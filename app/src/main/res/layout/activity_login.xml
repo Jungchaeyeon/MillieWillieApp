@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.LoginActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".LoginActivity">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
+            android:background="@color/white"
+            android:text="구글 로그인"
+            android:textColor="@color/black" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:onClick="@{()->vi.onClickKakaoLogin()}"
+            android:text="카카오 로그인"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+</layout>

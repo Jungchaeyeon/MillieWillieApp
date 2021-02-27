@@ -2,6 +2,7 @@ package com.makeus.milliewillie
 
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.kakao.sdk.common.KakaoSdk
 import com.makeus.milliewillie.di.networkModule
 import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.di.viewModelModule
@@ -43,6 +44,9 @@ class MyApplication : Application() {
 
         RxJavaPlugins.setErrorHandler { RxErrorHandler().processErrorHandler(it) }
         RxJavaPlugins.lockdown()
+
+        // Kakao SDK 초기화
+        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
     }
 
     override fun onTerminate() {

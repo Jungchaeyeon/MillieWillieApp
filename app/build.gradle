@@ -29,10 +29,29 @@ android {
         }
     }
 
+    signingConfigs {
+        debug {
+            storeFile file(SIGNED_STORE_FILE)
+            storePassword SIGNED_STORE_PASSWORD
+            keyAlias SIGNED_KEY_ALIAS
+            keyPassword SIGNED_KEY_PASSWORD
+        }
+    }
+
+
     buildTypes {
-        release {
+        debug{
             minifyEnabled false
+            shrinkResources false
+
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -44,7 +63,9 @@ android {
             versionNameSuffix "-dev"
             resValue "string", "app_name", rootProject.appNameDev
             buildConfigField "String", "API_URL", rootProject.apiUrlDev
-
+            manifestPlaceholders = rootProject.manifestPlaceholdersDev
+            buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKeyDev
+            buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKeyDev
         }
 
         stage {
@@ -53,12 +74,18 @@ android {
             versionNameSuffix "-stage"
             resValue "string", "app_name", rootProject.appNameStage
             buildConfigField "String", "API_URL", rootProject.apiUrlStage
+            manifestPlaceholders = rootProject.manifestPlaceholdersStage
+            buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKeyStage
+            buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKeyStage
         }
 
         real {
             dimension "makeUs"
             resValue "string", "app_name", rootProject.appName
             buildConfigField "String", "API_URL", rootProject.apiUrl
+            manifestPlaceholders = rootProject.manifestPlaceholders
+            buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKey
+            buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKey
         }
     }
 
@@ -137,6 +164,9 @@ dependencies {
     //stetho
     implementation "com.facebook.stetho:stetho:$stethoVersion"
     implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
+
+    //kakao
+    implementation "com.kakao.sdk:v2-user-rx:$kakaoVersion" // 카카오 로그인
 
     testImplementation "junit:junit:$junitVersion"
 

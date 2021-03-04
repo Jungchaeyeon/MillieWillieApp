@@ -66,7 +66,15 @@ android {
             manifestPlaceholders = rootProject.manifestPlaceholdersDev
             buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKeyDev
             buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKeyDev
+
+            copy {
+                from 'src/dev/'
+                include '*.json'
+                into '.'
+            }
         }
+
+
 
         stage {
             dimension "makeUs"
@@ -77,6 +85,12 @@ android {
             manifestPlaceholders = rootProject.manifestPlaceholdersStage
             buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKeyStage
             buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKeyStage
+
+            copy {
+                from 'src/stage/'
+                include '*.json'
+                into '.'
+            }
         }
 
         real {
@@ -86,7 +100,15 @@ android {
             manifestPlaceholders = rootProject.manifestPlaceholders
             buildConfigField "String", "KAKAO_APP_KEY", rootProject.kakaoAppKey
             buildConfigField "String", "KAKAO_OAUTH_APP_KEY", rootProject.kakaoOauthAppKey
+
+            copy {
+                from 'src/real/'
+                include '*.json'
+                into '.'
+            }
         }
+
+
     }
 
     android.variantFilter { variant ->
@@ -116,6 +138,7 @@ android {
 
 dependencies {
 
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
 
@@ -134,6 +157,15 @@ dependencies {
 
     // RxJava2
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    // Firebase
+    implementation platform("com.google.firebase:firebase-bom:$firebaseBom")
+    implementation "com.google.firebase:firebase-messaging:$firebaseMessageVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation "com.google.firebase:firebase-auth:$firebaseAuthVersion"
+    implementation "com.google.android.gms:play-services-auth:$firebasePlayServiceAuthVersion"
 
     // OKHttp3 + Retrofit2
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
@@ -176,3 +208,6 @@ dependencies {
     testImplementation "androidx.test:core:$testCoreVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitTestVersion"
 }
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

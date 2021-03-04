@@ -29,6 +29,14 @@ buildscript {
 
         glideVersion = '4.11.0'
 
+        firebaseBom = '25.12.0'
+        firebaseMessageVersion = '21.0.1'
+        firebaseCoreVersion = '18.0.0'
+        firebaseAnalyticsVersion = '17.5.0'
+        firebaseAuthVersion = '20.0.1'
+        firebasePlayServiceAuthVersion = '19.0.0'
+        firebaseCrashlytics = '17.1.1'
+
         koinAndroidVersion = '3.0.0-alpha-4'
         gsonVersion = '2.8.5'
         securePreferenceVersion = '0.1.4'
@@ -36,6 +44,8 @@ buildscript {
         stethoVersion = '1.5.1'
 
         jsoupVersion = '1.11.1'
+        crashlyticsVersion = "2.4.1"
+
 
         jvmTargetVersion = '1.8'
 
@@ -80,7 +90,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-
+        classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$crashlyticsVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

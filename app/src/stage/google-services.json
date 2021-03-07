@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1018054123989",
+    "project_id": "milliewillie-stage",
+    "storage_bucket": "milliewillie-stage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018054123989:android:d7fd8fd92deab9bf1fdd5c",
+        "android_client_info": {
+          "package_name": "com.makeus.milliewillie.stage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018054123989-s7mlpam76hr0fgco7mff7ovvfgfksj5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makeus.milliewillie.stage",
+            "certificate_hash": "eb204cd3b74c6bb110c94ac15dd469b032fec748"
+          }
+        },
+        {
+          "client_id": "1018054123989-afvbss5sgmkumbgc1mm4flknbjbiscdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXjlPkYYqrfE2cPemaWwFyJn_cP6kWrz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018054123989-afvbss5sgmkumbgc1mm4flknbjbiscdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

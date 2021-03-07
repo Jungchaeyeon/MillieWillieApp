@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.common.BasicBottomSheetDialogFragment" />
+    </data>
+
+    <LinearLayout
+        style="@style/BottomLayout"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{vi.liveTitle}"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="타이틀" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{vi.liveContent}"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            tools:text="내용" />
+
+
+        <!--    lineTint 대신 전체 색 채우고 싶을 경우 backgroundTint 사용 하면 됨    -->
+        <Button
+            lineTint="@{@color/purple_500}"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rect_radius_8"
+            android:onClick="@{()->vi.onClickOk()}"
+            android:stateListAnimator="@null"
+            android:text="@{vi.liveButton}"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="확인" />
+
+    </LinearLayout>
+</layout>

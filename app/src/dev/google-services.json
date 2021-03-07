@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "994943615668",
+    "project_id": "milliewillie-dev",
+    "storage_bucket": "milliewillie-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994943615668:android:15fd3c330f96ed87614de1",
+        "android_client_info": {
+          "package_name": "com.makeus.milliewillie.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994943615668-vnotfrqk3sds16ipf2landif27h4l9p1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makeus.milliewillie.dev",
+            "certificate_hash": "eb204cd3b74c6bb110c94ac15dd469b032fec748"
+          }
+        },
+        {
+          "client_id": "994943615668-5agqnk1kq0h5lee3h69663hig9cio4k0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIud8g5wxISE4z2WTt0W9BFY-FT8XIS5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994943615668-5agqnk1kq0h5lee3h69663hig9cio4k0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

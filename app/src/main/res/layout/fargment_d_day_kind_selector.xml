@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/d_day_kind_img_gotoback"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/icon_gotobac" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/d_day_kind_img_gotoback"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:text="D-day"/>
+
+        <TextView
+            android:id="@+id/d_day_anni_text_complete"
+            android:layout_width="22dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="12sp"
+            android:text="@string/complete"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true"
+            android:text="@string/anniversary"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            android:src="@drawable/icon_select"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true"
+            android:text="@string/certification"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            android:src="@drawable/icon_select"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true"
+            android:text="@string/ncee"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            android:src="@drawable/icon_select"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true"
+            android:text="@string/birthday"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            android:src="@drawable/icon_select"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="24dp"
+            android:layout_centerVertical="true"
+            android:text="@string/user_setting"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            android:src="@drawable/icon_select"/>
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

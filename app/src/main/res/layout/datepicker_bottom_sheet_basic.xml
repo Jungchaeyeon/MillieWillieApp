@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.fragment.DatePickerBasicBottomSheetDialogFragment" />
+    </data>
+    <RelativeLayout
+        style="@style/BottomLayout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="5dp"
+                android:onClick="@{()->vi.onClickCancel()}"
+                android:text="취소" />
+
+            <TextView
+                android:id="@+id/btn_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:padding="5dp"
+                android:onClick="@{()->vi.onClickOk()}"
+                android:text="완료" />
+        </RelativeLayout>
+
+        <DatePicker
+            android:id="@+id/dpSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+        </RelativeLayout>
+
+
+
+</layout>

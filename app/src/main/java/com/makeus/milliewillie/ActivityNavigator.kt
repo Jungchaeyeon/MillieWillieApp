@@ -5,8 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
-import com.makeus.milliewillie.ui.LoginActivity
-import com.makeus.milliewillie.ui.MainActivity
+import com.makeus.milliewillie.ui.*
 import java.util.*
 
 /**
@@ -22,14 +21,20 @@ class ActivityNavigator private constructor(private val context: Context) {
         fun with(context: Context): ActivityNavigator = ActivityNavigator(context)
 
         @JvmStatic
-        fun with(fragment: Fragment): ActivityNavigator = with(fragment.context ?: fragment.requireActivity())
+        fun with(fragment: Fragment): ActivityNavigator =
+            with(fragment.context ?: fragment.requireActivity())
     }
 
     val stack: ArrayList<Intent> = ArrayList()
 
     fun main(isClear: Boolean = true) = MyIntent(MainActivity::class.java, isClear)
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
-
+    fun name(isClear: Boolean = true) = MyIntent(IntroSettingNameActivity::class.java, isClear)
+    fun type() = MyIntent(IntroServiceTypeActivity::class.java)
+    fun typedetail() = MyIntent(IntroServiceTypeDetailActivity::class.java)
+    fun enlist1() = MyIntent(IntroEnlistDateActivity1::class.java)
+    fun enlist2() = MyIntent(IntroEnlistDateActivity2::class.java)
+    fun goal() = MyIntent(IntroGoalActivity::class.java)
 
     inner class MyIntent : Intent {
 

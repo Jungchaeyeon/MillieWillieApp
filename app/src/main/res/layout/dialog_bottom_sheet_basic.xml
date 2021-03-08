@@ -12,9 +12,11 @@
     </data>
 
     <LinearLayout
-        style="@style/BottomLayout"
+        android:background="@drawable/custom_bottom_sheet"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
         <TextView
             android:layout_width="wrap_content"

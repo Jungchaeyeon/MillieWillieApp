@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.makeus.base.R
 
 abstract class BaseDataBindingBottomSheetFragment<B : ViewDataBinding>(
     private val layoutId: Int
@@ -18,7 +20,6 @@ abstract class BaseDataBindingBottomSheetFragment<B : ViewDataBinding>(
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-
         return binding.root
     }
 

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.IntroGoalActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.IntroGoalActivity">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="35dp"
+                android:onClick="@{()->vi.onClickBack()}"
+                android:src="@drawable/ic_icon_gotobac" />
+
+            <TextView
+                style="@style/spoqa_bold_22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="46dp"
+                android:text="군 복무기간동안 이뤄 낼\n목표 1가지를 말씀해주세요" />
+
+            <TextView
+                style="@style/spoqa_regular_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:text="구체적일 수록 좋아요 :)"
+                android:textSize="13sp" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="33dp"
+                android:text="목표 설정"
+                android:textColor="@color/black_all" />
+
+            <EditText
+                android:id="@+id/edt_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/aqua_blue"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="몸 만들고 바디프로필 찍자!"
+                android:inputType="text" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            style="@style/Wrap"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/bubble_goal1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/Wrap"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/bubble_goal2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <ImageView
+            style="@style/Wrap"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/bubble_goal3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            style="@style/Wrap"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="34dp"
+            android:src="@drawable/bubble_goal4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ImageView
+            style="@style/Wrap"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="100dp"
+            android:src="@drawable/bubble_goal5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <Button
+            style="@style/spoqa_bold_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rect_radius_8"
+            android:backgroundTint="@color/aqua_blue"
+            android:onClick="@{()->vi.onClickDone()}"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

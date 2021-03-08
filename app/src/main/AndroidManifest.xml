@@ -39,8 +39,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.LoginActivity">
+        </activity>
         <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.IntroSettingNameActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity android:name=".ui.IntroServiceTypeActivity"/>
+        <activity android:name=".ui.IntroServiceTypeDetailActivity"/>
+        <activity android:name=".ui.IntroEnlistDateActivity1"/>
+        <activity android:name=".ui.IntroEnlistDateActivity2"/>
+        <activity android:name=".ui.IntroGoalActivity"/>
     </application>
 
 </manifest>

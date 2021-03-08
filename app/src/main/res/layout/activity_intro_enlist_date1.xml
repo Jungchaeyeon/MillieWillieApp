@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.UserViewModel" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.IntroEnlistDateActivity1" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.IntroEnlistDateActivity1">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
+            android:onClick="@{()->vi.onClickBack()}"
+            android:src="@drawable/ic_icon_gotobac" />
+
+        <TextView
+            style="@style/spoqa_bold_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="전역일 계산 정보를 위해\n입대 일자를 입력해주세요." />
+
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="입대일"
+            android:textColor="@color/black_all" />
+
+        <Button
+            android:id="@+id/btn_enlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_google_login"
+            android:drawableEnd="@drawable/ic_icon_semo"
+            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:paddingHorizontal="10dp"
+            android:text="@{vm.liveBtnEnlist}"
+            android:textAlignment="viewStart"
+            tools:text="2021.3.3 (토)" />
+
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="전역일"
+            android:textColor="@color/black_all" />
+
+        <Button
+            android:id="@+id/btn_discharge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_google_login"
+            android:drawableEnd="@drawable/ic_icon_semo"
+            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:paddingHorizontal="10dp"
+            android:text="@{vm.liveBtnDischarge}"
+            android:textAlignment="viewStart"
+            tools:text="2021.3.3 (토)" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:text="일병 진급일"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_private_prom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveBtnPrivate}"
+                tools:text="2021.3.3 (토)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:text="상병 진급일"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_corporal_prom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveBtnCorporal}"
+                tools:text="2021.3.3 (토)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:text="병장 진급일"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_sergeant_prom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveBtnSergeant}"
+                tools:text="2021.3.3 (토)" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                style="@style/spoqa_bold_22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rect_radius_8"
+                android:backgroundTint="@color/aqua_blue"
+                android:onClick="@{()->vi.onClickDone()}"
+                android:text="확인"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</layout>

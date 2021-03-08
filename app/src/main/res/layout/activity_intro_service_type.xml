@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.IntroServiceTypeActivity" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.UserViewModel" />
+    </data>
+
+    <LinearLayout
+        style="@style/Match"
+        android:orientation="vertical"
+        tools:context=".ui.IntroServiceTypeActivity">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
+            android:onClick="@{()->vi.onClickBack()}"
+            android:src="@drawable/ic_icon_gotobac" />
+
+        <TextView
+            style="@style/spoqa_bold_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="46dp"
+            android:text="복무 형태를 골라주세요." />
+
+        <LinearLayout
+            android:id="@+id/type_soldier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/background_google_login"
+            android:elevation="10dp"
+            android:onClick="@{(view)->vi.onClickItem(view)}"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/spoqa_medium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="일반 병사" />
+
+            <TextView
+                style="@style/spoqa_regular_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:paddingBottom="12dp"
+                android:text="육군, 해군, 공군, 해병, 의경, 카투사, 특전사, 의무소방, 해양의무경찰,\n사회복무요원, 산업기능요원, 전문연구요원"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/type_sergeant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/background_google_login"
+            android:elevation="10dp"
+            android:onClick="@{(view)->vi.onClickItem(view)}"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/spoqa_medium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="부사관" />
+
+            <TextView
+                style="@style/spoqa_regular_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="18dp"
+                android:text="부사관"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/type_captain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/background_google_login"
+            android:elevation="10dp"
+            android:onClick="@{(view)->vi.onClickItem(view)}"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/spoqa_medium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="준사관" />
+
+            <TextView
+                style="@style/spoqa_regular_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:text="기술행정 준사관, 회전익항공기 조종 준사관, 경력직 항공운항 준사관,\n통번역 준사관"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/type_general"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/background_google_login"
+            android:elevation="10dp"
+            android:onClick="@{(view)->vi.onClickItem(view)}"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/spoqa_medium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="장교" />
+
+            <TextView
+                style="@style/spoqa_regular_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="18dp"
+                android:text="ROTC, 학사장교, 3사관, 사관학교"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

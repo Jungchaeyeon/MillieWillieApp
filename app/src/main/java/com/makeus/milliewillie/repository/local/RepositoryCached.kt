@@ -39,6 +39,10 @@ abstract class RepositoryCached {
         hashCached[key.name] = value
         return value
     }
+    fun getName() = getValue(LocalKey.NAME , "")
+    fun getType() = getValue(LocalKey.TYPE, "")
+    fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
+    fun getDate() = getValue(LocalKey.DATE, "")
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

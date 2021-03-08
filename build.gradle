@@ -51,6 +51,7 @@ buildscript {
 
         kakaoVersion = '2.3.0'
 
+        lottieVersion ="3.5.0"
         //Test
         robolectricVersion = '4.3'
         testCoreVersion = '1.3.0'

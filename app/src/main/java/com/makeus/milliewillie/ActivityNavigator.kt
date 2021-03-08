@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
+import com.makeus.milliewillie.ui.LoginActivity
 import com.makeus.milliewillie.ui.MainActivity
 import java.util.*
 
@@ -27,7 +28,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     val stack: ArrayList<Intent> = ArrayList()
 
     fun main(isClear: Boolean = true) = MyIntent(MainActivity::class.java, isClear)
-
+    fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
 
 
     inner class MyIntent : Intent {

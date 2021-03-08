@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.WelcomeViewModel" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.WelcomeActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".ui.WelcomeActivity">
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_intro"
+            replaceAll="@{vm.introItemList}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/spoqa_medium_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:onClick="@{()->vi.onClickNext()}"
+                android:padding="50dp"
+                android:text="next" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

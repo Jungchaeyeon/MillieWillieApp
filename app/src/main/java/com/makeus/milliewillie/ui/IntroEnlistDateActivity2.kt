@@ -26,15 +26,15 @@ class IntroEnlistDateActivity2 :
 
         viewModel.run {
 
-            customDialog1.date.observe(
-                this@IntroEnlistDateActivity2,
-                androidx.lifecycle.Observer { liveBtnEnlist.value = customDialog1.date.value })
-            customDialog2.date.observe(
-                this@IntroEnlistDateActivity2,
-                androidx.lifecycle.Observer { liveBtnDischarge.value = customDialog2.date.value })
-            customDialog6.date.observe(
-                this@IntroEnlistDateActivity2,
-                androidx.lifecycle.Observer { liveBtnPromotion.value = customDialog6.date.value })
+//            customDialog1.date.observe(
+//                this@IntroEnlistDateActivity2,
+//                androidx.lifecycle.Observer { liveBtnEnlist.value = customDialog1.date.value })
+//            customDialog2.date.observe(
+//                this@IntroEnlistDateActivity2,
+//                androidx.lifecycle.Observer { liveBtnDischarge.value = customDialog2.date.value })
+//            customDialog6.date.observe(
+//                this@IntroEnlistDateActivity2,
+//                androidx.lifecycle.Observer { liveBtnPromotion.value = customDialog6.date.value })
         }
 
 
@@ -42,23 +42,23 @@ class IntroEnlistDateActivity2 :
 
     fun onClickDate(view: View) {
 
-        when (view.id) {
-            R.id.btn_enlist -> {
-                viewModel.customDialog1.show(supportFragmentManager, "custom_dialog")
-            }
-            R.id.btn_discharge -> {
-                viewModel.customDialog2.show(supportFragmentManager, "custom_dialog")
-            }
-            R.id.btn_promotion -> {
-                viewModel.customDialog6.show(supportFragmentManager, "custom_dialog")
-            }
-
-        }
+//        when (view.id) {
+//            R.id.btn_enlist -> {
+//                viewModel.customDialog1.show(supportFragmentManager, "custom_dialog")
+//            }
+//            R.id.btn_discharge -> {
+//                viewModel.customDialog2.show(supportFragmentManager, "custom_dialog")
+//            }
+//            R.id.btn_promotion -> {
+//                viewModel.customDialog6.show(supportFragmentManager, "custom_dialog")
+//            }
+//
+//        }
 
     }
 
     fun onClickDone() {
-        if(btn_discharge.text.isEmpty()==true || btn_promotion.text.isEmpty()==true){
+        if(btn_discharge.text.isEmpty() || btn_promotion.text.isEmpty()){
             "날짜를 선택해주세요.".showShortToastSafe()
         }
         ActivityNavigator.with(this).goal().start()

@@ -52,9 +52,9 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
-            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:onClick="@{()-> vi.onClickDate(0)}"
             android:paddingHorizontal="10dp"
-            android:text="@{vm.liveBtnEnlist}"
+            android:text="@{vm.liveDateButtonList[0]}"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
 
@@ -75,9 +75,9 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
-            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:onClick="@{()-> vi.onClickDate(1)}"
             android:paddingHorizontal="10dp"
-            android:text="@{vm.liveBtnDischarge}"
+            android:text="@{vm.liveDateButtonList[1]}"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
 
@@ -105,9 +105,9 @@
                 android:layout_marginVertical="2dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
-                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:onClick="@{()-> vi.onClickDate(2)}"
                 android:paddingHorizontal="10dp"
-                android:text="@{vm.liveBtnPrivate}"
+                android:text="@{vm.liveDateButtonList[2]}"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -136,9 +136,9 @@
                 android:layout_marginVertical="2dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
-                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:onClick="@{()-> vi.onClickDate(3)}"
                 android:paddingHorizontal="10dp"
-                android:text="@{vm.liveBtnCorporal}"
+                android:text="@{vm.liveDateButtonList[3]}"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -167,9 +167,9 @@
                 android:layout_marginVertical="2dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
-                android:onClick="@{(view)-> vi.onClickDate(view)}"
+                android:onClick="@{()-> vi.onClickDate(4)}"
                 android:paddingHorizontal="10dp"
-                android:text="@{vm.liveBtnSergeant}"
+                android:text="@{vm.liveDateButtonList[4]}"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 

@@ -9,27 +9,13 @@ import java.util.*
 class UserViewModel : BaseViewModel(){
   //  val liveuserData = MutableLiveData<User>()
 
-    val liveTypeDetailSoldier = MutableLiveData<List<ServiceDetailType>>()
-    val customDialog1 = DatePickerBasicBottomSheetDialogFragment.getInstance()
-    val customDialog2 = DatePickerBasicBottomSheetDialogFragment.getInstance()
-    val customDialog3 = DatePickerBasicBottomSheetDialogFragment.getInstance()
-    val customDialog4 = DatePickerBasicBottomSheetDialogFragment.getInstance()
-    val customDialog5 = DatePickerBasicBottomSheetDialogFragment.getInstance()
-    val customDialog6 = DatePickerBasicBottomSheetDialogFragment.getInstance()
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today() } }
 
-    val liveBtnEnlist = MutableLiveData<String>()
-    val liveBtnDischarge = MutableLiveData<String>()
-    val liveBtnPrivate = MutableLiveData<String>()
-    val liveBtnCorporal = MutableLiveData<String>()
-    val liveBtnSergeant= MutableLiveData<String>()
+    val liveTypeDetailSoldier = MutableLiveData<List<ServiceDetailType>>()
+
     val liveBtnPromotion= MutableLiveData<String>()
 
     init {
-        liveBtnEnlist.postValue(today())
-        liveBtnPrivate.postValue(today())
-        liveBtnCorporal.postValue(today())
-        liveBtnSergeant.postValue(today())
-
     }
 
     fun today(): String{

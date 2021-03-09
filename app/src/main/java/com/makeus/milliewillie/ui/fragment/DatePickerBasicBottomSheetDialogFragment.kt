@@ -17,9 +17,10 @@ class DatePickerBasicBottomSheetDialogFragment :
 
 
     val liveButton = MutableLiveData<String>()
-    val date = MutableLiveData<String>()
 
-    private var clickOk: (() -> Unit)? = null
+    private var date : String = ""
+
+    private var clickOk: ((String) -> Unit)? = null
 
     companion object {
         fun getInstance() = DatePickerBasicBottomSheetDialogFragment()
@@ -38,21 +39,19 @@ class DatePickerBasicBottomSheetDialogFragment :
         dpSpinner.init(
             today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
-
         ) { view, year, month, day ->
-            val month = month + 1
-            date.postValue(year.toString().plus(".") + month.toString().plus(".") + day.toString())
+            date = "$year.${month + 1}.$day"
         }
     }
 
-    fun setOnClickOk(clickOk: (() -> Unit)): DatePickerBasicBottomSheetDialogFragment {
+    fun setOnClickOk(clickOk: ((String) -> Unit)): DatePickerBasicBottomSheetDialogFragment {
         this.clickOk = clickOk
         return this
     }
 
 
     fun onClickOk() {
-        clickOk?.invoke()
+        clickOk?.invoke(date)
         dismiss()
     }
     fun onClickCancel(){

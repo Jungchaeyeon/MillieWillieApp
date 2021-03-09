@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
 import com.makeus.milliewillie.ui.MainActivity
+import com.makeus.milliewillie.ui.dDay.DdayActivity
 import java.util.*
 
 /**
@@ -27,6 +28,8 @@ class ActivityNavigator private constructor(private val context: Context) {
     val stack: ArrayList<Intent> = ArrayList()
 
     fun main(isClear: Boolean = true) = MyIntent(MainActivity::class.java, isClear)
+
+    fun dDay(isClear: Boolean = true) = MyIntent(DdayActivity::class.java, isClear)
 
 
 

@@ -62,9 +62,17 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         }
     }
 
+//    fun nextStep(isSuccess : Boolean) {
+//        if (isSuccess){
+//            ActivityNavigator.with(this).main().start()
+//        } else {
+//            "로그인에 실패했습니다.".showLongToastSafe()
+//        }
+//    }
+
     fun nextStep(isSuccess : Boolean) {
         if (isSuccess){
-            ActivityNavigator.with(this).main().start()
+            ActivityNavigator.with(this).dDay().start()
         } else {
             "로그인에 실패했습니다.".showLongToastSafe()
         }

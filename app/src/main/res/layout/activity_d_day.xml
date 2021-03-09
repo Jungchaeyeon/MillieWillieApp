@@ -19,6 +19,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:id="@+id/d_day_dummy_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

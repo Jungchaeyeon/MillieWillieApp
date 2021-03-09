@@ -14,9 +14,10 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/d_day_birth_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,11 +27,10 @@
                 android:id="@+id/d_day_certi_text_todo"
                 android:layout_width="wrap_content"
                 android:layout_height="17dp"
-                android:layout_marginStart="24dp"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
                 android:text="@string/check_list"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -43,22 +43,21 @@
                 android:id="@+id/d_day_certi_todo_recycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/fragment_d_day_recycler_item"/>
+                tools:listitem="@layout/fragment_d_day_recycler_item" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/d_day_certi_todo_recycler"
-                >
+                android:layout_below="@id/d_day_certi_todo_recycler">
 
                 <CheckBox
                     android:id="@+id/d_day_certi_checkbox"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
                     android:scaleX="0.7"
                     android:scaleY="0.7"
-                    android:layout_marginStart="16dp"
-                    android:layout_centerVertical="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -67,10 +66,12 @@
                     android:id="@+id/d_day_certi_edit_todo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@+id/d_day_certi_checkbox"
-                    android:layout_centerVertical="true"
                     android:backgroundTint="@color/non"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
                     android:hint="@string/todo_add"
                     android:maxLength="20"
                     android:maxLines="1"

@@ -47,6 +47,7 @@ class LoginViewModel : BaseViewModel() {
         GoogleSignIn.getSignedInAccountFromIntent(data).run {
             try {
                 getResult(ApiException::class.java)?.let { googleSignInAccount ->
+                    Log.e(googleSignInAccount.idToken)
                     auth.signInWithCredential(
                         GoogleAuthProvider.getCredential(
                             googleSignInAccount.idToken,

@@ -1,6 +1,8 @@
 package com.makeus.milliewillie.ui
 
 import android.content.Intent
+import com.bumptech.glide.util.Util
+import com.kakao.sdk.common.util.Utility
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
@@ -8,6 +10,7 @@ import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.ui.common.BasicBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.common.BasicDialogFragment
+import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -21,6 +24,9 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         vi = this@LoginActivity
         vm = viewModel
         viewModel.bindLifecycle(this@LoginActivity)
+
+        val keyHash = Utility.getKeyHash(this@LoginActivity)
+        Log.e(keyHash)
 
         //center dialog
         BasicDialogFragment.getInstance()

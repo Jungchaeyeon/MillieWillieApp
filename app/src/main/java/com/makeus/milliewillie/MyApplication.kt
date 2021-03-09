@@ -23,6 +23,8 @@ class MyApplication : Application() {
 
         fun getString(stringId: Int): String = globalApplicationContext.getString(stringId)
 
+        var isFocused = false
+
     }
 
     override fun onCreate() {

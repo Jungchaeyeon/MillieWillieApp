@@ -1,7 +1,11 @@
 package com.makeus.milliewillie.ui.dDay
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.milliewillie.MyApplication.Companion.isFocused
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityDDayBinding
 import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
@@ -29,7 +33,7 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         viewModel.bindLifecycle(this@DdayActivity)
 
         replaceViewFrame(classificationValue)
-        setBtnStatus(binding.dDayBtnAnni)
+        binding.dDayBtnAnni.isSelected = true
 
         binding.dDayBtnAnni.setOnClickListener {
             classificationValue = Classification.ANNIVERSARY
@@ -52,6 +56,13 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             replaceViewFrame(classificationValue)
         }
 
+        binding.dDayAnniTextComplete.setOnClickListener{
+            Toast.makeText(this@DdayActivity, "Complete", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.dDayAnniLayoutDate.setOnClickListener {
+
+        }
 
     }
 
@@ -62,11 +73,12 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         val btnNcee = binding.dDayBtnNcee
         val btnList = arrayListOf<View>(btnAnni, btnBirthday, btnCertification, btnNcee)
 
-        btnList.forEach {view ->
-            if (view == btn && !btn.isSelected) btn.isSelected = !btn.isSelected
-            else view.isSelected = false
+        if (!btn.isSelected) {
+            btnList.forEach { view ->
+                if (view == btn) btn.isSelected = !btn.isSelected
+                else view.isSelected = false
+            }
         }
-
     }
 
 

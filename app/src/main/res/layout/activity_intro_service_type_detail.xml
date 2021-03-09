@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.IntroServiceTypeDetailActivity" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.UserViewModel" />
+    </data>
+
+    <LinearLayout
+        style="@style/Match"
+        android:orientation="vertical"
+        tools:context=".ui.IntroServiceTypeDetailActivity">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
+            android:onClick="@{()->vi.onClickBack()}"
+            android:src="@drawable/ic_icon_gotobac" />
+
+        <TextView
+            style="@style/spoqa_bold_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="46dp"
+            android:text="복무 형태를 골라주세요." />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_detail_item"
+            replaceAll="@{vm.liveTypeDetailSoldier}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="130dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.Intro" />
+    </data>
+
+    <LinearLayout
+        style="@style/Match"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/Wrap"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="74dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                setImage="@{item.imgViewNowPage1}"
+                style="@style/Wrap"
+                android:layout_marginEnd="3dp" />
+
+            <ImageView
+                setImage="@{item.imgViewNowPage2}"
+                style="@style/Wrap"
+                android:layout_marginEnd="3dp" />
+
+            <ImageView
+                style="@style/Wrap"
+                android:layout_marginEnd="3dp"
+                android:src="@drawable/mini_oval_gray" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_preview"
+            style="@style/spoqa_bold_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="32dp"
+            android:text="@{item.textMain}"
+            tools:text="안녕하세요!\n만나뵙게되어 반가워요" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:setAni="@{item.ani}" />
+
+
+    </LinearLayout>
+</layout>

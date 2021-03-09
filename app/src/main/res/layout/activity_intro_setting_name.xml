@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.IntroSettingNameActivity" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.IntroSettingNameActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="35dp"
+                android:onClick="@{()->vi.onClickBack()}"
+                android:src="@drawable/ic_icon_gotobac" />
+
+            <TextView
+                style="@style/spoqa_bold_22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="46dp"
+                android:text="이름을 입력하세요" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="3dp"
+                android:text="실명이 아닌 닉네임도 가능합니다:)"
+                android:textSize="13dp" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="64dp"
+                android:text="이름 입력"
+                android:textColor="@color/black_all" />
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:backgroundTint="@color/aqua_blue"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="폰군인"
+                android:inputType="text">
+
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/aqua_blue"
+                android:onClick="@{()->vi.onClickNext()}"
+                android:text="다음"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

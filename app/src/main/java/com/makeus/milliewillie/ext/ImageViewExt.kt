@@ -11,7 +11,7 @@ fun ImageView.setImage(Image: Int) {
 }
 
 
-@BindingAdapter("app:loadUrl")
+@BindingAdapter("loadUrl")
 fun ImageView.loadUrl(url: String?) {
     if (url.isNullOrEmpty()) {
         return

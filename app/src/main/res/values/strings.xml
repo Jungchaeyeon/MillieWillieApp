@@ -28,7 +28,9 @@
     <string name="ncee">수능</string>
     <string name="birthday">생일</string>
     <string name="user_setting">직접설정</string>
+    <string name="search_for_place">장소·주소 검색</string>
 
+    <string name="select">선택</string>
     <string name="ok">확인</string>
 
 </resources>

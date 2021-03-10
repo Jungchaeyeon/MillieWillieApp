@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
+import com.makeus.milliewillie.ui.map.MapActivity
 import java.util.*
 
 /**
@@ -35,12 +36,13 @@ class ActivityNavigator private constructor(private val context: Context) {
 
 
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
-    fun name(isClear: Boolean = true) = MyIntent(IntroSettingNameActivity::class.java, isClear)
+    fun name() = MyIntent(IntroSettingNameActivity::class.java)
     fun type() = MyIntent(IntroServiceTypeActivity::class.java)
     fun typedetail() = MyIntent(IntroServiceTypeDetailActivity::class.java)
     fun enlist1() = MyIntent(IntroEnlistDateActivity1::class.java)
     fun enlist2() = MyIntent(IntroEnlistDateActivity2::class.java)
     fun goal() = MyIntent(IntroGoalActivity::class.java)
+    fun map() = MyIntent(MapActivity::class.java)
 
     inner class MyIntent : Intent {
 

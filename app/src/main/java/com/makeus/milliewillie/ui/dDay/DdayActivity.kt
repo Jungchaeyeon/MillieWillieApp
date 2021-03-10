@@ -1,17 +1,15 @@
 package com.makeus.milliewillie.ui.dDay
 
-import android.annotation.SuppressLint
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.makeus.base.activity.BaseDataBindingActivity
-import com.makeus.milliewillie.MyApplication.Companion.isFocused
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityDDayBinding
 import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment
 import com.makeus.milliewillie.ui.dDay.certification.CertificationFragment
 import com.makeus.milliewillie.ui.dDay.ncee.NceeFragment
+import com.makeus.milliewillie.ui.fragment.DatePickerBasicBottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 enum class Classification {
@@ -27,6 +25,12 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
 
     var classificationValue = Classification.ANNIVERSARY
 
+    lateinit var btnAnni: View
+    lateinit var btnBirthday: View
+    lateinit var btnCertification: View
+    lateinit var btnNcee: View
+
+
     override fun ActivityDDayBinding.onBind() {
         vi = this@DdayActivity
         vm = viewModel
@@ -35,42 +39,50 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         replaceViewFrame(classificationValue)
         binding.dDayBtnAnni.isSelected = true
 
-        binding.dDayBtnAnni.setOnClickListener {
-            classificationValue = Classification.ANNIVERSARY
-            setBtnStatus(it)
-            replaceViewFrame(classificationValue)
-        }
-        binding.dDayBtnBirthday.setOnClickListener {
-            classificationValue = Classification.BIRTHDAY
-            setBtnStatus(it)
-            replaceViewFrame(classificationValue)
-        }
-        binding.dDayBtnCertification.setOnClickListener {
-            classificationValue = Classification.CERTIFICATION
-            setBtnStatus(it)
-            replaceViewFrame(classificationValue)
-        }
-        binding.dDayBtnNcee.setOnClickListener {
-            classificationValue = Classification.NCEE
-            setBtnStatus(it)
-            replaceViewFrame(classificationValue)
-        }
+        btnAnni = binding.dDayBtnAnni
+        btnBirthday = binding.dDayBtnBirthday
+        btnCertification = binding.dDayBtnCertification
+        btnNcee = binding.dDayBtnNcee
 
         binding.dDayAnniTextComplete.setOnClickListener{
             Toast.makeText(this@DdayActivity, "Complete", Toast.LENGTH_SHORT).show()
         }
 
-        binding.dDayAnniLayoutDate.setOnClickListener {
-
-        }
 
     }
 
-    fun setBtnStatus(btn: View) {
-        val btnAnni = binding.dDayBtnAnni
-        val btnBirthday = binding.dDayBtnBirthday
-        val btnCertification = binding.dDayBtnCertification
-        val btnNcee = binding.dDayBtnNcee
+    fun onClickDdayDate() {
+        DatePickerBasicBottomSheetDialogFragment.getInstance()
+            .setOnClickOk {
+                viewModel.liveDataDdayDate.postValue(it)
+            }.show(supportFragmentManager)
+    }
+
+    fun setBtnStatus(position: Int){
+        when (position) {
+            1 -> {
+                setBtnView(btnAnni)
+                replaceViewFrame(Classification.ANNIVERSARY)
+            }
+            2 -> {
+                setBtnView(btnBirthday)
+                replaceViewFrame(Classification.BIRTHDAY)
+            }
+            3 -> {
+                setBtnView(btnCertification)
+                replaceViewFrame(Classification.CERTIFICATION)
+            }
+            4 -> {
+                setBtnView(btnNcee)
+                replaceViewFrame(Classification.NCEE)
+            }
+        }
+
+
+    }
+
+    fun setBtnView(btn: View) {
+
         val btnList = arrayListOf<View>(btnAnni, btnBirthday, btnCertification, btnNcee)
 
         if (!btn.isSelected) {

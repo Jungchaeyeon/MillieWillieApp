@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.dDay.certification
 
 import com.makeus.base.fragment.BaseDataBindingFragment
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentDDayAnniversaryBinding
 import com.makeus.milliewillie.databinding.FragmentDDayCertificationBinding
@@ -14,6 +15,10 @@ class CertificationFragment: BaseDataBindingFragment<FragmentDDayCertificationBi
         vi = this@CertificationFragment
         vm = viewModel
         viewModel.bindLifecycle(this@CertificationFragment)
+    }
+
+    fun setOnClickLocation() {
+        ActivityNavigator.with(this).map().start()
     }
 
 }

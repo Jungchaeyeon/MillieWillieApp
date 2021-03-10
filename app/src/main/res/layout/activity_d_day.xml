@@ -141,7 +141,9 @@
                     android:layout_toEndOf="@+id/d_day_anni_text_classification"
                     android:background="@drawable/d_day_btn_selected"
                     android:text="@string/anniversary"
-                    android:textColor="@color/d_day_btn_text_selected" />
+                    android:textColor="@color/d_day_btn_text_selected"
+                    android:onClick="@{()-> vi.setBtnStatus(1)}"
+                    />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/d_day_btn_birthday"
@@ -152,7 +154,9 @@
                     android:layout_toEndOf="@+id/d_day_btn_anni"
                     android:background="@drawable/d_day_btn_selected"
                     android:text="@string/birthday"
-                    android:textColor="@color/d_day_btn_text_selected" />
+                    android:textColor="@color/d_day_btn_text_selected"
+                    android:onClick="@{()-> vi.setBtnStatus(2)}"
+                    />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/d_day_btn_certification"
@@ -163,7 +167,9 @@
                     android:layout_toEndOf="@+id/d_day_btn_birthday"
                     android:background="@drawable/d_day_btn_selected"
                     android:text="@string/certification"
-                    android:textColor="@color/d_day_btn_text_selected" />
+                    android:textColor="@color/d_day_btn_text_selected"
+                    android:onClick="@{()-> vi.setBtnStatus(3)}"
+                    />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/d_day_btn_ncee"
@@ -174,14 +180,18 @@
                     android:layout_toEndOf="@+id/d_day_btn_certification"
                     android:background="@drawable/d_day_btn_selected"
                     android:text="@string/ncee"
-                    android:textColor="@color/d_day_btn_text_selected" />
+                    android:textColor="@color/d_day_btn_text_selected"
+                    android:onClick="@{()-> vi.setBtnStatus(4)}"
+                    />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/d_day_anni_layout_date"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:onClick="@{()-> vi.onClickDdayDate()}"
+                >
 
                 <TextView
                     android:id="@+id/d_day_anni_text_date"
@@ -201,7 +211,8 @@
                     android:layout_marginStart="40dp"
                     android:layout_toEndOf="@+id/d_day_anni_text_date"
                     android:backgroundTint="@color/non"
-                    android:text=" "
+                    android:text="@{vm.liveDataDdayDate}"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
 
                 <TextView

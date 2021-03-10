@@ -141,6 +141,7 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
+    implementation files('libs/libDaumMapAndroid.jar')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"

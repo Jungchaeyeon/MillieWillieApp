@@ -3,6 +3,7 @@
     package="com.makeus.milliewillie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".MyApplication"
@@ -21,24 +22,14 @@
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
-<<<<<<< HEAD
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
             <data android:host="oauth"
                 android:scheme="kakao2d201bd6dccfb28dcd39158f1557383b" />
-        </intent-filter>
-    </activity>
-=======
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
->>>>>>> upstream/develop
-
-                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
-                <data
-                    android:host="oauth"
-                    android:scheme="@{KAKAO_OAUTH_APP_KEY}" />
             </intent-filter>
         </activity>
+
 
         <activity android:name=".ui.WelcomeActivity">
             <intent-filter>
@@ -47,13 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".ui.MainActivity"/>
         <activity android:name=".ui.dDay.DdayActivity"/>
-=======
-        <activity android:name=".ui.LoginActivity">
-        </activity>
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.LoginActivity"/>
         <activity android:name=".ui.IntroSettingNameActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
@@ -62,7 +49,7 @@
         <activity android:name=".ui.IntroEnlistDateActivity1"/>
         <activity android:name=".ui.IntroEnlistDateActivity2"/>
         <activity android:name=".ui.IntroGoalActivity"/>
->>>>>>> upstream/develop
+        <activity android:name=".ui.map.MapActivity"/>
     </application>
 
 </manifest>

@@ -55,7 +55,6 @@
             android:gravity="center_vertical"
             android:onClick="@{(view)-> vi.onClickDate(view)}"
             android:paddingHorizontal="8dp"
-            android:text="@{vm.liveBtnEnlist}"
             android:textColor="@color/black_all"
             tools:text="2021.3.3 (토)" />
 
@@ -79,7 +78,6 @@
             android:hint="날짜를 선택해주세요."
             android:onClick="@{(view)-> vi.onClickDate(view)}"
             android:paddingHorizontal="10dp"
-            android:text="@{vm.liveBtnDischarge}"
             android:textAlignment="viewStart" />
 
         <TextView

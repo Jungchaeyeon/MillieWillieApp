@@ -80,6 +80,12 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <style name="MapBottomLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/rect_radius_top</item>
+        <item name="android:backgroundTint">#ffffff</item>
+    </style>
 
     <!--    디자인 색상으로 style naming    -->
     <style name="ButtonLine2398e3" parent="ClickWrap">

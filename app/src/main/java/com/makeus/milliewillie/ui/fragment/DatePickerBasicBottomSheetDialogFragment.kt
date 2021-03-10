@@ -1,9 +1,6 @@
 package com.makeus.milliewillie.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
@@ -40,6 +37,7 @@ class DatePickerBasicBottomSheetDialogFragment :
             today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
         ) { view, year, month, day ->
+
             date = "$year.${month + 1}.$day"
         }
     }
@@ -48,7 +46,6 @@ class DatePickerBasicBottomSheetDialogFragment :
         this.clickOk = clickOk
         return this
     }
-
 
     fun onClickOk() {
         clickOk?.invoke(date)

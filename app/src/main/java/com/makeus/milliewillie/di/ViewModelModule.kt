@@ -2,6 +2,7 @@ package com.makeus.milliewillie.di
 
 import com.makeus.milliewillie.ui.WelcomeViewModel
 import com.makeus.milliewillie.ui.LoginViewModel
+import com.makeus.milliewillie.ui.map.MapViewModel
 import com.makeus.milliewillie.ui.dDay.DdayViewModel
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel
 import com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel
@@ -16,7 +17,7 @@ val viewModelModule = module {
     viewModel { BirthdayViewModel() }
     viewModel { CertificationViewModel() }
     viewModel { NceeViewModel() }
-
     viewModel { WelcomeViewModel() }
     viewModel { UserViewModel() }
+    viewModel { MapViewModel() }
 }

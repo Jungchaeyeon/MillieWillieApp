@@ -5,21 +5,80 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.MainActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        tools:context=".View.MainActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f2f2f2"
+                android:elevation="1dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_plan"
+                style="@style/FloatingBtn"
+                android:layout_marginBottom="230dp"
+                android:onClick="@{(view)->vi.onClick(view)}"
+                android:src="@drawable/ic_icon_pencil"
+                android:visibility="invisible"
+                app:backgroundTint="@color/white"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_dday"
+                style="@style/FloatingBtn"
+                android:layout_marginBottom="170dp"
+                android:onClick="@{(view)->vi.onClick(view)}"
+                android:src="@drawable/ic_dday"
+                android:visibility="invisible"
+                app:backgroundTint="@color/black_all"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                style="@style/FloatingBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="90dp"
+                android:backgroundTint="@color/aqua_blue"
+                android:onClick="@{(view)->vi.onClick(view)}"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                android:src="@drawable/ic_add" />
+        </RelativeLayout>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!" />
+            android:background="@color/white"
+            app:itemIconTint="@color/bottom_navi_item_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_navi_menu" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

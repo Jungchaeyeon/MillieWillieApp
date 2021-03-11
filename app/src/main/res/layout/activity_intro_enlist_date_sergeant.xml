@@ -10,20 +10,20 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroEnlistDateActivity2" />
+            type="com.makeus.milliewillie.ui.IntroEnlistDateSergeantActivity" />
     </data>
 
     <LinearLayout
         style="@style/Match"
         android:orientation="vertical"
-        tools:context=".ui.IntroEnlistDateActivity1">
+        tools:context=".ui.IntroEnlistDateSergeantActivity">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="35dp"
-            android:onClick="@{()->vi.onClickBack()}"
+            android:onClick="@{()->vi.finish()}"
             android:src="@drawable/ic_icon_gotobac" />
 
         <TextView
@@ -53,9 +53,9 @@
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:gravity="center_vertical"
-            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:onClick="@{()-> vi.onClickDate(0)}"
+            android:text="@{vm.liveDateButtonList[0]}"
             android:paddingHorizontal="8dp"
-            android:text="@{vm.liveBtnEnlist}"
             android:textColor="@color/black_all"
             tools:text="2021.3.3 (토)" />
 
@@ -77,9 +77,9 @@
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
-            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:onClick="@{()-> vi.onClickDate(1)}"
+            android:text="@{vm.liveDateButtonList[1]}"
             android:paddingHorizontal="10dp"
-            android:text="@{vm.liveBtnDischarge}"
             android:textAlignment="viewStart" />
 
         <TextView
@@ -100,9 +100,9 @@
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
-            android:onClick="@{(view)-> vi.onClickDate(view)}"
+            android:onClick="@{()-> vi.onClickDate(2)}"
+            android:text="@{vm.liveDateButtonList[2]}"
             android:paddingHorizontal="10dp"
-            android:text="@{vm.liveBtnPromotion}"
             android:textAlignment="viewStart" />
 
         <RelativeLayout

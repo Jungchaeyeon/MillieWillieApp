@@ -9,7 +9,6 @@ import com.makeus.milliewillie.databinding.ItemTypeDetailBinding
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_service_type_detail.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -32,7 +31,7 @@ class IntroServiceTypeDetailActivity :
                     ) {
                         vi = this@IntroServiceTypeDetailActivity
                         item = it
-                        repositoryCached.setValue(LocalKey.DETAILTYPE,it.detailType.toString())
+                        repositoryCached.setValue(LocalKey.DETAILTYPE, it.detailType.toString())
                     })
         }
 
@@ -50,14 +49,19 @@ class IntroServiceTypeDetailActivity :
         } else viewModel.requestDetailCaptain()
     }
 
-    fun onClickItemD() {
+    fun onClickItemD(detailType: String) {
+
+        //복무 세부 타입 캐시 저장
+        repositoryCached.setValue(LocalKey.DETAILTYPE, detailType)
+
         if (repositoryCached.getType() == "일반병사") {
             ActivityNavigator.with(this).enlist1().start()
         } else {
             ActivityNavigator.with(this).enlist2().start()
         }
     }
-    fun onClickBack(){
+
+    fun onClickBack() {
         onBackPressed()
     }
 }

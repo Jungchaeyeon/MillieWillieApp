@@ -32,9 +32,10 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun name(isClear: Boolean = true) = MyIntent(IntroSettingNameActivity::class.java, isClear)
     fun type() = MyIntent(IntroServiceTypeActivity::class.java)
     fun typedetail() = MyIntent(IntroServiceTypeDetailActivity::class.java)
-    fun enlist1() = MyIntent(IntroEnlistDateActivity1::class.java)
-    fun enlist2() = MyIntent(IntroEnlistDateActivity2::class.java)
+    fun enlist1() = MyIntent(IntroEnlistDateSoldierActivity::class.java)
+    fun enlist2() = MyIntent(IntroEnlistDateSergeantActivity::class.java)
     fun goal() = MyIntent(IntroGoalActivity::class.java)
+    fun makeplan() = MyIntent(MakePlanActivity::class.java)
 
     inner class MyIntent : Intent {
 

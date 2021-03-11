@@ -5,6 +5,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
 import com.makeus.milliewillie.ui.bottom_navi_fragment.EmotionFragment
@@ -96,7 +97,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
             }
             R.id.fab_plan -> {
                 anim()
-             //   ActivityNavigator.with(this).makeplan().start()
+                ActivityNavigator.with(this).makeplan().start()
             }
         }
     }

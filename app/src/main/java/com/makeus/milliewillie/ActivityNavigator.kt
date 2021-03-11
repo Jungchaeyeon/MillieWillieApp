@@ -35,7 +35,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun enlist1() = MyIntent(IntroEnlistDateSoldierActivity::class.java)
     fun enlist2() = MyIntent(IntroEnlistDateSergeantActivity::class.java)
     fun goal() = MyIntent(IntroGoalActivity::class.java)
-   // fun makeplan() = MyIntent(MakePlanActivity::class.java)
+    fun makeplan() = MyIntent(MakePlanActivity::class.java)
 
     inner class MyIntent : Intent {
 

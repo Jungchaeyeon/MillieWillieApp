@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.MainSchedule" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="false">
+
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginVertical="24dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_underline_main_schedule"
+            android:text="@{item.schedule}"
+            android:textColor="@color/black_all"
+            android:textSize="16sp"
+            tools:text="첫 휴우가" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

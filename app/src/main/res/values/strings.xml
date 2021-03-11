@@ -1,3 +1,8 @@
 <resources>
     <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="divide">구분</string>
+    <string name="discharge">전역</string>
+    <string name="blank_message1">아직 생성한 일정/기록이 없습니다.</string>
+    <string name="blank_message2">추가하기 버튼을 눌러 추가해 보세요!</string>
 </resources>

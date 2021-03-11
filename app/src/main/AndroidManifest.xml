@@ -47,8 +47,8 @@
         </activity>
         <activity android:name=".ui.IntroServiceTypeActivity"/>
         <activity android:name=".ui.IntroServiceTypeDetailActivity"/>
-        <activity android:name=".ui.IntroEnlistDateActivity1"/>
-        <activity android:name=".ui.IntroEnlistDateActivity2"/>
+        <activity android:name=".ui.IntroEnlistDateSoldierActivity"/>
+        <activity android:name=".ui.IntroEnlistDateSergeantActivity"/>
         <activity android:name=".ui.IntroGoalActivity"/>
     </application>
 

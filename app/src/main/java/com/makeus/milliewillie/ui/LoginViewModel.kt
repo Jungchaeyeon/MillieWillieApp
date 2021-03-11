@@ -61,6 +61,9 @@ class LoginViewModel : BaseViewModel() {
 
                             auth.currentUser?.let {
                                 Log.e(googleSignInAccount.id)
+                                Log.e(googleSignInAccount.idToken,"AccessToken")
+                                Log.e(googleSignInAccount.isExpired.toString(),"AccessToken")
+
                                 response.invoke(true)
                             }
                         } else {

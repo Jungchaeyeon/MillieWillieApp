@@ -14,7 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class IntroServiceTypeActivity :
     BaseDataBindingActivity<ActivityIntroServiceTypeBinding>(R.layout.activity_intro_service_type) {
-    val viewModel by viewModel<UserViewModel>()
+    private val viewModel by viewModel<UserViewModel>()
     private val repositoryCached by inject<RepositoryCached>()
     override fun ActivityIntroServiceTypeBinding.onBind() {
 

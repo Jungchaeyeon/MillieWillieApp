@@ -9,6 +9,7 @@ import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.DatepickerBottomSheetBasicBinding
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 

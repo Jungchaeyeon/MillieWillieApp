@@ -15,18 +15,16 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MakePlanActivity :
     BaseDataBindingActivity<ActivityMakePlanBinding>(R.layout.activity_make_plan) {
 
-    val viewModel by viewModel<MakePlanViewModel>()
+    private val viewModel by viewModel<MakePlanViewModel>()
 
     companion object {
-
         fun getInstance() = MakePlanActivity()
-
     }
 
     override fun ActivityMakePlanBinding.onBind() {
-
         vi = this@MakePlanActivity
-        vm=viewModel
+        vm = viewModel
+        viewModel.bindLifecycle(this@MakePlanActivity)
         // openColorPicker(this@MakePlanActivity)
 
         rv_memo_list.run {
@@ -38,17 +36,13 @@ class MakePlanActivity :
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<Plan.Todos, ItemPlanLayoutBinding>(
                         R.layout.item_plan_layout
                     ) {
-                        vi=this@MakePlanActivity
-                        vm = viewModel
+                        vi = this@MakePlanActivity
                     })
 
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<Plan.Todos, ItemPlanTodoBinding>(
                         R.layout.item_plan_todo
                     ) {
-                        vm = viewModel
-                        if (viewModel.livePlanTodoList.value?.isNotEmpty() == true) {
-                        }
                         item = it
                     })
 
@@ -62,7 +56,8 @@ class MakePlanActivity :
                 .show(supportFragmentManager, "custom_dialog")
         }
     }
-    fun onClickDone(){
+
+    fun onClickDone() {
         onBackPressed()
     }
 

@@ -50,6 +50,7 @@
         <activity android:name=".ui.IntroEnlistDateActivity2"/>
         <activity android:name=".ui.IntroGoalActivity"/>
         <activity android:name=".ui.map.MapActivity"/>
+        <activity android:name=".ui.routine.MakeRoutineActivity"/>
     </application>
 
 </manifest>

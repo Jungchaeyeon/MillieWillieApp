@@ -2,9 +2,15 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
+
     <size
-        android:width="20dp"
+        android:width="10dp"
         android:height="10dp" />
+    <padding
+        android:top="-1dp"
+        android:bottom="-1dp"
+        android:right="-1dp"
+        android:left="-1dp"/>
     <solid
-        android:color="#FFFFFF" />
+        android:color="#000000" />
 </shape>

@@ -9,7 +9,8 @@ import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment
 import com.makeus.milliewillie.ui.dDay.certification.CertificationFragment
 import com.makeus.milliewillie.ui.dDay.ncee.NceeFragment
-import com.makeus.milliewillie.ui.fragment.DatePickerBasicBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.fragment.DatePickerBirthBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 enum class Classification {
@@ -48,15 +49,26 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             Toast.makeText(this@DdayActivity, "Complete", Toast.LENGTH_SHORT).show()
         }
 
-
     }
 
     fun onClickDdayDate() {
-        DatePickerBasicBottomSheetDialogFragment.getInstance()
-            .setOnClickOk {
-                viewModel.liveDataDdayDate.postValue(it)
-            }.show(supportFragmentManager)
+        when {
+            btnBirthday.isSelected -> {
+                DatePickerBirthBottomSheetDialogFragment.getInstance()
+                    .setOnClickOk {
+                        viewModel.liveDataDdayDate.postValue(it)
+                    }.show(supportFragmentManager)
+            }
+            else -> {
+                DatePickerDdayBottomSheetDialogFragment.getInstance()
+                    .setOnClickOk {
+                        viewModel.liveDataDdayDate.postValue(it)
+                    }.show(supportFragmentManager)
+            }
+        }
+
     }
+
 
     fun setBtnStatus(position: Int){
         when (position) {

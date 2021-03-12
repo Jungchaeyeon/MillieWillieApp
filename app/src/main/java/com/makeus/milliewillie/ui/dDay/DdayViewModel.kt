@@ -10,7 +10,7 @@ class DdayViewModel : BaseViewModel() {
 
     private fun date(): String? {
         val today = Calendar.getInstance()
-        return today.get(Calendar.YEAR).toString() +"." + (today.get(Calendar.MONTH) + 1).toString() + "."+ today.get(Calendar.DAY_OF_MONTH).toString()
+        return today.get(Calendar.YEAR).toString() + "년 " + (today.get(Calendar.MONTH) + 1).toString() + "월 "+ today.get(Calendar.DAY_OF_MONTH).toString() + "일"
     }
 
 }

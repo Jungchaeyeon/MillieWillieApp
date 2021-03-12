@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.routine.ExPartSelectBottomSheetFragment" />
+    </data>
+
+    <RelativeLayout
+        style="@style/BottomLayout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rbs_layout_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:onClick="@{()-> vi.onClickCancel()}"
+                android:padding="5dp"
+                android:text="@string/cancel" />
+            <TextView
+                android:id="@+id/rbs_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="16dp"
+                android:padding="5dp"
+                android:text="@string/classification"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/btn_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{()-> vi.onClickOk()}"
+                android:padding="5dp"
+                android:text="@string/complete" />
+        </RelativeLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rbs_layout_top"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_total"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:onClick="@{()-> vi.setTextStatus(1)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/total" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_shoulder"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(2)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/shoulder" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_chest"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(3)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/chest" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_back"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:onClick="@{()-> vi.setTextStatus(4)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/back" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_abs"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(5)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/abs" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_triceps"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(6)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/triceps" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_biceps"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:onClick="@{()-> vi.setTextStatus(7)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/biceps" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_forearm"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(8)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/forearm" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_arm"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(9)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/arm" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_hip"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:onClick="@{()-> vi.setTextStatus(10)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/hip" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_thigh"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(11)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/thigh" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_calf"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(12)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/calf" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_whole_body"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:onClick="@{()-> vi.setTextStatus(13)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/whole_body" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/rbs_btn_core"
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:onClick="@{()-> vi.setTextStatus(14)}"
+                    android:background="@drawable/routine_btn_selected"
+                    android:text="@string/core" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="104dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:enabled="false"
+                    android:visibility="invisible"/>
+            </LinearLayout>
+        </TableLayout>
+
+
+    </RelativeLayout>
+
+
+
+</layout>

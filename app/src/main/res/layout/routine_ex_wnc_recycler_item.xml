@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rebs_wnc_recycler_layout_input"
+        android:layout_width="match_parent"
+        android:layout_height="38dp">
+
+        <TextView
+            android:id="@+id/rebs_wnc_recycler_text_total_set_count"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_centerVertical="true"
+            android:text="0 세트"/>
+
+        <EditText
+            android:id="@+id/rebs_wnc_recycler_edit_weight"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/rebs_wnc_recycler_text_total_set_count"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:backgroundTint="@color/gray"
+            android:textAlignment="textEnd"
+            android:hint="0.0"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/rebs_wnc_recycler_text_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@+id/rebs_wnc_recycler_edit_weight"
+            android:layout_centerVertical="true"
+            android:text="kg"/>
+
+        <EditText
+            android:id="@+id/rebs_wnc_recycler_edit_count"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/rebs_wnc_recycler_text_kg"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:backgroundTint="@color/gray"
+            android:textAlignment="textEnd"
+            android:hint="0.0"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/rebs_wnc_recycler_text_kg2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@+id/rebs_wnc_recycler_edit_count"
+            android:layout_centerVertical="true"
+            android:text="개"/>
+
+        <ImageView
+            android:id="@+id/rebs_wnc_recycler_img_text_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_delete_text"/>
+    </RelativeLayout>
+</layout>

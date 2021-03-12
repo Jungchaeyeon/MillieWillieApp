@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.routine.MakeRoutineActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.routine.MakeRoutineViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:id="@+id/routine_img_cancel"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/vic_icon_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerInParent="true"
+                android:text="@string/make_routine"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/routine_text_complete"
+                android:layout_width="22dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:text="@string/complete"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/layout_underline"
+                >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/non"
+                android:maxLines="1"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:hint="@string/routine_name"
+                android:textSize="14sp"
+                />
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/layout_underline"
+            android:onClick="@{()-> vi.onClickSetPartOfEx()}">
+
+            <TextView
+                android:id="@+id/routine_text_part_of_ex"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:text="@string/part_of_ex"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/routine_text_select_part_of_ex"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@+id/routine_text_part_of_ex"
+                android:hint="@string/select_part_of_ex"
+                android:text="@{vm.liveDatePartOfEx}"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_left" />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/layout_underline"
+                >
+                <TextView
+                    android:id="@+id/routine_text_repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/repeat"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_everyday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="39dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_repeat"
+                    android:onClick="@{()-> vi.setTextStatus(1)}"
+                    android:text="@string/everyday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_everyday"
+                    android:onClick="@{()-> vi.setTextStatus(2)}"
+                    android:text="@string/monday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_monday"
+                    android:onClick="@{()-> vi.setTextStatus(3)}"
+                    android:text="@string/tuesday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_tuesday"
+                    android:onClick="@{()-> vi.setTextStatus(4)}"
+                    android:text="@string/wednesday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_wednesday"
+                    android:onClick="@{()-> vi.setTextStatus(5)}"
+                    android:text="@string/thursday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_thursday"
+                    android:onClick="@{()-> vi.setTextStatus(6)}"
+                    android:text="@string/friday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+                <TextView
+                    android:id="@+id/routine_text_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/routine_text_friday"
+                    android:onClick="@{()-> vi.setTextStatus(7)}"
+                    android:text="@string/saturday"
+                    android:textColor="@color/d_day_btn_text_selected"
+                    />
+
+                <TextView
+                    android:id="@+id/routine_text_sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/routine_text_saturday"
+                    android:onClick="@{()-> vi.setTextStatus(8)}"
+                    android:text="@string/sunday"
+                    android:textColor="@color/d_day_btn_text_selected"/>
+            </RelativeLayout>
+
+    </LinearLayout>
+</layout>

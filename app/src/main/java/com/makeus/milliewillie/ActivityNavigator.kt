@@ -9,6 +9,7 @@ import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.map.MapActivity
+import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import java.util.*
 
 /**
@@ -43,6 +44,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun enlist2() = MyIntent(IntroEnlistDateActivity2::class.java)
     fun goal() = MyIntent(IntroGoalActivity::class.java)
     fun map() = MyIntent(MapActivity::class.java)
+    fun routine() = MyIntent(MakeRoutineActivity::class.java)
 
     inner class MyIntent : Intent {
 

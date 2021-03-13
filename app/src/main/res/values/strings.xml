@@ -26,4 +26,5 @@
     <string name="notice">알림</string>
     <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
     <string name="todo">할일</string>
+    <string name="reset">초기화</string>
 </resources>

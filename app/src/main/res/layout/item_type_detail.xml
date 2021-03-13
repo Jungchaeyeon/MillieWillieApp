@@ -7,7 +7,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroServiceTypeDetailActivity" />
+            type="com.makeus.milliewillie.ui.intro.IntroServiceTypeDetailActivity" />
 
         <variable
             name="item"

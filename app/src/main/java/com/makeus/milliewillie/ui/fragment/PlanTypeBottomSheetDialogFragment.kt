@@ -1,15 +1,16 @@
 package com.makeus.milliewillie.ui.fragment
 
-import androidx.lifecycle.MutableLiveData
+import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.databinding.ItemPlanTypeBinding
 import com.makeus.milliewillie.databinding.PlanTypeBottomSheetBinding
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.MakePlanViewModel
-import com.makeus.milliewillie.databinding.ItemPlanTypeBinding
-import com.makeus.milliewillie.repository.local.LocalKey
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
+import kotlinx.android.synthetic.main.item_plan_layout.*
 import kotlinx.android.synthetic.main.item_plan_type.*
 import kotlinx.android.synthetic.main.plan_type_bottom_sheet.*
 import org.koin.android.ext.android.inject
@@ -21,47 +22,43 @@ class PlanTypeBottomSheetDialogFragment :
     BaseDataBindingBottomSheetFragment<PlanTypeBottomSheetBinding>(R.layout.plan_type_bottom_sheet) {
 
     val viewModel by viewModel<MakePlanViewModel>()
-    val liveButton = MutableLiveData<String>()
     private val repositoryCached by inject<RepositoryCached>()
 
-    private var clickOk: (() -> Unit)? = null
+    private var clickDate: ((String) -> Unit)? = null
 
     companion object {
         fun getInstance() = PlanTypeBottomSheetDialogFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+    }
+
     override fun PlanTypeBottomSheetBinding.onBind() {
         vi = this@PlanTypeBottomSheetDialogFragment
         vm = viewModel
-        //vm.bindLifecycle(this@PlanTypeBottomSheetDialogFragment)
-        liveButton.postValue(context?.getString(R.string.ok))
 
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
         rv_plan_type.run {
             adapter = BaseDataBindingRecyclerViewAdapter<String>()
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<String, ItemPlanTypeBinding>(R.layout.item_plan_type) {
                         vi = this@PlanTypeBottomSheetDialogFragment
-                        vm = viewModel
                         item = it
                     })
         }
     }
 
-    fun setOnClickOk(clickOk: (() -> Unit)): PlanTypeBottomSheetDialogFragment {
-        this.clickOk = clickOk
+    fun setOnClickDate(clickDate: ((String) -> Unit)): PlanTypeBottomSheetDialogFragment {
+        this.clickDate = clickDate
         return this
     }
 
-    fun onClickOk() {
-        clickOk?.invoke()
-        dismiss()
-    }
 
-    fun onClickItem(text: String) {
-        //text.showShortToastSafe()
+    fun onClickDate(text: String) {
         repositoryCached.setValue(LocalKey.PLANTYPE, text)
-
+        clickDate?.invoke(text)
+        dismiss()
     }
 
 

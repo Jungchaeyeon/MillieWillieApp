@@ -6,7 +6,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.bottom_navi_fragment.EmotionFragment" />
+            type="com.makeus.milliewillie.ui.home.tab3.EmotionFragment" />
     </data>
 
     <LinearLayout

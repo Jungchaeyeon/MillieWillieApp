@@ -7,7 +7,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroServiceTypeDetailActivity" />
+            type="com.makeus.milliewillie.ui.intro.IntroServiceTypeDetailActivity" />
 
         <variable
             name="vm"
@@ -17,7 +17,7 @@
     <LinearLayout
         style="@style/Match"
         android:orientation="vertical"
-        tools:context=".ui.IntroServiceTypeDetailActivity">
+        tools:context=".ui.intro.IntroServiceTypeDetailActivity">
 
         <ImageView
             android:layout_width="30dp"

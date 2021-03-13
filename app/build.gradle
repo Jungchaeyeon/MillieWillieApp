@@ -142,8 +142,8 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
 
-    //colorpicker
-    implementation "petrov.kristiyan:colorpicker-library:$colorPickerVersion"
+    //calendar picker
+    implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"

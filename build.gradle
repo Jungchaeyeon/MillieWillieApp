@@ -54,7 +54,9 @@ buildscript {
         lottieVersion ="3.5.0"
 
         colorPickerVersion ="1.1.10"
-        //Test
+
+        calendarVersion="0.3"
+     //Test
         robolectricVersion = '4.3'
         testCoreVersion = '1.3.0'
         junitVersion = '4.12'

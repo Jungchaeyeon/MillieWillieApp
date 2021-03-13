@@ -8,11 +8,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.LoginActivity" />
+            type="com.makeus.milliewillie.ui.login.LoginActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.LoginViewModel" />
+            type="com.makeus.milliewillie.ui.login.LoginViewModel" />
     </data>
 
     <LinearLayout

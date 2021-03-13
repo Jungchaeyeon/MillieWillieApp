@@ -11,7 +11,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment" />
+            type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
     </data>
 
 

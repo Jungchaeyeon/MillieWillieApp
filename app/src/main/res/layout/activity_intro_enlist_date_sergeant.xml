@@ -10,13 +10,13 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroEnlistDateSergeantActivity" />
+            type="com.makeus.milliewillie.ui.intro.IntroEnlistDateSergeantActivity" />
     </data>
 
     <LinearLayout
         style="@style/Match"
         android:orientation="vertical"
-        tools:context=".ui.IntroEnlistDateSergeantActivity">
+        tools:context=".ui.intro.IntroEnlistDateSergeantActivity">
 
         <ImageView
             android:layout_width="30dp"

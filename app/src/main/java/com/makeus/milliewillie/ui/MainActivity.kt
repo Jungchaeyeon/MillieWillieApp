@@ -8,10 +8,10 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
-import com.makeus.milliewillie.ui.bottom_navi_fragment.EmotionFragment
-import com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment
-import com.makeus.milliewillie.ui.bottom_navi_fragment.WorkoutFragment
-import com.makeus.testmilliewillie.ui.bottom_navi_fragment.InfoFragment
+import com.makeus.milliewillie.ui.home.tab1.HomeFragment
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
+import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
+import com.makeus.milliewillie.ui.home.tab4.InfoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,6 +34,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
 
+        initNavigation()
         changeFragment(HomeFragment.getInstance())
 
         navigationView.setOnNavigationItemSelectedListener { item ->
@@ -62,6 +63,10 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
             false
         }
 
+    }
+    private fun initNavigation() {
+        //bottom navi 기본 tint 설정 막음
+       navigation_view.itemIconTintList = null
     }
     fun anim() {
         if (isFabOpen) {

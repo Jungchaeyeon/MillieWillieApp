@@ -5,13 +5,16 @@
     <data>
 
         <import type="android.text.Html" />
+
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.MakePlanViewModel" />
+
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.fragment.PlanTypeBottomSheetDialogFragment" />
     </data>
+
     <LinearLayout
         style="@style/BottomLayout"
         android:orientation="vertical">
@@ -26,32 +29,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:padding="5dp"
-                android:textSize="14sp"
-                android:text="@string/divide" />
+                android:text="@string/divide"
+                android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/btn_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:padding="10dp"
-                android:onClick="@{()->vi.onClickOk()}"
-                android:text="@string/ok" />
         </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_plan_type"
+            replaceAll="@{vm.livePlanTypeList}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            replaceAll="@{vm.livePlanTypeList}"
             android:isScrollContainer="true"
-            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"/>
+            app:spanCount="3" />
 
 
-        </LinearLayout>
-
+    </LinearLayout>
 
 
 </layout>

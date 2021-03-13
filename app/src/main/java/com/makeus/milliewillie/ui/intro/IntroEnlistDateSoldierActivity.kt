@@ -5,8 +5,7 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroEnlistDateSoldierBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.ui.UserViewModel
-import com.makeus.milliewillie.ui.fragment.DatePickerBasicBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_intro_enlist_date_soldier.*
 import kotlinx.android.synthetic.main.datepicker_bottom_sheet_basic.*
 import org.koin.android.viewmodel.ext.android.viewModel

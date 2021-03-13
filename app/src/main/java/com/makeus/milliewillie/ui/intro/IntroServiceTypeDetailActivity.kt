@@ -9,7 +9,6 @@ import com.makeus.milliewillie.databinding.ItemTypeDetailBinding
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.UserViewModel
 import kotlinx.android.synthetic.main.activity_intro_service_type_detail.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel

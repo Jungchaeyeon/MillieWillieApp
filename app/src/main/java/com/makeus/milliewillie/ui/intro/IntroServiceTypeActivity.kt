@@ -7,7 +7,6 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroServiceTypeBinding
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.UserViewModel
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import org.koin.android.ext.android.inject

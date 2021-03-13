@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.MakePlanActivity" />
+            type="com.makeus.milliewillie.ui.plan.MakePlanActivity" />
     </data>
 
     <LinearLayout
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:onClick="@{()->vi.onClickPlanType()}"
-                android:text="@{vm.livePlanType}"
+                android:text="@string/plan"
                 android:textColor="@color/black_all"
                 tools:text="일정" />
 
@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:onClick="@{()->vi.onClickCalendar()}"
-                android:text="@string/pick_date" />
+                android:text="@string/check_leave_date" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -197,6 +197,84 @@
             android:background="@color/light_gray" />
 
         <LinearLayout
+            android:id="@+id/layout_leave"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/military_leave"
+                android:textColor="@color/black_all"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/pick_date" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_left" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_other_plan"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/title_day_and_night"
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/black_all"
+                android:textSize="14sp"
+                android:text="@string/reward_leave"
+                tools:text="포상휴가"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/day_and_night"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                tools:text="6박 7일" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_left" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/layout_notice_week"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
@@ -373,6 +451,7 @@
             android:background="@color/light_gray" />
 
         <LinearLayout
+            android:id="@+id/title_todo"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"

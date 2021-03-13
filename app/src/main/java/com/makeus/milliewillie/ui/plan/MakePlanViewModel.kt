@@ -1,12 +1,8 @@
-package com.makeus.milliewillie.ui
+package com.makeus.milliewillie.ui.plan
 
-import android.graphics.Color
-import androidx.core.graphics.toColor
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Plan
-import okhttp3.internal.format
 
 class MakePlanViewModel : BaseViewModel() {
 

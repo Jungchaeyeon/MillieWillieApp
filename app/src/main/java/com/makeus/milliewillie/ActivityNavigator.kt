@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.intro.*
 import com.makeus.milliewillie.ui.login.LoginActivity
+import com.makeus.milliewillie.ui.plan.MakePlanActivity
+import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
 import java.util.*
 
 /**

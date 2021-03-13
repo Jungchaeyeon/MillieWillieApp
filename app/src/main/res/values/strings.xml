@@ -40,4 +40,7 @@
     <string name="silver">#dfe5e6</string>
     <string name="cool_grey">#b2babf</string>
     <string name="steel_grey">#7e8b90</string>
+    <string name="military_leave">정기휴가</string>
+    <string name="check_leave_date">휴가일수 확인</string>
+    <string name="reward_leave">포상휴가</string>
 </resources>

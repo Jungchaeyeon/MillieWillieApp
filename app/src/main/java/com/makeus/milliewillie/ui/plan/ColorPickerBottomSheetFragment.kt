@@ -1,15 +1,10 @@
-package com.makeus.milliewillie.ui.fragment
+package com.makeus.milliewillie.ui.plan
 
-import android.graphics.Color
 import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ColorPickerBottomSheetBinding
-import com.makeus.milliewillie.ext.showLongToastSafe
-import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.MakePlanViewModel
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import kotlinx.android.synthetic.main.item_plan_layout.*
 import kotlinx.android.synthetic.main.item_plan_type.*

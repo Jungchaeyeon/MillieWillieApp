@@ -55,7 +55,7 @@ buildscript {
 
         colorPickerVersion ="1.1.10"
 
-        calendarVersion="0.3"
+        calendarpickerVersion="0.3"
      //Test
         robolectricVersion = '4.3'
         testCoreVersion = '1.3.0'

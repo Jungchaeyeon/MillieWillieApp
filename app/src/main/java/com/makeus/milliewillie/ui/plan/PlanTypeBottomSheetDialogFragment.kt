@@ -1,4 +1,4 @@
-package com.makeus.milliewillie.ui.fragment
+package com.makeus.milliewillie.ui.plan
 
 import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
@@ -8,7 +8,6 @@ import com.makeus.milliewillie.databinding.ItemPlanTypeBinding
 import com.makeus.milliewillie.databinding.PlanTypeBottomSheetBinding
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.MakePlanViewModel
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import kotlinx.android.synthetic.main.item_plan_layout.*
 import kotlinx.android.synthetic.main.item_plan_type.*
@@ -56,6 +55,7 @@ class PlanTypeBottomSheetDialogFragment :
 
 
     fun onClickDate(text: String) {
+        viewModel.livePlanType.postValue(text)
         repositoryCached.setValue(LocalKey.PLANTYPE, text)
         clickDate?.invoke(text)
         dismiss()

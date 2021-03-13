@@ -108,8 +108,8 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 anim()
             }
             R.id.fab_plan -> {
-                anim()
                 ActivityNavigator.with(this).makeplan().start()
+               fabAction()
             }
         }
     }

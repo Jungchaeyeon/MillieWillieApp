@@ -19,17 +19,18 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
 
     lateinit var fabOpen: Animation
-    lateinit  var fabClose : Animation
+    lateinit var fabClose: Animation
     private var isFabOpen = false
 
     val viewModel by viewModel<MainViewModel>()
-    companion object{
+
+    companion object {
         fun getInstance() = MainActivity()
     }
 
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-        vm =viewModel
+        vm = viewModel
 
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
@@ -38,6 +39,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         changeFragment(HomeFragment.getInstance())
 
         navigationView.setOnNavigationItemSelectedListener { item ->
+            fabAction()
             when (item.itemId) {
                 R.id.page_home -> {
 
@@ -64,33 +66,38 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         }
 
     }
+
     private fun initNavigation() {
         //bottom navi 기본 tint 설정 막음
-       navigation_view.itemIconTintList = null
+        navigation_view.itemIconTintList = null
     }
+
     fun anim() {
         if (isFabOpen) {
             fab_dday.run {
                 startAnimation(fabClose)
-                isClickable =false
+                isClickable = false
             }
-            fab_plan.run{
+            fab_plan.run {
                 startAnimation(fabClose)
-                isClickable =false
+                isClickable = false
             }
             isFabOpen = false
+            alpha90.visibility = View.GONE
         } else {
             fab_dday.run {
                 startAnimation(fabOpen)
-                isClickable =true
+                isClickable = true
             }
-            fab_plan.run{
+            fab_plan.run {
                 startAnimation(fabOpen)
-                isClickable =true
+                isClickable = true
             }
             isFabOpen = true
+            alpha90.visibility = View.VISIBLE
         }
     }
+
     fun onClick(v: View) {
         val id = v.id
         when (id) {
@@ -107,7 +114,17 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         }
     }
 
+    fun fabAction() {
+        if (isFabOpen) {
+            fab_dday.startAnimation(fabClose)
+            fab_plan.startAnimation(fabClose)
+            isFabOpen = false
+        }
+        alpha90.visibility = View.GONE
+    }
+
     private fun changeFragment(fragment: Fragment) {
+        alpha90.visibility = View.GONE
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)

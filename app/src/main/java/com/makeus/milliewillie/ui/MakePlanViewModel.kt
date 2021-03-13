@@ -1,13 +1,18 @@
 package com.makeus.milliewillie.ui
 
+import android.graphics.Color
+import androidx.core.graphics.toColor
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Plan
+import okhttp3.internal.format
 
 class MakePlanViewModel : BaseViewModel() {
 
     val livePlanTypeList =MutableLiveData<List<String>>()
     val livePlanType = MutableLiveData<String>().apply { value = " 일정"}
+    val livePlanColor = MutableLiveData<String>()
     val livePlanTodoList = MutableLiveData<List<Plan.Todos>>()
 
 

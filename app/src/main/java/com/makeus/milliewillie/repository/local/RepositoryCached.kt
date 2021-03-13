@@ -42,8 +42,10 @@ abstract class RepositoryCached {
     fun getName() = getValue(LocalKey.NAME , "")
     fun getType() = getValue(LocalKey.TYPE, "")
     fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
-    fun getDate() = getValue(LocalKey.DATE, "일정")
-    fun getPlanType() = getValue(LocalKey.PLANTYPE, "")
+    fun getDate() = getValue(LocalKey.DATE, "")
+    fun getPlanType() = getValue(LocalKey.PLANTYPE, "일정")
+    fun getNotice() = getValue(LocalKey.PLANNOTICE, "")
+    fun getColor() = getValue(LocalKey.COLOR, "#ffbe65")
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

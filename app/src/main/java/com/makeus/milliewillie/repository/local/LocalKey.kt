@@ -6,5 +6,7 @@ enum class LocalKey {
     TYPE,
     DETAILTYPE,
     GOAL,
-    PLANTYPE
+    PLANTYPE,
+    PLANNOTICE,
+    COLOR,
 }

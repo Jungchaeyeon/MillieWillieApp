@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,7 +8,7 @@
             type="com.makeus.milliewillie.model.Plan.Todos" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -16,17 +16,22 @@
         android:orientation="horizontal">
 
         <CheckBox
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:buttonTint="@color/light_gray" />
+
+        <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:layout_marginStart="4dp"
+            android:background="@color/trans"
             android:fontFamily="@font/spoqa_han_sans_neo_medium"
             android:text="@{item.todo}"
             android:textColor="@color/icon_gray"
             android:textSize="14dp" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="30dp"

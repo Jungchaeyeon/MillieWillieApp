@@ -24,7 +24,7 @@
             android:layout_height="50dp">
 
             <TextView
-                android:id="@+id/d_day_certi_text_todo"
+                android:id="@+id/d_day_birth_text_todo"
                 android:layout_width="wrap_content"
                 android:layout_height="17dp"
                 android:layout_centerVertical="true"
@@ -40,18 +40,21 @@
             android:layout_marginBottom="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/d_day_certi_todo_recycler"
+                android:id="@+id/d_day_birth_todo_recycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                replaceAll="@{vm.checkItemList}"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/fragment_d_day_recycler_item" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/d_day_certi_todo_recycler">
+                android:layout_below="@id/d_day_birth_todo_recycler">
 
                 <CheckBox
-                    android:id="@+id/d_day_certi_checkbox"
+                    android:id="@+id/d_day_birth_checkbox"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
@@ -63,12 +66,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/d_day_certi_edit_todo"
+                    android:id="@+id/d_day_birth_edit_todo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/d_day_certi_checkbox"
+                    android:layout_toEndOf="@+id/d_day_birth_checkbox"
                     android:backgroundTint="@color/non"
                     android:focusableInTouchMode="true"
                     android:focusable="true"

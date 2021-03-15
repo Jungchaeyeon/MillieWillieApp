@@ -12,6 +12,7 @@ import com.makeus.milliewillie.ui.dDay.ncee.NceeFragment
 import com.makeus.milliewillie.ui.fragment.DatePickerBirthBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 
 enum class Classification {
     ANNIVERSARY,
@@ -55,19 +56,22 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         when {
             btnBirthday.isSelected -> {
                 DatePickerBirthBottomSheetDialogFragment.getInstance()
-                    .setOnClickOk {
-                        viewModel.liveDataDdayDate.postValue(it)
+                    .setOnClickOk {date, gapDay ->
+                        viewModel.liveDataDayGap.postValue(gapDay)
+                        viewModel.liveDataDdayDate.postValue(date)
                     }.show(supportFragmentManager)
             }
             else -> {
                 DatePickerDdayBottomSheetDialogFragment.getInstance()
-                    .setOnClickOk {
-                        viewModel.liveDataDdayDate.postValue(it)
+                    .setOnClickOk {date, gapDay ->
+                        viewModel.liveDataDayGap.postValue(gapDay)
+                        viewModel.liveDataDdayDate.postValue(date)
                     }.show(supportFragmentManager)
             }
         }
 
     }
+
 
 
     fun setBtnStatus(position: Int){

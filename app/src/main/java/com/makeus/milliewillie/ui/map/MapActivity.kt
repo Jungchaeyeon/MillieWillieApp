@@ -21,6 +21,8 @@ class MapActivity: BaseDataBindingActivity<ActivityMapBinding>(R.layout.activity
         val mapviewContainer = binding.mapLayoutMapView as ViewGroup
         mapviewContainer.addView(mapView)
 
+
+
     }
 
 

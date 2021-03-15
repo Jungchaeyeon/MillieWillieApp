@@ -32,13 +32,13 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         Log.e(keyHash)
 
         //center dialog
-        BasicDialogFragment.getInstance()
-                .setTitle("예제 타이틀")
-                .setSubTitle("예제 서브 타이틀 (설정 안하면 안보임)")
-                .setContent("내용")
-                .setOnClickOk {
-                    "확인 클릭".showLongToastSafe()
-                }.show(supportFragmentManager)
+//        BasicDialogFragment.getInstance()
+//                .setTitle("예제 타이틀")
+//                .setSubTitle("예제 서브 타이틀 (설정 안하면 안보임)")
+//                .setContent("내용")
+//                .setOnClickOk {
+//                    "확인 클릭".showLongToastSafe()
+//                }.show(supportFragmentManager)
 
         //center dialog
 //        BasicDialogFragment.getInstance()
@@ -90,7 +90,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     fun nextStep(isSuccess : Boolean) {
         if (isSuccess){
-            ActivityNavigator.with(this).dDay().start()
+            ActivityNavigator.with(this).main().start()
         } else {
             "로그인에 실패했습니다.".showLongToastSafe()
         }

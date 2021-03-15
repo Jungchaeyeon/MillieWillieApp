@@ -76,4 +76,27 @@
     <string name="select">선택</string>
     <string name="ok">확인</string>
 
+    <string name="divide">구분</string>
+    <string name="discharge">전역</string>
+    <string name="blank_message1">아직 생성한 일정/기록이 없습니다.</string>
+    <string name="blank_message2">추가하기 버튼을 눌러 추가해 보세요!</string>
+    <string name="devide">구분</string>
+    <string name="plan">일정</string>
+    <string name="manage_plan">일정 관리</string>
+    <string name="finish">완료</string>
+    <string name="introduce_plan_page1">휴가, 외박등의 기간이 있는 일정을 만들 수 있어요.</string>
+    <string name="introduce_plan_page2">구분 탭을 눌러보세요 :)</string>
+    <string name="plan_title">일정 제목</string>
+    <string name="plan_date">날짜</string>
+    <string name="pick_date">날짜 선택</string>
+    <string name="repeat_no">안함</string>
+    <string name="mon">월</string>
+    <string name="tues">화</string>
+    <string name="wedn">수</string>
+    <string name="thurs">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
+    <string name="notice">알림</string>
+    <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
 </resources>

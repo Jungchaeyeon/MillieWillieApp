@@ -48,4 +48,9 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.requestIntroItemList()
+    }
+
 }

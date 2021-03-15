@@ -1,5 +1,7 @@
 package com.makeus.milliewillie.ui
 
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
@@ -17,6 +19,7 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
         vi = this@WelcomeActivity
         vm = viewModel
         viewModel.bindLifecycle(this@WelcomeActivity)
+        vIndicator.createDotPanel(2, R.drawable.indicator_dot_off, R.drawable.indicator_dot_on, 0)
 
 
         //viewpager
@@ -29,6 +32,13 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<Intro, ItemWelcomeBinding>(R.layout.item_welcome) {
                         item = it
                     })
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    vIndicator.selectDot(position)
+                }
+            })
         }
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_home"
+        android:title="" />
+    <item
+        android:id="@+id/page_workout"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_workout"
+        android:title="" />
+    <item
+        android:id="@+id/page_emotion"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_emo"
+        android:title="" />
+    <item
+        android:id="@+id/page_info"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_info"
+        android:title="" />
+</menu>

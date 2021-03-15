@@ -14,29 +14,6 @@
         style="@style/Match"
         android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/Wrap"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="74dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                setImage="@{item.imgViewNowPage1}"
-                style="@style/Wrap"
-                android:layout_marginEnd="3dp" />
-
-            <ImageView
-                setImage="@{item.imgViewNowPage2}"
-                style="@style/Wrap"
-                android:layout_marginEnd="3dp" />
-
-            <ImageView
-                style="@style/Wrap"
-                android:layout_marginEnd="3dp"
-                android:src="@drawable/mini_oval_gray" />
-
-        </LinearLayout>
-
         <TextView
             android:id="@+id/txt_preview"
             style="@style/spoqa_bold_22"

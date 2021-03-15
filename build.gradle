@@ -52,11 +52,14 @@ buildscript {
         kakaoVersion = '2.3.0'
 
         lottieVersion ="3.5.0"
+
+        colorPickerVersion ="1.1.10"
         //Test
         robolectricVersion = '4.3'
         testCoreVersion = '1.3.0'
         junitVersion = '4.12'
         junitTestVersion = '1.1.2'
+
     }
 
     ext {

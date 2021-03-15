@@ -46,7 +46,19 @@
     <style name="ClickWrap" parent="Wrap">
         <item name="android:foreground">?selectableItemBackground</item>
     </style>
-
+    <style name="MatchWrap_24">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:layout_marginStart">24dp</item>
+    </style>
+    <style name="FloatingBtn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginEnd">24dp</item>
+    </style>
     <style name="DialogLayout">
         <item name="android:minWidth">300dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -112,6 +124,14 @@
         <item name="android:lineSpacingExtra">3sp</item>
         <item name="android:textColor">@color/text_gray</item>
     </style>
+    <style name="spoqa_regular_12">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
 
     <style name="spoqa_medium_14">
         <item name="android:gravity">center_horizontal</item>

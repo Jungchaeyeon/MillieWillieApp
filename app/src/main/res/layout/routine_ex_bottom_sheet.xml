@@ -155,14 +155,27 @@
                     android:text="@string/set_count"
                     android:textColor="@color/black" />
 
+                <EditText
+                    android:id="@+id/rebs_wnc_edit_set_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/non"
+                    android:singleLine="true"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"
+                    android:hint="0"/>
+
                 <TextView
                     android:id="@+id/rebs_wnc_text_total_set_input"
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"
-                    android:text="0 세트" />
+                    android:layout_toEndOf="@+id/rebs_wnc_edit_set_count"
+                    android:text="세트" />
 
             </RelativeLayout>
 
@@ -185,6 +198,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:onClick="@{(view) -> vi.onClickSwitch(view)}"
                     android:thumb="@drawable/ic_baseline_brightness_1_24"
                     android:track="@drawable/switch_track_selector"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />

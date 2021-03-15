@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment" />
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.MainSchedule" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="폰군인"
+                android:textColor="@color/black_all"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_left" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일병 2호봉" />
+
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/spoqa_bold_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:text="D-day"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="64dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="3호봉 진급" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D-29"
+                android:textColor="@color/black_all" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="상병 진급" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D-152"
+                android:textColor="@color/black_all" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="36dp"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/progressbar_custom" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/discharge" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="D-229"
+                android:textColor="@color/black_all" />
+        </LinearLayout>
+
+        <Button
+            style="@style/MatchWrap_24"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/background_google_login"
+            android:drawableLeft="@drawable/ic_icon_goal"
+            android:text="토익만 따가서 나가자!"
+            android:textAlignment="viewStart" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/line" />
+
+        <LinearLayout
+            style="@style/MatchWrap_24"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:text="3월10일"
+                android:textColor="@color/black_all" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_down" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/txt_blank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank_message1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank_message2" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

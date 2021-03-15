@@ -56,27 +56,24 @@ class ExPartSelectBottomSheetFragment:
         calf = binding.rbsBtnCalf
         wholeBody = binding.rbsBtnWholeBody
         core = binding.rbsBtnCore
-
-        total.isSelected = true
     }
 
     fun setTextStatus(position: Int){
-        when (position) {
-            1 -> setBtnView(total)
-            2 -> setBtnView(shoulder)
-            3 -> setBtnView(chest)
-            4 -> setBtnView(back)
-            5 -> setBtnView(abs)
-            6 -> setBtnView(triceps)
-            7 -> setBtnView(biceps)
-            8 -> setBtnView(forearm)
-            9 -> setBtnView(arm)
-            10 -> setBtnView(hip)
-            11 -> setBtnView(thigh)
-            12 -> setBtnView(calf)
-            13 -> setBtnView(wholeBody)
-            14 -> setBtnView(core)
+        val textList = arrayListOf(total, shoulder, chest, back, abs, triceps, biceps,
+            forearm, arm, hip, thigh, calf, wholeBody, core)
+
+        if (!textList[position-1].isSelected) {
+            textList.forEach { view ->
+                if (textList[position-1] == view) {
+                    view.isSelected = true
+                    partOfEx = view.text.toString()
+                    Log.e(partOfEx)
+                }
+                else view.isSelected = false
+            }
         }
+
+        onClickOk()
 
     }
 
@@ -103,9 +100,11 @@ class ExPartSelectBottomSheetFragment:
     }
 
     fun onClickOk() {
-        Log.e(partOfEx)
         clickOk?.invoke(partOfEx)
         dismiss()
+
+        ExerciseSetBottomSheetFragment.getInstance()
+            .setOnClickOk {}.show(fragmentManager!!)
     }
     fun onClickCancel(){
         dismiss()

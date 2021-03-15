@@ -143,6 +143,9 @@ dependencies {
     implementation project(':base')
     implementation files('libs/libDaumMapAndroid.jar')
 
+    //colorpicker
+    implementation "petrov.kristiyan:colorpicker-library:$colorPickerVersion"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"

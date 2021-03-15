@@ -15,4 +15,18 @@
     <color name="black_all">#3e3e3e</color>
     <color name="text_gray">#9d9d9d</color>
     <color name="e_white">#eeeeee</color>
+    <color name="white_two">#fafafa</color>
+    <color name="bright_yellow">#fff900</color>
+    <color name="pink">#ff91bc</color>
+    <color name="light_greenish_blue">#5df2ad</color>
+    <color name="bright_aqua">#15eff7</color>
+    <color name="faded_blue">#6b8fc9</color>
+    <color name="apricot">#ffbe65</color>
+    <color name="dodger_blue">#5093ff</color>
+    <color name="periwinkle">#8a6fff</color>
+    <color name="silver">#dfe5e6</color>
+    <color name="cool_grey">#b2babf</color>
+    <color name="steel_grey">#7e8b90</color>
+    <color name="trans">#00000000</color>
+    <color name="icon_gray">#bbbbbb</color>
 </resources>

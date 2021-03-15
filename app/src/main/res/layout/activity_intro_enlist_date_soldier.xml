@@ -10,21 +10,21 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroEnlistDateActivity1" />
+            type="com.makeus.milliewillie.ui.IntroEnlistDateSoldierActivity" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.IntroEnlistDateActivity1">
+        tools:context=".ui.IntroEnlistDateSoldierActivity">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="35dp"
-            android:onClick="@{()->vi.onClickBack()}"
+            android:onClick="@{()->vi.finish()}"
             android:src="@drawable/ic_icon_gotobac" />
 
         <TextView

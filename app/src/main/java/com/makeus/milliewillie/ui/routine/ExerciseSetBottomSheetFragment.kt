@@ -1,7 +1,9 @@
 package com.makeus.milliewillie.ui.routine
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Switch
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.RoutineExBottomSheetBinding
@@ -30,6 +32,7 @@ class ExerciseSetBottomSheetFragment:
         vm = viewModel
         viewModel.bindLifecycle(this@ExerciseSetBottomSheetFragment)
 
+        binding.rebsWncSwitch.isChecked = true
 
     }
 
@@ -68,6 +71,17 @@ class ExerciseSetBottomSheetFragment:
                 binding.rebsTimeLayout.visibility = View.VISIBLE
             }
         }
+    }
+
+    fun onClickSwitch(v: Switch) {
+        v.isChecked = !v.isChecked
+
+        if (v.isChecked) {
+            binding.rebsWncLayoutSetAdd.visibility = View.VISIBLE
+        } else {
+            binding.rebsWncLayoutSetAdd.visibility = View.GONE
+        }
+
     }
 
     fun setOnClickOk(clickOk: ((String) -> Unit)): ExerciseSetBottomSheetFragment {

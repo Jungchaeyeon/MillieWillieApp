@@ -10,6 +10,7 @@ import com.makeus.milliewillie.ui.dDay.ncee.NceeViewModel
 import com.makeus.milliewillie.ui.UserViewModel
 import com.makeus.milliewillie.ui.routine.ExerciseSetViewModel
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel
+import com.makeus.milliewillie.ui.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,4 +25,6 @@ val viewModelModule = module {
     viewModel { MapViewModel() }
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
+    viewModel { MainViewModel() }
+    viewModel { MakePlanViewModel() }
 }

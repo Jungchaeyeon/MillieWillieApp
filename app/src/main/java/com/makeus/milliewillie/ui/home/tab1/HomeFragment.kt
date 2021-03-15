@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentHomeBinding
 import com.makeus.milliewillie.databinding.ItemHomeLayoutBinding
@@ -29,12 +30,12 @@ class HomeFragment :
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment
         vm = viewModel
-        viewModel.bindLifecycle(requireActivity())
+      //  viewModel.bindLifecycle(requireActivity())
 
 
 
         rvMemoList.run {
-            ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(this)
+           // ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(this)
 
             adapter = BaseDataBindingRecyclerViewAdapter<MainSchedule>()
                 .setItemViewType { item, position, isLast ->
@@ -44,17 +45,16 @@ class HomeFragment :
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemHomeLayoutBinding>(
                         R.layout.item_home_layout
                     ) {
-                        vm = viewModel
-
+                        vi=this@HomeFragment
                     })
 
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemMainScheduleBinding>(
                         R.layout.item_main_schedule
                     ) {
-                        vm = viewModel
-                        if (viewModel.liveMainScheduleList.value?.isNotEmpty() == true) {
-                            txt_blank.visibility = View.GONE
+
+                        if (viewModel.liveMainScheduleList.value?.isEmpty() == true) {
+                            txt_blank.visibility = View.VISIBLE
                         }
                         item = it
                     })
@@ -85,6 +85,15 @@ class HomeFragment :
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, nextFrag, "findThisFragment")
             ?.addToBackStack(null)?.commit()
+    }
+    fun onClickCalendar(){
+        
+    }
+    fun onClickMyPage(){
+        ActivityNavigator.with(this).mypage().start()
+    }
+    fun onClickEdit(){
+        ActivityNavigator.with(this).mypageedit().start()
     }
 
     override fun onResume() {

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.intro.*
 import com.makeus.milliewillie.ui.login.LoginActivity
+import com.makeus.milliewillie.ui.mypage.MyPageActivity
+import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
 import java.util.*
@@ -41,6 +43,8 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun goal() = MyIntent(IntroGoalActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
     fun plancalendar() = MyIntent(PlanCalendarActivity::class.java)
+    fun mypage() = MyIntent(MyPageActivity::class.java)
+    fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
 
     inner class MyIntent : Intent {
 

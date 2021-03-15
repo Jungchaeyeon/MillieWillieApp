@@ -2,6 +2,7 @@
     <string name="ok">확인</string>
     <string name="cancel">취소</string>
     <string name="divide">구분</string>
+    <string name="enlist">입대</string>
     <string name="discharge">전역</string>
     <string name="blank_message1">아직 생성한 일정/기록이 없습니다.</string>
     <string name="blank_message2">추가하기 버튼을 눌러 추가해 보세요!</string>
@@ -43,4 +44,12 @@
     <string name="military_leave">정기휴가</string>
     <string name="check_leave_date">휴가일수 확인</string>
     <string name="reward_leave">포상휴가</string>
+    <string name="mypage">마이페이지</string>
+    <string name="edit">편집</string>
+    <string name="army_private">일병</string>
+    <string name="army_corporal">상병</string>
+    <string name="done">완료</string>
+    <string name="service_type">복무 타입</string>
+    <string name="goal">목표</string>
+    <string name="name">이름</string>
 </resources>

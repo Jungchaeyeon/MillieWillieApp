@@ -123,6 +123,7 @@
             app:elevation="6dp"
             app:fabCustomSize="60dp"
             app:fabSize="auto"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toTopOf="@+id/navigation_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="30dp"

@@ -114,6 +114,7 @@
         <item name="android:paddingTop">16dp</item>
     </style>
 
+
     <!-- font-->
     <style name="spoqa_regular_10">
         <item name="android:gravity">center_horizontal</item>
@@ -131,14 +132,26 @@
         <item name="android:textColor">@color/text_gray</item>
     </style>
 
-
+    <style name="spoqa_medium_12">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/black_all</item>
+    </style>
     <style name="spoqa_medium_14">
-        <item name="android:gravity">center_horizontal</item>
         <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:textColor">@color/text_gray</item>
+    </style>
+    <style name="spoqa_regular_14">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/black_all</item>
     </style>
 
     <style name="spoqa_medium_16">

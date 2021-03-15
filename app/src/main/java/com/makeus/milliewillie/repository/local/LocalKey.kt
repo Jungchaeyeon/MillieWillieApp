@@ -9,4 +9,7 @@ enum class LocalKey {
     PLANTYPE,
     PLANNOTICE,
     COLOR,
+    DAYNIGHT,
+    STARTDATE,
+    ENDDATE
 }

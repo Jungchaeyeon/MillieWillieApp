@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.mypage.MyPageEditActivity" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.mypage.MyPageEditActivity">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:onClick="@{()->vi.finish()}"
+                    android:text="@string/cancel" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:onClick="@{()->vi.finish()}"
+                    android:text="@string/done" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/user_photo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="24dp"
+                    android:src="@drawable/ic_profile"
+                    android:onClick="@{()->vi.onClickImg()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/spoqa_medium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:drawableEnd="@drawable/icon_edit_21"
+                    android:onClick="@{()->vi.onClickName()}"
+                    android:text="@{vm.liveUserName}"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/user_photo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/spoqa_regular_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:drawableEnd="@drawable/icon_semo_20"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->vi.onClickBirth()}"
+                    android:text="@{vm.liveUserBirth}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/user_photo"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/goal" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/icon_floating_plan"
+                android:drawableTint="@color/text_gray"
+                android:paddingStart="16dp"
+                android:paddingEnd="9dp"
+                android:onClick="@{()->vi.onClickGoal()}"
+                android:text="@{vm.liveUserGoal}"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/service_type"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_service_type"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{()->vi.onClickType()}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveServiceype}"
+                android:textAlignment="viewStart"
+                tools:text="육군" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="입대일"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_enlist"
+                style="@style/spoqa_regular_14"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{()-> vi.onClickDate(0)}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveDateButtonList[0]}"
+                android:textAlignment="viewStart"
+                tools:text="2021.3.3 (토)" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:text="전역일"
+                android:textColor="@color/black_all" />
+
+            <Button
+                android:id="@+id/btn_discharge"
+                style="@style/spoqa_regular_14"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_google_login"
+                android:drawableEnd="@drawable/ic_icon_semo"
+                android:onClick="@{()-> vi.onClickDate(1)}"
+                android:paddingHorizontal="10dp"
+                android:text="@{vm.liveDateButtonList[1]}"
+                android:textAlignment="viewStart"
+                tools:text="2021.3.3 (토)" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/spoqa_medium_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:text="일병 진급일"
+                    android:textColor="@color/black_all" />
+
+                <Button
+                    android:id="@+id/btn_private_prom"
+                    style="@style/spoqa_regular_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/background_google_login"
+                    android:drawableEnd="@drawable/ic_icon_semo"
+                    android:onClick="@{()-> vi.onClickDate(2)}"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{vm.liveDateButtonList[2]}"
+                    tools:text="2021.3.3 (토)" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/spoqa_medium_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:text="상병 진급일"
+                    android:textColor="@color/black_all" />
+
+                <Button
+                    android:id="@+id/btn_corporal_prom"
+                    style="@style/spoqa_regular_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/background_google_login"
+                    android:drawableEnd="@drawable/ic_icon_semo"
+                    android:onClick="@{()-> vi.onClickDate(3)}"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{vm.liveDateButtonList[3]}"
+                    tools:text="2021.3.3 (토)" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/spoqa_medium_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:text="병장 진급일"
+                    android:textColor="@color/black_all" />
+
+                <Button
+                    android:id="@+id/btn_sergeant_prom"
+                    style="@style/spoqa_regular_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/background_google_login"
+                    android:drawableEnd="@drawable/ic_icon_semo"
+                    android:onClick="@{()-> vi.onClickDate(4)}"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{vm.liveDateButtonList[4]}"
+                    tools:text="2021.3.3 (토)" />
+            </LinearLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/mypage_edit_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </FrameLayout>
+</layout>

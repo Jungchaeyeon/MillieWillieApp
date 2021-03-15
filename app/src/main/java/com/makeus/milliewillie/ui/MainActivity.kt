@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui
 
+import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -20,6 +21,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
+    lateinit var fabFastClose: Animation
     private var isFabOpen = false
 
     val viewModel by viewModel<MainViewModel>()
@@ -34,6 +36,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
+        fabFastClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close_fast);
 
         initNavigation()
         changeFragment(HomeFragment.getInstance())
@@ -108,8 +111,18 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 anim()
             }
             R.id.fab_plan -> {
+                fab_dday.run {
+                    startAnimation(fabFastClose)
+                    isClickable = false
+                }
+                fab_plan.run {
+                    startAnimation(fabFastClose)
+                    isClickable = false
+                }
                 ActivityNavigator.with(this).makeplan().start()
-               fabAction()
+                isFabOpen = false
+                alpha90.visibility = View.GONE
+
             }
         }
     }

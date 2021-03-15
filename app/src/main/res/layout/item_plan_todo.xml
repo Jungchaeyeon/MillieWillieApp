@@ -22,6 +22,7 @@
             android:buttonTint="@color/light_gray" />
 
         <EditText
+            android:id="@+id/edt_todo"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="4dp"

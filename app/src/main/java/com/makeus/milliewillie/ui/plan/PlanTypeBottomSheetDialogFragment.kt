@@ -9,7 +9,6 @@ import com.makeus.milliewillie.databinding.PlanTypeBottomSheetBinding
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
-import kotlinx.android.synthetic.main.item_plan_layout.*
 import kotlinx.android.synthetic.main.item_plan_type.*
 import kotlinx.android.synthetic.main.plan_type_bottom_sheet.*
 import org.koin.android.ext.android.inject

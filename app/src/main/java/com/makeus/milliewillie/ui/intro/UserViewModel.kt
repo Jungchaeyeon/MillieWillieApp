@@ -8,9 +8,16 @@ import java.util.*
 
 class UserViewModel : BaseViewModel() {
 
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply {
-        value =today() }}
+        val liveEditData=MutableLiveData<String>()
+        val liveModifyTitle=MutableLiveData<String>().apply { value="이름" }
+        val liveUserName =MutableLiveData<String>().apply { value="정채연" }
+        val liveUserBirth =MutableLiveData<String>().apply { value="1999.07.21" }
+        val liveUserGoal =MutableLiveData<String>().apply { value="토익만 따서 나가자!" }
 
+
+        val liveServiceype =MutableLiveData<String>().apply { value="육군" }
+        val liveDateButtonList = List(5) { MutableLiveData<String>().apply {
+        value =today() }}
         val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 

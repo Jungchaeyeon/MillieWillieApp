@@ -8,6 +8,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.plan.PlanCalendarActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,13 +42,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <TextView
-                style="@style/spoqa_regular_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="14dp"
-                android:text="@string/reset"
-                android:textColor="@color/black_all" />
+<!--            <TextView-->
+<!--                style="@style/spoqa_regular_12"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="14dp"-->
+<!--                android:text="@string/reset"-->
+<!--                android:textColor="@color/black_all" />-->
 
         </LinearLayout>
 
@@ -79,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:text="@{vm.liveStartDate}"
                 tools:text="3월 2일 (토)" />
 
             <TextView
@@ -86,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" - "
+                android:textStyle="bold"
                 android:textColor="@color/white" />
 
             <TextView
@@ -94,6 +99,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:text="@{vm.liveEndDate}"
+                android:textStyle="bold"
                 tools:text="3월 2일 (토)" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

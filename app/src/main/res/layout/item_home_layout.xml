@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,7 +160,8 @@
             style="@style/MatchWrap_24"
             android:layout_height="30dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:onClick="@{()->vi.onClickCalendar()}">
 
             <TextView
                 style="@style/spoqa_medium_14"
@@ -170,15 +170,25 @@
                 android:textAlignment="viewStart"
                 android:drawableEnd="@drawable/ic_down"
                 android:text="3월10일"
-                android:onClick="@{()->vi.onClickCalendar()}"
                 android:textColor="@color/black_all" />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-
         </LinearLayout>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendar_view"
+            android:background="@drawable/rect_radius_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="3dp"
+            app:mcv_headerTextAppearance="@style/spoqa_medium_16"
+            app:mcv_showOtherDates="all"
+            app:mcv_selectionColor="#70333333"
+            android:visibility="gone" />
+
 
         <LinearLayout
             android:id="@+id/txt_blank"
@@ -199,6 +209,5 @@
                 android:layout_height="wrap_content"
                 android:text="@string/blank_message2" />
         </LinearLayout>
-
     </LinearLayout>
 </layout>

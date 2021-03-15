@@ -13,5 +13,5 @@ val viewModelModule = module {
     viewModel { WelcomeViewModel() }
     viewModel { UserViewModel() }
     viewModel { MainViewModel() }
-    viewModel { MakePlanViewModel() }
+    single {  MakePlanViewModel() }
 }

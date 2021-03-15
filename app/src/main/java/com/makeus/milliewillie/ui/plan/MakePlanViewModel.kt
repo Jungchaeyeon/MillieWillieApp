@@ -8,11 +8,11 @@ class MakePlanViewModel : BaseViewModel() {
 
     val livePlanTypeList = MutableLiveData<List<String>>()
     val livePlanType = MutableLiveData<String>().apply { value = " 일정" }
-    val livePlanColor = MutableLiveData<String>()
+    val livePlanColor = MutableLiveData<String>().apply { value ="#ffbe65" }
     val livePlanTodoList =MutableLiveData<MutableList<Plan.Todos>>()
     val liveDayAndNight =MutableLiveData<String>()
-    val liveStartDate = MutableLiveData<String>()
-    val liveEndDate = MutableLiveData<String>()
+    val liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
+
 
         fun requestTodoList(){
             livePlanTodoList.postValue(

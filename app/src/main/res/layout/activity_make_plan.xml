@@ -55,7 +55,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
-                android:onClick="@{()->vi.finish()}"
+                android:onClick="@{()->vi.onClickDone()}"
                 android:text="@string/finish"
                 android:textColor="@color/black_all" />
         </LinearLayout>
@@ -116,6 +116,7 @@
                     </LinearLayout>
 
                     <EditText
+                        android:id="@+id/plan_title"
                         style="@style/spoqa_medium_14"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -203,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@string/pick_date" />
+                        android:text="@{vm.liveDate}" />
 
                     <ImageView
                         style="@style/spoqa_medium_14"
@@ -246,7 +247,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@string/pick_date" />
+                        android:text="@{vm.liveDayAndNight}"/>
 
                     <ImageView
                         android:layout_width="20dp"
@@ -285,7 +286,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        tools:text="6박 7일" />
+                        android:text="@{vm.liveDayAndNight}"/>
 
                     <ImageView
                         android:layout_width="20dp"

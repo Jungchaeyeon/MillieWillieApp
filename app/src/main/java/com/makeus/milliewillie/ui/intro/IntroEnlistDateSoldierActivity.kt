@@ -9,6 +9,7 @@ import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_intro_enlist_date_soldier.*
 import kotlinx.android.synthetic.main.datepicker_bottom_sheet_basic.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
 
 class IntroEnlistDateSoldierActivity :
@@ -27,6 +28,9 @@ class IntroEnlistDateSoldierActivity :
         DatePickerBasicBottomSheetDialogFragment.getInstance()
             .setOnClickOk {
                 viewModel.liveDateButtonList[position].postValue(it)
+                if(position==0){
+                   viewModel.calculateDay(it)
+                }
             }.show(supportFragmentManager)
     }
 

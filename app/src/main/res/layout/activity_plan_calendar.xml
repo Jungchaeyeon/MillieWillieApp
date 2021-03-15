@@ -31,11 +31,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:background="@drawable/ic_back"
-                android:onClick="@{()->vi.finish()}" />
+                android:onClick="@{()->vi.onClickOk()}" />
 
             <View
                 android:layout_width="wrap_content"
@@ -76,32 +77,15 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/departure_date"
                 style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="@{vm.liveStartDate}"
+                android:text="@{vm.liveDate}"
                 tools:text="3월 2일 (토)" />
 
-            <TextView
-                style="@style/spoqa_medium_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" - "
-                android:textStyle="bold"
-                android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/return_date"
-                style="@style/spoqa_medium_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@{vm.liveEndDate}"
-                android:textStyle="bold"
-                tools:text="3월 2일 (토)" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

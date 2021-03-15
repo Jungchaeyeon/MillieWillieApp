@@ -53,7 +53,11 @@ buildscript {
 
         lottieVersion ="3.5.0"
 
+        calendarVersion="2.0.1"
+
         colorPickerVersion ="1.1.10"
+
+        lifecyclerVersion="2.2.0"
 
         calendarpickerVersion="0.3"
      //Test

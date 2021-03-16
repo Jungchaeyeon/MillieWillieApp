@@ -29,4 +29,21 @@
     <color name="steel_grey">#7e8b90</color>
     <color name="trans">#00000000</color>
     <color name="icon_gray">#bbbbbb</color>
+
+
+    <!--Background color-->
+    <color name="calendar_picker_bg">#00FFFFFF</color>
+
+    <color name="calendar_day_unselected_bg">#00000000</color>
+    <color name="calendar_day_selected_bg">#00E5FF</color>
+    <color name="calendar_day_range_selected_bg">#1000E5FF</color>
+
+    <!--Font color-->
+    <color name="calendar_day_disabled_font">#b2babf</color>
+    <color name="calendar_day_weekend_font">#00E5FF</color>
+    <color name="calendar_day_selected_font">#FFFFFF</color>
+    <color name="calendar_day_normal_font">#333333</color>
+
+    <color name="calendar_month_font">#000000</color>
+    <color name="calendar_week_font">#333333</color>
 </resources>

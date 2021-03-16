@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.mypage.MyPageEditFragment" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mypage_modify_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000"
+        android:alpha="0.95"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_12"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:onClick="@{()->vi.onClickCancel()}"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/spoqa_medium_12"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="@color/white"
+                android:onClick="@{()->vi.onClickOk()}"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title_modify"
+            style="@style/spoqa_medium_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="163dp"
+            android:text="@{vm.liveModifyTitle}"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/edit_txt"
+            style="@style/MatchWrap_24"
+            android:backgroundTint="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:text="@={vm.liveEditData}" />
+    </LinearLayout>
+</layout>

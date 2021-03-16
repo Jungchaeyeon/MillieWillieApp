@@ -70,6 +70,7 @@
     <string name="minute">분</string>
     <string name="sec">초</string>
     <string name="set_count">세트 수</string>
+    <string name="set_total_count_input">%d 세트</string>
     <string name="set_add">세트 추가</string>
     <string name="total_set_con">전체 세트 동일</string>
 
@@ -77,6 +78,7 @@
     <string name="ok">확인</string>
 
     <string name="divide">구분</string>
+    <string name="enlist">입대</string>
     <string name="discharge">전역</string>
     <string name="blank_message1">아직 생성한 일정/기록이 없습니다.</string>
     <string name="blank_message2">추가하기 버튼을 눌러 추가해 보세요!</string>
@@ -99,4 +101,30 @@
     <string name="sun">일</string>
     <string name="notice">알림</string>
     <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
+
+    <string name="reset">초기화</string>
+    <string name="makeplan">일정 만들기</string>
+    <string name="makedday">D-day 만들기</string>
+    <string name="plan_color">일정 색상</string>
+    <string name="pink">#ff91bc</string>
+    <string name="light_greenish_blue">#5df2ad</string>
+    <string name="bright_aqua">#15eff7</string>
+    <string name="faded_blue">#6b8fc9</string>
+    <string name="apricot">#ffbe65</string>
+    <string name="dodger_blue">#5093ff</string>
+    <string name="periwinkle">#8a6fff</string>
+    <string name="silver">#dfe5e6</string>
+    <string name="cool_grey">#b2babf</string>
+    <string name="steel_grey">#7e8b90</string>
+    <string name="military_leave">정기휴가</string>
+    <string name="check_leave_date">휴가일수 확인</string>
+    <string name="reward_leave">포상휴가</string>
+    <string name="mypage">마이페이지</string>
+    <string name="army_private">일병</string>
+    <string name="army_corporal">상병</string>
+    <string name="done">완료</string>
+    <string name="service_type">복무 타입</string>
+    <string name="goal">목표</string>
+    <string name="name">이름</string>
+
 </resources>

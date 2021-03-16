@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.MakePlanActivity" />
+            type="com.makeus.milliewillie.ui.plan.MakePlanActivity" />
     </data>
 
     <LinearLayout
@@ -19,17 +19,489 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MakePlanActivity">
+        tools:context=".ui.plan.MakePlanActivity">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_memo_list"
-            replaceAll="@{vm.livePlanTodoList}"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:isScrollContainer="true"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ic_x"
+                android:onClick="@{()->vi.finish()}" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manage_plan"
+                android:textColor="@color/black_all" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:onClick="@{()->vi.onClickDone()}"
+                android:text="@string/finish"
+                android:textColor="@color/black_all" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@color/e_white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/spoqa_regular_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="26dp"
+                        android:text="@string/introduce_plan_page1" />
+
+                    <TextView
+                        style="@style/spoqa_regular_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="26dp"
+                        android:text="@string/introduce_plan_page2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{()->vi.onClickColor()}"
+                        android:orientation="vertical"
+                        android:paddingVertical="23dp"
+                        android:paddingStart="26dp"
+                        android:paddingEnd="16dp">
+
+                        <ImageView
+                            android:id="@+id/btn_color"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:background="@drawable/oval_30"
+                            android:backgroundTint="@color/periwinkle"
+                            android:padding="23dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/plan_title"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/bg_left_line_aqua"
+                        android:gravity="center_vertical"
+                        android:hint="@string/plan_title"
+                        android:paddingStart="10dp"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/devide"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/btn_tp"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->vi.onClickPlanType()}"
+                        android:text="@string/plan"
+                        android:textColor="@color/black_all"
+                        tools:text="일정" />
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_left" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->vi.onClickCalendar()}"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/plan_date"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/txt_daynight"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@{vm.liveDate}" />
+
+                    <ImageView
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_left" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/layout_leave"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/military_leave"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@{vm.liveDayAndNight}"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_left" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_other_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/title_day_and_night"
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/reward_leave"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp"
+                        tools:text="포상휴가" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/day_and_night"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@{vm.liveDayAndNight}"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_left" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_notice_week"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/repeat"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_no_notice"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/repeat_no"
+                        android:textOn="@string/repeat_no" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_mon"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/mon"
+                        android:textOn="@string/mon" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_tue"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/tues"
+                        android:textOn="@string/tues" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_wed"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/wedn"
+                        android:textOn="@string/wedn" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_thur"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/thurs"
+                        android:textOn="@string/thurs" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_fri"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/fri"
+                        android:textOn="@string/fri" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_sat"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/sat"
+                        android:textOn="@string/sat" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_sun"
+                        style="@style/spoqa_medium_14"
+                        android:layout_width="35dp"
+                        android:layout_height="29dp"
+                        android:layout_marginEnd="39dp"
+                        android:layout_weight="1"
+                        android:background="@color/trans"
+                        android:gravity="center"
+                        android:onClick="@{(view)->vi.onClickDate(view)}"
+                        android:textColor="@color/ic_date_selector"
+                        android:textOff="@string/sun"
+                        android:textOn="@string/sun" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/notice"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txt_notice"
+                        style="@style/spoqa_regular_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/notice_msg" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ToggleButton
+                        android:id="@+id/btn_notice"
+                        android:layout_width="40dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginVertical="20dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/toggle_on_off"
+                        android:onClick="@{()->vi.onClickNotice()}"
+                        android:textOff=""
+                        android:textOn="" />
+                </LinearLayout>
+
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
+
+                <LinearLayout
+                    android:id="@+id/title_todo"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/todo"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_memo_list"
+                    replaceAll="@{vm.livePlanTodoList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:isScrollContainer="true"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

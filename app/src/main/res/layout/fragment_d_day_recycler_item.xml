@@ -34,7 +34,7 @@
             android:backgroundTint="@color/non"
             android:textSize="14sp"
             android:textColor="@color/black_all"
-            android:text="신분증 챙기기"
+            android:text="@{item.textCheck}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent" />

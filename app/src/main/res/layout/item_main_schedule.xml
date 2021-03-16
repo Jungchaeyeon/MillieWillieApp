@@ -11,32 +11,41 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment" />
+            type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
     </data>
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="4dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="false">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+        <View
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            style="@style/ColorPickerItem"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/oval_30"
+            android:backgroundTint="@color/apricot" />
         <TextView
             style="@style/spoqa_medium_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginVertical="24dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:background="@drawable/bg_underline_main_schedule"
             android:text="@{item.schedule}"
             android:textColor="@color/black_all"
             android:textSize="16sp"
             tools:text="첫 휴우가" />
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </layout>

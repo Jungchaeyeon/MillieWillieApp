@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.WelcomeViewModel" />
+            type="com.makeus.milliewillie.ui.intro.WelcomeViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.WelcomeActivity" />
+            type="com.makeus.milliewillie.ui.intro.WelcomeActivity" />
     </data>
 
     <FrameLayout

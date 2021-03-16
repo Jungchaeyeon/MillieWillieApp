@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui
 
+import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -8,10 +9,11 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
-import com.makeus.milliewillie.ui.bottom_navi_fragment.EmotionFragment
-import com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment
-import com.makeus.milliewillie.ui.bottom_navi_fragment.WorkoutFragment
-import com.makeus.testmilliewillie.ui.bottom_navi_fragment.InfoFragment
+import com.makeus.milliewillie.ui.home.tab1.HomeFragment
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
+import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
+import com.makeus.milliewillie.ui.home.tab4.InfoFragment
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -19,24 +21,29 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
 
     lateinit var fabOpen: Animation
-    lateinit  var fabClose : Animation
+    lateinit var fabClose: Animation
+    lateinit var fabFastClose: Animation
     private var isFabOpen = false
 
     val viewModel by viewModel<MainViewModel>()
-    companion object{
+
+    companion object {
         fun getInstance() = MainActivity()
     }
 
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-        vm =viewModel
+        vm = viewModel
 
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
+        fabFastClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close_fast);
 
+        initNavigation()
         changeFragment(HomeFragment.getInstance())
 
         navigationView.setOnNavigationItemSelectedListener { item ->
+            fabAction()
             when (item.itemId) {
                 R.id.page_home -> {
                     fab.visibility = View.VISIBLE
@@ -63,29 +70,38 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         }
 
     }
+
+    private fun initNavigation() {
+        //bottom navi 기본 tint 설정 막음
+        navigation_view.itemIconTintList = null
+    }
+
     fun anim() {
         if (isFabOpen) {
             fab_dday.run {
                 startAnimation(fabClose)
-                isClickable =false
+                isClickable = false
             }
-            fab_plan.run{
+            fab_plan.run {
                 startAnimation(fabClose)
-                isClickable =false
+                isClickable = false
             }
             isFabOpen = false
+            alpha90.visibility = View.GONE
         } else {
             fab_dday.run {
                 startAnimation(fabOpen)
-                isClickable =true
+                isClickable = true
             }
-            fab_plan.run{
+            fab_plan.run {
                 startAnimation(fabOpen)
-                isClickable =true
+                isClickable = true
             }
             isFabOpen = true
+            alpha90.visibility = View.VISIBLE
         }
     }
+
     fun onClick(v: View) {
         val id = v.id
         when (id) {
@@ -94,16 +110,37 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
             }
             R.id.fab_dday -> {
                 anim()
+                Log.e("called")
                 ActivityNavigator.with(this).dDay().start()
             }
             R.id.fab_plan -> {
-                anim()
+                fab_dday.run {
+                    startAnimation(fabFastClose)
+                    isClickable = false
+                }
+                fab_plan.run {
+                    startAnimation(fabFastClose)
+                    isClickable = false
+                }
                 ActivityNavigator.with(this).makeplan().start()
+                isFabOpen = false
+                alpha90.visibility = View.GONE
+
             }
         }
     }
 
+    fun fabAction() {
+        if (isFabOpen) {
+            fab_dday.startAnimation(fabClose)
+            fab_plan.startAnimation(fabClose)
+            isFabOpen = false
+        }
+        alpha90.visibility = View.GONE
+    }
+
     private fun changeFragment(fragment: Fragment) {
+        alpha90.visibility = View.GONE
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)

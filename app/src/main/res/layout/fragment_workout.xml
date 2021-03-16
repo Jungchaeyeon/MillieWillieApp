@@ -7,7 +7,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.bottom_navi_fragment.WorkoutFragment" />
+            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
     </data>
 
     <RelativeLayout

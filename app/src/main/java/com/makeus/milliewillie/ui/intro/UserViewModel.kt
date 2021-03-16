@@ -18,8 +18,7 @@ class UserViewModel : BaseViewModel() {
 
 
         val liveServiceype =MutableLiveData<String>().apply { value="육군" }
-        val liveDateButtonList = List(5) { MutableLiveData<String>().apply {
-        value ="날짜를 입력해주세요"}}
+        val liveDateButtonList = List(5) { MutableLiveData<String>().apply {value=today()}}
         val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 

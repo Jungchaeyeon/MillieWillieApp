@@ -50,25 +50,24 @@ class PlanCalendarActivity :
             val calcuDate = (endDate.time - startDate.time) / (60 * 60 * 24 * 1000)
 
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
+            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
         }
 
         calendar_view.setOnStartSelectedListener { startDate, label ->
             startStrDate = dateFormat.format(startDate)
+            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
         }
 
         calendar_view.apply {
             setRangeDate(firstCalendarDate.time, secondCalendarDate.time)
             setSelectionDate(firstCalendarDate.time, thirdCalendarDate.time)
         }
+
     }
 
 
-    fun onClickOk() {
-        if (plan_title.text.isEmpty()) {
-            plan_title.isFocusable = true
-            viewModel.liveDayAndNight.postValue(dayNightStr)
-            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
-            onBackPressed()
-        }
+    fun onClickBack() {
+        viewModel.liveDayAndNight.postValue(dayNightStr)
+        onBackPressed()
     }
 }

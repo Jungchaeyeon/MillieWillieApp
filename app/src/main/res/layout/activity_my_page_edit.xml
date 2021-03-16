@@ -63,7 +63,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="24dp"
-                    android:src="@drawable/ic_profile"
+                    android:src="@drawable/icon_profile_img"
                     android:onClick="@{()->vi.onClickImg()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

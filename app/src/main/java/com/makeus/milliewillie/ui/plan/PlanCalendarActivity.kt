@@ -48,7 +48,7 @@ class PlanCalendarActivity :
             startStrDate = dateFormat.format(startDate)
             endStrDate = dateFormat.format(endDate)
             val calcuDate = (endDate.time - startDate.time) / (60 * 60 * 24 * 1000)
-            "$calcuDate".showShortToastSafe()
+
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
         }
 

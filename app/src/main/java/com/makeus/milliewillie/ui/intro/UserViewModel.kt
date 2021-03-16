@@ -23,6 +23,10 @@ class UserViewModel : BaseViewModel() {
         val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 
+    init {
+        calculateDay(today())
+    }
+
         fun today(): String {
             val today = Calendar.getInstance()
             return today.get(Calendar.YEAR)
@@ -79,7 +83,7 @@ class UserViewModel : BaseViewModel() {
         val cal = Calendar.getInstance()
         cal.time = date
 
-        df.format(cal.time).toString().showShortToastSafe()
+       // df.format(cal.time).toString().showShortToastSafe()
 
         //진급일
         var promPrivate=""

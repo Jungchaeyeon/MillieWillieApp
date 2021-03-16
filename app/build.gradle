@@ -147,7 +147,7 @@ dependencies {
     implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarpickerVersion"
 
     //calendar
-    implementation "com.github.prolificinteractive:material-calendarview:${calendarVersion}"
+    implementation "com.github.prolificinteractive:material-calendarview:$calendarVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"

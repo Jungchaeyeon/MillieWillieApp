@@ -3,6 +3,8 @@ package com.makeus.milliewillie.ui.plan
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
+import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
@@ -31,7 +33,8 @@ class MakePlanActivity :
 
     private val viewModel by viewModel<MakePlanViewModel>()
     val repositoryCached by inject<RepositoryCached>()
-    val context =this
+    val context = this
+
     companion object {
         fun getInstance() = MakePlanActivity()
     }
@@ -58,6 +61,8 @@ class MakePlanActivity :
     }
 
     fun onClickPlanType() {
+        viewModel.liveDate.postValue("")
+        viewModel.liveDayAndNight.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
                 val type = repositoryCached.getPlanType()
@@ -160,8 +165,14 @@ class MakePlanActivity :
     }
 
     fun onClickDone() {
-        SampleToast.createToast(context, "일정 생성 완료!")?.show()
-        onBackPressed()
+        if (plan_title.text.isEmpty()) {
+            plan_title.isFocusable = true
+            Toast.makeText(applicationContext,"제목을 입력해주세요",Toast.LENGTH_LONG).show()
+            //Snackbar.make(this.navigation_view, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
+        } else {
+            SampleToast.createToast(context, "일정 생성 완료!")?.show()
+            ActivityNavigator.with(this).main().start()
+        }
     }
 
     override fun onResume() {

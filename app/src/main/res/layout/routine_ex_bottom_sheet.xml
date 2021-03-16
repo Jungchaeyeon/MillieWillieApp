@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rebs_layout_option_select"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <RelativeLayout
                 android:id="@+id/rebs_wnc_layout_set"
@@ -201,8 +201,7 @@
                     android:layout_centerVertical="true"
                     android:onClick="@{() -> vi.onClickSwitch()}"
                     android:thumb="@drawable/ic_baseline_brightness_1_24"
-                    android:track="@drawable/switch_track_selector"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    android:track="@drawable/switch_track_selector"/>
 
 
             </RelativeLayout>
@@ -290,6 +289,7 @@
                     tools:listitem="@layout/routine_ex_wnc_recycler_item" />
 
                 <RelativeLayout
+                    android:id="@+id/rebs_wnc_layout_add_set"
                     android:layout_width="match_parent"
                     android:layout_height="38dp">
 

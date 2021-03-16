@@ -4,7 +4,9 @@ import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
+import com.makeus.milliewillie.ui.fragment.DatePickerBirthBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
+import com.makeus.milliewillie.util.Log
 
 
 class WorkoutFragment :
@@ -16,6 +18,12 @@ class WorkoutFragment :
 
     override fun FragmentWorkoutBinding.onBind() {
         vi= this@WorkoutFragment
+
+        WeightRecordBottomSheetFragment.getInstance()
+            .setOnClickOk {goal, current ->
+
+            }.show(fragmentManager!!)
+
     }
 
     fun onClickItem() {

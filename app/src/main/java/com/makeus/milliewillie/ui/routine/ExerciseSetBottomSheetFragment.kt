@@ -60,15 +60,19 @@ class ExerciseSetBottomSheetFragment:
             }
         })
 
-//        rebsWncRecyclerSet.run {
-//            adapter = BaseDataBindingRecyclerViewAdapter<WorkoutSet>()
-//                .addViewType(
-//                    BaseDataBindingRecyclerViewAdapter.MultiViewType<WorkoutSet, RoutineExWncRecyclerItemBinding>(R.layout.routine_ex_wnc_recycler_item) {
-//                        vi = this@ExerciseSetBottomSheetFragment
-//                        item = it
-//                    }
-//                )
-//        }
+        rebsWncRecyclerSet.run {
+            adapter = BaseDataBindingRecyclerViewAdapter<WorkoutSet>()
+                .addViewType(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<WorkoutSet, RoutineExWncRecyclerItemBinding>(R.layout.routine_ex_wnc_recycler_item) {
+                        vi = this@ExerciseSetBottomSheetFragment
+                        item = it
+                    }
+                )
+        }
+
+        binding.rebsWncLayoutAddSet.setOnClickListener {
+            viewModel.addItem()
+        }
 
     }
 
@@ -109,12 +113,14 @@ class ExerciseSetBottomSheetFragment:
     }
 
     fun onClickSwitch() {
-//        binding.rebsWncSwitch.toggle()
-        Log.e(binding.rebsWncSwitch.isChecked.toString())
 
         if (binding.rebsWncSwitch.isChecked) {
             binding.rebsWncLayoutSetAdd.visibility = View.GONE
         } else {
+//            binding.rebsWncEditSetCount.isEnabled = false
+//            binding.rebsWncEditSetCount.setText(viewModel.liveDataSetItemListSize.toString())
+//            binding.rebsWncTextTotalSetCount.text = "1 세트"
+
             binding.rebsWncLayoutSetAdd.visibility = View.VISIBLE
         }
 

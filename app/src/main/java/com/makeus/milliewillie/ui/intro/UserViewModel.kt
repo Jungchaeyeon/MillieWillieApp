@@ -19,10 +19,13 @@ class UserViewModel : BaseViewModel() {
 
 
         val liveServiceype =MutableLiveData<String>().apply { value="육군" }
-        val liveDateButtonList = List(5) { MutableLiveData<String>().apply {
-        value ="날짜를 입력해주세요"}}
+        val liveDateButtonList = List(5) { MutableLiveData<String>().apply {value=today()}}
         val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
+
+    init {
+        calculateDay(today())
+    }
 
         fun today(): String {
             val today = Calendar.getInstance()
@@ -81,7 +84,7 @@ class UserViewModel : BaseViewModel() {
         val cal = Calendar.getInstance()
         cal.time = date
 
-        df.format(cal.time).toString().showShortToastSafe()
+       // df.format(cal.time).toString().showShortToastSafe()
 
         //진급일
         var promPrivate=""

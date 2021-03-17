@@ -49,19 +49,20 @@
         <activity android:name=".ui.plan.MakePlanActivity" >
         </activity>
         <activity android:name=".ui.MainActivity">
-        </activity>
-        <activity
-            android:name=".ui.intro.IntroSettingNameActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.intro.IntroServiceTypeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.intro.IntroSettingNameActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.intro.IntroServiceTypeActivity" >
+        </activity>
         <activity android:name=".ui.intro.IntroServiceTypeDetailActivity" />
-        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity" />
+        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity" >
+        </activity>
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
         <activity android:name=".ui.intro.IntroGoalActivity" />
     </application>

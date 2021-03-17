@@ -49,6 +49,7 @@ abstract class RepositoryCached {
     fun getDayNight() = getValue(LocalKey.COLOR, "")
     fun getStartDate() = getValue(LocalKey.COLOR, "")
     fun getEndDate() = getValue(LocalKey.COLOR, "")
+    fun getMiliDday() = getValue(LocalKey.MILIDDAY, "")
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

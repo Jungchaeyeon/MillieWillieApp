@@ -10,12 +10,10 @@
             name="vi"
             type="com.makeus.milliewillie.ui.MainActivity" />
 
-        <variable
-            name="vm"
-            type="com.makeus.milliewillie.ui.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".View.MainActivity">

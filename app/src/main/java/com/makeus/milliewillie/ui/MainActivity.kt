@@ -13,6 +13,7 @@ import com.makeus.milliewillie.ui.home.tab1.HomeFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
 import com.makeus.milliewillie.ui.home.tab4.InfoFragment
+import com.makeus.milliewillie.ui.plan.MakePlanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -24,15 +25,12 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     lateinit var fabFastClose: Animation
     private var isFabOpen = false
 
-    val viewModel by viewModel<MainViewModel>()
-
     companion object {
         fun getInstance() = MainActivity()
     }
 
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-        vm = viewModel
 
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);

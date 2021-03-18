@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
@@ -15,6 +14,7 @@
     </data>
 
     <RelativeLayout
+        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

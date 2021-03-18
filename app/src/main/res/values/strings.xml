@@ -126,12 +126,11 @@
     <string name="service_type">복무 타입</string>
     <string name="goal">목표</string>
     <string name="name">이름</string>
-
     <string name="today_workout">오늘의 운동</string>
     <string name="weight_record">체중기록</string>
     <string name="goal_weight">목표체중</string>
     <string name="current_weight">현재체중</string>
     <string name="workout_non_item1">아직 생성한 운동루틴이 없습니다.</string>
     <string name="workout_non_item2">추가하기 버튼을 눌러 추가해 보세요!</string>
-
+    <string name="startMW">밀리윌리 시작하기</string>
 </resources>

@@ -19,13 +19,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/d_day_dummy_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
-
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,209 +26,214 @@
             app:liftOnScroll="true"
             app:liftOnScrollTargetViewId="@id/d_day_frame_layout">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="30dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <ImageView
-                    android:id="@+id/d_day_anni_img_cancel"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/vic_icon_delete" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
 
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="17dp"
-                    android:layout_centerInParent="true"
-                    android:text="D-day"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/d_day_anni_img_cancel"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/vic_icon_delete" />
 
-                <TextView
-                    android:id="@+id/d_day_anni_text_complete"
-                    android:layout_width="22dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:text="@string/complete"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="17dp"
+                        android:layout_centerInParent="true"
+                        android:text="D-day"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="11dp"
-                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/d_day_anni_text_complete"
+                        android:layout_width="22dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/complete"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/d_day_anni_edit_title"
-                    android:layout_width="87dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:backgroundTint="@color/non"
-                    android:hint="@string/d_day_title"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="11dp"
+                    android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="69dp"
-                android:layout_marginTop="1dp"
-                android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/d_day_anni_edit_title"
+                        android:layout_width="87dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:backgroundTint="@color/non"
+                        android:hint="@string/d_day_title"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="39dp"
-                    android:layout_height="17dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="34dp"
-                    android:text="@string/sub_title"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="69dp"
+                    android:layout_marginTop="1dp"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/d_day_anni_edit_sub_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="4dp"
-                    android:backgroundTint="@color/non"
-                    android:hint="@string/sub_title_hint"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="39dp"
+                        android:layout_height="17dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="34dp"
+                        android:text="@string/sub_title"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
+                    <EditText
+                        android:id="@+id/d_day_anni_edit_sub_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="4dp"
+                        android:backgroundTint="@color/non"
+                        android:hint="@string/sub_title_hint"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/d_day_anni_text_classification"
-                    android:layout_width="26dp"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="24dp"
-                    android:text="@string/classification"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/d_day_btn_anni"
-                    android:layout_width="53dp"
-                    android:layout_height="26dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="35dp"
-                    android:layout_toEndOf="@+id/d_day_anni_text_classification"
-                    android:background="@drawable/d_day_btn_selected"
-                    android:text="@string/anniversary"
-                    android:textColor="@color/d_day_btn_text_selected"
-                    android:onClick="@{()-> vi.setBtnStatus(1)}"
-                    />
+                    <TextView
+                        android:id="@+id/d_day_anni_text_classification"
+                        android:layout_width="26dp"
+                        android:layout_height="17dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/classification"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/d_day_btn_birthday"
-                    android:layout_width="42dp"
-                    android:layout_height="26dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/d_day_btn_anni"
-                    android:background="@drawable/d_day_btn_selected"
-                    android:text="@string/birthday"
-                    android:textColor="@color/d_day_btn_text_selected"
-                    android:onClick="@{()-> vi.setBtnStatus(2)}"
-                    />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/d_day_btn_anni"
+                        android:layout_width="53dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="35dp"
+                        android:layout_toEndOf="@+id/d_day_anni_text_classification"
+                        android:background="@drawable/d_day_btn_selected"
+                        android:text="@string/anniversary"
+                        android:textColor="@color/d_day_btn_text_selected"
+                        android:onClick="@{()-> vi.setBtnStatus(1)}"
+                        />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/d_day_btn_certification"
-                    android:layout_width="53dp"
-                    android:layout_height="26dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/d_day_btn_birthday"
-                    android:background="@drawable/d_day_btn_selected"
-                    android:text="@string/certification"
-                    android:textColor="@color/d_day_btn_text_selected"
-                    android:onClick="@{()-> vi.setBtnStatus(3)}"
-                    />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/d_day_btn_birthday"
+                        android:layout_width="42dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/d_day_btn_anni"
+                        android:background="@drawable/d_day_btn_selected"
+                        android:text="@string/birthday"
+                        android:textColor="@color/d_day_btn_text_selected"
+                        android:onClick="@{()-> vi.setBtnStatus(2)}"
+                        />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/d_day_btn_ncee"
-                    android:layout_width="42dp"
-                    android:layout_height="26dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/d_day_btn_certification"
-                    android:background="@drawable/d_day_btn_selected"
-                    android:text="@string/ncee"
-                    android:textColor="@color/d_day_btn_text_selected"
-                    android:onClick="@{()-> vi.setBtnStatus(4)}"
-                    />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/d_day_btn_certification"
+                        android:layout_width="53dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/d_day_btn_birthday"
+                        android:background="@drawable/d_day_btn_selected"
+                        android:text="@string/certification"
+                        android:textColor="@color/d_day_btn_text_selected"
+                        android:onClick="@{()-> vi.setBtnStatus(3)}"
+                        />
 
-            </RelativeLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/d_day_btn_ncee"
+                        android:layout_width="42dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/d_day_btn_certification"
+                        android:background="@drawable/d_day_btn_selected"
+                        android:text="@string/ncee"
+                        android:textColor="@color/d_day_btn_text_selected"
+                        android:onClick="@{()-> vi.setBtnStatus(4)}"
+                        />
 
-            <RelativeLayout
-                android:id="@+id/d_day_anni_layout_date"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:onClick="@{()-> vi.onClickDdayDate()}"
-                >
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/d_day_anni_text_date"
-                    android:layout_width="26dp"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="24dp"
-                    android:text="@string/date"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/d_day_anni_layout_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:onClick="@{()-> vi.onClickDdayDate()}"
+                    >
 
-                <TextView
-                    android:id="@+id/d_day_anni_text_date_selector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="40dp"
-                    android:layout_toEndOf="@+id/d_day_anni_text_date"
-                    android:backgroundTint="@color/non"
-                    android:text="@{vm.liveDataDdayDate}"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/d_day_anni_text_date"
+                        android:layout_width="26dp"
+                        android:layout_height="17dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/date"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/d_day_anni_text_date_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="4dp"
-                    android:layout_toStartOf="@+id/d_day_anni_img_date_arrow"
-                    android:text="@{vm.liveDataDayGap}"
-                    android:textColor="@color/gray" />
+                    <TextView
+                        android:id="@+id/d_day_anni_text_date_selector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_toEndOf="@+id/d_day_anni_text_date"
+                        android:backgroundTint="@color/non"
+                        android:text="@{vm.liveDataDdayDate}"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
 
-                <ImageView
-                    android:id="@+id/d_day_anni_img_date_arrow"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/icon_left" />
+                    <TextView
+                        android:id="@+id/d_day_anni_text_date_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="4dp"
+                        android:layout_toStartOf="@+id/d_day_anni_img_date_arrow"
+                        android:text="@{vm.liveDataDayGap}"
+                        android:textColor="@color/gray" />
 
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/d_day_anni_img_date_arrow"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/icon_left" />
 
+                </RelativeLayout>
+            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

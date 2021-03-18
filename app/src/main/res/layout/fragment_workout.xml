@@ -8,6 +8,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel" />
     </data>
 
     <RelativeLayout
@@ -66,15 +69,11 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/workout_layout_weight_graph"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:layout_below="@+id/workout_layout_weight_record"
-            >
-
-
-        </RelativeLayout>
+            android:layout_below="@+id/workout_layout_weight_record" />
 
         <LinearLayout
             android:id="@+id/workout_layout_today_ex"
@@ -111,6 +110,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/workout_layout_today_ex"
             android:orientation="horizontal"
+            replaceAll="@{vm.todayExItemList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
 

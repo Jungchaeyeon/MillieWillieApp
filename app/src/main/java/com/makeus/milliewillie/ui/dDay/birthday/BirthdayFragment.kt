@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.databinding.FragmentDDayBirthRecyclerItemBinding
 import com.makeus.milliewillie.databinding.FragmentDDayBirthdayBinding
 import com.makeus.milliewillie.databinding.FragmentDDayRecyclerItemBinding
 import com.makeus.milliewillie.model.DdayCheckList
@@ -20,47 +21,26 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
 
     @SuppressLint("ClickableViewAccessibility")
     override fun FragmentDDayBirthdayBinding.onBind() {
-        vi = this@BirthdayFragment
         vm = viewModel
-//        viewModel.bindLifecycle(this@BirthdayFragment)
 
         dDayBirthTodoRecycler.run {
-//            this.setOnClickListener {
-//                Log.e("recycler clicked")
-//            }
-            this.setOnTouchListener { v, event ->
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    Log.e("touch")
-                    true
-                }
-                false
-            }
             adapter = BaseDataBindingRecyclerViewAdapter<DdayCheckList>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<DdayCheckList, FragmentDDayRecyclerItemBinding>(R.layout.fragment_d_day_recycler_item) {
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<DdayCheckList, FragmentDDayBirthRecyclerItemBinding>(R.layout.fragment_d_day_birth_recycler_item) {
                         vi = this@BirthdayFragment
                         item = it
                     }
                 )
-//
-//            BaseDataBindingRecyclerViewAdapter<DdayCheckList>().itemClick = object : BaseDataBindingRecyclerViewAdapter.MyItemClickListener {
-//                override fun onItemClick(view: View, position: Int) {
-//                    Log.e("item clicked")
-//                }
-//
-//            }
-
         }
 
         binding.dDayBirthEditTodo.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (binding.dDayBirthEditTodo.text.toString().isNotEmpty()) {
-                    viewModel.addItem(binding.dDayBirthEditTodo.text.toString())
+                    viewModel.addItem(DdayCheckList(binding.dDayBirthEditTodo.text.toString()))
                     binding.dDayBirthEditTodo.setText("")
-                    viewModel.checkItemList.observe(this@BirthdayFragment, Observer {
-                        viewModel.defaultCheckItemList()
-//                        Log.e("observe")
-                    })
+
+                    //래디님 이거 Observer 필요없네요!!
+                    //enter누르면 추가하게끔 해놓았어요. Observer필요하시면 정의해주세요!
                 }
                 return@setOnKeyListener true
             }
@@ -70,14 +50,9 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
 
     }
 
-    fun checkboxClick() {
-        Log.e("touch checkbox")
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.checkItemList.removeObservers(this)
+//        viewModel.checkItemList.removeObservers(this)
     }
 
     override fun onResume() {

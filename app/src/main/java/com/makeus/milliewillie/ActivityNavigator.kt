@@ -55,6 +55,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun plancalendar() = MyIntent(PlanCalendarActivity::class.java)
     fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
+    fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
 
     inner class MyIntent : Intent {
 

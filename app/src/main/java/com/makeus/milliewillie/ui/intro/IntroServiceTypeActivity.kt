@@ -5,6 +5,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroServiceTypeBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
@@ -27,15 +28,13 @@ class IntroServiceTypeActivity :
         when (view.id) {
             R.id.type_soldier -> {
                 repositoryCached.setValue(LocalKey.TYPE, "일반병사")
+                viewModel.liveServiceId.value="일반병사"
+
             }
-            R.id.type_sergeant -> {
+            R.id.type_sergeant ,R.id.type_captain,R.id.type_general-> {
                 repositoryCached.setValue(LocalKey.TYPE, "부사관")
-            }
-            R.id.type_captain -> {
-                repositoryCached.setValue(LocalKey.TYPE, "준사관")
-            }
-            R.id.type_general -> {
-                repositoryCached.setValue(LocalKey.TYPE, "장교")
+                viewModel.liveServiceId.value="부사관"
+
             }
         }
         repositoryCached.getType().let { Log.d(it,"type") }

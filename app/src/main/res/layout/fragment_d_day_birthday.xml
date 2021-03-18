@@ -4,95 +4,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
-        <variable
-            name="vi"
-            type="com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment" />
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel" />
 
     </data>
 
-        <LinearLayout
-            android:id="@+id/d_day_birth_layout"
+    <LinearLayout
+        android:id="@+id/d_day_birth_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="50dp">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/d_day_birth_text_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:text="@string/check_list"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/d_day_birth_todo_recycler"
+                replaceAll="@{vm.checkItemList}"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:id="@+id/d_day_birth_text_todo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="24dp"
-                    android:text="@string/check_list"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+                android:layout_below="@id/d_day_birth_todo_recycler">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/d_day_birth_todo_recycler"
-                    replaceAll="@{vm.checkItemList}"
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:id="@+id/d_day_birth_checkbox"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/d_day_birth_edit_todo"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:isScrollContainer="true"
-                    android:orientation="vertical"
-
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/d_day_birth_todo_recycler">
-
-                    <CheckBox
-                        android:id="@+id/d_day_birth_checkbox"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:scaleX="0.7"
-                        android:scaleY="0.7"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/d_day_birth_edit_todo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_toEndOf="@+id/d_day_birth_checkbox"
-                        android:backgroundTint="@color/non"
-                        android:focusableInTouchMode="true"
-                        android:focusable="true"
-                        android:inputType="text"
-                        android:hint="@string/todo_add"
-                        android:maxLength="20"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textColor="@color/black_all"
-                        android:textSize="14sp" />
-                </RelativeLayout>
-
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@+id/d_day_birth_checkbox"
+                    android:backgroundTint="@color/non"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:hint="@string/todo_add"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/black_all"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-
+    </LinearLayout>
 
 </layout>

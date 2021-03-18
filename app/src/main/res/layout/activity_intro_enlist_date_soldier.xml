@@ -23,16 +23,17 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="5dp"
             android:onClick="@{()->vi.finish()}"
             android:src="@drawable/ic_icon_gotobac" />
 
         <TextView
             style="@style/spoqa_bold_22"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="57dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
+            android:includeFontPadding="false"
             android:text="전역일 계산 정보를 위해\n입대 일자를 입력해주세요." />
 
         <TextView
@@ -40,14 +41,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="53dp"
             android:text="입대일"
             android:textColor="@color/black_all" />
 
         <Button
             android:id="@+id/btn_enlist"
+            style="@style/spoqa_regular_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
@@ -63,14 +65,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:text="전역일"
             android:textColor="@color/black_all" />
 
         <Button
             android:id="@+id/btn_discharge"
+            style="@style/spoqa_regular_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
@@ -98,16 +101,19 @@
 
             <Button
                 android:id="@+id/btn_private_prom"
+                style="@style/spoqa_regular_14"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
                 android:onClick="@{()-> vi.onClickDate(2)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[2]}"
+                android:textAlignment="viewStart"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -129,16 +135,19 @@
 
             <Button
                 android:id="@+id/btn_corporal_prom"
+                style="@style/spoqa_regular_14"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
                 android:onClick="@{()-> vi.onClickDate(3)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[3]}"
+                android:textAlignment="viewStart"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -160,16 +169,19 @@
 
             <Button
                 android:id="@+id/btn_sergeant_prom"
+                style="@style/spoqa_regular_14"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
                 android:onClick="@{()-> vi.onClickDate(4)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[4]}"
+                android:textAlignment="viewStart"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -183,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="9dp"
                 android:background="@drawable/rect_radius_8"
                 android:backgroundTint="@color/aqua_blue"
                 android:onClick="@{()->vi.onClickDone()}"

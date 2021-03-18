@@ -23,34 +23,31 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="false">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-        <View
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            style="@style/ColorPickerItem"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/oval_30"
-            android:backgroundTint="@color/apricot" />
-        <TextView
-            style="@style/spoqa_medium_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:background="@drawable/bg_underline_main_schedule"
-            android:text="@{item.schedule}"
-            android:textColor="@color/black_all"
-            android:textSize="16sp"
-            tools:text="첫 휴우가" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <EditText
+            <View
+                style="@style/ColorPickerItem"
+                bgTint="@{item.color}"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/oval_30" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="123123123"
-                android:inputType="text" />
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_underline_main_schedule"
+                android:text="@{item.schedule}"
+                android:textColor="@color/black_all"
+                android:textSize="16sp"
+                tools:text="첫 휴우가" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

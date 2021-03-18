@@ -94,7 +94,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:onClick="@{()-> vi.setOnClickLocation()}"
+            >
 
             <TextView
                 android:id="@+id/d_day_ncee_text_location"
@@ -151,9 +153,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/d_day_ncee_todo_recycler"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/fragment_d_day_recycler_item"/>
+                android:orientation="vertical"
+                replaceAll="@{vm.nceeCheckItemList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

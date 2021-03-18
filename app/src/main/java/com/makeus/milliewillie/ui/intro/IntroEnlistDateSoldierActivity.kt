@@ -5,10 +5,13 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroEnlistDateSoldierBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_enlist_date_soldier.*
 import kotlinx.android.synthetic.main.datepicker_bottom_sheet_basic.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,11 +20,13 @@ class IntroEnlistDateSoldierActivity :
     BaseDataBindingActivity<ActivityIntroEnlistDateSoldierBinding>(R.layout.activity_intro_enlist_date_soldier) {
 
     private val viewModel by viewModel<UserViewModel>()
+    val repositoryCached by inject<RepositoryCached>()
 
     override fun ActivityIntroEnlistDateSoldierBinding.onBind() {
         vi = this@IntroEnlistDateSoldierActivity
         vm = viewModel
         viewModel.bindLifecycle(this@IntroEnlistDateSoldierActivity)
+
 
     }
 
@@ -37,11 +42,14 @@ class IntroEnlistDateSoldierActivity :
     }
 
     fun onClickDone() {
-        if(btn_discharge.text.isEmpty()){
-            "날짜를 선택해주세요.".showShortToastSafe()
-        }
-        ActivityNavigator.with(this).goal().start()
+        repositoryCached.setValue(LocalKey.MILIDDAY,viewModel.dischargeDdayPercent().toInt())
+        repositoryCached.setValue(LocalKey.ENDDDAY,viewModel.calDday(btn_discharge.text.toString()).toString())
+//        Log.e(repositoryCached.getDDay(),"EndDDay")
+//        Log.e(repositoryCached.getMiliDday(),"MiliDay")
+        ActivityNavigator.with(this).goal().start()}
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.enlistDataInit()
     }
-
-
 }

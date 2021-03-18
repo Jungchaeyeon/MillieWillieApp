@@ -14,7 +14,9 @@
     </data>
 
     <LinearLayout
-        style="@style/Match"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.intro.IntroServiceTypeActivity">
 
@@ -22,7 +24,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="5dp"
             android:onClick="@{()->vi.onClickBack()}"
             android:src="@drawable/ic_icon_gotobac" />
 
@@ -32,16 +34,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="46dp"
+            android:includeFontPadding="false"
             android:text="복무 형태를 골라주세요." />
 
         <LinearLayout
             android:id="@+id/type_soldier"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="191dp"
             android:background="@drawable/background_google_login"
-            android:elevation="10dp"
+            android:elevation="5dp"
             android:onClick="@{(view)->vi.onClickItem(view)}"
             android:orientation="vertical">
 
@@ -51,16 +54,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
                 android:layout_marginTop="12dp"
                 android:text="일반 병사" />
 
             <TextView
                 style="@style/spoqa_regular_10"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:paddingBottom="12dp"
+                android:layout_marginBottom="12dp"
+                android:includeFontPadding="false"
+                android:lineHeight="13sp"
                 android:text="육군, 해군, 공군, 해병, 의경, 카투사, 특전사, 의무소방, 해양의무경찰,\n사회복무요원, 산업기능요원, 전문연구요원"
                 android:textAlignment="textStart" />
         </LinearLayout>
@@ -68,11 +74,11 @@
         <LinearLayout
             android:id="@+id/type_sergeant"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/background_google_login"
-            android:elevation="10dp"
+            android:elevation="5dp"
             android:onClick="@{(view)->vi.onClickItem(view)}"
             android:orientation="vertical">
 
@@ -81,7 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="19dp"
+                android:includeFontPadding="false"
                 android:text="부사관" />
 
             <TextView
@@ -91,18 +98,19 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="18dp"
-                android:text="부사관"
+                android:includeFontPadding="false"
+                android:text="단기하사, 전문하사, 특전사"
                 android:textAlignment="textStart" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/type_captain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/background_google_login"
-            android:elevation="10dp"
+            android:elevation="5dp"
             android:onClick="@{(view)->vi.onClickItem(view)}"
             android:orientation="vertical">
 
@@ -112,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:includeFontPadding="false"
                 android:text="준사관" />
 
             <TextView
@@ -120,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
+                android:includeFontPadding="false"
                 android:layout_marginBottom="12dp"
                 android:text="기술행정 준사관, 회전익항공기 조종 준사관, 경력직 항공운항 준사관,\n통번역 준사관"
                 android:textAlignment="textStart" />
@@ -128,11 +138,12 @@
         <LinearLayout
             android:id="@+id/type_general"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="61dp"
             android:background="@drawable/background_google_login"
-            android:elevation="10dp"
+            android:elevation="5dp"
             android:onClick="@{(view)->vi.onClickItem(view)}"
             android:orientation="vertical">
 
@@ -142,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:includeFontPadding="false"
                 android:text="장교" />
 
             <TextView
@@ -151,6 +163,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="18dp"
+                android:includeFontPadding="false"
                 android:text="ROTC, 학사장교, 3사관, 사관학교"
                 android:textAlignment="textStart" />
         </LinearLayout>

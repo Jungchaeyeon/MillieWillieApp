@@ -5,11 +5,17 @@ enum class LocalKey {
     DATE,
     TYPE,
     DETAILTYPE,
+    ENLISTDATE,
+    DISCHARGEDATE,
+    MILIDDAY,
     GOAL,
     PLANTYPE,
     PLANNOTICE,
     COLOR,
     DAYNIGHT,
     STARTDATE,
-    ENDDATE
+    ENDDATE,
+    ENDDDAY,
+    NEXTDDAY,
+    MONTHDDAY
 }

@@ -8,6 +8,7 @@ import com.makeus.milliewillie.ui.dDay.ncee.NceeViewModel
 import com.makeus.milliewillie.ui.routine.ExerciseSetViewModel
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel
 import com.makeus.milliewillie.ui.*
+import com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import com.makeus.milliewillie.ui.intro.WelcomeViewModel
 import com.makeus.milliewillie.ui.login.LoginViewModel
@@ -22,10 +23,11 @@ val viewModelModule = module {
     viewModel { CertificationViewModel() }
     viewModel { NceeViewModel() }
     viewModel { WelcomeViewModel() }
-    viewModel { UserViewModel() }
     viewModel { MapViewModel() }
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
+    single { UserViewModel() }
     viewModel { MainViewModel() }
     single {  MakePlanViewModel() }
+    viewModel { WorkoutViewModel() }
 }

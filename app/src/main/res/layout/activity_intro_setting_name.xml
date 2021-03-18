@@ -11,6 +11,7 @@
     </data>
 
     <LinearLayout
+        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,7 +26,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="5dp"
                 android:onClick="@{()->vi.onClickBack()}"
                 android:src="@drawable/ic_icon_gotobac" />
 
@@ -34,8 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:includeFontPadding="false"
                 android:layout_marginTop="46dp"
-                android:text="이름을 입력하세요" />
+                android:text="이름을 입력해주세요" />
 
             <TextView
                 style="@style/spoqa_medium_14"
@@ -55,26 +57,40 @@
                 android:text="이름 입력"
                 android:textColor="@color/black_all" />
 
-            <EditText
-                android:id="@+id/edt_name"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp">
+            <EditText
+                android:id="@+id/edt_name"
+                style="@style/spoqa_bold_22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:backgroundTint="@color/aqua_blue"
                 android:focusable="true"
+                android:paddingEnd="30dp"
+                android:singleLine="true"
+                android:maxLength="17"
+                android:textCursorDrawable="@drawable/edittext_cursor"
                 android:focusableInTouchMode="true"
                 android:hint="이름/닉네임을 입력해주세요."
+                android:textSize="16sp"
                 android:inputType="text">
-
                 <requestFocus />
             </EditText>
-
+                <Button
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@drawable/icon_clear_text"
+                    android:onClick="@{()->vi.onClickClear()}"/>
+            </FrameLayout>
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

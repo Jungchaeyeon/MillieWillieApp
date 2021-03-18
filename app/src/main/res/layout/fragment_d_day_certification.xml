@@ -148,9 +148,6 @@
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -159,11 +156,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/d_day_certi_todo_recycler"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/fragment_d_day_recycler_item"/>
+                    replaceAll="@{vm.certiCheckItemList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -200,8 +197,7 @@
                 </RelativeLayout>
 
             </RelativeLayout>
-        </androidx.core.widget.NestedScrollView>
-
 
     </LinearLayout>
+
 </layout>

@@ -17,6 +17,10 @@ class CertificationFragment: BaseDataBindingFragment<FragmentDDayCertificationBi
         vi = this@CertificationFragment
         vm = viewModel
         viewModel.bindLifecycle(this@CertificationFragment)
+
+
+
+
     }
 
     fun onClickDdayDate() {

@@ -1,5 +1,6 @@
 package com.makeus.base.recycler
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BaseDataBindingRecyclerViewAdapter<T : Any>
     : RecyclerView.Adapter<BaseDataBindingViewHolder<T, ViewDataBinding>>() {
+
+    interface MyItemClickListener {
+        fun onItemClick(view: View, position: Int)
+    }
+
+    var itemClick: MyItemClickListener? = null
+
+
+
+
+
 
     class MultiViewType<T, B>(
             val layoutId: Int,
@@ -72,6 +84,15 @@ class BaseDataBindingRecyclerViewAdapter<T : Any>
         position: Int
     ) {
         holder.bindData(items[position])
+
+
+        if(itemClick != null) {
+            holder.itemView.setOnClickListener {
+                itemClick?.onItemClick(it, position)
+            }
+        }
+
+
     }
 
 

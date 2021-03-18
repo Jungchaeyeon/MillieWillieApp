@@ -148,52 +148,59 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/d_day_certi_todo_recycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/fragment_d_day_recycler_item"/>
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/d_day_certi_todo_recycler"
-                >
+                android:layout_marginBottom="10dp">
 
-                <CheckBox
-                    android:id="@+id/d_day_certi_checkbox"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleX="0.7"
-                    android:scaleY="0.7"
-                    android:layout_marginStart="16dp"
-                    android:layout_centerVertical="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/d_day_certi_edit_todo"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/d_day_certi_todo_recycler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/d_day_certi_checkbox"
-                    android:layout_centerVertical="true"
-                    android:backgroundTint="@color/non"
-                    android:hint="@string/todo_add"
-                    android:maxLength="20"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/gray"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/fragment_d_day_recycler_item"/>
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/d_day_certi_todo_recycler"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/d_day_certi_checkbox"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:layout_marginStart="16dp"
+                        android:layout_centerVertical="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/d_day_certi_edit_todo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_toEndOf="@+id/d_day_certi_checkbox"
+                        android:layout_centerVertical="true"
+                        android:backgroundTint="@color/non"
+                        android:hint="@string/todo_add"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>

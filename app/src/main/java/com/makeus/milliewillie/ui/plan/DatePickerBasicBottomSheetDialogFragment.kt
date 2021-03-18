@@ -19,7 +19,7 @@ class DatePickerBasicBottomSheetDialogFragment :
 
     val liveButton = MutableLiveData<String>()
     private var date : String = ""
-
+    var reDate: String=""
     private var clickOk: ((String) -> Unit)? = null
 
     companion object {
@@ -43,6 +43,9 @@ class DatePickerBasicBottomSheetDialogFragment :
 
             date = "$year.${month + 1}.$day"
         }
+            val cal = Calendar.getInstance()
+            val dayOfWeekformat = SimpleDateFormat(" (EE)")
+            reDate= dayOfWeekformat.format(cal.time)
     }
 
     fun setOnClickOk(clickOk: ((String) -> Unit)): DatePickerBasicBottomSheetDialogFragment {
@@ -51,7 +54,7 @@ class DatePickerBasicBottomSheetDialogFragment :
     }
 
     fun onClickOk() {
-        clickOk?.invoke(date)
+        clickOk?.invoke(date+reDate)
         dismiss()
     }
     fun onClickCancel(){

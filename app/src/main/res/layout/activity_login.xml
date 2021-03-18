@@ -27,7 +27,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="189dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/ani_mw_logintitle" />
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="172dp"
             android:background="@drawable/background_kakao_login"
             android:drawableLeft="@drawable/icon_login_kakao"
             android:foreground="@drawable/ripple_default"
@@ -46,8 +46,12 @@
             android:onClick="@{()->vi.onClickKakaoLogin()}"
             android:paddingStart="16dp"
             android:text="카카오 로그인"
+<<<<<<< HEAD
             android:textColor="@color/black_all"
             tools:ignore="RtlCompat" />
+=======
+            android:textColor="#85000000" />
+>>>>>>> fix
 
         <Button
             style="@style/spoqa_medium_14"
@@ -55,6 +59,7 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="32dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="61dp"
             android:textAlignment="viewStart"
             android:background="@drawable/background_google_login"
             android:drawableLeft="@drawable/icon_login_google"
@@ -63,8 +68,12 @@
             android:onClick="@{()->vi.onClickGoogleLogin()}"
             android:paddingStart="16dp"
             android:text="구글 로그인"
+<<<<<<< HEAD
             android:textColor="@color/black_all"
             tools:ignore="RtlCompat" />
+=======
+            android:textColor="#54000000" />
+>>>>>>> fix
 
 
     </LinearLayout>

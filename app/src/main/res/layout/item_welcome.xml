@@ -14,27 +14,26 @@
         style="@style/Match"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_preview"
-            style="@style/spoqa_bold_22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="32dp"
-            android:text="@{item.textMain}"
-            tools:text="안녕하세요!\n만나뵙게되어 반가워요" />
+    <TextView
+        android:id="@+id/txt_preview"
+        style="@style/spoqa_bold_22"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="32dp"
+        android:includeFontPadding="false"
+        android:text="@{item.textMain}"
+        tools:text="안녕하세요!\n만나뵙게되어 반가워요" />
 
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_animation"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="80dp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:setAni="@{item.ani}" />
-
-
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_animation"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="97dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:setAni="@{item.ani}" />
     </LinearLayout>
 </layout>

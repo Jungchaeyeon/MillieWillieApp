@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/AppTheme"
         tools:context=".ui.intro.IntroGoalActivity">
 
         <LinearLayout
@@ -28,7 +29,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="5dp"
                 android:onClick="@{()->vi.onClickBack()}"
                 android:src="@drawable/ic_icon_gotobac" />
 
@@ -36,6 +37,7 @@
                 style="@style/spoqa_bold_22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="46dp"
                 android:text="군 복무기간동안 이뤄 낼\n목표 1가지를 말씀해주세요" />
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
+                android:includeFontPadding="false"
                 android:text="구체적일 수록 좋아요 :)"
                 android:textSize="13sp" />
 
@@ -62,6 +65,7 @@
                 android:id="@+id/edt_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/edittext_cursor"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/aqua_blue"
@@ -76,7 +80,7 @@
             android:id="@+id/imageView"
             style="@style/Wrap"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="89dp"
             android:src="@drawable/bubble_goal1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -84,8 +88,8 @@
         <ImageView
             android:id="@+id/imageView2"
             style="@style/Wrap"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="33dp"
             android:src="@drawable/bubble_goal2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -94,28 +98,34 @@
             style="@style/Wrap"
             android:layout_marginStart="24dp"
             android:layout_marginTop="23dp"
+            android:layout_marginBottom="126dp"
             android:src="@drawable/bubble_goal3"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <ImageView
             android:id="@+id/imageView3"
             style="@style/Wrap"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="34dp"
+            android:layout_marginTop="244dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="15dp"
             android:src="@drawable/bubble_goal4"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ImageView
+            android:id="@+id/imageView4"
             style="@style/Wrap"
-            android:layout_marginTop="13dp"
             android:layout_marginEnd="100dp"
+            android:layout_marginBottom="50dp"
             android:src="@drawable/bubble_goal5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
+            android:id="@+id/button"
             style="@style/spoqa_bold_22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

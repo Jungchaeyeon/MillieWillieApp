@@ -9,12 +9,20 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
 import com.makeus.milliewillie.ui.home.tab4.InfoFragment
+<<<<<<< HEAD
 import com.makeus.milliewillie.util.Log
+=======
+import com.makeus.milliewillie.ui.intro.UserViewModel
+import com.makeus.milliewillie.ui.plan.MakePlanViewModel
+>>>>>>> fix
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -24,16 +32,15 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation
     private var isFabOpen = false
-
-    val viewModel by viewModel<MainViewModel>()
-
+    val viewModel by viewModel<UserViewModel>()
+    val repositoryCached by inject<RepositoryCached>()
     companion object {
         fun getInstance() = MainActivity()
     }
 
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-        vm = viewModel
+        viewModel.bindLifecycle(this@MainActivity)
 
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
@@ -41,7 +48,6 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
         initNavigation()
         changeFragment(HomeFragment.getInstance())
-
         navigationView.setOnNavigationItemSelectedListener { item ->
             fabAction()
             when (item.itemId) {
@@ -74,6 +80,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     private fun initNavigation() {
         //bottom navi 기본 tint 설정 막음
         navigation_view.itemIconTintList = null
+
     }
 
     fun anim() {
@@ -146,5 +153,9 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 }

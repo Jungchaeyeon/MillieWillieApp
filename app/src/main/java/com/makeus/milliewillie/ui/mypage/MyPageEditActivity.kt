@@ -63,6 +63,7 @@ class MyPageEditActivity :
     fun onClickGoal(){
         viewModel.liveModifyTitle.postValue("목표")
         viewModel.liveEditData.postValue(viewModel.liveUserGoal.value)
+
         toModifyPage()
     }
 

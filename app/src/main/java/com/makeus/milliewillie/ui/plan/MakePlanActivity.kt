@@ -1,21 +1,18 @@
 package com.makeus.milliewillie.ui.plan
 
-import android.content.Intent
 import android.graphics.Color
 import android.view.View
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
-import com.makeus.milliewillie.ext.BgTint
-import com.makeus.milliewillie.ext.showLongToastSafe
+import com.makeus.milliewillie.ext.bgTint
+import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
-import com.makeus.milliewillie.ui.mypage.MyPageEditFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
@@ -70,7 +67,7 @@ class MakePlanActivity :
                 when (type) {
                     "정기휴가", "일정" -> {
                         layout_other_plan.visibility = View.GONE
-                        layout.visibility = View.VISIBLE
+                        layout_mk_plan.visibility = View.VISIBLE
                         item_todo.visibility = View.VISIBLE
                         when (type) {
                             "정기휴가" -> {
@@ -127,7 +124,7 @@ class MakePlanActivity :
     fun onClickColor() {
         ColorPickerBottomSheetFragment.getInstance()
             .setOnClickColor {
-                btn_color.BgTint(it)
+                btn_color.bgTint(it)
                 viewModel.livePlanColor.postValue(it)
             }
             .show(supportFragmentManager)
@@ -166,12 +163,11 @@ class MakePlanActivity :
 
     fun onClickDone() {
         if (plan_title.text.isEmpty()) {
-            plan_title.isFocusable = true
-            Toast.makeText(applicationContext,"제목을 입력해주세요",Toast.LENGTH_LONG).show()
-            //Snackbar.make(this.navigation_view, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
         } else {
             SampleToast.createToast(context, "일정 생성 완료!")?.show()
             ActivityNavigator.with(this).main().start()
+            viewModel.additem(MainSchedule(plan_title.text.toString(),viewModel.livePlanColor.value.toString()))
         }
     }
 

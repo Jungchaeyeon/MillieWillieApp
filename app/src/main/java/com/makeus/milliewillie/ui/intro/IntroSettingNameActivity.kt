@@ -41,6 +41,8 @@ class IntroSettingNameActivity :
             this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(edt_name.windowToken, 0)
     }
-
+    fun onClickClear(){
+        edt_name.text.clear()
+    }
 
 }

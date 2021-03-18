@@ -22,10 +22,14 @@ val viewModelModule = module {
     viewModel { CertificationViewModel() }
     viewModel { NceeViewModel() }
     viewModel { WelcomeViewModel() }
+<<<<<<< HEAD
     viewModel { UserViewModel() }
     viewModel { MapViewModel() }
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
+=======
+    single { UserViewModel() }
+>>>>>>> fix
     viewModel { MainViewModel() }
     single {  MakePlanViewModel() }
 }

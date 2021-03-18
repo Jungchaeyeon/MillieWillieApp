@@ -14,7 +14,10 @@
     </data>
 
     <LinearLayout
-        style="@style/Match"
+        android:id="@+id/layout_sergeant"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.intro.IntroEnlistDateSergeantActivity">
 
@@ -22,7 +25,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="5dp"
             android:onClick="@{()->vi.finish()}"
             android:src="@drawable/ic_icon_gotobac" />
 
@@ -32,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="46dp"
+            android:includeFontPadding="false"
             android:text="전역일 계산 정보를 위해\n입대 일자를 입력해주세요." />
 
         <TextView
@@ -45,17 +49,17 @@
 
         <Button
             android:id="@+id/btn_enlist"
-            style="@style/spoqa_medium_14"
+            style="@style/spoqa_regular_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:gravity="center_vertical"
             android:onClick="@{()-> vi.onClickDate(0)}"
-            android:text="@{vm.liveDateButtonList[0]}"
             android:paddingHorizontal="8dp"
+            android:text="@{vm.liveDateButtonList[0]}"
             android:textColor="@color/black_all"
             tools:text="2021.3.3 (토)" />
 
@@ -70,16 +74,17 @@
 
         <Button
             android:id="@+id/btn_discharge"
+            style="@style/spoqa_regular_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
             android:onClick="@{()-> vi.onClickDate(1)}"
-            android:text="@{vm.liveDateButtonList[1]}"
             android:paddingHorizontal="10dp"
+            android:text="@{vm.liveDateButtonList[1]}"
             android:textAlignment="viewStart" />
 
         <TextView
@@ -93,16 +98,17 @@
 
         <Button
             android:id="@+id/btn_promotion"
+            style="@style/spoqa_regular_14"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
             android:onClick="@{()-> vi.onClickDate(2)}"
-            android:text="@{vm.liveDateButtonList[2]}"
             android:paddingHorizontal="10dp"
+            android:text="@{vm.liveDateButtonList[2]}"
             android:textAlignment="viewStart" />
 
         <RelativeLayout
@@ -115,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="9dp"
                 android:background="@drawable/rect_radius_8"
                 android:backgroundTint="@color/aqua_blue"
                 android:onClick="@{()->vi.onClickDone()}"

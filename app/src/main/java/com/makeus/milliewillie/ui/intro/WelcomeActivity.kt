@@ -1,5 +1,8 @@
 package com.makeus.milliewillie.ui.intro
 
+import android.view.View
+import android.view.animation.TranslateAnimation
+import androidx.core.view.marginTop
 import androidx.viewpager2.widget.ViewPager2
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -7,9 +10,12 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityWelcomeBinding
 import com.makeus.milliewillie.databinding.ItemWelcomeBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.Intro
 import kotlinx.android.synthetic.main.activity_welcome.*
+import kotlinx.android.synthetic.main.item_welcome.*
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout.activity_welcome) {
     private val viewModel by viewModel<WelcomeViewModel>()
@@ -24,18 +30,30 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
         //viewpager
         vp_intro.run {
             adapter = BaseDataBindingRecyclerViewAdapter<Intro>()
-                .setItemViewType { item, position, isLast ->
-                    if (position == 0) 0 else 0
-                }
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<Intro, ItemWelcomeBinding>(R.layout.item_welcome) {
                         item = it
                     })
 
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     vIndicator.selectDot(position)
+
+                    if(position==0){
+                        btn_startMW.visibility = View.INVISIBLE
+                    }
+                     if (position == 1) {
+                        btn_startMW.visibility = View.VISIBLE
+                        val animate = TranslateAnimation(
+                            0F,  // fromXDelta
+                            0F,  // toXDelta
+                            btn_startMW.height.toFloat(),  // fromYDelta
+                            0F
+                        ) // toYDelta
+                        animate.duration = 500
+                        btn_startMW.startAnimation(animate)
+                    }
                 }
             })
         }
@@ -52,6 +70,7 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
             ActivityNavigator.with(this).login().start()
         }
     }
+
     private fun getItem(i: Int): Int {
         return vp_intro.currentItem + i
     }

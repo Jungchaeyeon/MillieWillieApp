@@ -10,6 +10,10 @@
             type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
 
         <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+
+        <variable
             name="item"
             type="com.makeus.milliewillie.model.MainSchedule" />
     </data>
@@ -62,6 +66,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:includeFontPadding="false"
+                    android:layout_gravity="center_vertical"
                     android:text="폰군인"
                     android:textColor="@color/black_all"
                     android:textSize="18sp" />
@@ -79,12 +85,14 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@{vi.classImg}"/>
 
                 <TextView
                     style="@style/spoqa_regular_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="일병 2호봉" />
 
 
@@ -96,13 +104,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="17dp"
-                android:text="D-day"
+                android:text="@{vi.dDay}"
                 android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="64dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -113,10 +122,10 @@
                     android:text="3호봉 진급" />
 
                 <TextView
-                    style="@style/spoqa_regular_12"
+                    style="@style/spoqa_medium_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="D-29"
+                    android:text="@{vi.monthDDay}"
                     android:textColor="@color/black_all" />
 
                 <View
@@ -132,10 +141,10 @@
                     android:text="상병 진급" />
 
                 <TextView
-                    style="@style/spoqa_regular_12"
+                    style="@style/spoqa_medium_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="D-152"
+                    android:text="@{vi.nextDDay}"
                     android:textColor="@color/black_all" />
 
             </LinearLayout>
@@ -180,7 +189,7 @@
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="24dp"
                     android:max="100"
-                    android:progress="@{vi.nowPercent}"
+                    android:progress="@{vi.nowPercentInt}"
                     android:progressDrawable="@drawable/progressbar_custom"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -206,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:text="D-229"
+                    android:text="@{vi.endDate}"
                     android:textColor="@color/black_all" />
             </LinearLayout>
 
@@ -215,7 +224,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
-                android:text="토익만 따가서 나가자!"
+                android:text="@{vm.liveGoalData}"
                 android:textAlignment="viewStart" />
 
             <View
@@ -235,7 +244,6 @@
                     style="@style/spoqa_medium_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_down"
                     android:text="3월10일"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black_all" />

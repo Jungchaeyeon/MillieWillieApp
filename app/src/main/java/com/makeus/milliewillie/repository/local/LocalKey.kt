@@ -14,5 +14,8 @@ enum class LocalKey {
     COLOR,
     DAYNIGHT,
     STARTDATE,
-    ENDDATE
+    ENDDATE,
+    ENDDDAY,
+    NEXTDDAY,
+    MONTHDDAY
 }

@@ -52,4 +52,5 @@
     <string name="service_type">복무 타입</string>
     <string name="goal">목표</string>
     <string name="name">이름</string>
+    <string name="startMW">밀리윌리 시작하기</string>
 </resources>

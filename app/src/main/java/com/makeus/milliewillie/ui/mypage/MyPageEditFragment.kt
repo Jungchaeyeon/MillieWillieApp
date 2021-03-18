@@ -9,9 +9,12 @@ import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentMypageEditBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
 import kotlinx.android.synthetic.main.fragment_mypage_edit.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -19,7 +22,7 @@ class MyPageEditFragment :
     BaseDataBindingFragment<FragmentMypageEditBinding>(R.layout.fragment_mypage_edit) {
 
     val viewModel: UserViewModel by sharedViewModel()
-
+    val repositoryCached by inject<RepositoryCached>()
 
     companion object {
         fun getInstance() = MyPageEditFragment()
@@ -77,6 +80,7 @@ class MyPageEditFragment :
             }
             "목표" -> {
                 viewModel.liveUserGoal.postValue(viewModel.liveEditData.value.toString())
+                repositoryCached.setValue(LocalKey.GOAL,viewModel.liveEditData.value.toString())
             }
         }
 

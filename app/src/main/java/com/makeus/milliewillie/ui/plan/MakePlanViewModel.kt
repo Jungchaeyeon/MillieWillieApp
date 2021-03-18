@@ -6,7 +6,10 @@ import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import io.reactivex.internal.util.NotificationLite.getValue
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 
 
 class MakePlanViewModel : BaseViewModel() {
@@ -17,6 +20,7 @@ class MakePlanViewModel : BaseViewModel() {
     val livePlanTodoList = MutableLiveData<MutableList<Plan.Todos>>()
     val liveDayAndNight = MutableLiveData<String>()
     val liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
+    val liveGoalData=MutableLiveData<String>()
 
     // 메인 일정 recyclerview itemlist
     val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply { this.postValue(arrayListOf(

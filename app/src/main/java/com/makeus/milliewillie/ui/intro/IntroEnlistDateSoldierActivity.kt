@@ -8,6 +8,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_enlist_date_soldier.*
 import kotlinx.android.synthetic.main.datepicker_bottom_sheet_basic.*
 import org.koin.android.ext.android.inject
@@ -26,6 +27,7 @@ class IntroEnlistDateSoldierActivity :
         vm = viewModel
         viewModel.bindLifecycle(this@IntroEnlistDateSoldierActivity)
 
+
     }
 
     fun onClickDate(position : Int) {
@@ -39,6 +41,14 @@ class IntroEnlistDateSoldierActivity :
     }
 
     fun onClickDone() {
-        repositoryCached.setValue(LocalKey.MILIDDAY,viewModel.dischargeDday().toInt())
+        repositoryCached.setValue(LocalKey.MILIDDAY,viewModel.dischargeDdayPercent().toInt())
+        repositoryCached.setValue(LocalKey.ENDDDAY,viewModel.calDday(btn_discharge.text.toString()).toString())
+//        Log.e(repositoryCached.getDDay(),"EndDDay")
+//        Log.e(repositoryCached.getMiliDday(),"MiliDay")
         ActivityNavigator.with(this).goal().start()}
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.enlistDataInit()
+    }
 }

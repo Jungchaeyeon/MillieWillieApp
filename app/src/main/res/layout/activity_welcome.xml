@@ -13,42 +13,45 @@
             type="com.makeus.milliewillie.ui.intro.WelcomeActivity" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
+        android:theme="@style/AppTheme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.makeus.milliewillie.ui.view.CircleIndicator
-                android:id="@+id/vIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="74dp" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_intro"
-                replaceAll="@{vm.introItemList}"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        </LinearLayout>
-
-        <TextView
-            style="@style/spoqa_medium_16"
+        <com.makeus.milliewillie.ui.view.CircleIndicator
+            android:id="@+id/vIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:onClick="@{()->vi.onClickNext()}"
-            android:padding="50dp"
-            android:text="next" />
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp" />
 
-    </FrameLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_intro"
+            replaceAll="@{vm.introItemList}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        <Button
+            android:id="@+id/btn_startMW"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="51dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_gravity="bottom|end"
+            android:gravity="center"
+            android:background="@drawable/background_google_login"
+            android:backgroundTint="@color/maincolor_blue"
+            android:onClick="@{()->vi.onClickNext()}"
+            android:lineHeight="17sp"
+            android:textSize="14sp"
+            android:textColor="@color/white_two"
+            android:text="@string/startMW"
+            android:visibility="invisible"
+            style="?android:attr/borderlessButtonStyle"/>
+    </LinearLayout>
+
 
 </layout>

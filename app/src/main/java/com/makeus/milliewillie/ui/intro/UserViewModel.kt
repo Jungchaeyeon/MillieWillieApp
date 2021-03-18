@@ -2,8 +2,8 @@ package com.makeus.milliewillie.ui.intro
 
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.ServiceDetailType
-import com.makeus.milliewillie.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,22 +17,28 @@ class UserViewModel : BaseViewModel() {
     val liveUserBirth = MutableLiveData<String>().apply { value = "1999.07.21" }
     val liveUserGoal = MutableLiveData<String>().apply { value = "토익만 따서 나가자!" }
 
-
+    val liveServiceId = MutableLiveData<String>()
     val liveServiceype = MutableLiveData<String>().apply { value = "육군" }
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today() } }
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value=""} }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 
-    init {
-        calculateDay(today())
+    fun enlistDataInit(){
+        if (liveServiceId.value == "일반병사") {
+            calculateDay(today())
+            liveDateButtonList[0].value=today()
+        }else{
+
+            liveDateButtonList[1].value=""
+            liveDateButtonList[2].value=""
+        }
+
     }
 
     fun today(): String {
-        val today = Calendar.getInstance()
-        return today.get(Calendar.YEAR)
-            .toString() + "." + (today.get(Calendar.MONTH) + 1).toString() + "." + today.get(
-            Calendar.DAY_OF_MONTH
-        ).toString()
+        val today = Calendar.getInstance().time
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+        return df.format(today)
     }
 
 
@@ -81,8 +87,9 @@ class UserViewModel : BaseViewModel() {
 
         //enlist.showShortToastSafe()
         //입대일 받아옴
-        val df = SimpleDateFormat("yyyy.MM.dd")
-        val date = df.parse(enlist)
+        val getDateFormat = SimpleDateFormat("yyyy.MM.dd")
+        val setDateFormat = SimpleDateFormat("yyyy.MM.dd (EE)")
+        val date = getDateFormat.parse(enlist)
         val cal = Calendar.getInstance()
         cal.time = date
 
@@ -129,20 +136,20 @@ class UserViewModel : BaseViewModel() {
         }
         //전역일
         cal.add(Calendar.MONTH, durAll)
-        dischargeDate = df.format(cal.time).toString()
+        dischargeDate = setDateFormat.format(cal.time).toString()
         cal.time = date
 
         //일병진급일
         cal.add(Calendar.MONTH, durPrivate)
-        promPrivate = df.format(cal.time).toString()
+        promPrivate = setDateFormat.format(cal.time).toString()
 
         //상병진급일
         cal.add(Calendar.MONTH, durCorporal)
-        promCorporal = df.format(cal.time).toString()
+        promCorporal = setDateFormat.format(cal.time).toString()
 
         //병장진급일
         cal.add(Calendar.MONTH, durSergeant)
-        promSergeant = df.format(cal.time).toString()
+        promSergeant = setDateFormat.format(cal.time).toString()
         cal.time = date
 
         liveDateButtonList[1].postValue(dischargeDate)
@@ -153,7 +160,7 @@ class UserViewModel : BaseViewModel() {
 
     fun calDateBetweenAnB(date1: String, date2: String): Float {
         var calDateDays: Long = 0L
-        val df = SimpleDateFormat("yyyy.MM.dd")
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
 
         try {
             val firstDate = df.parse(date1)
@@ -168,11 +175,10 @@ class UserViewModel : BaseViewModel() {
         return calDateDays.toFloat()
     }
 
-    fun dischargeDday(): Float {
+    fun dischargeDdayPercent(): Float {
         val cal = Calendar.getInstance()
-        val df = SimpleDateFormat("yyyy.MM.dd")
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
         val nowFormat = df.format(cal.time).toString()
-
 
         val allDays = calDateBetweenAnB(
             liveDateButtonList[1].value.toString(),
@@ -180,9 +186,26 @@ class UserViewModel : BaseViewModel() {
         )
         val nowDays = calDateBetweenAnB(nowFormat, liveDateButtonList[0].value.toString())
 
-       // Log.e((nowDays/allDays*100).toString(),"값")
-        return (nowDays / allDays * 100)
+        // Log.e((nowDays/allDays*100).toString(),"값")
+        return (nowDays / allDays * 100).toFloat()
     }
+    fun calDday(inputDate: String):Int{
+        var calDateDays: Int=0
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+
+        try {
+            val todayDate = df.parse(today())
+            val calDate = df.parse(inputDate)
+
+            var difference= todayDate.time - calDate.time
+            calDateDays = (difference / (24 * 60 * 60 * 1000)).toInt()
+            calDateDays = abs(calDateDays)
+        } catch (e: ParseException) {
+
+        }
+        return calDateDays
+    }
+
 
 }
 

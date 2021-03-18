@@ -19,22 +19,26 @@
             android:layout_height="wrap_content">
 
             <TextView
+                style="@style/spoqa_medium_14"
                 android:id="@+id/btn_cancle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:padding="5dp"
                 android:onClick="@{()->vi.onClickCancel()}"
+                android:textColor="#9d9d9d"
                 android:text="취소" />
 
             <TextView
                 android:id="@+id/btn_done"
+                style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="16dp"
                 android:padding="5dp"
                 android:onClick="@{()->vi.onClickOk()}"
+                android:textColor="#3e3e3e"
                 android:text="완료" />
         </RelativeLayout>
 

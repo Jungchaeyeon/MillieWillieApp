@@ -18,6 +18,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.MakePlanViewModel
+import com.makeus.milliewillie.util.Log
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -25,17 +26,23 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     val viewModel by viewModel<MakePlanViewModel>()
-
-    private val repositoryCached by inject<RepositoryCached>()
-    var nowPercent: Int = repositoryCached.getMiliDday().toInt()
-    var nowPercentStr: String = repositoryCached.getMiliDday() + "%"
-    var nowPercentFlt: Float = nowPercent.toFloat().div(100.0).toFloat()
-
+    val repositoryCached by inject<RepositoryCached>()
+    val classImg : Int=0
     var calFlag = false
+    var dDay = "D-"+repositoryCached.getDDay()
+    var nextDDay = ""
+    var monthDDay = ""
+    var endDate =""
+    var nowPercentInt= 0
+    var nowPercent=""
+    var nowPercentStr=""
+    var nowPercentFlt=0F
 
     companion object {
         fun getInstance() = HomeFragment()
@@ -43,6 +50,21 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment
         vm = viewModel
+
+        setClassImg()
+        dDay="D-"+repositoryCached.getDDay()
+
+        //viewModel.liveGoalData.postValue(repositoryCached.getGoal())
+        nowPercent=repositoryCached.getMiliDday()
+        nowPercentInt=nowPercent.toInt()
+        nowPercentFlt=nowPercent.toFloat()?.div(100.0).toFloat()
+        nowPercentStr="$nowPercent%"
+
+
+        Log.e(repositoryCached.getDDay(),"EndDDay")
+        Log.e(repositoryCached.getmonthDDay(),"MonthDay")
+        Log.e(repositoryCached.getMiliDday(),"MiliDay")
+
 
         rvMemoList.run {
             //ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(this)
@@ -81,7 +103,6 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
 
-
                 binding.rvMemoList.adapter?.notifyItemRemoved(position)
             }
         }
@@ -103,7 +124,9 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         }
     }
 
-
+    fun setClassImg(){
+        //if(repositoryCached.)
+    }
     fun onClickItem() {
         val nextFrag = HomeFragment()
         activity?.supportFragmentManager?.beginTransaction()
@@ -135,5 +158,11 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     override fun onResume() {
         super.onResume()
+       // viewModel.nowPercent=repositoryCached.getMiliDday()
     }
+    fun endDate(): String {
+        endDate=repositoryCached.getEnd()
+        return endDate.substring(2)
+    }
+
 }

@@ -6,6 +6,7 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroServiceTypeDetailBinding
 import com.makeus.milliewillie.databinding.ItemTypeDetailBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached

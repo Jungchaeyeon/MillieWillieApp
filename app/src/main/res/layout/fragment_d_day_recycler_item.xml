@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{()-> vi.checkboxClick()}"
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
@@ -22,22 +23,35 @@
             android:layout_height="30dp"
             android:scaleX="0.7"
             android:scaleY="0.7"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+             />
 
         <EditText
+            android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
+            android:autofillHints="@string/todo_add"
             android:backgroundTint="@color/non"
-            android:textSize="14sp"
-            android:textColor="@color/black_all"
+            android:inputType="text"
             android:text="@{item.textCheck}"
-            android:enabled="true"
+            android:textColor="@color/black_all"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/todo"
+            app:layout_constraintStart_toEndOf="@+id/editText2"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

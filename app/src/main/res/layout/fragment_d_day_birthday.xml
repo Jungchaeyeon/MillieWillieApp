@@ -75,9 +75,11 @@
                     android:backgroundTint="@color/non"
                     android:focusableInTouchMode="true"
                     android:focusable="true"
+                    android:inputType="text"
                     android:hint="@string/todo_add"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:singleLine="true"
                     android:textColor="@color/gray"
                     android:textSize="14sp" />
             </RelativeLayout>

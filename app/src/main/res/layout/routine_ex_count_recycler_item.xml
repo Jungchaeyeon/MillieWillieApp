@@ -2,7 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.WorkoutSet" />
     </data>
 
     <RelativeLayout
@@ -15,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_centerVertical="true"
-            android:text="0 세트"/>
+            android:text="@{item.setCount}"/>
 
         <EditText
             android:id="@+id/rebs_count_recycler_edit_count"

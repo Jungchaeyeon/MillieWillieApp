@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_centerVertical="true"
-            android:text="세트"/>
+            android:text="@{item.setCount}"/>
 
         <EditText
             android:id="@+id/rebs_wnc_recycler_edit_weight"

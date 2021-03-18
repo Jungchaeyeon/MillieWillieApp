@@ -15,175 +15,175 @@
         android:orientation="vertical"
         android:animateLayoutChanges="true">
 
-        <RelativeLayout
-            android:id="@+id/rebs_wnc_layout_set"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginHorizontal="8dp">
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rebs_wnc_layout_set"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="38dp"-->
+<!--            android:layout_marginHorizontal="8dp">-->
 
-            <TextView
-                android:id="@+id/rebs_wnc_text_total_set_title"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_centerVertical="true"
-                android:text="@string/set_count"
-                android:textColor="@color/black"/>
+<!--            <TextView-->
+<!--                android:id="@+id/rebs_wnc_text_total_set_title"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="@string/set_count"-->
+<!--                android:textColor="@color/black"/>-->
 
-            <TextView
-                android:id="@+id/rebs_wnc_text_total_set_input"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_marginStart="5dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"
-                android:text="0 세트"/>
+<!--            <TextView-->
+<!--                android:id="@+id/rebs_wnc_text_total_set_input"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"-->
+<!--                android:text="0 세트"/>-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-        <RelativeLayout
-            android:id="@+id/rebs_wnc_layout_switch"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_below="@id/rebs_wnc_layout_set">
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rebs_wnc_layout_switch"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="38dp"-->
+<!--            android:layout_marginHorizontal="8dp"-->
+<!--            android:layout_below="@id/rebs_wnc_layout_set">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_centerVertical="true"
-                android:text="@string/total_set_con"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="@string/total_set_con"/>-->
 
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="32dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:track="@drawable/switch_track_selector"
-                android:thumb="@drawable/ic_baseline_brightness_1_24"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rebs_wnc_layout_input"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_below="@id/rebs_wnc_layout_switch">
-
-            <TextView
-                android:id="@+id/rebs_wnc_text_total_set_count"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_centerVertical="true"
-                android:text="0 세트"/>
-
-            <EditText
-                android:id="@+id/rebs_wnc_edit_weight"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/rebs_wnc_text_total_set_count"
-                android:maxLength="5"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:backgroundTint="@color/gray"
-                android:textAlignment="textEnd"
-                android:hint="0.0"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/rebs_wnc_text_kg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_toEndOf="@+id/rebs_wnc_edit_weight"
-                android:layout_centerVertical="true"
-                android:text="kg"/>
-
-            <EditText
-                android:id="@+id/rebs_wnc_edit_count"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/rebs_wnc_text_kg"
-                android:maxLength="5"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:backgroundTint="@color/gray"
-                android:textAlignment="textEnd"
-                android:hint="0.0"
-                android:textColor="@color/black"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/rebs_wnc_text_kg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_toEndOf="@+id/rebs_wnc_edit_count"
-                android:layout_centerVertical="true"
-                android:text="개"/>
-        </RelativeLayout>
-
-        <!-- 여기서부터 스위치 OFF 시 visibility -->
-        <LinearLayout
-            android:id="@+id/rebs_wnc_layout_set_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rebs_wnc_layout_input"
-            android:visibility="visible"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rebs_wnc_recycler_set"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginHorizontal="8dp"
-                tools:listitem="@layout/routine_ex_wnc_recycler_item"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="38dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_centerInParent="true">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/icon_add_set"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="17dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="@string/set_add"
-                        android:textColor="@color/black_all"/>
-
-                </LinearLayout>
-            </RelativeLayout>
-
-        </LinearLayout>
+<!--            <Switch-->
+<!--                android:id="@+id/switch1"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:track="@drawable/switch_track_selector"-->
+<!--                android:thumb="@drawable/ic_baseline_brightness_1_24"-->
+<!--                tools:ignore="UseSwitchCompatOrMaterialXml" />-->
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rebs_wnc_btn_ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_below="@id/rebs_wnc_layout_set_add"
-            android:background="@drawable/map_btn_border"
-            android:text="@string/ok"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/rebs_wnc_layout_input"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="38dp"-->
+<!--            android:layout_marginHorizontal="8dp"-->
+<!--            android:layout_below="@id/rebs_wnc_layout_switch">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/rebs_wnc_text_total_set_count"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="0 세트"/>-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/rebs_wnc_edit_weight"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_toEndOf="@+id/rebs_wnc_text_total_set_count"-->
+<!--                android:maxLength="5"-->
+<!--                android:maxLines="1"-->
+<!--                android:singleLine="true"-->
+<!--                android:backgroundTint="@color/gray"-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:hint="0.0"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/rebs_wnc_text_kg"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_toEndOf="@+id/rebs_wnc_edit_weight"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="kg"/>-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/rebs_wnc_edit_count"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_toEndOf="@+id/rebs_wnc_text_kg"-->
+<!--                android:maxLength="5"-->
+<!--                android:maxLines="1"-->
+<!--                android:singleLine="true"-->
+<!--                android:backgroundTint="@color/gray"-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:hint="0.0"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/rebs_wnc_text_kg2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_toEndOf="@+id/rebs_wnc_edit_count"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="개"/>-->
+<!--        </RelativeLayout>-->
+
+<!--        &lt;!&ndash; 여기서부터 스위치 OFF 시 visibility &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/rebs_wnc_layout_set_add"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/rebs_wnc_layout_input"-->
+<!--            android:visibility="visible"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rebs_wnc_recycler_set"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_marginHorizontal="8dp"-->
+<!--                tools:listitem="@layout/routine_ex_wnc_recycler_item"/>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="38dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="38dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:layout_centerInParent="true">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:src="@drawable/icon_add_set"/>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="17dp"-->
+<!--                        android:layout_marginBottom="1dp"-->
+<!--                        android:text="@string/set_add"-->
+<!--                        android:textColor="@color/black_all"/>-->
+
+<!--                </LinearLayout>-->
+<!--            </RelativeLayout>-->
+
+<!--        </LinearLayout>-->
+
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/rebs_wnc_btn_ok"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_below="@id/rebs_wnc_layout_set_add"-->
+<!--            android:background="@drawable/map_btn_border"-->
+<!--            android:text="@string/ok"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textStyle="bold"/>-->
 
 
     </RelativeLayout>

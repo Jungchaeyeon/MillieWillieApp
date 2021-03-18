@@ -46,7 +46,8 @@
             android:onClick="@{()->vi.onClickKakaoLogin()}"
             android:paddingStart="16dp"
             android:text="카카오 로그인"
-            android:textColor="@color/black_all" />
+            android:textColor="@color/black_all"
+            tools:ignore="RtlCompat" />
 
         <Button
             style="@style/spoqa_medium_14"
@@ -62,7 +63,8 @@
             android:onClick="@{()->vi.onClickGoogleLogin()}"
             android:paddingStart="16dp"
             android:text="구글 로그인"
-            android:textColor="@color/black_all" />
+            android:textColor="@color/black_all"
+            tools:ignore="RtlCompat" />
 
 
     </LinearLayout>

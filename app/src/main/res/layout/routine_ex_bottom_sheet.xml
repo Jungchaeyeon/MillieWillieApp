@@ -133,20 +133,21 @@
         </LinearLayout>
 
         <!-- WNC 시작 -->
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rebs_wnc_layout"
-            style="@style/BottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rebs_layout_option_select"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/rebs_wnc_layout_set"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginHorizontal="8dp">
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="16dp">
 
                 <TextView
                     android:id="@+id/rebs_wnc_text_total_set_title"
@@ -159,16 +160,17 @@
                 <EditText
                     android:id="@+id/rebs_wnc_edit_set_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"
                     android:backgroundTint="@color/non"
-                    android:singleLine="true"
+                    android:hint="1"
                     android:maxLength="3"
                     android:maxLines="1"
-                    android:textSize="14sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/rebs_wnc_text_total_set_title"
-                    android:hint="0"/>
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/rebs_wnc_text_total_set_input"
@@ -185,7 +187,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_below="@id/rebs_wnc_layout_set"
-                android:layout_marginHorizontal="8dp">
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_wnc_layout_set"
+                tools:layout_editor_absoluteX="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,144 +203,159 @@
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:onClick="@{() -> vi.onClickSwitch()}"
+                    android:onClick="@{(view) -> vi.onClickSwitch(view)}"
                     android:thumb="@drawable/ic_baseline_brightness_1_24"
-                    android:track="@drawable/switch_track_selector"/>
-
-
+                    android:track="@drawable/switch_track_selector"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rebs_wnc_layout_input"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_below="@id/rebs_wnc_layout_switch"
-                android:layout_marginHorizontal="8dp">
-
-                <TextView
-                    android:id="@+id/rebs_wnc_text_total_set_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:text="0 세트" />
-
-                <EditText
-                    android:id="@+id/rebs_wnc_edit_weight"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/rebs_wnc_text_total_set_count"
-                    android:backgroundTint="@color/gray"
-                    android:hint="0.0"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/rebs_wnc_text_kg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_wnc_edit_weight"
-                    android:text="kg" />
-
-                <EditText
-                    android:id="@+id/rebs_wnc_edit_count"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/rebs_wnc_text_kg"
-                    android:backgroundTint="@color/gray"
-                    android:hint="0.0"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/rebs_wnc_text_kg2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_wnc_edit_count"
-                    android:text="개" />
-            </RelativeLayout>
-
-            <!-- 여기서부터 스위치 OFF 시 visibility -->
-            <LinearLayout
-                android:id="@+id/rebs_wnc_layout_set_add"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/rebs_wnc_layout_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rebs_wnc_layout_input"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_below="@id/rebs_wnc_layout_switch"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_wnc_layout_switch"
+                tools:layout_editor_absoluteX="16dp">
 
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/rebs_wnc_layout_app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:liftOnScroll="true"
+                    app:liftOnScrollTargetViewId="@id/rebs_wnc_recycler_set">
+
+                    <RelativeLayout
+                        android:id="@+id/rebs_wnc_layout_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginHorizontal="8dp"
+                        app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+                        <TextView
+                            android:id="@+id/rebs_wnc_text_total_set_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="17dp"
+                            android:layout_centerVertical="true"
+                            android:text="1 세트" />
+
+                        <EditText
+                            android:id="@+id/rebs_wnc_edit_weight"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_toEndOf="@+id/rebs_wnc_text_total_set_count"
+                            android:backgroundTint="@color/gray"
+                            android:hint="0.0"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rebs_wnc_text_kg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_wnc_edit_weight"
+                            android:text="kg" />
+
+                        <EditText
+                            android:id="@+id/rebs_wnc_edit_count"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/rebs_wnc_text_kg"
+                            android:backgroundTint="@color/gray"
+                            android:hint="0.0"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rebs_wnc_text_kg2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_wnc_edit_count"
+                            android:text="개" />
+                    </RelativeLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <!-- 여기서부터 스위치 OFF 시 visibility -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rebs_wnc_recycler_set"
-                    replaceAll="@{vm.liveDataAddSetList}"
+                    replaceAll="@{vm.liveDataWncAddSetList}"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginHorizontal="8dp"
+                    android:nestedScrollingEnabled="true"
                     android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/routine_ex_wnc_recycler_item" />
 
-                <RelativeLayout
-                    android:id="@+id/rebs_wnc_layout_add_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp">
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                    <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rebs_wnc_layout_add"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:visibility="gone"
+                android:onClick="@{(view)-> vi.onClickAddItem(view)}"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_wnc_layout_scroll"
+                tools:layout_editor_absoluteX="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables,UselessParent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_add_set" />
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="38dp"
-                        android:layout_centerInParent="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        tools:ignore="UseCompoundDrawables,UselessParent">
+                        android:layout_height="17dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/set_add"
+                        android:textColor="@color/black_all" />
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/icon_add_set" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="17dp"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/set_add"
-                            android:textColor="@color/black_all" />
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/rebs_wnc_btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rebs_wnc_layout_set_add"
-                android:layout_marginTop="12dp"
+                android:layout_below="@id/rebs_wnc_layout_scroll"
                 android:background="@drawable/map_btn_border"
                 android:text="@string/ok"
                 android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="@{()-> vi.onClickOk()}"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_wnc_layout_add"
+                tools:layout_editor_absoluteX="16dp" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- WNC 끝 -->
 
         <!-- COUNT 시작 -->
-        <RelativeLayout
-            style="@style/BottomLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rebs_count_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -348,7 +367,9 @@
                 android:id="@+id/rebs_count_layout_set"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginHorizontal="8dp">
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="8dp">
 
                 <TextView
                     android:id="@+id/rebs_count_text_total_set_title"
@@ -356,16 +377,30 @@
                     android:layout_height="17dp"
                     android:layout_centerVertical="true"
                     android:text="@string/set_count"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/rebs_count_edit_set_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/rebs_count_text_total_set_title"
+                    android:backgroundTint="@color/non"
+                    android:hint="1"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/rebs_count_text_total_set_input"
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
-                    android:layout_marginStart="5dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/rebs_count_text_total_set_title"
-                    android:text="0 세트"/>
+                    android:layout_toEndOf="@+id/rebs_count_edit_set_count"
+                    android:text="세트" />
 
             </RelativeLayout>
 
@@ -373,142 +408,166 @@
                 android:id="@+id/rebs_count_layout_switch"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
+                android:layout_below="@id/rebs_count_layout_set"
                 android:layout_marginHorizontal="8dp"
-                android:layout_below="@id/rebs_count_layout_set">
+                app:layout_constraintTop_toBottomOf="@+id/rebs_count_layout_set"
+                tools:layout_editor_absoluteX="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_centerVertical="true"
-                    android:text="@string/total_set_con"/>
+                    android:text="@string/total_set_con" />
 
                 <Switch
                     android:id="@+id/rebs_count_switch"
                     android:layout_width="32dp"
                     android:layout_height="20dp"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:track="@drawable/switch_track_selector"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{(view) -> vi.onClickSwitch(view)}"
                     android:thumb="@drawable/ic_baseline_brightness_1_24"
+                    android:track="@drawable/switch_track_selector"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rebs_count_layout_input"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/rebs_count_layout_coordinator"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_below="@id/rebs_count_layout_switch">
-
-                <TextView
-                    android:id="@+id/rebs_count_text_total_set_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:text="0 세트"/>
-
-                <EditText
-                    android:id="@+id/rebs_count_edit_count"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/rebs_count_text_total_set_count"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:backgroundTint="@color/gray"
-                    android:textAlignment="textEnd"
-                    android:hint="0"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/rebs_count_text_kg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_count_edit_count"
-                    android:layout_centerVertical="true"
-                    android:text="개"/>
-            </RelativeLayout>
-
-            <!-- 여기서부터 스위치 OFF 시 visibility -->
-            <LinearLayout
-                android:id="@+id/rebs_count_layout_set_add"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rebs_count_layout_input"
-                android:visibility="visible"
-                android:orientation="vertical">
+                android:layout_below="@id/rebs_count_layout_switch"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_count_layout_switch"
+                tools:layout_editor_absoluteX="16dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rebs_count_recycler_set"
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/rebs_count_layout_app_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/routine_ex_count_recycler_item"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:liftOnScroll="true"
+                    app:liftOnScrollTargetViewId="@id/rebs_count_recycler_set">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/rebs_count_layout_input"
+                        android:layout_width="match_parent"
                         android:layout_height="38dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/icon_add_set"/>
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_below="@id/rebs_count_layout_switch"
+                        app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
                         <TextView
+                            android:id="@+id/rebs_count_text_total_set_count"
                             android:layout_width="wrap_content"
                             android:layout_height="17dp"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/set_add"
-                            android:textColor="@color/black_all"/>
+                            android:layout_centerVertical="true"
+                            android:text="1 세트"/>
 
-                    </LinearLayout>
-                </RelativeLayout>
+                        <EditText
+                            android:id="@+id/rebs_count_edit_count"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/rebs_count_text_total_set_count"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:backgroundTint="@color/gray"
+                            android:textAlignment="textEnd"
+                            android:hint="0"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
 
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/rebs_count_text_kg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_count_edit_count"
+                            android:layout_centerVertical="true"
+                            android:text="개"/>
+                    </RelativeLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- 여기서부터 스위치 OFF 시 visibility -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rebs_count_recycler_set"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="8dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                replaceAll="@{vm.liveDataCountAddSetList}"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/routine_ex_count_recycler_item"/>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <RelativeLayout
+                android:id="@+id/rebs_count_layout_add"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@id/rebs_count_layout_coordinator"
+                android:onClick="@{(view)-> vi.onClickAddItem(view)}"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_count_layout_coordinator">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_add_set" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/set_add"
+                        android:textColor="@color/black_all" />
+
+                </LinearLayout>
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/rebs_count_btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_below="@id/rebs_count_layout_set_add"
+                android:layout_below="@id/rebs_count_layout_add"
                 android:background="@drawable/map_btn_border"
                 android:text="@string/ok"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="@{()-> vi.onClickOk()}"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_count_layout_add" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- COUNT 끝 -->
 
         <!-- TIME 시작 -->
-        <RelativeLayout
-            style="@style/BottomLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rebs_time_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rebs_layout_option_select"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/rebs_time_layout_set"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginHorizontal="8dp">
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="8dp">
 
                 <TextView
                     android:id="@+id/rebs_time_text_total_set_title"
@@ -516,16 +575,30 @@
                     android:layout_height="17dp"
                     android:layout_centerVertical="true"
                     android:text="@string/set_count"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/rebs_time_edit_set_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/rebs_time_text_total_set_title"
+                    android:backgroundTint="@color/non"
+                    android:hint="1"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/rebs_time_text_total_set_input"
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
-                    android:layout_marginStart="5dp"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/rebs_time_text_total_set_title"
-                    android:text="0 세트"/>
+                    android:layout_toEndOf="@+id/rebs_time_edit_set_count"
+                    android:text="세트" />
 
             </RelativeLayout>
 
@@ -533,171 +606,197 @@
                 android:id="@+id/rebs_time_layout_switch"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
+                android:layout_below="@id/rebs_time_layout_set"
                 android:layout_marginHorizontal="8dp"
-                android:layout_below="@id/rebs_time_layout_set">
+                app:layout_constraintTop_toBottomOf="@+id/rebs_time_layout_set">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     android:layout_centerVertical="true"
-                    android:text="@string/total_set_con"/>
+                    android:text="@string/total_set_con" />
 
                 <Switch
                     android:id="@+id/rebs_time_switch"
                     android:layout_width="32dp"
                     android:layout_height="20dp"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:track="@drawable/switch_track_selector"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{(view)-> vi.onClickSwitch(view)}"
                     android:thumb="@drawable/ic_baseline_brightness_1_24"
+                    android:track="@drawable/switch_track_selector"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rebs_time_layout_input"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/rebs_time_layout_coordinator"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_below="@id/rebs_time_layout_switch">
-
-                <TextView
-                    android:id="@+id/rebs_time_text_total_set_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:layout_centerVertical="true"
-                    android:text="0 세트"/>
-
-                <EditText
-                    android:id="@+id/rebs_time_edit_hour"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/rebs_time_text_total_set_count"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:backgroundTint="@color/gray"
-                    android:textAlignment="textEnd"
-                    android:hint="0.0"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/rebs_time_text_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_time_edit_hour"
-                    android:layout_centerVertical="true"
-                    android:text="@string/option_time"/>
-
-                <EditText
-                    android:id="@+id/rebs_time_edit_min"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/rebs_time_text_hour"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:backgroundTint="@color/gray"
-                    android:textAlignment="textEnd"
-                    android:hint="0"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/rebs_time_text_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_time_edit_min"
-                    android:layout_centerVertical="true"
-                    android:text="@string/minute"/>
-
-                <EditText
-                    android:id="@+id/rebs_time_edit_sec"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/rebs_time_text_min"
-                    android:maxLength="5"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:backgroundTint="@color/gray"
-                    android:textAlignment="textEnd"
-                    android:hint="0"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/rebs_time_text_sec"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_toEndOf="@+id/rebs_time_edit_sec"
-                    android:layout_centerVertical="true"
-                    android:text="@string/sec"/>
-            </RelativeLayout>
-
-            <!-- 여기서부터 스위치 OFF 시 visibility -->
-            <LinearLayout
-                android:id="@+id/rebs_time_layout_set_add"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rebs_time_layout_input"
-                android:visibility="visible"
-                android:orientation="vertical">
+                android:layout_below="@id/rebs_time_layout_switch"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_time_layout_switch"
+                tools:layout_editor_absoluteX="16dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rebs_time_recycler_set"
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/rebs_time_layout_app_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    tools:listitem="@layout/routine_ex_time_recycler_item"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:liftOnScroll="true"
+                    app:liftOnScrollTargetViewId="@id/rebs_time_recycler_set">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="38dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/rebs_time_layout_input"
+                        android:layout_width="match_parent"
                         android:layout_height="38dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/icon_add_set"/>
+                        android:layout_below="@id/rebs_time_layout_switch"
+                        android:layout_marginHorizontal="8dp"
+                        app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
                         <TextView
+                            android:id="@+id/rebs_time_text_total_set_count"
                             android:layout_width="wrap_content"
                             android:layout_height="17dp"
-                            android:layout_marginBottom="1dp"
-                            android:text="@string/set_add"
-                            android:textColor="@color/black_all"/>
+                            android:layout_centerVertical="true"
+                            android:text="1 세트" />
 
-                    </LinearLayout>
-                </RelativeLayout>
+                        <EditText
+                            android:id="@+id/rebs_time_edit_hour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_toEndOf="@+id/rebs_time_text_total_set_count"
+                            android:backgroundTint="@color/gray"
+                            android:ems="2"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/rebs_time_text_hour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_time_edit_hour"
+                            android:text="@string/option_time" />
 
+                        <EditText
+                            android:id="@+id/rebs_time_edit_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/rebs_time_text_hour"
+                            android:backgroundTint="@color/gray"
+                            android:ems="2"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rebs_time_text_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_time_edit_min"
+                            android:text="@string/minute" />
+
+                        <EditText
+                            android:id="@+id/rebs_time_edit_sec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/rebs_time_text_min"
+                            android:backgroundTint="@color/gray"
+                            android:ems="2"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/rebs_time_text_sec"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@+id/rebs_time_edit_sec"
+                            android:text="@string/sec" />
+                    </RelativeLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <!-- 여기서부터 스위치 OFF 시 visibility -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rebs_time_recycler_set"
+                    replaceAll="@{vm.liveDataTimeAddSetList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                    tools:listitem="@layout/routine_ex_time_recycler_item" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <RelativeLayout
+                android:id="@+id/rebs_time_layout_add"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/rebs_time_layout_coordinator"
+                android:onClick="@{(view)-> vi.onClickAddItem(view)}"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_time_layout_coordinator">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_add_set" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/set_add"
+                        android:textColor="@color/black_all" />
+
+                </LinearLayout>
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/rebs_time_btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_below="@id/rebs_time_layout_set_add"
+                android:layout_below="@id/rebs_time_layout_add"
                 android:background="@drawable/map_btn_border"
                 android:text="@string/ok"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="@{()-> vi.onClickOk()}"
+                app:layout_constraintTop_toBottomOf="@+id/rebs_time_layout_add" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- TIME 끝 -->
 
 

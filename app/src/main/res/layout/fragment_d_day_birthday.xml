@@ -47,7 +47,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:isScrollContainer="true"
                     android:orientation="vertical"
+
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
 
@@ -83,7 +85,7 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/black_all"
                         android:textSize="14sp" />
                 </RelativeLayout>
 

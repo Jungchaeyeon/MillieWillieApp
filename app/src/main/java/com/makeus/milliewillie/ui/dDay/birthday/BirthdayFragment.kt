@@ -14,8 +14,7 @@ import com.makeus.milliewillie.model.DdayCheckList
 import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.layout.fragment_d_day_birthday),
-    View.OnClickListener {
+class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.layout.fragment_d_day_birthday) {
 
     private val viewModel by viewModel<BirthdayViewModel>()
 
@@ -57,7 +56,7 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (binding.dDayBirthEditTodo.text.toString().isNotEmpty()) {
                     viewModel.addItem(binding.dDayBirthEditTodo.text.toString())
-
+                    binding.dDayBirthEditTodo.setText("")
                     viewModel.checkItemList.observe(this@BirthdayFragment, Observer {
                         viewModel.defaultCheckItemList()
 //                        Log.e("observe")
@@ -84,11 +83,6 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
     override fun onResume() {
         super.onResume()
         viewModel.defaultCheckItemList()
-    }
-
-    override fun onClick(v: View?) {
-        Log.e(v.toString())
-        Log.e("clicked")
     }
 
 }

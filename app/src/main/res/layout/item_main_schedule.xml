@@ -45,6 +45,12 @@
             android:textColor="@color/black_all"
             android:textSize="16sp"
             tools:text="첫 휴우가" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123123123"
+                android:inputType="text" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

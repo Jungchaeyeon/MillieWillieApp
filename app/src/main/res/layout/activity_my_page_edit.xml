@@ -18,12 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<<<<<<< HEAD
         <FrameLayout
-=======
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
             style="@style/AppTheme"
->>>>>>> fix
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -303,6 +303,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
+        </LinearLayout>
         </FrameLayout>
     </ScrollView>
 </layout>

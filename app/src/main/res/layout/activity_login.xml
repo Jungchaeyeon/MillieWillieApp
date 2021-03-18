@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".LoginActivity">
+        tools:context=".ui.login.LoginActivity">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_animation"
@@ -46,12 +46,9 @@
             android:onClick="@{()->vi.onClickKakaoLogin()}"
             android:paddingStart="16dp"
             android:text="카카오 로그인"
-<<<<<<< HEAD
-            android:textColor="@color/black_all"
-            tools:ignore="RtlCompat" />
-=======
-            android:textColor="#85000000" />
->>>>>>> fix
+            android:textColor="#85000000"/>
+
+
 
         <Button
             style="@style/spoqa_medium_14"
@@ -68,12 +65,9 @@
             android:onClick="@{()->vi.onClickGoogleLogin()}"
             android:paddingStart="16dp"
             android:text="구글 로그인"
-<<<<<<< HEAD
-            android:textColor="@color/black_all"
             tools:ignore="RtlCompat" />
-=======
             android:textColor="#54000000" />
->>>>>>> fix
+
 
 
     </LinearLayout>

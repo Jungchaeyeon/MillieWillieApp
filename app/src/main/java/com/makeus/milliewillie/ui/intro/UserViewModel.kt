@@ -2,14 +2,8 @@ package com.makeus.milliewillie.ui.intro
 
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.ServiceDetailType
-<<<<<<< HEAD
-import com.makeus.milliewillie.util.Log
-import java.text.DateFormat
-=======
 import java.text.ParseException
->>>>>>> fix
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
@@ -85,18 +79,12 @@ class UserViewModel : BaseViewModel() {
                 ServiceDetailType("육군"), ServiceDetailType("해군"), ServiceDetailType("공군"),
                 ServiceDetailType("해병대")
             )
-<<<<<<< HEAD
-        }
-    fun calculateDay(enlist: String){
-        Log.d(enlist)
-=======
         )
-    }
+        }
 
     fun calculateDay(enlist: String) {
 
         //enlist.showShortToastSafe()
->>>>>>> fix
         //입대일 받아옴
         val getDateFormat = SimpleDateFormat("yyyy.MM.dd")
         val setDateFormat = SimpleDateFormat("yyyy.MM.dd (EE)")

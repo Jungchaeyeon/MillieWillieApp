@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="item"
             type="String" />
-
-        <variable
-            name="vm"
-            type="com.makeus.milliewillie.ui.MakePlanViewModel" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.fragment.PlanTypeBottomSheetDialogFragment" />
+            type="com.makeus.milliewillie.ui.plan.PlanTypeBottomSheetDialogFragment" />
 
     </data>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
         <Button
-            style="@style/spoqa_medium_14"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:paddingVertical="15dp"
-            android:paddingHorizontal="39dp"
             android:layout_margin="4dp"
-            android:background="@drawable/item_grid_8"
+            android:background="@drawable/item_stroke_8"
             android:textColor="@color/black"
             android:gravity="center"
             android:text="@{item}"
-            android:onClick="@{()->vi.onClickItem(item)}"
-            tools:text="육군" />
+            android:onClick="@{()->vi.onClickDate(item)}"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:textSize="14sp"
+            style="?android:attr/borderlessButtonStyle"
+            tools:text="휴가" />
 
 
     </LinearLayout>

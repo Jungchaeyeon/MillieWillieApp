@@ -7,13 +7,13 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroGoalActivity" />
+            type="com.makeus.milliewillie.ui.intro.IntroGoalActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.IntroGoalActivity">
+        tools:context=".ui.intro.IntroGoalActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.dDay.certification.CertificationFragment" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/d_day_certi_layout_date"
+            android:onClick="@{()-> vi.onClickDdayDate()}"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/d_day_certi_text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:text="@string/start_date"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/d_day_certi_text_date_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40dp"
+                android:layout_toEndOf="@+id/d_day_certi_text_date"
+                android:backgroundTint="@color/non"
+                android:text="@{vm.liveDataToday}"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/d_day_certi_text_date_info"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_toStartOf="@+id/d_day_certi_img_date_arrow"
+                android:text="@{vm.liveDataTodayInfo}"
+                android:textColor="@color/gray" />
+
+            <ImageView
+                android:id="@+id/d_day_certi_img_date_arrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/icon_left" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/d_day_certi_text_link"
+                android:layout_width="26dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="24dp"
+                android:layout_centerVertical="true"
+                android:text="@string/link"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/d_day_certi_edit_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="30dp"
+                android:layout_toEndOf="@+id/d_day_certi_text_link"
+                android:backgroundTint="@color/non"
+                android:hint="@string/link_hint"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:onClick="@{()-> vi.setOnClickLocation()}"
+            >
+
+            <TextView
+                android:id="@+id/d_day_certi_text_location"
+                android:layout_width="26dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="24dp"
+                android:layout_centerVertical="true"
+                android:text="@string/location"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/d_day_certi_edit_location"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginEnd="4dp"
+                android:layout_toStartOf="@+id/d_day_certi_img_location_arrow"
+                android:layout_centerVertical="true"
+                android:text="@string/location_info"
+                android:textColor="@color/gray"
+                />
+
+            <ImageView
+                android:id="@+id/d_day_certi_img_location_arrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_left"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/d_day_certi_text_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginStart="24dp"
+                android:layout_centerVertical="true"
+                android:text="@string/something_for_do"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/d_day_certi_todo_recycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/fragment_d_day_recycler_item"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/d_day_certi_todo_recycler"
+                >
+
+                <CheckBox
+                    android:id="@+id/d_day_certi_checkbox"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/d_day_certi_edit_todo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@+id/d_day_certi_checkbox"
+                    android:layout_centerVertical="true"
+                    android:backgroundTint="@color/non"
+                    android:hint="@string/todo_add"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

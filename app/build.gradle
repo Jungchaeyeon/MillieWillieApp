@@ -141,9 +141,13 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
+    implementation files('libs/libDaumMapAndroid.jar')
 
-    //colorpicker
-    implementation "petrov.kristiyan:colorpicker-library:$colorPickerVersion"
+    //calendar picker
+    implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarpickerVersion"
+
+    //calendar
+    implementation "com.github.prolificinteractive:material-calendarview:$calendarVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"

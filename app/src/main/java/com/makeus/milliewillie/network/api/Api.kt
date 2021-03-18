@@ -21,10 +21,12 @@ interface Api {
 //        @Query("_type") _type : String = "json"
 //    ) : Observable<GallerySearch>
 
+
 //    @POST("user/login")
 //    fun login(
 //        @Body userData: UserInfo.Data = UserInfo.Data()
-//    ): Single<UserInfo>
+//    ): Sin
+//    gle<UserInfo>
 //
 //    @GET("v1/nid/me")
 //    fun naverLogin(

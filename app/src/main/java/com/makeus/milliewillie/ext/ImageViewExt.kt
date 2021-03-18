@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ext
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -10,8 +11,7 @@ fun ImageView.setImage(Image: Int) {
     this.setImageResource(Image)
 }
 
-
-@BindingAdapter("app:loadUrl")
+@BindingAdapter("loadUrl")
 fun ImageView.loadUrl(url: String?) {
     if (url.isNullOrEmpty()) {
         return

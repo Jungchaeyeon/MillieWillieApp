@@ -6,13 +6,17 @@
 
         <variable
             name="vi"
-            type="com.makeus.testmilliewillie.ui.bottom_navi_fragment.InfoFragment" />
+            type="com.makeus.milliewillie.ui.home.tab4.InfoFragment" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.bottom_navi_fragment.activity_emotion_fragment">
+
+
+
 
     </LinearLayout>
 </layout>

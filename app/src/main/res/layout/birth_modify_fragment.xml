@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.mypage.MyPageBirthFragment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.7"
+            android:background="#CC000000">
+
+            <TextView
+                android:id="@+id/title_modify"
+                style="@style/spoqa_medium_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="221dp"
+                android:text="@{vm.liveModifyTitle}"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/edit_txt"
+                style="@style/MatchWrap_24"
+                android:layout_marginTop="258dp"
+                android:backgroundTint="@color/white"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:singleLine="true"
+                android:text="@={vm.liveEditData}"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <DatePicker
+                    android:id="@+id/dpSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rect_radius_top"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner" />
+
+                <TextView
+                    android:id="@+id/btn_cancle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:onClick="@{()->vi.onClickCancel()}"
+                    android:padding="15dp"
+                    android:text="취소" />
+
+                <TextView
+                    android:id="@+id/btn_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{()->vi.onClickOk()}"
+                    android:padding="15dp"
+                    android:text="완료"
+                    android:textColor="@color/black_all" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.MainActivity" />
+
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.MainViewModel" />
@@ -18,63 +20,120 @@
         android:layout_height="match_parent"
         tools:context=".View.MainActivity">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f2f2f2"
-                android:elevation="1dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:elevation="1dp" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/alpha90"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:background="#66000000"
+            android:visibility="invisible"
+            android:onClick="@{()->vi.fabAction()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/fab_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:onClick="@{(view)->vi.onClick(view)}"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/fab_dday"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:text="@string/makeplan"
+                android:textColor="@color/white"
+                tools:text="일정만들기" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_plan"
                 style="@style/FloatingBtn"
-                android:layout_marginBottom="230dp"
-                android:onClick="@{(view)->vi.onClick(view)}"
-                android:src="@drawable/ic_icon_pencil"
-                android:visibility="invisible"
+                android:src="@drawable/icon_floating_plan"
                 app:backgroundTint="@color/white"
                 app:elevation="6dp"
+                app:fabCustomSize="60dp"
+                app:fabSize="auto"
+                app:maxImageSize="45dp"
                 app:pressedTranslationZ="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fab_dday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:onClick="@{(view)->vi.onClick(view)}"
+            app:layout_constraintBottom_toTopOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:text="@string/makedday"
+                android:textColor="@color/white" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_dday"
                 style="@style/FloatingBtn"
-                android:layout_marginBottom="170dp"
-                android:onClick="@{(view)->vi.onClick(view)}"
-                android:src="@drawable/ic_dday"
-                android:visibility="invisible"
+                android:src="@drawable/ic_floating_dday"
                 app:backgroundTint="@color/black_all"
                 app:elevation="6dp"
+                app:fabCustomSize="60dp"
+                app:fabSize="auto"
+                app:maxImageSize="45dp"
                 app:pressedTranslationZ="12dp" />
+        </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                style="@style/FloatingBtn"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="90dp"
-                android:backgroundTint="@color/aqua_blue"
-                android:onClick="@{(view)->vi.onClick(view)}"
-                app:elevation="6dp"
-                app:pressedTranslationZ="12dp"
-                android:src="@drawable/ic_add" />
-        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/FloatingBtn"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/aqua_blue"
+            android:onClick="@{(view)->vi.onClick(view)}"
+            android:src="@drawable/ic_add"
+            app:elevation="6dp"
+            app:fabCustomSize="60dp"
+            app:fabSize="auto"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/navigation_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="30dp"
+            app:pressedTranslationZ="12dp" />
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:itemIconTint="@color/bottom_navi_item_selector"
+            android:background="@drawable/rect_radius_top"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

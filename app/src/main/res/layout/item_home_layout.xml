@@ -4,7 +4,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.bottom_navi_fragment.HomeFragment" />
+            type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
         <variable
             name="item"
             type="com.makeus.milliewillie.model.MainSchedule" />
@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="40dp"
+            android:onClick="@{()->vi.onClickMyPage()}">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -158,28 +158,37 @@
 
         <LinearLayout
             style="@style/MatchWrap_24"
+            android:layout_height="30dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:onClick="@{()->vi.onClickCalendar()}">
 
             <TextView
                 style="@style/spoqa_medium_14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:text="3월10일"
-                android:textColor="@color/black_all" />
-
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_down" />
+                android:textAlignment="viewStart"
+                android:drawableEnd="@drawable/ic_down"
+                android:text="3월10일"
+                android:textColor="@color/black_all" />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-
         </LinearLayout>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendar_view"
+            android:background="@drawable/rect_radius_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="3dp"
+            app:mcv_headerTextAppearance="@style/spoqa_medium_16"
+            app:mcv_showOtherDates="all"
+            app:mcv_selectionColor="#70333333"
+            android:visibility="gone" />
+
 
         <LinearLayout
             android:id="@+id/txt_blank"
@@ -188,7 +197,7 @@
             android:layout_marginTop="25dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -200,6 +209,5 @@
                 android:layout_height="wrap_content"
                 android:text="@string/blank_message2" />
         </LinearLayout>
-
     </LinearLayout>
 </layout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.Html" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+        <variable
+            name="item"
+            type="Integer" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.ColorPickerBottomSheetFragment" />
+    </data>
+
+    <LinearLayout
+        style="@style/BottomLayout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/spoqa_bold_22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="5dp"
+                android:text="@string/plan_color"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/apricot"
+                android:onClick="@{()->vi.onClickColor(@string/apricot)}"/>
+
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/pink"
+                android:onClick="@{()->vi.onClickColor(@string/pink)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/light_greenish_blue"
+                android:onClick="@{()->vi.onClickColor(@string/light_greenish_blue)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/aqua_blue"
+                android:onClick="@{()->vi.onClickColor(@string/bright_aqua)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/faded_blue"
+                android:onClick="@{()->vi.onClickColor(@string/faded_blue)}"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_horizontal">
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/dodger_blue"
+                android:onClick="@{()->vi.onClickColor(@string/dodger_blue)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/periwinkle"
+                android:onClick="@{()->vi.onClickColor(@string/periwinkle)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/silver"
+                android:onClick="@{()->vi.onClickColor(@string/silver)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/cool_grey"
+                android:onClick="@{()->vi.onClickColor(@string/cool_grey)}"/>
+
+            <View
+                style="@style/ColorPickerItem"
+                android:background="@drawable/oval_30"
+                android:backgroundTint="@color/steel_grey"
+                android:onClick="@{()->vi.onClickColor(@string/steel_grey)}"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

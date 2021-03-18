@@ -5,7 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
+import com.makeus.milliewillie.ui.MainActivity
+import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
+import com.makeus.milliewillie.ui.map.MapActivity
+import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
+import com.makeus.milliewillie.ui.intro.*
+import com.makeus.milliewillie.ui.login.LoginActivity
+import com.makeus.milliewillie.ui.mypage.MyPageActivity
+import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
+import com.makeus.milliewillie.ui.plan.MakePlanActivity
+import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
 import java.util.*
 
 /**
@@ -28,14 +38,23 @@ class ActivityNavigator private constructor(private val context: Context) {
     val stack: ArrayList<Intent> = ArrayList()
 
     fun main(isClear: Boolean = true) = MyIntent(MainActivity::class.java, isClear)
+
+    fun dDay(isClear: Boolean = true) = MyIntent(DdayActivity::class.java)
+
+
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
-    fun name(isClear: Boolean = true) = MyIntent(IntroSettingNameActivity::class.java, isClear)
+    fun name() = MyIntent(IntroSettingNameActivity::class.java)
     fun type() = MyIntent(IntroServiceTypeActivity::class.java)
     fun typedetail() = MyIntent(IntroServiceTypeDetailActivity::class.java)
     fun enlist1() = MyIntent(IntroEnlistDateSoldierActivity::class.java)
     fun enlist2() = MyIntent(IntroEnlistDateSergeantActivity::class.java)
     fun goal() = MyIntent(IntroGoalActivity::class.java)
+    fun map() = MyIntent(MapActivity::class.java)
+    fun routine() = MyIntent(MakeRoutineActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
+    fun plancalendar() = MyIntent(PlanCalendarActivity::class.java)
+    fun mypage() = MyIntent(MyPageActivity::class.java)
+    fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
 
     inner class MyIntent : Intent {
 

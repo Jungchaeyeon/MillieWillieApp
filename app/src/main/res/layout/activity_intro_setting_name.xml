@@ -6,7 +6,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.IntroSettingNameActivity" />
+            type="com.makeus.milliewillie.ui.intro.IntroSettingNameActivity" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.IntroSettingNameActivity">
+        tools:context=".ui.intro.IntroSettingNameActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:backgroundTint="@color/aqua_blue"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="폰군인"
+                android:hint="이름/닉네임을 입력해주세요."
                 android:inputType="text">
 
                 <requestFocus />

@@ -4,10 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
-        <variable
-            name="vi"
-            type="com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment" />
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel" />

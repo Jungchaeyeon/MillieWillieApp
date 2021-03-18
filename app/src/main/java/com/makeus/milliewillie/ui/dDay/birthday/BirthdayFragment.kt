@@ -21,21 +21,9 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
 
     @SuppressLint("ClickableViewAccessibility")
     override fun FragmentDDayBirthdayBinding.onBind() {
-        vi = this@BirthdayFragment
         vm = viewModel
-//        viewModel.bindLifecycle(this@BirthdayFragment)
 
         dDayBirthTodoRecycler.run {
-//            this.setOnClickListener {
-//                Log.e("recycler clicked")
-//            }
-            this.setOnTouchListener { v, event ->
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    Log.e("touch")
-                    true
-                }
-                false
-            }
             adapter = BaseDataBindingRecyclerViewAdapter<DdayCheckList>()
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<DdayCheckList, FragmentDDayRecyclerItemBinding>(R.layout.fragment_d_day_recycler_item) {
@@ -43,25 +31,16 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
                         item = it
                     }
                 )
-//
-//            BaseDataBindingRecyclerViewAdapter<DdayCheckList>().itemClick = object : BaseDataBindingRecyclerViewAdapter.MyItemClickListener {
-//                override fun onItemClick(view: View, position: Int) {
-//                    Log.e("item clicked")
-//                }
-//
-//            }
-
         }
 
         binding.dDayBirthEditTodo.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (binding.dDayBirthEditTodo.text.toString().isNotEmpty()) {
-                    viewModel.addItem(binding.dDayBirthEditTodo.text.toString())
 
-                    viewModel.checkItemList.observe(this@BirthdayFragment, Observer {
-                        viewModel.defaultCheckItemList()
-//                        Log.e("observe")
-                    })
+                    viewModel.addItem(DdayCheckList(binding.dDayBirthEditTodo.text.toString()))
+
+                    //래디님 이거 Observer 필요없네요!!
+                    //enter누르면 추가하게끔 해놓았어요. Observer필요하시면 정의해주세요!
                 }
                 return@setOnKeyListener true
             }

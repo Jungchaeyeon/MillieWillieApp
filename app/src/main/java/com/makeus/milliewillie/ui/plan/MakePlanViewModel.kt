@@ -16,28 +16,31 @@ class MakePlanViewModel : BaseViewModel() {
 
     val livePlanTypeList = MutableLiveData<List<String>>()
     val livePlanType = MutableLiveData<String>().apply { value = " 일정" }
-    val livePlanColor = MutableLiveData<String>().apply { value="#8a6fff" }
+    val livePlanColor = MutableLiveData<String>().apply { value = "#8a6fff" }
     val livePlanTodoList = MutableLiveData<MutableList<Plan.Todos>>()
     val liveDayAndNight = MutableLiveData<String>()
     val liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
-    val liveGoalData=MutableLiveData<String>()
+    val liveGoalData = MutableLiveData<String>()
 
     // 메인 일정 recyclerview itemlist
-    val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply { this.postValue(arrayListOf(
-        MainSchedule()
-    )) }
-    var planitems= ArrayList<MainSchedule>()
+    val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply {
+        this.postValue(
+            arrayListOf(
+                MainSchedule()
+            )
+        )
+    }
+    var planitems = ArrayList<MainSchedule>()
 
     fun additem(item: MainSchedule) {
-        //planitems.size.toString().showShortToastSafe()
-        if(planitems.size ==0){
-            planitems.add(0,MainSchedule())
+
+        if (planitems.size == 0) {
+            planitems.add(0, MainSchedule())
             planitems.add(item)
-            liveMainPlan.value=planitems
-        }
-        else{
-        planitems.add(item)
-        liveMainPlan.value=planitems
+            liveMainPlan.value = planitems
+        } else {
+            planitems.add(item)
+            liveMainPlan.value = planitems
         }
     }
 
@@ -45,6 +48,7 @@ class MakePlanViewModel : BaseViewModel() {
         planitems.remove(item)
         liveMainPlan.value = planitems
     }
+
     fun notifyChange() {
         val items: ArrayList<MainSchedule>? = liveMainPlan.value
         liveMainPlan.value = items
@@ -67,7 +71,6 @@ class MakePlanViewModel : BaseViewModel() {
             )
         )
     }
-
 
 
 }

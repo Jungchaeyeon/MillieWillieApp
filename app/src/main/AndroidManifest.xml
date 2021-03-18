@@ -17,10 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.MainCalendarActivity"></activity>
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".ui.mypage.MyPageActivity" />
         <activity android:name=".ui.plan.PlanCalendarActivity" />
 
@@ -41,13 +41,12 @@
                     android:scheme="${KAKAO_OAUTH_APP_KEY}" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.intro.WelcomeActivity" >
-        </activity>
+        <activity android:name=".ui.intro.WelcomeActivity"></activity>
         <activity android:name=".ui.login.LoginActivity">
         </activity>
-        <activity android:name=".ui.plan.MakePlanActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
+        <activity
+            android:name=".ui.plan.MakePlanActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,13 +56,10 @@
         </activity>
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity android:name=".ui.intro.IntroServiceTypeActivity" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".ui.intro.IntroServiceTypeActivity"></activity>
         <activity android:name=".ui.intro.IntroServiceTypeDetailActivity" />
-        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity" >
-        </activity>
+        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity"></activity>
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
         <activity android:name=".ui.intro.IntroGoalActivity" />
     </application>

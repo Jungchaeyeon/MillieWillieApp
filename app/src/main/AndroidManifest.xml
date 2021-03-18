@@ -46,27 +46,22 @@
         </activity>
 
         <activity android:name=".ui.intro.WelcomeActivity">
-
         </activity>
-        <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.plan.MakePlanActivity" />
-
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.login.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.plan.MakePlanActivity" />
+
+        <activity android:name=".ui.MainActivity">
+        </activity>
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
-        <activity android:name=".ui.intro.WelcomeActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".ui.login.LoginActivity"
-            tools:ignore="DuplicateActivity" />
-
         <activity android:name=".ui.dDay.DdayActivity" />
         <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.routine.MakeRoutineActivity" />

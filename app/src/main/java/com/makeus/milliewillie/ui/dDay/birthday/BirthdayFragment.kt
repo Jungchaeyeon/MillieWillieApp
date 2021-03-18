@@ -11,6 +11,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentDDayBirthdayBinding
 import com.makeus.milliewillie.databinding.FragmentDDayRecyclerItemBinding
 import com.makeus.milliewillie.model.DdayCheckList
+import com.makeus.milliewillie.model.KakaoLogin
 import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -39,8 +40,6 @@ class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.l
 
                     viewModel.addItem(DdayCheckList(binding.dDayBirthEditTodo.text.toString()))
 
-                    //래디님 이거 Observer 필요없네요!!
-                    //enter누르면 추가하게끔 해놓았어요. Observer필요하시면 정의해주세요!
                 }
                 return@setOnKeyListener true
             }

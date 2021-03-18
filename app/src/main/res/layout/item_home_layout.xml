@@ -66,9 +66,9 @@
                     style="@style/spoqa_medium_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:includeFontPadding="false"
-                    android:layout_gravity="center_vertical"
                     android:text="폰군인"
                     android:textColor="@color/black_all"
                     android:textSize="18sp" />
@@ -87,7 +87,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@{vi.classImg}"/>
+                    android:background="@{vi.classImg}" />
 
                 <TextView
                     style="@style/spoqa_regular_12"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{vi.monthDDay}"
                     android:textColor="@color/black_all"
-                    tools:text="D - 23"/>
+                    tools:text="D - 23" />
 
                 <View
                     android:layout_width="wrap_content"
@@ -148,37 +148,41 @@
                     android:layout_height="wrap_content"
                     android:text="@{vi.nextDDay}"
                     android:textColor="@color/black_all"
-                    tools:text="D - 123"/>
+                    tools:text="D - 123" />
 
             </LinearLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="31dp">
+                android:layout_height="31dp"
+                android:layout_marginTop="8dp">
+
                 <RelativeLayout
                     android:layout_width="29dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center_horizontal|center_vertical"
                     android:background="@drawable/icon_percent_bubble"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/guideline">
-                <TextView
-                    android:id="@+id/txt_now_percent"
-                    android:layout_width="21dp"
-                    android:layout_height="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@{vi.nowPercentStr}"
-                    android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:gravity="center_horizontal|center_vertical"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_now_percent"
+                        android:layout_width="21dp"
+                        android:layout_height="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@{vi.nowPercentStr}"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
                 </RelativeLayout>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
                     setPercent="@{vi.nowPercentFlt}"
+                    app:layout_constraintGuide_percent="0.5"
                     android:layout_width="0dp"
+                    app:layout_constraintGuide_begin="24dp"
                     android:layout_height="0dp"
                     android:orientation="vertical" />
 
@@ -228,7 +232,8 @@
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
                 android:text="@{vm.liveGoalData}"
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                tools:text="토익만 따서 나가자!" />
 
             <View
                 android:layout_width="match_parent"
@@ -266,10 +271,12 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="visible">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/blank_message1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

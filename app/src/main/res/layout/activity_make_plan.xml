@@ -26,12 +26,18 @@
             android:layout_height="40dp"
             android:gravity="center_vertical">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/ic_x"
-                android:onClick="@{()->vi.finish()}" />
+               android:layout_marginStart="15dp">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_x"
+                    android:onClick="@{()->vi.finish()}" />
+            </LinearLayout>
 
             <View
                 android:layout_width="wrap_content"
@@ -247,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@{vm.liveDayAndNight}"/>
+                        android:text="@{vm.liveDayAndNight}" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -286,7 +292,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@{vm.liveDayAndNight}"/>
+                        android:text="@{vm.liveDayAndNight}" />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -501,6 +507,40 @@
                     android:isScrollContainer="true"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rv_memo_list">
+
+                    <CheckBox
+                        android:id="@+id/chkbox_todo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/edt_todo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="@color/non"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/todo_add"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

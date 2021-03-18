@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.plan
 
 import android.graphics.Color
+import android.view.KeyEvent
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.view.*
 import kotlinx.android.synthetic.main.item_plan_todo.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -51,6 +53,18 @@ class MakePlanActivity :
                         vi = this@MakePlanActivity
                         item = it
                     })
+        }
+
+        edtTodo.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (edtTodo.text.toString().isNotEmpty()) {
+
+                   viewModel.addTodo(Plan.Todos(false,edtTodo.text.toString()))
+                   edtTodo.text.clear()
+                }
+                return@setOnKeyListener true
+            }
+            false
         }
         viewModel.liveDayAndNight.observe(
             this@MakePlanActivity,
@@ -167,13 +181,18 @@ class MakePlanActivity :
         } else {
             SampleToast.createToast(context, "일정 생성 완료!")?.show()
             ActivityNavigator.with(this).main().start()
-            viewModel.additem(MainSchedule(plan_title.text.toString(),viewModel.livePlanColor.value.toString()))
+            viewModel.addItem(
+                MainSchedule(
+                    plan_title.text.toString(),
+                    viewModel.livePlanColor.value.toString()
+                )
+
+            )
         }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.requestTodoList()
     }
 }
 

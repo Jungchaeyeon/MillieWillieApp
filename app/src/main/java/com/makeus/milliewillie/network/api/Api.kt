@@ -1,5 +1,9 @@
 package com.makeus.milliewillie.network.api
 
+import com.makeus.milliewillie.model.BaseResponse
+import com.makeus.milliewillie.model.KakaoLogin
+import com.makeus.milliewillie.model.Users
+import com.makeus.milliewillie.model.UsersRequest
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -38,4 +42,21 @@ interface Api {
 //    fun uploadThumbnail(
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
+
+
+    @POST("users/login-kakao")
+    fun kakaoLogin(): Observable<KakaoLogin>
+
+    @POST("users/jwt")
+    fun jwt(): Observable<BaseResponse>
+
+//    @POST("users")
+//    fun users(
+//        @Field("name") name : String
+//    ): Observable<Users>
+
+    @POST("users")
+    fun users(
+        @Body body : UsersRequest
+    ): Observable<Users>
 }

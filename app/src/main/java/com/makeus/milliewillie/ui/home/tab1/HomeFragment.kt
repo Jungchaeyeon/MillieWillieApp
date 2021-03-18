@@ -1,6 +1,5 @@
 package com.makeus.milliewillie.ui.home.tab1
 
-import android.view.MotionEvent
 import android.view.View
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -9,13 +8,13 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentHomeBinding
 import com.makeus.milliewillie.databinding.ItemHomeLayoutBinding
 import com.makeus.milliewillie.databinding.ItemMainScheduleBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.MakePlanViewModel
 import kotlinx.android.synthetic.main.activity_make_plan.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
+import kotlinx.android.synthetic.main.item_plan_todo.view.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -25,7 +24,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     val viewModel by viewModel<MakePlanViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val classImg: Int = 0
-    var dDay =""
+    var dDay = ""
     var nextDDay = ""
     var monthDDay = ""
     var endDate = ""
@@ -51,7 +50,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
 
         rvMemoList.run {
-           // ItemTouchHelper(simpleItemTouchCallback).attachToRecyclerView(this)
+
             adapter = BaseDataBindingRecyclerViewAdapter<MainSchedule>()
                 .setItemViewType { item, position, isLast ->
                     if (position == 0) 0 else 1
@@ -66,22 +65,14 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemMainScheduleBinding>(
                         R.layout.item_main_schedule
                     ) {
-                        if (this@HomeFragment.viewModel.planitems.size >= 2) {
+                        if (this@HomeFragment.viewModel.planItems.size >= 2) {
                             txt_blank.visibility = View.GONE
                         }
                         item = it
                     })
-            rvMemoList.run { object : View.OnTouchListener {
-                override fun onTouch(view: View?, p1: MotionEvent?): Boolean {
-
-                    return true
-                }
-            } }
-
 
         }
     }
-
 
 
     fun setClassImg() {

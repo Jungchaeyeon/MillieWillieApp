@@ -1,9 +1,11 @@
 package com.makeus.milliewillie.network.adapter
 
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class AuthInterceptor : Interceptor {
+class AuthInterceptor(val repositoryCached: RepositoryCached) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
@@ -11,9 +13,10 @@ class AuthInterceptor : Interceptor {
 
         return chain.proceed(
             originalRequest.newBuilder().apply {
-//                if (repositoryCached.getId().isNotEmpty()) {
-//                    header("id", repositoryCached.getId())
-//                }
+                if (repositoryCached.getToken().isNotEmpty()) {
+                    Log.e(repositoryCached.getToken())
+                    header("X-ACCESS-TOKEN", repositoryCached.getToken())
+                }
                 url(url)
                 method(originalRequest.method, originalRequest.body)
             }.build()

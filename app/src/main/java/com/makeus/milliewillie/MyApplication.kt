@@ -1,6 +1,7 @@
 package com.makeus.milliewillie
 
 import android.app.Application
+import android.content.SharedPreferences
 import com.facebook.stetho.Stetho
 import com.kakao.sdk.common.KakaoSdk
 import com.makeus.milliewillie.di.networkModule
@@ -25,6 +26,8 @@ class MyApplication : Application() {
 
         var isFocused = false
 
+        lateinit var sSharedPreferences: SharedPreferences
+        const val MILLI_WILLI = "MILLI_WILLI"
     }
 
     override fun onCreate() {
@@ -49,6 +52,9 @@ class MyApplication : Application() {
 
         // Kakao SDK 초기화
         KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
+
+        sSharedPreferences = applicationContext.getSharedPreferences(MILLI_WILLI, MODE_PRIVATE)
+
     }
 
     override fun onTerminate() {

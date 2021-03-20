@@ -4,13 +4,14 @@ import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
+import com.makeus.milliewillie.util.Log
 import java.util.*
 
 class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<FragmentWorkoutWeightInputBottomSheetBinding>(
     R.layout.fragment_workout_weight_input_bottom_sheet) {
 
-    var goal = ""
-    var currnet = ""
+    private var goal: String = ""
+    private var current: String = ""
 
     private var clickOk: ((String, String) -> Unit)? = null
 
@@ -25,6 +26,7 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
 
     override fun FragmentWorkoutWeightInputBottomSheetBinding.onBind() {
         vi = this@WeightRecordBottomSheetFragment
+
     }
 
 
@@ -33,8 +35,12 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
         return this
     }
 
+
+
     fun onClickOk() {
-        clickOk?.invoke(goal, currnet)
+        goal = binding.wRecordEditGoal.text.toString()
+        current = binding.wRecordEditCurrent.text.toString()
+        clickOk?.invoke(goal, current)
         dismiss()
     }
 

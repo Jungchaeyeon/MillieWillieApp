@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.network.api
 
+import com.makeus.milliewillie.model.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -38,4 +39,25 @@ interface Api {
 //    fun uploadThumbnail(
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
+
+    @POST("calendars/schedule")
+    fun schedule(
+        @Body body: ScheduleRequest
+    ): Observable<Schedule>
+
+    @POST("users/login-kakao")
+    fun kakaoLogin(): Observable<KakaoLogin>
+
+    @GET("users/jwt")
+    fun jwt(): Observable<BaseResponse>
+
+//    @POST("users")
+//    fun users(
+//        @Field("name") name : String
+//    ): Observable<Users>
+
+    @POST("users")
+    fun users(
+        @Body body : UsersRequest
+    ): Observable<Users>
 }

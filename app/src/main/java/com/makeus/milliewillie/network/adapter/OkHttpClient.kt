@@ -3,6 +3,7 @@ package com.makeus.milliewillie.network.adapter
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.makeus.milliewillie.BuildConfig
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -13,7 +14,7 @@ object OkHttpClient {
     private const val WRITE_TIMEOUT = 15L
     private const val READ_TIMEOUT = 15L
 
-    fun createOkHttpClient(): OkHttpClient =
+    fun createOkHttpClient(repositoryCached: RepositoryCached): OkHttpClient =
         OkHttpClient.Builder().apply {
             if (BuildConfig.DEBUG) {
                 addNetworkInterceptor(StethoInterceptor())
@@ -24,6 +25,6 @@ object OkHttpClient {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level =
                     if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-            }).addInterceptor(AuthInterceptor())
+            }).addInterceptor(AuthInterceptor(repositoryCached))
             .build()
 }

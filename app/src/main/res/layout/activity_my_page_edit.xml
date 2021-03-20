@@ -58,7 +58,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:gravity="center"
-                        android:onClick="@{()->vi.finish()}"
+                        android:onClick="@{()->vi.requestUserUpdate()}"
                         android:text="@string/done" />
                 </LinearLayout>
 

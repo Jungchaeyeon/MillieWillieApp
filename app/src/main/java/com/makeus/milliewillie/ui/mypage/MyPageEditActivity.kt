@@ -5,6 +5,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMyPageEditBinding
@@ -40,7 +41,8 @@ class MyPageEditActivity :
     fun onClickType() {
 
     }
-    fun onClickImg(){
+
+    fun onClickImg() {
 
     }
 
@@ -60,19 +62,29 @@ class MyPageEditActivity :
             }.show(supportFragmentManager)
 
     }
-    fun onClickGoal(){
+
+    fun onClickGoal() {
         viewModel.liveModifyTitle.postValue("목표")
         viewModel.liveEditData.postValue(viewModel.liveUserGoal.value)
 
         toModifyPage()
     }
 
-    fun toModifyPage(){
-        mypage_edit_container.visibility=View.VISIBLE
+    fun toModifyPage() {
+        mypage_edit_container.visibility = View.VISIBLE
         supportFragmentManager?.beginTransaction()
             ?.attach(MyPageEditFragment.getInstance())
             ?.replace(R.id.mypage_edit_container, MyPageEditFragment.getInstance())
             ?.addToBackStack(null)?.commit()
     }
 
+    fun requestUserUpdate() {
+        viewModel.requestUserUpdate().subscribe {
+            if (it.isSuccess) {
+                "변경 완료".showShortToastSafe()
+            } else {
+                "변경 실패".showShortToastSafe()
+            }
+        }.disposeOnDestroy(this)
+    }
 }

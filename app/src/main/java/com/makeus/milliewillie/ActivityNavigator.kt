@@ -39,7 +39,7 @@ class ActivityNavigator private constructor(private val context: Context) {
 
     fun main(isClear: Boolean = true) = MyIntent(MainActivity::class.java, isClear)
 
-    fun dDay(isClear: Boolean = true) = MyIntent(DdayActivity::class.java)
+    fun dDay() = MyIntent(DdayActivity::class.java)
 
 
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)

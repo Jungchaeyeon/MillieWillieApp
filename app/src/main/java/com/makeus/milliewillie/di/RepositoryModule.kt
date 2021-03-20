@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<RepositoryCached> { RepositoryDevicePreference(androidContext()) }   //not used
-    single { ApiRepository(get()) }
+    single { ApiRepository(get(), get()) }
 }

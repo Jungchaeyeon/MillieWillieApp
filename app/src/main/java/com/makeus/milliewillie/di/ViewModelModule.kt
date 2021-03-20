@@ -17,8 +17,8 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { LoginViewModel() }
-    viewModel { DdayViewModel() }
+    viewModel { LoginViewModel(get() , get()) }
+    viewModel { DdayViewModel(get()) }
     viewModel { BirthdayViewModel() }
     viewModel { CertificationViewModel() }
     viewModel { NceeViewModel() }
@@ -26,7 +26,7 @@ val viewModelModule = module {
     viewModel { MapViewModel() }
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
-    single { UserViewModel() }
+    single { UserViewModel(get()) }
     viewModel { MainViewModel() }
     single {  MakePlanViewModel() }
     viewModel { WorkoutViewModel() }

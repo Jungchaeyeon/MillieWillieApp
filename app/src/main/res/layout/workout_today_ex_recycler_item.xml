@@ -15,8 +15,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/today_ex_item_border"
+        android:paddingHorizontal="11dp"
+        >
 
         <TextView
             android:id="@+id/today_ex_text_day_of_week"

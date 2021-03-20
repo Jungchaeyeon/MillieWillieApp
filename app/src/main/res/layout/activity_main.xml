@@ -21,7 +21,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/AppTheme"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
@@ -121,10 +120,11 @@
             app:borderWidth="0dp"
             app:elevation="6dp"
             app:fabCustomSize="60dp"
+            android:src="@drawable/icon_floating_plus"
             app:fabSize="auto"
             app:layout_constraintBottom_toTopOf="@+id/navigation_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="60dp"
+            app:maxImageSize="16dp"
             app:pressedTranslationZ="12dp" />
 
 

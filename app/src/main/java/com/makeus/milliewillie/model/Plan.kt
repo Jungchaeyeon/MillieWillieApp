@@ -10,6 +10,7 @@ data class Plan(
         val planType : String=""
     )
     data class Todos(
-        val todo : String=""
+        var boolean: Boolean=false,
+        var todo : String=""
     )
 }

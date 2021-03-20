@@ -3,8 +3,10 @@ package com.makeus.milliewillie.ui.dDay
 import android.view.View
 import android.widget.Toast
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityDDayBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment
 import com.makeus.milliewillie.ui.dDay.certification.CertificationFragment
@@ -37,6 +39,8 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         vi = this@DdayActivity
         vm = viewModel
         viewModel.bindLifecycle(this@DdayActivity)
+
+        requestScheduleApi()
 
         replaceViewFrame(classificationValue)
         binding.dDayBtnAnni.isSelected = true
@@ -72,7 +76,15 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
 
     }
 
-
+    fun requestScheduleApi() {
+        viewModel.requestSchedule().subscribe() {
+            if (it.isSuccess) {
+                "호출 성공".showShortToastSafe()
+            } else {
+                "호출 실패".showShortToastSafe()
+            }
+        }.disposeOnDestroy(this)
+    }
 
     fun setBtnStatus(position: Int){
         when (position) {

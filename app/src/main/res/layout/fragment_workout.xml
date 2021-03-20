@@ -43,7 +43,7 @@
 
         <LinearLayout
             android:id="@+id/workout_layout_weight_record"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="30dp"
@@ -69,11 +69,78 @@
 
         </LinearLayout>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/workout_layout_weight_graph"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/workout_text_today_workout"
+            android:layout_alignParentEnd="true"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/workout_dash"
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:enabled="false"
+                android:visibility="gone"
+                android:background="@color/blue_green"
+                android:layout_marginEnd="4dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:id="@+id/workout_text_goal_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/workout_dash"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:includeFontPadding="false"
+                android:text="@{vm.goalWeightText}"
+                android:textSize="10sp"
+                android:textColor="@color/blue_green"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/workout_layout_graph"
             android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:layout_below="@+id/workout_layout_weight_record" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="24dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/chart_underline"
+            android:layout_below="@+id/workout_layout_weight_record" >
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/workout_layout_weight_graph"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:background="@drawable/workout_chart_background"
+                android:layout_alignParentTop="true"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/workout_recycler_day"
+                replaceAll="@{vm.liveRecordWeightItemList}"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@+id/workout_layout_weight_graph"
+                android:layout_marginEnd="6dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ImageView
+                android:id="@+id/workout_img_add_weight_date"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/workout_layout_weight_graph"
+                android:layout_toEndOf="@+id/workout_recycler_day"
+                android:onClick="@{()-> vi.onClickWeightDateItemAdd()}"
+                android:src="@drawable/icon_add_small" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/workout_layout_today_ex"
@@ -81,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="13dp"
-            android:layout_below="@id/workout_layout_weight_graph"
+            android:layout_below="@+id/workout_layout_graph"
             android:orientation="horizontal">
 
             <TextView
@@ -103,38 +170,44 @@
 
         </LinearLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/workout_recycler_day_of_week"
+            android:id="@+id/workout_recycler_today_routine"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/workout_layout_today_ex"
-            android:orientation="horizontal"
-            replaceAll="@{vm.todayExItemList}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            android:orientation="vertical"
+            replaceAll="@{vm.liveRoutineItemList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <TextView
-            android:id="@+id/workout_text_non_item1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
-            android:layout_below="@id/workout_recycler_day_of_week"
-            android:layout_centerHorizontal="true"
-            android:textSize="12sp"
-            android:textColor="@color/blue_green"
-            android:text="@string/workout_non_item1"/>
 
-        <TextView
-            android:id="@+id/workout_text_non_item2"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_below="@id/workout_text_non_item1"
-            android:layout_centerHorizontal="true"
-            android:textSize="12sp"
-            android:textColor="@color/blue_green"
-            android:text="@string/workout_non_item2"/>
+            android:layout_below="@id/workout_layout_today_ex"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/workout_text_non_item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:textColor="@color/blue_green"
+                android:text="@string/workout_non_item1"/>
+
+            <TextView
+                android:id="@+id/workout_text_non_item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_below="@id/workout_text_non_item1"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:textColor="@color/blue_green"
+                android:text="@string/workout_non_item2"/>
+        </RelativeLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/workout_fab"

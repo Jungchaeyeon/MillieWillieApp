@@ -11,8 +11,6 @@ import java.util.*
 class DatePickerBirthBottomSheetDialogFragment:
     BaseDataBindingBottomSheetFragment<DatepickerBottomSheetBirthBinding>(R.layout.datepicker_bottom_sheet_birth) {
 
-    val liveButton = MutableLiveData<String>()
-
     private var date : String = ""
     private var gapDays : String = ""
 
@@ -29,7 +27,6 @@ class DatePickerBirthBottomSheetDialogFragment:
 
     override fun DatepickerBottomSheetBirthBinding.onBind() {
         vi = this@DatePickerBirthBottomSheetDialogFragment
-        liveButton.postValue(context?.getString(R.string.ok))
 
         val today = Calendar.getInstance()
         dpSpinner.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)) { view, year, month, day ->

@@ -22,6 +22,10 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     private val requestGoogleAuth = 9001
 
+    companion object {
+        var deviceToken: String = ""
+    }
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun ActivityLoginBinding.onBind() {
         vi = this@LoginActivity
@@ -61,6 +65,10 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
+            viewModel.getFcmToken {
+                deviceToken = it
+                Log.e("deviceToken : ${deviceToken}")
+            }
             viewModel.onRequestLoginWithGoogle(this, data) {
                 nextStep(it)
             }
@@ -76,7 +84,8 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     fun onClickKakaoLogin(){
         viewModel.getFcmToken {
-
+            deviceToken = it
+            Log.e("deviceToken : ${deviceToken}")
         }
         viewModel.onClickKakaoLogin(this) {
             nextStep(it)
@@ -93,7 +102,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     fun nextStep(isSuccess : Boolean) {
         if (isSuccess){
-            ActivityNavigator.with(this).name().start()
+            ActivityNavigator.with(this).main().start()
         } else {
             "로그인에 실패했습니다.".showLongToastSafe()
         }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/BottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/record_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/weight_record"
+            android:textColor="@color/black_all"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> vi.onClickCancel()}"
+            android:src="@drawable/vic_icon_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/record_layout_current"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            tools:layout_editor_absoluteX="16dp">
+
+            <EditText
+                android:id="@+id/record_edit_current"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:gravity="end"
+                android:textCursorDrawable="@color/main_col_blu"
+                android:layout_toStartOf="@+id/record_text_kg2"
+                android:background="@drawable/weight_record_edit_background"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/record_text_kg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="kg"
+                android:textColor="@color/black_all" />
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/record_btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/map_btn_border"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:onClick="@{()-> vi.onClickOk()}"
+            app:layout_constraintTop_toBottomOf="@+id/record_layout_current"
+            tools:layout_editor_absoluteX="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,14 +1,18 @@
 package com.makeus.milliewillie.ui.intro
 
 import androidx.lifecycle.MutableLiveData
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.ServiceDetailType
+import com.makeus.milliewillie.model.UsersRequest
+import com.makeus.milliewillie.repository.ApiRepository
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 
-class UserViewModel : BaseViewModel() {
+class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 
     val liveEditData = MutableLiveData<String>()
     val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
@@ -18,18 +22,18 @@ class UserViewModel : BaseViewModel() {
 
     val liveServiceId = MutableLiveData<String>()
     val liveServiceype = MutableLiveData<String>().apply { value = "육군" }
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value=""} }
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = "" } }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 
-    fun enlistDataInit(){
+    fun enlistDataInit() {
         if (liveServiceId.value == "일반병사") {
             calculateDay(today())
-            liveDateButtonList[0].value=today()
-        }else{
+            liveDateButtonList[0].value = today()
+        } else {
 
-            liveDateButtonList[1].value=""
-            liveDateButtonList[2].value=""
+            liveDateButtonList[1].value = ""
+            liveDateButtonList[2].value = ""
         }
 
     }
@@ -80,7 +84,7 @@ class UserViewModel : BaseViewModel() {
                 ServiceDetailType("해병대")
             )
         )
-        }
+    }
 
     fun calculateDay(enlist: String) {
 
@@ -188,15 +192,16 @@ class UserViewModel : BaseViewModel() {
         // Log.e((nowDays/allDays*100).toString(),"값")
         return (nowDays / allDays * 100).toFloat()
     }
-    fun calDday(inputDate: String):Int{
-        var calDateDays: Int=0
+
+    fun calDday(inputDate: String): Int {
+        var calDateDays: Int = 0
         val df = SimpleDateFormat("yyyy.MM.dd (EE)")
 
         try {
             val todayDate = df.parse(today())
             val calDate = df.parse(inputDate)
 
-            var difference= todayDate.time - calDate.time
+            var difference = todayDate.time - calDate.time
             calDateDays = (difference / (24 * 60 * 60 * 1000)).toInt()
             calDateDays = abs(calDateDays)
         } catch (e: ParseException) {
@@ -205,6 +210,20 @@ class UserViewModel : BaseViewModel() {
         return calDateDays
     }
 
-
+    fun requestUserUpdate() =
+        apiRepository.users(
+            UsersRequest(
+                name = "",
+                serveType = "",
+                startDate = "",
+                endDate = "",
+                strPrivate = "",
+                strCorporal = "",
+                strSergeant = "",
+                proDate = "",
+                goal = "",
+                profileImg = ""
+            )
+        )
 }
 

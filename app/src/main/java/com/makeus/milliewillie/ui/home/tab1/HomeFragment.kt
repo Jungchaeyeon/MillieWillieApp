@@ -43,8 +43,9 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
         setClassImg()
         dDay = "D-" + repositoryCached.getDDay()
-        nowPercent = repositoryCached.getMiliDday()
-        nowPercentInt = nowPercent.toInt()
+       // nowPercent = repositoryCached.getMiliDday()
+        nowPercent = "57"
+        nowPercentInt = nowPercent.toInt().plus(2)
         nowPercentFlt = nowPercent.toFloat()?.div(100.0).toFloat()
         nowPercentStr = "$nowPercent%"
 

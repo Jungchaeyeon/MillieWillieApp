@@ -56,7 +56,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.page_emotion -> {
-                    fab.visibility = View.VISIBLE
+                    fab.visibility = View.GONE
                     changeFragment(EmotionFragment.getInstance())
                     return@setOnNavigationItemSelectedListener true
                 }

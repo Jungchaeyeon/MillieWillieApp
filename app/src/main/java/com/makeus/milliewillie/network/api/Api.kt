@@ -47,7 +47,7 @@ interface Api {
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>
 
-    @POST("users/jwt")
+    @GET("users/jwt")
     fun jwt(): Observable<BaseResponse>
 
 //    @POST("users")

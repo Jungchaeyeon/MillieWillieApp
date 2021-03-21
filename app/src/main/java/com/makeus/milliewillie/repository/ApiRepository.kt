@@ -22,6 +22,5 @@ class ApiRepository(
     }
 
     //fun users(name : String) = apiTest.users(name)
-
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest)
 }

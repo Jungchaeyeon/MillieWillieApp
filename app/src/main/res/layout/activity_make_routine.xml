@@ -102,7 +102,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/icon_left" />
+                android:src="@drawable/icon_right" />
         </RelativeLayout>
 
         <RelativeLayout

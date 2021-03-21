@@ -7,6 +7,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,7 +23,7 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 
     val liveServiceId = MutableLiveData<String>()
     val liveServiceype = MutableLiveData<String>().apply { value = "육군" }
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = "" } }
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today()} }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
 
@@ -84,6 +85,40 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
                 ServiceDetailType("해병대")
             )
         )
+    }
+    fun enlistValueTest(): Boolean {
+
+        val cal = Calendar.getInstance()
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+        val firstDate = df.parse(liveDateButtonList[0].value.toString())
+        val prom1Date = df.parse(liveDateButtonList[2].value.toString())
+        val prom2Date = df.parse(liveDateButtonList[3].value.toString())
+        val prom3Date = df.parse(liveDateButtonList[4].value.toString())
+        val endDate = df.parse(liveDateButtonList[1].value.toString())
+
+        Log.e("${cal.time}")
+        Log.e("$firstDate")
+        Log.e("$prom1Date?")
+        Log.e("$prom2Date")
+        Log.e("$prom3Date?")
+        Log.e("$endDate?")
+
+        if (firstDate <= cal.time) {
+            if (firstDate.time < prom1Date.time) {
+                if (prom1Date.time < prom2Date.time) {
+                    if (prom2Date.time < prom3Date.time) {
+                        if (prom3Date.time < endDate.time) {
+                            return true
+                        }
+                        return false
+                    }
+                    return false
+                }
+                return false
+            }
+            return false
+        }
+        return false
     }
 
     fun calculateDay(enlist: String) {
@@ -208,6 +243,11 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 
         }
         return calDateDays
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     fun requestUserUpdate() =

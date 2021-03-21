@@ -147,11 +147,12 @@ dependencies {
     implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarpickerVersion"
 
     //calendar
-    implementation "com.github.prolificinteractive:material-calendarview:$calendarVersion"
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
+
     implementation "com.google.android.material:material:$materialVersion"
 
     //lottie

@@ -53,7 +53,7 @@ buildscript {
 
         lottieVersion ="3.5.0"
 
-        calendarVersion="2.0.1"
+        calendarVersion="1.0.3"
 
         colorPickerVersion ="1.1.10"
 
@@ -71,7 +71,7 @@ buildscript {
     ext {
         //Dev
         appNameDev = "MakeUs-DEV"
-        apiUrlDev = "\"http://shine94.kr/app/\""
+        apiUrlDev = "\"https://shine94.kr/app/\""
         kakaoAppKeyDev = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyDev = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersDev = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]
@@ -79,7 +79,7 @@ buildscript {
 
         //Stage
         appNameStage = "MakeUs-Stage"
-        apiUrlStage = "\"http://shine94.kr/app/\""
+        apiUrlStage = "\"https://shine94.kr/app/\""
         kakaoAppKeyStage = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyStage = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersStage = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]

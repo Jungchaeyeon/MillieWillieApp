@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.intro
 
-import com.makeus.base.activity.BaseDataBindingActivity
+import com.google.android.material.snackbar.Snackbar
+import  com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroEnlistDateSoldierBinding
@@ -30,11 +31,11 @@ class IntroEnlistDateSoldierActivity :
 
     }
 
-    fun onClickDate(position : Int) {
+    fun onClickDate(position: Int) {
         DatePickerBasicBottomSheetDialogFragment.getInstance()
             .setOnClickOk {
                 viewModel.liveDateButtonList[position].postValue(it)
-                if(position==0){
+                if (position == 0) {
                     Log.d(it)
                     viewModel.calculateDay(it)
                 }
@@ -42,11 +43,21 @@ class IntroEnlistDateSoldierActivity :
     }
 
     fun onClickDone() {
-        repositoryCached.setValue(LocalKey.MILIDDAY,viewModel.dischargeDdayPercent().toInt())
-        repositoryCached.setValue(LocalKey.ENDDDAY,viewModel.calDday(btn_discharge.text.toString()).toString())
-//        Log.e(repositoryCached.getDDay(),"EndDDay")
-//        Log.e(repositoryCached.getMiliDday(),"MiliDay")
-        ActivityNavigator.with(this).goal().start()}
+        if (viewModel.enlistValueTest()) {
+            Log.e("실행1")
+            repositoryCached.setValue(
+                LocalKey.ENDDDAY,
+                viewModel.calDday(btn_discharge.text.toString()).toString()
+            )
+            Log.e("실행2")
+            ActivityNavigator.with(this).goal().start()
+        }
+        else{
+            Log.e("실행3")
+            Snackbar.make(this.layout_enlistSet,"날짜 정보가 옳바르지 않습니다.",Snackbar.LENGTH_LONG).show()
+
+        }
+    }
 
     override fun onResume() {
         super.onResume()

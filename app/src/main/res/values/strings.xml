@@ -133,4 +133,7 @@
     <string name="workout_non_item1">아직 생성한 운동루틴이 없습니다.</string>
     <string name="workout_non_item2">추가하기 버튼을 눌러 추가해 보세요!</string>
     <string name="startMW">밀리윌리 시작하기</string>
+    <string name="today">오늘</string>
+    <string name="plz_today_emotion">오늘의 감정을 남겨주세요.</string>
+    <string name="emo_happy">행복해</string>
 </resources>

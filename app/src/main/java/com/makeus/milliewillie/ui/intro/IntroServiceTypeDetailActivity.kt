@@ -54,7 +54,7 @@ class IntroServiceTypeDetailActivity :
 
         //복무 세부 타입 캐시 저장
         repositoryCached.setValue(LocalKey.DETAILTYPE, detailType)
-        viewModel.liveServiceype.postValue(detailType)
+        viewModel.liveServicetype.postValue(detailType)
         if (repositoryCached.getType() == "일반병사") {
             ActivityNavigator.with(this).enlist1().start()
         } else {

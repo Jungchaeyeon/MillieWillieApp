@@ -1,9 +1,6 @@
 package com.makeus.milliewillie.network.api
 
-import com.makeus.milliewillie.model.BaseResponse
-import com.makeus.milliewillie.model.KakaoLogin
-import com.makeus.milliewillie.model.Users
-import com.makeus.milliewillie.model.UsersRequest
+import com.makeus.milliewillie.model.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -58,5 +55,10 @@ interface Api {
     @POST("users")
     fun users(
         @Body body : UsersRequest
+    ): Observable<Users>
+
+    @POST("users/kakao")
+    fun kakao(
+        @Body body : KakaoRequest
     ): Observable<Users>
 }

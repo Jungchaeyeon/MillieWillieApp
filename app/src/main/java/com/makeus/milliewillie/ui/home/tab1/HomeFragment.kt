@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.home.tab1
 
+import android.graphics.Color
 import android.view.View
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -40,7 +41,6 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment
         vm = viewModel
-
         setClassImg()
         dDay = "D-" + repositoryCached.getDDay()
        // nowPercent = repositoryCached.getMiliDday()
@@ -61,6 +61,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                         R.layout.item_home_layout
                     ) {
                         vi = this@HomeFragment
+
                     })
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemMainScheduleBinding>(
@@ -68,6 +69,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                     ) {
                         if (this@HomeFragment.viewModel.planItems.size >= 2) {
                             txt_blank.visibility = View.GONE
+
                         }
                         item = it
                     })

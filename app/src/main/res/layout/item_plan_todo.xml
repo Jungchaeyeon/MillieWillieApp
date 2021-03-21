@@ -6,6 +6,9 @@
         <variable
             name="item"
             type="com.makeus.milliewillie.model.Plan.Todos" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.MakePlanActivity" />
     </data>
 
     <LinearLayout
@@ -35,9 +38,10 @@
             android:textSize="14dp" />
 
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_edit" />
+<!--        <ImageView-->
+<!--            android:id="@+id/test_edit"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            setImage="@{vi.liveSetImage}" />-->
     </LinearLayout>
 </layout>

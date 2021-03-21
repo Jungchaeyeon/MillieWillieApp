@@ -136,4 +136,8 @@
     <string name="today">오늘</string>
     <string name="plz_today_emotion">오늘의 감정을 남겨주세요.</string>
     <string name="emo_happy">행복해</string>
+    <string name="leave">휴가</string>
+    <string name="leftDays">남은일수</string>
+    <string name="leftall">/총</string>
+    <string name="discharge_day">전역일</string>
 </resources>

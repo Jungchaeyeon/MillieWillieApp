@@ -35,7 +35,7 @@ class IntroEnlistDateSoldierActivity :
         DatePickerBasicBottomSheetDialogFragment.getInstance()
             .setOnClickOk {
                 viewModel.liveDateButtonList[position].postValue(it)
-                if (position == 0) {
+                if(position == 0) {
                     Log.d(it)
                     viewModel.calculateDay(it)
                 }

@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    ISMEMBER,
     TOKEN,
     NAME,
     DATE,

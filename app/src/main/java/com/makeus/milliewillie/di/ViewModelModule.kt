@@ -26,7 +26,7 @@ val viewModelModule = module {
     viewModel { MapViewModel() }
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
-    single { UserViewModel(get()) } //추후 수정
+    viewModel { UserViewModel(get()) } //추후 수정
     single {  MakePlanViewModel() }//추후 수정
     viewModel { MainViewModel() }
     viewModel { EmoViewModel() }

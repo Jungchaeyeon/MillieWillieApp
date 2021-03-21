@@ -55,6 +55,8 @@ buildscript {
 
         calendarVersion="1.0.3"
 
+        calendar="1.6.1"
+
         colorPickerVersion ="1.1.10"
 
         lifecyclerVersion="2.2.0"

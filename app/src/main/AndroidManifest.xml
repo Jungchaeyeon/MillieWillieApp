@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MainCalendarActivity"/>
+        <activity android:name=".ui.MainCalendarActivity">
+        </activity>
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
             android:windowSoftInputMode="adjustResize"/>
@@ -53,11 +54,6 @@
 
         <activity android:name=".ui.MainActivity"
          android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
@@ -72,7 +68,13 @@
         <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity">
         </activity>
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
-        <activity android:name=".ui.intro.IntroGoalActivity" />
+        <activity android:name=".ui.intro.IntroGoalActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

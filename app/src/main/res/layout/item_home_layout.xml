@@ -28,6 +28,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="end"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/icon_calendar_off"
             android:onClick="@{()->vi.onClickCalendar()}" />
@@ -42,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="18dp"
                 android:onClick="@{()->vi.onClickMyPage()}">
 
                 <ImageView
@@ -57,15 +58,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:includeFontPadding="false"
-                    android:text="폰군인"
+                    android:text="김군인"
                     android:textColor="@color/black_all"
                     android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/icon_right" />
 
                 <View
                     android:layout_width="0dp"
@@ -87,161 +82,257 @@
 
             </LinearLayout>
 
-            <TextView
-                style="@style/spoqa_bold_22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="17dp"
-                android:text="@{vi.dDay}"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="64dp"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/spoqa_regular_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="3호봉 진급" />
-
-                <TextView
-                    style="@style/spoqa_medium_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{vi.monthDDay}"
-                    android:textColor="@color/black_all"
-                    tools:text="D - 23" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <TextView
-                    style="@style/spoqa_regular_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="상병 진급" />
-
-                <TextView
-                    style="@style/spoqa_medium_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{vi.nextDDay}"
-                    android:textColor="@color/black_all"
-                    tools:text="D - 123" />
-
-            </LinearLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
-                android:layout_marginTop="8dp">
-
-                <RelativeLayout
-                    android:id="@+id/relativeLayout7"
-                    android:layout_width="29dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/icon_percent_bubble"
-                    android:gravity="center_horizontal|center_vertical"
-                    app:layout_constraintEnd_toEndOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/txt_now_percent"
-                        android:layout_width="21dp"
-                        android:layout_height="12dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@{vi.nowPercentStr}"
-                        android:textColor="@color/white"
-                        android:textSize="10sp" />
-                </RelativeLayout>
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline"
-                    setPercent="@{vi.nowPercentFlt}"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="24dp" />
-
-
-                <ProgressBar
-                    android:id="@+id/progressbar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="28dp"
-                    android:max="100"
-                    android:progress="@{vi.nowPercentInt}"
-                    android:progressDrawable="@drawable/progressbar_custom"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/spoqa_regular_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/discharge" />
-
-                <TextView
-                    style="@style/spoqa_regular_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="@{vi.endDate}"
-                    android:textColor="@color/black_all" />
-            </LinearLayout>
-
             <Button
                 style="@style/MatchWrap_24"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
                 android:text="@{vm.liveGoalData}"
                 android:textAlignment="viewStart"
                 tools:text="토익만 따서 나가자!" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="157dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rect_radius_8"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/spoqa_bold_22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="24dp"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0.6sp"
+                    android:text="D-442"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="64dp"
+                    android:layout_marginTop="12dp"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="3호봉 진급" />
+
+                    <TextView
+                        style="@style/spoqa_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{vi.monthDDay}"
+                        android:textColor="@color/black_all"
+                        tools:text="D - 23" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="상병 진급" />
+
+                    <TextView
+                        style="@style/spoqa_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{vi.nextDDay}"
+                        android:textColor="@color/black_all"
+                        tools:text="D - 123" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout7"
+                        android:layout_width="29dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/icon_percent_bubble"
+                        android:gravity="center_horizontal|center_vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/guideline"
+                        app:layout_constraintStart_toStartOf="@id/guideline"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txt_now_percent"
+                            android:layout_width="21dp"
+                            android:layout_height="12dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@{vi.nowPercentStr}"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline"
+                        setPercent="@{vi.nowPercentFlt}"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="24dp" />
+
+
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="28dp"
+                        android:max="100"
+                        android:progress="@{vi.nowPercentInt}"
+                        android:progressDrawable="@drawable/progressbar_custom"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="9dp"
+                        android:text="@string/discharge" />
+
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="22.05.18"
+                        android:textColor="@color/black_all" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rect_radius_8"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/icon_star" />
+
+                    <TextView
+                        style="@style/spoqa_bold_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/leave"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        style="@style/spoqa_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/leftDays" />
+
+                    <TextView
+                        style="@style/spoqa_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/leftall"
+                        android:textColor="@color/text_gray" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_bold_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="0.1"
+                        android:text="24"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        style="@style/spoqa_bold_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="0.1"
+                        android:text="/30"
+                        android:textColor="@color/text_gray"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="2dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/line" />
+                android:background="@color/light_gray" />
 
             <LinearLayout
                 style="@style/MatchWrap_24"
                 android:layout_height="30dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
                 android:onClick="@{()->vi.onClickCalendar()}"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/spoqa_medium_14"
+                    style="@style/spoqa_bold_22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3월10일"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/black_all" />
+                    android:textColor="@color/black_all"
+                    android:textSize="16dp" />
 
                 <View
                     android:layout_width="wrap_content"

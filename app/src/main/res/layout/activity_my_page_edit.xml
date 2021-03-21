@@ -151,7 +151,7 @@
                     android:drawableEnd="@drawable/ic_icon_semo"
                     android:onClick="@{()->vi.onClickType()}"
                     android:paddingHorizontal="10dp"
-                    android:text="@{vm.liveServiceype}"
+                    android:text="@{vm.liveServicetype}"
                     android:textAlignment="viewStart"
                     tools:text="육군" />
 

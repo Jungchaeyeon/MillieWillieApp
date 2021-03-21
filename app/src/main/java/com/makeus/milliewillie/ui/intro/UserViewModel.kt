@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.KakaoRequest
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.ApiRepository
@@ -15,16 +16,17 @@ import kotlin.math.abs
 
 class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 
-    val liveEditData = MutableLiveData<String>()
-    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
     val liveUserName = MutableLiveData<String>().apply { value = "정채연" }
     val liveUserBirth = MutableLiveData<String>().apply { value = "1999.07.21" }
+    val liveServiceId = MutableLiveData<String>()
+    val liveServicetype = MutableLiveData<String>().apply { value = "육군" }
     val liveUserGoal = MutableLiveData<String>().apply { value = "토익만 따서 나가자!" }
 
-    val liveServiceId = MutableLiveData<String>()
-    val liveServiceype = MutableLiveData<String>().apply { value = "육군" }
+    val liveEditData = MutableLiveData<String>()
+    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
     val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today()} }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
+
 
 
     fun enlistDataInit() {
@@ -149,7 +151,7 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         //전역일
         var enlistDate = 0
 
-        when (liveServiceype.value.toString()) {
+        when (liveServicetype.value.toString()) {
             "육군" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
@@ -253,16 +255,32 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
     fun requestUserUpdate() =
         apiRepository.users(
             UsersRequest(
-                name = "",
-                serveType = "",
-                startDate = "",
-                endDate = "",
-                strPrivate = "",
-                strCorporal = "",
-                strSergeant = "",
-                proDate = "",
-                goal = "",
+                name = liveUserName.value.toString(),
+                serveType =liveServicetype.value.toString(),
+                startDate = liveDateButtonList[0].value.toString(),
+                endDate = liveDateButtonList[1].value.toString(),
+                strPrivate = liveDateButtonList[2].value.toString(),
+                strCorporal = liveDateButtonList[3].value.toString(),
+                strSergeant = liveDateButtonList[4].value.toString(),
+                proDate = liveDateButtonList[2].value.toString(),
+                goal = liveUserGoal.value.toString(),
                 profileImg = ""
+            )
+        )
+
+    fun requestKakao() =
+        apiRepository.kakao(
+            KakaoRequest(
+                name = liveUserName.value.toString(),
+                serveType =liveServicetype.value.toString(),
+                stateIdx = liveServiceId.value.toString(),
+                startDate = liveDateButtonList[0].value.toString(),
+                endDate = liveDateButtonList[1].value.toString(),
+                strPrivate = liveDateButtonList[2].value.toString(),
+                strCorporal = liveDateButtonList[3].value.toString(),
+                strSergeant = liveDateButtonList[4].value.toString(),
+                proDate = liveDateButtonList[2].value.toString(),
+                goal = liveUserGoal.value.toString(),
             )
         )
 }

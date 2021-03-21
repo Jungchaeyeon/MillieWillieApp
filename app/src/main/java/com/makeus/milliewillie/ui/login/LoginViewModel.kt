@@ -17,7 +17,6 @@ import com.kakao.sdk.user.rx
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -45,6 +44,7 @@ class LoginViewModel(
                     .build()
             )
         }
+
         return googleSignInClient
     }
 
@@ -140,6 +140,19 @@ class LoginViewModel(
     fun getFcmToken(response: (String) -> Unit) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             response(it.result ?: "")
+        }
+    }
+
+    fun firstCheckJmt(response: (Boolean) -> Unit){
+        if(repositoryCached.getToken().isNotEmpty()){
+            apiRepository.jwt().subscribe ({
+                Log.e("jwt유효한 토큰")
+                response.invoke(true)
+            } , {
+                it.printStackTrace()
+                Log.e("jwt유효하지 않은 토큰")
+                response.invoke(false)
+            }).disposeOnDestroy(this)
         }
     }
 }

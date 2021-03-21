@@ -10,6 +10,7 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.bgTint
+import com.makeus.milliewillie.ext.setImage
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -33,6 +34,7 @@ class MakePlanActivity :
     private val viewModel by viewModel<MakePlanViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val context = this
+    var liveSetImage = 0
 
     companion object {
         fun getInstance() = MakePlanActivity()
@@ -59,8 +61,9 @@ class MakePlanActivity :
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (edtTodo.text.toString().isNotEmpty()) {
 
-                   viewModel.addTodo(Plan.Todos(false,edtTodo.text.toString()))
-                   edtTodo.text.clear()
+                    viewModel.addTodo(Plan.Todos(false, edtTodo.text.toString()))
+                    //  liveSetImage=R.drawable.emo_9_satisfied
+                    edtTodo.text.clear()
                 }
                 return@setOnKeyListener true
             }

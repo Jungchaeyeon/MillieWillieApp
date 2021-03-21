@@ -35,7 +35,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
         viewModel.bindLifecycle(this@MainActivity)
-
+       // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
         fabFastClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close_fast);

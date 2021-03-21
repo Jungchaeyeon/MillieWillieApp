@@ -221,7 +221,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_toStartOf="@+id/d_day_anni_img_date_arrow"
                         android:text="@{vm.liveDataDayGap}"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/text_gray" />
 
                     <ImageView
                         android:id="@+id/d_day_anni_img_date_arrow"

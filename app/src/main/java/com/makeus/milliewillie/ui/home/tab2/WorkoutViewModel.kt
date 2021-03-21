@@ -2,8 +2,12 @@ package com.makeus.milliewillie.ui.home.tab2
 
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.model.WorkoutWeightRecordDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WorkoutViewModel: BaseViewModel() {
     val liveRecordWeightItemList = MutableLiveData<ArrayList<WorkoutWeightRecordDate>>()
@@ -21,6 +25,8 @@ class WorkoutViewModel: BaseViewModel() {
     )
 //    val _routineArrayList = ArrayList<TodayRoutines>()
 
+    var liveDataToday = MutableLiveData<String>().apply { value = "" }
+
     var goalWeight = ""
     val goalWeightText = MutableLiveData<String>().apply { value = goalWeight }
 
@@ -28,6 +34,7 @@ class WorkoutViewModel: BaseViewModel() {
         defaultRecordWeightItemList()
         defaultRoutineItemList()
     }
+
     fun defaultRecordWeightItemList() {
         liveRecordWeightItemList.postValue(recordWeightArrayList)
     }

@@ -24,10 +24,20 @@ class MyApplication : Application() {
 
         fun getString(stringId: Int): String = globalApplicationContext.getString(stringId)
 
-        var isFocused = false
+        fun getStringArg(stringId: Int, arg: String) {
+            String.format(globalApplicationContext.getString(stringId, arg))
+        }
+
+        lateinit var loginType: LOGINTYPE
+        var isEnabledPush: Boolean = true
 
         lateinit var sSharedPreferences: SharedPreferences
         const val MILLI_WILLI = "MILLI_WILLI"
+    }
+
+    enum class LOGINTYPE {
+        KAKAO,
+        GOOGLE
     }
 
     override fun onCreate() {

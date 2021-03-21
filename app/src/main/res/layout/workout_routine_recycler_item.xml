@@ -9,6 +9,12 @@
             name="vi"
             type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
         <variable
+            name="vi_feed"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment" />
+        <variable
+            name="vi_calendar"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+        <variable
             name="item"
             type="com.makeus.milliewillie.model.TodayRoutines" />
 
@@ -25,6 +31,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/routine_list_background"
+            android:onClick="@{()-> vi.onClickItem(3)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +56,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_below="@id/w_routine_text_name"
                 android:layout_toStartOf="@+id/w_routine_img_arrow"
-                android:textColor="@color/blue_green2"
+                android:textColor="@color/maincolor_blue"
                 android:textSize="13sp"
                 android:text="@{item.dayOfWeek}" />
 

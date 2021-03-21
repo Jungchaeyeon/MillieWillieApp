@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vi_parent"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_a_type">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_trans"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/today_calendar_img_goto_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/icon_gotobac"
+                    app:tint="@color/blue_green" />
+
+                <ImageView
+                    android:id="@+id/today_calendar_img_goto_feed"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/icon_list_off" />
+
+            </RelativeLayout>
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="398dp"
+                android:background="@drawable/calendar_background"
+                app:mcv_dateTextAppearance="@style/CalendarDateText"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+                app:mcv_selectionColor="@color/non"
+                app:mcv_leftArrowMask="@drawable/icon_left_reverse"
+                app:mcv_rightArrowMask="@drawable/icon_left"
+                app:mcv_arrowColor="@color/blue_green"
+                app:mcv_headerTextAppearance="@style/CalendarHeaderText"
+                app:mcv_showOtherDates="defaults"
+                app:mcv_tileSize="match_parent" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/calendar">
+
+                <TextView
+                    android:id="@+id/today_calendar_text_today_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/blue_green"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:includeFontPadding="false"
+                    android:text="@{vm.liveDataToday}" />
+
+                <TextView
+                    android:id="@+id/today_calendar_text_today_date_of_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_toEndOf="@id/today_calendar_text_today_date"
+                    android:layout_alignBottom="@+id/today_calendar_text_today_date"
+                    android:textColor="@color/blue_green"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/today"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/today_calendar_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                replaceAll="@{vm.liveRoutineItemList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

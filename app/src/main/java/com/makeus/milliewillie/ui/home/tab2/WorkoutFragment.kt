@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Handler
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -17,7 +18,7 @@ import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.model.WorkoutWeightRecordDate
-import com.makeus.milliewillie.ui.home.tab1.HomeFragment
+import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -51,38 +52,12 @@ class WorkoutFragment :
         vi= this@WorkoutFragment
         vm = viewModel
 
+        todayDate() //오늘 날짜 설정
+
         isInputGoal = false
         SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
-        // 목표체중 유무에 따라 다른 창을 띄움
-        when (isInputGoal) {
-            true -> {
-                WeightAddRecordBottomSheetFragment.getInstance()
-                    .setOnClickOk { weight ->
-                        Log.e(weight)
-                    }.show(fragmentManager!!)
-            }
-            false -> {
-                WeightRecordBottomSheetFragment.getInstance()
-                    .setOnClickOk { goal, current ->
-                        val goalText = String.format(getString(R.string.goal_weight_var, goal))
-                        viewModel.goalWeightText.postValue(goalText)
-                        binding.workoutDash.visibility = View.VISIBLE
-
-                        goalValue = goal.toFloat()
-                        currentValue = current.toFloat()
-                        isInputGoal = true
-                        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
-
-                        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-                        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
-
-                        Handler().postDelayed ({
-                            setLineChart()
-                        },200)
-                    }.show(fragmentManager!!)
-            }
-        }
+        onClickWeightDateItemAdd() // 체중 입력
 
         //라인차트 함수 호출
         setLineChart()
@@ -110,18 +85,66 @@ class WorkoutFragment :
 
     }
 
+    fun todayDate(){
+        val dateInstance = Calendar.getInstance()
+
+        val month = dateInstance.get(Calendar.MONTH)
+        val day = dateInstance.get(Calendar.DAY_OF_MONTH)
+        val dayOfWeek = dateInstance.get(Calendar.DAY_OF_WEEK)
+        var dayOfWeekText = ""
+
+        when (dayOfWeek) {
+            1 -> dayOfWeekText = "일"
+            2 -> dayOfWeekText = "월"
+            3 -> dayOfWeekText = "화"
+            4 -> dayOfWeekText = "수"
+            5 -> dayOfWeekText = "목"
+            6 -> dayOfWeekText = "금"
+            7 -> dayOfWeekText = "토"
+        }
+
+        val today = String.format(getString(R.string.todayDateForm, month, day, dayOfWeekText))
+
+        viewModel.liveDataToday.postValue(today)
+    }
+
     @SuppressLint("StringFormatMatches")
     fun onClickWeightDateItemAdd() {
-        WeightAddRecordBottomSheetFragment.getInstance()
-            .setOnClickOk { weight ->
-                Log.e(weight)
-                val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-                viewModel.addWeightItem(WorkoutWeightRecordDate(weight = weight, date = dateform))
+        // 목표체중 유무에 따라 다른 창을 띄움
+        when (isInputGoal) {
+            true -> {
+                WeightAddRecordBottomSheetFragment.getInstance()
+                    .setOnClickOk { weight ->
+                        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
+                        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = weight, date = dateform))
 
-                Handler().postDelayed ({
-                    setLineChart()
-                },200)
-            }.show(fragmentManager!!)
+                        Handler().postDelayed ({
+                            setLineChart()
+                        },200)
+                    }.show(fragmentManager!!)
+            }
+            false -> {
+                WeightRecordBottomSheetFragment.getInstance()
+                    .setOnClickOk { goal, current ->
+                        val goalText = String.format(getString(R.string.goal_weight_var, goal))
+                        viewModel.goalWeightText.postValue(goalText)
+                        binding.workoutDash.visibility = View.VISIBLE
+
+                        goalValue = goal.toFloat()
+                        currentValue = current.toFloat()
+                        isInputGoal = true
+                        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+
+                        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
+                        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+
+                        Handler().postDelayed ({
+                            setLineChart()
+                        },200)
+                    }.show(fragmentManager!!)
+            }
+        }
+
     }
 
     fun setLineChart() {
@@ -186,25 +209,27 @@ class WorkoutFragment :
             setDrawHighlightIndicators(false)
         }
 
-
         // set data
         binding.workoutLayoutWeightGraph.setData(data)
         binding.workoutLayoutWeightGraph.notifyDataSetChanged()
         binding.workoutLayoutWeightGraph.invalidate()
     }
 
-    fun onClickItem() {
-        val nextFrag = HomeFragment()
-        activity?.supportFragmentManager?.beginTransaction()?.replace(
-            R.id.container,
-            nextFrag,
-            "findThisFragment"
-        )
-            ?.addToBackStack(null)?.commit()
-    }
-
-    fun onClick() {
-        ActivityNavigator.with(context!!).routine().start()
+    fun onClickItem(distinction: Int) {
+        when (distinction) {
+            1 -> { // 체중기록 화면
+                ActivityNavigator.with(this).weightRecord().start()
+            }
+            2 -> { // 오늘의 운동 화면
+                ActivityNavigator.with(this).todayWorkout().start()
+            }
+            3 -> { // 운동 시작 화면
+                ActivityNavigator.with(this).workoutStart().start()
+            }
+            4 -> { // 루틴 만들기 화면
+                ActivityNavigator.with(context!!).routine().start()
+            }
+        }
     }
 
     override fun onResume() {

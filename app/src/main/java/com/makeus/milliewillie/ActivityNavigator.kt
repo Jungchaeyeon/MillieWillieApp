@@ -16,6 +16,9 @@ import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
+import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity
+import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
+import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
 import java.util.*
 
 /**
@@ -56,6 +59,9 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
+    fun workoutStart() = MyIntent(WorkoutStartActivity::class.java)
+    fun todayWorkout() = MyIntent(TodayWorkoutActivity::class.java)
+    fun weightRecord() = MyIntent(WeightRecordActivity::class.java)
 
     inner class MyIntent : Intent {
 

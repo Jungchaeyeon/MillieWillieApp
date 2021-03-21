@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WeightRecordFragment" />
+            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WeightRecordDateOfMonth" />
+            type="com.makeus.milliewillie.model.WeightPerDay" />
 
     </data>
 
@@ -22,7 +22,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0월 0일"
+            android:text="@{item.dayOfMonth}"
             android:textColor="@color/black_all"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:text="@string/middle_dot"
+            android:text="@{item.PMAmount}"
             android:textColor="@color/icon_gray"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

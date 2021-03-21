@@ -55,7 +55,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
-                android:textCursorDrawable="@color/main_col_blu"
+                android:textCursorDrawable="@color/maincolor_blue"
                 android:layout_toStartOf="@+id/record_text_kg2"
                 android:background="@drawable/weight_record_edit_background"
                 android:inputType="number" />

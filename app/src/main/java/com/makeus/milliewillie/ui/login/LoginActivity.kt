@@ -7,6 +7,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.ext.showLongToastSafe
@@ -65,6 +67,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
+            loginType = MyApplication.LOGINTYPE.GOOGLE
             viewModel.getFcmToken {
                 deviceToken = it
                 Log.e("deviceToken : ${deviceToken}")
@@ -83,6 +86,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     }
 
     fun onClickKakaoLogin(){
+        loginType = MyApplication.LOGINTYPE.KAKAO
         viewModel.getFcmToken {
             deviceToken = it
             Log.e("deviceToken : ${deviceToken}")

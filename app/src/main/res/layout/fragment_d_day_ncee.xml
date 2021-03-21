@@ -52,7 +52,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_toStartOf="@+id/d_day_ncee_img_date_arrow"
                 android:text="@{vm.liveDataTodayInfo}"
-                android:textColor="@color/gray" />
+                android:textColor="@color/text_gray" />
 
             <ImageView
                 android:id="@+id/d_day_ncee_img_date_arrow"
@@ -117,7 +117,7 @@
                 android:layout_toStartOf="@+id/d_day_ncee_img_location_arrow"
                 android:layout_centerVertical="true"
                 android:text="@string/location_info"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 />
 
             <ImageView
@@ -190,7 +190,7 @@
                 android:maxLength="20"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="14sp" />
             </RelativeLayout>
 

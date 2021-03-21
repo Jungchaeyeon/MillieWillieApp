@@ -5,7 +5,6 @@ import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.databinding.FragmentDDayCertiRecyclerItemBinding
 import com.makeus.milliewillie.databinding.FragmentDDayNceeBinding
 import com.makeus.milliewillie.databinding.FragmentDDayNceeRecyclerItemBinding
 import com.makeus.milliewillie.model.DdayCheckList
@@ -43,14 +42,12 @@ class NceeFragment: BaseDataBindingFragment<FragmentDDayNceeBinding>(R.layout.fr
             false
         }
 
-
-
     }
 
     fun onClickDdayDate() {
         fragmentManager?.let {
             DatePickerDdayBottomSheetDialogFragment.getInstance()
-                .setOnClickOk {date, gapDay ->
+                .setOnClickOk {date, gapDay, year, month ->
                     viewModel.liveDataToday.postValue(date)
                     viewModel.liveDataTodayInfo.postValue(gapDay)
                 }.show(it)

@@ -6,10 +6,11 @@ import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.ScheduleRequest
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.login.LoginActivity
 import java.util.*
 
-class DdayViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
+class DdayViewModel(val apiRepository: ApiRepository, val repositoryCached: RepositoryCached) : BaseViewModel() {
 
     val liveDataDdayDate = MutableLiveData<String>().apply { value = " " }
 
@@ -26,7 +27,7 @@ class DdayViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         return today.get(Calendar.YEAR).toString() + "년 " + (today.get(Calendar.MONTH) + 1).toString() + "월 "+ today.get(Calendar.DAY_OF_MONTH).toString() + "일"
     }
 
-    val dummyData = ScheduleRequest(color = "빨간색", distinction = "일정", title = "토익 인강듣기", startDate = "2021-03-09", endDate = "2021-03-10", repetition = "월", push = "T", pushDeviceToken = deviceToken)
+//    val dummyData = ScheduleRequest(color = "빨간색", distinction = "일정", title = "토익 인강듣기", startDate = "2021-03-09", endDate = "2021-03-10", repetition = "월", push = "T", pushDeviceToken = deviceToken)
 
 //    fun requestSchedule() {
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener {
@@ -37,7 +38,7 @@ class DdayViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 //
 //    }
 
-    fun requestSchedule() = apiRepository.schedule(dummyData)
+//    fun requestSchedule() = apiRepository.schedule(dummyData)
 
 
 

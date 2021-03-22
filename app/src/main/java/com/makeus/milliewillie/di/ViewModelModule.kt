@@ -22,7 +22,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { LoginViewModel(get() , get()) }
-    viewModel { DdayViewModel(get()) }
+    viewModel { DdayViewModel(get(), get()) }
     viewModel { BirthdayViewModel() }
     viewModel { CertificationViewModel() }
     viewModel { NceeViewModel() }
@@ -33,7 +33,7 @@ val viewModelModule = module {
     single { UserViewModel(get()) }
     viewModel { MainViewModel() }
     single {  MakePlanViewModel() }
-    viewModel { WorkoutViewModel() }
+    viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel() }
     viewModel { WorkoutStartViewModel() }
     viewModel { InfoViewModel() }

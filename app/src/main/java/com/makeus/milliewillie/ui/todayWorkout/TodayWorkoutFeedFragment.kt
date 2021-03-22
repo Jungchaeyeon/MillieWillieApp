@@ -16,7 +16,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
 
     private var isEdit = false
 
-    lateinit var itemView: View
+    var liveDataItemImg = R.drawable.icon_arrow_gotodeep
 
     override fun FragmentTodayWorkoutFeedBinding.onBind() {
         vi = this@TodayWorkoutFeedFragment
@@ -36,12 +36,26 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
                 )
         }
 
-        logTest()
 
     }
 
-    fun logTest() {
-        Log.e("$itemView")
+    fun onClickEdit() {
+        isEdit = !isEdit
+        Log.e(isEdit.toString())
+        when (isEdit) {
+            true -> {
+//                binding.todayFeedTextEdit.setText(R.string.complete)
+                viewModel.liveDataTextEdit.postValue(R.string.complete)
+                liveDataItemImg = R.drawable.icon_delete_btype
+                viewModel.defaultRoutineItemList()
+            }
+            false -> {
+//                binding.todayFeedTextEdit.setText(R.string.edit)
+                viewModel.liveDataTextEdit.postValue(R.string.edit)
+                liveDataItemImg = R.drawable.icon_arrow_gotodeep
+                viewModel.defaultRoutineItemList()
+            }
+        }
     }
 
 

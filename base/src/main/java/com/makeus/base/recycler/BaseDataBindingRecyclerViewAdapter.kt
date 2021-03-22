@@ -1,6 +1,6 @@
 package com.makeus.base.recycler
 
-import android.view.View
+import android.util.Log
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
@@ -68,13 +68,14 @@ class BaseDataBindingRecyclerViewAdapter<T : Any>
 
     override fun getItemCount() = items.size
 
+    var itemPosition = 0
     override fun onBindViewHolder(
         holder: BaseDataBindingViewHolder<T, ViewDataBinding>,
         position: Int
     ) {
         holder.bindData(items[position])
-    }
 
+    }
 
 
 

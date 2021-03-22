@@ -1,7 +1,6 @@
 package com.makeus.milliewillie.repository
 
-import com.makeus.milliewillie.model.ScheduleRequest
-import com.makeus.milliewillie.model.UsersRequest
+import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -27,4 +26,11 @@ class ApiRepository(
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest)
 
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)
+
+    fun getDailyWeight(path: Long) = apiTest.getDailyWeight(path)
+
+    fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
+    fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
+
+    fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
 }

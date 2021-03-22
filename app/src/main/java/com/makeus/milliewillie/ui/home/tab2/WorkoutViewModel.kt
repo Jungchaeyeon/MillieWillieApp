@@ -1,15 +1,17 @@
 package com.makeus.milliewillie.ui.home.tab2
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.model.TodayRoutines
-import com.makeus.milliewillie.model.WorkoutWeightRecordDate
+import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.exerciseId
 import java.util.*
 import kotlin.collections.ArrayList
 
-class WorkoutViewModel: BaseViewModel() {
+class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
     val liveRecordWeightItemList = MutableLiveData<ArrayList<WorkoutWeightRecordDate>>()
     val recordWeightArrayList = ArrayList<WorkoutWeightRecordDate>()
     var liveRecordWeightItemListSize = recordWeightArrayList.size
@@ -35,8 +37,19 @@ class WorkoutViewModel: BaseViewModel() {
         defaultRoutineItemList()
     }
 
+    fun getDailyWeight() = apiRepository.getDailyWeight(exerciseId)
+
+
+
     fun defaultRecordWeightItemList() {
         liveRecordWeightItemList.postValue(recordWeightArrayList)
+    }
+
+    fun createWeightItem(weightItems: ArrayList<DailyWeight>, dateItems: ArrayList<WeightDay>){
+        for (i in 0 until weightItems.size) {
+            recordWeightArrayList.add(WorkoutWeightRecordDate(weight = weightItems[i].dailyWeight, date = dateItems[i].weightDay))
+        }
+        defaultRecordWeightItemList()
     }
 
     fun addWeightItem(item: WorkoutWeightRecordDate) {

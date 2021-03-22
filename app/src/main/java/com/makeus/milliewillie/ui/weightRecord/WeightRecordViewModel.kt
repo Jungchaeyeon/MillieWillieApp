@@ -1,14 +1,11 @@
 package com.makeus.milliewillie.ui.weightRecord
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.MyApplication.Companion.getString
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.WeightPerDay
 import com.makeus.milliewillie.model.WorkoutWeightRecordDate
-import com.makeus.milliewillie.util.Log
 import java.lang.IllegalArgumentException
 import java.util.*
 import kotlin.collections.ArrayList

@@ -2,13 +2,14 @@ package com.makeus.milliewillie.ui.home.tab2
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
@@ -16,9 +17,11 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.PostDailyWeightRequest
+import com.makeus.milliewillie.model.FirstWeightRequest
 import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.model.WorkoutWeightRecordDate
-import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,18 +47,52 @@ class WorkoutFragment :
     companion object {
         fun getInstance() = WorkoutFragment()
         const val IS_GOAL = "IS_GOAL"
+        const val EXERCISE_ID = "EXERCISE_ID"
         var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+        var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1
     }
 
-    @SuppressLint("ResourceAsColor", "StringFormatMatches")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
+    }
+
+    @SuppressLint("ResourceAsColor", "StringFormatMatches", "CheckResult")
     override fun FragmentWorkoutBinding.onBind() {
         vi= this@WorkoutFragment
         vm = viewModel
 
         todayDate() //오늘 날짜 설정
 
-        isInputGoal = false
+        isInputGoal = true
         SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+
+        // 체중 기록 GET 호출
+        viewModel.getDailyWeight().subscribe({
+            if (it.isSuccess) {
+                Log.e("getDailyWeight 호출 성공")
+
+                val goalText = String.format(getString(R.string.goal_weight_var, it.result.goalWeight))
+                viewModel.goalWeightText.postValue(goalText)
+                binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+
+                goalValue = it.result.goalWeight.toFloat()
+                Log.e("goalValue: $goalValue")
+                Log.e("dailyWeightList: ${it.result.dailyWeightList}")
+                Log.e("weightDayList: ${it.result.weightDayList}")
+                viewModel.createWeightItem(it.result.dailyWeightList, it.result.weightDayList)
+
+                setLineChart()
+            } else {
+                Log.e("getDailyWeight 호출 실패")
+                Log.e(it.message)
+            }
+
+        }, {
+            Log.e("getDailyWeight22 호출 실패")
+            Log.e(it.message)
+        })
 
         onClickWeightDateItemAdd() // 체중 입력
 
@@ -115,36 +152,80 @@ class WorkoutFragment :
             true -> {
                 WeightAddRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { weight ->
-                        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-                        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = weight, date = dateform))
+                        viewModel.apiRepository.postDailyWeight(
+                            body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
+                            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+                            .subscribe({
+                                Log.e("호출 성공")
 
-                        Handler().postDelayed ({
-                            setLineChart()
-                        },200)
+                                val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
+                                viewModel.addWeightItem(WorkoutWeightRecordDate(weight = weight, date = dateform))
+
+                                Handler().postDelayed ({
+                                    setLineChart()
+                                },200)
+
+                                "호출 성공".showShortToastSafe()
+                            }, {
+                                Log.e("호출 실패")
+                                Log.e(it.message)
+                                "호출 실패".showShortToastSafe()
+                            }).disposeOnDestroy(this)
                     }.show(fragmentManager!!)
             }
             false -> {
                 WeightRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { goal, current ->
-                        val goalText = String.format(getString(R.string.goal_weight_var, goal))
-                        viewModel.goalWeightText.postValue(goalText)
-                        binding.workoutDash.visibility = View.VISIBLE
+                        viewModel.apiRepository.postFirstWeight(
+                            FirstWeightRequest(
+                                goalWeight = goal.toInt(),
+                                firstWeight = current.toInt()
+                            )
+                        )
+                            .subscribe({
+                                if (it.isSuccess) {
+                                    Log.e("postFirstWeight 성공")
+                                    Log.e(it.isSuccess.toString())
+                                    Log.e(it.code.toString())
+                                    Log.e(it.message)
 
-                        goalValue = goal.toFloat()
-                        currentValue = current.toFloat()
-                        isInputGoal = true
-                        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+                                    drawDailyWeight(goal, current)
 
-                        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-                        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+                                    goalValue = goal.toFloat()
+                                    isInputGoal = true
+                                    SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+                                    SharedPreference.putSettingItem(
+                                        EXERCISE_ID,
+                                        it.result.exerciseId.toString()
+                                    )
 
-                        Handler().postDelayed ({
-                            setLineChart()
-                        },200)
+                                    Handler().postDelayed({
+                                        setLineChart()
+                                    }, 200)
+                                    "호출 성공".showShortToastSafe()
+                                } else {
+                                    Log.e("postFirstWeight 실패")
+                                    Log.e(it.message)
+                                }
+                            }, {
+                                Log.e("호출 실패")
+                                Log.e(it.message)
+                                "호출 실패".showShortToastSafe()
+                            }).disposeOnDestroy(this)
                     }.show(fragmentManager!!)
             }
         }
 
+    }
+
+    fun drawDailyWeight(goal: String, current: String) {
+        Log.e("called drawDailyWeight")
+        val goalText = String.format(getString(R.string.goal_weight_var, goal))
+        viewModel.goalWeightText.postValue(goalText)
+        binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+
+        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
+        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
     }
 
     fun setLineChart() {
@@ -157,21 +238,35 @@ class WorkoutFragment :
             values.add(Entry (i.toFloat(), viewModel.liveRecordWeightItemList.value!![i].weight.toInt().toFloat())) // (x값, y값) // (list size, weight)
         }
 
-        goalWeight.add(Entry(0f, goalValue))
-        goalWeight.add(Entry(5f, goalValue))
-
-        val xAxis = binding.workoutLayoutWeightGraph.xAxis
+        if (goalValue.toInt() != 0) {
+            goalWeight.add(Entry(0f, goalValue))
+            goalWeight.add(Entry(5f, goalValue))
+        }
 
         val set1 = LineDataSet(values, "DataSet 1")
         val set2 = LineDataSet(goalWeight, "GOAL")
 
         val dataSets: ArrayList<ILineDataSet> = ArrayList()
-        dataSets.add(set1) // add the data sets
-        dataSets.add(set2)
+        dataSets.add(set1) // 체중에 대한 data sets
+        dataSets.add(set2) // 목표에 대한 data sets
+
+        set1.apply {
+            color = Color.WHITE
+            setCircleColor(Color.WHITE)
+            valueTextSize = 0.0f
+            setDrawHighlightIndicators(false)
+        }
+
+        set2.apply {
+            color = Color.GRAY
+            valueTextSize = 0.0f
+            setDrawCircles(false)
+            setDrawHighlightIndicators(false)
+        }
 
         // create a data object with the data sets
-        val data = LineData(dataSets)
 
+        val xAxis = binding.workoutLayoutWeightGraph.xAxis
         xAxis.apply {
             setDrawGridLines(false) // 그리드라인 세로선 설정
             setDrawAxisLine(false) // 그리드라인 가로선 설정
@@ -195,20 +290,7 @@ class WorkoutFragment :
             }
         }
 
-        set1.apply {
-            color = Color.WHITE
-            setCircleColor(Color.WHITE)
-            valueTextSize = 0.0f
-            setDrawHighlightIndicators(false)
-        }
-
-        set2.apply {
-            color = Color.GRAY
-            valueTextSize = 0.0f
-            setDrawCircles(false)
-            setDrawHighlightIndicators(false)
-        }
-
+        val data = LineData(dataSets)
         // set data
         binding.workoutLayoutWeightGraph.setData(data)
         binding.workoutLayoutWeightGraph.notifyDataSetChanged()
@@ -234,7 +316,6 @@ class WorkoutFragment :
 
     override fun onResume() {
         super.onResume()
-        viewModel.defaultRecordWeightItemList()
     }
 
 }

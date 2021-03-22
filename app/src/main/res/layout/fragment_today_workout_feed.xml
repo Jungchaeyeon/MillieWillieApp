@@ -41,7 +41,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="7dp"
                 android:gravity="center"
-                android:text="@string/edit"
+                android:onClick="@{()-> vi.onClickEdit()}"
+                android:text="@{vm.liveDataTextEdit}"
                 android:textSize="12sp" />
 
         </RelativeLayout>

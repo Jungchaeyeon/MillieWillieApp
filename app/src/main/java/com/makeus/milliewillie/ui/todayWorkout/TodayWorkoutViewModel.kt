@@ -2,9 +2,12 @@ package com.makeus.milliewillie.ui.todayWorkout
 
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.TodayRoutines
 
 class TodayWorkoutViewModel: BaseViewModel() {
+
+    var liveDataTextEdit = MutableLiveData<Int>().apply { value = R.string.edit }
 
     var liveDataToday = MutableLiveData<String>().apply { value = "" }
 

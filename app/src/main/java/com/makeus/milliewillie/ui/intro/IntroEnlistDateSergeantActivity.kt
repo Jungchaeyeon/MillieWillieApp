@@ -49,7 +49,7 @@ class IntroEnlistDateSergeantActivity :
 
     override fun onResume() {
         super.onResume()
-        viewModel.liveServiceId.postValue("부사관")
+        viewModel.liveServiceId.postValue(2)
         viewModel.enlistDataInit()
     }
 

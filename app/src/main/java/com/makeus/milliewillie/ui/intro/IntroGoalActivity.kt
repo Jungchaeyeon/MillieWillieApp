@@ -33,29 +33,19 @@ class IntroGoalActivity :
 
     fun onClickDone() {
         if (edt_goal.text.isNotEmpty()) {
-            viewModel.liveUserGoal.postValue(edt_goal.text.toString())
-            ActivityNavigator.with(this).main().start()
-            //requestUserUpdate()
+            viewModel.liveUserGoal.value=edt_goal.text.toString()
+            //ActivityNavigator.with(this).main().start()
+            requestUser()
         } else {
             Snackbar.make(this.linearLayout,"목표를 입력해 주세요.",Snackbar.LENGTH_SHORT).show()
         }
     }
-    fun requestKakao() {
-        viewModel.requestKakao().subscribe {
+    fun requestUser() {
+        viewModel.requestUser().subscribe {
             if (it.isSuccess) {
-                "회원가입 완료".showShortToastSafe()
+                "가입 완료".showShortToastSafe()
             } else {
-                "회원가입 실패".showShortToastSafe()
-            }
-        }.disposeOnDestroy(this)
-    }
-    fun requestUserUpdate() {
-        Log.e("1.requestUserUpdate호출")
-        viewModel.requestUserUpdate().subscribe {
-            if (it.isSuccess) {
-                "변경 완료".showShortToastSafe()
-            } else {
-                "변경 실패".showShortToastSafe()
+                "가입 실패".showShortToastSafe()
             }
         }.disposeOnDestroy(this)
     }

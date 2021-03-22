@@ -4,7 +4,9 @@ import java.io.Serializable
 
 data class UsersRequest(
     val name : String,
+    val stateIdx : Int,
     val serveType : String,
+    val birthday : String,
     val startDate : String,
     val endDate : String,
     val strPrivate : String,
@@ -12,5 +14,5 @@ data class UsersRequest(
     val strSergeant : String,
     val proDate : String,
     val goal : String,
-    val profileImg : String
+    val socialType : String
 ) : Serializable

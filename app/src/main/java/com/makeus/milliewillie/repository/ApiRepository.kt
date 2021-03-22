@@ -31,17 +31,9 @@ class ApiRepository(
     fun jwt() = apiTest.jwt().doOnNext{}
 
     //fun users(name : String) = apiTest.users(name)
-    fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext{
-        //header에 token을 jwt로 변경
-        Log.e("2.repository")
-        repositoryCached.setValue(LocalKey.TOKEN , it.jwt)
-    }.switchMap {
-        //jwt API 호출
-        Log.e("3.repository")
-        apiTest.jwt()
-    }
 
-    fun kakao(kakaoRequest: KakaoRequest) = apiTest.kakao(kakaoRequest).doOnNext{
+    //회원가입
+    fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext{
         //header에 token을 jwt로 변경
         repositoryCached.setValue(LocalKey.TOKEN , it.jwt)
     }.switchMap {

@@ -140,4 +140,6 @@
     <string name="leftDays">남은일수</string>
     <string name="leftall">/총</string>
     <string name="discharge_day">전역일</string>
+    <string name="info_mili">복무정보</string>
+    <string name="enlist_day">입대일</string>
 </resources>

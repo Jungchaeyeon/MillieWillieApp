@@ -49,11 +49,18 @@
         <activity android:name=".ui.intro.WelcomeActivity">
         </activity>
         <activity android:name=".ui.login.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.plan.MakePlanActivity" />
 
         <activity android:name=".ui.MainActivity"
          android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.HolidayActivity">
         </activity>
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
@@ -69,11 +76,6 @@
         </activity>
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
         <activity android:name=".ui.intro.IntroGoalActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

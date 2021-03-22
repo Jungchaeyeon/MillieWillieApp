@@ -57,8 +57,4 @@ interface Api {
         @Body body : UsersRequest
     ): Observable<Users>
 
-    @POST("users/kakao")
-    fun kakao(
-        @Body body : KakaoRequest
-    ): Observable<Users>
 }

@@ -105,5 +105,8 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         endDate = repositoryCached.getEnd()
         return endDate.substring(2)
     }
+    fun onClickHoli(){
+        ActivityNavigator.with(this).holiday().start()
+    }
 
 }

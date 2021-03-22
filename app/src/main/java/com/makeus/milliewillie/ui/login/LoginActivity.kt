@@ -68,6 +68,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     }
 
     fun onClickGoogleLogin() {
+        repositoryCached.setValue(LocalKey.SOCIALTYPE, "G")
         startActivityForResult(
             viewModel.getGoogleLoginClient(this)?.signInIntent,
             requestGoogleAuth
@@ -75,6 +76,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     }
 
     fun onClickKakaoLogin() {
+        repositoryCached.setValue(LocalKey.SOCIALTYPE, "K")
         viewModel.getFcmToken {
 
         }

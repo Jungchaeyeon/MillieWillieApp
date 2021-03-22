@@ -8,33 +8,32 @@ import com.makeus.milliewillie.model.KakaoRequest
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 
-class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
+class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: ApiRepository) :
+    BaseViewModel() {
 
-    val liveUserName = MutableLiveData<String>().apply { value = "정채연" }
-    val liveUserBirth = MutableLiveData<String>().apply { value = "1999.07.21" }
-    val liveServiceId = MutableLiveData<String>()
+    val liveUserName = MutableLiveData<String>()
+    val liveUserBirth = MutableLiveData<String>().apply { value = "1999-07-21" }
+    val liveServiceId = MutableLiveData<Int>().apply { value = 1 }
     val liveServicetype = MutableLiveData<String>().apply { value = "육군" }
-    val liveUserGoal = MutableLiveData<String>().apply { value = "토익만 따서 나가자!" }
-
+    val liveUserGoal = MutableLiveData<String>()
     val liveEditData = MutableLiveData<String>()
-    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today()} }
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today() } }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
-
+    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
 
     fun enlistDataInit() {
-        if (liveServiceId.value == "일반병사") {
+        if (liveServiceId.value == 1) {
             calculateDay(today())
             liveDateButtonList[0].value = today()
         } else {
-
             liveDateButtonList[1].value = ""
             liveDateButtonList[2].value = ""
         }
@@ -88,6 +87,7 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
             )
         )
     }
+
     fun enlistValueTest(): Boolean {
 
         val cal = Calendar.getInstance()
@@ -252,36 +252,47 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
 
     }
 
-    fun requestUserUpdate() =
+    //    fun requestUserUpdate() =
+//        apiRepository.users(
+//            UsersRequest(
+//                name = liveUserName.value.toString(),
+//                stateIdx = liveServiceId.value as Int,
+//                serveType =liveServicetype.value.toString(),
+//                startDate = liveDateButtonList[0].value.toString(),
+//                endDate = liveDateButtonList[1].value.toString(),
+//                strPrivate = liveDateButtonList[2].value.toString(),
+//                strCorporal = liveDateButtonList[3].value.toString(),
+//                strSergeant = liveDateButtonList[4].value.toString(),
+//                proDate = liveDateButtonList[2].value.toString(),
+//                goal = liveUserGoal.value.toString(),
+//                socialType =
+//            )
+//        )
+    fun requestUser() =
         apiRepository.users(
             UsersRequest(
                 name = liveUserName.value.toString(),
-                serveType =liveServicetype.value.toString(),
-                startDate = liveDateButtonList[0].value.toString(),
-                endDate = liveDateButtonList[1].value.toString(),
-                strPrivate = liveDateButtonList[2].value.toString(),
-                strCorporal = liveDateButtonList[3].value.toString(),
-                strSergeant = liveDateButtonList[4].value.toString(),
-                proDate = liveDateButtonList[2].value.toString(),
+                stateIdx = liveServiceId.value as Int,
+                serveType = liveServicetype.value.toString(),
+                birthday = liveUserBirth.value.toString(),
+                startDate = dateformat(liveDateButtonList[0].value.toString()),
+                endDate = dateformat(liveDateButtonList[1].value.toString()),
+                strPrivate = dateformat(liveDateButtonList[2].value.toString()),
+                strCorporal = dateformat(liveDateButtonList[3].value.toString()),
+                strSergeant = dateformat(liveDateButtonList[4].value.toString()),
+                proDate = dateformat(liveDateButtonList[2].value.toString()),
                 goal = liveUserGoal.value.toString(),
-                profileImg = ""
+                socialType = repositoryCached.getSocialType()
             )
         )
 
-    fun requestKakao() =
-        apiRepository.kakao(
-            KakaoRequest(
-                name = liveUserName.value.toString(),
-                serveType =liveServicetype.value.toString(),
-                stateIdx = liveServiceId.value.toString(),
-                startDate = liveDateButtonList[0].value.toString(),
-                endDate = liveDateButtonList[1].value.toString(),
-                strPrivate = liveDateButtonList[2].value.toString(),
-                strCorporal = liveDateButtonList[3].value.toString(),
-                strSergeant = liveDateButtonList[4].value.toString(),
-                proDate = liveDateButtonList[2].value.toString(),
-                goal = liveUserGoal.value.toString(),
-            )
-        )
+    fun dateformat(date: String): String {
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+        val dateformat = SimpleDateFormat("yyyy-MM-dd")
+        val resultDate = df.parse(date)
+        Log.e(resultDate.toString(), "parse")
+        return dateformat.format(resultDate)
+    }
+
 }
 

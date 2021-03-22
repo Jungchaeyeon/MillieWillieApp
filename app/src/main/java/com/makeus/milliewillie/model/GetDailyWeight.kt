@@ -1,12 +1,14 @@
 package com.makeus.milliewillie.model
 
+import com.google.gson.JsonArray
+
 class GetDailyWeight(
     val result: Result
 ): BaseResponse() {
     data class Result(
         val goalWeight: String,
-        val dailyWeightList: ArrayList<DailyWeight>,
-        val weightDayList: ArrayList<WeightDay>
+        val dailyWeightList: JsonArray,
+        val weightDayList: JsonArray
     )
 }
 

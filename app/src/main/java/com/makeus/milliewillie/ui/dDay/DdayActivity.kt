@@ -86,16 +86,17 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
     fun requestScheduleApi() {
         val dummyData = ScheduleRequest(color = "빨간색", distinction = "일정", title = "토익 인강듣기", startDate = "2021-03-09", endDate = "2021-03-10", repetition = "월", push = "T", pushDeviceToken = deviceToken)
 
-        viewModel.apiRepository.schedule(dummyData).subscribe({
-            Log.e(it.isSuccess.toString())
-            Log.e(it.message)
-            Log.e(it.code.toString())
-            Log.e(it.result.toString())
-            "호출 성공".showShortToastSafe()
-        },{
-            Log.e(it.message.toString())
-            "호출 실패".showShortToastSafe()
-        }) .disposeOnDestroy(this)
+        viewModel.apiRepository.schedule(dummyData).subscribe{
+            if (it.isSuccess) {
+                Log.e(it.isSuccess.toString())
+                Log.e(it.message)
+                Log.e(it.code.toString())
+                "호출 성공".showShortToastSafe()
+            } else {
+                Log.e(it.message.toString())
+                "호출 실패".showShortToastSafe()
+            }
+        }.disposeOnDestroy(this)
 
 //        viewModel.requestSchedule().subscribe() {
 //            if (it.isSuccess) {

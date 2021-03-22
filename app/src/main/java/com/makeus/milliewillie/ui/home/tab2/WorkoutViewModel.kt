@@ -42,6 +42,7 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 
 
     fun defaultRecordWeightItemList() {
+        liveRecordWeightItemListSize = recordWeightArrayList.size
         liveRecordWeightItemList.postValue(recordWeightArrayList)
     }
 

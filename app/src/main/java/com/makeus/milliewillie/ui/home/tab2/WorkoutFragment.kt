@@ -18,12 +18,10 @@ import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.model.PostDailyWeightRequest
-import com.makeus.milliewillie.model.FirstWeightRequest
-import com.makeus.milliewillie.model.TodayRoutines
-import com.makeus.milliewillie.model.WorkoutWeightRecordDate
+import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
+import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,7 +40,8 @@ class WorkoutFragment :
     val todayMonth = calendar.get(Calendar.MONTH)
     val today = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val weightItemList = ArrayList<String>()
+    val dailyWeightArray = ArrayList<DailyWeight>()
+    val weightDayArray = ArrayList<WeightDay>()
 
     companion object {
         fun getInstance() = WorkoutFragment()
@@ -65,34 +64,41 @@ class WorkoutFragment :
 
         todayDate() //오늘 날짜 설정
 
-        isInputGoal = true
-        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+//        isInputGoal = true
+//        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
         // 체중 기록 GET 호출
-        viewModel.getDailyWeight().subscribe({
-            if (it.isSuccess) {
-                Log.e("getDailyWeight 호출 성공")
+        viewModel.getDailyWeight()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.e(it.isSuccess.toString())
+                if (it.isSuccess) {
+                    Log.e("getDailyWeight 호출 성공")
 
-                val goalText = String.format(getString(R.string.goal_weight_var, it.result.goalWeight))
-                viewModel.goalWeightText.postValue(goalText)
-                binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+                    val goalText = String.format(getString(R.string.goal_weight_var, it.result.goalWeight))
+                    viewModel.goalWeightText.postValue(goalText)
+                    binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
 
-                goalValue = it.result.goalWeight.toFloat()
-                Log.e("goalValue: $goalValue")
-                Log.e("dailyWeightList: ${it.result.dailyWeightList}")
-                Log.e("weightDayList: ${it.result.weightDayList}")
-                viewModel.createWeightItem(it.result.dailyWeightList, it.result.weightDayList)
+                    goalValue = it.result.goalWeight.toFloat()
+                    Log.e("goalValue: $goalValue")
+                    Log.e("dailyWeightList: ${it.result.dailyWeightList}")
+                    Log.e("weightDayList: ${it.result.weightDayList}")
+                    it.result.dailyWeightList.forEach { element ->
+                        dailyWeightArray.add(0, DailyWeight(element.asString))
+                    }
+                    it.result.weightDayList.forEach { element ->
+                        weightDayArray.add(0, WeightDay(element.asString))
+                    }
+                    viewModel.createWeightItem(dailyWeightArray, weightDayArray)
 
-                setLineChart()
-            } else {
-                Log.e("getDailyWeight 호출 실패")
-                Log.e(it.message)
-            }
-
-        }, {
-            Log.e("getDailyWeight22 호출 실패")
-            Log.e(it.message)
-        })
+                    Handler().postDelayed({
+                        setLineChart()
+                    }, 200)
+                } else {
+                    Log.e("getDailyWeight 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this@WorkoutFragment)
 
         onClickWeightDateItemAdd() // 체중 입력
 
@@ -145,44 +151,42 @@ class WorkoutFragment :
         viewModel.liveDataToday.postValue(today)
     }
 
-    @SuppressLint("StringFormatMatches")
     fun onClickWeightDateItemAdd() {
         // 목표체중 유무에 따라 다른 창을 띄움
         when (isInputGoal) {
             true -> {
                 WeightAddRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { weight ->
-                        viewModel.apiRepository.postDailyWeight(
-                            body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
+                        viewModel.apiRepository.postDailyWeight(body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
                             path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
-                            .subscribe({
-                                Log.e("호출 성공")
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                Log.e(it.isSuccess.toString())
+                                if (it.isSuccess) {
+                                    Log.e("호출 성공")
 
-                                val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-                                viewModel.addWeightItem(WorkoutWeightRecordDate(weight = weight, date = dateform))
+                                    drawDailyWeight(goalValue.toString(), weight)
 
-                                Handler().postDelayed ({
-                                    setLineChart()
-                                },200)
+                                    Handler().postDelayed({
+                                        setLineChart()
+                                    }, 200)
 
-                                "호출 성공".showShortToastSafe()
-                            }, {
-                                Log.e("호출 실패")
-                                Log.e(it.message)
-                                "호출 실패".showShortToastSafe()
-                            }).disposeOnDestroy(this)
+                                    "호출 성공".showShortToastSafe()
+                                } else {
+                                    Log.e("호출 실패")
+                                    Log.e(it.message)
+                                    "호출 실패".showShortToastSafe()
+                                }
+                            }.disposeOnDestroy(this)
                     }.show(fragmentManager!!)
             }
             false -> {
                 WeightRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { goal, current ->
-                        viewModel.apiRepository.postFirstWeight(
-                            FirstWeightRequest(
-                                goalWeight = goal.toInt(),
-                                firstWeight = current.toInt()
-                            )
-                        )
-                            .subscribe({
+                        viewModel.apiRepository.postFirstWeight(FirstWeightRequest(goalWeight = goal.toInt(), firstWeight = current.toInt()))
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                Log.e(it.isSuccess.toString())
                                 if (it.isSuccess) {
                                     Log.e("postFirstWeight 성공")
                                     Log.e(it.isSuccess.toString())
@@ -194,10 +198,7 @@ class WorkoutFragment :
                                     goalValue = goal.toFloat()
                                     isInputGoal = true
                                     SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
-                                    SharedPreference.putSettingItem(
-                                        EXERCISE_ID,
-                                        it.result.exerciseId.toString()
-                                    )
+                                    SharedPreference.putSettingItem(EXERCISE_ID, it.result.exerciseId.toString())
 
                                     Handler().postDelayed({
                                         setLineChart()
@@ -206,12 +207,9 @@ class WorkoutFragment :
                                 } else {
                                     Log.e("postFirstWeight 실패")
                                     Log.e(it.message)
+                                    "호출 실패".showShortToastSafe()
                                 }
-                            }, {
-                                Log.e("호출 실패")
-                                Log.e(it.message)
-                                "호출 실패".showShortToastSafe()
-                            }).disposeOnDestroy(this)
+                            }.disposeOnDestroy(this)
                     }.show(fragmentManager!!)
             }
         }
@@ -224,8 +222,13 @@ class WorkoutFragment :
         viewModel.goalWeightText.postValue(goalText)
         binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
 
-        val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth, today))
-        viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+        if (todayMonth < 10) {
+            val dateform = String.format(getString(R.string.date_weight_record_format, "0$todayMonth", today))
+            viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+        } else {
+            val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth.toString(), today))
+            viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+        }
     }
 
     fun setLineChart() {
@@ -234,8 +237,7 @@ class WorkoutFragment :
         val goalWeight = ArrayList<Entry>()
 
         for(i in 0 until viewModel.liveRecordWeightItemListSize){
-            Log.e("${viewModel.liveRecordWeightItemList.value!![i].weight.toInt().toFloat()}")
-            values.add(Entry (i.toFloat(), viewModel.liveRecordWeightItemList.value!![i].weight.toInt().toFloat())) // (x값, y값) // (list size, weight)
+            values.add(Entry (i.toFloat(), viewModel.liveRecordWeightItemList.value!![i].weight.toFloat())) // (x값, y값) // (list size, weight)
         }
 
         if (goalValue.toInt() != 0) {

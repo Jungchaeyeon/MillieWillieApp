@@ -142,7 +142,7 @@
     <string name="weight_record">체중기록</string>
     <string name="goal_weight">목표체중</string>
     <string name="goal_weight_var">목표체중 : %skg</string>
-    <string name="date_weight_record_format">%d/%d</string>
+    <string name="date_weight_record_format">%s/%d</string>
     <string name="current_weight">현재체중</string>
     <string name="todayDateForm">%d월 %d일(%s)</string>
 

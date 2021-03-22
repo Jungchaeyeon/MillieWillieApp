@@ -41,7 +41,6 @@ abstract class RepositoryCached {
     }
 
     fun getToken() = getGeneralValue(LocalKey.TOKEN , "")
-    fun getName() = getValue(LocalKey.NAME , "")
     fun getType() = getValue(LocalKey.TYPE, "")
     fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
     fun getDate() = getValue(LocalKey.DATE, "")

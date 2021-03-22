@@ -1,11 +1,14 @@
 package com.makeus.milliewillie.ui.intro
 
+import android.annotation.SuppressLint
+import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import  com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroEnlistDateSoldierBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
@@ -21,7 +24,11 @@ class IntroEnlistDateSoldierActivity :
     BaseDataBindingActivity<ActivityIntroEnlistDateSoldierBinding>(R.layout.activity_intro_enlist_date_soldier) {
 
     private val viewModel by viewModel<UserViewModel>()
-    val repositoryCached by inject<RepositoryCached>()
+
+    override fun setupProperties(bundle: Bundle?) {
+        super.setupProperties(bundle)
+        viewModel.usersRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as UsersRequest
+    }
 
     override fun ActivityIntroEnlistDateSoldierBinding.onBind() {
         vi = this@IntroEnlistDateSoldierActivity
@@ -35,8 +42,16 @@ class IntroEnlistDateSoldierActivity :
         DatePickerBasicBottomSheetDialogFragment.getInstance()
             .setOnClickOk {
                 viewModel.liveDateButtonList[position].postValue(it)
+
+                when(position){
+                    1-> viewModel.usersRequest.endDate = viewModel.dateChangeTest(it)
+                    2-> viewModel.usersRequest.strPrivate = viewModel.dateChangeTest(it)
+                    3-> viewModel.usersRequest.strCorporal = viewModel.dateChangeTest(it)
+                    4 -> viewModel.usersRequest.strSergeant = viewModel.dateChangeTest(it)
+                }
+
                 if(position == 0) {
-                    Log.d(it)
+                    viewModel.usersRequest.startDate=viewModel.dateChangeTest(it)
                     viewModel.calculateDay(it)
                 }
             }.show(supportFragmentManager)
@@ -44,23 +59,18 @@ class IntroEnlistDateSoldierActivity :
 
     fun onClickDone() {
         if (viewModel.enlistValueTest()) {
-            Log.e("실행1")
-            repositoryCached.setValue(
-                LocalKey.ENDDDAY,
                 viewModel.calDday(btn_discharge.text.toString()).toString()
-            )
-            Log.e("실행2")
-            ActivityNavigator.with(this).goal().start()
+
+            ActivityNavigator.with(this).goal(viewModel.usersRequest).start()
         }
         else{
-            Log.e("실행3")
             Snackbar.make(this.layout_enlistSet,"날짜 정보가 옳바르지 않습니다.",Snackbar.LENGTH_LONG).show()
-
         }
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.enlistDataInit()
+        viewModel.usersRequest
     }
 }

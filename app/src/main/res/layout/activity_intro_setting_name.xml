@@ -79,7 +79,6 @@
                 android:textCursorDrawable="@drawable/edittext_cursor"
                 android:focusableInTouchMode="true"
                 android:hint="이름/닉네임을 입력해주세요."
-                android:text="@={vm.liveUserName}"
                 android:textSize="16sp"
                 android:inputType="text">
                 <requestFocus />

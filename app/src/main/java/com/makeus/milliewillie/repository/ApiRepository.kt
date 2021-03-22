@@ -36,6 +36,7 @@ class ApiRepository(
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext{
         //header에 token을 jwt로 변경
         repositoryCached.setValue(LocalKey.TOKEN , it.jwt)
+
     }.switchMap {
         //jwt API 호출
         apiTest.jwt()

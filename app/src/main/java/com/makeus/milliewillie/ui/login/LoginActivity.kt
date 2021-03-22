@@ -78,7 +78,6 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     fun onClickKakaoLogin() {
         repositoryCached.setValue(LocalKey.SOCIALTYPE, "K")
         viewModel.getFcmToken {
-
         }
         viewModel.onClickKakaoLogin(this) {
             nextStep(it)

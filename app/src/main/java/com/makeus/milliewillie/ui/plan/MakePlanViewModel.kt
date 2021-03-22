@@ -21,10 +21,8 @@ class MakePlanViewModel : BaseViewModel() {
 
     //TodoMethod
     fun addTodo(item: Plan.Todos) {
-
         planTodos.add(item)
         livePlanTodoList.value = planTodos
-
     }
 
     fun removeTodo(item: MainSchedule) {
@@ -75,8 +73,6 @@ class MakePlanViewModel : BaseViewModel() {
             )
         )
     }
-
-
 }
 
 

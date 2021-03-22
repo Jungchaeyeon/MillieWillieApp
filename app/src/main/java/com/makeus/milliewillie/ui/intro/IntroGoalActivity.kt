@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.intro
 
+import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
@@ -21,10 +22,19 @@ class IntroGoalActivity :
     BaseDataBindingActivity<ActivityIntroGoalBinding>(R.layout.activity_intro_goal) {
 
     val viewModel by viewModel<UserViewModel>()
-    private val repositoryCached by inject<RepositoryCached>()
 
+    override fun setupProperties(bundle: Bundle?) {
+        super.setupProperties(bundle)
+        viewModel.usersRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as UsersRequest
+    }
     override fun ActivityIntroGoalBinding.onBind() {
         vi = this@IntroGoalActivity
+        Log.e(viewModel.usersRequest.startDate.toString(),"startDate")
+        Log.e(viewModel.usersRequest.endDate.toString(),"endDate")
+        Log.e(viewModel.usersRequest.proDate.toString(),"proDate")
+        Log.e(viewModel.usersRequest.strCorporal.toString(),"strCorporal")
+        Log.e(viewModel.usersRequest.strPrivate.toString(),"strPrivate")
+        Log.e(viewModel.usersRequest.strSergeant.toString(),"strSergeant")
     }
 
     fun onClickBack() {
@@ -33,8 +43,7 @@ class IntroGoalActivity :
 
     fun onClickDone() {
         if (edt_goal.text.isNotEmpty()) {
-            viewModel.liveUserGoal.value=edt_goal.text.toString()
-            //ActivityNavigator.with(this).main().start()
+            viewModel.usersRequest.goal=edt_goal.text.toString()
             requestUser()
         } else {
             Snackbar.make(this.linearLayout,"목표를 입력해 주세요.",Snackbar.LENGTH_SHORT).show()
@@ -49,5 +58,6 @@ class IntroGoalActivity :
             }
         }.disposeOnDestroy(this)
     }
+
 
 }

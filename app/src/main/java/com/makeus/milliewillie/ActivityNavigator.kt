@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
+import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
@@ -12,6 +13,8 @@ import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.intro.*
 import com.makeus.milliewillie.ui.login.LoginActivity
+import com.makeus.milliewillie.ui.mypage.InfoEnlistActivity
+import com.makeus.milliewillie.ui.mypage.InfoMiliActivity
 import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
@@ -44,11 +47,10 @@ class ActivityNavigator private constructor(private val context: Context) {
 
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
     fun name() = MyIntent(IntroSettingNameActivity::class.java)
-    fun type() = MyIntent(IntroServiceTypeActivity::class.java)
-    fun typedetail() = MyIntent(IntroServiceTypeDetailActivity::class.java)
-    fun enlist1() = MyIntent(IntroEnlistDateSoldierActivity::class.java)
-    fun enlist2() = MyIntent(IntroEnlistDateSergeantActivity::class.java)
-    fun goal() = MyIntent(IntroGoalActivity::class.java)
+    fun type(usersRequest: UsersRequest) = MyIntent(IntroServiceTypeActivity::class.java).apply { putExtra(KEY_DATA,usersRequest) }
+    fun typedetail(usersRequest: UsersRequest) = MyIntent(IntroServiceTypeDetailActivity::class.java).apply { putExtra(KEY_DATA,usersRequest) }
+    fun enlist1(usersRequest: UsersRequest) = MyIntent(IntroEnlistDateSoldierActivity::class.java).apply { putExtra(KEY_DATA,usersRequest) }
+    fun enlist2(usersRequest: UsersRequest) = MyIntent(IntroEnlistDateSergeantActivity::class.java).apply { putExtra(KEY_DATA,usersRequest) }
     fun map() = MyIntent(MapActivity::class.java)
     fun routine() = MyIntent(MakeRoutineActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
@@ -56,7 +58,11 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
-    fun holiday() = MyIntent(HolidayActivity::class.java)
+    fun holiday() = MyIntent(InfoMiliActivity::class.java)
+    fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
+    fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
+        putExtra(KEY_DATA, usersRequest)
+    }
 
     inner class MyIntent : Intent {
 

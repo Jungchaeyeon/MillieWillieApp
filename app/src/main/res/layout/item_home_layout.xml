@@ -97,7 +97,8 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rect_radius_8"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="@{()->vi.onClickEdit()}">
 
                 <TextView
                     style="@style/spoqa_bold_22"

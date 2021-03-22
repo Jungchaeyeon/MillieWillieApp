@@ -28,6 +28,7 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
     val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
+    var usersRequest: UsersRequest= UsersRequest()
 
     fun enlistDataInit() {
         if (liveServiceId.value == 1) {
@@ -98,12 +99,12 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
         val prom3Date = df.parse(liveDateButtonList[4].value.toString())
         val endDate = df.parse(liveDateButtonList[1].value.toString())
 
-        Log.e("${cal.time}")
-        Log.e("$firstDate")
-        Log.e("$prom1Date?")
-        Log.e("$prom2Date")
-        Log.e("$prom3Date?")
-        Log.e("$endDate?")
+//        Log.e("${cal.time}")
+//        Log.e("$firstDate")
+//        Log.e("$prom1Date?")
+//        Log.e("$prom2Date")
+//        Log.e("$prom3Date?")
+//        Log.e("$endDate?")
 
         if (firstDate <= cal.time) {
             if (firstDate.time < prom1Date.time) {
@@ -121,6 +122,18 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
             return false
         }
         return false
+    }
+    fun dateChangeTest(string: String): String {
+
+        val date = string.substring(0,10)
+        val df = SimpleDateFormat("yyyy.MM.dd")
+        val dff = SimpleDateFormat("yyyy-MM-dd")
+
+//        Log.e(date,"hi")
+//        Log.e(df.parse(date).toString(),"hi2")
+//        Log.e(dff.format(df.parse(date)).toString(),"hi3")
+
+        return dff.format(df.parse(date))
     }
 
     fun calculateDay(enlist: String) {
@@ -196,6 +209,13 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
         liveDateButtonList[2].postValue(promPrivate)
         liveDateButtonList[3].postValue(promCorporal)
         liveDateButtonList[4].postValue(promSergeant)
+
+        usersRequest.startDate =dateChangeTest(enlist)
+        usersRequest.endDate= dateChangeTest(dischargeDate)
+        usersRequest.strPrivate=dateChangeTest(promPrivate)
+        usersRequest.strCorporal=dateChangeTest(promCorporal)
+        usersRequest.strSergeant=dateChangeTest(promSergeant)
+        usersRequest.proDate=dateChangeTest(promSergeant)
     }
 
     fun calDateBetweenAnB(date1: String, date2: String): Float {
@@ -252,7 +272,7 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
 
     }
 
-    //    fun requestUserUpdate() =
+   //   fun requestUserUpdate() =
 //        apiRepository.users(
 //            UsersRequest(
 //                name = liveUserName.value.toString(),
@@ -271,28 +291,20 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
     fun requestUser() =
         apiRepository.users(
             UsersRequest(
-                name = liveUserName.value.toString(),
-                stateIdx = liveServiceId.value as Int,
-                serveType = liveServicetype.value.toString(),
-                birthday = liveUserBirth.value.toString(),
-                startDate = dateformat(liveDateButtonList[0].value.toString()),
-                endDate = dateformat(liveDateButtonList[1].value.toString()),
-                strPrivate = dateformat(liveDateButtonList[2].value.toString()),
-                strCorporal = dateformat(liveDateButtonList[3].value.toString()),
-                strSergeant = dateformat(liveDateButtonList[4].value.toString()),
-                proDate = dateformat(liveDateButtonList[2].value.toString()),
-                goal = liveUserGoal.value.toString(),
+                name = usersRequest.name,
+                stateIdx = usersRequest.stateIdx,
+                serveType = usersRequest.serveType,
+                startDate =usersRequest.startDate,
+                endDate = usersRequest.endDate,
+                strPrivate = usersRequest.strPrivate,
+                strCorporal =usersRequest.strCorporal,
+                strSergeant =usersRequest.strSergeant,
+                proDate = usersRequest.proDate,
+                goal = usersRequest.goal,
                 socialType = repositoryCached.getSocialType()
             )
         )
 
-    fun dateformat(date: String): String {
-        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
-        val dateformat = SimpleDateFormat("yyyy-MM-dd")
-        val resultDate = df.parse(date)
-        Log.e(resultDate.toString(), "parse")
-        return dateformat.format(resultDate)
-    }
 
 }
 

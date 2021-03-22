@@ -4,7 +4,6 @@ enum class LocalKey {
     SOCIALTYPE,
     ISMEMBER,
     TOKEN,
-    NAME,
     DATE,
     TYPE,
     DETAILTYPE,

@@ -98,7 +98,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     }
 
     fun onClickEdit() {
-        ActivityNavigator.with(this).mypageedit().start()
+        ActivityNavigator.with(this).infoenlist().start()
     }
 
     fun endDate(): String {

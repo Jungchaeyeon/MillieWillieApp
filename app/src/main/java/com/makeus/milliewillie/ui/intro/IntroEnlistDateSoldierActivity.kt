@@ -60,7 +60,6 @@ class IntroEnlistDateSoldierActivity :
     fun onClickDone() {
         if (viewModel.enlistValueTest()) {
                 viewModel.calDday(btn_discharge.text.toString()).toString()
-
             ActivityNavigator.with(this).goal(viewModel.usersRequest).start()
         }
         else{

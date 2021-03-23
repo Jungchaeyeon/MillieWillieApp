@@ -45,6 +45,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun dDay(isClear: Boolean = true) = MyIntent(DdayActivity::class.java)
 
 
+    fun welcome(isClear: Boolean = true) = MyIntent(WelcomeActivity::class.java, isClear)
     fun login(isClear: Boolean = true) = MyIntent(LoginActivity::class.java, isClear)
     fun name() = MyIntent(IntroSettingNameActivity::class.java)
     fun type(usersRequest: UsersRequest) = MyIntent(IntroServiceTypeActivity::class.java).apply { putExtra(KEY_DATA,usersRequest) }

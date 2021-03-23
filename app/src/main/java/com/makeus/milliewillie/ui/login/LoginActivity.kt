@@ -6,6 +6,7 @@ import com.kakao.sdk.common.util.Utility
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
@@ -16,6 +17,7 @@ import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.common.BasicBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.common.BasicDialogFragment
 import com.makeus.milliewillie.util.Log
+import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -28,21 +30,22 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repositoryCached.setValue(LocalKey.TOKEN,"")
+
         if (repositoryCached.getToken().isNotEmpty()) {
-            Log.e("토큰 없음")
-            // /app/user/jwt
+                //1단계 -> jwt 가지고 있니?
             viewModel.firstCheckJmt() {
-                if (it==true) {
-                    Log.e(it.toString(),"메인으로")
+                //2단계. 유효한 토큰?
+                if (it) {
+                    Log.e(it.toString(), "메인으로")
                     ActivityNavigator.with(this).main().start()
                 } else {
-                    Log.e(it.toString(),"로그인으로")
-                    ActivityNavigator.with(this).login().start()
+                    Log.e(it.toString(), "로그인으로")
+                  //  ActivityNavigator.with(this).login().start()
                 }
             }
-        }
+        } else {
 
+        }
 
     }
 
@@ -82,6 +85,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         viewModel.onClickKakaoLogin(this) {
             nextStep(it)
         }
+
     }
 
 //    fun nextStep(isSuccess : Boolean) {
@@ -96,8 +100,12 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         if (isSuccess) {
             ActivityNavigator.with(this).main().start()
         } else {
-            ActivityNavigator.with(this).name().start()
-           // "로그인에 실패했습니다.".showLongToastSafe()
+            if(!repositoryCached.getIsMember()){
+                ActivityNavigator.with(this).welcome().start()
+            }else{
+                Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
+
 }

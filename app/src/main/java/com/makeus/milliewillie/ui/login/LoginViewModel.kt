@@ -97,14 +97,21 @@ class LoginViewModel(
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
-                Log.e("로그인 성공 ${token.accessToken}")
-                repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
-                requestKakaoLogin(response)
-                //response.invoke(true)
+                if(!repositoryCached.getIsMember()){
+                    repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
+                    response.invoke(false)
+                }
+                else {
+                    Log.e("로그인 성공 ${token.accessToken}")
+                    repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
+                    requestKakaoLogin(response)
+                    //response.invoke(true)
+                }
             }, { error ->
                 error.printStackTrace()
                 response.invoke(false)
             }).disposeOnDestroy(this)
+
     }
 
     private fun requestKakaoLogin(response: (Boolean) -> Unit) {

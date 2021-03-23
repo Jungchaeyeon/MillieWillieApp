@@ -142,4 +142,5 @@
     <string name="discharge_day">전역일</string>
     <string name="info_mili">복무정보</string>
     <string name="enlist_day">입대일</string>
+    <string name="holiday">휴가</string>
 </resources>

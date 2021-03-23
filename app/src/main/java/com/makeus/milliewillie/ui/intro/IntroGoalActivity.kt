@@ -12,6 +12,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_goal.*
 import org.koin.android.ext.android.inject
@@ -52,7 +53,8 @@ class IntroGoalActivity :
     fun requestUser() {
         viewModel.requestUser().subscribe {
             if (it.isSuccess) {
-                "가입 완료".showShortToastSafe()
+                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
+                ActivityNavigator.with(this).main().start()
             } else {
                 "가입 실패".showShortToastSafe()
             }

@@ -40,7 +40,7 @@
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
                 android:hint="0"
-                android:textColor="@color/black"
+                android:textColor="@color/black_all"
                 android:textSize="14sp"/>
 
             <TextView
@@ -50,6 +50,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_toEndOf="@+id/rebs_time_recycler_edit_hour"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black_all"
                 android:text="@string/option_time"/>
 
             <EditText
@@ -65,7 +66,7 @@
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
                 android:hint="0"
-                android:textColor="@color/black"
+                android:textColor="@color/black_all"
                 android:textSize="14sp"/>
 
             <TextView
@@ -75,6 +76,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_toEndOf="@+id/rebs_time_recycler_edit_min"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black_all"
                 android:text="@string/minute"/>
 
             <EditText
@@ -90,7 +92,7 @@
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
                 android:hint="0"
-                android:textColor="@color/black"
+                android:textColor="@color/black_all"
                 android:textSize="14sp"/>
 
             <TextView
@@ -100,6 +102,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_toEndOf="@+id/rebs_time_recycler_edit_sec"
                 android:layout_centerVertical="true"
+                android:textColor="@color/black_all"
                 android:text="@string/sec"/>
         </RelativeLayout>
 
@@ -109,7 +112,7 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete_text"/>
+            android:src="@drawable/icon_small_delete"/>
     </RelativeLayout>
 
 </layout>

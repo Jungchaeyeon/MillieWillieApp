@@ -57,9 +57,29 @@ interface Api {
     @GET("exercises/{exerciseId}/daily-weights")
     fun getDailyWeight(@Path("exerciseId") exerciseId: Long): Observable<GetDailyWeight>
 
+    @GET("exercises/{exerciseId}/weight-records")
+    fun getWeightRecord(@Path("exerciseId") exerciseId: Long,
+                        @Query("viewMonth") viewMonth: Int,
+                        @Query("viewYear") viewYear: Int): Observable<GetWeightRecord>
+
+    @GET("exercises/{exerciseId}/all-routines")
+    fun getAllRoutines(@Path("exerciseId") exerciseId: Long): Observable<AllRoutines>
+
+    @GET("exercises/{exerciseId}/routines")
+    fun getRoutines(@Path("exerciseId") exerciseId: Long,
+                    @Query("targetDate") targetDate: String): Observable<Routines>
+
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,
-                        @Body body: PatchGoalWeightRequest): Observable<PatchGoalWeight>
+                        @Body body: PatchGoalWeightRequest): Observable<ResultResponse>
+
+    @PATCH("exercises/{exerciseId}/weights")
+    fun patchTodayWeight(@Path("exerciseId") exerciseId: Long,
+                        @Body body: PatchTodayWeightRequest): Observable<ResultResponse>
+
+    @DELETE("exercises/{exerciseId}/routines/{routineId}")
+    fun deleteRoutine(@Path("exerciseId") exerciseId: Long): Observable<ResultResponse>
+
 
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>

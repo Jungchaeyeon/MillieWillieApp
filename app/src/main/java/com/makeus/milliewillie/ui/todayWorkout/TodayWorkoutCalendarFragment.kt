@@ -1,24 +1,41 @@
 package com.makeus.milliewillie.ui.todayWorkout
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
-import com.makeus.milliewillie.model.TodayRoutines
+import com.makeus.milliewillie.model.MyRoutineInfo
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
+import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkoutCalendarBinding>(R.layout.fragment_today_workout_calendar) {
 
     private val viewModel by viewModel<TodayWorkoutViewModel>()
 
+    val now = Date()
+    val format = SimpleDateFormat("yyyy-MM-dd")
+    val date = format.format(now)
 
+    private val routineArray = ArrayList<MyRoutineInfo>()
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun FragmentTodayWorkoutCalendarBinding.onBind() {
         vi = this@TodayWorkoutCalendarFragment
         viParent = TodayWorkoutActivity()
         vm = viewModel
+
+        executeGetRoutines()
 
         todayDate()
 
@@ -27,15 +44,45 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
         }
 
         binding.todayCalendarRecycler.run {
-            adapter = BaseDataBindingRecyclerViewAdapter<TodayRoutines>()
+            adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<TodayRoutines, WorkoutRoutineRecyclerItemBinding>(R.layout.workout_routine_recycler_item){
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(R.layout.workout_routine_recycler_item){
                         viCalendar = this@TodayWorkoutCalendarFragment
                         item = it
                     }
                 )
         }
 
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun executeGetRoutines() {
+        viewModel.apiRepository.getRoutines(
+            path = SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong(), targetDate = date
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess){
+                    Log.e("getRoutines 호출 성공")
+
+                    it.result.asJsonArray.forEach { objects ->
+                        val item = objects.asJsonObject
+
+                        routineArray.add(
+                            MyRoutineInfo(
+                                routineName = item.get("routineName").asString,
+                                routineRepeatDay = item.get("routineRepeatDay").asString,
+                                routineId = item.get("routineId").asLong
+                            )
+                        )
+                    }
+                    viewModel.createRoutineItem(routineArray)
+                } else {
+                    Log.e("getRoutines 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
     }
 
     fun itemClick() {

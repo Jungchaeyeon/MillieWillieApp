@@ -78,6 +78,6 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete_text"/>
+            android:src="@drawable/icon_small_delete"/>
     </RelativeLayout>
 </layout>

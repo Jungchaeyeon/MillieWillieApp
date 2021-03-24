@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.routine
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
@@ -10,64 +11,62 @@ import kotlin.collections.ArrayList
 
 class ExerciseSetViewModel: BaseViewModel() {
 
-    val liveDataRoutineKind = MutableLiveData<String>().apply { value = "옵션 선택" }
     val liveDataWncAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
     val liveDataCountAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
     val liveDataTimeAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
 
-    val wncSetItemList = arrayListOf<WorkoutSet>(WorkoutSet("2 세트"), WorkoutSet("3 세트"))
-    val countSetItemList = arrayListOf<WorkoutSet>(WorkoutSet("2 세트"), WorkoutSet("3 세트"))
-    val timeSetItemList = arrayListOf<WorkoutSet>(WorkoutSet("2 세트"), WorkoutSet("3 세트"))
+    val wncSetItemList = ArrayList<WorkoutSet>()
+    val countSetItemList = ArrayList<WorkoutSet>()
+    val timeSetItemList = ArrayList<WorkoutSet>()
     var wncSetItemListSize = wncSetItemList.size
     var countSetItemListSize = countSetItemList.size
     var timeSetItemListSize = timeSetItemList.size
 
+    var liveDataSetCount = MutableLiveData<String>().apply { value = "0" }
+    var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0 세트" }
+
     init {
         defaultAddSet()
-        defaultCountAddSet()
-        defaultTimeAddSet()
+    }
+
+    fun increaseSetCount(value: String) {
+        liveDataSetCount.postValue(value)
+        liveDataUnderSetCount.postValue("$value 세트")
+    }
+    fun decreaseSetCount(value: String) {
+        liveDataSetCount.postValue(value)
+        liveDataUnderSetCount.postValue("$value 세트")
     }
 
     fun defaultAddSet() {
+        wncSetItemListSize = wncSetItemList.size
         liveDataWncAddSetList.postValue(wncSetItemList)
-        wncSetItemListSize = wncSetItemList.size
-        timeSetItemListSize = wncSetItemList.size
-    }
-
-    fun defaultCountAddSet() {
-        liveDataCountAddSetList.postValue(countSetItemList)
         countSetItemListSize = countSetItemList.size
-    }
-
-    fun defaultTimeAddSet() {
-        liveDataTimeAddSetList.postValue(timeSetItemList)
+        liveDataCountAddSetList.postValue(countSetItemList)
         timeSetItemListSize = timeSetItemList.size
+        liveDataTimeAddSetList.postValue(timeSetItemList)
     }
 
-    fun addItem(view: View) {
-        when (view.id) {
-            R.id.rebs_wnc_layout_add -> {
-                wncSetItemList.add(WorkoutSet("${wncSetItemListSize + 2} 세트"))
-                wncSetItemListSize = wncSetItemList.size
-                android.util.Log.e("makeUs", "wncSetItemList: $wncSetItemList")
-            }
-            R.id.rebs_count_layout_add -> {
-                countSetItemList.add(WorkoutSet("${countSetItemListSize + 2} 세트"))
-                countSetItemListSize = countSetItemList.size
-                android.util.Log.e("makeUs", "countSetItemList: $countSetItemList")
-            }
-            R.id.rebs_time_layout_add -> {
-                timeSetItemList.add(WorkoutSet("${timeSetItemListSize + 2} 세트"))
-                timeSetItemListSize = timeSetItemList.size
-                android.util.Log.e("makeUs", "timeSetItemList: $timeSetItemList")
-            }
-        }
-
-    }
-
-    fun removeItem(position: Int) {
-        wncSetItemList.removeAt(position)
+    fun addItem() {
+        wncSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
         wncSetItemListSize = wncSetItemList.size
+        countSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
+        countSetItemListSize = countSetItemList.size
+        timeSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
+        timeSetItemListSize = timeSetItemList.size
+
+        defaultAddSet()
+    }
+
+    fun removeItem() {
+        wncSetItemList.removeAt(wncSetItemListSize-1)
+        wncSetItemListSize = wncSetItemList.size
+        countSetItemList.removeAt(countSetItemListSize-1)
+        countSetItemListSize = countSetItemList.size
+        timeSetItemList.removeAt(timeSetItemListSize-1)
+        timeSetItemListSize = timeSetItemList.size
+
+        defaultAddSet()
     }
 
 }

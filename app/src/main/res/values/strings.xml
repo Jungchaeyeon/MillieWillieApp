@@ -153,4 +153,6 @@
     <string name="startMW">밀리윌리 시작하기</string>
     <string name="start">시작</string>
     <string name="workout_done">운동 끝내기</string>
+
+    <string name="d_day_explain">자격증,시험,기념일등의 D - day를 확인하세요</string>
 </resources>

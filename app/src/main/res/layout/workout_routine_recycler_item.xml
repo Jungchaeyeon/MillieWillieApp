@@ -16,7 +16,7 @@
             type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.TodayRoutines" />
+            type="com.makeus.milliewillie.model.MyRoutineInfo" />
 
     </data>
 
@@ -58,7 +58,7 @@
                 android:layout_toStartOf="@+id/w_routine_img_arrow"
                 android:textColor="@color/maincolor_blue"
                 android:textSize="13sp"
-                android:text="@{item.dayOfWeek}" />
+                android:text="@{item.routineRepeatDay}" />
 
             <ImageView
                 android:id="@+id/w_routine_img_arrow"
@@ -67,6 +67,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:onClick="@{()-> vi_feed.onClickImage(2)}"
                 setImage="@{vi_feed.liveDataItemImg}" />
 
         </RelativeLayout>

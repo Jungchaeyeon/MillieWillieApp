@@ -27,7 +27,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:src="@drawable/icon_gotobac" />
 
@@ -44,29 +43,64 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/workout_layout_goal_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/workout_dash"
+                android:layout_width="10dp"
+                android:layout_height="2dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:background="@color/icon_gray"
+                android:enabled="false" />
+
+            <TextView
+                android:id="@+id/workout_text_goal_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:layout_toEndOf="@+id/workout_dash"
+                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:includeFontPadding="false"
+                android:text="@{vm.topRecordGoalWeight}"
+                android:textColor="@color/black_all"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/workout_layout_graph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/chart_underline"
+            android:background="@drawable/layout_underline"
             android:paddingBottom="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout7"
+            app:layout_constraintTop_toBottomOf="@+id/workout_layout_goal_weight"
             tools:layout_editor_absoluteX="24dp">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/weight_record_line_chart"
                 android:layout_width="match_parent"
                 android:layout_height="82dp"
-                android:layout_marginHorizontal="24dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginHorizontal="24dp"
                 android:background="@drawable/workout_chart_background_white" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/weight_record_weight_recycler"
                 replaceAll="@{vm.liveDataWeightRecordList}"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="24dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/weight_record_line_chart"
+                android:layout_marginHorizontal="24dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -80,6 +114,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/workout_chart_background_white"
+            android:onClick="@{()-> vi.modifyGoalWeight()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/workout_layout_graph">
@@ -98,15 +133,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
                 android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/non"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="0"
+                android:text="@{vm.recordGoalWeight}"
                 android:textColor="@color/icon_gray"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -2,9 +2,11 @@ package com.makeus.milliewillie.ui.home.tab2
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -23,6 +25,7 @@ import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -37,11 +40,12 @@ class WorkoutFragment :
 
     val calendar = Calendar.getInstance()
 
-    val todayMonth = calendar.get(Calendar.MONTH)
+    val todayMonth = calendar.get(Calendar.MONTH) + 1
     val today = calendar.get(Calendar.DAY_OF_MONTH)
 
     val dailyWeightArray = ArrayList<DailyWeight>()
     val weightDayArray = ArrayList<WeightDay>()
+    var routineArray = ArrayList<MyRoutineInfo>()
 
     companion object {
         fun getInstance() = WorkoutFragment()
@@ -57,6 +61,7 @@ class WorkoutFragment :
         exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor", "StringFormatMatches", "CheckResult")
     override fun FragmentWorkoutBinding.onBind() {
         vi= this@WorkoutFragment
@@ -68,6 +73,79 @@ class WorkoutFragment :
 //        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
         // 체중 기록 GET 호출
+        executeGetWeightRecord()
+        // 루틴 GET 호출
+        executeGetRoutines()
+
+        onClickWeightDateItemAdd() // 체중 입력
+
+        //라인차트 함수 호출
+        setLineChart()
+
+        binding.workoutRecyclerDay.run {
+            adapter = BaseDataBindingRecyclerViewAdapter<WorkoutWeightRecordDate>()
+                .addViewType(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<WorkoutWeightRecordDate, WorkoutWeightRecyclerItemBinding>(
+                        R.layout.workout_weight_recycler_item
+                    ) {
+                        vi = this@WorkoutFragment
+                        item = it
+                    }
+                )
+        }
+
+        binding.workoutRecyclerTodayRoutine.run {
+            adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
+                .addViewType(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(
+                        R.layout.workout_routine_recycler_item
+                    ) {
+                        vi = this@WorkoutFragment
+                        item = it
+                    }
+                )
+        }
+
+
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun executeGetRoutines() {
+        val now = Date()
+        val format = SimpleDateFormat("yyyy-MM-dd")
+        val date = format.format(now)
+        Log.e(date)
+
+        viewModel.apiRepository.getRoutines(
+            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), targetDate = date
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess){
+                    Log.e("getRoutines 호출 성공")
+
+                    it.result.asJsonArray.forEach { objects ->
+                        val item = objects.asJsonObject
+
+                        routineArray.add(
+                            MyRoutineInfo(
+                                routineName = item.get("routineName").asString,
+                                routineRepeatDay = item.get("routineRepeatDay").asString,
+                                routineId = item.get("routineId").asLong
+                            )
+                        )
+                    }
+                    viewModel.createRoutineList(routineArray)
+                } else {
+                    Log.e("getRoutines 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+    }
+
+
+    fun executeGetWeightRecord() {
         viewModel.getDailyWeight()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -75,7 +153,12 @@ class WorkoutFragment :
                 if (it.isSuccess) {
                     Log.e("getDailyWeight 호출 성공")
 
-                    val goalText = String.format(getString(R.string.goal_weight_var, it.result.goalWeight))
+                    val goalText = String.format(
+                        getString(
+                            R.string.goal_weight_var,
+                            it.result.goalWeight
+                        )
+                    )
                     viewModel.goalWeightText.postValue(goalText)
                     binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
 
@@ -99,39 +182,12 @@ class WorkoutFragment :
                     Log.e(it.message)
                 }
             }.disposeOnDestroy(this@WorkoutFragment)
-
-        onClickWeightDateItemAdd() // 체중 입력
-
-        //라인차트 함수 호출
-        setLineChart()
-
-        binding.workoutRecyclerDay.run {
-            adapter = BaseDataBindingRecyclerViewAdapter<WorkoutWeightRecordDate>()
-                .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<WorkoutWeightRecordDate, WorkoutWeightRecyclerItemBinding>(R.layout.workout_weight_recycler_item) {
-                        vi = this@WorkoutFragment
-                        item = it
-                    }
-                )
-        }
-
-        binding.workoutRecyclerTodayRoutine.run {
-            adapter = BaseDataBindingRecyclerViewAdapter<TodayRoutines>()
-                .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<TodayRoutines, WorkoutRoutineRecyclerItemBinding>(R.layout.workout_routine_recycler_item){
-                        vi = this@WorkoutFragment
-                        item = it
-                    }
-                )
-        }
-
-
     }
 
     fun todayDate(){
         val dateInstance = Calendar.getInstance()
 
-        val month = dateInstance.get(Calendar.MONTH)
+        val month = dateInstance.get(Calendar.MONTH) + 1
         val day = dateInstance.get(Calendar.DAY_OF_MONTH)
         val dayOfWeek = dateInstance.get(Calendar.DAY_OF_WEEK)
         var dayOfWeekText = ""
@@ -157,8 +213,12 @@ class WorkoutFragment :
             true -> {
                 WeightAddRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { weight ->
-                        viewModel.apiRepository.postDailyWeight(body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
-                            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+                        viewModel.apiRepository.postDailyWeight(
+                            body = PostDailyWeightRequest(
+                                dayWeight = weight.toDouble()
+                            ),
+                            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
+                        )
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe {
                                 Log.e(it.isSuccess.toString())
@@ -183,7 +243,12 @@ class WorkoutFragment :
             false -> {
                 WeightRecordBottomSheetFragment.getInstance()
                     .setOnClickOk { goal, current ->
-                        viewModel.apiRepository.postFirstWeight(FirstWeightRequest(goalWeight = goal.toInt(), firstWeight = current.toInt()))
+                        viewModel.apiRepository.postFirstWeight(
+                            FirstWeightRequest(
+                                goalWeight = goal.toInt(),
+                                firstWeight = current.toInt()
+                            )
+                        )
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe {
                                 Log.e(it.isSuccess.toString())
@@ -198,7 +263,10 @@ class WorkoutFragment :
                                     goalValue = goal.toFloat()
                                     isInputGoal = true
                                     SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
-                                    SharedPreference.putSettingItem(EXERCISE_ID, it.result.exerciseId.toString())
+                                    SharedPreference.putSettingItem(
+                                        EXERCISE_ID,
+                                        it.result.exerciseId.toString()
+                                    )
 
                                     Handler().postDelayed({
                                         setLineChart()
@@ -223,10 +291,22 @@ class WorkoutFragment :
         binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
 
         if (todayMonth < 10) {
-            val dateform = String.format(getString(R.string.date_weight_record_format, "0$todayMonth", today))
+            val dateform = String.format(
+                getString(
+                    R.string.date_weight_record_format,
+                    "0$todayMonth",
+                    today
+                )
+            )
             viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
         } else {
-            val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth.toString(), today))
+            val dateform = String.format(
+                getString(
+                    R.string.date_weight_record_format,
+                    todayMonth.toString(),
+                    today
+                )
+            )
             viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
         }
     }
@@ -237,7 +317,12 @@ class WorkoutFragment :
         val goalWeight = ArrayList<Entry>()
 
         for(i in 0 until viewModel.liveRecordWeightItemListSize){
-            values.add(Entry (i.toFloat(), viewModel.liveRecordWeightItemList.value!![i].weight.toFloat())) // (x값, y값) // (list size, weight)
+            values.add(
+                Entry(
+                    i.toFloat(),
+                    viewModel.liveRecordWeightItemList.value!![i].weight.toFloat()
+                )
+            ) // (x값, y값) // (list size, weight)
         }
 
         if (goalValue.toInt() != 0) {

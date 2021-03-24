@@ -9,6 +9,7 @@ import android.widget.Switch
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
+import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.RoutineExBottomSheetBinding
@@ -16,12 +17,24 @@ import com.makeus.milliewillie.databinding.RoutineExCountRecyclerItemBinding
 import com.makeus.milliewillie.databinding.RoutineExTimeRecyclerItemBinding
 import com.makeus.milliewillie.databinding.RoutineExWncRecyclerItemBinding
 import com.makeus.milliewillie.model.WorkoutSet
+import com.makeus.milliewillie.ui.dDay.Classification
+import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
+import com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment
+import com.makeus.milliewillie.ui.dDay.certification.CertificationFragment
+import com.makeus.milliewillie.ui.dDay.ncee.NceeFragment
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.routine_ex_bottom_sheet.*
+import okhttp3.internal.wait
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseSetBottomSheetFragment:
-    BaseDataBindingBottomSheetFragment<RoutineExBottomSheetBinding>(R.layout.routine_ex_bottom_sheet) {
+    BaseDataBindingFragment<RoutineExBottomSheetBinding>(R.layout.routine_ex_bottom_sheet) {
+
+    enum class SetOptions() {
+        WNC,
+        COUNT,
+        TIME
+    }
 
     companion object {
         fun getInstance() = ExerciseSetBottomSheetFragment()
@@ -29,9 +42,12 @@ class ExerciseSetBottomSheetFragment:
 
     val viewModel by viewModel<ExerciseSetViewModel>()
 
+    lateinit var btnWnc: View
+    lateinit var btnCount: View
+    lateinit var btnTime: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
     }
 
     private var clickOk: ((String) -> Unit)? = null
@@ -41,49 +57,12 @@ class ExerciseSetBottomSheetFragment:
         vm = viewModel
         viewModel.bindLifecycle(this@ExerciseSetBottomSheetFragment)
 
-        binding.rebsWncSwitch.isChecked = true
-        binding.rebsCountSwitch.isChecked = true
-        binding.rebsTimeSwitch.isChecked = true
+        btnWnc = binding.rebsBtnWnc
+        btnCount = binding.rebsBtnCount
+        btnTime = binding.rebsBtnTime
 
-        Log.e(binding.rebsWncSwitch.isChecked.toString())
-
-        // EditText 이벤트 3종
-        binding.rebsWncEditSetCount.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s?.length != 0 ) {
-                    if (binding.rebsWncSwitch.isChecked) binding.rebsWncTextTotalSetCount.text = "$s 세트"
-                    else binding.rebsWncTextTotalSetCount.text = "1 세트"
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-        binding.rebsCountEditSetCount.addTextChangedListener(object :TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s?.length != 0 ) {
-                    if (binding.rebsCountSwitch.isChecked) binding.rebsCountTextTotalSetCount.text = "$s 세트"
-                    else binding.rebsCountTextTotalSetCount.text = "1 세트"
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-        binding.rebsTimeEditSetCount.addTextChangedListener(object :TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s?.length != 0 ) {
-                    if (binding.rebsTimeSwitch.isChecked) binding.rebsTimeTextTotalSetCount.text = "$s 세트"
-                    else binding.rebsTimeTextTotalSetCount.text = "1 세트"
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        setBtnStatus(1)
+        binding.rebsSwitch.isChecked = true
 
         // 리사이클러뷰 바인딩 적용 3종
         rebsWncRecyclerSet.run {
@@ -117,108 +96,93 @@ class ExerciseSetBottomSheetFragment:
 
     }
 
-    fun onClickOptionSelect() {
-        binding.rebsLayoutOptionSelect.isSelected = !binding.rebsLayoutOptionSelect.isSelected
-        when (binding.rebsLayoutOptionSelect.isSelected) {
-            true -> {
-                binding.rebsLayoutOptions.visibility = View.VISIBLE
-                binding.rebsWncLayout.visibility = View.GONE
+    fun setBtnStatus(position: Int){
+        when (position) {
+            1 -> {
+                setBtnView(btnWnc)
+                replaceViewFrame(SetOptions.WNC)
+            }
+            2 -> {
+                setBtnView(btnCount)
+                replaceViewFrame(SetOptions.COUNT)
+            }
+            3 -> {
+                setBtnView(btnTime)
+                replaceViewFrame(SetOptions.TIME)
+            }
+        }
+    }
+
+    fun setBtnView(btn: View) {
+        val btnList = arrayListOf<View>(btnWnc, btnCount, btnTime)
+
+        if (!btn.isSelected) {
+            btnList.forEach { view ->
+                if (view == btn) btn.isSelected = !btn.isSelected
+                else view.isSelected = false
+            }
+        }
+    }
+
+    fun replaceViewFrame(setOptions: SetOptions) {
+        when (setOptions) {
+            SetOptions.WNC -> {
+                binding.rebsWncLayout.visibility = View.VISIBLE
                 binding.rebsCountLayout.visibility = View.GONE
                 binding.rebsTimeLayout.visibility = View.GONE
             }
-            false -> {
-                binding.rebsLayoutOptions.visibility = View.INVISIBLE
-            }
-        }
-    }
-
-    fun onClickOption(position: Int) {
-        binding.rebsLayoutOptionSelect.isSelected = !binding.rebsLayoutOptionSelect.isSelected
-        when (position) {
-            1 -> {
-                viewModel.liveDataRoutineKind.postValue(binding.rebsTextFirst.text.toString())
-                binding.rebsLayoutOptions.visibility = View.GONE
-                binding.rebsWncLayout.visibility = View.VISIBLE
-            }
-            2 -> {
-                viewModel.liveDataRoutineKind.postValue(binding.rebsTextSecond.text.toString())
-                binding.rebsLayoutOptions.visibility = View.GONE
+            SetOptions.COUNT -> {
+                binding.rebsWncLayout.visibility = View.GONE
                 binding.rebsCountLayout.visibility = View.VISIBLE
+                binding.rebsTimeLayout.visibility = View.GONE
             }
-            3 -> {
-                viewModel.liveDataRoutineKind.postValue(binding.rebsTextThird.text.toString())
-                binding.rebsLayoutOptions.visibility = View.GONE
+            SetOptions.TIME -> {
+                binding.rebsWncLayout.visibility = View.GONE
+                binding.rebsCountLayout.visibility = View.GONE
                 binding.rebsTimeLayout.visibility = View.VISIBLE
             }
+
         }
+
     }
 
     fun onClickAddItem(view: View) {
-        Log.e(view.toString())
-
         when (view.id) {
-            R.id.rebs_wnc_layout_add -> {
-                Log.e("clicked add")
-                viewModel.addItem(view)
-                viewModel.liveDataWncAddSetList.observe(this@ExerciseSetBottomSheetFragment, Observer { viewModel.defaultAddSet() })
-                binding.rebsWncEditSetCount.setText("${viewModel.wncSetItemListSize + 1}")
+            R.id.rebs_btn_plus -> {
+                viewModel.increaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() + 1}")
+                viewModel.addItem()
             }
-            R.id.rebs_count_layout_add -> {
-                Log.e("clicked add2")
-                viewModel.addItem(view)
-                viewModel.liveDataCountAddSetList.observe(this@ExerciseSetBottomSheetFragment, Observer { viewModel.defaultCountAddSet() })
-                binding.rebsCountEditSetCount.setText("${viewModel.countSetItemListSize + 1}")
+            R.id.rebs_btn_minus -> {
+                viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                viewModel.removeItem()
             }
-            R.id.rebs_time_layout_add -> {
-                Log.e("clicked add3")
-                viewModel.addItem(view)
-                viewModel.liveDataTimeAddSetList.observe(this@ExerciseSetBottomSheetFragment, Observer { viewModel.defaultTimeAddSet() })
-                binding.rebsTimeEditSetCount.setText("${viewModel.timeSetItemListSize + 1}")
-            }
-
         }
+
     }
 
-    fun onClickSwitch(view: View) {
-        Log.e(view.toString())
-        val wncViewList = arrayListOf<View>( binding.rebsWncLayoutAdd, binding.rebsWncRecyclerSet, binding.rebsWncEditSetCount)
-        val countViewList = arrayListOf<View>(binding.rebsCountLayoutAdd, binding.rebsCountRecyclerSet, binding.rebsCountEditSetCount)
-        val timeViewList = arrayListOf<View>(binding.rebsTimeLayoutAdd, binding.rebsTimeRecyclerSet, binding.rebsTimeEditSetCount)
+    fun onClickSwitch() {
+        when (binding.rebsSwitch.isChecked) {
+            true -> {
+                binding.rebsWncLayoutInput.visibility = View.VISIBLE
+                binding.rebsCountLayoutInput.visibility = View.VISIBLE
+                binding.rebsTimeLayoutInput.visibility = View.VISIBLE
 
-        val viewList = ArrayList<View>()
+                binding.rebsWncRecyclerSet.visibility = View.GONE
+                binding.rebsCountRecyclerSet.visibility = View.GONE
+                binding.rebsTimeRecyclerSet.visibility = View.GONE
+            }
+            false -> {
+                binding.rebsWncLayoutInput.visibility = View.GONE
+                binding.rebsCountLayoutInput.visibility = View.GONE
+                binding.rebsTimeLayoutInput.visibility = View.GONE
 
-        when (view.id) {
-            R.id.rebs_wnc_switch -> {
-                wncViewList.forEach {
-                    viewList.add(it)
-                }
+                binding.rebsWncRecyclerSet.visibility = View.VISIBLE
+                binding.rebsCountRecyclerSet.visibility = View.VISIBLE
+                binding.rebsTimeRecyclerSet.visibility = View.VISIBLE
             }
-            R.id.rebs_count_switch -> {
-                countViewList.forEach {
-                    viewList.add(it)
-                }
-            }
-            R.id.rebs_time_switch -> {
-                timeViewList.forEach {
-                    viewList.add(it)
-                }
-            }
-
         }
 
-        if ((view as Switch).isChecked) {
-            viewList[0].visibility = View.GONE
-            viewList[1].visibility = View.GONE
-            viewList[2].isEnabled = true
-            (viewList[2] as EditText).setText("1")
-        } else {
-            viewList[2].isEnabled = false
-            (viewList[2] as EditText).setText("${viewModel.wncSetItemListSize + 1}")
-            binding.rebsWncTextTotalSetCount.text = "1 세트"
 
-            viewList[0].visibility = View.VISIBLE
-            viewList[1].visibility = View.VISIBLE
-        }
 
     }
 
@@ -229,17 +193,15 @@ class ExerciseSetBottomSheetFragment:
 
     fun onClickOk() {
         clickOk?.invoke("")
-        dismiss()
+//        dismiss()
     }
     fun onClickCancel(){
-        dismiss()
+//        dismiss()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.defaultAddSet()
-        viewModel.defaultCountAddSet()
-        viewModel.defaultTimeAddSet()
     }
 
 }

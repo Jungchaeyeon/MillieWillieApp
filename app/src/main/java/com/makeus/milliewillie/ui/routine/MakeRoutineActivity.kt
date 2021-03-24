@@ -51,7 +51,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 //            }.show(supportFragmentManager)
         ExPartSelectBottomSheetFragment.getInstance()
             .setOnClickOk {
-            viewModel.liveDatePartOfEx.postValue(it)
+                viewModel.liveDatePartOfEx.postValue(it)
             }.show(supportFragmentManager)
     }
 
@@ -69,15 +69,20 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     }
 
     fun setBtnView(text: View) {
-
         val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
 
-        if (!text.isSelected) {
-            textList.forEach { view ->
-                if (view == text) text.isSelected = !text.isSelected
-                else view.isSelected = false
+        if (text == everyDay) {
+            text.isSelected = true
+            textList.forEach {
+                if (it != everyDay) it.isSelected = false
             }
+        } else {
+            everyDay.isSelected = false
+            text.isSelected = !text.isSelected
         }
+
+
+
     }
 
     fun replaceFrame(fragment: Fragment, container: Int) {

@@ -32,8 +32,9 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_data_info"
+            android:text="@{item.currentWeight}"
             android:textColor="@color/icon_gray"
+            android:onClick="@{()-> vi.todayWeightInput()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,10 +43,9 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:text="@{item.PMAmount}"
-            android:textColor="@color/icon_gray"
-            android:textStyle="bold"
+            android:textColor="@color/black_all"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

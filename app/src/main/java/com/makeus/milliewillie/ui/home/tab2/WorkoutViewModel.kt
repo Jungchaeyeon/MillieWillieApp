@@ -19,12 +19,8 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 //        TodayExDayOfWeek("화"), TodayExDayOfWeek("수"), TodayExDayOfWeek("목")
 //        ,TodayExDayOfWeek("목"), TodayExDayOfWeek("금"), TodayExDayOfWeek("오늘"))
 
-    val liveRoutineItemList = MutableLiveData<ArrayList<TodayRoutines>>()
-    val _routineArrayList = arrayListOf<TodayRoutines>(
-        TodayRoutines("어깨깡새우깡", "매일"),
-        TodayRoutines("힙깡새우깡", "월, 화"),
-        TodayRoutines("1일1깡새우깡", "화, 수, 목")
-    )
+    val liveRoutineItemList = MutableLiveData<ArrayList<MyRoutineInfo>>()
+    val _routineArrayList = ArrayList<MyRoutineInfo>()
 //    val _routineArrayList = ArrayList<TodayRoutines>()
 
     var liveDataToday = MutableLiveData<String>().apply { value = "" }
@@ -47,6 +43,7 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
     }
 
     fun createWeightItem(weightItems: ArrayList<DailyWeight>, dateItems: ArrayList<WeightDay>){
+        recordWeightArrayList.clear()
         for (i in 0 until weightItems.size) {
             recordWeightArrayList.add(WorkoutWeightRecordDate(weight = weightItems[i].dailyWeight, date = dateItems[i].weightDay))
         }
@@ -55,17 +52,15 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 
     fun addWeightItem(item: WorkoutWeightRecordDate) {
         if (recordWeightArrayList.size < 5) {
-            recordWeightArrayList.add(WorkoutWeightRecordDate(
-                weight = item.weight, date = item.date)
-            )
+            recordWeightArrayList.add(WorkoutWeightRecordDate(weight = item.weight, date = item.date))
+
             liveRecordWeightItemList.value = recordWeightArrayList
             liveRecordWeightItemListSize = recordWeightArrayList.size
             android.util.Log.e("makeUs", "checkArrayList: $recordWeightArrayList")
         } else {
             removeWeightItem(0)
-            recordWeightArrayList.add(WorkoutWeightRecordDate(
-                weight = item.weight, date = item.date)
-            )
+            recordWeightArrayList.add(WorkoutWeightRecordDate(weight = item.weight, date = item.date))
+
             liveRecordWeightItemList.value = recordWeightArrayList
             liveRecordWeightItemListSize = recordWeightArrayList.size
             android.util.Log.e("makeUs", "checkArrayList: $recordWeightArrayList")
@@ -76,21 +71,28 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
         recordWeightArrayList.removeAt(position)
         liveRecordWeightItemList.value = recordWeightArrayList
         liveRecordWeightItemListSize = recordWeightArrayList.size
-        android.util.Log.e("makeUs", "checkArrayList: $recordWeightArrayList")
     }
 
     fun defaultRoutineItemList() {
         liveRoutineItemList.postValue(_routineArrayList)
     }
 
-    fun addRoutineItem(item: TodayRoutines) {
-        _routineArrayList.add(TodayRoutines(
-            routineName = item.routineName, dayOfWeek = item.dayOfWeek)
+    fun createRoutineList(routineList: ArrayList<MyRoutineInfo>) {
+        _routineArrayList.clear()
+        for (i in routineList) _routineArrayList.add(
+            MyRoutineInfo(routineName = i.routineName,routineRepeatDay = i.routineRepeatDay, routineId = i.routineId)
         )
-        liveRoutineItemList.value = _routineArrayList
-        android.util.Log.e("makeUs", "_routineArrayList: $_routineArrayList")
-
+        defaultRoutineItemList()
     }
+
+//    fun addRoutineItem(item: MyRoutineInfo) {
+//        _routineArrayList.add(MyRoutineInfo(
+//            routineName = item.routineName, dayOfWeek = item.dayOfWeek)
+//        )
+//        liveRoutineItemList.value = _routineArrayList
+//        android.util.Log.e("makeUs", "_routineArrayList: $_routineArrayList")
+//
+//    }
 
     fun removeRoutineItem(position: Int) {
         _routineArrayList.removeAt(position)

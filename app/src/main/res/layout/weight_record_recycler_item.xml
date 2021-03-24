@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity" />
         <variable
             name="item"
             type="com.makeus.milliewillie.model.WorkoutWeightRecordDate" />
@@ -31,8 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{item.weight}"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="12sp"
+            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="@{item.date}"
-            android:textColor="@color/blue_green"
+            android:textColor="@color/text_gray"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -34,7 +34,7 @@
             android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
             android:hint="0"
-            android:textColor="@color/black"
+            android:textColor="@color/black_all"
             android:textSize="14sp"/>
 
         <TextView
@@ -44,6 +44,7 @@
             android:layout_marginStart="4dp"
             android:layout_toEndOf="@+id/rebs_count_recycler_edit_count"
             android:layout_centerVertical="true"
+            android:textColor="@color/black_all"
             android:text="개"/>
 
         <ImageView
@@ -52,6 +53,6 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete_text"/>
+            android:src="@drawable/icon_small_delete"/>
     </RelativeLayout>
 </layout>

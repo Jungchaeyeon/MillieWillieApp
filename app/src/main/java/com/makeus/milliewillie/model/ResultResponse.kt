@@ -1,5 +1,5 @@
 package com.makeus.milliewillie.model
 
-data class PatchGoalWeight(
+data class ResultResponse(
     val result: String
 ): BaseResponse()

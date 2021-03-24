@@ -103,8 +103,12 @@ class ExPartSelectBottomSheetFragment:
         clickOk?.invoke(partOfEx)
         dismiss()
 
-        ExerciseSetBottomSheetFragment.getInstance()
-            .setOnClickOk {}.show(fragmentManager!!)
+        activity?.supportFragmentManager?.beginTransaction()?.add(R.id.routine_container, ExerciseSetBottomSheetFragment())?.addToBackStack(null)?.commitAllowingStateLoss()
+
+//        ExerciseSetBottomSheetFragment.getInstance()
+//            .setOnClickOk {
+//
+//            }.show(fragmentManager!!)
     }
     fun onClickCancel(){
         dismiss()

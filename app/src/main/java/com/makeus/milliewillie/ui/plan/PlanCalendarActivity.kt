@@ -5,6 +5,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityPlanCalendarBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
@@ -21,8 +22,11 @@ class PlanCalendarActivity :
 
     val repositoryCached by inject<RepositoryCached>()
     private var dayNightStr: String = ""
+    private var dayAvail: String = ""
     private var startStrDate: String = ""
     private var endStrDate: String = ""
+    val firstCalendarDate = Calendar.getInstance(Locale.KOREA)
+    val thirdCalendarDate = Calendar.getInstance()
 
     companion object {
         fun getInstance() = PlanCalendarActivity()
@@ -33,14 +37,14 @@ class PlanCalendarActivity :
         vm = viewModel
         viewModel.bindLifecycle(this@PlanCalendarActivity)
 
-        val firstCalendarDate = Calendar.getInstance(Locale.KOREA)
+        //val firstCalendarDate = Calendar.getInstance(Locale.KOREA)
         val dateFormat = SimpleDateFormat("MM월 dd일 (EE)")
 
         val secondCalendarDate = Calendar.getInstance()
         secondCalendarDate.time = firstCalendarDate.time
         secondCalendarDate.add(Calendar.YEAR, 1)
 
-        val thirdCalendarDate = Calendar.getInstance()
+        //val thirdCalendarDate = Calendar.getInstance()
         thirdCalendarDate.time = firstCalendarDate.time
         thirdCalendarDate.add(Calendar.MONTH, 0)
 
@@ -50,12 +54,13 @@ class PlanCalendarActivity :
             val calcuDate = (endDate.time - startDate.time) / (60 * 60 * 24 * 1000)
 
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
-            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
+            dayAvail= calcuDate.toInt().plus(1).toString()
+            viewModel.liveDate.postValue("$startStrDate - $endStrDate $dayNightStr")
         }
 
         calendar_view.setOnStartSelectedListener { startDate, label ->
             startStrDate = dateFormat.format(startDate)
-            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
+            viewModel.liveDate.postValue("$startStrDate"+" 1일")
         }
 
         calendar_view.apply {
@@ -68,6 +73,10 @@ class PlanCalendarActivity :
 
     fun onClickBack() {
         viewModel.liveDayAndNight.postValue(dayNightStr)
+        repositoryCached.setValue(LocalKey.AVAILHOLI,dayAvail)
         onBackPressed()
+    }
+    fun onClickToday(){
+        calendar_view.setSelectionDate(firstCalendarDate.time, thirdCalendarDate.time)
     }
 }

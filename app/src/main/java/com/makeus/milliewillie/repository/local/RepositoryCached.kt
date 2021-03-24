@@ -58,6 +58,7 @@ abstract class RepositoryCached {
     fun getIsMember() = getValue(LocalKey.ISMEMBER, false)
     fun getSocialType() = getValue(LocalKey.SOCIALTYPE, "")
     fun getholiExist() = getValue(LocalKey.HOLIEXIST, false)
+    fun getAvailHoli() = getValue(LocalKey.AVAILHOLI, 0)
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

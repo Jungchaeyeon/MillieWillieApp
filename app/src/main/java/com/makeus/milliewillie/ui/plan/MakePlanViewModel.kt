@@ -15,6 +15,10 @@ class MakePlanViewModel : BaseViewModel() {
     val liveGoalData = MutableLiveData<String>()
     val livePlanTypeList = MutableLiveData<List<String>>()
 
+    val liveAvailNumber = MutableLiveData<String>()
+    var liveAvailHap =MutableLiveData<Int>().apply { value=0 }
+    var liveAvailValue = List(3){MutableLiveData<String>().apply { value="0"}}
+
     // TodoItem list
     val livePlanTodoList = MutableLiveData<MutableList<Plan.Todos>>()
     var planTodos = ArrayList<Plan.Todos>()
@@ -67,7 +71,7 @@ class MakePlanViewModel : BaseViewModel() {
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(
             listOf(
-                "일정", "정기휴가", "포상휴가",
+                "일정", "휴가",
                 "외박", "훈련", "면회",
                 "외출", "전투휴무", "당직"
             )

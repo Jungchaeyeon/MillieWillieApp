@@ -18,6 +18,7 @@
         android:id="@+id/layout_mk_plan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f5f5f5"
         android:orientation="vertical"
         tools:context=".ui.plan.MakePlanActivity">
 
@@ -127,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="24dp"
-                        android:background="@drawable/bg_left_line_aqua"
+                        android:background="@color/trans"
                         android:gravity="center_vertical"
                         android:hint="@string/plan_title"
                         android:paddingStart="10dp"
@@ -232,22 +233,22 @@
                     android:layout_height="60dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:onClick="@{()->vi.onClickVaca()}">
 
                     <TextView
                         style="@style/spoqa_regular_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:text="@string/military_leave"
+                        android:text="@string/holiday"
                         android:textColor="@color/black_all"
                         android:textSize="14sp" />
 
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_weight="1" />
-
+                        android:layout_weight="1"/>
                     <TextView
                         style="@style/spoqa_medium_14"
                         android:layout_width="wrap_content"
@@ -261,7 +262,11 @@
                         android:layout_margin="16dp"
                         android:src="@drawable/icon_right" />
                 </LinearLayout>
-
+                <View
+                    style="@style/MatchWrap_24"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/light_gray" />
                 <LinearLayout
                     android:id="@+id/layout_other_plan"
                     android:layout_width="match_parent"
@@ -299,133 +304,6 @@
                         android:layout_height="20dp"
                         android:layout_margin="16dp"
                         android:src="@drawable/icon_right" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/layout_notice_week"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="8">
-
-                    <TextView
-                        style="@style/spoqa_regular_12"
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:text="@string/repeat"
-                        android:textColor="@color/black_all"
-                        android:textSize="14sp" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_no_notice"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/repeat_no"
-                        android:textOn="@string/repeat_no" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_mon"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/mon"
-                        android:textOn="@string/mon" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_tue"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/tues"
-                        android:textOn="@string/tues" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_wed"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/wedn"
-                        android:textOn="@string/wedn" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_thur"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/thurs"
-                        android:textOn="@string/thurs" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_fri"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/fri"
-                        android:textOn="@string/fri" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_sat"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/sat"
-                        android:textOn="@string/sat" />
-
-                    <ToggleButton
-                        android:id="@+id/btn_sun"
-                        style="@style/spoqa_medium_14"
-                        android:layout_width="35dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="39dp"
-                        android:layout_weight="1"
-                        android:background="@color/trans"
-                        android:gravity="center"
-                        android:onClick="@{(view)->vi.onClickDate(view)}"
-                        android:textColor="@color/ic_date_selector"
-                        android:textOff="@string/sun"
-                        android:textOn="@string/sun" />
                 </LinearLayout>
 
                 <View
@@ -515,11 +393,13 @@
 
                     <CheckBox
                         android:id="@+id/chkbox_todo"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:scaleX="0.7"
-                        android:scaleY="0.7"
+                        android:scaleX="1.05"
+                        android:scaleY="1.05"
+                        android:background="@drawable/icon_checkbox"
+                        android:backgroundTint="#e3e3e3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

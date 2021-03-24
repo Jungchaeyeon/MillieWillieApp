@@ -43,13 +43,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-<!--            <TextView-->
-<!--                style="@style/spoqa_regular_12"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="14dp"-->
-<!--                android:text="@string/reset"-->
-<!--                android:textColor="@color/black_all" />-->
+
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="@string/reset"
+                android:textColor="@color/black_all"
+                android:gravity="center"
+                android:layout_marginEnd="15dp"
+                android:onClick="@{()->vi.onClickToday()}"/>
 
         </LinearLayout>
 
@@ -80,7 +84,7 @@
                 style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/white_two"
                 android:textStyle="bold"
                 android:text="@{vm.liveDate}"
                 tools:text="3월 2일 (토)" />

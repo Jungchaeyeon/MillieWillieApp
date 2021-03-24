@@ -20,6 +20,7 @@ import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
+import com.makeus.milliewillie.ui.plan.PlanVacationActivity
 import java.util.*
 
 /**
@@ -63,6 +64,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun holiday() = MyIntent(HolidayActivity::class.java)
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
+    fun planvacation() = MyIntent(PlanVacationActivity::class.java)
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }

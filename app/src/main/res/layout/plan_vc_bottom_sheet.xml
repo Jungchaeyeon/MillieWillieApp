@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.PlanVacationBottomSheetFragment" />
+    </data>
+
+    <LinearLayout
+        style="@style/BottomLayout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/avail_pick_date_vc" />
+
+            <TextView
+                android:id="@+id/txt_avail_num"
+                style="@style/spoqa_bold_22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView19"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/regular_holi"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="정기휴가" />
+
+            <TextView
+                android:id="@+id/edt_regul"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="34dp"
+                android:background="@drawable/rect_radius_8"
+                android:backgroundTint="#fafafa"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:paddingStart="84dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_day1"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/day"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edt_regul"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_plus_regul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/icon_plus_circle"
+                android:onClick="@{()->vi.onClickPlus(0)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_day1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_minus_regul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_minus_circle"
+                android:onClick="@{()->vi.onClickMinus(0)}"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_plus_regul"
+                app:layout_constraintStart_toEndOf="@+id/btn_plus_regul"
+                app:layout_constraintTop_toTopOf="@+id/btn_plus_regul" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_vaca_prize"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/prize_holi"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="포상휴가" />
+
+            <TextView
+                android:id="@+id/edt_prize"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="34dp"
+                android:background="@drawable/rect_radius_8"
+                android:backgroundTint="#fafafa"
+                android:paddingStart="84dp"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:focusable="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_vaca_prize"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView21"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/day"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edt_prize"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_plus_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/icon_plus_circle"
+                android:onClick="@{()->vi.onClickPlus(1)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_minus_prize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_minus_circle"
+                android:onClick="@{()->vi.onClickMinus(1)}"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_plus_prize"
+                app:layout_constraintStart_toEndOf="@+id/btn_plus_prize"
+                app:layout_constraintTop_toTopOf="@+id/btn_plus_prize" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_other_vaca"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="18dp"
+                android:text="@string/other_holi"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="기타휴가" />
+
+            <TextView
+                android:id="@+id/edt_other"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="34dp"
+                android:background="@drawable/rect_radius_8"
+                android:backgroundTint="#fafafa"
+                android:paddingStart="84dp"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_other_vaca"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_day3"
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/day"
+                android:textColor="@color/black_all"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edt_other"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_plus_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/icon_plus_circle"
+                android:onClick="@{()->vi.onClickPlus(2)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_day3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_minus_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_minus_circle"
+                android:onClick="@{()->vi.onClickMinus(2)}"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_plus_other"
+                app:layout_constraintStart_toEndOf="@+id/btn_plus_other"
+                app:layout_constraintTop_toTopOf="@+id/btn_plus_other" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            style="@style/spoqa_bold_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/dpSpinner"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/background_google_login"
+            android:backgroundTint="@color/main_col_blu"
+            android:onClick="@{()->vi.onClickOk()}"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</layout>

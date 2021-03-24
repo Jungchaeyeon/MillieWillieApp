@@ -8,9 +8,11 @@ import com.makeus.milliewillie.di.networkModule
 import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.di.viewModelModule
 import com.makeus.milliewillie.network.adapter.RxErrorHandler
+import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import kotlin.properties.Delegates
 
 class MyApplication : Application() {
 
@@ -30,6 +32,8 @@ class MyApplication : Application() {
 
         lateinit var loginType: LOGINTYPE
         var isEnabledPush: Boolean = true
+
+        var isFirstExListSet by Delegates.notNull<Boolean>()
 
         lateinit var sSharedPreferences: SharedPreferences
         const val MILLI_WILLI = "MILLI_WILLI"
@@ -64,6 +68,7 @@ class MyApplication : Application() {
         KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
 
         sSharedPreferences = applicationContext.getSharedPreferences(MILLI_WILLI, MODE_PRIVATE)
+        isFirstExListSet = SharedPreference.getSettingBooleanItem("firstSet")
 
     }
 

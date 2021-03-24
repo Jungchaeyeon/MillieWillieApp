@@ -19,15 +19,8 @@ class ExPartSelectBottomSheetFragment:
     lateinit var chest: AppCompatButton
     lateinit var back: AppCompatButton
     lateinit var abs: AppCompatButton
-    lateinit var triceps: AppCompatButton
-    lateinit var biceps: AppCompatButton
-    lateinit var forearm: AppCompatButton
     lateinit var arm: AppCompatButton
-    lateinit var hip: AppCompatButton
-    lateinit var thigh: AppCompatButton
-    lateinit var calf: AppCompatButton
-    lateinit var wholeBody: AppCompatButton
-    lateinit var core: AppCompatButton
+    lateinit var leg: AppCompatButton
 
 
     companion object {
@@ -47,20 +40,13 @@ class ExPartSelectBottomSheetFragment:
         chest = binding.rbsBtnChest
         back = binding.rbsBtnBack
         abs = binding.rbsBtnAbs
-        triceps = binding.rbsBtnTriceps
-        biceps = binding.rbsBtnBiceps
-        forearm = binding.rbsBtnForearm
         arm = binding.rbsBtnArm
-        hip = binding.rbsBtnHip
-        thigh = binding.rbsBtnThigh
-        calf = binding.rbsBtnCalf
-        wholeBody = binding.rbsBtnWholeBody
-        core = binding.rbsBtnCore
+        leg = binding.rbsBtnLeg
+
     }
 
     fun setTextStatus(position: Int){
-        val textList = arrayListOf(total, shoulder, chest, back, abs, triceps, biceps,
-            forearm, arm, hip, thigh, calf, wholeBody, core)
+        val textList = arrayListOf(total, leg, chest, back, shoulder, arm, abs)
 
         if (!textList[position-1].isSelected) {
             textList.forEach { view ->
@@ -79,8 +65,7 @@ class ExPartSelectBottomSheetFragment:
 
     fun setBtnView(btn: AppCompatButton) {
 
-        val textList = arrayListOf(total, shoulder, chest, back, abs, triceps, biceps,
-            forearm, arm, hip, thigh, calf, wholeBody, core)
+        val textList = arrayListOf(total, leg, chest, back, shoulder, arm, abs)
 
         if (!btn.isSelected) {
             textList.forEach { view ->
@@ -103,7 +88,6 @@ class ExPartSelectBottomSheetFragment:
         clickOk?.invoke(partOfEx)
         dismiss()
 
-        activity?.supportFragmentManager?.beginTransaction()?.add(R.id.routine_container, ExerciseSetBottomSheetFragment())?.addToBackStack(null)?.commitAllowingStateLoss()
 
 //        ExerciseSetBottomSheetFragment.getInstance()
 //            .setOnClickOk {

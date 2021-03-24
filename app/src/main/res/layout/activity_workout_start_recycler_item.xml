@@ -47,6 +47,7 @@
             android:id="@+id/start_item_recycler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/start_item_text_ex_info"
             android:orientation="horizontal"
             replaceAll="@{vm.liveDataCircleItemList}"

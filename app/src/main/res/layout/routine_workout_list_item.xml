@@ -5,23 +5,24 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity" />
+            type="com.makeus.milliewillie.ui.routine.MakeRoutineActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.StartRecyclerCircleItem" />
+            type="com.makeus.milliewillie.model.RoutineWorkoutListItem" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            setImage="@{item.circle}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:paddingVertical="15dp"
+            android:text="@{item.listItemName}"
+            android:textColor="@color/text_gray"
+            android:onClick="@{()-> vi.onClickExItem()}"
             app:layout_constraintTop_toTopOf="parent" />
 
 

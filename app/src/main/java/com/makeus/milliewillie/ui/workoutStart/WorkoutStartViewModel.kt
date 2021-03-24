@@ -5,6 +5,7 @@ import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.StartRecyclerCircleItem
 import com.makeus.milliewillie.model.StartRecyclerItem
+import com.makeus.milliewillie.util.Log
 
 class WorkoutStartViewModel: BaseViewModel() {
 
@@ -16,18 +17,20 @@ class WorkoutStartViewModel: BaseViewModel() {
 
     init {
         defaultItemList()
-        defaultCircleItemList()
     }
 
     fun defaultItemList() {
-        createItemList()
-        liveDataItemList.postValue(_itemList)
+        defaultCircleItemList()
     }
 
     fun createItemList() {
         for (i in 0..9) {
-            _itemList.add(StartRecyclerItem(exName = "밀리터리 프레스", exInfo = "5set, 10kg, 5개"))
+            if (i == 0 || i == 1) _itemList.add(StartRecyclerItem(exName = "", exInfo = "", circleList = _circleItemList))
+            _itemList.add(StartRecyclerItem(exName = "밀리터리 프레스", exInfo = "5set, 10kg, 5개", circleList = _circleItemList))
+            if (i == 8 || i == 9) _itemList.add(StartRecyclerItem(exName = "", exInfo = "", circleList = _circleItemList))
         }
+        Log.e(_itemList.toString())
+        liveDataItemList.postValue(_itemList)
     }
 
     fun onClickItemList(position: Int) {
@@ -37,9 +40,11 @@ class WorkoutStartViewModel: BaseViewModel() {
 
     fun defaultCircleItemList() {
         for (i in 0..4) {
-            _circleItemList.add(StartRecyclerCircleItem(R.drawable.circle_recycler_item_unselect))
+            _circleItemList.add(StartRecyclerCircleItem())
         }
         liveDataCircleItemList.postValue(_circleItemList)
+        Log.e(_circleItemList.toString())
+        createItemList()
     }
 
 

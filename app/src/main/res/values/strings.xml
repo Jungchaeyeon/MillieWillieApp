@@ -8,6 +8,7 @@
     <string name="sub_title">소제목</string>
     <string name="sub_title_hint">목표, 동기부여 혹은 설명도 좋아요(선택사항)</string>
     <string name="classification">구분</string>
+    <string name="exercisePart">운동 부위</string>
     <string name="start_date">시작일</string>
     <string name="date">날짜</string>
     <string name="date_info">날짜선택</string>
@@ -73,6 +74,8 @@
     <string name="calf">종아리</string>
     <string name="whole_body">전신</string>
     <string name="core">코어</string>
+    <string name="leg">하체</string>
+    <string name="part_of_ex_title">%s 운동</string>
 
     <string name="option_select">옵션 선택</string>
     <string name="option_weight_count">무게 + 개수</string>

@@ -1,23 +1,22 @@
 package com.makeus.milliewillie.ui.routine
 
-import android.util.Log
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.R
-import com.makeus.milliewillie.model.WorkoutSet
+import com.makeus.milliewillie.model.WorkoutCountSet
+import com.makeus.milliewillie.model.WorkoutTimeSet
+import com.makeus.milliewillie.model.WorkoutWncSet
 import kotlin.collections.ArrayList
 
 
 class ExerciseSetViewModel: BaseViewModel() {
 
-    val liveDataWncAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
-    val liveDataCountAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
-    val liveDataTimeAddSetList = MutableLiveData<ArrayList<WorkoutSet>>()
+    val liveDataWncAddSetList = MutableLiveData<ArrayList<WorkoutWncSet>>()
+    val liveDataCountAddSetList = MutableLiveData<ArrayList<WorkoutCountSet>>()
+    val liveDataTimeAddSetList = MutableLiveData<ArrayList<WorkoutTimeSet>>()
 
-    val wncSetItemList = ArrayList<WorkoutSet>()
-    val countSetItemList = ArrayList<WorkoutSet>()
-    val timeSetItemList = ArrayList<WorkoutSet>()
+    val wncSetItemList = ArrayList<WorkoutWncSet>()
+    val countSetItemList = ArrayList<WorkoutCountSet>()
+    val timeSetItemList = ArrayList<WorkoutTimeSet>()
     var wncSetItemListSize = wncSetItemList.size
     var countSetItemListSize = countSetItemList.size
     var timeSetItemListSize = timeSetItemList.size
@@ -25,6 +24,8 @@ class ExerciseSetViewModel: BaseViewModel() {
     var liveDataSetCount = MutableLiveData<String>().apply { value = "0" }
     var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0 세트" }
 
+    var liveDataExerciseName = MutableLiveData<String>().apply { value = "" }
+    
     init {
         defaultAddSet()
     }
@@ -48,11 +49,11 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addItem() {
-        wncSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
+        wncSetItemList.add(WorkoutWncSet("${liveDataSetCount.value!!.toInt()+1}세트"))
         wncSetItemListSize = wncSetItemList.size
-        countSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
+        countSetItemList.add(WorkoutCountSet("${liveDataSetCount.value!!.toInt()+1}세트"))
         countSetItemListSize = countSetItemList.size
-        timeSetItemList.add(WorkoutSet("${liveDataSetCount.value!!.toInt()+1} 세트"))
+        timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
         timeSetItemListSize = timeSetItemList.size
 
         defaultAddSet()
@@ -67,6 +68,28 @@ class ExerciseSetViewModel: BaseViewModel() {
         timeSetItemListSize = timeSetItemList.size
 
         defaultAddSet()
+    }
+
+    fun addPositionItem(setOption: ExerciseSetBottomSheetFragment.SetOptions, position: Int, value: String, kind: Int) {
+        when (setOption) {
+            ExerciseSetBottomSheetFragment.SetOptions.WNC-> {
+                when (kind) {
+                    1 -> wncSetItemList[position].weight = value
+                    2 -> wncSetItemList[position].count = value
+                }
+            }
+            ExerciseSetBottomSheetFragment.SetOptions.COUNT-> {
+                countSetItemList[position].count = value
+            }
+            ExerciseSetBottomSheetFragment.SetOptions.TIME-> {
+                when (kind) {
+                    1 -> timeSetItemList[position].hour = value
+                    2 -> timeSetItemList[position].min = value
+                    3 -> timeSetItemList[position].sec = value
+                }
+            }
+        }
+
     }
 
 }

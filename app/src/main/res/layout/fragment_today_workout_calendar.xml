@@ -39,6 +39,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="15dp"
                     android:src="@drawable/icon_gotobac"
+                    android:onClick="@{()-> vi.onClickCancel()}"
                     app:tint="@color/blue_green" />
 
                 <ImageView
@@ -59,7 +60,7 @@
                 android:background="@drawable/calendar_background"
                 app:mcv_dateTextAppearance="@style/CalendarDateText"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
-                app:mcv_selectionColor="@color/non"
+                app:mcv_selectionColor="@color/blue_green_zero"
                 app:mcv_leftArrowMask="@drawable/icon_left_reverse"
                 app:mcv_rightArrowMask="@drawable/icon_left"
                 app:mcv_arrowColor="@color/blue_green"

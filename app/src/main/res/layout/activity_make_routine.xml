@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -60,6 +60,7 @@
                     android:background="@drawable/layout_underline"
                     >
                 <EditText
+                    android:id="@+id/routine_edit_routine_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -212,10 +213,55 @@
 
             </RelativeLayout>
 
-            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="22dp"
+                android:paddingBottom="8dp"
+                android:layout_marginHorizontal="24dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_all"
+                    android:text="@{vm.liveDataPartOfExTitle}"
+                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:includeFontPadding="false"/>
+                
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/routine_img_add"
+                    android:src="@drawable/icon_search_black"/>
 
+                <ImageView
+                    android:id="@+id/routine_img_add"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="@{()-> vi.onClickAddExKind()}"
+                    android:src="@drawable/icon_add"/>
 
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/routine_selected_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="vertical"
+                replaceAll="@{vm.liveDataSelectedItemList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/routine_workout_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="vertical"
+                replaceAll="@{vm.liveDataExItemList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </LinearLayout>
 

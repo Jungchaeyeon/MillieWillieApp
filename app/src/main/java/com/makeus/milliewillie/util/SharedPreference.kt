@@ -51,7 +51,7 @@ object SharedPreference {
         Log.e("result $key (value : $jsonList ) to $MILLI_WILLI")
     }
 
-    fun getArrayStringItem(key: String): ArrayList<String>? {
+    fun getArrayStringItem(key: String): ArrayList<String> {
         Log.e("Get $key from $MILLI_WILLI")
         val json = sSharedPreferences.getString(key, null)
         val returnList = ArrayList<String>()

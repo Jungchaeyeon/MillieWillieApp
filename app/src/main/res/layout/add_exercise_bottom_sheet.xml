@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.text.Html" />
+
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment" />
-
-
+            type="com.makeus.milliewillie.ui.routine.AddExerciseBottomSheetFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +18,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/record_text_title"
+            android:id="@+id/add_ex_text_tile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -40,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
-            android:id="@+id/record_layout_current"
+            android:id="@+id/add_ex_name"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginTop="12dp"
@@ -49,30 +50,18 @@
             tools:layout_editor_absoluteX="16dp">
 
             <EditText
-                android:id="@+id/record_edit_current"
+                android:id="@+id/add_ex_edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:maxLines="1"
-                android:maxLength="3"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:inputType="phone"
                 android:textCursorDrawable="@color/maincolor_blue"
-                android:layout_toStartOf="@+id/record_text_kg2"
                 android:background="@drawable/weight_record_edit_background"/>
-
-            <TextView
-                android:id="@+id/record_text_kg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="24dp"
-                android:text="kg"
-                android:textColor="@color/black_all" />
 
         </RelativeLayout>
 
@@ -86,9 +75,12 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:onClick="@{()-> vi.onClickOk()}"
-            app:layout_constraintTop_toBottomOf="@+id/record_layout_current"
+            app:layout_constraintTop_toBottomOf="@+id/add_ex_name"
             tools:layout_editor_absoluteX="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </layout>

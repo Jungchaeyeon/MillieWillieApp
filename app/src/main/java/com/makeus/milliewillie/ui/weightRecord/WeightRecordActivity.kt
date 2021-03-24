@@ -88,16 +88,10 @@ class WeightRecordActivity :
                     }
                     return false
                 }
-
-                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-
-                }
-
-                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-
-                }
-
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
             })
+
             adapter = BaseDataBindingRecyclerViewAdapter<WeightPerDay>()
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<WeightPerDay, ActivityWeightRecordRecyclerItemBinding>(R.layout.activity_weight_record_recycler_item) {

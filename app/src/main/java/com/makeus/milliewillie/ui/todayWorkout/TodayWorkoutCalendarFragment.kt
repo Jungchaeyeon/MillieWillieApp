@@ -1,23 +1,28 @@
 package com.makeus.milliewillie.ui.todayWorkout
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.calendar.EventDecorator
+import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkoutCalendarBinding>(R.layout.fragment_today_workout_calendar) {
 
@@ -39,6 +44,25 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
         todayDate()
 
+        val calendarDayList: java.util.ArrayList<CalendarDay> = java.util.ArrayList()
+
+        binding.calendar.addDecorators(
+            SundayDecorator()
+        )
+        binding.calendar.setOnDateChangedListener { widget, date, selected ->
+            if (date !in calendarDayList) {
+                calendarDayList.add(date)
+                binding.calendar.addDecorators(
+                    SundayDecorator(),
+                    EventDecorator(R.color.blue_green, calendarDayList, context!!)
+                )
+            } else {
+                calendarDayList.remove(date)
+                binding.calendar.removeDecorator(EventDecorator(R.color.blue_green, calendarDayList,context!!))
+            }
+            android.util.Log.e("TAG", "onCreate: $calendarDayList")
+        }
+
         binding.todayCalendarImgGotoFeed.setOnClickListener {
             (activity as TodayWorkoutActivity).onClickViewChange(2)
         }
@@ -46,7 +70,9 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
         binding.todayCalendarRecycler.run {
             adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(R.layout.workout_routine_recycler_item){
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(
+                        R.layout.workout_routine_recycler_item
+                    ) {
                         viCalendar = this@TodayWorkoutCalendarFragment
                         item = it
                     }
@@ -59,7 +85,8 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
     @RequiresApi(Build.VERSION_CODES.O)
     private fun executeGetRoutines() {
         viewModel.apiRepository.getRoutines(
-            path = SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong(), targetDate = date
+            path = SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong(),
+            targetDate = date
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -85,10 +112,6 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
             }.disposeOnDestroy(this)
     }
 
-    fun itemClick() {
-
-    }
-
     fun todayDate(){
         val dateInstance = Calendar.getInstance()
 
@@ -107,10 +130,14 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
             7 -> dayOfWeekText = "토"
         }
 
-        val today = String.format(getString(R.string.todayDateForm, month, day, dayOfWeekText))
+        val today = String.format(getString(R.string.todayDateForm, month + 1, day, dayOfWeekText))
 
         viewModel.liveDataToday.postValue(today)
         Log.e(today)
+    }
+
+    fun onClickCancel() {
+        activity?.onBackPressed()
     }
 
     override fun onResume() {

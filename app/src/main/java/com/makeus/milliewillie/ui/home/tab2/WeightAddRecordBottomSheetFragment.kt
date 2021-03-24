@@ -30,13 +30,10 @@ class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fra
     }
 
 
-
     fun setOnClickOk(clickOk: ((String) -> Unit)): WeightAddRecordBottomSheetFragment {
         this.clickOk = clickOk
         return this
     }
-
-
 
     fun onClickOk() {
         currnet = binding.recordEditCurrent.text.toString()

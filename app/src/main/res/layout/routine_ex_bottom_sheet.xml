@@ -17,6 +17,7 @@
     </data>
 
     <RelativeLayout
+        style="@style/BottomLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -27,7 +28,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="15dp"
+            android:onClick="@{()-> vi.onClickCancel()}"
             android:src="@drawable/icon_gotobac"/>
 
 
@@ -35,11 +36,10 @@
             android:id="@+id/rebs_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/rebs_img_goto_back"
-            android:text="밀리터리 프레스"
+            android:text="@{vm.liveDataExerciseName}"
             android:textSize="22sp"
             android:textColor="@color/black_all"
             android:textStyle="bold"/>
@@ -49,7 +49,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@+id/rebs_text_title"
-            android:layout_marginHorizontal="24dp"
             android:background="@drawable/layout_underline"
             >
 
@@ -105,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_below="@+id/rebs_layout_option_select"
-            android:layout_marginHorizontal="24dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp">
 
@@ -135,9 +133,9 @@
             android:layout_below="@+id/rebs_layout_switch">
 
             <RelativeLayout
+                android:id="@+id/relativeLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginHorizontal="24dp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp">
 
@@ -184,7 +182,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/rebs_btn_minus"
                     android:background="@drawable/icon_plus"
-                    android:onClick="@{(view)-> vi.onClickAddItem(view)}"/>
+                    android:onClick="@{(view)-> vi.onClickAddItem(view)}" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/rebs_btn_minus"
@@ -193,12 +191,22 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/icon_minus"
-                    android:onClick="@{(view)-> vi.onClickAddItem(view)}"/>
+                    android:onClick="@{(view)-> vi.onClickAddItem(view)}" />
             </RelativeLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rebs_btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginVertical="12dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/map_btn_border"
+            android:onClick="@{()-> vi.onClickOk()}"
+            android:text="@string/ok"
+            android:textColor="@color/white_two"
+            android:textStyle="bold" />
 
 
         <!-- WNC 시작 -->
@@ -207,6 +215,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rebs_layout_set"
+            android:layout_above="@+id/rebs_btn_ok"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -215,7 +224,6 @@
                 android:id="@+id/rebs_wnc_layout_input"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginHorizontal="24dp"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp">
@@ -281,29 +289,15 @@
                 android:id="@+id/rebs_wnc_recycler_set"
                 replaceAll="@{vm.liveDataWncAddSetList}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="24dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/rebs_wnc_btn_ok"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp"
                 tools:listitem="@layout/routine_ex_wnc_recycler_item" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/rebs_wnc_btn_ok"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/map_btn_border"
-                android:onClick="@{()-> vi.onClickOk()}"
-                android:text="@string/ok"
-                android:textColor="@color/white_two"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- WNC 끝 -->
@@ -314,6 +308,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rebs_layout_set"
+            android:layout_above="@+id/rebs_btn_ok"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -321,7 +316,6 @@
                 android:id="@+id/rebs_count_layout_input"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:layout_marginHorizontal="24dp"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_scrollFlags="exitUntilCollapsed|scroll"
@@ -366,30 +360,15 @@
                 android:id="@+id/rebs_count_recycler_set"
                 replaceAll="@{vm.liveDataCountAddSetList}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="24dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                app:layout_constraintBottom_toTopOf="@+id/rebs_count_btn_ok"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp"
                 tools:listitem="@layout/routine_ex_count_recycler_item" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/rebs_count_btn_ok"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/map_btn_border"
-                android:onClick="@{()-> vi.onClickOk()}"
-                android:text="@string/ok"
-                android:textColor="@color/white_two"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- COUNT 끝 -->
@@ -400,8 +379,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rebs_layout_set"
+            android:layout_above="@+id/rebs_btn_ok"
             android:orientation="vertical"
-            android:layout_marginHorizontal="24dp"
             android:visibility="gone">
 
             <RelativeLayout
@@ -506,25 +485,13 @@
                 android:id="@+id/rebs_time_recycler_set"
                 replaceAll="@{vm.liveDataTimeAddSetList}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/rebs_time_btn_ok"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/routine_ex_time_recycler_item" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/rebs_time_btn_ok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/map_btn_border"
-                android:onClick="@{()-> vi.onClickOk()}"
-                android:text="@string/ok"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- TIME 끝 -->

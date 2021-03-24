@@ -28,7 +28,7 @@ val viewModelModule = module {
     viewModel { NceeViewModel() }
     viewModel { WelcomeViewModel() }
     viewModel { MapViewModel() }
-    viewModel { MakeRoutineViewModel() }
+    viewModel { MakeRoutineViewModel(get()) }
     viewModel { ExerciseSetViewModel() }
     single { UserViewModel(get()) }
     viewModel { MainViewModel() }

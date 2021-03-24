@@ -7,7 +7,7 @@
             type="com.makeus.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WorkoutSet" />
+            type="com.makeus.milliewillie.model.WorkoutCountSet" />
     </data>
 
     <RelativeLayout
@@ -31,6 +31,7 @@
             android:maxLength="5"
             android:maxLines="1"
             android:singleLine="true"
+            android:imeOptions="actionDone"
             android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
             android:hint="0"

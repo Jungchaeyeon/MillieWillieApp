@@ -55,12 +55,14 @@ class PlanCalendarActivity :
 
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
             dayAvail= calcuDate.toInt().plus(1).toString()
-            viewModel.liveDate.postValue("$startStrDate - $endStrDate $dayNightStr")
+            viewModel.liveDate.postValue("$startStrDate - $endStrDate")
+            viewModel.liveOnlyDay.postValue(dayNightStr)
         }
 
         calendar_view.setOnStartSelectedListener { startDate, label ->
             startStrDate = dateFormat.format(startDate)
-            viewModel.liveDate.postValue("$startStrDate"+" 1일")
+            viewModel.liveDate.postValue("$startStrDate")
+            viewModel.liveOnlyDay.postValue("1일")
         }
 
         calendar_view.apply {

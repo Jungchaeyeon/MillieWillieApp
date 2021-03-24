@@ -10,10 +10,13 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.bgTint
+import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.ui.common.BasicDialogFragment
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
@@ -53,7 +56,9 @@ class MakePlanActivity :
                         vi = this@MakePlanActivity
                         item = it
                     })
+
         }
+
 
         edtTodo.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -61,7 +66,7 @@ class MakePlanActivity :
 
                     viewModel.addTodo(Plan.Todos(false, edtTodo.text.toString()))
                     //  liveSetImage=R.drawable.emo_9_satisfied
-                    edtTodo.text.clear()
+                    edtTodo.text=null
                 }
                 return@setOnKeyListener true
             }
@@ -77,6 +82,7 @@ class MakePlanActivity :
         viewModel.liveDayAndNight.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
+                viewModel.replaceTodo()
                 val type = repositoryCached.getPlanType()
                 btn_tp.text = type
                 when (type) {
@@ -151,7 +157,11 @@ class MakePlanActivity :
     }
 
     fun onClickVaca(){
-        ActivityNavigator.with(context).planvacation().start()
+        if(viewModel.liveDayAndNight.value.isNullOrEmpty()){
+            Snackbar.make(this.layout_mk_plan,"휴가일수는 날짜를 선택하신 뒤에 확인 가능합니다.",Snackbar.LENGTH_LONG).show()
+        }
+        else{
+        ActivityNavigator.with(context).planvacation().start()}
     }
     fun onClickNotice() {
         if (btn_notice.isChecked) {
@@ -176,7 +186,9 @@ class MakePlanActivity :
                 )
 
             )
-        }
+//            for(i in 0..viewModel.planTodos.size){
+//            Log.e(viewModel.planTodos.get(i).todo.toString(),"$i 번째 아이템")}
+       }
     }
 
     override fun onResume() {

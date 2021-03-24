@@ -30,8 +30,9 @@ class PlanVacationBottomSheetFragment :
 
 
     val liveButton = MutableLiveData<String>()
-    val viewModel : MakePlanViewModel by sharedViewModel()
+    val viewModel: MakePlanViewModel by sharedViewModel()
     val repositoryCached by inject<RepositoryCached>()
+    var hap = 0
 
     private var clickOk: ((String) -> Unit)? = null
 
@@ -41,10 +42,13 @@ class PlanVacationBottomSheetFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+        setStyle(STYLE_NORMAL, R.style.MyTransparentBottomSheetDialogTheme)
     }
+
     override fun PlanVcBottomSheetBinding.onBind() {
-         vi=this@PlanVacationBottomSheetFragment
+        vi = this@PlanVacationBottomSheetFragment
+
+
     }
 
     fun setOnClickOk(clickOk: ((String) -> Unit)): PlanVacationBottomSheetFragment {
@@ -56,35 +60,52 @@ class PlanVacationBottomSheetFragment :
         clickOk?.invoke("")
         dismiss()
     }
-    fun onClickPlus(id : Int){
 
-        when(id){
-            0-> edt_regul.text = (edt_regul.text.toString().toInt()+1).toString()
-            1-> edt_prize.text = (edt_prize.text.toString().toInt()+1).toString()
-            2-> edt_other.text = (edt_other.text.toString().toInt()+1).toString()
+    fun onClickPlus(id: Int) {
+
+
+        //Log.e(repositoryCached.getAvailHoli().toString(), "repo")
+
+        hap = edt_regul.text.toString().toInt() + edt_other.text.toString()
+            .toInt() + edt_prize.text.toString().toInt()
+
+        when (id) {
+            0 -> edt_regul.text = (edt_regul.text.toString().toInt() + 1).toString()
+            1 -> edt_prize.text = (edt_prize.text.toString().toInt() + 1).toString()
+            2 -> edt_other.text = (edt_other.text.toString().toInt() + 1).toString()
             else -> ""
         }
-        val hap =edt_regul.text.toString().toInt()+ edt_other.text.toString().toInt()+ edt_prize.text.toString().toInt()
-        Log.e(repositoryCached.getAvailHoli().toString(),"AvailHoli repo")
-        if(hap >=repositoryCached.getAvailHoli())
-        {
-            btn_plus_other.isEnabled=false
-            btn_plus_prize.isEnabled=false
-            btn_plus_regul.isEnabled=false
+        if (hap == repositoryCached.getAvailHoli() - 1) {
+            btn_plus_other.isEnabled = false
+            btn_plus_prize.isEnabled = false
+            btn_plus_regul.isEnabled = false
         }
+
+
     }
-    fun onClickMinus(num: Int){
 
-        when(id){
-            0-> edt_regul.text = (edt_regul.text.toString().toInt()-1).toString()
-            1-> edt_prize.text = (edt_prize.text.toString().toInt()-1).toString()
-            2-> edt_other.text = (edt_other.text.toString().toInt()-1).toString()
-            else -> ""
+    fun onClickMinus(id: Int) {
+        Log.e("$hap", "hap")
+        btn_plus_other.isEnabled = true
+        btn_plus_prize.isEnabled = true
+        btn_plus_regul.isEnabled = true
+
+        if (edt_regul.text.toString().toInt() >= 0) {
+            if (edt_prize.text.toString().toInt() >= 0) {
+                if (edt_other.text.toString().toInt() >= 0) {
+                    when (id) {
+                        0 -> edt_regul.text = (edt_regul.text.toString().toInt() - 1).toString()
+                        1 -> edt_prize.text = (edt_prize.text.toString().toInt() - 1).toString()
+                        2 -> edt_other.text = (edt_other.text.toString().toInt() - 1).toString()
+                        else -> ""
+                    }
+                }
+            }
         }
-        if(edt_regul.text =="0") edt_regul.isEnabled=false
-        else if(edt_prize.text =="0") edt_prize.isEnabled=false
-        else if(edt_other.text =="0") edt_other.isEnabled=false
-        else ""
+        if (edt_regul.text.toString() == "-1") edt_regul.text = "0"
+        if (edt_prize.text.toString() == "-1") edt_prize.text = "0"
+        if (edt_other.text.toString() == "-1") edt_other.text = "0"
+
     }
 
     fun onClickCancel() {
@@ -93,7 +114,7 @@ class PlanVacationBottomSheetFragment :
 
     override fun onResume() {
         super.onResume()
-        txt_avail_num.text=repositoryCached.getAvailHoli().toString()+"일"
+        txt_avail_num.text = repositoryCached.getAvailHoli().toString() + "일"
     }
 
 }

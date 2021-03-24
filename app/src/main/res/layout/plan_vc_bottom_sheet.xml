@@ -102,7 +102,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txt_day1"
                 app:layout_constraintTop_toTopOf="parent" />
-
+p
             <ImageView
                 android:id="@+id/btn_minus_regul"
                 android:layout_width="wrap_content"

@@ -14,6 +14,7 @@ class MakePlanViewModel : BaseViewModel() {
     val liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
     val liveGoalData = MutableLiveData<String>()
     val livePlanTypeList = MutableLiveData<List<String>>()
+    var liveOnlyDay =MutableLiveData<String>()
 
     val liveAvailNumber = MutableLiveData<String>()
     var liveAvailHap =MutableLiveData<Int>().apply { value=0 }
@@ -26,6 +27,10 @@ class MakePlanViewModel : BaseViewModel() {
     //TodoMethod
     fun addTodo(item: Plan.Todos) {
         planTodos.add(item)
+        livePlanTodoList.value = planTodos
+    }
+    fun replaceTodo(){
+        planTodos.clear()
         livePlanTodoList.value = planTodos
     }
 

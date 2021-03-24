@@ -9,6 +9,7 @@ import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
+import com.makeus.milliewillie.ui.holiday.HolidayActivity
 import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.intro.*
@@ -59,8 +60,9 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
-    fun holiday() = MyIntent(InfoMiliActivity::class.java)
+    fun holiday() = MyIntent(HolidayActivity::class.java)
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
+    fun infomili() = MyIntent(InfoMiliActivity::class.java)
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }

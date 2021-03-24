@@ -20,11 +20,6 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.holiday.HolidayActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.mypage.InfoEnlistActivity"></activity>
         <activity android:name=".ui.MainCalendarActivity" />
@@ -57,7 +52,13 @@
         <activity android:name=".ui.plan.MakePlanActivity" />
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.mypage.InfoMiliActivity"></activity>
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"

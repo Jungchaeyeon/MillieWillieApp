@@ -69,7 +69,6 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                     ) {
                         if (this@HomeFragment.viewModel.planItems.size >= 2) {
                             txt_blank.visibility = View.GONE
-
                         }
                         item = it
                     })

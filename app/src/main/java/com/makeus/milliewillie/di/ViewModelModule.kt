@@ -5,6 +5,7 @@ import com.makeus.milliewillie.ui.dDay.DdayViewModel
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel
 import com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel
 import com.makeus.milliewillie.ui.dDay.ncee.NceeViewModel
+import com.makeus.milliewillie.ui.holiday.HoliViewModel
 import com.makeus.milliewillie.ui.home.tab3.EmoViewModel
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import com.makeus.milliewillie.ui.intro.WelcomeViewModel
@@ -30,4 +31,5 @@ val viewModelModule = module {
     single {  MakePlanViewModel() }//추후 수정
     viewModel { MainViewModel() }
     viewModel { EmoViewModel() }
+    viewModel { HoliViewModel() }
 }

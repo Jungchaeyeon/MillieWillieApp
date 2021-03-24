@@ -54,6 +54,22 @@ class CircleIndicator : LinearLayout{
         selectDot(position)
     }
 
+    fun customCreateDotPanel(count: Int, defaultCircle: Int, selectCircle: Int) {
+        this.removeAllViews()
+
+        mDefaultCircle = defaultCircle
+        mSelectCircle = selectCircle
+
+        for (i in 0 until count) {
+            imageDot.add(ImageView(mContext).apply {
+                if (i < count - 1) {
+                    setPadding(0, 0, temp.toInt(), 0)
+                }
+            })
+            this.addView(imageDot[i])
+        }
+        selectDots(0)
+    }
     /**
      * 선택된 점 표시
      * @param position
@@ -61,6 +77,10 @@ class CircleIndicator : LinearLayout{
     fun selectDot(position: Int) {
         imageDot.forEachIndexed { index, imageView ->
             imageView.setImageResource(if (index == position) mSelectCircle else mDefaultCircle)
+        }
+    } fun selectDots(nums: Int) {
+        imageDot.forEachIndexed { index, imageView ->
+            imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
         }
     }
 }

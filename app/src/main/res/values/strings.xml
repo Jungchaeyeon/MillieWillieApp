@@ -143,4 +143,24 @@
     <string name="info_mili">복무정보</string>
     <string name="enlist_day">입대일</string>
     <string name="holiday">휴가</string>
+    <string name="use">사용하기</string>
+    <string name="add">추가하기</string>
+    <string name="register">등록하기</string>
+    <string name="prize">포상</string>
+    <string name="prize_holi">포상휴가</string>
+    <string name="max_prizeholi">/15일</string>
+    <string name="regular">정기</string>
+    <string name="add_holi">휴가 추가하기</string>
+    <string name="regular_holi">정기휴가</string>
+    <string name="other_holi">기타휴가</string>
+    <string name="day">일</string>
+    <string name="all_holiday">총 휴가일수</string>
+    <string name="naming_holi">휴가 명칭</string>
+    <string name="air_force">공군</string>
+    <string name="air_force_info">28일 (21개월 복무 시)</string>
+    <string name="navy">해군</string>
+    <string name="navy_info">27일 (20개월 복무 시)</string>
+    <string name="army_info">24일 (18개월 복무 시)</string>
+    <string name="army">육군/해병대</string>
+    <string name="add_holi_num">추가일수</string>
 </resources>

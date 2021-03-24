@@ -19,7 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.holiday.HolidayActivity"></activity>
+        <activity android:name=".ui.holiday.HolidayActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.mypage.InfoEnlistActivity"></activity>
         <activity android:name=".ui.MainCalendarActivity" />
         <activity
@@ -47,11 +53,6 @@
         </activity>
         <activity android:name=".ui.intro.WelcomeActivity" />
         <activity android:name=".ui.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.plan.MakePlanActivity" />
         <activity

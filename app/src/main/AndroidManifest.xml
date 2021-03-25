@@ -58,8 +58,10 @@
         <activity android:name=".ui.intro.WelcomeActivity" />
         <activity android:name=".ui.login.LoginActivity">
 
+
         </activity>
         <activity android:name=".ui.plan.MakePlanActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,12 +70,12 @@
         </activity>
 
 
+
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
-
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan" >

@@ -1,6 +1,8 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    DAYNIGHT,
+    PICKDATE,
     AVAILHOLI,
     HOLIEXIST,
     SOCIALTYPE,
@@ -14,9 +16,8 @@ enum class LocalKey {
     MILIDDAY,
     GOAL,
     PLANTYPE,
-    PLANNOTICE,
     COLOR,
-    DAYNIGHT,
+    ONLYDAY,
     STARTDATE,
     ENDDATE,
     ENDDDAY,

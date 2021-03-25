@@ -21,6 +21,8 @@ import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordViewModel
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel
 import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.get
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val viewModelModule = module {
@@ -34,8 +36,8 @@ val viewModelModule = module {
     viewModel { MakeRoutineViewModel(get()) }
     viewModel { ExerciseSetViewModel() }
     viewModel { UserViewModel(get(),get()) }
+    viewModel {  MakePlanViewModel(get()) }//추후 수정
     viewModel { MainViewModel() }
-    single {  MakePlanViewModel() }
     viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel() }

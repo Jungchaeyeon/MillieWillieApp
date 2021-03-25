@@ -1,9 +1,11 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.os.Bundle
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
+import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
@@ -28,7 +30,10 @@ class PlanVacationActivity :
     companion object {
         fun getInstance() = PlanVacationActivity()
     }
-
+    override fun setupProperties(bundle: Bundle?) {
+        super.setupProperties(bundle)
+        viewModel.plansRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as PlansRequest
+    }
 
     override fun ActivityPlanVacationBinding.onBind() {
         vi = this@PlanVacationActivity

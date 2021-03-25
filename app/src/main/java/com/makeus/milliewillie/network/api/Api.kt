@@ -93,6 +93,11 @@ interface Api {
 //        @Field("name") name : String
 //    ): Observable<Users>
 
+    @POST("calendars/plans")
+    fun plans(
+        @Body body : PlansRequest
+    ): Observable<Plans>
+
     @POST("users")
     fun users(
         @Body body : UsersRequest

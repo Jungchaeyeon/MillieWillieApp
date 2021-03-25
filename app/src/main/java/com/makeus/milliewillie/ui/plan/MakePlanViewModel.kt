@@ -90,7 +90,7 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
         )
     }
 
-    fun requestPlan()=
+    fun requestPlan() =
         apiRepository.plans(
             PlansRequest(
                 color = livePlanColor.value.toString(),
@@ -99,7 +99,7 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
                 startDate = plansRequest.startDate,
                 endDate = plansRequest.endDate,
                 push = plansRequest.push,
-                pushDeviceToken =null,
+                pushDeviceToken = null,
                 planVacation = plansRequest.planVacation,
                 work = plansRequest.work
             )

@@ -8,7 +8,7 @@ data class PlansRequest(
     var title: String="",
     var startDate: String="",
     var endDate: String="",
-    var push: String="N",
+    var push: String?=null,
     var pushDeviceToken: String?=null,
     var planVacation: List<PlanVacation>?= null,
     var work: List<Work>?= null

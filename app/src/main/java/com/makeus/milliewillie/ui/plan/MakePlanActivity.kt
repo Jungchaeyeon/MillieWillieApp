@@ -48,9 +48,9 @@ class MakePlanActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repositoryCached.setValue(LocalKey.PICKDATE,"날짜선택")
-        repositoryCached.setValue(LocalKey.ONLYDAY,"")
-        repositoryCached.setValue(LocalKey.DAYNIGHT,"")
+        repositoryCached.setValue(LocalKey.PICKDATE, "날짜선택")
+        repositoryCached.setValue(LocalKey.ONLYDAY, "")
+        repositoryCached.setValue(LocalKey.DAYNIGHT, "")
     }
 
     override fun ActivityMakePlanBinding.onBind() {
@@ -91,7 +91,7 @@ class MakePlanActivity :
 
     fun onClickPlanType() {
         //viewModel.liveDate.postValue("")
-        repositoryCached.setValue(LocalKey.PICKDATE,"")
+        repositoryCached.setValue(LocalKey.PICKDATE, "")
         viewModel.liveDayAndNight.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
@@ -193,7 +193,9 @@ class MakePlanActivity :
             Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
         } else {
             viewModel.plansRequest.title = plan_title.text.toString()
-            viewModel.plansRequest.work = viewModel.planTodos.toList()
+            if (viewModel.planTodos.size != 0) {
+                viewModel.plansRequest.work = viewModel.planTodos.toList()
+            }
             requestUser()
         }
     }
@@ -226,9 +228,10 @@ class MakePlanActivity :
         viewModel.plansRequest.startDate = planDateChange(today)
         viewModel.plansRequest.endDate = planDateChange(today)
     }
+
     fun planDateChange(date: Date): String {
         val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        Log.e(planDateFormat.format(date).toString(),"날짜로그출력")
+        Log.e(planDateFormat.format(date).toString(), "날짜로그출력")
         return planDateFormat.format(date).toString()
     }
 }

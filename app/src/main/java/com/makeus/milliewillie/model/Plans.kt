@@ -16,7 +16,7 @@ data class Plans(
     ){
         data class PlanVacation(
         val planVacationId : Long,
-        val count : Integer,
+        val count : Int,
         val vacationId : Long
         )
         data class Work(

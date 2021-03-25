@@ -4,7 +4,6 @@ import com.makeus.milliewillie.model.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
-
 interface Api {
 
 //    @GET("openapi/service/rest/PhotoGalleryService/gallerySearchList")
@@ -98,4 +97,5 @@ interface Api {
     fun users(
         @Body body : UsersRequest
     ): Observable<Users>
+
 }

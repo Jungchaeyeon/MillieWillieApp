@@ -1,6 +1,6 @@
 package com.makeus.milliewillie.model
 
 data class Users(
-    var userId : String,
+    var userId : Long,
     var jwt : String
 ) : BaseResponse()

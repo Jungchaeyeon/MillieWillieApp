@@ -8,6 +8,10 @@
             name="vi"
             type="com.makeus.milliewillie.ui.intro.IntroSettingNameActivity" />
 
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+
     </data>
 
     <LinearLayout

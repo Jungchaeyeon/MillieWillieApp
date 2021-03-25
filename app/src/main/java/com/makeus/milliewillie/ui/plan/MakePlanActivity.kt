@@ -10,10 +10,13 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.bgTint
+import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.ui.common.BasicDialogFragment
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
@@ -21,7 +24,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.view.*
 import kotlinx.android.synthetic.main.item_plan_todo.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
-import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -33,6 +35,7 @@ class MakePlanActivity :
     private val viewModel by viewModel<MakePlanViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val context = this
+    var liveSetImage = 0
 
     companion object {
         fun getInstance() = MakePlanActivity()
@@ -53,14 +56,17 @@ class MakePlanActivity :
                         vi = this@MakePlanActivity
                         item = it
                     })
+
         }
+
 
         edtTodo.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (edtTodo.text.toString().isNotEmpty()) {
 
-                   viewModel.addTodo(Plan.Todos(false,edtTodo.text.toString()))
-                   edtTodo.text.clear()
+                    viewModel.addTodo(Plan.Todos(false, edtTodo.text.toString()))
+                    //  liveSetImage=R.drawable.emo_9_satisfied
+                    edtTodo.text=null
                 }
                 return@setOnKeyListener true
             }
@@ -76,33 +82,34 @@ class MakePlanActivity :
         viewModel.liveDayAndNight.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
+                viewModel.replaceTodo()
                 val type = repositoryCached.getPlanType()
                 btn_tp.text = type
                 when (type) {
-                    "정기휴가", "일정" -> {
+                    "휴가", "일정" -> {
                         layout_other_plan.visibility = View.GONE
                         layout_mk_plan.visibility = View.VISIBLE
-                        item_todo.visibility = View.VISIBLE
+                       // item_todo.visibility = View.VISIBLE
                         when (type) {
-                            "정기휴가" -> {
-                                layout_notice_week.visibility = View.GONE
+                            "휴가" -> {
+                              //  layout_notice_week.visibility = View.GONE
                                 layout_leave.visibility = View.VISIBLE
                             }
                             "일정" -> {
-                                layout_notice_week.visibility = View.VISIBLE
+                               // layout_notice_week.visibility = View.VISIBLE
                                 layout_leave.visibility = View.GONE
                             }
                         }
                     }
-                    "포상휴가", "외박", "훈련", "면회", "외출", "전투휴무", "당직" -> {
+                     "외박", "훈련", "면회", "외출", "전투휴무", "당직" -> {
                         layout_other_plan.visibility = View.VISIBLE
-                        layout_notice_week.visibility = View.GONE
+                        //layout_notice_week.visibility = View.GONE
                         layout_leave.visibility = View.GONE
 
                         when (type) {
                             "외박" -> {
                                 title_day_and_night.text = "외박"
-                                item_todo.visibility = View.VISIBLE
+                               // item_todo.visibility = View.VISIBLE
                             }
                             "훈련" -> {
                                 title_day_and_night.text = "훈련"
@@ -149,22 +156,13 @@ class MakePlanActivity :
         txt_daynight.setTextColor(Color.parseColor("#3e3e3e"))
     }
 
-    fun onClickDate(view: View) {
-        if (view.id == R.id.btn_no_notice) {
-            if (btn_no_notice.isChecked) {
-                btn_mon.isChecked = false
-                btn_tue.isChecked = false
-                btn_wed.isChecked = false
-                btn_thur.isChecked = false
-                btn_fri.isChecked = false
-                btn_sat.isChecked = false
-                btn_sun.isChecked = false
-            }
-        } else {
-            btn_no_notice.isChecked = false
+    fun onClickVaca(){
+        if(viewModel.liveDayAndNight.value.isNullOrEmpty()){
+            Snackbar.make(this.layout_mk_plan,"휴가일수는 날짜를 선택하신 뒤에 확인 가능합니다.",Snackbar.LENGTH_LONG).show()
         }
+        else{
+        ActivityNavigator.with(context).planvacation().start()}
     }
-
     fun onClickNotice() {
         if (btn_notice.isChecked) {
             //repositoryCached.setValue(LocalKey.PLANNOTICE, "Y")
@@ -188,7 +186,9 @@ class MakePlanActivity :
                 )
 
             )
-        }
+//            for(i in 0..viewModel.planTodos.size){
+//            Log.e(viewModel.planTodos.get(i).todo.toString(),"$i 번째 아이템")}
+       }
     }
 
     override fun onResume() {

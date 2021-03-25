@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.home.tab1
 
+import android.graphics.Color
 import android.view.View
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -41,14 +42,14 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment
         vm = viewModel
-
         setClassImg()
         dDay = "D-" + repositoryCached.getDDay()
-        nowPercent = repositoryCached.getMiliDday()
-        android.util.Log.e("TAG", "onBind: $nowPercent", )
-//        nowPercentInt = nowPercent.toInt()
-//        nowPercentFlt = nowPercent.toFloat()?.div(100.0).toFloat()
-//        nowPercentStr = "$nowPercent%"
+
+       // nowPercent = repositoryCached.getMiliDday()
+        nowPercent = "57"
+        nowPercentInt = nowPercent.toInt().plus(2)
+        nowPercentFlt = nowPercent.toFloat()?.div(100.0).toFloat()
+        nowPercentStr = "$nowPercent%"
 
 
         rvMemoList.run {
@@ -62,6 +63,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                         R.layout.item_home_layout
                     ) {
                         vi = this@HomeFragment
+
                     })
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemMainScheduleBinding>(
@@ -97,12 +99,15 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     }
 
     fun onClickEdit() {
-        ActivityNavigator.with(this).mypageedit().start()
+        ActivityNavigator.with(this).infomili().start()
     }
 
     fun endDate(): String {
         endDate = repositoryCached.getEnd()
         return endDate.substring(2)
+    }
+    fun onClickHoli(){
+        ActivityNavigator.with(this).holiday().start()
     }
 
 }

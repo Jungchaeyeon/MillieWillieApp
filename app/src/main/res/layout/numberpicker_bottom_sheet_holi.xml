@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.holiday.HolidayNumberPickerBottomSheetFragment" />
+    </data>
+    <LinearLayout
+        style="@style/BottomLayout"
+        android:orientation="vertical">
+
+        <NumberPicker
+            android:id="@+id/np_spinner"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+        <Button
+            style="@style/spoqa_bold_22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_alignBottom="@+id/dpSpinner"
+            android:background="@drawable/background_google_login"
+            android:backgroundTint="@color/main_col_blu"
+            android:text="@string/ok"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:onClick="@{()->vi.onClickOk()}"/>
+        </LinearLayout>
+
+
+
+</layout>

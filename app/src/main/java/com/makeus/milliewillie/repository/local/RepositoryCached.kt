@@ -41,7 +41,6 @@ abstract class RepositoryCached {
     }
 
     fun getToken() = getGeneralValue(LocalKey.TOKEN , "")
-    fun getName() = getValue(LocalKey.NAME , "")
     fun getType() = getValue(LocalKey.TYPE, "")
     fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
     fun getDate() = getValue(LocalKey.DATE, "")
@@ -56,6 +55,10 @@ abstract class RepositoryCached {
     fun getDDay() = getValue(LocalKey.ENDDDAY, "")
     fun getnextDDay() = getValue(LocalKey.NEXTDDAY, "")
     fun getmonthDDay() = getValue(LocalKey.MONTHDDAY, "")
+    fun getIsMember() = getValue(LocalKey.ISMEMBER, false)
+    fun getSocialType() = getValue(LocalKey.SOCIALTYPE, "")
+    fun getholiExist() = getValue(LocalKey.HOLIEXIST, false)
+    fun getAvailHoli() = getValue(LocalKey.AVAILHOLI, 0)
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

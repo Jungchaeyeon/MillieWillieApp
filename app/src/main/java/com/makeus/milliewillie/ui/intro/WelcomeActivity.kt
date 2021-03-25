@@ -67,7 +67,7 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
             // 다음 화면이동
             vp_intro.currentItem = current
         } else {
-            ActivityNavigator.with(this).login().start()
+            ActivityNavigator.with(this).name().start()
         }
     }
 

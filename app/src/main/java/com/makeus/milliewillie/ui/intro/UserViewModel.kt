@@ -4,34 +4,38 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.KakaoRequest
 import com.makeus.milliewillie.model.ServiceDetailType
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.util.Log
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 
-class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
+class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: ApiRepository) :
+    BaseViewModel() {
 
+    val liveUserName = MutableLiveData<String>()
+    val liveUserBirth = MutableLiveData<String>().apply { value = "1999-07-21" }
+    val liveServiceId = MutableLiveData<Int>().apply { value = 1 }
+    val liveServicetype = MutableLiveData<String>().apply { value = "육군" }
+    val liveUserGoal = MutableLiveData<String>()
     val liveEditData = MutableLiveData<String>()
-    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
-    val liveUserName = MutableLiveData<String>().apply { value = "정채연" }
-    val liveUserBirth = MutableLiveData<String>().apply { value = "1999.07.21" }
-    val liveUserGoal = MutableLiveData<String>().apply { value = "토익만 따서 나가자!" }
-
-    val liveServiceId = MutableLiveData<String>()
-    val liveServiceype = MutableLiveData<String>().apply { value = "육군" }
-    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = "" } }
+    val liveDateButtonList = List(5) { MutableLiveData<String>().apply { value = today() } }
     val liveTypeDetailList = MutableLiveData<List<ServiceDetailType>>()
 
+    val liveModifyTitle = MutableLiveData<String>().apply { value = "이름" }
+    var usersRequest: UsersRequest = UsersRequest()
 
     fun enlistDataInit() {
-        if (liveServiceId.value == "일반병사") {
+        if (liveServiceId.value == 1) {
             calculateDay(today())
             liveDateButtonList[0].value = today()
         } else {
-
+            Log.e("장교, 부사관 ")
             liveDateButtonList[1].value = ""
             liveDateButtonList[2].value = ""
         }
@@ -86,6 +90,79 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         )
     }
 
+    fun enlistValueTest(): Boolean {
+
+        val cal = Calendar.getInstance()
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+        val firstDate = df.parse(liveDateButtonList[0].value.toString())
+        val prom1Date = df.parse(liveDateButtonList[2].value.toString())
+        val prom2Date = df.parse(liveDateButtonList[3].value.toString())
+        val prom3Date = df.parse(liveDateButtonList[4].value.toString())
+        val endDate = df.parse(liveDateButtonList[1].value.toString())
+
+//        Log.e("${cal.time}")
+//        Log.e("$firstDate")
+//        Log.e("$prom1Date?")
+//        Log.e("$prom2Date")
+//        Log.e("$prom3Date?")
+//        Log.e("$endDate?")
+
+        if (firstDate <= cal.time) {
+            if (firstDate.time < prom1Date.time) {
+                if (prom1Date.time < prom2Date.time) {
+                    if (prom2Date.time < prom3Date.time) {
+                        if (prom3Date.time < endDate.time) {
+                            return true
+                        }
+                        return false
+                    }
+                    return false
+                }
+                return false
+            }
+            return false
+        }
+        return false
+    }
+
+    fun enlistValueTestSergeant(): Boolean {
+
+        val cal = Calendar.getInstance()
+        val df = SimpleDateFormat("yyyy.MM.dd (EE)")
+        val firstDate = df.parse(liveDateButtonList[0].value.toString())
+        val prom1Date = df.parse(liveDateButtonList[2].value.toString())
+        val endDate = df.parse(liveDateButtonList[1].value.toString())
+
+        if (firstDate <= cal.time) {
+            if (firstDate.time < prom1Date.time) {
+                if (prom1Date.time < endDate.time) {
+                    return true
+                }
+                return false
+            }
+            return false
+        }
+        return false
+    }
+
+    fun sergeantNull(){
+        usersRequest.strPrivate=null
+        usersRequest.strCorporal=null
+        usersRequest.strSergeant=null
+    }
+    fun dateChangeTest(string: String): String {
+
+        val date = string.substring(0, 10)
+        val df = SimpleDateFormat("yyyy.MM.dd")
+        val dff = SimpleDateFormat("yyyy-MM-dd")
+
+//        Log.e(date,"hi")
+//        Log.e(df.parse(date).toString(),"hi2")
+//        Log.e(dff.format(df.parse(date)).toString(),"hi3")
+
+        return dff.format(df.parse(date))
+    }
+
     fun calculateDay(enlist: String) {
 
         //enlist.showShortToastSafe()
@@ -114,7 +191,7 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         //전역일
         var enlistDate = 0
 
-        when (liveServiceype.value.toString()) {
+        when (liveServicetype.value.toString()) {
             "육군" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
@@ -159,6 +236,13 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         liveDateButtonList[2].postValue(promPrivate)
         liveDateButtonList[3].postValue(promCorporal)
         liveDateButtonList[4].postValue(promSergeant)
+
+        usersRequest.startDate = dateChangeTest(enlist)
+        usersRequest.endDate = dateChangeTest(dischargeDate)
+        usersRequest.strPrivate = dateChangeTest(promPrivate)
+        usersRequest.strCorporal = dateChangeTest(promCorporal)
+        usersRequest.strSergeant = dateChangeTest(promSergeant)
+        usersRequest.proDate = null
     }
 
     fun calDateBetweenAnB(date1: String, date2: String): Float {
@@ -210,20 +294,44 @@ class UserViewModel(val apiRepository: ApiRepository) : BaseViewModel() {
         return calDateDays
     }
 
-    fun requestUserUpdate() =
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    //   fun requestUserUpdate() =
+//        apiRepository.users(
+//            UsersRequest(
+//                name = liveUserName.value.toString(),
+//                stateIdx = liveServiceId.value as Int,
+//                serveType =liveServicetype.value.toString(),
+//                startDate = liveDateButtonList[0].value.toString(),
+//                endDate = liveDateButtonList[1].value.toString(),
+//                strPrivate = liveDateButtonList[2].value.toString(),
+//                strCorporal = liveDateButtonList[3].value.toString(),
+//                strSergeant = liveDateButtonList[4].value.toString(),
+//                proDate = liveDateButtonList[2].value.toString(),
+//                goal = liveUserGoal.value.toString(),
+//                socialType =
+//            )
+//        )
+    fun requestUser() =
         apiRepository.users(
             UsersRequest(
-                name = "",
-                serveType = "",
-                startDate = "",
-                endDate = "",
-                strPrivate = "",
-                strCorporal = "",
-                strSergeant = "",
-                proDate = "",
-                goal = "",
-                profileImg = ""
+                name = usersRequest.name,
+                stateIdx = usersRequest.stateIdx,
+                serveType = usersRequest.serveType,
+                startDate = usersRequest.startDate,
+                endDate = usersRequest.endDate,
+                strPrivate = usersRequest.strPrivate,
+                strCorporal = usersRequest.strCorporal,
+                strSergeant = usersRequest.strSergeant,
+                proDate = usersRequest.proDate,
+                goal = usersRequest.goal,
+                socialType = repositoryCached.getSocialType()
             )
         )
+
+
 }
 

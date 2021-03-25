@@ -6,6 +6,9 @@
         <variable
             name="item"
             type="com.makeus.milliewillie.model.Plan.Todos" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.MakePlanActivity" />
     </data>
 
     <LinearLayout
@@ -17,9 +20,11 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:buttonTint="@color/light_gray" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/icon_checkbox"
+            android:backgroundTint="#e3e3e3"/>
 
         <EditText
             android:id="@+id/edt_todo"
@@ -35,9 +40,10 @@
             android:textSize="14dp" />
 
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_edit" />
+<!--        <ImageView-->
+<!--            android:id="@+id/test_edit"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            setImage="@{vi.liveSetImage}" />-->
     </LinearLayout>
 </layout>

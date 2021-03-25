@@ -39,6 +39,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
         repositoryCached.setValue(LocalKey.TOKEN, "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYxNjI2Mjk0NX0.SQUi5dcXye6KNJkfxkJZWjD8o5NhtyYcjeWd3MA2xeY")
 
+       // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
         fabFastClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close_fast);
@@ -59,7 +60,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.page_emotion -> {
-                    fab.visibility = View.VISIBLE
+                    fab.visibility = View.GONE
                     changeFragment(EmotionFragment.getInstance())
                     return@setOnNavigationItemSelectedListener true
                 }

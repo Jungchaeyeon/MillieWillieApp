@@ -58,9 +58,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:gravity="center"
-                        android:onClick="@{()->vi.requestUserUpdate()}"
                         android:text="@string/done" />
                 </LinearLayout>
+<!--                        android:onClick="@{()->vi.requestUserUpdate()}"-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                     android:drawableEnd="@drawable/ic_icon_semo"
                     android:onClick="@{()->vi.onClickType()}"
                     android:paddingHorizontal="10dp"
-                    android:text="@{vm.liveServiceype}"
+                    android:text="@{vm.liveServicetype}"
                     android:textAlignment="viewStart"
                     tools:text="육군" />
 

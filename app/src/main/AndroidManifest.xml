@@ -28,11 +28,15 @@
         </service>
 
         <activity android:name=".ui.MainCalendarActivity"/>
+        <activity android:name=".ui.holiday.HolidayActivity">
+        </activity>
+        <activity android:name=".ui.mypage.InfoEnlistActivity"></activity>
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.mypage.MyPageActivity" />
         <activity android:name=".ui.plan.PlanCalendarActivity" />
+        <activity android:name=".ui.plan.PlanVacationActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -45,17 +49,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-
                 <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
                 <data
                     android:host="oauth"
                     android:scheme="kakao2d201bd6dccfb28dcd39158f1557383b" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.intro.WelcomeActivity">
+        <activity android:name=".ui.intro.WelcomeActivity" />
+        <activity android:name=".ui.login.LoginActivity">
         </activity>
-        <activity android:name=".ui.login.LoginActivity" >
+        <activity android:name=".ui.plan.MakePlanActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,11 +66,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.plan.MakePlanActivity" />
-
-        <activity android:name=".ui.MainActivity">
-
-        </activity>
 
         <activity
             android:name=".ui.intro.IntroSettingNameActivity"
@@ -75,11 +73,18 @@
 
         <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
 
+        <activity
+            android:name=".ui.MainActivity"
+            android:windowSoftInputMode="adjustPan" >
+
+        </activity>
+        <activity android:name=".ui.mypage.InfoMiliActivity"/>
+
         <activity android:name=".ui.dDay.DdayActivity" />
         <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.routine.MakeRoutineActivity" />
         <activity android:name=".ui.intro.IntroServiceTypeDetailActivity" />
-        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity"/>
+        <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity" />
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
         <activity android:name=".ui.intro.IntroGoalActivity" />
         <activity android:name=".ui.workoutStart.WorkoutStartActivity"/>

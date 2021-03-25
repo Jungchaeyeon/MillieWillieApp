@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.DatepickerBottomSheetBasicBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import org.koin.android.viewmodel.compat.SharedViewModelCompat.sharedViewModel
@@ -18,9 +19,10 @@ class DatePickerBasicBottomSheetDialogFragment :
 
 
     val liveButton = MutableLiveData<String>()
-    private var date : String = ""
-    var reDate: String=""
+    private var date: String = ""
+    var reDate: String = ""
     private var clickOk: ((String) -> Unit)? = null
+    val today = Calendar.getInstance()
 
     companion object {
         fun getInstance() = DatePickerBasicBottomSheetDialogFragment()
@@ -35,7 +37,6 @@ class DatePickerBasicBottomSheetDialogFragment :
         vi = this@DatePickerBasicBottomSheetDialogFragment
         liveButton.postValue(context?.getString(R.string.ok))
 
-        val today = Calendar.getInstance()
         dpSpinner.init(
             today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
@@ -43,9 +44,9 @@ class DatePickerBasicBottomSheetDialogFragment :
 
             date = "$year.${month + 1}.$day"
         }
-            val cal = Calendar.getInstance()
-            val dayOfWeekformat = SimpleDateFormat(" (EE)")
-            reDate= dayOfWeekformat.format(cal.time)
+        val cal = Calendar.getInstance()
+        val dayOfWeekformat = SimpleDateFormat(" (EE)")
+        reDate = dayOfWeekformat.format(cal.time)
     }
 
     fun setOnClickOk(clickOk: ((String) -> Unit)): DatePickerBasicBottomSheetDialogFragment {
@@ -54,10 +55,18 @@ class DatePickerBasicBottomSheetDialogFragment :
     }
 
     fun onClickOk() {
-        clickOk?.invoke(date+reDate)
+
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd")
+        val dateDefault = dateFormat.format(today.time)
+       if (date == "") {
+            clickOk?.invoke(dateDefault + reDate)
+        } else {
+             clickOk?.invoke(date + reDate)
+        }
         dismiss()
     }
-    fun onClickCancel(){
+
+    fun onClickCancel() {
         dismiss()
     }
 

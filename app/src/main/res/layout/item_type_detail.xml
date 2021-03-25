@@ -54,7 +54,7 @@
                     android:includeFontPadding="false"
                     android:text="@{item.plusType}"
                     android:textColor="@color/text_gray"
-                    android:textSize="12dp"
+                    android:textSize="10dp"
                     tools:text="육군" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

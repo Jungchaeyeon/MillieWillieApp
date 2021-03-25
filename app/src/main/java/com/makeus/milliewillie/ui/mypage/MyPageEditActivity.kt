@@ -78,13 +78,13 @@ class MyPageEditActivity :
             ?.addToBackStack(null)?.commit()
     }
 
-    fun requestUserUpdate() {
-        viewModel.requestUserUpdate().subscribe {
-            if (it.isSuccess) {
-                "변경 완료".showShortToastSafe()
-            } else {
-                "변경 실패".showShortToastSafe()
-            }
-        }.disposeOnDestroy(this)
-    }
+//    fun requestUserUpdate() {
+//        viewModel.requestUserUpdate().subscribe {
+//            if (it.isSuccess) {
+//                "변경 완료".showShortToastSafe()
+//            } else {
+//                "변경 실패".showShortToastSafe()
+//            }
+//        }.disposeOnDestroy(this)
+//    }
 }

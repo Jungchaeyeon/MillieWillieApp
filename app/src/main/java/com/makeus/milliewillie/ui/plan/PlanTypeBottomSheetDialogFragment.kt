@@ -52,7 +52,6 @@ class PlanTypeBottomSheetDialogFragment :
         return this
     }
 
-
     fun onClickDate(text: String) {
         viewModel.livePlanType.postValue(text)
         repositoryCached.setValue(LocalKey.PLANTYPE, text)

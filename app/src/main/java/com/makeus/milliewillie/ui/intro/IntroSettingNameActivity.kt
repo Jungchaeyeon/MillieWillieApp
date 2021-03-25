@@ -7,17 +7,13 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroSettingNameBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.repository.local.LocalKey
-import com.makeus.milliewillie.repository.local.RepositoryCached
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class IntroSettingNameActivity :
     BaseDataBindingActivity<ActivityIntroSettingNameBinding>(R.layout.activity_intro_setting_name) {
 
-    private val repositoryCached by inject<RepositoryCached>()
-
-
+    val viewModel by viewModel<UserViewModel>()
 
     override fun ActivityIntroSettingNameBinding.onBind() {
         vi = this@IntroSettingNameActivity
@@ -26,8 +22,8 @@ class IntroSettingNameActivity :
 
     fun onClickNext() {
         if (edt_name.text.isNotEmpty()) {
-            repositoryCached.setValue(LocalKey.NAME, edt_name.text)
-            ActivityNavigator.with(this).type().start()
+            viewModel.usersRequest.name = edt_name.text.toString()
+            ActivityNavigator.with(this).type(viewModel.usersRequest).start()
         } else {
             "이름을 입력해 주세요.".showShortToastSafe()
         }

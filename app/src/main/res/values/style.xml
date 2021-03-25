@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">@color/black</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorControlHighlight">#f0f9ff</item>
-        <item name="android:windowBackground">@color/white_two</item>
+        <item name="android:windowBackground">#f5f5f5</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:textCursorDrawable">@color/black_all</item>
     </style>
@@ -103,6 +103,7 @@
         <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
     </style>
 
+
     <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
@@ -117,6 +118,10 @@
         <item name="android:paddingBottom">17dp</item>
         <item name="android:paddingTop">24dp</item>
         <item name="android:orientation">vertical</item>
+    </style>
+    <style name="MyTransparentBottomSheetDialogTheme" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/trans</item>
+        <item name="android:colorBackground">@color/trans</item>
     </style>
 
     <style name="BottomLayout">

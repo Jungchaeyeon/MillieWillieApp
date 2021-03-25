@@ -8,6 +8,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
@@ -35,6 +36,9 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
         viewModel.bindLifecycle(this@MainActivity)
+
+        repositoryCached.setValue(LocalKey.TOKEN, "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYxNjI2Mjk0NX0.SQUi5dcXye6KNJkfxkJZWjD8o5NhtyYcjeWd3MA2xeY")
+
        // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
@@ -111,7 +115,6 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
             }
             R.id.fab_dday -> {
                 anim()
-                Log.e("called")
                 ActivityNavigator.with(this).dDay().start()
             }
             R.id.fab_plan -> {

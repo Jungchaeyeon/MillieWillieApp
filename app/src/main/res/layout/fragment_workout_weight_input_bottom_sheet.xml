@@ -58,11 +58,14 @@
                 android:text="@string/goal_weight" />
 
             <EditText
+                android:id="@+id/w_record_edit_goal"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:background="@drawable/weight_record_edit_background"
                 android:layout_marginStart="8dp"
                 android:layout_centerVertical="true"
+                android:gravity="end"
+                android:textCursorDrawable="@color/maincolor_blue"
                 android:layout_toStartOf="@+id/w_record_text_kg1"
                 android:layout_toEndOf="@+id/w_record_text_goal_weight"
                 android:inputType="number"
@@ -107,6 +110,8 @@
                 android:background="@drawable/weight_record_edit_background"
                 android:layout_marginStart="8dp"
                 android:layout_centerVertical="true"
+                android:gravity="end"
+                android:textCursorDrawable="@color/maincolor_blue"
                 android:layout_toStartOf="@+id/w_record_text_kg2"
                 android:layout_toEndOf="@+id/w_record_text_current_weight"
                 android:inputType="number"

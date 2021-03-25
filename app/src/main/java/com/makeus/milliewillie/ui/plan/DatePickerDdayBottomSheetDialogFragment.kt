@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.DatepickerBottomSheetDDayBinding
-import com.makeus.milliewillie.util.Log
 import java.util.*
 
 class DatePickerDdayBottomSheetDialogFragment:
@@ -15,8 +14,10 @@ class DatePickerDdayBottomSheetDialogFragment:
 
     private var date : String = ""
     private var gapDays : String = ""
+    private var dateYear: String = ""
+    private var dateMonth: String = ""
 
-    private var clickOk: ((String, String) -> Unit)? = null
+    private var clickOk: ((String, String, String, String) -> Unit)? = null
 
     companion object {
         fun getInstance() = DatePickerDdayBottomSheetDialogFragment()
@@ -41,6 +42,8 @@ class DatePickerDdayBottomSheetDialogFragment:
                 }
 
             date = "${year}년 ${month + 1}월 ${day}일"
+            dateYear = year.toString()
+            dateMonth = (month + 1).toString()
         }
     }
 
@@ -73,7 +76,7 @@ class DatePickerDdayBottomSheetDialogFragment:
         }.timeInMillis
     }
 
-    fun setOnClickOk(clickOk: ((String, String) -> Unit)): DatePickerDdayBottomSheetDialogFragment {
+    fun setOnClickOk(clickOk: ((String, String, String, String) -> Unit)): DatePickerDdayBottomSheetDialogFragment {
         this.clickOk = clickOk
         return this
     }
@@ -82,9 +85,11 @@ class DatePickerDdayBottomSheetDialogFragment:
         if (date.isBlank()) {
             date = "${Calendar.getInstance().get(Calendar.YEAR)}년 ${Calendar.getInstance().get(Calendar.MONTH)+1}월 ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}일"
             gapDays = "오늘"
+            dateYear = "${Calendar.getInstance().get(Calendar.YEAR)}"
+            dateMonth = "${Calendar.getInstance().get(Calendar.MONTH)+1}"
         }
 
-        clickOk?.invoke(date, gapDays)
+        clickOk?.invoke(date, gapDays, dateYear, dateMonth)
         dismiss()
     }
     fun onClickCancel(){

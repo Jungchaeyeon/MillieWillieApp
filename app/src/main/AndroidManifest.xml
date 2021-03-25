@@ -19,10 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+
+        <service android:name="com.makeus.milliewillie.FCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <activity android:name=".ui.MainCalendarActivity"/>
         <activity android:name=".ui.holiday.HolidayActivity">
         </activity>
         <activity android:name=".ui.mypage.InfoEnlistActivity"></activity>
-        <activity android:name=".ui.MainCalendarActivity" />
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -57,16 +65,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".ui.intro.IntroSettingNameActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
+
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan" >
 
         </activity>
         <activity android:name=".ui.mypage.InfoMiliActivity"/>
-        <activity
-            android:name=".ui.intro.IntroSettingNameActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.intro.IntroServiceTypeActivity" />
+
         <activity android:name=".ui.dDay.DdayActivity" />
         <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.routine.MakeRoutineActivity" />
@@ -74,6 +87,9 @@
         <activity android:name=".ui.intro.IntroEnlistDateSoldierActivity" />
         <activity android:name=".ui.intro.IntroEnlistDateSergeantActivity" />
         <activity android:name=".ui.intro.IntroGoalActivity" />
+        <activity android:name=".ui.workoutStart.WorkoutStartActivity"/>
+        <activity android:name=".ui.todayWorkout.TodayWorkoutActivity"/>
+        <activity android:name=".ui.weightRecord.WeightRecordActivity"/>
     </application>
 
 </manifest>

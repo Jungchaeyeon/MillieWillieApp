@@ -38,6 +38,10 @@ android {
         }
     }
 
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
 
     buildTypes {
         debug{
@@ -134,6 +138,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+
 }
 
 dependencies {
@@ -142,6 +147,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
     implementation files('libs/libDaumMapAndroid.jar')
+
+    // dot_graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     //calendar picker
     implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarpickerVersion"
@@ -209,7 +217,8 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
 
     //kakao
-    implementation "com.kakao.sdk:v2-user-rx:$kakaoVersion" // 카카오 로그인
+    implementation "com.kakao.sdk:v2-user-rx:$kakaoVersion"
+    implementation 'androidx.work:work-runtime:2.5.0'// 카카오 로그인
 
     testImplementation "junit:junit:$junitVersion"
 

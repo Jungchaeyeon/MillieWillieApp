@@ -1,15 +1,29 @@
 package com.makeus.milliewillie.ui.routine
 
+import android.os.Build
+import android.view.MotionEvent
 import android.view.View
-import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.google.android.datatransport.cct.internal.LogEvent
+import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.databinding.ActivityMakeRoutineBinding
-import com.makeus.milliewillie.ui.dDay.Classification
+import com.makeus.milliewillie.databinding.*
+import com.makeus.milliewillie.model.PostRoutineRequest
+import com.makeus.milliewillie.model.RoutineSelectedRecyclerItem
+import com.makeus.milliewillie.model.RoutineWorkoutListItem
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.absItemListKey
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.armItemListKey
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.backItemListKey
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.chestItemListKey
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.legItemListKey
+import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.shoulderItemListKey
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.properties.Delegates
 
 class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R.layout.activity_make_routine) {
 
@@ -24,6 +38,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     lateinit var saturday: View
     lateinit var sunday: View
 
+    private var exerciseName = ""
+    private var position by Delegates.notNull<Int>()
+
+    val detailTypeList = ArrayList<Int>()
 
     override fun ActivityMakeRoutineBinding.onBind() {
         vi = this@MakeRoutineActivity
@@ -41,18 +59,86 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
         everyDay.isSelected = true
 
+        routineSelectedRecycler.run {
+            adapter = BaseDataBindingRecyclerViewAdapter<RoutineSelectedRecyclerItem>()
+                .addViewType(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineSelectedRecyclerItem, RoutineWorkoutSelectedRecyclerItemBinding>(R.layout.routine_workout_selected_recycler_item) {
+                        vi = this@MakeRoutineActivity
+                        item = it
+                    }
+                )
+        }
+        routineWorkoutList.run {
+            // 아이템 클릭 리스너
+            addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    val child = rv.findChildViewUnder(e.x, e.y)
+                    val position = child?.let { rv.getChildAdapterPosition(it) }
+                    if (e.action == MotionEvent.ACTION_MOVE) return false
+                    else if (e.action == MotionEvent.ACTION_UP) {
+                        Log.e("$position")
+                        if (position != null) {
+                            this@MakeRoutineActivity.position = position
+                            return false
+                        }
+                        return true
+                    }
+                    return false
+                }
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+            })
+
+            adapter = BaseDataBindingRecyclerViewAdapter<RoutineWorkoutListItem>()
+                .addViewType(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineWorkoutListItem, RoutineWorkoutListItemBinding>(R.layout.routine_workout_list_item) {
+                        vi = this@MakeRoutineActivity
+                        item = it
+                    }
+                )
+        }
 
     }
 
+    fun onClickExItem() {
+        when (viewModel.exerciseKind) {
+            "전체" -> exerciseName = viewModel.totalItemList[position]
+            "하체" -> exerciseName = viewModel.legItemList[position]
+            "가슴" -> exerciseName = viewModel.chestItemList[position]
+            "등" -> exerciseName = viewModel.backItemList[position]
+            "어깨" -> exerciseName = viewModel.shoulderItemList[position]
+            "팔" -> exerciseName = viewModel.armItemList[position]
+            "복근" -> exerciseName = viewModel.absItemList[position]
+        }
+
+        ExerciseSetBottomSheetFragment.getInstance()
+            .setOnClickOk(exerciseName) { name, list ->
+                var textOption = ""
+                for (i in 0 until list.size) {
+                    if (i == list.size-1) {
+                        textOption += list[i]
+                    } else {
+                        textOption += "${list[i]} · "
+                    }
+                }
+                viewModel.addSelectedItem(RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption))
+                Log.e("${RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption)}")
+            }.show(supportFragmentManager)
+
+    }
+
+
     fun onClickSetPartOfEx() {
-//        ExerciseSetBottomSheetFragment.getInstance()
-//            .setOnClickOk {
-//                viewModel.liveDatePartOfEx.postValue(it)
-//            }.show(supportFragmentManager)
         ExPartSelectBottomSheetFragment.getInstance()
             .setOnClickOk {
-            viewModel.liveDatePartOfEx.postValue(it)
+                viewModel.liveDatePartOfEx.postValue(it)
+                val textSet = String.format(getString(R.string.part_of_ex_title, it))
+                viewModel.liveDataPartOfExTitle.postValue(textSet)
+                viewModel.createExItem(it)
             }.show(supportFragmentManager)
+
     }
 
     fun setTextStatus(position: Int){
@@ -69,21 +155,101 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     }
 
     fun setBtnView(text: View) {
-
         val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
 
-        if (!text.isSelected) {
-            textList.forEach { view ->
-                if (view == text) text.isSelected = !text.isSelected
-                else view.isSelected = false
+        if (text == everyDay) {
+            text.isSelected = true
+            textList.forEach {
+                if (it != everyDay) it.isSelected = false
             }
+        } else {
+            everyDay.isSelected = false
+            text.isSelected = !text.isSelected
+        }
+
+    }
+
+    fun onClickAddExKind() {
+        AddExerciseBottomSheetFragment.getInstance()
+            .setOnClickOk {
+                viewModel.totalItemList.add(it)
+                when (viewModel.exerciseKind) {
+                    "하체" -> {
+                        viewModel.legItemList.add(it)
+                        SharedPreference.putArrayStringItem(legItemListKey, viewModel.legItemList)
+                    }
+                    "가슴" -> {
+                        viewModel.chestItemList.add(it)
+                        SharedPreference.putArrayStringItem(chestItemListKey, viewModel.chestItemList)
+                    }
+                    "등" -> {
+                        viewModel.backItemList.add(it)
+                        SharedPreference.putArrayStringItem(backItemListKey, viewModel.backItemList)
+                    }
+                    "어깨" -> {
+                        viewModel.shoulderItemList.add(it)
+                        SharedPreference.putArrayStringItem(shoulderItemListKey, viewModel.shoulderItemList)
+                    }
+                    "팔" -> {
+                        viewModel.armItemList.add(it)
+                        SharedPreference.putArrayStringItem(armItemListKey, viewModel.armItemList)
+                    }
+                    "복근" -> {
+                        viewModel.absItemList.add(it)
+                        SharedPreference.putArrayStringItem(absItemListKey, viewModel.absItemList)
+                    }
+                }
+            }.show(supportFragmentManager)
+    }
+
+
+    var repeatDays = ""
+
+    fun getRepeatDays() {
+        val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
+
+        for (i in 0 until textList.size) {
+            if (textList[i].isSelected) {
+                when (textList[i]) {
+                    everyDay -> repeatDays += "8"
+                    monday -> repeatDays += "1"
+                    tuesday -> repeatDays += "2"
+                    wendesday -> repeatDays += "3"
+                    thursday -> repeatDays += "4"
+                    friday -> repeatDays += "5"
+                    saturday -> repeatDays += "6"
+                    sunday -> repeatDays += "7"
+                }
+            }
+            if (i != 0 && i != textList.size-1) repeatDays += "#"
         }
     }
 
-    fun replaceFrame(fragment: Fragment, container: Int) {
-        val fmbt = supportFragmentManager.beginTransaction()
+    fun onClickOk() {
+        getRepeatDays()
+        val detailNameList = ArrayList<String>()
 
-        fmbt.replace(container, fragment).commitAllowingStateLoss()
+        viewModel.liveDataSelectedItemList.value!!.forEach {
+            detailNameList.add(it.routineName)
+        }
+
+//        viewModel.apiRepository.postRoutine(body = PostRoutineRequest(
+//            routineName = binding.routineEditRoutineName.text.toString(),
+//            bodyPart = viewModel.liveDatePartOfEx.value.toString(),
+//            repeatDay = repeatDays,
+//            detailName = detailNameList,
+//            detailType = ,
+//            detailTypeContext = ,
+//            detailSetEqual = ,
+//            detailSet =)
+//            , path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+
+//        viewModel.apiRepository.getRoutines()
+        onBackPressed()
+    }
+
+    fun onClickCancel() {
+        onBackPressed()
     }
 
 }

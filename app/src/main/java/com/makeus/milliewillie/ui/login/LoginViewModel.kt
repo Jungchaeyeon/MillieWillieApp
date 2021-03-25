@@ -117,10 +117,11 @@ class LoginViewModel(
     private fun requestKakaoLogin(response: (Boolean) -> Unit) {
         apiRepository.kakaoLogin().subscribe ({
             response.invoke(true)
-            Log.e("로그인 성공공")
+            Log.e("true?")
         } , {
             it.printStackTrace()
             response.invoke(false)
+            Log.e("false?")
         }).disposeOnDestroy(this)
     }
 

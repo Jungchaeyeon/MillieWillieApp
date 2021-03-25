@@ -1,59 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingVertical="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+        <variable
+            name="vi_feed"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment" />
+        <variable
+            name="vi_calendar"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.MyRoutineInfo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/routine_list_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
 
-        <TextView
-            android:id="@+id/w_routine_text_name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
-            android:layout_toStartOf="@+id/w_routine_img_arrow"
-            android:textColor="@color/blue_green2"
-            android:textSize="16sp"
-            android:text=" "/>
+            android:layout_height="70dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/routine_list_background"
+            android:onClick="@{()-> vi.onClickItem(3)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/w_routine_text_week_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="1dp"
-            android:layout_below="@id/w_routine_text_name"
-            android:layout_toStartOf="@+id/w_routine_img_arrow"
-            android:textColor="@color/blue_green2"
-            android:textSize="13sp"
-            android:text=" "/>
+            <TextView
+                android:id="@+id/w_routine_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_toStartOf="@+id/w_routine_img_arrow"
+                android:textColor="@color/blue_green2"
+                android:textSize="16sp"
+                android:text="@{item.routineName}" />
 
-        <ImageView
-            android:id="@+id/w_routine_img_arrow"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/icon_arrow_gotodeep"/>
+            <TextView
+                android:id="@+id/w_routine_text_week_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/w_routine_text_name"
+                android:layout_toStartOf="@+id/w_routine_img_arrow"
+                android:textColor="@color/maincolor_blue"
+                android:textSize="13sp"
+                android:text="@{item.routineRepeatDay}" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/w_routine_img_arrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:onClick="@{()-> vi_feed.onClickImage(2)}"
+                setImage="@{vi_feed.liveDataItemImg}" />
+
+        </RelativeLayout>
 
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -52,7 +52,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@id/content_cn_img_goto_back"
                     android:text="subtitle"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="10sp" />
 
                 <TextView
@@ -98,7 +98,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/content_cn_text_d_day"
                     android:text="~"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="12sp" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/content_cn_text_tilt"
                     android:text="end_date"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -284,7 +284,7 @@
                             android:maxLength="20"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:textColor="@color/gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="14sp" />
                     </RelativeLayout>
 

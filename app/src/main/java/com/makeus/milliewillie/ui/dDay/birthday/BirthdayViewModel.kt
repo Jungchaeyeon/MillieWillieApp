@@ -2,11 +2,7 @@ package com.makeus.milliewillie.ui.dDay.birthday
 
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.DdayCheckList
-import com.makeus.milliewillie.model.Intro
-import com.makeus.milliewillie.model.MainSchedule
-import com.makeus.milliewillie.model.WorkoutSet
 
 class BirthdayViewModel : BaseViewModel() {
     val checkItemList = MutableLiveData<ArrayList<DdayCheckList>>()
@@ -14,7 +10,7 @@ class BirthdayViewModel : BaseViewModel() {
     val checkArrayList = ArrayList<DdayCheckList>()
 
     init{
-      //  defaultCheckItemList()
+        defaultCheckItemList()
     }
     fun defaultCheckItemList() {
         checkItemList.postValue(checkArrayList)

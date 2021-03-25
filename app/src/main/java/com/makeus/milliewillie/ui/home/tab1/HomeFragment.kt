@@ -12,6 +12,7 @@ import com.makeus.milliewillie.databinding.ItemMainScheduleBinding
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.plan.MakePlanViewModel
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
@@ -43,6 +44,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         vm = viewModel
         setClassImg()
         dDay = "D-" + repositoryCached.getDDay()
+
        // nowPercent = repositoryCached.getMiliDday()
         nowPercent = "57"
         nowPercentInt = nowPercent.toInt().plus(2)

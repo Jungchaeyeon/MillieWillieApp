@@ -9,6 +9,8 @@ import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.ext.showLongToastSafe
@@ -49,6 +51,10 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     }
 
+    companion object {
+        var deviceToken: String = ""
+    }
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun ActivityLoginBinding.onBind() {
         vi = this@LoginActivity
@@ -64,6 +70,11 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
+            loginType = MyApplication.LOGINTYPE.GOOGLE
+            viewModel.getFcmToken {
+                deviceToken = it
+                Log.e("deviceToken : ${deviceToken}")
+            }
             viewModel.onRequestLoginWithGoogle(this, data) {
                 nextStep(it)
             }
@@ -77,6 +88,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
             requestGoogleAuth
         )
     }
+
 
     fun onClickKakaoLogin() {
         repositoryCached.setValue(LocalKey.SOCIALTYPE, "K")
@@ -95,6 +107,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 //            "로그인에 실패했습니다.".showLongToastSafe()
 //        }
 //    }
+
 
     fun nextStep(isSuccess: Boolean) {
         if (isSuccess) {

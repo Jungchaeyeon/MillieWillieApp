@@ -8,7 +8,7 @@
             type="com.makeus.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WorkoutSet" />
+            type="com.makeus.milliewillie.model.WorkoutWncSet" />
 
     </data>
 
@@ -33,9 +33,11 @@
             android:maxLength="5"
             android:maxLines="1"
             android:singleLine="true"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
+            android:imeOptions="actionDone"
             android:hint="0.0"
+            android:text="@{item.weight}"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 
@@ -57,9 +59,11 @@
             android:maxLength="5"
             android:maxLines="1"
             android:singleLine="true"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
+            android:imeOptions="actionDone"
             android:hint="0.0"
+            android:text="@{item.count}"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 
@@ -78,6 +82,6 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_delete_text"/>
+            android:src="@drawable/icon_small_delete"/>
     </RelativeLayout>
 </layout>

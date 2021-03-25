@@ -52,7 +52,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_toStartOf="@+id/d_day_certi_img_date_arrow"
                 android:text="@{vm.liveDataTodayInfo}"
-                android:textColor="@color/gray" />
+                android:textColor="@color/text_gray" />
 
             <ImageView
                 android:id="@+id/d_day_certi_img_date_arrow"
@@ -118,7 +118,7 @@
                 android:layout_toStartOf="@+id/d_day_certi_img_location_arrow"
                 android:layout_centerVertical="true"
                 android:text="@string/location_info"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 />
 
             <ImageView
@@ -148,9 +148,6 @@
 
         </RelativeLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -159,11 +156,11 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/d_day_certi_todo_recycler"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/fragment_d_day_recycler_item"/>
+                    replaceAll="@{vm.certiCheckItemList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -195,13 +192,12 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="14sp" />
                 </RelativeLayout>
 
             </RelativeLayout>
-        </androidx.core.widget.NestedScrollView>
-
 
     </LinearLayout>
+
 </layout>

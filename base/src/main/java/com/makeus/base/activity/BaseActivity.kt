@@ -92,6 +92,11 @@ abstract class BaseActivity(private val layoutId: Int) : AppCompatActivity(),
         super.onPause()
     }
 
+    fun hideKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
     override fun onDestroy() {
         compositeDisposableOnDestroy.clear()
         super.onDestroy()

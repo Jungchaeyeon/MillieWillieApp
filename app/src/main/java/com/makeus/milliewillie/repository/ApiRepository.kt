@@ -12,6 +12,7 @@ import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ApiRepository(
     private val repositoryCached: RepositoryCached,
@@ -52,7 +53,7 @@ class ApiRepository(
     fun deleteRoutine(path: Long) = apiTest.deleteRoutine(exerciseId = path)
     fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
         Log.e(it.result.color.toString(),"왜 안돼?")
-    }
+    }.observeOn(AndroidSchedulers.mainThread())
     //회원가입
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
         //header에 token을 jwt로 변경

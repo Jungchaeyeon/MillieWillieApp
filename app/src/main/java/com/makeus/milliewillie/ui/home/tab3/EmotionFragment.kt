@@ -9,6 +9,8 @@ import android.widget.EditText
 import androidx.core.content.ContextCompat.getSystemService
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import com.makeus.base.activity.BaseActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
@@ -17,6 +19,8 @@ import com.makeus.milliewillie.databinding.ItemEmoListBinding
 import com.makeus.milliewillie.model.EmotionImg
 import com.makeus.milliewillie.ui.utils.DrawableUtils
 import com.makeus.milliewillie.util.Log
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.fragment_emotion.*
 import kotlinx.android.synthetic.main.item_emo_calendar_day.*
@@ -24,6 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 
@@ -48,6 +53,15 @@ class EmotionFragment :
 
     }
 
+    fun onChangeFocus(hasFocus: Boolean) {
+        if (hasFocus) {
+            Observable.timer(300, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                binding.sv.fullScroll(View.FOCUS_DOWN)
+            }.disposeOnDestroy(this)
+        } else {
+            (activity as BaseActivity).hideKeyboard()
+        }
+    }
 
     override fun FragmentEmotionBinding.onBind() {
         vi = this@EmotionFragment
@@ -161,9 +175,10 @@ class EmotionFragment :
 
         return calDateDays.toInt()
     }
-    fun calDay():Int{
+
+    fun calDay(): Int {
         val dateFormat = SimpleDateFormat("dd")
-        val pickDay =dateFormat.format(day)
+        val pickDay = dateFormat.format(day)
         return pickDay.toInt()
     }
 }

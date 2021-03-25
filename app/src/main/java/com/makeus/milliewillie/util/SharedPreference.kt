@@ -14,7 +14,7 @@ object SharedPreference {
     }
 
     fun getSettingItem(key: String): String? {
-        Log.e("Return ${sSharedPreferences.getString(key, null)}")
+        Log.e("Return ${sSharedPreferences.getString(key, "")}")
         return sSharedPreferences.getString(key, null)
     }
 

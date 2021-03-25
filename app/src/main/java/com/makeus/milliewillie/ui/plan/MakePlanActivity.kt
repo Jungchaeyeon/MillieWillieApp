@@ -1,10 +1,13 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.messaging.FirebaseMessaging
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -12,7 +15,6 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.bgTint
-import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plan
@@ -20,7 +22,6 @@ import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
-import com.makeus.milliewillie.ui.common.BasicDialogFragment
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
@@ -46,11 +47,23 @@ class MakePlanActivity :
         fun getInstance() = MakePlanActivity()
     }
 
+    val requestCode = 1004
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == this.requestCode){
+            //data.getStringArrayExtra()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         repositoryCached.setValue(LocalKey.PICKDATE, "날짜선택")
         repositoryCached.setValue(LocalKey.ONLYDAY, "")
         repositoryCached.setValue(LocalKey.DAYNIGHT, "")
+        val today = Calendar.getInstance().time
+        viewModel.plansRequest.startDate = planDateChange(today)
+        viewModel.plansRequest.endDate = planDateChange(today)
     }
 
     override fun ActivityMakePlanBinding.onBind() {
@@ -58,11 +71,13 @@ class MakePlanActivity :
         vm = viewModel
         viewModel.bindLifecycle(this@MakePlanActivity)
 
+
+
         rv_memo_list.isNestedScrollingEnabled = false
         rv_memo_list.run {
-            adapter = BaseDataBindingRecyclerViewAdapter<Plan.Todos>()
+            adapter = BaseDataBindingRecyclerViewAdapter<PlansRequest.Work>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<Plan.Todos, ItemPlanTodoBinding>(
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<PlansRequest.Work, ItemPlanTodoBinding>(
                         R.layout.item_plan_todo
                     ) {
                         vi = this@MakePlanActivity
@@ -77,7 +92,7 @@ class MakePlanActivity :
                 if (edtTodo.text.toString().isNotEmpty()) {
 
                     viewModel.addTodo(PlansRequest.Work(edtTodo.text.toString()))
-                    //  liveSetImage=R.drawable.emo_9_satisfied
+
                     edtTodo.text = null
                 }
                 return@setOnKeyListener true
@@ -174,7 +189,7 @@ class MakePlanActivity :
             Snackbar.make(this.layout_mk_plan, "휴가일수는 날짜를 선택하신 뒤에 확인 가능합니다.", Snackbar.LENGTH_LONG)
                 .show()
         } else {
-            ActivityNavigator.with(context).planvacation(viewModel.plansRequest).start()
+            ActivityNavigator.with(context).planvacation(viewModel.plansRequest).startForResult(requestCode)
         }
     }
 
@@ -193,10 +208,30 @@ class MakePlanActivity :
             Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
         } else {
             viewModel.plansRequest.title = plan_title.text.toString()
+            viewModel.plansRequest.startDate = repositoryCached.getPlanStartDate()
+            viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
+
+
+            Log.e(viewModel.plansRequest.planVacation.toString(), "Make에서 planVac")
+//            Log.e(viewModel.planVacationList[0].count.toString(),"Make에서 planVac")
+//            Log.e(viewModel.planVacationList[1].count.toString(),"Make에서 planVac")
+//            Log.e(viewModel.planVacationList[2].count.toString(),"Make에서 planVac")
+//            Log.e(viewModel.planVacationList[0].vacationId.toString(),"Make에서 id")
+//            Log.e(viewModel.planVacationList[1].vacationId.toString(),"Make에서 id")
+//            Log.e(viewModel.planVacationList[2].vacationId.toString(),"Make에서 id")
+
+
             if (viewModel.planTodos.size != 0) {
                 viewModel.plansRequest.work = viewModel.planTodos.toList()
             }
-            requestUser()
+//            if (viewModel.planVacationList.isNullOrEmpty()) {
+//                viewModel.plansRequest.planVacation = viewModel.planVacationList.toList()
+//            }
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                viewModel.plansRequest.pushDeviceToken = task.result
+                //requestUser()
+            }
         }
     }
 
@@ -224,14 +259,12 @@ class MakePlanActivity :
         viewModel.liveOnlyDay.value = repositoryCached.getOnlyDay()
         viewModel.liveDayAndNight.value = repositoryCached.getDayNight()
 
-        val today = Calendar.getInstance().time
-        viewModel.plansRequest.startDate = planDateChange(today)
-        viewModel.plansRequest.endDate = planDateChange(today)
+
     }
 
     fun planDateChange(date: Date): String {
         val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        Log.e(planDateFormat.format(date).toString(), "날짜로그출력")
+        //  Log.e(planDateFormat.format(date).toString(), "날짜로그출력")
         return planDateFormat.format(date).toString()
     }
 }

@@ -37,7 +37,7 @@
             android:textAlignment="textEnd"
             android:imeOptions="actionDone"
             android:hint="0.0"
-            android:text="@{item.weight}"
+            android:text="@={item.weight}"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 
@@ -63,7 +63,7 @@
             android:textAlignment="textEnd"
             android:imeOptions="actionDone"
             android:hint="0.0"
-            android:text="@{item.count}"
+            android:text="@={item.count}"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 

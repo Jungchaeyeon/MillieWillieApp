@@ -1,6 +1,8 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    PLANSTART,
+    PLANEND,
     DAYNIGHT,
     PICKDATE,
     AVAILHOLI,

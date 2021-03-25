@@ -116,6 +116,8 @@
     <string name="notice">알림</string>
     <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
 
+    <string name="string_id"><![CDATA[<font color="#9ee91d">텍스트 1 %1$s %s %d</font> <font color="#878787">텍스트 2 %2$s</font>]]></string>
+
     <string name="reset">초기화</string>
     <string name="makeplan">일정 만들기</string>
     <string name="makedday">D-day 만들기</string>

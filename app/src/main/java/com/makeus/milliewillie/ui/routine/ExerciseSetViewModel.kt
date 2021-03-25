@@ -21,7 +21,10 @@ class ExerciseSetViewModel: BaseViewModel() {
     var countSetItemListSize = countSetItemList.size
     var timeSetItemListSize = timeSetItemList.size
 
-    var liveDataSetCount = MutableLiveData<String>().apply { value = "0" }
+    val liveSwitchStatus = MutableLiveData<Boolean>()
+    var liveDataSetCount = MutableLiveData<String>().apply { value = setCount.toString() }
+    var setCount = 0
+
     var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0 세트" }
 
     var liveDataExerciseName = MutableLiveData<String>().apply { value = "" }
@@ -30,13 +33,17 @@ class ExerciseSetViewModel: BaseViewModel() {
         defaultAddSet()
     }
 
-    fun increaseSetCount(value: String) {
-        liveDataSetCount.postValue(value)
-        liveDataUnderSetCount.postValue("$value 세트")
+    fun increaseSetCount() {
+        setCount += 1
+        liveDataSetCount.postValue(setCount.toString())
+        liveDataUnderSetCount.postValue("$setCount 세트")
+        addItem()
     }
-    fun decreaseSetCount(value: String) {
-        liveDataSetCount.postValue(value)
-        liveDataUnderSetCount.postValue("$value 세트")
+    fun decreaseSetCount() {
+        setCount -= 1
+        liveDataSetCount.postValue(setCount.toString())
+        liveDataUnderSetCount.postValue("$setCount 세트")
+        removeItem()
     }
 
     fun defaultAddSet() {
@@ -49,17 +56,19 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addItem() {
-        wncSetItemList.add(WorkoutWncSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+        wncSetItemList.add(WorkoutWncSet("$setCount 세트"))
         wncSetItemListSize = wncSetItemList.size
-        countSetItemList.add(WorkoutCountSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+        countSetItemList.add(WorkoutCountSet("$setCount 세트"))
         countSetItemListSize = countSetItemList.size
-        timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+        timeSetItemList.add(WorkoutTimeSet("$setCount 세트"))
         timeSetItemListSize = timeSetItemList.size
 
+        liveDataWncAddSetList.postValue(wncSetItemList)
         defaultAddSet()
     }
 
     fun removeItem() {
+        //wncSetItemList.removeLast()
         wncSetItemList.removeAt(wncSetItemListSize-1)
         wncSetItemListSize = wncSetItemList.size
         countSetItemList.removeAt(countSetItemListSize-1)

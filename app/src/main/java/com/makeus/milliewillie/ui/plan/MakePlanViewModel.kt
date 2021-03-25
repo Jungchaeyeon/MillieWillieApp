@@ -1,13 +1,13 @@
 package com.makeus.milliewillie.ui.plan
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
-import com.makeus.milliewillie.repository.local.RepositoryCached
-import java.text.SimpleDateFormat
+import io.reactivex.Observable
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
@@ -22,29 +22,32 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
     val livePlanTypeList = MutableLiveData<List<String>>()
     var liveOnlyDay = MutableLiveData<String>()
 
-    var plansRequest =PlansRequest()
-
-
+    var plansRequest = PlansRequest()
 
     // TodoItem list
-    val livePlanTodoList = MutableLiveData<MutableList<PlansRequest.Work>>()
+    val livePlanTodoList = MutableLiveData<ArrayList<PlansRequest.Work>>()
     var planTodos = ArrayList<PlansRequest.Work>()
-
     //TodoMethod
     fun addTodo(item: PlansRequest.Work) {
         planTodos.add(item)
         livePlanTodoList.value = planTodos
     }
-
     fun replaceTodo() {
         planTodos.clear()
         livePlanTodoList.value = planTodos
     }
-
-    fun removeTodo(item: MainSchedule) {
-        planTodos.remove(item)
-        livePlanTodoList.value = planTodos
-    }
+    //showTodo
+//    val livePlanTodoList = MutableLiveData<ArrayList<String>>()
+//    var planTodosList = ArrayList<String>()
+//    //TodoMethod
+//    fun addTodoItem(item: String) {
+//        planTodosList.add(item)
+//        livePlanTodoList.value = planTodosList
+//    }
+//    fun replaceTodoItem() {
+//        planTodosList.clear()
+//        livePlanTodoList.value = planTodosList
+//    }
 
 
     //Main 일정 recyclerview itemlist
@@ -109,6 +112,19 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
 //        plansRequest.startDate=planDateChange(today.toString())
 //        plansRequest.endDate=planDateChange(today.toString())
 //    }
+
+    val liveDDayPercent = MutableLiveData<String>()
+    var count = 0
+
+    init {
+        Observable.interval(0, 1, TimeUnit.SECONDS).timeInterval().map {
+            count++
+        }.subscribe {
+            //퍼센트 계산
+            liveDDayPercent.postValue(it.toString())
+
+        }.disposeOnDestroy(this)
+    }
 }
 
 

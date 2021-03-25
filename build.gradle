@@ -46,6 +46,7 @@ buildscript {
         jsoupVersion = '1.11.1'
         crashlyticsVersion = "2.4.1"
 
+        chartVersion ="v3.1.0"
 
         jvmTargetVersion = '1.8'
 

@@ -149,7 +149,7 @@ dependencies {
     implementation files('libs/libDaumMapAndroid.jar')
 
     // dot_graph
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation "com.github.PhilJay:MPAndroidChart:$chartVersion"
 
     //calendar picker
     implementation "com.andrewjapar.rangedatepicker:rangedatepicker:$calendarpickerVersion"

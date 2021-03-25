@@ -1,35 +1,42 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.model.MainSchedule
-import com.makeus.milliewillie.model.Plan
+import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class MakePlanViewModel : BaseViewModel() {
+class MakePlanViewModel(val apiRepository: ApiRepository) :
+    BaseViewModel() {
 
-    val livePlanType = MutableLiveData<String>().apply { value = " 일정" }
+    val livePlanType = MutableLiveData<String>().apply { value = "일정" }
     val livePlanColor = MutableLiveData<String>().apply { value = "#8a6fff" }
     val liveDayAndNight = MutableLiveData<String>()
-    val liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
+    var liveDate = MutableLiveData<String>().apply { value = "날짜선택" }
     val liveGoalData = MutableLiveData<String>()
     val livePlanTypeList = MutableLiveData<List<String>>()
-    var liveOnlyDay =MutableLiveData<String>()
+    var liveOnlyDay = MutableLiveData<String>()
 
-    val liveAvailNumber = MutableLiveData<String>()
-    var liveAvailHap =MutableLiveData<Int>().apply { value=0 }
-    var liveAvailValue = List(3){MutableLiveData<String>().apply { value="0"}}
+    var plansRequest =PlansRequest()
+
+
 
     // TodoItem list
-    val livePlanTodoList = MutableLiveData<MutableList<Plan.Todos>>()
-    var planTodos = ArrayList<Plan.Todos>()
+    val livePlanTodoList = MutableLiveData<MutableList<PlansRequest.Work>>()
+    var planTodos = ArrayList<PlansRequest.Work>()
 
     //TodoMethod
-    fun addTodo(item: Plan.Todos) {
+    fun addTodo(item: PlansRequest.Work) {
         planTodos.add(item)
         livePlanTodoList.value = planTodos
     }
-    fun replaceTodo(){
+
+    fun replaceTodo() {
         planTodos.clear()
         livePlanTodoList.value = planTodos
     }
@@ -82,6 +89,26 @@ class MakePlanViewModel : BaseViewModel() {
             )
         )
     }
+
+    fun requestPlan()=
+        apiRepository.plans(
+            PlansRequest(
+                color = livePlanColor.value.toString(),
+                planType = livePlanType.value.toString(),
+                title = plansRequest.title,
+                startDate = plansRequest.startDate,
+                endDate = plansRequest.endDate,
+                push = plansRequest.push,
+                pushDeviceToken =null,
+                planVacation = plansRequest.planVacation,
+                work = plansRequest.work
+            )
+        )
+//    fun initDate(){
+//        val today = Calendar.getInstance().time
+//        plansRequest.startDate=planDateChange(today.toString())
+//        plansRequest.endDate=planDateChange(today.toString())
+//    }
 }
 
 

@@ -156,10 +156,6 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
         val df = SimpleDateFormat("yyyy.MM.dd")
         val dff = SimpleDateFormat("yyyy-MM-dd")
 
-//        Log.e(date,"hi")
-//        Log.e(df.parse(date).toString(),"hi2")
-//        Log.e(dff.format(df.parse(date)).toString(),"hi3")
-
         return dff.format(df.parse(date))
     }
 

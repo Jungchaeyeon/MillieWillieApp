@@ -1,14 +1,21 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.DatepickerBottomSheetBasicBinding
 import com.makeus.milliewillie.databinding.NumberpickerBottomSheetHoliBinding
 import com.makeus.milliewillie.databinding.PlanVcBottomSheetBinding
 import com.makeus.milliewillie.di.repositoryModule
+import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.intro.UserViewModel
@@ -33,8 +40,10 @@ class PlanVacationBottomSheetFragment :
     val viewModel: MakePlanViewModel by sharedViewModel()
     val repositoryCached by inject<RepositoryCached>()
     var hap = 0
+    var planVacation = ArrayList<PlansRequest.PlanVacation>()
 
     private var clickOk: ((String) -> Unit)? = null
+    private lateinit var callback: OnBackPressedCallback
 
     companion object {
         fun getInstance() = PlanVacationBottomSheetFragment()
@@ -45,10 +54,22 @@ class PlanVacationBottomSheetFragment :
         setStyle(STYLE_NORMAL, R.style.MyTransparentBottomSheetDialogTheme)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                ActivityNavigator.with(context).makeplan().start()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
     override fun PlanVcBottomSheetBinding.onBind() {
         vi = this@PlanVacationBottomSheetFragment
-
-
     }
 
     fun setOnClickOk(clickOk: ((String) -> Unit)): PlanVacationBottomSheetFragment {
@@ -57,9 +78,20 @@ class PlanVacationBottomSheetFragment :
     }
 
     fun onClickOk() {
+        planVacation.add(PlansRequest.PlanVacation(1,edt_regul.text.toString().toInt()))
+        planVacation.add(PlansRequest.PlanVacation(2,edt_prize.text.toString().toInt()))
+        planVacation.add(PlansRequest.PlanVacation(3,edt_other.text.toString().toInt()))
+        viewModel.plansRequest.planVacation = planVacation.toList()
+
+        for(i in 0..2){
+            Log.e(viewModel.plansRequest.planVacation!![i].count.toString())
+        }
         clickOk?.invoke("")
         dismiss()
+
     }
+
+
 
     fun onClickPlus(id: Int) {
 

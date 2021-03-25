@@ -41,12 +41,13 @@ abstract class RepositoryCached {
     }
 
     fun getToken() = getGeneralValue(LocalKey.TOKEN , "")
+    fun getPickDate() = getGeneralValue(LocalKey.PICKDATE , "날짜선택")
     fun getType() = getValue(LocalKey.TYPE, "")
     fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
     fun getDate() = getValue(LocalKey.DATE, "")
     fun getPlanType() = getValue(LocalKey.PLANTYPE, "일정")
-    fun getNotice() = getValue(LocalKey.PLANNOTICE, "")
     fun getColor() = getValue(LocalKey.COLOR, "#ffbe65")
+    fun getOnlyDay() = getValue(LocalKey.ONLYDAY, "")
     fun getDayNight() = getValue(LocalKey.DAYNIGHT, "")
     fun getStartDate() = getValue(LocalKey.STARTDATE, "")
     fun getEnd() = getValue(LocalKey.ENDDATE, "")

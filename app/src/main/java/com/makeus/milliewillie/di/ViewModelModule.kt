@@ -15,6 +15,8 @@ import com.makeus.milliewillie.ui.plan.MakePlanViewModel
 import com.makeus.milliewillie.ui.routine.ExerciseSetViewModel
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel
 import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.get
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val viewModelModule = module {
@@ -28,7 +30,7 @@ val viewModelModule = module {
     viewModel { MakeRoutineViewModel() }
     viewModel { ExerciseSetViewModel() }
     viewModel { UserViewModel(get(),get()) }
-    single {  MakePlanViewModel() }//추후 수정
+    viewModel {  MakePlanViewModel(get()) }//추후 수정
     viewModel { MainViewModel() }
     viewModel { EmoViewModel() }
     viewModel { HoliViewModel() }

@@ -2,6 +2,7 @@ package com.makeus.milliewillie.repository
 
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.model.KakaoRequest
+import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -26,7 +27,6 @@ class ApiRepository(
                 repositoryCached.setValue(LocalKey.ISMEMBER, true)
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
             }
-
     }.switchMap {
         //jwt API 호출
         apiTest.jwt()
@@ -34,9 +34,11 @@ class ApiRepository(
 
     fun jwt() = apiTest.jwt().doOnNext {}
 
-
     //fun users(name : String) = apiTest.users(name)
 
+    fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
+
+    }
     //회원가입
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
         //header에 token을 jwt로 변경

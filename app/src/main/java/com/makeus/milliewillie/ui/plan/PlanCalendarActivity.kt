@@ -1,12 +1,18 @@
 package com.makeus.milliewillie.ui.plan
 
 
+import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityPlanCalendarBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.PlansRequest
+import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_plan_calendar.*
@@ -23,13 +29,17 @@ class PlanCalendarActivity :
     val repositoryCached by inject<RepositoryCached>()
     private var dayNightStr: String = ""
     private var dayAvail: String = ""
-    private var startStrDate: String = ""
-    private var endStrDate: String = ""
+    var startStrDate: String = ""
+    var endStrDate: String = ""
     val firstCalendarDate = Calendar.getInstance(Locale.KOREA)
     val thirdCalendarDate = Calendar.getInstance()
 
     companion object {
         fun getInstance() = PlanCalendarActivity()
+    }
+    override fun setupProperties(bundle: Bundle?) {
+        super.setupProperties(bundle)
+        viewModel.plansRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as PlansRequest
     }
 
     override fun ActivityPlanCalendarBinding.onBind() {
@@ -51,18 +61,31 @@ class PlanCalendarActivity :
         calendar_view.setOnRangeSelectedListener { startDate, endDate, startLabel, endLabel ->
             startStrDate = dateFormat.format(startDate)
             endStrDate = dateFormat.format(endDate)
+
+            Log.e(startDate.toString(),"startDate")
+            Log.e(endDate.toString(),"endDate")
+
+            viewModel.plansRequest.startDate = planDateChange(startDate)
+            viewModel.plansRequest.endDate = planDateChange(endDate)
+
             val calcuDate = (endDate.time - startDate.time) / (60 * 60 * 24 * 1000)
 
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
             dayAvail= calcuDate.toInt().plus(1).toString()
             viewModel.liveDate.postValue("$startStrDate - $endStrDate")
-            viewModel.liveOnlyDay.postValue(dayNightStr)
+           // viewModel.liveOnlyDay.postValue(dayNightStr)
+            repositoryCached.setValue(LocalKey.ONLYDAY,dayNightStr)
+            repositoryCached.setValue(LocalKey.DAYNIGHT,dayNightStr)
         }
 
         calendar_view.setOnStartSelectedListener { startDate, label ->
             startStrDate = dateFormat.format(startDate)
+            viewModel.plansRequest.startDate = planDateChange(startDate)
+            viewModel.plansRequest.endDate = planDateChange(startDate)
             viewModel.liveDate.postValue("$startStrDate")
-            viewModel.liveOnlyDay.postValue("1일")
+            //viewModel.liveOnlyDay.postValue("1일")
+            repositoryCached.setValue(LocalKey.ONLYDAY,"1일")
+            repositoryCached.setValue(LocalKey.DAYNIGHT,"1일")
         }
 
         calendar_view.apply {
@@ -76,9 +99,22 @@ class PlanCalendarActivity :
     fun onClickBack() {
         viewModel.liveDayAndNight.postValue(dayNightStr)
         repositoryCached.setValue(LocalKey.AVAILHOLI,dayAvail)
+        repositoryCached.setValue(LocalKey.PICKDATE,viewModel.liveDate.value.toString())
+        Log.e(repositoryCached.getPickDate().toString(),"pickDate")
+
         onBackPressed()
     }
     fun onClickToday(){
         calendar_view.setSelectionDate(firstCalendarDate.time, thirdCalendarDate.time)
+    }
+    fun planDateChange(date: Date): String {
+        val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        Log.e(planDateFormat.format(date).toString(),"날짜로그출력")
+        return planDateFormat.format(date).toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onClickToday()
     }
 }

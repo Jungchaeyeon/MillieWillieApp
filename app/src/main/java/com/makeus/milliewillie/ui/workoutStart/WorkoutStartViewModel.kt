@@ -15,22 +15,26 @@ class WorkoutStartViewModel: BaseViewModel() {
     val liveDataCircleItemList = MutableLiveData<ArrayList<StartRecyclerCircleItem>>()
     val _circleItemList = ArrayList<StartRecyclerCircleItem>()
 
+    val liveDataTimeSec = MutableLiveData<String>().apply { value = "00" }
+    val liveDataTimeMin = MutableLiveData<String>().apply { value = "00" }
+    val liveDataTimeHour = MutableLiveData<String>().apply { value = "00" }
+
     init {
         defaultItemList()
+        defaultCircleItemList()
     }
 
     fun defaultItemList() {
-        defaultCircleItemList()
+        createItemList()
+        liveDataItemList.value = _itemList
+
+        Log.e("liveDataItemList ${liveDataItemList.value}")
     }
 
     fun createItemList() {
         for (i in 0..9) {
-            if (i == 0 || i == 1) _itemList.add(StartRecyclerItem(exName = "", exInfo = "", circleList = _circleItemList))
-            _itemList.add(StartRecyclerItem(exName = "밀리터리 프레스", exInfo = "5set, 10kg, 5개", circleList = _circleItemList))
-            if (i == 8 || i == 9) _itemList.add(StartRecyclerItem(exName = "", exInfo = "", circleList = _circleItemList))
+            _itemList.add(StartRecyclerItem(exName = "밀리터리 프레스", exInfo = "5set, 10kg, 5개"))
         }
-        Log.e(_itemList.toString())
-        liveDataItemList.postValue(_itemList)
     }
 
     fun onClickItemList(position: Int) {
@@ -42,12 +46,17 @@ class WorkoutStartViewModel: BaseViewModel() {
         for (i in 0..4) {
             _circleItemList.add(StartRecyclerCircleItem())
         }
-        liveDataCircleItemList.postValue(_circleItemList)
-        Log.e(_circleItemList.toString())
-        createItemList()
+        liveDataCircleItemList.value = _circleItemList
+        Log.e("liveDataCircleItemList ${liveDataCircleItemList.value}")
+//        liveDataCircleItemList.postValue(_circleItemList)
+//        Log.e(liveDataCircleItemList.value.toString())
+//        Log.e(_circleItemList.toString())
+
     }
 
-
+    fun increaseSec(value: String) {
+        liveDataTimeSec.postValue("${value.toInt() + 1}")
+    }
 
 
 }

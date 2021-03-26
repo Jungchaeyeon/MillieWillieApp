@@ -135,7 +135,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
 
             }
             2 -> { // 루틴 삭제 API
-                viewModel.apiRepository.deleteRoutine(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+                viewModel.apiRepository.deleteRoutine(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), allRoutineArray[position].routineId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         if (it.isSuccess) {

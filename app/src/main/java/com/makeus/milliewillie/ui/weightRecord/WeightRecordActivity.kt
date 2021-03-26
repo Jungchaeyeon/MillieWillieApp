@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Handler
 import android.view.MotionEvent
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.showShortToastSafe
@@ -24,6 +26,7 @@ import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.exerciseId
+import com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -38,6 +41,7 @@ class WeightRecordActivity :
     BaseDataBindingActivity<ActivityWeightRecordBinding>(R.layout.activity_weight_record) {
 
     private val viewModel by viewModel<WeightRecordViewModel>()
+    private val viewModel2 by viewModel<WorkoutViewModel>()
 
     private var goalValue: Float = 0f
     private var currentValue: Float = 0f
@@ -295,6 +299,46 @@ class WeightRecordActivity :
         binding.weightRecordLineChart.setData(data)
         binding.weightRecordLineChart.notifyDataSetChanged()
         binding.weightRecordLineChart.invalidate()
+    }
+
+    fun onClickCancel() {
+        onBackPressed()
+    }
+    private val dailyWeightArray = ArrayList<DailyWeight>()
+    private val weightDayArray = ArrayList<WeightDay>()
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.e("onBackPressed")
+//        viewModel.apiRepository.getDailyWeight(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe() {
+//                if (it.isSuccess) {
+//                    Log.e("getDailyWeight 호출 성공")
+//
+//                    val goalText = String.format(
+//                        getString(
+//                            R.string.goal_weight_var,
+//                            it.result.goalWeight
+//                        )
+//                    )
+//                    viewModel2.goalWeightText.postValue(goalText)
+//                    binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+//
+//                    goalValue = it.result.goalWeight.toFloat()
+//                    Log.e("goalValue: $goalValue")
+//                    Log.e("dailyWeightList: ${it.result.dailyWeightList}")
+//                    Log.e("weightDayList: ${it.result.weightDayList}")
+//                    it.result.dailyWeightList.forEach { element ->
+//                        dailyWeightArray.add(0, DailyWeight(element.asString))
+//                    }
+//                    it.result.weightDayList.forEach { element ->
+//                        weightDayArray.add(0, WeightDay(element.asString))
+//                    }
+//                    viewModel2.createWeightItem(dailyWeightArray, weightDayArray)
+//                } else {
+//                    Log.e("호출 실패")
+//                }
+//            }.disposeOnDestroy(this)
     }
 
 

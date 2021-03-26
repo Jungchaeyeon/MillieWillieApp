@@ -70,6 +70,11 @@ interface Api {
     fun getRoutines(@Path("exerciseId") exerciseId: Long,
                     @Query("targetDate") targetDate: String): Observable<Routines>
 
+    @GET("exercises/{exerciseId}/reports")
+    fun getReports(@Path("exerciseId") exerciseId: Long,
+                   @Query("viewYear") viewYear: Int,
+                   @Query("viewMonth") viewMonth: Int):Observable<ReportsResponse>
+
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,
                         @Body body: PatchGoalWeightRequest): Observable<ResultResponse>
@@ -79,7 +84,8 @@ interface Api {
                         @Body body: PatchTodayWeightRequest): Observable<ResultResponse>
 
     @DELETE("exercises/{exerciseId}/routines/{routineId}")
-    fun deleteRoutine(@Path("exerciseId") exerciseId: Long): Observable<ResultResponse>
+    fun deleteRoutine(@Path("exerciseId") exerciseId: Long,
+                      @Path("routineId") routineId: Long): Observable<ResultResponse>
 
 
     @POST("users/login-kakao")

@@ -15,13 +15,14 @@ import android.text.style.StyleSpan
 import androidx.annotation.RequiresApi
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.util.Log
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 
 @SuppressLint("UseCompatLoadingForDrawables")
-class EventDecorator(dates: Collection<CalendarDay>, context: Context) :
+class DotDecorator(private val color: Int, dates: Collection<CalendarDay>, context: Context) :
     DayViewDecorator {
 
     private val drawable: Drawable = context.resources.getDrawable(R.drawable.calendar_item_background)
@@ -33,9 +34,9 @@ class EventDecorator(dates: Collection<CalendarDay>, context: Context) :
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun decorate(view: DayViewFacade) {
-        view.setBackgroundDrawable(drawable)
-
-//        view.addSpan(DotSpan(5f, R.color.maincolor_blue)); // 날자밑에 점
+//        view.setBackgroundDrawable(drawable)
+        Log.e(color.toString())
+        view.addSpan(DotSpan(10f, color)); // 날자밑에 점
     }
 
 }

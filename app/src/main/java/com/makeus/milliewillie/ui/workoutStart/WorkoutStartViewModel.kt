@@ -57,6 +57,12 @@ class WorkoutStartViewModel: BaseViewModel() {
     fun increaseSec(value: String) {
         liveDataTimeSec.postValue("${value.toInt() + 1}")
     }
+    fun increaseMin(value: String) {
+        liveDataTimeMin.postValue("${value.toInt() + 1}")
+    }
+    fun increaseHour(value: String) {
+        liveDataTimeHour.postValue("${value.toInt() + 1}")
+    }
 
 
 }

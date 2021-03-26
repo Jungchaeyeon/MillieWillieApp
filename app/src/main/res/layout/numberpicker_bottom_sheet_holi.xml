@@ -30,7 +30,7 @@
             android:layout_marginTop="50dp"
             android:layout_alignBottom="@+id/dpSpinner"
             android:background="@drawable/background_google_login"
-            android:backgroundTint="@color/main_col_blu"
+            android:backgroundTint="@color/maincolor_blue"
             android:text="@string/ok"
             android:textSize="14sp"
             android:textColor="@color/white"

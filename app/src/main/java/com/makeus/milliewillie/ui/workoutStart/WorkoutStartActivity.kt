@@ -1,6 +1,8 @@
 package com.makeus.milliewillie.ui.workoutStart
 
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
@@ -70,11 +72,37 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
     }
 
+    var isStart = false
     fun stopWatch() {
-//        timer(period = 1000, initialDelay = 1000) {
-//            viewModel.increaseSec(viewModel.liveDataTimeSec.value!!)
-//            binding.startTextSec.text = viewModel.liveDataTimeSec.toString()
-//        }
+        isStart = !isStart
+        when (isStart) {
+            true -> {
+                timer(period = 1000, initialDelay = 1000) {
+                    Handler(Looper.getMainLooper()).post {
+                        viewModel.increaseSec(viewModel.liveDataTimeSec.value!!)
+                        if (viewModel.liveDataTimeSec.value!!.toInt() == 59) {
+                            viewModel.liveDataTimeSec.postValue("00")
+                            viewModel.increaseMin(viewModel.liveDataTimeMin.value!!)
+                            binding.startTextMinute.text = viewModel.liveDataTimeMin.value.toString()
+                        }
+                        if (viewModel.liveDataTimeMin.value!!.toInt() == 59) {
+                            viewModel.liveDataTimeMin.postValue("00")
+                            viewModel.increaseHour(viewModel.liveDataTimeHour.value!!)
+                            binding.startTextHour.text = viewModel.liveDataTimeHour.value.toString()
+                        }
+                        binding.startTextSec.text = viewModel.liveDataTimeSec.toString()
+                    }
+//                    handler.obtainMessage(0).sendToTarget()
+                }
+            }
+            false -> {
+                timer(period = 1000) {
+
+                }.cancel()
+
+            }
+        }
+
     }
 
 

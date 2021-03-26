@@ -8,18 +8,24 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.calendar.DotDecorator
 import com.makeus.milliewillie.calendar.EventDecorator
+import com.makeus.milliewillie.calendar.SelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.CalendarUtils.getYear
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,6 +37,16 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
     val now = Date()
     val format = SimpleDateFormat("yyyy-MM-dd")
     val date = format.format(now)
+
+    var year = Calendar.getInstance().get(Calendar.YEAR)
+    var month = Calendar.getInstance().get(Calendar.MONTH) + 1
+
+    var calendarItemYear = ""
+    var calendarItemMonth = ""
+    var calendarItemDay = ""
+
+    val calendarMonthList = ArrayList<CalendarDay>()
+    var reportsDatesList = ArrayList<String>()
 
     private val routineArray = ArrayList<MyRoutineInfo>()
 
@@ -44,23 +60,35 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
         todayDate()
 
-        val calendarDayList: java.util.ArrayList<CalendarDay> = java.util.ArrayList()
+        val calendarDayList: ArrayList<CalendarDay> = ArrayList()
 
-        binding.calendar.addDecorators(
-            SundayDecorator()
-        )
+        binding.calendar.apply {
+            state().edit()
+                .isCacheCalendarPositionEnabled(false)
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit()
+            isDynamicHeightEnabled = true
+            setPadding(0,-10, 0, 0)
+        }
+        binding.calendar.addDecorators(SundayDecorator())
+
+
+        binding.calendar.setOnMonthChangedListener { widget, date ->
+            year = date.year
+            month = date.month + 1
+
+            binding.calendar.addDecorators(SundayDecorator())
+            calendarMonthList.clear()
+            executeGetReports()
+        }
+
         binding.calendar.setOnDateChangedListener { widget, date, selected ->
             if (date !in calendarDayList) {
-                calendarDayList.add(date)
-                binding.calendar.addDecorators(
-                    SundayDecorator(),
-                    EventDecorator(R.color.blue_green, calendarDayList, context!!)
-                )
-            } else {
-                calendarDayList.remove(date)
-                binding.calendar.removeDecorator(EventDecorator(R.color.blue_green, calendarDayList,context!!))
+                binding.calendar.apply {
+                    addDecorators(SundayDecorator(), SelectionDecorator(date, context!!))
+                    invalidateDecorators()
+                }
             }
-            android.util.Log.e("TAG", "onCreate: $calendarDayList")
         }
 
         binding.todayCalendarImgGotoFeed.setOnClickListener {
@@ -81,11 +109,27 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
     }
 
+    fun setDateFormat(date: String) {
+        var idx = 0
+        calendarItemYear = ""
+        calendarItemMonth = ""
+        calendarItemDay = ""
+        Log.e(date)
+        for (i in date.indices) {
+            if (i == 0 || i == date.length-1) continue
+            else if (date[i] == '-') idx++
+            else if (idx < 1) calendarItemYear += date[i]
+            else if (idx < 2) calendarItemMonth += date[i]
+            else calendarItemDay += date[i]
+        }
+
+    }
+
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun executeGetRoutines() {
         viewModel.apiRepository.getRoutines(
-            path = SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong(),
+            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
             targetDate = date
         )
             .observeOn(AndroidSchedulers.mainThread())
@@ -110,6 +154,43 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
                     Log.e(it.message)
                 }
             }.disposeOnDestroy(this)
+    }
+
+
+    fun executeGetReports() {
+        reportsDatesList.clear()
+        viewModel.apiRepository.getReports(
+            SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            viewYear = year, viewMonth = month)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("getReports 호출 성공")
+                    for (i in 0 until it.result.size()) reportsDatesList.add(it.result[i].toString())
+                    Log.e("reportsDatesList = $reportsDatesList")
+
+                    for (i in 0 until reportsDatesList.size) {
+                        setDateFormat(reportsDatesList[i])
+                        calendarMonthList.add(CalendarDay.from(calendarItemYear.toInt(), calendarItemMonth.toInt()-1, calendarItemDay.toInt()))
+                    }
+                    calendarMonthList.forEach {
+                        binding.calendar.apply {
+                            removeDecorators()
+                            addDecorators(DotDecorator(R.color.blue_green, calendarMonthList, context!!))
+                            invalidateDecorators()
+                        }
+                    }
+                    Log.e("calendarMonthList = ${calendarMonthList}")
+                } else {
+                    Log.e("getReports 호출 실패")
+                    Log.e(it.message)
+                }
+
+
+            }.disposeOnDestroy(this)
+
+
+
     }
 
     fun todayDate(){
@@ -140,8 +221,12 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
         activity?.onBackPressed()
     }
 
+
+
     override fun onResume() {
         super.onResume()
+        executeGetReports()
+
         viewModel.defaultRoutineItemList()
     }
 

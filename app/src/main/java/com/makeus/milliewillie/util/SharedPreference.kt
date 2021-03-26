@@ -14,8 +14,8 @@ object SharedPreference {
     }
 
     fun getSettingItem(key: String): String? {
-        Log.e("Return ${sSharedPreferences.getString(key, null)}")
-        return sSharedPreferences.getString(key, null)
+        Log.e("Return ${sSharedPreferences.getString(key, "")}")
+        return sSharedPreferences.getString(key, "")
     }
 
     fun putSettingBooleanItem(key: String, value: Boolean) {
@@ -43,7 +43,7 @@ object SharedPreference {
             if (value.isNotEmpty()) {
                 editor.putString(key, jsonList.toString())
             } else {
-                editor.putString(key, null)
+                editor.putString(key, "")
             }
         }
         editor.apply()
@@ -53,7 +53,7 @@ object SharedPreference {
 
     fun getArrayStringItem(key: String): ArrayList<String> {
         Log.e("Get $key from $MILLI_WILLI")
-        val json = sSharedPreferences.getString(key, null)
+        val json = sSharedPreferences.getString(key, "")
         val returnList = ArrayList<String>()
         if (json != null) {
             try {

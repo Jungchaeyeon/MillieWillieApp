@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
@@ -22,6 +23,7 @@ import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.legItem
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.shoulderItemListKey
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
+import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -41,7 +43,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     private var exerciseName = ""
     private var position by Delegates.notNull<Int>()
 
-    val detailTypeList = ArrayList<Int>()
+    private var detailType = ArrayList<Int>()
+    private var detailTypeContext = ArrayList<String>()
+    private var detailSetEqual = ArrayList<Boolean>()
+    private var detailSet = ArrayList<Int>()
 
     override fun ActivityMakeRoutineBinding.onBind() {
         vi = this@MakeRoutineActivity
@@ -114,7 +119,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         }
 
         ExerciseSetBottomSheetFragment.getInstance()
-            .setOnClickOk(exerciseName) { name, list ->
+            .setOnClickOk(exerciseName) { name, list, detailTypeList, detailTypeContextList, detailSetEqualList, detailSetList ->
                 var textOption = ""
                 for (i in 0 until list.size) {
                     if (i == list.size-1) {
@@ -123,6 +128,11 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                         textOption += "${list[i]} · "
                     }
                 }
+                detailType = detailTypeList
+                detailTypeContext = detailTypeContextList
+                detailSetEqual = detailSetEqualList
+                detailSet = detailSetList
+                Log.e("detailSet = $detailSet")
                 viewModel.addSelectedItem(RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption))
                 Log.e("${RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption)}")
             }.show(supportFragmentManager)
@@ -211,17 +221,41 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         for (i in 0 until textList.size) {
             if (textList[i].isSelected) {
                 when (textList[i]) {
-                    everyDay -> repeatDays += "8"
-                    monday -> repeatDays += "1"
-                    tuesday -> repeatDays += "2"
-                    wendesday -> repeatDays += "3"
-                    thursday -> repeatDays += "4"
-                    friday -> repeatDays += "5"
-                    saturday -> repeatDays += "6"
-                    sunday -> repeatDays += "7"
+                    everyDay -> {
+                        repeatDays += "8"
+                        break
+                    }
+                    monday -> {
+                        repeatDays += "1"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    tuesday -> {
+                        repeatDays += "2"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    wendesday -> {
+                        repeatDays += "3"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    thursday -> {
+                        repeatDays += "4"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    friday -> {
+                        repeatDays += "5"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    saturday -> {
+                        repeatDays += "6"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
+                    sunday -> {
+                        repeatDays += "7"
+                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                    }
                 }
             }
-            if (i != 0 && i != textList.size-1) repeatDays += "#"
+
         }
     }
 
@@ -233,18 +267,35 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             detailNameList.add(it.routineName)
         }
 
-//        viewModel.apiRepository.postRoutine(body = PostRoutineRequest(
-//            routineName = binding.routineEditRoutineName.text.toString(),
-//            bodyPart = viewModel.liveDatePartOfEx.value.toString(),
-//            repeatDay = repeatDays,
-//            detailName = detailNameList,
-//            detailType = ,
-//            detailTypeContext = ,
-//            detailSetEqual = ,
-//            detailSet =)
-//            , path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+        Log.e(binding.routineEditRoutineName.text.toString())
+        Log.e(viewModel.liveDatePartOfEx.value.toString())
+        Log.e(repeatDays)
+        Log.e(detailNameList.toString())
+        Log.e(detailType.toString())
+        Log.e(detailTypeContext.toString())
+        Log.e(detailSetEqual.toString())
+        Log.e(detailSet.toString())
 
-//        viewModel.apiRepository.getRoutines()
+        viewModel.apiRepository.postRoutine(body = PostRoutineRequest(
+            routineName = binding.routineEditRoutineName.text.toString(),
+            bodyPart = viewModel.liveDatePartOfEx.value.toString(),
+            repeatDay = repeatDays,
+            detailName = detailNameList,
+            detailType = detailType,
+            detailTypeContext = detailTypeContext,
+            detailSetEqual = detailSetEqual,
+            detailSet = detailSet)
+            , path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("postRoutine 호출 성공")
+                } else {
+                    Log.e("postRoutine 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+
         onBackPressed()
     }
 

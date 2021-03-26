@@ -73,7 +73,7 @@ buildscript {
     ext {
         //Dev
         appNameDev = "MakeUs-DEV"
-        apiUrlDev = "\"https://shine94.kr/app/\""
+        apiUrlDev = "\"https://www.miliwili.shop/app/\""
         kakaoAppKeyDev = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyDev = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersDev = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]
@@ -81,7 +81,7 @@ buildscript {
 
         //Stage
         appNameStage = "MakeUs-Stage"
-        apiUrlStage = "\"https://shine94.kr/app/\""
+        apiUrlStage = "\"https://www.miliwili.shop/app/\""
         kakaoAppKeyStage = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyStage = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersStage = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]

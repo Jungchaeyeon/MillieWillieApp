@@ -46,6 +46,13 @@ class ExerciseSetBottomSheetFragment:
     lateinit var btnCount: View
     lateinit var btnTime: View
 
+    var resultArrayList = ArrayList<String>()
+
+    private val detailType = ArrayList<Int>()
+    private val detailTypeContext = ArrayList<String>()
+    private val detailSetEqual = ArrayList<Boolean>()
+    private val detailSet = ArrayList<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        arguments.let {
@@ -55,7 +62,7 @@ class ExerciseSetBottomSheetFragment:
         position = 0
     }
 
-    private var clickOk: ((String, ArrayList<String>) -> Unit)? = null
+    private var clickOk: ((String, ArrayList<String>, ArrayList<Int>,ArrayList<String>, ArrayList<Boolean>, ArrayList<Int>) -> Unit)? = null
 
     var temp =""
 
@@ -271,6 +278,8 @@ class ExerciseSetBottomSheetFragment:
     fun onClickSwitch() {
         when (binding.rebsSwitch.isChecked) {
             true -> {
+                viewModel.resetItems()
+
                 binding.rebsWncLayoutInput.visibility = View.VISIBLE
                 binding.rebsCountLayoutInput.visibility = View.VISIBLE
                 binding.rebsTimeLayoutInput.visibility = View.VISIBLE
@@ -280,6 +289,13 @@ class ExerciseSetBottomSheetFragment:
                 binding.rebsTimeRecyclerSet.visibility = View.GONE
             }
             false -> {
+                binding.rebsWncEditWeight.text = null
+                binding.rebsWncEditCount.text = null
+                binding.rebsCountEditCount.text = null
+                binding.rebsTimeEditHour.text = null
+                binding.rebsTimeEditMin.text = null
+                binding.rebsTimeEditSec.text = null
+
                 binding.rebsWncLayoutInput.visibility = View.GONE
                 binding.rebsCountLayoutInput.visibility = View.GONE
                 binding.rebsTimeLayoutInput.visibility = View.GONE
@@ -292,12 +308,7 @@ class ExerciseSetBottomSheetFragment:
 
     }
 
-    var resultArrayList = ArrayList<String>()
 
-    private val detailType = ArrayList<Int>()
-    private val detailTypeContext = ArrayList<String>()
-    private val detailSetEqual = ArrayList<Boolean>()
-    private val detailSet = ArrayList<Int>()
 
     fun initResult() {
         when (setOptionKind) {
@@ -311,17 +322,25 @@ class ExerciseSetBottomSheetFragment:
                         val wncExCount = binding.rebsWncEditCount.text.toString()
 
                         detailSet.add(setCount.toInt())
+                        detailTypeContext.add("$wncWeight#$wncExCount")
                         resultArrayList.add("${setCount}세트, ${wncWeight}kg, ${wncExCount}개")
                     }
                     false -> {
+                        var idx = 0
+                        var optionsText = ""
                         detailSetEqual.add(false)
                         viewModel.defaultAddSet()
                         val optionArrayList = viewModel.liveDataWncAddSetList.value!!
                         Log.e(optionArrayList.toString())
                         optionArrayList.forEach {
-                            detailSet.add(it.setCount[0].toInt())
+                            optionsText += if (idx == 0) "${it.weight}#${it.count}"
+                            else "/${it.weight}#${it.count}"
+                            idx++
+
                             resultArrayList.add("${it.setCount}, ${it.weight}kg, ${it.count}개")
                         }
+                        detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
+                        detailTypeContext.add(optionsText)
 
                     }
                 }
@@ -335,17 +354,25 @@ class ExerciseSetBottomSheetFragment:
                         val countCount = binding.rebsCountEditCount.text.toString()
 
                         detailSet.add(setCount.toInt())
+                        detailTypeContext.add(countCount)
                         resultArrayList.add("${setCount}세트, ${countCount}개")
                     }
                     false -> {
+                        var idx = 0
+                        var optionsText = ""
                         detailSetEqual.add(false)
                         viewModel.defaultAddSet()
                         val optionArrayList = viewModel.liveDataCountAddSetList.value!!
                         Log.e(optionArrayList.toString())
                         optionArrayList.forEach {
-                            detailSet.add(it.setCount[0].toInt())
+                            optionsText += if (idx == 0) "${it.count}"
+                            else "/${it.count}"
+                            idx++
+
                             resultArrayList.add("${it.setCount}, ${it.count}개")
                         }
+                        detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
+                        detailTypeContext.add(optionsText)
                     }
                 }
             }
@@ -363,11 +390,12 @@ class ExerciseSetBottomSheetFragment:
                         if (!timeHour.isBlank()) timeText += "${timeHour}시 "
                         if (!timeMin.isBlank()) timeText += "${timeMin}분 "
                         if (!timeSec.isBlank()) timeText += "${timeSec}초 "
-
                         detailSet.add(setCount.toInt())
                         resultArrayList.add("${setCount}세트, $timeText")
                     }
                     false -> {
+                        var idx = 0
+                        var optionsText = ""
                         detailSetEqual.add(false)
                         viewModel.defaultAddSet()
                         val optionArrayList = viewModel.liveDataTimeAddSetList.value!!
@@ -379,17 +407,29 @@ class ExerciseSetBottomSheetFragment:
                             if (!it.min.isBlank()) timeText += "${it.min}분 "
                             if (!it.sec.isBlank()) timeText += "${it.sec}초 "
 
-                            detailSet.add(it.setCount[0].toInt())
+                            optionsText += if (idx == 0) "${exchangeToSec(it.hour, it.min) + it.sec.toInt()}"
+                            else "/${(exchangeToSec(it.hour, it.min) + it.sec.toInt())}"
+                            idx++
+
                             resultArrayList.add("${it.setCount}, $timeText")
                             timeText = ""
                         }
+                        detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
+                        detailTypeContext.add(optionsText)
                     }
                 }
             }
         }
     }
 
-    fun setOnClickOk(exerciseName: String, clickOk: ((String, ArrayList<String>) -> Unit)): ExerciseSetBottomSheetFragment {
+    fun exchangeToSec(hour: String, min: String): Int {
+        val exHour = hour.toInt() * 3600
+        val exMin = min.toInt() * 60
+
+        return exHour + exMin
+    }
+
+    fun setOnClickOk(exerciseName: String, clickOk: ((String, ArrayList<String>, ArrayList<Int>,ArrayList<String>, ArrayList<Boolean>, ArrayList<Int>) -> Unit)): ExerciseSetBottomSheetFragment {
         this.exerciseName = exerciseName
         this.clickOk = clickOk
         return this
@@ -397,7 +437,7 @@ class ExerciseSetBottomSheetFragment:
 
     fun onClickOk() {
         initResult()
-        clickOk?.invoke(exerciseName, resultArrayList)
+        clickOk?.invoke(exerciseName, resultArrayList, detailType, detailTypeContext, detailSetEqual, detailSet)
         dismiss()
     }
     fun onClickCancel(){

@@ -5,6 +5,7 @@ import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.model.WorkoutCountSet
 import com.makeus.milliewillie.model.WorkoutTimeSet
 import com.makeus.milliewillie.model.WorkoutWncSet
+import com.makeus.milliewillie.util.Log
 import kotlin.collections.ArrayList
 
 
@@ -56,6 +57,10 @@ class ExerciseSetViewModel: BaseViewModel() {
         timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
         timeSetItemListSize = timeSetItemList.size
 
+        Log.e("addPositionItem2 : $wncSetItemList")
+        Log.e("addPositionItem2 : $countSetItemList")
+        Log.e("addPositionItem2 : $timeSetItemList")
+
         defaultAddSet()
     }
 
@@ -71,6 +76,9 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addPositionItem(setOption: ExerciseSetBottomSheetFragment.SetOptions, position: Int, value: String, kind: Int) {
+        Log.e("addPositionItem : $wncSetItemList")
+        Log.e("addPositionItem : $countSetItemList")
+        Log.e("addPositionItem : $timeSetItemList")
         when (setOption) {
             ExerciseSetBottomSheetFragment.SetOptions.WNC-> {
                 when (kind) {
@@ -90,6 +98,20 @@ class ExerciseSetViewModel: BaseViewModel() {
             }
         }
 
+    }
+
+    fun resetItems() {
+        wncSetItemList.clear()
+        countSetItemList.clear()
+        timeSetItemList.clear()
+
+        for (i in 0 until liveDataSetCount.value!!.toInt()) {
+            wncSetItemList.add(WorkoutWncSet("${i+1}세트"))
+            countSetItemList.add(WorkoutCountSet("${i+1}세트"))
+            timeSetItemList.add(WorkoutTimeSet("${i+1}세트"))
+        }
+
+        defaultAddSet()
     }
 
 }

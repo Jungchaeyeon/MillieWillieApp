@@ -52,13 +52,23 @@ class WorkoutFragment :
         const val IS_GOAL = "IS_GOAL"
         const val EXERCISE_ID = "EXERCISE_ID"
         var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1
+        var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1.toLong()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
+        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0.toLong()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onResume() {
+        super.onResume()
+        // 루틴 GET 호출
+        executeGetRoutines()
+        // 체중 기록 GET 호출
+        executeGetWeightRecord()
+        "onResume".showShortToastSafe()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -72,15 +82,10 @@ class WorkoutFragment :
         isInputGoal = true
         SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
-        // 체중 기록 GET 호출
-        executeGetWeightRecord()
-        // 루틴 GET 호출
-        executeGetRoutines()
-
         onClickWeightDateItemAdd() // 체중 입력
 
-        //라인차트 함수 호출
-        setLineChart()
+//        //라인차트 함수 호출
+//        setLineChart()
 
         binding.workoutRecyclerDay.run {
             adapter = BaseDataBindingRecyclerViewAdapter<WorkoutWeightRecordDate>()
@@ -117,6 +122,8 @@ class WorkoutFragment :
         val date = format.format(now)
         Log.e(date)
 
+        routineArray.clear()
+
         viewModel.apiRepository.getRoutines(
             path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), targetDate = date
         )
@@ -146,6 +153,8 @@ class WorkoutFragment :
 
 
     fun executeGetWeightRecord() {
+        dailyWeightArray.clear()
+        weightDayArray.clear()
         viewModel.getDailyWeight()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -368,8 +377,8 @@ class WorkoutFragment :
                 ActivityNavigator.with(this).weightRecord().start()
             }
             2 -> { // 오늘의 운동 화면
-//                ActivityNavigator.with(this).todayWorkout().start()
-                ActivityNavigator.with(this).workoutStart().start()
+                ActivityNavigator.with(this).todayWorkout().start()
+//                ActivityNavigator.with(this).workoutStart().start()
             }
             3 -> { // 운동 시작 화면
                 ActivityNavigator.with(this).workoutStart().start()
@@ -380,8 +389,6 @@ class WorkoutFragment :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
+
 
 }

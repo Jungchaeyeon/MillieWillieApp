@@ -8,6 +8,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.exerciseId
+import com.makeus.milliewillie.util.Log
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,6 +41,7 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
     fun defaultRecordWeightItemList() {
         liveRecordWeightItemListSize = recordWeightArrayList.size
         liveRecordWeightItemList.postValue(recordWeightArrayList)
+        Log.e(liveRecordWeightItemList.value.toString())
     }
 
     fun createWeightItem(weightItems: ArrayList<DailyWeight>, dateItems: ArrayList<WeightDay>){
@@ -47,6 +49,8 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
         for (i in 0 until weightItems.size) {
             recordWeightArrayList.add(WorkoutWeightRecordDate(weight = weightItems[i].dailyWeight, date = dateItems[i].weightDay))
         }
+        Log.e("onBackPressed called")
+        Log.e(recordWeightArrayList.toString())
         defaultRecordWeightItemList()
     }
 

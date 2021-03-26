@@ -42,6 +42,7 @@ class ApiRepository(
     fun getWeightRecord(path: Long, viewMonth:Int, viewYear: Int) = apiTest.getWeightRecord(exerciseId =  path, viewMonth = viewMonth, viewYear = viewYear)
     fun getAllRoutines(path: Long) = apiTest.getAllRoutines(exerciseId = path)
     fun getRoutines(path: Long, targetDate: String) = apiTest.getRoutines(exerciseId = path, targetDate = targetDate)
+    fun getReports(path: Long, viewYear: Int, viewMonth: Int) = apiTest.getReports(exerciseId = path, viewYear = viewYear, viewMonth = viewMonth)
 
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
@@ -50,7 +51,7 @@ class ApiRepository(
     fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
 
-    fun deleteRoutine(path: Long) = apiTest.deleteRoutine(exerciseId = path)
+    fun deleteRoutine(exerciseId: Long, routineId: Long) = apiTest.deleteRoutine(exerciseId = exerciseId, routineId = routineId)
     //회원가입
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
         //header에 token을 jwt로 변경

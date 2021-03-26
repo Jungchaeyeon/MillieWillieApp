@@ -2,11 +2,8 @@ package com.makeus.milliewillie.ui.home.tab3
 
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.core.content.ContextCompat.getSystemService
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.makeus.base.fragment.BaseDataBindingFragment
@@ -15,16 +12,13 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentEmotionBinding
 import com.makeus.milliewillie.databinding.ItemEmoListBinding
 import com.makeus.milliewillie.model.EmotionImg
-import com.makeus.milliewillie.ui.utils.DrawableUtils
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.fragment_emotion.*
 import kotlinx.android.synthetic.main.item_emo_calendar_day.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
-import kotlin.math.abs
 
 
 class EmotionFragment :

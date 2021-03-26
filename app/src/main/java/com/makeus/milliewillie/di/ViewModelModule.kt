@@ -36,7 +36,6 @@ val viewModelModule = module {
     viewModel { UserViewModel(get(),get()) }
     single {  MakePlanViewModel() }//추후 수정
     viewModel { MainViewModel() }
-    single {  MakePlanViewModel() }
     viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel() }

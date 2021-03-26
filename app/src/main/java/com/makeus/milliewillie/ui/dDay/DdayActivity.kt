@@ -1,8 +1,11 @@
 package com.makeus.milliewillie.ui.dDay
 
 import android.annotation.SuppressLint
+import android.icu.util.ChineseCalendar
+import android.os.Build
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.R
@@ -20,6 +23,7 @@ import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragme
 import com.makeus.milliewillie.ui.login.LoginActivity.Companion.deviceToken
 import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
 
 enum class Classification {
@@ -41,12 +45,11 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
     lateinit var btnNcee: View
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun ActivityDDayBinding.onBind() {
         vi = this@DdayActivity
         vm = viewModel
         viewModel.bindLifecycle(this@DdayActivity)
-
-        requestScheduleApi()
 
         replaceViewFrame(classificationValue)
         binding.dDayBtnAnni.isSelected = true
@@ -60,15 +63,22 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             Toast.makeText(this@DdayActivity, "Complete", Toast.LENGTH_SHORT).show()
         }
 
+
+
+
+
     }
 
     fun onClickDdayDate() {
         when {
             btnBirthday.isSelected -> {
                 DatePickerBirthBottomSheetDialogFragment.getInstance()
-                    .setOnClickOk {date, gapDay ->
+                    .setOnClickOk {date, gapDay, lunarBirthday, thisYearLunarBirthday, nextYearLunarBirthday ->
                         viewModel.liveDataDayGap.postValue(gapDay)
+//                        val dateForm = "$date\n$lunarBirthday\n$thisYearLunarBirthday\n$nextYearLunarBirthday"
                         viewModel.liveDataDdayDate.postValue(date)
+//                        Log.e(dateForm)
+//                        Log.e(viewModel.liveDataDdayDate.value!!.toString())
                     }.show(supportFragmentManager)
             }
             else -> {
@@ -80,39 +90,6 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             }
         }
 
-    }
-
-    @SuppressLint("CheckResult")
-    fun requestScheduleApi() {
-        val dummyData = ScheduleRequest(color = "빨간색", distinction = "일정", title = "토익 인강듣기", startDate = "2021-03-09", endDate = "2021-03-10", repetition = "월", push = "T", pushDeviceToken = deviceToken)
-
-        viewModel.apiRepository.schedule(dummyData).subscribe{
-            if (it.isSuccess) {
-                Log.e(it.isSuccess.toString())
-                Log.e(it.message)
-                Log.e(it.code.toString())
-                "호출 성공".showShortToastSafe()
-            } else {
-                Log.e(it.message.toString())
-                "호출 실패".showShortToastSafe()
-            }
-        }.disposeOnDestroy(this)
-
-//        viewModel.requestSchedule().subscribe() {
-//            if (it.isSuccess) {
-//                "호출 성공".showShortToastSafe()
-//                Log.e(it.isSuccess.toString())
-//                Log.e(it.message.toString())
-//                Log.e(it.code.toString())
-//                Log.e(it.result.toString())
-//            } else {
-//                "호출 실패".showShortToastSafe()
-//                Log.e(it.isSuccess.toString())
-//                Log.e(it.message.toString())
-//                Log.e(it.code.toString())
-//                Log.e(it.result.toString())
-//            }
-//        }.disposeOnDestroy(this)
     }
 
     fun setBtnStatus(position: Int){
@@ -171,5 +148,13 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         }
 
     }
+
+
+
+
+
+
+
+
 
 }

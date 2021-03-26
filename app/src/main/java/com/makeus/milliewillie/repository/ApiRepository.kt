@@ -43,6 +43,7 @@ class ApiRepository(
     fun getAllRoutines(path: Long) = apiTest.getAllRoutines(exerciseId = path)
     fun getRoutines(path: Long, targetDate: String) = apiTest.getRoutines(exerciseId = path, targetDate = targetDate)
     fun getReports(path: Long, viewYear: Int, viewMonth: Int) = apiTest.getReports(exerciseId = path, viewYear = viewYear, viewMonth = viewMonth)
+    fun getDetailsExercises(exerciseId: Long, routineId: Long) = apiTest.getDetailsExercises(exerciseId = exerciseId, routineId = routineId)
 
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)

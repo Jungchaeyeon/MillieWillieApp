@@ -70,14 +70,11 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
             isDynamicHeightEnabled = true
             setPadding(0,-10, 0, 0)
         }
-        binding.calendar.addDecorators(SundayDecorator())
 
 
         binding.calendar.setOnMonthChangedListener { widget, date ->
             year = date.year
             month = date.month + 1
-
-            binding.calendar.addDecorators(SundayDecorator())
             calendarMonthList.clear()
             executeGetReports()
         }
@@ -176,7 +173,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
                     calendarMonthList.forEach {
                         binding.calendar.apply {
                             removeDecorators()
-                            addDecorators(DotDecorator(R.color.blue_green, calendarMonthList, context!!))
+                            addDecorators(SundayDecorator(), DotDecorator(R.color.blue_green, calendarMonthList, context!!))
                             invalidateDecorators()
                         }
                     }

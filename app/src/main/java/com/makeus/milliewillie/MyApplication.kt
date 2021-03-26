@@ -30,7 +30,7 @@ class MyApplication : Application() {
             String.format(globalApplicationContext.getString(stringId, arg))
         }
 
-        lateinit var loginType: LOGINTYPE
+//        lateinit var loginType: LOGINTYPE
         var isEnabledPush: Boolean = true
 
         var isFirstExListSet by Delegates.notNull<Boolean>()

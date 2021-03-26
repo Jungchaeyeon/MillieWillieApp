@@ -75,6 +75,10 @@ interface Api {
                    @Query("viewYear") viewYear: Int,
                    @Query("viewMonth") viewMonth: Int):Observable<ReportsResponse>
 
+    @GET("exercises/{exerciseId}/routines/{routineId}/detail-exercises")
+    fun getDetailsExercises(@Path("exerciseId") exerciseId: Long,
+                            @Path("routineId") routineId: Long): Observable<DetailsExercisesResponse>
+
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,
                         @Body body: PatchGoalWeightRequest): Observable<ResultResponse>

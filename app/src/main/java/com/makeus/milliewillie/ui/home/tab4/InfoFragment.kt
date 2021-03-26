@@ -2,7 +2,6 @@ package com.makeus.milliewillie.ui.home.tab4
 
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.MyApplication
-import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.databinding.FragmentInfoBinding
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
@@ -25,14 +24,14 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
     }
 
     fun getLoginType() {
-        when (loginType) {
-            MyApplication.LOGINTYPE.KAKAO -> {
-                binding.infoTextLoginType.text = getString(R.string.kakao_login)
-            }
-            MyApplication.LOGINTYPE.GOOGLE -> {
-                binding.infoTextLoginType.text = getString(R.string.google_login)
-            }
-        }
+//        when (loginType) {
+//            MyApplication.LOGINTYPE.KAKAO -> {
+//                binding.infoTextLoginType.text = getString(R.string.kakao_login)
+//            }
+//            MyApplication.LOGINTYPE.GOOGLE -> {
+//                binding.infoTextLoginType.text = getString(R.string.google_login)
+//            }
+//        }
     }
 
     fun onClickItem() {

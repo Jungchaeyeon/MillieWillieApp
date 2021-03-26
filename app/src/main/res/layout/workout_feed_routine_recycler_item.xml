@@ -9,8 +9,8 @@
             name="vi"
             type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
         <variable
-            name="vi_calendar"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+            name="vi_feed"
+            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment" />
         <variable
             name="item"
             type="com.makeus.milliewillie.model.MyRoutineInfo" />
@@ -28,7 +28,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/routine_list_background"
-            android:onClick="@{()-> vi.onClickItem(3)}"
+            android:onClick="@{()-> vi_feed.onClickImage(1)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +64,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:onClick="@{}"
-                android:src="@drawable/icon_arrow_gotodeep"/>
+                android:onClick="@{()-> vi_feed.onClickImage(2)}"
+                setImage="@{vi_feed.liveDataItemImg}" />
 
         </RelativeLayout>
 

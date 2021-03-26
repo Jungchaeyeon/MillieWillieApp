@@ -11,16 +11,16 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
-import com.makeus.milliewillie.model.PostRoutineRequest
-import com.makeus.milliewillie.model.RoutineSelectedRecyclerItem
-import com.makeus.milliewillie.model.RoutineWorkoutListItem
+import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.absItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.armItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.backItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.chestItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.legItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.shoulderItemListKey
+import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment.Companion.ROUTINE_ID_KEY
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,6 +40,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     lateinit var saturday: View
     lateinit var sunday: View
 
+    private var routineId by Delegates.notNull<Long>()
     private var exerciseName = ""
     private var position by Delegates.notNull<Int>()
 
@@ -47,6 +48,17 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     private var detailTypeContext = ArrayList<String>()
     private var detailSetEqual = ArrayList<Boolean>()
     private var detailSet = ArrayList<Int>()
+
+    override fun onResume() {
+        super.onResume()
+        if (intent.hasExtra(ROUTINE_ID_KEY)) {
+            routineId = intent.getLongExtra(ROUTINE_ID_KEY, 0)
+            Log.e("routineId = $routineId")
+        }
+
+        if (isModifiedRoutine) executeGetDetailsExercises()
+
+    }
 
     override fun ActivityMakeRoutineBinding.onBind() {
         vi = this@MakeRoutineActivity
@@ -104,6 +116,78 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     }
                 )
         }
+
+    }
+
+    lateinit var routineName: String
+    lateinit var bodyPart: String
+    var repeatDay = ArrayList<Int>()
+    var detailResList = ArrayList<ExerciseDetailRes>()
+
+    var resExerciseName = ""
+    var resExerciseType = 0
+    var resSetCount = 0
+    var resIsSetSame = false
+
+    fun executeGetDetailsExercises() {
+        viewModel.apiRepository.getDetailsExercises(
+            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            routineId = routineId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("executeGetDetailsExercises 호출 성공")
+
+                    routineName = it.result.get("routineName").asString
+                    bodyPart = it.result.get("bodyPart").asString
+
+                    val repeatList = it.result.get("repeatDay").asJsonArray
+                    for (i in 0 until repeatList.size()) repeatDay.add(repeatList[i].asInt)
+                    Log.e(repeatDay.toString())
+
+                    val resDetailResList = it.result.get("detailResList").asJsonArray
+
+                    resDetailResList.forEach { objects ->
+                        val item = objects.asJsonObject
+
+                        val setDetailList = ArrayList<ExerciseDetailSetRes>()
+
+                        resExerciseName = item.get("exerciseName").asString
+                        resExerciseType = item.get("exerciseType").asInt
+                        resSetCount = item.get("setCount").asInt
+                        resIsSetSame = item.get("isSetSame").asBoolean
+
+                        item.get("setDetailList").asJsonArray.forEach{ setDetailsObject ->
+                            val setDetailsItem = setDetailsObject.asJsonObject
+
+                            val setStr = setDetailsItem.get("setStr").asString
+                            val weight = setDetailsItem.get("weight").asDouble
+                            val count = setDetailsItem.get("count").asInt
+                            val time = setDetailsItem.get("time").asInt
+
+                            val listItem = ExerciseDetailSetRes(setStr = setStr, weight = weight, count = count, time = time)
+
+                            setDetailList.add(listItem)
+                        }
+                        Log.e(setDetailList.toString())
+                        val listItem2 = ExerciseDetailRes(exerciseName = resExerciseName, exerciseType = resExerciseType, setCount = resSetCount, isSetSame = resIsSetSame, setDetailList = setDetailList)
+                        detailResList.add(listItem2)
+                        Log.e(detailResList.toString())
+
+                    }
+                    Log.e("debug")
+                    Log.e(detailResList.toString())
+
+                } else {
+                    Log.e("executeGetDetailsExercises 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+
+        isModifiedRoutine = false
+    }
+
+    fun modifiedViewDataBinding() {
 
     }
 

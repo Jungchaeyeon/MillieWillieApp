@@ -28,6 +28,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 
 class WorkoutFragment :
@@ -46,6 +47,7 @@ class WorkoutFragment :
     val dailyWeightArray = ArrayList<DailyWeight>()
     val weightDayArray = ArrayList<WeightDay>()
     var routineArray = ArrayList<MyRoutineInfo>()
+    var routineId by Delegates.notNull<Long>()
 
     companion object {
         fun getInstance() = WorkoutFragment()
@@ -53,6 +55,7 @@ class WorkoutFragment :
         const val EXERCISE_ID = "EXERCISE_ID"
         var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
         var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1.toLong()
+        var isModifiedRoutine: Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

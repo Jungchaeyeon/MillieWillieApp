@@ -1,6 +1,5 @@
 package com.makeus.milliewillie.network.api
 
-import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.milliewillie.model.*
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -38,7 +37,12 @@ interface Api {
 //    ): Observable<Thumbnail>
 
     @GET("users")
-    fun getUsers() : Observable<UsersResponse>
+    fun getUsers(): Observable<UsersResponse>
+
+    @PATCH("users")
+    fun patchUsers(
+        @Body body : UsersPatch
+    ) : Observable<UsersResponse>
 
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>

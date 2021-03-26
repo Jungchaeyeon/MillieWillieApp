@@ -70,7 +70,6 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
 
     val liveDDayPercent = MutableLiveData<String>()
     var count = 0
-
     init {
         Observable.interval(0, 1, TimeUnit.SECONDS).timeInterval().map {
             count++

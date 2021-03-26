@@ -10,7 +10,7 @@
             type="com.makeus.milliewillie.ui.mypage.InfoEnlistActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+            type="com.makeus.milliewillie.ui.mypage.MyPageEditViewModel" />
     </data>
 
     <LinearLayout

@@ -8,9 +8,6 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.mypage.MyPageActivity" />
-        <variable
-            name="vm"
-            type="com.makeus.milliewillie.ui.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -82,7 +79,7 @@
                 android:includeFontPadding="false"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="14dp"
-                android:text="@{vm.usersResponse.name}"
+                android:text="폰군인"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/user_photo"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +91,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:includeFontPadding="false"
-                android:text="@{vm.usersResponse.birthday}"
+                android:text="생일을 입력해 주세요."
                 android:textColor="@color/black_all"
                 android:lineSpacingExtra="3.6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -111,7 +108,7 @@
             android:layout_marginVertical="12dp"
             android:background="@drawable/background_google_login"
             android:drawableStart="@drawable/ic_icon_goal"
-            android:text="@{vm.usersResponse.goal}"
+            android:text="토익만 따서 나가자!"
             android:textAlignment="viewStart" />
 
         <LinearLayout
@@ -139,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@{vm.usersResponse.startDate}" />
+                    android:text="21.02.12" />
 
                 <View
                     android:layout_width="wrap_content"
@@ -158,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:text="@{vm.hobongClassInfo}"
+                    android:text="일병2호봉"
                     android:textColor="@color/black_all" />
 
             </LinearLayout>
@@ -187,9 +184,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{vm.allDday}"
-                        android:textSize="16sp"
-                        tools:text="D - 442"/>
+                        android:text="D-442"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -203,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
-                        android:text="@{vm.nowPercentStr}"
+                        android:text="15.3422345"
                         android:textColor="@color/black_all"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -27,6 +27,6 @@ fun View.setPercent(value: Float) {
     (guideline as Guideline).setGuidelinePercent(value)
 }
 @BindingAdapter("setProgress")
-fun View.setProgress(value:String){
-    (progressbar as ProgressBar).setProgress(value.toInt())
+fun View.setProgress(value:MutableLiveData<String>){
+    (progressbar as ProgressBar).progress = value.value?.toInt()!!
 }

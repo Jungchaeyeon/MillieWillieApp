@@ -1,18 +1,14 @@
 package com.makeus.milliewillie.repository
 
 
-import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.milliewillie.model.*
 
-import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.model.KakaoRequest
 import com.makeus.milliewillie.model.PlansRequest
 
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ApiRepository(
@@ -36,6 +32,8 @@ class ApiRepository(
 
     fun jwt() = apiTest.jwt().doOnNext {}
     fun getUsers() = apiTest.getUsers()
+    fun patchUsers(usersPatch : UsersPatch) = apiTest.patchUsers(usersPatch)
+    fun users(usersRequest : UsersRequest) = apiTest.users(usersRequest).observeOn(AndroidSchedulers.mainThread())
 
     //fun users(name : String) = apiTest.users(name)
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)
@@ -52,6 +50,5 @@ class ApiRepository(
     fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
     }.observeOn(AndroidSchedulers.mainThread())
     //회원가입
-    fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).observeOn(AndroidSchedulers.mainThread())
 
 }

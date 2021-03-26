@@ -7,6 +7,7 @@ import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.UsersResponse
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -96,6 +97,8 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         Log.e(toDischargePercent,"toDischargePercnet")
         Log.e(toDischargePercent,"toNextPromPercent")
         Log.e(toMonthPromPercent,"toNextMonthPromPercent")
+
+        repositoryCached.setValue(LocalKey.ALLDDAY,nowPercentInt)
     }
 
     fun getUsers() = apiRepository.getUsers().observeOn(AndroidSchedulers.mainThread())

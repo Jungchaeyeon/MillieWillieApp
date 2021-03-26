@@ -11,13 +11,14 @@ data class UsersResponse(
         val stateIdx: Int=0,
         val serveType: String="",
         var startDate: String="",
-        val endDate: String="",
-        val strPrivate: String="",
-        val strCorporal: String="",
-        val strSergeant: String="",
+        var endDate: String="",
+        var strPrivate: String="",
+        var strCorporal: String="",
+        var strSergeant: String="",
         var hobong: Int=0,
         val normalPromotionStateIdx: Int=0,
         val proDate: String="",
         val goal: String=""
+
     )
 }

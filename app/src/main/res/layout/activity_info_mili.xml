@@ -183,13 +183,13 @@
 
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.allDdayPercent}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
-            android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="@{vm.dischargePercent}"/>
+            android:progressDrawable="@drawable/progressbar_custom"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -217,9 +217,10 @@
                 android:text="@{vm.nextPromDday}"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginHorizontal="24dp"
             android:orientation="horizontal">
 
@@ -228,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="@{vm.toNextPromPercent}"
-                tools:text="15.45353453453"/>
+                tools:text="15.45353453453" />
 
             <View
                 android:layout_width="wrap_content"
@@ -240,17 +241,17 @@
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
                 android:text="@{vm.formatNextPromDate}"
-                tools:text="2020년 3월 18일"/>
+                tools:text="2020년 3월 18일" />
         </LinearLayout>
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.nextDdayPercent}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
-            android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="@{vm.nextPromPercent}"/>
+            android:progressDrawable="@drawable/progressbar_custom" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -305,13 +306,14 @@
         </LinearLayout>
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.mothPromDday}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
             android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="@{vm.monthPromPercent}"/>
+            />
     </LinearLayout>
 
 </layout>

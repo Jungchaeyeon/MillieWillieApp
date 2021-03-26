@@ -62,6 +62,9 @@ abstract class RepositoryCached {
     fun getSocialType() = getValue(LocalKey.SOCIALTYPE, "")
     fun getholiExist() = getValue(LocalKey.HOLIEXIST, false)
     fun getAvailHoli() = getValue(LocalKey.AVAILHOLI, 0)
+    fun getDday() = getValue(LocalKey.ALLDDAY, 0)//percent
+    fun getNextPromDday() = getValue(LocalKey.NEXTPROMDDAY, 0)//percent
+    fun getMonthPromDday() = getValue(LocalKey.MONTHPROMDDAY, 0)//percent
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

@@ -20,7 +20,7 @@ import java.util.*
 class MainCalendarActivity :
     BaseDataBindingActivity<ActivityMainCalendarviewBinding>(R.layout.activity_main_calendarview) {
 
-    val viewModel by viewModel<MakePlanViewModel>()
+    val viewModel by viewModel<MainViewModel>()
 
     companion object {
         fun getInstance() = MainCalendarActivity()

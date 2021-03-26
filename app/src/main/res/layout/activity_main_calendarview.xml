@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.MainViewModel" />
     </data>
 
     <LinearLayout

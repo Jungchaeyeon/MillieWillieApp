@@ -1,6 +1,5 @@
 package com.makeus.milliewillie.ui.home.tab1
 
-import android.graphics.Color
 import android.view.View
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
@@ -11,28 +10,26 @@ import com.makeus.milliewillie.databinding.ItemHomeLayoutBinding
 import com.makeus.milliewillie.databinding.ItemMainScheduleBinding
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.plan.MakePlanViewModel
+import com.makeus.milliewillie.ui.MainViewModel
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 
 class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    val viewModel by viewModel<MakePlanViewModel>()
+
+    val viewModel: MainViewModel by sharedViewModel()
     val repositoryCached by inject<RepositoryCached>()
     val classImg: Int = 0
     var dDay = ""
-    var nextDDay = ""
-    var monthDDay = ""
     var endDate = ""
     var nowPercentInt = 0
     var nowPercent = ""
-    var nowPercentStr = ""
     var nowPercentFlt = 0F
 
     companion object {
@@ -42,15 +39,8 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment
         vm = viewModel
+
         setClassImg()
-        dDay = "D-" + repositoryCached.getDDay()
-
-       // nowPercent = repositoryCached.getMiliDday()
-        nowPercent = "57"
-        nowPercentInt = nowPercent.toInt().plus(2)
-        nowPercentFlt = nowPercent.toFloat()?.div(100.0).toFloat()
-        nowPercentStr = "$nowPercent%"
-
 
         rvMemoList.run {
 
@@ -63,7 +53,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                         R.layout.item_home_layout
                     ) {
                         vi = this@HomeFragment
-
+                        vm = viewModel
                     })
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<MainSchedule, ItemMainScheduleBinding>(
@@ -94,6 +84,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         ActivityNavigator.with(this).maincalendar().start()
     }
 
+    //x
     fun onClickMyPage() {
         ActivityNavigator.with(this).mypage().start()
     }
@@ -106,8 +97,19 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         endDate = repositoryCached.getEnd()
         return endDate.substring(2)
     }
-    fun onClickHoli(){
+
+    fun onClickHoli() {
         ActivityNavigator.with(this).holiday().start()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        responseUser()
+    }
+
+    fun responseUser() {
+        viewModel.getUsers()
+        Log.e(viewModel.usersResponse.toString(),"스타트 홈에서 ")
     }
 
 }

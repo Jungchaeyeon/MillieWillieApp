@@ -14,8 +14,8 @@ data class PlansRequest(
     var work: List<Work>? = null
 ) : Serializable {
     data class PlanVacation(
-        var vacationId: Long = 0L,
-        var count: Int = 0
+        var vacationId: Long? = 0L,
+        var count: Int? = 0
     )
 
     data class Work(

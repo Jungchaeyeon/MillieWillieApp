@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.model.UsersRequest
+import com.makeus.milliewillie.model.UsersResponse
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*

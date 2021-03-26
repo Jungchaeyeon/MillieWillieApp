@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.intro
 
 import android.os.Bundle
+import android.os.Handler
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
@@ -24,6 +25,7 @@ class IntroGoalActivity :
 
     val viewModel by viewModel<UserViewModel>()
     val context = this
+    val repositoryCached by inject<RepositoryCached>()
     override fun setupProperties(bundle: Bundle?) {
         super.setupProperties(bundle)
         viewModel.usersRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as UsersRequest
@@ -53,17 +55,18 @@ class IntroGoalActivity :
     fun requestUser() {
         viewModel.requestUser().subscribe {
             if (it.isSuccess) {
-              //  SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)",).show()
+                repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
+                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)",)?.show()
                 ActivityNavigator.with(this).main().start()
-                showSuccessToast()
+                Log.e(repositoryCached.getToken(), "환영users")
+//                Log.e( it.result.jwt, "환영 Test")
+//                Log.e( it.result.userId.toString(),"id 값")
             } else {
                 "가입 실패".showShortToastSafe()
             }
         }.disposeOnDestroy(this)
     }
-    fun showSuccessToast(){
-     //   SampleToast.createToast(context, "밀리윌리 가입을 환영합니다 :)")?.show()
-    }
+
 
 
 }

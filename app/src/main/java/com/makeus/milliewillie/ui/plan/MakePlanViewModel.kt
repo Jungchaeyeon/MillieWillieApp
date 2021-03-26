@@ -36,52 +36,7 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
         planTodos.clear()
         livePlanTodoList.value = planTodos
     }
-    //showTodo
-//    val livePlanTodoList = MutableLiveData<ArrayList<String>>()
-//    var planTodosList = ArrayList<String>()
-//    //TodoMethod
-//    fun addTodoItem(item: String) {
-//        planTodosList.add(item)
-//        livePlanTodoList.value = planTodosList
-//    }
-//    fun replaceTodoItem() {
-//        planTodosList.clear()
-//        livePlanTodoList.value = planTodosList
-//    }
 
-
-    //Main 일정 recyclerview itemlist
-    val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply {
-        this.postValue(
-            arrayListOf(
-                MainSchedule()
-            )
-        )
-    }
-    var planItems = ArrayList<MainSchedule>()
-
-    //Main 일정 itemMethod
-    fun addItem(item: MainSchedule) {
-
-        if (planItems.size == 0) {
-            planItems.add(0, MainSchedule())
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        } else {
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        }
-    }
-
-    fun removeItem(item: MainSchedule) {
-        planItems.remove(item)
-        liveMainPlan.value = planItems
-    }
-
-    fun notifyChange() {
-        val items: ArrayList<MainSchedule>? = liveMainPlan.value
-        liveMainPlan.value = items
-    }
 
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(

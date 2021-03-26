@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.network.api
 
+import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.milliewillie.model.*
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -35,6 +36,30 @@ interface Api {
 //    fun uploadThumbnail(
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
+
+    @GET("users")
+    fun getUsers() : Observable<UsersResponse>
+
+    @POST("users/login-kakao")
+    fun kakaoLogin(): Observable<KakaoLogin>
+
+    @GET("users/jwt")
+    fun jwt(): Observable<BaseResponse>
+
+//    @POST("users")
+//    fun users(
+//        @Field("name") name : String
+//    ): Observable<Users>
+
+    @POST("calendars/plans")
+    fun plans(
+        @Body body : PlansRequest
+    ): Observable<Plans>
+
+    @POST("users")
+    fun users(
+        @Body body : UsersRequest
+    ): Observable<Users>
 
     @POST("calendars/schedule")
     fun schedule(
@@ -81,26 +106,5 @@ interface Api {
     @DELETE("exercises/{exerciseId}/routines/{routineId}")
     fun deleteRoutine(@Path("exerciseId") exerciseId: Long): Observable<ResultResponse>
 
-
-    @POST("users/login-kakao")
-    fun kakaoLogin(): Observable<KakaoLogin>
-
-    @GET("users/jwt")
-    fun jwt(): Observable<BaseResponse>
-
-//    @POST("users")
-//    fun users(
-//        @Field("name") name : String
-//    ): Observable<Users>
-
-    @POST("calendars/plans")
-    fun plans(
-        @Body body : PlansRequest
-    ): Observable<Plans>
-
-    @POST("users")
-    fun users(
-        @Body body : UsersRequest
-    ): Observable<Users>
 
 }

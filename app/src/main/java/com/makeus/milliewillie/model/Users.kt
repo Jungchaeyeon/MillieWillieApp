@@ -1,6 +1,10 @@
 package com.makeus.milliewillie.model
 
 data class Users(
-    var userId : Long,
-    var jwt : String
-) : BaseResponse()
+   val result: Result
+) : BaseResponse(){
+    data class Result(
+        var userId : Long,
+        var jwt : String
+    )
+}

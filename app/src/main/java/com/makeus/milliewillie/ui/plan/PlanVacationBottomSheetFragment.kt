@@ -69,13 +69,6 @@ class PlanVacationBottomSheetFragment :
         viewModel.plansRequest.planVacation.add(PlansRequest.PlanVacation(2.toLong(),edit_prize.text.toString().toInt()))
         viewModel.plansRequest.planVacation.add(PlansRequest.PlanVacation(3.toLong(),edit_other.text.toString().toInt()))
 
-        Log.e(viewModel.plansRequest.planVacation[0].count.toString(),"frag planVac")
-        Log.e(viewModel.plansRequest.planVacation[1].count.toString(),"frag planVac")
-        Log.e(viewModel.plansRequest.planVacation[2].count.toString(),"frag planVac")
-        Log.e(viewModel.plansRequest.planVacation[0].vacationId.toString(),"frag id")
-        Log.e(viewModel.plansRequest.planVacation[1].vacationId.toString(),"frag id")
-        Log.e(viewModel.plansRequest.planVacation[2].vacationId.toString(),"frag id")
-
         clickOk?.invoke("")
         dismiss()
 

@@ -11,7 +11,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.MainViewModel" />
 
         <variable
             name="item"
@@ -50,6 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_profile" />
+<!--                    android:text="@{vm.usersResponse.name.toString()}"-->
 
                 <TextView
                     style="@style/spoqa_medium_14"
@@ -58,9 +59,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:includeFontPadding="false"
-                    android:text="김군인"
                     android:textColor="@color/black_all"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="@{vm.usersResponse.name}" />
 
                 <View
                     android:layout_width="0dp"
@@ -76,19 +77,21 @@
                     style="@style/spoqa_regular_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{vm.hobongClassInfo}"
                     android:layout_gravity="center_vertical"
-                    android:text="일병 2호봉" />
+                    tools:text="일병2호봉"/>
 
 
             </LinearLayout>
 
+<!--                android:text="@{vm.usersResponse.goal.toString()}"-->
             <Button
                 style="@style/MatchWrap_24"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
-                android:text="@{vm.liveGoalData}"
                 android:textAlignment="viewStart"
+                android:text="@{vm.usersResponse.goal}"
                 tools:text="토익만 따서 나가자!" />
 
             <LinearLayout
@@ -108,8 +111,9 @@
                     android:layout_marginTop="24dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0.6sp"
-                    android:text="D-442"
-                    android:textSize="20sp" />
+                    android:text="@{vm.allDday}"
+                    android:textSize="20sp"
+                    tools:text="D-442"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,13 +128,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="3호봉 진급" />
+                        android:text="@{vm.monthProm}"
+                        tools:text="3호봉 진급" />
 
                     <TextView
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vi.monthDDay}"
+                        android:text="@{vm.monthPromDday}"
                         android:textColor="@color/black_all"
                         tools:text="D - 23" />
 
@@ -144,13 +149,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="상병 진급" />
+                        android:text="@{vm.nextProm}"
+                        tools:text="상병 진급" />
 
                     <TextView
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vi.nextDDay}"
+                        android:text="@{vm.nextPromDday}"
                         android:textColor="@color/black_all"
                         tools:text="D - 123" />
 
@@ -176,14 +182,15 @@
                             android:layout_width="21dp"
                             android:layout_height="12dp"
                             android:layout_marginBottom="8dp"
-                            android:text="@{vi.nowPercentStr}"
+                            android:gravity="center_horizontal"
+                            android:text="@{vm.nowPercentStr}"
                             android:textColor="@color/white"
                             android:textSize="10sp" />
                     </RelativeLayout>
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline"
-                        setPercent="@{vi.nowPercentFlt}"
+                        setPercent="@{vm.nowPercentFlt}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:orientation="vertical"
@@ -198,7 +205,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="28dp"
                         android:max="100"
-                        android:progress="@{vi.nowPercentInt}"
+                        android:progress="@{vm.nowPercentInt}"
                         android:progressDrawable="@drawable/progressbar_custom"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -214,7 +221,7 @@
                     <TextView
                         style="@style/spoqa_regular_12"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="9dp"
                         android:text="@string/discharge" />
 
@@ -223,7 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:text="22.05.18"
+                        android:text="@{vm.usersResponse.endDate}"
                         android:textColor="@color/black_all" />
                 </LinearLayout>
             </LinearLayout>

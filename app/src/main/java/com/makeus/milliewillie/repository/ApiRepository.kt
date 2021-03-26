@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.repository
 
 
+import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.milliewillie.model.*
 
 import com.makeus.milliewillie.ActivityNavigator
@@ -23,14 +24,10 @@ class ApiRepository(
 
 
     fun kakaoLogin() = apiTest.kakaoLogin().doOnNext {
-
             if (!it.result.isMember) {
-                Log.e(it.result.isMember.toString(),"가입되지 않은 멤버")
                  repositoryCached.setValue(LocalKey.ISMEMBER, false)
             } else {
-                Log.e(it.result.isMember.toString(),"가입된 멤버")
                 repositoryCached.setValue(LocalKey.ISMEMBER, true)
-                repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
             }
     }.switchMap {
         //jwt API 호출
@@ -38,6 +35,7 @@ class ApiRepository(
     }
 
     fun jwt() = apiTest.jwt().doOnNext {}
+    fun getUsers() = apiTest.getUsers()
 
     //fun users(name : String) = apiTest.users(name)
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)
@@ -52,11 +50,8 @@ class ApiRepository(
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
     fun deleteRoutine(path: Long) = apiTest.deleteRoutine(exerciseId = path)
     fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
-        Log.e(it.result.color.toString(),"왜 안돼?")
     }.observeOn(AndroidSchedulers.mainThread())
     //회원가입
-    fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
-        //header에 token을 jwt로 변경
-        repositoryCached.setValue(LocalKey.TOKEN, it.jwt)
-    }
+    fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).observeOn(AndroidSchedulers.mainThread())
+
 }

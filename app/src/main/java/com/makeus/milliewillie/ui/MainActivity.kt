@@ -4,6 +4,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
@@ -19,15 +20,18 @@ import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-
+    val viewModel by viewModel<MainViewModel>()
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation
     private var isFabOpen = false
-    val viewModel by viewModel<UserViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     companion object {
         fun getInstance() = MainActivity()
@@ -36,8 +40,6 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
         viewModel.bindLifecycle(this@MainActivity)
-
-        repositoryCached.setValue(LocalKey.TOKEN, "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTYxNjI2Mjk0NX0.SQUi5dcXye6KNJkfxkJZWjD8o5NhtyYcjeWd3MA2xeY")
 
        // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
@@ -154,5 +156,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
     override fun onResume() {
         super.onResume()
+
     }
+
 }

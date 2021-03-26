@@ -33,16 +33,17 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Log.e(repositoryCached.getToken().toString(),"토큰유무")
+
         if (repositoryCached.getToken().isNotEmpty()) {
                 //1단계 -> jwt 가지고 있니?
             viewModel.firstCheckJmt() {
                 //2단계. 유효한 토큰?
                 if (it) {
-                    Log.e(it.toString(), "메인으로")
+                    Log.e(it.toString(), "유효한 토큰-> 메인으로")
                     ActivityNavigator.with(this).main().start()
                 } else {
-                    Log.e(it.toString(), "로그인으로")
-                  //  ActivityNavigator.with(this).login().start()
+                    Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
                 }
             }
         } else {
@@ -111,10 +112,16 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     fun nextStep(isSuccess: Boolean) {
         if (isSuccess) {
-            ActivityNavigator.with(this).main().start()
-        } else {
+            Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
             if(!repositoryCached.getIsMember()){
                 ActivityNavigator.with(this).welcome().start()
+            }
+            else{
+                ActivityNavigator.with(this).main().start()
+                Log.e(repositoryCached.getToken(),"jwt")
+            }
+        } else {
+            if(!repositoryCached.getIsMember()){
             }else{
                 Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
             }

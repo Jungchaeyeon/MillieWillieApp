@@ -1,10 +1,8 @@
-package com.makeus.milliewillie.ui
+package com.makeus.milliewillie.ui.mypage
 
 import androidx.lifecycle.MutableLiveData
-import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.UsersResponse
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -13,12 +11,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 
-class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: RepositoryCached) :
+class MyPageEditViewModel(val apiRepository: ApiRepository, val repositoryCached: RepositoryCached) :
     BaseViewModel() {
-
 
     var usersResponse = UsersResponse.Result()
     val hobongClassInfo = MutableLiveData<String>()
@@ -30,20 +26,23 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
     val formatNextMonthPromDate =MutableLiveData<String>()
     val formatNextPromDate =MutableLiveData<String>()
     val formatDischargeDate =MutableLiveData<String>()
-    val serviceInfo = MutableLiveData<String>()
-    var toDischargePercent = ""
-    var toNextPromPercent = ""
-    var toMonthPromPercent = ""
-    var nowPercentInt = 0
-    var nowPercentStr ="%"
-    var nowPercentFlt = 3.0f
+    var toDischargePercent =MutableLiveData<String>()
+    var toNextPromPercent =MutableLiveData<String>()
+    var toMonthPromPercent =MutableLiveData<String>()
+    var dischargePercent = 0
+    var nextPromPercent = 0
+    var monthPromPercent =0
+    var userEnlist = MutableLiveData<String>()
+
 
     init {
         getUsers()
+        Log.e(usersResponse.startDate)
+        //userEnlist.value = usersResponse.startDate
     }
     fun initMain(){
         usersResponse.hobong+=2
-
+        userEnlist.value = usersResponse.startDate
         allDday.value =  "D - "+calDday(usersResponse.endDate).toString()
         monthProm.value = usersResponse.hobong.plus(1).toString()+"호봉 진급"
         monthPromDday.value = "D - " + calHobongDday().toString()
@@ -60,42 +59,43 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
             3-> { hobongClassInfo.value= "병장"
                 nextProm.value = "다음 진급 없음"}
         }
-        hobongClassInfo.value += usersResponse.hobong.toString()+"호봉"
-        nowPercentInt= dischargeDdayPercent(usersResponse.startDate,usersResponse.endDate).toInt()
-        nowPercentFlt= nowPercentInt.toFloat().plus(0.05).toFloat()
-        nowPercentStr= nowPercentInt.toString()+"%"
-        Log.e("${nowPercentInt}","nowPercentInt")
+        hobongClassInfo.value =usersResponse.serveType+" "+ usersResponse.hobong.toString()+"호봉"
     }
 
     fun percentInit(){
 
-        serviceInfo.value = usersResponse.serveType +" "+ hobongClassInfo.toString()
-
         val dfParse = SimpleDateFormat("yyyy-MM-dd")
         val dfFormat = SimpleDateFormat("yyyy년 MM월 dd일")
 
-        //percent계산하는 부분
+        // Next percent계산하는 부분
         when(usersResponse.normalPromotionStateIdx){
-            0 -> {toNextPromPercent = dischargeDdayPercent(usersResponse.startDate,usersResponse.strPrivate).toString()
-                 dfFormat.format(dfParse.parse(usersResponse.strPrivate))}
-            1 -> {toNextPromPercent = dischargeDdayPercent(usersResponse.strPrivate,usersResponse.strCorporal).toString()
-                dfFormat.format(dfParse.parse(usersResponse.strCorporal))}
-            2 ->{ toNextPromPercent = dischargeDdayPercent(usersResponse.strCorporal,usersResponse.strSergeant).toString()
-                dfFormat.format(dfParse.parse(usersResponse.strSergeant))}
+            0 -> { toNextPromPercent.value = dischargeDdayPercent(usersResponse.startDate,usersResponse.strPrivate).toString()
+                   formatNextPromDate.value = dfFormat.format(dfParse.parse(usersResponse.strPrivate))}
+            1 -> { toNextPromPercent.value = dischargeDdayPercent(usersResponse.strPrivate,usersResponse.strCorporal).toString()
+                   formatNextPromDate.value = dfFormat.format(dfParse.parse(usersResponse.strCorporal))}
+            2 ->{ toNextPromPercent.value = dischargeDdayPercent(usersResponse.strCorporal,usersResponse.strSergeant).toString()
+                formatNextPromDate.value = dfFormat.format(dfParse.parse(usersResponse.strSergeant))}
 
-            3 -> toNextPromPercent = dischargeDdayPercent(usersResponse.strSergeant,usersResponse.endDate).toString()
+            3 -> toNextPromPercent.value = dischargeDdayPercent(usersResponse.strSergeant,usersResponse.endDate).toString()
         }
         val cal = Calendar.getInstance()
-        cal.set(Calendar.DAY_OF_MONTH+1,1); //다음 월의 1일로 변경
-
-        Log.e(cal.time.toString())
+        cal.set(Calendar.DAY_OF_MONTH,1); //다음 월의 1일로 변경
+        cal.set(Calendar.MONTH,Calendar.MONTH+1)
+        formatNextMonthPromDate.value =dfFormat.format(cal.time)
+        Log.e(formatNextMonthPromDate.value,"포맷결과")
      //   formatNextMonthPromDate.value = dfFormat.format(cal)
 
+        //전역 yyyy년 MM월 dd일
         formatDischargeDate.value = dfFormat.format(dfParse.parse(usersResponse.endDate))
+        //전역 percent
+        toDischargePercent.value = dischargeDdayPercent(usersResponse.startDate, usersResponse.endDate).toString()
 
-        Log.e(toDischargePercent,"toDischargePercnet")
-        Log.e(toDischargePercent,"toNextPromPercent")
-        Log.e(toMonthPromPercent,"toNextMonthPromPercent")
+        dischargePercent = toDischargePercent.value!!.toInt()
+        nextPromPercent = toNextPromPercent.value!!.toInt()
+        monthPromPercent = toMonthPromPercent.value!!.toInt()
+        Log.e(toDischargePercent.value,"toDischargePercnet")
+        Log.e(toDischargePercent.value,"toNextPromPercent")
+        Log.e(toMonthPromPercent.value,"toNextMonthPromPercent")
     }
 
     fun getUsers() = apiRepository.getUsers().observeOn(AndroidSchedulers.mainThread())
@@ -111,38 +111,7 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         }).disposeOnDestroy(this)
 
 
-    //Main 일정 recyclerview itemlist
-    val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply {
-        this.postValue(
-            arrayListOf(
-                MainSchedule()
-            )
-        )
-    }
-    var planItems = ArrayList<MainSchedule>()
 
-    //Main 일정 itemMethod
-    fun addItem(item: MainSchedule) {
-
-        if (planItems.size == 0) {
-            planItems.add(0, MainSchedule())
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        } else {
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        }
-    }
-
-    fun removeItem(item: MainSchedule) {
-        planItems.remove(item)
-        liveMainPlan.value = planItems
-    }
-
-    fun notifyChange() {
-        val items: ArrayList<MainSchedule>? = liveMainPlan.value
-        liveMainPlan.value = items
-    }
 
 
     fun calDateBetweenAnB(date1: String, date2: String): Int {

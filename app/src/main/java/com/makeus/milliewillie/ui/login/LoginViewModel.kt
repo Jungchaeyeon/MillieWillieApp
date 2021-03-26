@@ -16,6 +16,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.rx
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -97,16 +98,13 @@ class LoginViewModel(
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
-                if(!repositoryCached.getIsMember()){
-                    repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
-                    response.invoke(false)
-                }
-                else {
-                    Log.e("로그인 성공 ${token.accessToken}")
-                    repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
-                    requestKakaoLogin(response)
-                    //response.invoke(true)
-                }
+
+                Log.e("일단 카카오 쪽 로그인 성공 ${token.accessToken}")
+                repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
+
+                //서버 통신
+                requestKakaoLogin(response)
+
             }, { error ->
                 error.printStackTrace()
                 response.invoke(false)
@@ -115,13 +113,13 @@ class LoginViewModel(
     }
 
     private fun requestKakaoLogin(response: (Boolean) -> Unit) {
-        apiRepository.kakaoLogin().subscribe ({
+        apiRepository.kakaoLogin().subscribe({
             response.invoke(true)
-            Log.e("true?")
-        } , {
+            Log.e("requestKakaoLogin true로 들어옴")
+        }, {
             it.printStackTrace()
             response.invoke(false)
-            Log.e("false?")
+            Log.e("requestKakaoLogin false로 들어옴")
         }).disposeOnDestroy(this)
     }
 
@@ -151,14 +149,14 @@ class LoginViewModel(
         }
     }
 
-    fun firstCheckJmt(response: (Boolean) -> Unit){
-        if(repositoryCached.getToken().isNotEmpty()){
-            apiRepository.jwt().subscribe ({
-                Log.e("jwt유효한 토큰")
+    fun firstCheckJmt(response: (Boolean) -> Unit) {
+        if (repositoryCached.getToken().isNotEmpty()) {
+            apiRepository.jwt().subscribe({
+                Log.e("jwt유효한 토큰으로 판정")
                 response.invoke(true)
-            } , {
+            }, {
                 it.printStackTrace()
-                Log.e("jwt유효하지 않은 토큰")
+                Log.e("jwt유효하지 않은 토큰으로 판정")
                 response.invoke(false)
             }).disposeOnDestroy(this)
         }

@@ -4,7 +4,6 @@ import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
@@ -79,7 +78,9 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         routineSelectedRecycler.run {
             adapter = BaseDataBindingRecyclerViewAdapter<RoutineSelectedRecyclerItem>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineSelectedRecyclerItem, RoutineWorkoutSelectedRecyclerItemBinding>(R.layout.routine_workout_selected_recycler_item) {
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineSelectedRecyclerItem, RoutineWorkoutSelectedRecyclerItemBinding>(
+                        R.layout.routine_workout_selected_recycler_item
+                    ) {
                         vi = this@MakeRoutineActivity
                         item = it
                     }
@@ -103,6 +104,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     }
                     return false
                 }
+
                 override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
 
                 override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
@@ -110,7 +112,9 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
             adapter = BaseDataBindingRecyclerViewAdapter<RoutineWorkoutListItem>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineWorkoutListItem, RoutineWorkoutListItemBinding>(R.layout.routine_workout_list_item) {
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineWorkoutListItem, RoutineWorkoutListItemBinding>(
+                        R.layout.routine_workout_list_item
+                    ) {
                         vi = this@MakeRoutineActivity
                         item = it
                     }
@@ -125,14 +129,17 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     var detailResList = ArrayList<ExerciseDetailRes>()
 
     var resExerciseName = ""
+    val exerciseNameList = ArrayList<String>()
     var resExerciseType = 0
+    val exerciseTypeList = ArrayList<Int>()
     var resSetCount = 0
     var resIsSetSame = false
 
     fun executeGetDetailsExercises() {
         viewModel.apiRepository.getDetailsExercises(
             exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
-            routineId = routineId)
+            routineId = routineId
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isSuccess) {
@@ -143,7 +150,6 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
                     val repeatList = it.result.get("repeatDay").asJsonArray
                     for (i in 0 until repeatList.size()) repeatDay.add(repeatList[i].asInt)
-                    Log.e(repeatDay.toString())
 
                     val resDetailResList = it.result.get("detailResList").asJsonArray
 
@@ -157,6 +163,8 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                         resSetCount = item.get("setCount").asInt
                         resIsSetSame = item.get("isSetSame").asBoolean
 
+                        exerciseTypeList.add(resExerciseType)
+                        exerciseNameList.add(resExerciseName)
                         item.get("setDetailList").asJsonArray.forEach{ setDetailsObject ->
                             val setDetailsItem = setDetailsObject.asJsonObject
 
@@ -165,19 +173,27 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                             val count = setDetailsItem.get("count").asInt
                             val time = setDetailsItem.get("time").asInt
 
-                            val listItem = ExerciseDetailSetRes(setStr = setStr, weight = weight, count = count, time = time)
+                            val listItem = ExerciseDetailSetRes(
+                                setStr = setStr,
+                                weight = weight,
+                                count = count,
+                                time = time
+                            )
 
                             setDetailList.add(listItem)
                         }
-                        Log.e(setDetailList.toString())
-                        val listItem2 = ExerciseDetailRes(exerciseName = resExerciseName, exerciseType = resExerciseType, setCount = resSetCount, isSetSame = resIsSetSame, setDetailList = setDetailList)
+                        val listItem2 = ExerciseDetailRes(
+                            exerciseName = resExerciseName,
+                            exerciseType = resExerciseType,
+                            setCount = resSetCount,
+                            isSetSame = resIsSetSame,
+                            setDetailList = setDetailList
+                        )
                         detailResList.add(listItem2)
-                        Log.e(detailResList.toString())
 
                     }
-                    Log.e("debug")
-                    Log.e(detailResList.toString())
 
+                    modifiedViewDataBinding()
                 } else {
                     Log.e("executeGetDetailsExercises 호출 실패")
                     Log.e(it.message)
@@ -187,8 +203,76 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         isModifiedRoutine = false
     }
 
+    private var m = 0
+    private var h = 0
+    private var s = 0
     fun modifiedViewDataBinding() {
+        everyDay.isSelected = false
+        binding.routineEditRoutineName.setText(routineName)
+        viewModel.liveDatePartOfEx.postValue(bodyPart)
 
+        // repeat
+        repeatDay.forEach {
+            when (it) {
+                1 -> monday.isSelected = true
+                2 -> tuesday.isSelected = true
+                3 -> wendesday.isSelected = true
+                4 -> thursday.isSelected = true
+                5 -> friday.isSelected = true
+                6 -> saturday.isSelected = true
+                7 -> sunday.isSelected = true
+                8 -> everyDay.isSelected = true
+            }
+        }
+
+        var typeIndex = 0
+        detailResList.forEach {
+            var routineSetOption = ""
+            var idx = 0
+            it.setDetailList.forEach { inner ->
+                when (exerciseTypeList[typeIndex]) {
+                    1 -> {
+                        if (idx == 0) routineSetOption += "${inner.setStr}, ${inner.weight}kg, ${inner.count}개"
+                        else routineSetOption += " · ${inner.setStr}, ${inner.weight}kg, ${inner.count}개"
+                    }
+                    2 -> {
+                        if (idx == 0) routineSetOption += "${inner.setStr}, ${inner.count}개"
+                        else routineSetOption += " · ${inner.setStr}, ${inner.count}개"
+                    }
+                    3 -> {
+                        val timeText = decodeTime(inner.time)
+                        if (idx == 0) routineSetOption += "${inner.setStr}, $timeText"
+                        else routineSetOption += " · ${inner.setStr},$timeText"
+                    }
+                }
+                idx ++
+            }
+            val selectedItem = RoutineSelectedRecyclerItem(routineName = exerciseNameList[typeIndex], routineSetOptions = routineSetOption)
+            viewModel.addSelectedItem(selectedItem)
+            typeIndex++
+        }
+
+        val textSet = String.format(getString(R.string.part_of_ex_title, bodyPart))
+        viewModel.liveDataPartOfExTitle.postValue(textSet)
+        viewModel.createExItem(bodyPart)
+
+    }
+
+
+    private fun decodeTime(sec: Int): String {
+        var timeText = ""
+
+        m = sec / 60
+        h = m / 60
+        s = 0
+        s = sec % 60
+        m %= 60
+
+        if (h != 0) timeText += "${h}시간 "
+        if (m != 0) timeText += "${m}분 "
+        if (s != 0) timeText += "${s}초 "
+
+        return timeText
     }
 
     fun onClickExItem() {
@@ -216,9 +300,13 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 detailTypeContext = detailTypeContextList
                 detailSetEqual = detailSetEqualList
                 detailSet = detailSetList
-                Log.e("detailSet = $detailSet")
-                viewModel.addSelectedItem(RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption))
-                Log.e("${RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption)}")
+                viewModel.addSelectedItem(
+                    RoutineSelectedRecyclerItem(
+                        routineName = name,
+                        routineSetOptions = textOption
+                    )
+                )
+
             }.show(supportFragmentManager)
 
     }
@@ -249,7 +337,16 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     }
 
     fun setBtnView(text: View) {
-        val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
+        val textList = arrayListOf<View>(
+            everyDay,
+            monday,
+            tuesday,
+            wendesday,
+            thursday,
+            friday,
+            saturday,
+            sunday
+        )
 
         if (text == everyDay) {
             text.isSelected = true
@@ -274,7 +371,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     }
                     "가슴" -> {
                         viewModel.chestItemList.add(it)
-                        SharedPreference.putArrayStringItem(chestItemListKey, viewModel.chestItemList)
+                        SharedPreference.putArrayStringItem(
+                            chestItemListKey,
+                            viewModel.chestItemList
+                        )
                     }
                     "등" -> {
                         viewModel.backItemList.add(it)
@@ -282,7 +382,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     }
                     "어깨" -> {
                         viewModel.shoulderItemList.add(it)
-                        SharedPreference.putArrayStringItem(shoulderItemListKey, viewModel.shoulderItemList)
+                        SharedPreference.putArrayStringItem(
+                            shoulderItemListKey,
+                            viewModel.shoulderItemList
+                        )
                     }
                     "팔" -> {
                         viewModel.armItemList.add(it)
@@ -300,7 +403,16 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     var repeatDays = ""
 
     fun getRepeatDays() {
-        val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
+        val textList = arrayListOf<View>(
+            everyDay,
+            monday,
+            tuesday,
+            wendesday,
+            thursday,
+            friday,
+            saturday,
+            sunday
+        )
 
         for (i in 0 until textList.size) {
             if (textList[i].isSelected) {
@@ -311,31 +423,31 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     }
                     monday -> {
                         repeatDays += "1"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     tuesday -> {
                         repeatDays += "2"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     wendesday -> {
                         repeatDays += "3"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     thursday -> {
                         repeatDays += "4"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     friday -> {
                         repeatDays += "5"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     saturday -> {
                         repeatDays += "6"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                     sunday -> {
                         repeatDays += "7"
-                        if (i != 0 && i != textList.size-1) repeatDays += "#"
+                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
                     }
                 }
             }
@@ -351,25 +463,18 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             detailNameList.add(it.routineName)
         }
 
-        Log.e(binding.routineEditRoutineName.text.toString())
-        Log.e(viewModel.liveDatePartOfEx.value.toString())
-        Log.e(repeatDays)
-        Log.e(detailNameList.toString())
-        Log.e(detailType.toString())
-        Log.e(detailTypeContext.toString())
-        Log.e(detailSetEqual.toString())
-        Log.e(detailSet.toString())
-
-        viewModel.apiRepository.postRoutine(body = PostRoutineRequest(
-            routineName = binding.routineEditRoutineName.text.toString(),
-            bodyPart = viewModel.liveDatePartOfEx.value.toString(),
-            repeatDay = repeatDays,
-            detailName = detailNameList,
-            detailType = detailType,
-            detailTypeContext = detailTypeContext,
-            detailSetEqual = detailSetEqual,
-            detailSet = detailSet)
-            , path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
+        viewModel.apiRepository.postRoutine(
+            body = PostRoutineRequest(
+                routineName = binding.routineEditRoutineName.text.toString(),
+                bodyPart = viewModel.liveDatePartOfEx.value.toString(),
+                repeatDay = repeatDays,
+                detailName = detailNameList,
+                detailType = detailType,
+                detailTypeContext = detailTypeContext,
+                detailSetEqual = detailSetEqual,
+                detailSet = detailSet
+            ), path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isSuccess) {

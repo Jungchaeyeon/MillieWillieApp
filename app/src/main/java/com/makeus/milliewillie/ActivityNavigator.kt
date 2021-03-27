@@ -13,6 +13,7 @@ import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.holiday.HolidayActivity
+import com.makeus.milliewillie.ui.holiday.HolidayEditActivity
 import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.intro.*
@@ -71,6 +72,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun todayWorkout() = MyIntent(TodayWorkoutActivity::class.java)
     fun weightRecord() = MyIntent(WeightRecordActivity::class.java)
     fun holiday() = MyIntent(HolidayActivity::class.java)
+    fun holiedit(liveHoliType: String) = MyIntent(HolidayEditActivity::class.java).apply { putExtra(KEY_DATA,liveHoliType) }
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
     fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }

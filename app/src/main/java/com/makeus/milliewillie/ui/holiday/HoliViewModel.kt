@@ -5,7 +5,7 @@ import com.makeus.base.viewmodel.BaseViewModel
 
 class HoliViewModel : BaseViewModel() {
 
-    var pickableMax =8
+    var pickableMax =50
 
     var regularHoliNum = 24
     var prizeHoliNum = 15
@@ -18,6 +18,10 @@ class HoliViewModel : BaseViewModel() {
     val livePrizeHoliday = MutableLiveData<String>().apply { value = "0일" }
     val livePrizeWholeHoliday = MutableLiveData<String>().apply { value = " /15일" }
     val liveOtherHoliday = MutableLiveData<String>().apply { value = " 0일" }
-    val liveOtherWholeHoliday = MutableLiveData<String>().apply { value = "15일" }
+    val liveOtherWholeHoliday = MutableLiveData<String>().apply { value = "/15일" }
+
+    //activity_holiday_edit
+    val liveHoliType = MutableLiveData<String>()
+
 
 }

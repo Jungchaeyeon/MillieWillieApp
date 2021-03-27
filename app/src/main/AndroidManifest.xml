@@ -41,7 +41,7 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="2d201bd6dccfb28dcd39158f1557383b" />
-
+        <activity android:name=".ui.holiday.HolidayEditActivity"/>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

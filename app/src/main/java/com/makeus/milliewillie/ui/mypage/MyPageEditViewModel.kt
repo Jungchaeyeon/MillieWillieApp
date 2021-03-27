@@ -85,7 +85,6 @@ class MyPageEditViewModel(
                 strCorporal = usersResponse.strCorporal,
                 strSergeant = usersResponse.strSergeant,
                 proDate = null
-
             )
         )
 

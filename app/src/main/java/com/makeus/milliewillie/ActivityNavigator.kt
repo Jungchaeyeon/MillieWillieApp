@@ -24,6 +24,7 @@ import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
+import com.makeus.milliewillie.ui.plan.PlanOutputActivity
 import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
@@ -75,6 +76,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun holiedit(liveHoliType: String) = MyIntent(HolidayEditActivity::class.java).apply { putExtra(KEY_DATA,liveHoliType) }
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
+    fun planoutput() = MyIntent(PlanOutputActivity::class.java)
     fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)

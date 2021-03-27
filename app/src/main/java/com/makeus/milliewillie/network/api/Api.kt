@@ -39,6 +39,25 @@ interface Api {
     @GET("users")
     fun getUsers(): Observable<UsersResponse>
 
+    @GET("users/vacations")
+    fun getVacation(): Observable<VacationIdResponse>
+
+    @POST("calendars/plans")
+    fun plans(
+        @Body body : PlansRequest
+    ): Observable<Plans>
+
+    @GET(" calendars/plans/{planId}}")
+    fun getPlans(@Path("planId") planId: Long): Observable<PlansGet>
+
+    @DELETE("calendars/plans/{planId}")
+    fun deletePlans(@Path("planId") planId: Long): Observable<BaseResponse>
+
+    @PATCH("calendars/plans/plans-diary/{diaryId}}")
+    fun patchPlanDiary(
+        @Body body: PlanDiaryRequest, @Path("diaryId") diaryId: Long): Observable<PlanDiary>
+
+
     @PATCH("users")
     fun patchUsers(
         @Body body : UsersPatch
@@ -46,6 +65,14 @@ interface Api {
 
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>
+
+    @PATCH("users/vacations/{vacationId}")
+    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
+
+
+//    @POST("exercises/{exerciseId}/weights")
+//    fun postDailyWeight(@Body body: PostDailyWeightRequest,
+//                        @Path("exerciseId") exerciseId: Long): Observable<PostDailyWeight>
 
     @GET("users/jwt")
     fun jwt(): Observable<BaseResponse>
@@ -55,10 +82,7 @@ interface Api {
 //        @Field("name") name : String
 //    ): Observable<Users>
 
-    @POST("calendars/plans")
-    fun plans(
-        @Body body : PlansRequest
-    ): Observable<Plans>
+
 
     @POST("users")
     fun users(

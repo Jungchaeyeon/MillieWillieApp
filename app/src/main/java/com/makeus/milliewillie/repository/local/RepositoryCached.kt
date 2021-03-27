@@ -65,6 +65,11 @@ abstract class RepositoryCached {
     fun getDday() = getValue(LocalKey.ALLDDAY, 0)//percent
     fun getNextPromDday() = getValue(LocalKey.NEXTPROMDDAY, 0)//percent
     fun getMonthPromDday() = getValue(LocalKey.MONTHPROMDDAY, 0)//percent
+    fun getPlanTotalDay() = getValue(LocalKey.MONTHPROMDDAY, "")//percent
+    fun getVacaId() = getValue(LocalKey.PATCHVACID, "")
+    fun getDiaryId() = getValue(LocalKey.DIARYID, "")
+    fun getPlanId() = getGeneralValue(LocalKey.PLANID, "")
+
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

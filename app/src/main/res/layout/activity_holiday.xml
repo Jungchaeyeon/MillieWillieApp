@@ -28,7 +28,8 @@
             android:layout_height="30dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/vic_icon_delete" />
+            android:background="@drawable/vic_icon_delete"
+            android:onClick="@{()->vi.finish()}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,6 +67,7 @@
                         android:background="@drawable/icon_infomation"
                         android:onClick="@{()->vi.onClickQues()}" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
@@ -104,6 +106,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="0.48sp"
+                        android:text="@{vm.liveAlreadyUseDays.toString()}"
+                        android:textSize="16sp" />
+                    <TextView
+                        style="@style/spoqa_bold_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="0.48sp"
+                        android:text=" / "
                         android:textSize="16sp" />
 
                     <TextView
@@ -112,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:lineSpacingExtra="0.48sp"
-                        android:text=" /"
+                        android:text="@{vm.liveNotUseDays.toString()}"
                         android:textColor="@color/text_gray"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -122,11 +132,11 @@
                     android:layout_width="254dp"
                     android:layout_height="53dp"
                     android:layout_marginStart="42dp"
-                    android:paddingTop="17dp"
-                    android:paddingBottom="8dp"
                     android:background="@drawable/bg_bubble_text_info"
                     android:gravity="center"
                     android:orientation="vertical"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="8dp"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
@@ -147,108 +157,109 @@
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:background="@color/white">
 
-                    <TextView
-                        android:id="@+id/txt_type_regul"
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="32dp"
-                        android:layout_height="17dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/cal_btn_background_selected"
-                        android:backgroundTint="#eeeeee"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/regular"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:background="@color/white">
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="20dp"
-                        android:includeFontPadding="false"
-                        android:text="정기휴가"
-                        app:layout_constraintStart_toEndOf="@+id/txt_type_regul"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="정기휴가" />
+                <TextView
+                    android:id="@+id/txt_type_regul"
+                    style="@style/spoqa_medium_12"
+                    android:layout_width="32dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/cal_btn_background_selected"
+                    android:backgroundTint="#eeeeee"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/regular"
+                    android:textColor="@color/text_gray"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-                    <ImageView
-                        android:id="@+id/regular_edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_info_3dots"
-                        android:onClick="@{(view)->vi.onClickInfo(view)}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_regul_Indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/textView4"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginBottom="22dp"
-                        android:text="@{vm.liveRegularHoliday}"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:text="0일" />
-
-                    <TextView
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginBottom="22dp"
-                        android:text="@{vm.liveRegularWholeHoliday}"
-                        android:textColor="@color/text_gray"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView4"
-                        app:layout_constraintTop_toTopOf="@+id/textView4"
-                        tools:text=" /8일" />
-
-                    <Button
-                        android:id="@+id/btn_use1"
-                        style="@style/spoqa_regular_12"
-                        android:layout_width="68dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="@drawable/rect_radius_4"
-                        android:onClick="@{()->vi.onClickUse(0)}"
-                        android:text="@string/use"
-                        android:textColor="@color/white"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/regular_edit" />
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/spoqa_medium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="20dp"
+                    android:includeFontPadding="false"
+                    android:text="정기휴가"
+                    app:layout_constraintStart_toEndOf="@+id/txt_type_regul"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="정기휴가" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/regular_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="@{(view)->vi.onClickInfo(view)}"
+                    android:src="@drawable/icon_info_3dots"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.makeus.milliewillie.ui.view.CircleIndicator
+                    android:id="@+id/holi_regul_Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/spoqa_medium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="@{vm.liveRegularHoliday}"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="0일" />
+
+                <TextView
+                    style="@style/spoqa_medium_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="@{vm.liveRegularWholeHoliday}"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintTop_toTopOf="@+id/textView4"
+                    tools:text=" /8일" />
+
+                <Button
+                    android:id="@+id/btn_use1"
+                    style="@style/spoqa_regular_12"
+                    android:layout_width="68dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/rect_radius_4"
+                    android:onClick="@{()->vi.onClickUse(0)}"
+                    android:text="@string/use"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/regular_edit" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <LinearLayout
@@ -299,10 +310,10 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="10dp"
+                        android:onClick="@{(view)->vi.onClickInfo(view)}"
                         android:src="@drawable/icon_info_3dots"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:onClick="@{(view)->vi.onClickInfo(view)}"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.makeus.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_prize_indicator"
@@ -416,10 +427,10 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="10dp"
+                        android:onClick="@{(view)->vi.onClickInfo(view)}"
                         android:src="@drawable/icon_info_3dots"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:onClick="@{(view)->vi.onClickInfo(view)}"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.makeus.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_other_Indicator"
@@ -489,6 +500,36 @@
                         app:layout_constraintTop_toBottomOf="@+id/other_edit" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/spoqa_regular_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/caution"
+                        android:textColor="#f8944b" />
+
+                    <TextView
+                        style="@style/spoqa_regular_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/caution_context1"
+                        android:textColor="@color/black_all"/>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/spoqa_regular_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:textColor="@color/black_all"
+                    android:text="@string/caution_context2" />
 
             </LinearLayout>
         </LinearLayout>

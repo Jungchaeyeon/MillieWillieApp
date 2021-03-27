@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.PlanOutputViewModel" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:background="#f5f5f5"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:background="#f5f5f5"
+            android:layout_height="400dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                android:background="#f5f5f5"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+                app:toolbarId="@+id/toolbar">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f5f5f5"
+                    android:orientation="vertical"
+                    tools:context=".ui.plan.PlanOutputActivity">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="56dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/icon_date" />
+
+                        <TextView
+                            style="@style/spoqa_medium_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:textColor="@color/black_all"
+                            tools:text="21.03.02 - 21.03.28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:background="#e3e3e3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/icon_category" />
+
+                        <TextView
+                            style="@style/spoqa_medium_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:textColor="@color/text_gray"
+                            tools:text="휴가" />
+
+                        <TextView
+                            style="@style/spoqa_medium_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:textColor="@color/black_all"
+                            tools:text="6박 7일" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#e3e3e3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginVertical="5dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/icon_prepare" />
+
+                        <TextView
+                            style="@style/spoqa_medium_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/todo"
+                            android:textColor="@color/text_gray"
+                            tools:text="할일" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#f5f5f5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginVertical="5dp"
+                            android:backgroundTint="@color/black_all"
+                            android:background="@drawable/icon_left"
+                            android:onClick="@{()->vi.finish()}" />
+
+                        <TextView
+                            style="@style/spoqa_bold_22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_underline_yellow"
+                            android:text="색깔 테스트 확인"
+                            android:textSize="16sp"
+                            tools:text="일정제목은20자까지 가능하게 길어짐" />
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/spoqa_regular_12"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="16dp"
+                            android:gravity="center"
+                            android:text="@string/edit"
+                            android:onClick="@{(view)->vi.onClickEdit(view)}"
+                            android:textColor="@color/black_all" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_todo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="178dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rect_radius_top"
+            android:backgroundTint="@color/white"
+            android:fillViewport="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical">
+                <TextView
+                    style="@style/spoqa_medium_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="24dp"
+                    tools:text="3월 2일"
+                    android:textColor="@color/black_all"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/icon_check"
+                    android:backgroundTint="#9d9d9d"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{()->vi.onClickDone()}"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#e3e3e3" />
+                <EditText
+                    android:id="@+id/edit_plan"
+                    style="@style/spoqa_medium_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="24dp"
+                    android:layout_marginTop="22dp"
+                    android:maxLines="20"
+                    android:hint="@string/write_plan"
+                    android:text="@={vm.liveContent}"
+                    android:background="@color/trans"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -81,7 +81,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     }
 
     fun onClickCalendar() {
-        ActivityNavigator.with(this).maincalendar().start()
+        ActivityNavigator.with(this).planoutput().start()
     }
 
     //x

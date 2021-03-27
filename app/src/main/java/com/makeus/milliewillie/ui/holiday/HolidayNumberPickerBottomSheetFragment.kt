@@ -30,13 +30,13 @@ class HolidayNumberPickerBottomSheetFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
     }
 
     override fun NumberpickerBottomSheetHoliBinding.onBind() {
         vi = this@HolidayNumberPickerBottomSheetFragment
         liveButton.postValue(context?.getString(R.string.ok))
 
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
         npSpinner.minValue=0
         npSpinner.maxValue = viewModel.pickableMax
         npSpinner.value=0

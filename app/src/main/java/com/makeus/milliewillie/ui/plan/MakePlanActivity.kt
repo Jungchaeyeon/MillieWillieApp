@@ -228,7 +228,7 @@ class MakePlanActivity :
             viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
 
             //viewModel.plansRequest.planVacation = array
-
+            viewModel.addTodo(PlansRequest.Work(plan_title.text.toString()))
 
             if (viewModel.planTodos.size != 0) {
                 viewModel.plansRequest.work = viewModel.planTodos.toList()
@@ -249,6 +249,7 @@ class MakePlanActivity :
             if (it.isSuccess) {
                 SampleToast.createToast(context, "일정 생성 완료!")?.show()
                 ActivityNavigator.with(this).main().start()
+                repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
 //                viewModel.addItem(
 //                    MainSchedule(
 //                        plan_title.text.toString(),

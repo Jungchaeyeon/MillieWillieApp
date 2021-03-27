@@ -34,6 +34,11 @@ class ApiRepository(
     fun getUsers() = apiTest.getUsers()
     fun patchUsers(usersPatch : UsersPatch) = apiTest.patchUsers(usersPatch)
     fun users(usersRequest : UsersRequest) = apiTest.users(usersRequest).observeOn(AndroidSchedulers.mainThread())
+    fun patchVacationId(vacationIdRequest: VacationIdPatch, path: Long) = apiTest.patchVacationId(vacationIdRequest,path).observeOn(AndroidSchedulers.mainThread())
+    fun getVacation() = apiTest.getVacation()
+    fun patchPlanDiary(planDiaryRequest: PlanDiaryRequest, path: Long) = apiTest.patchPlanDiary(body = planDiaryRequest, diaryId = path)
+    fun getPlans(path: Long) = apiTest.getPlans(planId = path)
+    fun deletePlans(path: Long) = apiTest.getPlans(planId = path)
 
     //fun users(name : String) = apiTest.users(name)
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)

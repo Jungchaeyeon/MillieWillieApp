@@ -1,6 +1,10 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    PLANID,
+    DIARYID,
+    PATCHVACID,
+    PLANTOTOALDAYS,
     MONTHPROMDDAY,
     NEXTPROMDDAY,
     ALLDDAY,

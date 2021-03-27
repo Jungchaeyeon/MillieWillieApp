@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu1"
-        android:title="휴가수정"
-        android:actionLayout="@layout/holi_menu_item"
-        app:showAsAction="never" />
+        android:actionLayout="@layout/item_menu_diary"
+        app:showAsAction="never"
+        android:title="삭제하기" />
 </menu>

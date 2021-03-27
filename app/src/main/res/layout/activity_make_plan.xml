@@ -130,6 +130,7 @@
                         android:layout_marginEnd="24dp"
                         android:background="@color/trans"
                         android:gravity="center_vertical"
+                        android:ems="20"
                         android:hint="@string/plan_title"
                         android:paddingStart="10dp"
                         android:singleLine="true" />

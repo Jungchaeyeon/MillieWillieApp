@@ -2,51 +2,37 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
-            name="flag"
-            type="Boolean" />
+            name="itemPlanWork"
+            type="com.makeus.milliewillie.model.PlansWork.Result" />
+
         <variable
             name="item"
             type="com.makeus.milliewillie.model.PlansGet.Result.Work" />
+
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
     </data>
 
     <LinearLayout
-        android:id="@+id/item_todo"
+        android:id="@+id/layout_item_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="7dp"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/text_todo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:checked="@{flag}"
-            android:background="@drawable/icon_checkbox"
-            android:backgroundTint="#e3e3e3"/>
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/chk_box_on_off"
+            android:onClick="@{()->vi.onClickChkBox(item)}"
+            android:text="@{item.content}"/>
 
-        <EditText
-            android:id="@+id/edt_todo"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@color/trans"
-            android:fontFamily="@font/spoqa_han_sans_neo_medium"
-            android:singleLine="true"
-            android:text="@{item.content}"
-            android:textColor="@color/icon_gray"
-            android:textSize="14dp" />
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/test_edit"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            setImage="@{vi.liveSetImage}" />-->
     </LinearLayout>
 </layout>

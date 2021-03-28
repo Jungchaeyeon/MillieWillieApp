@@ -1,6 +1,9 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
@@ -14,21 +17,25 @@ import com.makeus.milliewillie.databinding.ItemPlanMemoBinding
 import com.makeus.milliewillie.databinding.ItemPlanTodoBinding
 import com.makeus.milliewillie.model.PlansGet
 import com.makeus.milliewillie.model.PlansRequest
+import com.makeus.milliewillie.model.PlansWork
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_plan_output.*
+import kotlinx.android.synthetic.main.item_output_plan_todo.*
 import kotlinx.android.synthetic.main.item_plan_memo.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PlanOutputActivity : BaseDataBindingActivity<ActivityPlanOutputBinding>(R.layout.activity_plan_output) {
+class PlanOutputActivity :
+    BaseDataBindingActivity<ActivityPlanOutputBinding>(R.layout.activity_plan_output) {
 
     val viewModel by viewModel<PlanOutputViewModel>()
     val repositoryCached by inject<RepositoryCached>()
+
     override fun ActivityPlanOutputBinding.onBind() {
         vi = this@PlanOutputActivity
         vm = viewModel
@@ -44,6 +51,7 @@ class PlanOutputActivity : BaseDataBindingActivity<ActivityPlanOutputBinding>(R.
                     ) {
                         vi = this@PlanOutputActivity
                         item = it
+
                     })
         }
         binding.rvMemo.run {
@@ -54,34 +62,50 @@ class PlanOutputActivity : BaseDataBindingActivity<ActivityPlanOutputBinding>(R.
                     ) {
                         vi = this@PlanOutputActivity
                         item = it
+
                     })
         }
+
+
     }
-    fun onClickDone(item : PlansGet.Result.Diary){
+
+    fun onClickDone(item: PlansGet.Result.Diary) {
 //        viewModel.liveContent.value = edit_plan.text.toString()
 //        Log.e(edit_plan.text.toString(),"edit 데이터 값 확인")
-        repositoryCached.setValue(LocalKey.DIARYID,item.diaryId)
+        repositoryCached.setValue(LocalKey.DIARYID, item.diaryId)
         viewModel.liveContent.value = edit_plan.text.toString()
         viewModel.patchPlanDiary()
-        SampleToast.createToast(this,"")?.show()
+        SampleToast.createToast(this, "")?.show()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun onClickChkBox(item : PlansGet.Result.Work){
+        Log.e(item.processingStatus,"preocesstiongStatus")
+
+        text_todo.isActivated =! text_todo.isActivated
+        if(text_todo.isActivated) text_todo.setTextColor(Color.parseColor("#9d9d9d"))
+        else text_todo.setTextColor(Color.parseColor("#3e3e3e"))
+
+        viewModel.patchDiary()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e(repositoryCached.getPlanId(),"id")
+        Log.e(repositoryCached.getPlanId(), "id")
     }
 
-    fun onClickEdit(view: View){
+    fun onClickEdit(view: View) {
         val popup = PopupMenu(this, view)
         val inflate = popup.menuInflater
         inflate.inflate(R.menu.item_menu_edit, popup.menu)
         popup.setOnMenuItemClickListener(PopupListener())
         popup.show()
     }
-    inner class PopupListener: PopupMenu.OnMenuItemClickListener {
+
+    inner class PopupListener : PopupMenu.OnMenuItemClickListener {
 
         override fun onMenuItemClick(item: MenuItem?): Boolean {
-            when(item?.itemId) {
+            when (item?.itemId) {
                 R.id.menu1 -> viewModel.deletePlans()
             }
             return false

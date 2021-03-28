@@ -67,6 +67,9 @@ interface Api {
     fun patchPlanDiary(
         @Body body: PlanDiaryRequest, @Path("diaryId") diaryId: Long): Observable<PlanDiary>
 
+    @PATCH("calendars/plans/plans-work/{workId}")
+    fun patchDiary(
+        @Path("workId") workId: Long): Observable<PlansWork>
 
 
     // 휴가 API

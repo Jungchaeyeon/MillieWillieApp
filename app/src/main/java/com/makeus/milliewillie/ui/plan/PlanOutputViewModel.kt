@@ -23,8 +23,9 @@ class PlanOutputViewModel(
 
     var planDiaryRequest = PlanDiaryRequest()
 
-    var dayInfo = ""
-    var planType =""
+    var dayInfo = MutableLiveData<String>()
+    var planType =MutableLiveData<String>()
+    var title =""
     var plansGet = PlansGet.Result()
     val liveDayNNight =MutableLiveData<String>()
     val liveContent = MutableLiveData<String>().apply { value = "" }
@@ -95,8 +96,9 @@ class PlanOutputViewModel(
                 // set plan Key
                 plansGet = it.result
                 Log.e(plansGet.toString(),"plansGet")
-                dayInfo = plansGet.dateInfo
-                planType = plansGet.planType
+                dayInfo.value = plansGet.dateInfo
+                planType.value = plansGet.planType
+                title = "제목 보류"
                 calDayNNight(plansGet.startDate, plansGet.endDate)
                 addTodoAll(it.result.work)
                 addMemoAll(it.result.diary)
@@ -119,6 +121,21 @@ class PlanOutputViewModel(
             }
         },{}
     ).disposeOnDestroy(this)
+
+    // 할일 TF patch
+    fun patchDiary() = apiRepository.patchDiary(path = repositoryCached.getWorkId().toLong())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+            if(it.isSuccess){
+                Log.e("할일 T/F 성공")
+                // set work Key
+                repositoryCached.setValue(LocalKey.WORKID, it.result.workId.toString())
+            }
+            else{
+                Log.e("할일 T/F 실패")
+            }
+        },{})
+
 
     //몇박 몇일
     fun calDayNNight(startDate: String, endDate : String){

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.plan.PlanOutputViewModel" />
+
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
@@ -14,20 +16,20 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:background="#f5f5f5"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#f5f5f5">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:background="#f5f5f5"
-            android:layout_height="224dp">
+            android:layout_height="224dp"
+            android:background="#f5f5f5">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
                 android:background="#f5f5f5"
+                app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
                 app:toolbarId="@+id/toolbar">
@@ -57,8 +59,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:textColor="@color/black_all"
-                            android:text="@{vm.dayInfo}" />
+                            android:text="@{vm.dayInfo}"
+                            android:textColor="@color/black_all" />
                     </LinearLayout>
 
                     <View
@@ -69,59 +71,106 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginVertical="5dp"
-                            android:layout_marginStart="16dp"
-                            android:src="@drawable/icon_category" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/spoqa_medium_12"
-                            android:layout_width="wrap_content"
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginVertical="5dp"
+                                android:layout_marginStart="16dp"
+                                android:src="@drawable/icon_category" />
+
+                            <TextView
+                                style="@style/spoqa_medium_12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="@{vm.planType}"
+                                android:textColor="@color/text_gray"
+                                tools:text="휴가" />
+
+                            <TextView
+                                style="@style/spoqa_medium_12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="@{vm.liveDayNNight}"
+                                android:textColor="@color/black_all"
+                                tools:text="6박 7일" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/caution_train"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:textColor="@color/text_gray"
-                            android:text="@{vm.planType}"
-                            tools:text="휴가" />
+                            android:layout_marginBottom="17dp"
+                            android:visibility="gone"
+                            android:orientation="vertical">
 
-                        <TextView
-                            style="@style/spoqa_medium_12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:textColor="@color/black_all"
-                            android:text="@{vm.liveDayNNight}"
-                            tools:text="6박 7일" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#e3e3e3" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:gravity="center_vertical">
+                                <TextView
+                                    style="@style/spoqa_regular_10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="24dp"
+                                    android:text="@string/caution"
+                                    android:textColor="#f8944b" />
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginVertical="5dp"
-                            android:layout_marginStart="16dp"
-                            android:src="@drawable/icon_prepare" />
+                                <TextView
+                                    style="@style/spoqa_regular_10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="@string/caution_context1"
+                                    android:textColor="@color/black_all" />
+                            </LinearLayout>
 
-                        <TextView
-                            style="@style/spoqa_medium_12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:text="@string/todo"
-                            android:textColor="@color/text_gray"
-                            tools:text="할일" />
+                            <TextView
+                                style="@style/spoqa_regular_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:text="@string/caution_context2"
+                                android:textColor="@color/black_all" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#e3e3e3" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginVertical="5dp"
+                                android:layout_marginStart="16dp"
+                                android:src="@drawable/icon_prepare" />
+
+                            <TextView
+                                style="@style/spoqa_medium_12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="@string/todo"
+                                android:textColor="@color/text_gray"
+                                tools:text="할일" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -141,8 +190,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginVertical="5dp"
-                            android:backgroundTint="@color/black_all"
                             android:background="@drawable/icon_left"
+                            android:backgroundTint="@color/black_all"
                             android:onClick="@{()->vi.finish()}" />
 
                         <TextView
@@ -150,7 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_underline_yellow"
-                            android:text="색깔 테스트 확인"
+                            android:text="@{vm.title}"
                             android:textSize="16sp"
                             tools:text="일정제목은20자까지 가능하게 길어짐" />
 
@@ -165,8 +214,8 @@
                             android:layout_height="40dp"
                             android:layout_marginEnd="16dp"
                             android:gravity="center"
-                            android:text="@string/edit"
                             android:onClick="@{(view)->vi.onClickEdit(view)}"
+                            android:text="@string/edit"
                             android:textColor="@color/black_all" />
 
                     </LinearLayout>
@@ -196,12 +245,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_memo"
-                replaceAll="@{vm.liveMemoList}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_memo"
+                    replaceAll="@{vm.liveMemoList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

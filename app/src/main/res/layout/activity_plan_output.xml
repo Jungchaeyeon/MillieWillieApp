@@ -21,7 +21,7 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:background="#f5f5f5"
-            android:layout_height="400dp">
+            android:layout_height="224dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:textColor="@color/black_all"
-                            tools:text="21.03.02 - 21.03.28" />
+                            android:text="@{vm.dayInfo}" />
                     </LinearLayout>
 
                     <View
@@ -85,6 +85,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:textColor="@color/text_gray"
+                            android:text="@{vm.planType}"
                             tools:text="휴가" />
 
                         <TextView
@@ -93,6 +94,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:textColor="@color/black_all"
+                            android:text="@{vm.liveDayNNight}"
                             tools:text="6박 7일" />
                     </LinearLayout>
                     <View
@@ -173,6 +175,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_todo"
+                    replaceAll="@{vm.livePlanTodoList}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="178dp"
@@ -192,48 +195,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="24dp"
-                    android:gravity="center_vertical">
-                <TextView
-                    style="@style/spoqa_medium_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="24dp"
-                    tools:text="3월 2일"
-                    android:textColor="@color/black_all"/>
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/icon_check"
-                    android:backgroundTint="#9d9d9d"
-                    android:layout_marginEnd="16dp"
-                    android:onClick="@{()->vi.onClickDone()}"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#e3e3e3" />
-                <EditText
-                    android:id="@+id/edit_plan"
-                    style="@style/spoqa_medium_14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="24dp"
-                    android:layout_marginTop="22dp"
-                    android:maxLines="20"
-                    android:hint="@string/write_plan"
-                    android:text="@={vm.liveContent}"
-                    android:background="@color/trans"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_memo"
+                replaceAll="@{vm.liveMemoList}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

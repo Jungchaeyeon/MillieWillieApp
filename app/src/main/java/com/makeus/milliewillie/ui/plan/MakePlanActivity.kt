@@ -250,6 +250,7 @@ class MakePlanActivity :
                 SampleToast.createToast(context, "일정 생성 완료!")?.show()
                 ActivityNavigator.with(this).main().start()
                 repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
+                Log.e(it.result.planId.toString(),"plan ID")
 //                viewModel.addItem(
 //                    MainSchedule(
 //                        plan_title.text.toString(),

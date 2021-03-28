@@ -92,6 +92,7 @@ abstract class BaseActivity(private val layoutId: Int) : AppCompatActivity(),
         super.onPause()
     }
 
+    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     fun hideKeyboard() {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)

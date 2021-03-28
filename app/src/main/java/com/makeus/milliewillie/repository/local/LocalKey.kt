@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    EMOTIONID,
     PLANID,
     DIARYID,
     PATCHVACID,

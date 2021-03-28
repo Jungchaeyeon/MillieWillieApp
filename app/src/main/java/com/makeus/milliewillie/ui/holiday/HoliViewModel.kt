@@ -20,6 +20,9 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
     var regularHoliNum = 0
     var prizeHoliNum = 0
     var otherHoliNum = 0
+    var regularNum = 0
+    var prizeNum = 0
+    var otherNum = 0
 
     var vacationIdPatch = VacationIdPatch()
     lateinit var vacationIdResponse: VacationIdResponse
@@ -62,6 +65,9 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                     regularHoliNum = it.result[0].totalDays
                     prizeHoliNum = it.result[1].totalDays
                     otherHoliNum = it.result[2].totalDays
+                    regularNum = it.result[0].useDays
+                    prizeNum= it.result[1].useDays
+                    otherNum= it.result[2].useDays
                     response.invoke(true)
                 } else {
                     Log.e("User정보 호출 실패")
@@ -76,6 +82,24 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         apiRepository.patchVacationId(
             VacationIdPatch(
                 totalDays = vacationIdPatch.totalDays
+            ),
+            path = repositoryCached.getVacaId().toLong()
+        ).subscribe({
+            if (it.isSuccess) {
+                Log.e("휴가 수정 성공")
+                response.invoke(true)
+            } else {
+                "휴가 수정실패".showShortToastSafe()
+                response.invoke(false)
+            }
+        }, {
+            response.invoke(false)
+        })
+    fun patchVacationIdAll(response: (Boolean) -> Unit) =
+        apiRepository.patchVacationId(
+            VacationIdPatch(
+                 useDays = vacationIdPatch.useDays,
+                 totalDays = vacationIdPatch.totalDays
             ),
             path = repositoryCached.getVacaId().toLong()
         ).subscribe({

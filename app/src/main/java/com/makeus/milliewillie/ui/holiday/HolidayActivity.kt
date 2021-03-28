@@ -22,8 +22,10 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
 
     val viewModel by viewModel<HoliViewModel>()
     val repositoryCached by inject<RepositoryCached>()
-    var prizeRegis = 0
-    var otherRegis = 0
+    var regulUse = 0
+    var prizeUser = 0
+    var otherUser = 0
+
     var maxValue = 24
     val context = this
     var infoFlag = false
@@ -31,10 +33,6 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
         vi = this@HolidayActivity
         vm = viewModel
         viewModel.bindLifecycle(this@HolidayActivity)
-
-        Log.e(viewModel.regularHoliNum.toString(),"regulWholeHol")
-        Log.e(viewModel.prizeHoliNum.toString(),"regulWholeHol")
-        Log.e(viewModel.otherHoliNum.toString(),"regulWholeHol")
     }
 
     inner class PopupListener : PopupMenu.OnMenuItemClickListener {
@@ -52,12 +50,27 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
     fun onClickInfo(view: View) {
         // openContextMenu(view)
         when (view.id) {
-            R.id.regular_edit -> {viewModel.liveHoliType.value = "정기휴가"
-                repositoryCached.setValue(LocalKey.PATCHVACID,viewModel.vacationIdResponse.result[0].vacationId)}
-            R.id.prize_edit -> {viewModel.liveHoliType.value = "포상휴가"
-                repositoryCached.setValue(LocalKey.PATCHVACID,viewModel.vacationIdResponse.result[1].vacationId)}
-            R.id.other_edit -> {viewModel.liveHoliType.value = "기타휴가"
-                repositoryCached.setValue(LocalKey.PATCHVACID,viewModel.vacationIdResponse.result[2].vacationId)}
+            R.id.regular_edit -> {
+                viewModel.liveHoliType.value = "정기휴가"
+                repositoryCached.setValue(
+                    LocalKey.PATCHVACID,
+                    viewModel.vacationIdResponse.result[0].vacationId
+                )
+            }
+            R.id.prize_edit -> {
+                viewModel.liveHoliType.value = "포상휴가"
+                repositoryCached.setValue(
+                    LocalKey.PATCHVACID,
+                    viewModel.vacationIdResponse.result[1].vacationId
+                )
+            }
+            R.id.other_edit -> {
+                viewModel.liveHoliType.value = "기타휴가"
+                repositoryCached.setValue(
+                    LocalKey.PATCHVACID,
+                    viewModel.vacationIdResponse.result[2].vacationId
+                )
+            }
         }
         val popup = PopupMenu(this, view)
         val inflate = popup.menuInflater
@@ -84,6 +97,11 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             viewModel.liveRegularHoliday.postValue(it + "일 /")
                             holi_regul_Indicator.selectDots(it.toInt())
                         }
+                        viewModel.vacationIdPatch.useDays = it.toInt()
+                        viewModel.vacationIdPatch.totalDays = viewModel.regularHoliNum
+                        Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
+                        Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.patchVacationIdAll() {}
                     }
                     1 -> {
                         if (it.toInt() == viewModel.prizeHoliNum) {
@@ -93,7 +111,12 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                         }
 
                         viewModel.livePrizeHoliday.postValue(it + "일 /")
-                        holi_prize_indicator.selectDots( it.toInt())
+                        holi_prize_indicator.selectDots(it.toInt())
+                        viewModel.vacationIdPatch.useDays = it.toInt()
+                        viewModel.vacationIdPatch.totalDays = viewModel.prizeHoliNum
+                        Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
+                        Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.patchVacationIdAll() {}
                     }
                     2 -> {
                         if (it.toInt() == viewModel.otherHoliNum) {
@@ -103,7 +126,12 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                         }
                         //regularholi3.text = it + "일"
                         viewModel.liveOtherHoliday.postValue(it + "일 /")
-                        holi_other_Indicator.selectDots( it.toInt())
+                        holi_other_Indicator.selectDots(it.toInt())
+                        viewModel.vacationIdPatch.useDays = it.toInt()
+                        viewModel.vacationIdPatch.totalDays = viewModel.otherHoliNum
+                        Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
+                        Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.patchVacationIdAll() {}
                     }
                 }
             }.show(supportFragmentManager)
@@ -127,6 +155,7 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             R.drawable.indicator_dot_on,
                             R.drawable.indicator_dot_off
                         )
+                        viewModel.livePrizeHoliday.postValue("0 일")
                         viewModel.livePrizeWholeHoliday.postValue(it + "일")
                     }
                     1 -> {
@@ -141,6 +170,7 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             R.drawable.indicator_dot_on,
                             R.drawable.indicator_dot_off
                         )
+                        viewModel.liveOtherHoliday.postValue("0 일")
                         viewModel.liveOtherWholeHoliday.postValue(it + "일")
                     }
                 }
@@ -167,24 +197,32 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
 
     override fun onResume() {
         super.onResume()
-        viewModel.getVacation(){
+        viewModel.getVacation() {
             binding.holiRegulIndicator.customCreateDotPanel(
                 viewModel.regularHoliNum,
                 R.drawable.indicator_dot_on,
                 R.drawable.indicator_dot_off
             )
+            Log.e(viewModel.regularNum.toString(), "레귤")
+            binding.holiRegulIndicator.selectDots(viewModel.regularNum)
 
             binding.holiPrizeIndicator.customCreateDotPanel(
                 viewModel.prizeHoliNum,
                 R.drawable.indicator_dot_on,
                 R.drawable.indicator_dot_off
             )
-
+            Log.e(viewModel.prizeNum.toString(), "프라")
+            binding.holiPrizeIndicator.selectDots(viewModel.prizeNum)
             binding.holiOtherIndicator.customCreateDotPanel(
                 viewModel.otherHoliNum,
                 R.drawable.indicator_dot_on,
                 R.drawable.indicator_dot_off
             )
+            Log.e(viewModel.otherNum.toString(), "아더")
+            binding.holiOtherIndicator.selectDots(viewModel.otherNum)
         }
+        if (viewModel.otherNum == 0) btn_register_other.visibility = View.INVISIBLE
+
+        if(viewModel.prizeNum == 0)  btn_register_prize.visibility = View.INVISIBLE
     }
 }

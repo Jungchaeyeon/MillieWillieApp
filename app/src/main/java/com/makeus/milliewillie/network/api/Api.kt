@@ -36,27 +36,50 @@ interface Api {
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
 
-    @GET("users")
-    fun getUsers(): Observable<UsersResponse>
+    //감정일기기
+   @POST("emotions-record")
+    fun postEmotionsRecord(
+        @Body body : EmotionsRecordRequest
+    ): Observable<EmotionsRecordResponse>
 
-    @GET("users/vacations")
-    fun getVacation(): Observable<VacationIdResponse>
+    @PATCH("emotions-record/{emotionsRecordId}")
+    fun patchEmotionsRecord(
+        @Body body : EmotionsRecordRequest,
+        @Path("emotionsRecordId") emotionsRecordId: Long
+    ): Observable<EmotionsRecordResponse>
 
+
+
+
+    //일정 API
     @POST("calendars/plans")
     fun plans(
         @Body body : PlansRequest
     ): Observable<Plans>
 
-    @GET(" calendars/plans/{planId}}")
+    @GET(" calendars/plans/{planId}")
     fun getPlans(@Path("planId") planId: Long): Observable<PlansGet>
 
     @DELETE("calendars/plans/{planId}")
     fun deletePlans(@Path("planId") planId: Long): Observable<BaseResponse>
 
-    @PATCH("calendars/plans/plans-diary/{diaryId}}")
+    @PATCH("calendars/plans/plans-diary/{diaryId}")
     fun patchPlanDiary(
         @Body body: PlanDiaryRequest, @Path("diaryId") diaryId: Long): Observable<PlanDiary>
 
+
+
+    // 휴가 API
+    @GET("users/vacations")
+    fun getVacation(): Observable<VacationIdResponse>
+
+    @PATCH("users/vacations/{vacationId}")
+    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
+
+
+    //회원정보
+    @GET("users")
+    fun getUsers(): Observable<UsersResponse>
 
     @PATCH("users")
     fun patchUsers(
@@ -66,13 +89,6 @@ interface Api {
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>
 
-    @PATCH("users/vacations/{vacationId}")
-    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
-
-
-//    @POST("exercises/{exerciseId}/weights")
-//    fun postDailyWeight(@Body body: PostDailyWeightRequest,
-//                        @Path("exerciseId") exerciseId: Long): Observable<PostDailyWeight>
 
     @GET("users/jwt")
     fun jwt(): Observable<BaseResponse>

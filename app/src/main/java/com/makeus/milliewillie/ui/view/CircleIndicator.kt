@@ -19,7 +19,7 @@ class CircleIndicator : LinearLayout{
 
     // 4.5dp 를 픽셀 단위로 바꿉니다.
     private val temp = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_SP, 8.0f, resources.displayMetrics
+        TypedValue.COMPLEX_UNIT_DIP, 8.0f, resources.displayMetrics
     )
 
     constructor(context: Context) : super(context) {

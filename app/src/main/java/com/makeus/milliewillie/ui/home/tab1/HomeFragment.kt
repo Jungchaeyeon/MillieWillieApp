@@ -109,7 +109,7 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     fun responseUser() {
         viewModel.getUsers()
-        Log.e(viewModel.usersResponse.toString(),"스타트 홈에서 ")
+        //Log.e(viewModel.usersResponse.toString(),"스타트 홈에서 ")
     }
 
 }

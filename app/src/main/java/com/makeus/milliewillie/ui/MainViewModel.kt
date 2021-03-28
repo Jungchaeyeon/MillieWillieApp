@@ -108,7 +108,6 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
             usersResponse = it.result
             initMain()
             percentInit()
-            Log.e(usersResponse.toString(),"스타트")
         } , {
             it.printStackTrace()
         }).disposeOnDestroy(this)

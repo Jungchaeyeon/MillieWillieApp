@@ -39,6 +39,8 @@ class ApiRepository(
     fun patchPlanDiary(planDiaryRequest: PlanDiaryRequest, path: Long) = apiTest.patchPlanDiary(body = planDiaryRequest, diaryId = path)
     fun getPlans(path: Long) = apiTest.getPlans(planId = path)
     fun deletePlans(path: Long) = apiTest.getPlans(planId = path)
+    fun postEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest) = apiTest.postEmotionsRecord(emotionsRecordRequest)
+    fun patchEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest, path : Long) = apiTest.patchEmotionsRecord(body = emotionsRecordRequest, emotionsRecordId = path)
 
     //fun users(name : String) = apiTest.users(name)
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)

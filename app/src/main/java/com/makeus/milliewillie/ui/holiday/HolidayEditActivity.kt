@@ -53,6 +53,7 @@ class HolidayEditActivity :
             if (allHoliDays.text.isNotEmpty()){
                 repositoryCached.setValue(LocalKey.PLANTOTOALDAYS, allHoliDays.text.toString())
                 viewModel.vacationIdPatch.totalDays = allHoliDays.text.toString().toInt()
+                viewModel.vacationIdPatch.useDays =  allHoliDays.text.toString().toInt()
                 viewModel.patchVacationId(){
                     if(it){
                         ActivityNavigator.with(this).holiday().start()

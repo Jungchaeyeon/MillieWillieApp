@@ -42,7 +42,7 @@ val viewModelModule = module {
     viewModel { WorkoutStartViewModel() }
     viewModel { InfoViewModel() }
     viewModel { WeightRecordViewModel(get()) }
-    viewModel { EmoViewModel() }
+    viewModel { EmoViewModel(get(),get()) }
     viewModel { HoliViewModel(get(),get()) }
     viewModel {MyPageEditViewModel(get(),get())}
     viewModel { PlanOutputViewModel(get(),get()) }

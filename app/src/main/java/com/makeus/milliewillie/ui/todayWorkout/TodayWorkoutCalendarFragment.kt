@@ -1,7 +1,6 @@
 package com.makeus.milliewillie.ui.todayWorkout
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.makeus.base.disposeOnDestroy
@@ -9,23 +8,19 @@ import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.calendar.DotDecorator
-import com.makeus.milliewillie.calendar.EventDecorator
 import com.makeus.milliewillie.calendar.SelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
-import com.prolificinteractive.materialcalendarview.CalendarUtils.getYear
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -156,7 +151,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
     fun executeGetReports() {
         reportsDatesList.clear()
-        viewModel.apiRepository.getReports(
+        viewModel.apiRepository.getCalendarReports(
             SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
             viewYear = year, viewMonth = month)
             .observeOn(AndroidSchedulers.mainThread())

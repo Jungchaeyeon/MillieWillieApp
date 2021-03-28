@@ -36,12 +36,6 @@ interface Api {
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
 
-    @POST("calendars/schedule")
-    fun schedule(
-        @Body body: ScheduleRequest
-    ): Observable<Schedule>
-
-
 
 
     @POST("exercises/first-weights")
@@ -54,6 +48,11 @@ interface Api {
     @POST("exercises/{exerciseId}/routines")
     fun postRoutine(@Body body: PostRoutineRequest,
                     @Path("exerciseId") exerciseId: Long): Observable<PostRoutine>
+
+    @POST("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun postReports(@Path("exerciseId") exerciseId: Long,
+                    @Path("routineId") routineId: Long,
+                    @Body body: PostReportsRequest): Observable<PostReportsResponse>
 
     @GET("exercises/{exerciseId}/daily-weights")
     fun getDailyWeight(@Path("exerciseId") exerciseId: Long): Observable<GetDailyWeight>
@@ -71,13 +70,25 @@ interface Api {
                     @Query("targetDate") targetDate: String): Observable<Routines>
 
     @GET("exercises/{exerciseId}/reports")
-    fun getReports(@Path("exerciseId") exerciseId: Long,
-                   @Query("viewYear") viewYear: Int,
-                   @Query("viewMonth") viewMonth: Int):Observable<ReportsResponse>
+    fun getCalendarReports(@Path("exerciseId") exerciseId: Long,
+                           @Query("viewYear") viewYear: Int,
+                           @Query("viewMonth") viewMonth: Int):Observable<ReportsResponse>
 
     @GET("exercises/{exerciseId}/routines/{routineId}/detail-exercises")
     fun getDetailsExercises(@Path("exerciseId") exerciseId: Long,
                             @Path("routineId") routineId: Long): Observable<DetailsExercisesResponse>
+
+    @GET("exercises/{exerciseId}/routines/{routineId}/start-exercises")
+    fun getStartExercises(@Path("exerciseId") exerciseId: Long,
+                          @Path("routineId") routineId: Long): Observable<StartExercisesResponse>
+    @GET("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun getReports(@Path("exerciseId") exerciseId: Long,
+                   @Path("routineId") routineId: Long,
+                   @Query("reportDate") reportDate: String): Observable<GetReportsResponse>
+
+    @PATCH("exercises/{exerciseId}/routines/{routineId}")
+    fun patchRoutine(@Path("exerciseId") exerciseId: Long,
+                     @Path("routineId") routineId: Long): Observable<PostRoutine>
 
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,

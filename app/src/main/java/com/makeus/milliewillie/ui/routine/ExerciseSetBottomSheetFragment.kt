@@ -405,10 +405,12 @@ class ExerciseSetBottomSheetFragment:
                         optionArrayList.forEach {
                             if (!it.hour.isBlank()) timeText += "${it.hour}시간 "
                             if (!it.min.isBlank()) timeText += "${it.min}분 "
-                            if (!it.sec.isBlank()) timeText += "${it.sec}초 "
 
-                            optionsText += if (idx == 0) "${exchangeToSec(it.hour, it.min) + it.sec.toInt()}"
-                            else "/${(exchangeToSec(it.hour, it.min) + it.sec.toInt())}"
+                            if (!it.sec.isBlank()) timeText += "${it.sec}초 "
+                            else it.sec = "0"
+
+                            optionsText += if (idx == 0) "${exchangeToSec(it.hour, it.min, it.sec)}"
+                            else "/${exchangeToSec(it.hour, it.min, it.sec)}"
                             idx++
 
                             resultArrayList.add("${it.setCount}, $timeText")
@@ -422,11 +424,15 @@ class ExerciseSetBottomSheetFragment:
         }
     }
 
-    fun exchangeToSec(hour: String, min: String): Int {
-        val exHour = hour.toInt() * 3600
-        val exMin = min.toInt() * 60
+    fun exchangeToSec(hour: String, min: String, sec: String): Int {
+        var exHour = 0
+        var exMin = 0
+        var exSec = 0
+        if (hour.isNotBlank()) exHour = hour.toInt() * 3600
+        if (min.isNotBlank()) exMin = min.toInt() * 60
+        if (min.isNotBlank()) exSec = sec.toInt()
 
-        return exHour + exMin
+        return exHour + exMin + exSec
     }
 
     fun setOnClickOk(exerciseName: String, clickOk: ((String, ArrayList<String>, ArrayList<Int>,ArrayList<String>, ArrayList<Boolean>, ArrayList<Int>) -> Unit)): ExerciseSetBottomSheetFragment {

@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/workout_layout_today_ex"
             android:orientation="vertical"
-            replaceAll="@{vm.liveRoutineItemList}"
+            replaceAll="@{vm._routineArrayList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

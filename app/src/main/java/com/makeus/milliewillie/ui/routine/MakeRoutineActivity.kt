@@ -48,11 +48,12 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     private var detailSetEqual = ArrayList<Boolean>()
     private var detailSet = ArrayList<Int>()
 
+    var repeatDays = ""
+
     override fun onResume() {
         super.onResume()
         if (intent.hasExtra(ROUTINE_ID_KEY)) {
             routineId = intent.getLongExtra(ROUTINE_ID_KEY, 0)
-            Log.e("routineId = $routineId")
         }
 
         if (isModifiedRoutine) executeGetDetailsExercises()
@@ -123,6 +124,53 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
     }
 
+    fun executePostRoutine() {
+        val detailNameList = ArrayList<String>()
+
+        viewModel.liveDataSelectedItemList.value!!.forEach {
+            detailNameList.add(it.routineName)
+        }
+
+        viewModel.apiRepository.postRoutine(
+            body = PostRoutineRequest(
+                routineName = binding.routineEditRoutineName.text.toString(),
+                bodyPart = viewModel.liveDatePartOfEx.value.toString(),
+                repeatDay = repeatDays,
+                detailName = detailNameList,
+                detailType = detailType,
+                detailTypeContext = detailTypeContext,
+                detailSetEqual = detailSetEqual,
+                detailSet = detailSet
+            ), path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("postRoutine 호출 성공")
+                } else {
+                    Log.e("postRoutine 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+    }
+
+    fun executePatchRoutine() {
+        viewModel.apiRepository.patchRoutine(
+            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            routineId = routineId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("patchRoutine 호출 성공")
+
+                } else {
+                    Log.e("patchRoutine 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+    }
+
+
     lateinit var routineName: String
     lateinit var bodyPart: String
     var repeatDay = ArrayList<Int>()
@@ -144,6 +192,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             .subscribe {
                 if (it.isSuccess) {
                     Log.e("executeGetDetailsExercises 호출 성공")
+                    var index = 0
 
                     routineName = it.result.get("routineName").asString
                     bodyPart = it.result.get("bodyPart").asString
@@ -173,12 +222,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                             val count = setDetailsItem.get("count").asInt
                             val time = setDetailsItem.get("time").asInt
 
-                            val listItem = ExerciseDetailSetRes(
-                                setStr = setStr,
-                                weight = weight,
-                                count = count,
-                                time = time
-                            )
+                            val listItem = ExerciseDetailSetRes(setStr = setStr, weight = weight, count = count, time = time)
 
                             setDetailList.add(listItem)
                         }
@@ -191,6 +235,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                         )
                         detailResList.add(listItem2)
 
+                        detailSetEqual.add(resIsSetSame)
+                        detailType.add(resExerciseType)
+                        initResult(index)
+                        index++
                     }
 
                     modifiedViewDataBinding()
@@ -200,7 +248,100 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 }
             }.disposeOnDestroy(this)
 
-        isModifiedRoutine = false
+    }
+
+    fun initResult(idx: Int) {
+        when (detailType[idx]) {
+            1 -> {
+                detailSet.add(detailResList[idx].setCount)
+                when (detailSetEqual[idx]) {
+                    true -> {
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 1) detailTypeContext.add("${inner.weight}#${inner.count}")
+                            }
+                        }
+                        Log.e(detailTypeContext.toString())
+                    }
+                    false -> {
+                        var index = 0
+                        var optionsText = ""
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 1) {
+                                    optionsText += if (index == 0) "${inner.weight}#${inner.count}"
+                                    else "/${inner.weight}#${inner.count}"
+                                    index++
+                                }
+                            }
+                        }
+                        detailTypeContext.add(optionsText)
+                        Log.e(detailTypeContext.toString())
+                    }
+                }
+            }
+            2 -> {
+                detailSet.add(detailResList[idx].setCount)
+                when (detailSetEqual[idx]) {
+                    true -> {
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 2) detailTypeContext.add("${inner.count}")
+                            }
+                        }
+                        Log.e(detailTypeContext.toString())
+                    }
+                    false -> {
+                        var index = 0
+                        var optionsText = ""
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 2) {
+                                    optionsText += if (index == 0) "${inner.count}"
+                                    else "/${inner.count}"
+                                    index++
+                                }
+                            }
+                        }
+                        detailTypeContext.add(optionsText)
+                        Log.e(detailTypeContext.toString())
+                    }
+                }
+            }
+            3 -> {
+                detailSet.add(detailResList[idx].setCount)
+                when (detailSetEqual[idx]) {
+                    true -> {
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 2) {
+                                    val timeText = decodeTime(inner.time)
+                                    detailTypeContext.add(timeText)
+                                }
+                            }
+                        }
+                        Log.e(detailTypeContext.toString())
+                    }
+                    false -> {
+                        var index = 0
+                        var optionsText = ""
+                        detailResList.forEach {
+                            it.setDetailList.forEach { inner ->
+                                if (it.exerciseType == 3) {
+                                    val timeText = decodeTime(inner.time)
+                                    optionsText += if (index == 0) timeText
+                                    else "/$timeText"
+                                    index++
+                                }
+                            }
+                        }
+                        detailTypeContext.add(optionsText)
+                        Log.e(detailTypeContext.toString())
+                    }
+
+                }
+            }
+        }
     }
 
     private var m = 0
@@ -247,6 +388,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 }
                 idx ++
             }
+
             val selectedItem = RoutineSelectedRecyclerItem(routineName = exerciseNameList[typeIndex], routineSetOptions = routineSetOption)
             viewModel.addSelectedItem(selectedItem)
             typeIndex++
@@ -296,16 +438,13 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                         textOption += "${list[i]} · "
                     }
                 }
-                detailType = detailTypeList
-                detailTypeContext = detailTypeContextList
-                detailSetEqual = detailSetEqualList
-                detailSet = detailSetList
-                viewModel.addSelectedItem(
-                    RoutineSelectedRecyclerItem(
-                        routineName = name,
-                        routineSetOptions = textOption
-                    )
-                )
+                for (i in 0 until detailTypeList.size) {
+                    detailType.add(detailTypeList[i])
+                    detailTypeContext.add(detailTypeContextList[i])
+                    detailSetEqual.add(detailSetEqualList[i])
+                    detailSet.add(detailSetList[i])
+                }
+                viewModel.addSelectedItem(RoutineSelectedRecyclerItem(routineName = name, routineSetOptions = textOption))
 
             }.show(supportFragmentManager)
 
@@ -400,91 +539,69 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     }
 
 
-    var repeatDays = ""
 
     fun getRepeatDays() {
-        val textList = arrayListOf<View>(
-            everyDay,
-            monday,
-            tuesday,
-            wendesday,
-            thursday,
-            friday,
-            saturday,
-            sunday
-        )
-
+        val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
+        var idx = 0
         for (i in 0 until textList.size) {
             if (textList[i].isSelected) {
                 when (textList[i]) {
                     everyDay -> {
-                        repeatDays += "8"
+                        repeatDays = "8"
                         break
                     }
                     monday -> {
-                        repeatDays += "1"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#1"
+                        else repeatDays += "1"
+                        idx++
                     }
                     tuesday -> {
-                        repeatDays += "2"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#2"
+                        else repeatDays += "2"
+                        idx++
                     }
                     wendesday -> {
-                        repeatDays += "3"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#3"
+                        else repeatDays += "3"
+                        idx++
                     }
                     thursday -> {
-                        repeatDays += "4"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#4"
+                        else repeatDays += "4"
+                        idx++
                     }
                     friday -> {
-                        repeatDays += "5"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#5"
+                        else repeatDays += "5"
+                        idx++
                     }
                     saturday -> {
-                        repeatDays += "6"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#6"
+                        else repeatDays += "6"
+                        idx++
                     }
                     sunday -> {
-                        repeatDays += "7"
-                        if (i != 0 && i != textList.size - 1) repeatDays += "#"
+                        if (idx != 0 && idx != textList.size - 1) repeatDays += "#7"
+                        else repeatDays += "7"
+                        idx++
                     }
                 }
             }
-
+            Log.e("repeatDays = $repeatDay")
         }
     }
 
     fun onClickOk() {
         getRepeatDays()
-        val detailNameList = ArrayList<String>()
-
-        viewModel.liveDataSelectedItemList.value!!.forEach {
-            detailNameList.add(it.routineName)
+        when (isModifiedRoutine) {
+            true -> {
+                executePatchRoutine()
+                isModifiedRoutine = false
+            }
+            false -> {
+                executePostRoutine()
+            }
         }
-
-        viewModel.apiRepository.postRoutine(
-            body = PostRoutineRequest(
-                routineName = binding.routineEditRoutineName.text.toString(),
-                bodyPart = viewModel.liveDatePartOfEx.value.toString(),
-                repeatDay = repeatDays,
-                detailName = detailNameList,
-                detailType = detailType,
-                detailTypeContext = detailTypeContext,
-                detailSetEqual = detailSetEqual,
-                detailSet = detailSet
-            ), path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
-        )
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it.isSuccess) {
-                    Log.e("postRoutine 호출 성공")
-                } else {
-                    Log.e("postRoutine 호출 실패")
-                    Log.e(it.message)
-                }
-            }.disposeOnDestroy(this)
-
         onBackPressed()
     }
 

@@ -24,6 +24,7 @@ import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
 import com.makeus.milliewillie.ui.plan.PlanVacationActivity
+import com.makeus.milliewillie.ui.report.ReportActivity
 import java.util.*
 
 /**
@@ -71,6 +72,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
     fun planvacation() = MyIntent(PlanVacationActivity::class.java)
+    fun reports() = MyIntent(ReportActivity::class.java)
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }

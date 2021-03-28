@@ -13,13 +13,13 @@ class WorkoutStartFirstBottomSheetFragment  :
     private var clickOk: ((String) -> Unit)? = null
 
     companion object {
-        fun getInstance() = WeightAddRecordBottomSheetFragment()
+        fun getInstance() = WorkoutStartFirstBottomSheetFragment()
     }
 
     override fun WorkoutStartFirstPopUpBinding.onBind() {
         vi = this@WorkoutStartFirstBottomSheetFragment
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-
+        dialog?.setCanceledOnTouchOutside(false)
     }
 
 

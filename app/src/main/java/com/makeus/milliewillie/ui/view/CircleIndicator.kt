@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.makeus.milliewillie.util.Log
 
 class CircleIndicator : LinearLayout{
 
@@ -18,6 +19,10 @@ class CircleIndicator : LinearLayout{
     // 4.5dp 를 픽셀 단위로 바꿉니다.
     private val temp = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, 8.0f, resources.displayMetrics
+    )
+
+    private val temp2 = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, 16.0f, resources.displayMetrics
     )
 
     constructor(context: Context) : super(context) {
@@ -70,6 +75,24 @@ class CircleIndicator : LinearLayout{
         }
         selectDots(0)
     }
+
+    fun custom2CreateDotPanel(count: Int, defaultCircle: Int, selectCircle: Int, position: Int) {
+        this.removeAllViews()
+
+        mDefaultCircle = defaultCircle
+        mSelectCircle = selectCircle
+
+        for (i in 0 until count) {
+            imageDot.add(ImageView(mContext).apply {
+                if (i < count - 1) {
+                    setPadding(0, 0, temp.toInt(), 0)
+                }
+            })
+            this.addView(imageDot[i])
+        }
+        rangePositionDots(position)
+        Log.e("position = $position")
+    }
     /**
      * 선택된 점 표시
      * @param position
@@ -78,8 +101,16 @@ class CircleIndicator : LinearLayout{
         imageDot.forEachIndexed { index, imageView ->
             imageView.setImageResource(if (index == position) mSelectCircle else mDefaultCircle)
         }
-    } fun selectDots(nums: Int) {
+    }
+    fun selectDots(nums: Int) {
         imageDot.forEachIndexed { index, imageView ->
+            imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
+        }
+    }
+    fun rangePositionDots(nums: Int) {
+        imageDot.forEachIndexed { index, imageView ->
+            Log.e("nums = $nums")
+            Log.e("index = $index")
             imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
         }
     }

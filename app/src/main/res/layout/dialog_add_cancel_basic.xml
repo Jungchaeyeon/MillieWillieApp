@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment" />
+    </data>
+
+    <LinearLayout style="@style/DialogLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="@{vi.liveTitle}"
+                android:textColor="@color/black_all"
+                android:textSize="14sp"
+                tools:text="타이틀" />
+
+        </LinearLayout>
+
+
+        <!--    line색상 대신 전체 색 채우고 싶을 경우 backgroundTint 사용 하면 됨    -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textSize="14sp"
+                android:textColor="@color/maincolor_blue"
+                android:gravity="center"
+                android:onClick="@{() -> vi.onClickOk()}"
+                android:text="@{vi.liveButton}" />
+
+            <TextView
+                android:id="@+id/text_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_toStartOf="@id/text_ok"
+                android:textSize="14sp"
+                android:textColor="@color/text_gray"
+                android:gravity="center"
+                android:onClick="@{() -> vi.onClickCancel()}"
+                android:text="@{vi.liveCancelButton}" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</layout>

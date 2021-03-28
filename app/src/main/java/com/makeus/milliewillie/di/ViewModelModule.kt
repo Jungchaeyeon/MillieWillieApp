@@ -17,6 +17,7 @@ import com.makeus.milliewillie.ui.intro.WelcomeViewModel
 import com.makeus.milliewillie.ui.login.LoginViewModel
 import com.makeus.milliewillie.ui.map.MapViewModel
 import com.makeus.milliewillie.ui.plan.MakePlanViewModel
+import com.makeus.milliewillie.ui.report.ReportViewModel
 import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordViewModel
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel
@@ -38,9 +39,10 @@ val viewModelModule = module {
     viewModel { MainViewModel() }
     viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel(get()) }
-    viewModel { WorkoutStartViewModel() }
+    viewModel { WorkoutStartViewModel(get()) }
     viewModel { InfoViewModel() }
     viewModel { WeightRecordViewModel(get()) }
     viewModel { EmoViewModel() }
     viewModel { HoliViewModel() }
+    viewModel { ReportViewModel(get()) }
 }

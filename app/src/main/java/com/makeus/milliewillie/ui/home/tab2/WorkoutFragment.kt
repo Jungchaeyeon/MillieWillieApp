@@ -2,11 +2,15 @@ package com.makeus.milliewillie.ui.home.tab2
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -21,6 +25,10 @@ import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
+import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment
+import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment.Companion.ROUTINE_ID_KEY
+import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartAdapter
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -48,11 +56,14 @@ class WorkoutFragment :
     val weightDayArray = ArrayList<WeightDay>()
     var routineArray = ArrayList<MyRoutineInfo>()
     var routineId by Delegates.notNull<Long>()
+    private var position by Delegates.notNull<Int>()
 
     companion object {
         fun getInstance() = WorkoutFragment()
         const val IS_GOAL = "IS_GOAL"
         const val EXERCISE_ID = "EXERCISE_ID"
+        const val ROUTINE_ID_KEY_FROM_WORKOUT = "ROUTINE_ID_KEY_FROM_WORKOUT"
+
         var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
         var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1.toLong()
         var isModifiedRoutine: Boolean = false
@@ -102,17 +113,50 @@ class WorkoutFragment :
                 )
         }
 
-        binding.workoutRecyclerTodayRoutine.run {
-            adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
-                .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(
-                        R.layout.workout_routine_recycler_item
-                    ) {
-                        vi = this@WorkoutFragment
-                        item = it
-                    }
-                )
-        }
+//        binding.workoutRecyclerTodayRoutine.run {
+//            // 아이템 클릭 리스너
+//            addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+//                @RequiresApi(Build.VERSION_CODES.O)
+//                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+//                    val child = rv.findChildViewUnder(e.x, e.y)
+//                    val position = child?.let { rv.getChildAdapterPosition(it) }
+//                    if (e.action == MotionEvent.ACTION_MOVE) return false
+//                    else if (e.action == MotionEvent.ACTION_UP) {
+//                        Log.e("$position")
+//                        if (position != null) {
+//                            this@WorkoutFragment.position = position
+//                            return false
+//                        }
+//                        return true
+//                    }
+//                    return false
+//                }
+//
+//                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+//
+//                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+//            })
+//            adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
+//                .addViewType(
+//                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(
+//                        R.layout.workout_routine_recycler_item
+//                    ) {
+//                        vi = this@WorkoutFragment
+//                        item = it
+//
+////                        Log.e("isDone?")
+////                        for (i in 0 until routineArray.size) {
+////                            if (findViewHolderForAdapterPosition(i).)
+////                            if (routineArray[adapterPosition].isDoneRoutine == "true") {
+////
+////                                Log.e("isDone >> $i ${routineArray[i].isDoneRoutine}")
+////                                this.wRoutineTextName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+////                            }
+////                        }
+//
+//                    }
+//                )
+//        }
 
 
     }
@@ -142,18 +186,43 @@ class WorkoutFragment :
                             MyRoutineInfo(
                                 routineName = item.get("routineName").asString,
                                 routineRepeatDay = item.get("routineRepeatDay").asString,
-                                routineId = item.get("routineId").asLong
+                                routineId = item.get("routineId").asLong,
+                                isDoneRoutine = item.get("isDoneRoutine").asString
                             )
                         )
                     }
-                    viewModel.createRoutineList(routineArray)
+                    routineItemList = viewModel.createRoutineList(routineArray)
                 } else {
                     Log.e("getRoutines 호출 실패")
                     Log.e(it.message)
                 }
+                setRecyclerAdapter()
             }.disposeOnDestroy(this)
     }
 
+    lateinit var routineRecyclerAdapter: WorkoutRoutineAdapter
+    private var routineItemList = ArrayList<MyRoutineInfo>()
+
+    fun setRecyclerAdapter() {
+        Log.e("routineItemList = $routineItemList")
+        routineRecyclerAdapter = WorkoutRoutineAdapter(context, routineItemList, viewModel)
+        binding.workoutRecyclerTodayRoutine.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
+
+            // 키워드 아이템 클릭 리스너
+            routineRecyclerAdapter.let {
+                it.setRoutineItemClickListener(object : WorkoutRoutineAdapter.RoutineItemClickListener {
+                    override fun onItemClick(position: Int) {
+                        Log.e(position.toString())
+                        this@WorkoutFragment.position = position
+                    }
+                })
+            } // end listener
+            adapter = routineRecyclerAdapter
+        }
+
+    }
 
     fun executeGetWeightRecord() {
         dailyWeightArray.clear()
@@ -381,10 +450,15 @@ class WorkoutFragment :
             }
             2 -> { // 오늘의 운동 화면
                 ActivityNavigator.with(this).todayWorkout().start()
+
 //                ActivityNavigator.with(this).workoutStart().start()
             }
             3 -> { // 운동 시작 화면
-                ActivityNavigator.with(this).workoutStart().start()
+                ActivityNavigator.with(this).workoutStart().apply {
+                    putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
+                    isModifiedRoutine = true
+                    start()
+                }
             }
             4 -> { // 루틴 만들기 화면
                 ActivityNavigator.with(context!!).routine().start()

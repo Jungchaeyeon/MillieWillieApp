@@ -36,19 +36,22 @@ class ApiRepository(
 
     //fun users(name : String) = apiTest.users(name)
 
-    fun schedule(body: ScheduleRequest) = apiTest.schedule(body)
 
     fun getDailyWeight(path: Long) = apiTest.getDailyWeight(path)
     fun getWeightRecord(path: Long, viewMonth:Int, viewYear: Int) = apiTest.getWeightRecord(exerciseId =  path, viewMonth = viewMonth, viewYear = viewYear)
     fun getAllRoutines(path: Long) = apiTest.getAllRoutines(exerciseId = path)
     fun getRoutines(path: Long, targetDate: String) = apiTest.getRoutines(exerciseId = path, targetDate = targetDate)
-    fun getReports(path: Long, viewYear: Int, viewMonth: Int) = apiTest.getReports(exerciseId = path, viewYear = viewYear, viewMonth = viewMonth)
+    fun getCalendarReports(path: Long, viewYear: Int, viewMonth: Int) = apiTest.getCalendarReports(exerciseId = path, viewYear = viewYear, viewMonth = viewMonth)
     fun getDetailsExercises(exerciseId: Long, routineId: Long) = apiTest.getDetailsExercises(exerciseId = exerciseId, routineId = routineId)
+    fun getStartExercises(exerciseId: Long, routineId: Long) = apiTest.getStartExercises(exerciseId = exerciseId, routineId = routineId)
+    fun getReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.getReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
 
+    fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
     fun postRoutine(body: PostRoutineRequest, path: Long) = apiTest.postRoutine(body = body, exerciseId = path)
 
+    fun patchRoutine(exerciseId: Long, routineId: Long) = apiTest.patchRoutine(exerciseId = exerciseId, routineId = routineId)
     fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
 

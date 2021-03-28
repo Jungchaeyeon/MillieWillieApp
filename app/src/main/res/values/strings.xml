@@ -157,7 +157,10 @@
     <string name="workout_done">운동 끝내기</string>
     <string name="workout_start">운동 시작하기</string>
     <string name="workout_start_question">운동을 시작하시겠습니까?</string>
-
+    <string name="ex_report">운동 리포트</string>
+    <string name="total_ex_time">총운동시간</string>
+    <string name="is_done_ex">운동을 종료하시겠습니까?</string>
+    <string name="stroke"><s>%s</s></string>
     <string name="d_day_explain">자격증,시험,기념일등의 D - day를 확인하세요</string>
     <string name="today">오늘</string>
     <string name="plz_today_emotion">오늘의 감정을 남겨주세요.</string>

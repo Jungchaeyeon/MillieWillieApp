@@ -81,12 +81,22 @@ class WorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
         liveRoutineItemList.postValue(_routineArrayList)
     }
 
-    fun createRoutineList(routineList: ArrayList<MyRoutineInfo>) {
+    fun createRoutineList(routineList: ArrayList<MyRoutineInfo>): ArrayList<MyRoutineInfo>{
         _routineArrayList.clear()
-        for (i in routineList) _routineArrayList.add(
-            MyRoutineInfo(routineName = i.routineName,routineRepeatDay = i.routineRepeatDay, routineId = i.routineId)
-        )
+
+        for (i in routineList) {
+            _routineArrayList.add(
+                MyRoutineInfo(
+                    routineName =  i.routineName,
+                    routineRepeatDay = i.routineRepeatDay,
+                    routineId = i.routineId,
+                    isDoneRoutine = i.isDoneRoutine
+                )
+            )
+        }
         defaultRoutineItemList()
+
+        return _routineArrayList
     }
 
 //    fun addRoutineItem(item: MyRoutineInfo) {

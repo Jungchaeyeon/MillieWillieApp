@@ -14,6 +14,7 @@ import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartAdapter
+import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -66,7 +67,12 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
         vm = viewModel
 
         val calendar = Calendar.getInstance()
-        today = "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH)+1}-${calendar.get(Calendar.DAY_OF_MONTH)}"
+
+        today = BasicTextFormat.BasicDashFormat(
+            calendar.get(Calendar.YEAR).toString(),
+            (calendar.get(Calendar.MONTH)+1).toString(),
+            calendar.get(Calendar.DAY_OF_MONTH).toString()
+        )
 
         if (intent.hasExtra(ROUTINE_ID_KEY_FROM_WORKOUT)) {
             routineId = intent.getLongExtra(ROUTINE_ID_KEY_FROM_WORKOUT, 0)
@@ -99,6 +105,15 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                     Log.e("postReports 호출 실패")
                     Log.e(it.message)
                 }
+
+                ActivityNavigator.with(this).reports().apply {
+                    Log.e("routineId = $routineId")
+                    putExtra(START_ROUTINE_ID, routineId)
+                    Log.e("today = $today")
+                    putExtra(REPORT_DATE_KEY, today)
+                    start()
+                }
+
             }.disposeOnDestroy(this)
     }
 
@@ -204,7 +219,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                             binding.startTextHour.text = viewModel.liveDataTimeHour.value.toString()
                         }
                         binding.startTextSec.text = viewModel.liveDataTimeSec.toString()
-                        totalTime = "${viewModel.liveDataTimeHour.value!!}:${viewModel.liveDataTimeMin.value!!}:${viewModel.liveDataTimeSec.value!!}"
+                        totalTime = BasicTextFormat.BasicTotalTimeFormat(viewModel.liveDataTimeHour.value!!, viewModel.liveDataTimeMin.value!!, viewModel.liveDataTimeSec.value!!)
                     }
                 }
             }
@@ -212,7 +227,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                 hour = viewModel.liveDataTimeHour.value!!
                 min = viewModel.liveDataTimeMin.value!!
                 sec = viewModel.liveDataTimeSec.value!!
-                totalTime = "$hour:$min:$sec"
+                totalTime = BasicTextFormat.BasicTotalTimeFormat(hour, min, sec)
                 timer.cancel()
             }
         }
@@ -233,13 +248,6 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
                 executePostReports()
 
-                ActivityNavigator.with(this).reports().apply {
-                    Log.e("routineId = $routineId")
-                    Log.e("today = $today")
-                    putExtra(START_ROUTINE_ID, routineId)
-                    putExtra(REPORT_DATE_KEY, today)
-                    start()
-                }
             }
             .show(supportFragmentManager)
     }

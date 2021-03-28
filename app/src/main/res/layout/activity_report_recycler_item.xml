@@ -27,7 +27,7 @@
             android:includeFontPadding="false"
             android:textSize="16sp"
             android:textColor="@color/black_all"
-            android:text="ex_name"/>
+            android:text="@{item.exerciseName}"/>
 
         <TextView
             android:id="@+id/report_text_ex_complete"
@@ -37,23 +37,24 @@
             android:layout_alignBottom="@+id/report_item_text_ex_name"
             android:textColor="@color/text_gray"
             android:textSize="12sp"
-            android:text="(0/0) 완료"/>
+            android:text="@{item.exerciseStatus}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/report_item_recycler"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/report_item_text_ex_name"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <TextView
+            android:id="@+id/report_text_ex_option"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/report_item_recycler"
             android:textColor="@color/text_gray"
             android:textSize="12sp"
-            android:text="ex_option"/>
+            android:text="@{item.exerciseOption}"/>
 
 
 

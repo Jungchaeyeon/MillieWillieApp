@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.home.tab4
 
 import com.makeus.base.fragment.BaseDataBindingFragment
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.databinding.FragmentInfoBinding
 import com.makeus.milliewillie.R
@@ -34,9 +35,12 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
 //        }
     }
 
-    fun onClickItem() {
-        val nextFrag = HomeFragment()
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, nextFrag, "findThisFragment")
-            ?.addToBackStack(null)?.commit()
+
+    fun onClickProfile() {
+        ActivityNavigator.with(this).profile().start()
+    }
+
+    fun onClickAccount() {
+        ActivityNavigator.with(this).account().start()
     }
 }

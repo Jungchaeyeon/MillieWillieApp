@@ -4,4 +4,9 @@ import com.makeus.base.viewmodel.BaseViewModel
 
 class InfoViewModel: BaseViewModel() {
 
+
+
+
+
+
 }

@@ -18,11 +18,12 @@ data class RoutineExercise(
     val exerciseStatus: String,
     val doneSet: Int,
     val isDone: Boolean,
-    val detailList: ArrayList<ExerciseDetail>
+    val setList: ArrayList<ExerciseDetail>
 )
 
 data class ExerciseDetail(
     val setCount: Int,
     val weight: String,
+    val count: String,
     val time: String
 )

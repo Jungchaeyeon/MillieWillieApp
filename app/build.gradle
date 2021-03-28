@@ -181,9 +181,10 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:$firebaseBom")
     implementation "com.google.firebase:firebase-messaging:$firebaseMessageVersion"
     implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics:17.4.0'
     implementation "com.google.firebase:firebase-auth:$firebaseAuthVersion"
+    implementation "com.google.firebase:firebase-storage:19.2.2"
     implementation "com.google.android.gms:play-services-auth:$firebasePlayServiceAuthVersion"
 
     // OKHttp3 + Retrofit2
@@ -220,6 +221,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-user-rx:$kakaoVersion"
     implementation 'androidx.work:work-runtime:2.5.0'// 카카오 로그인
 
+
     testImplementation "junit:junit:$junitVersion"
 
     testImplementation "org.koin:koin-test:$koinAndroidVersion"
@@ -229,5 +231,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$junitTestVersion"
 }
 
+apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'

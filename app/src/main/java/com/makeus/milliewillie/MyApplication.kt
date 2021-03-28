@@ -37,6 +37,10 @@ class MyApplication : Application() {
 
         lateinit var sSharedPreferences: SharedPreferences
         const val MILLI_WILLI = "MILLI_WILLI"
+
+        var userProfileImgUrl = ""
+        val userName = ""
+
     }
 
     enum class LOGINTYPE {

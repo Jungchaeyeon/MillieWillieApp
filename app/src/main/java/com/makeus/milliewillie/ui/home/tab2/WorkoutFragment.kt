@@ -2,15 +2,12 @@ package com.makeus.milliewillie.ui.home.tab2
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -21,14 +18,13 @@ import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
-import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
-import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment
-import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment.Companion.ROUTINE_ID_KEY
-import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartAdapter
+import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
+import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
+import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,6 +47,7 @@ class WorkoutFragment :
 
     val todayMonth = calendar.get(Calendar.MONTH) + 1
     val today = calendar.get(Calendar.DAY_OF_MONTH)
+    private lateinit var reportDate: String
 
     val dailyWeightArray = ArrayList<DailyWeight>()
     val weightDayArray = ArrayList<WeightDay>()
@@ -92,6 +89,11 @@ class WorkoutFragment :
         vm = viewModel
 
         todayDate() //오늘 날짜 설정
+        reportDate = BasicTextFormat.BasicDashFormat(
+            calendar.get(Calendar.YEAR).toString(),
+            (calendar.get(Calendar.MONTH)+1).toString(),
+            calendar.get(Calendar.DAY_OF_MONTH).toString()
+        )
 
         isInputGoal = true
         SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
@@ -143,17 +145,6 @@ class WorkoutFragment :
 //                    ) {
 //                        vi = this@WorkoutFragment
 //                        item = it
-//
-////                        Log.e("isDone?")
-////                        for (i in 0 until routineArray.size) {
-////                            if (findViewHolderForAdapterPosition(i).)
-////                            if (routineArray[adapterPosition].isDoneRoutine == "true") {
-////
-////                                Log.e("isDone >> $i ${routineArray[i].isDoneRoutine}")
-////                                this.wRoutineTextName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-////                            }
-////                        }
-//
 //                    }
 //                )
 //        }
@@ -216,6 +207,8 @@ class WorkoutFragment :
                     override fun onItemClick(position: Int) {
                         Log.e(position.toString())
                         this@WorkoutFragment.position = position
+
+                        onClickItem(3)
                     }
                 })
             } // end listener
@@ -453,12 +446,24 @@ class WorkoutFragment :
 
 //                ActivityNavigator.with(this).workoutStart().start()
             }
-            3 -> { // 운동 시작 화면
-                ActivityNavigator.with(this).workoutStart().apply {
-                    putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
-                    isModifiedRoutine = true
-                    start()
+            3 -> {
+                when (routineArray[position].isDoneRoutine.toBoolean()) {
+                    true -> { // 운동 리포트 화면
+                        ActivityNavigator.with(this).reports().apply {
+                            putExtra(START_ROUTINE_ID, routineArray[position].routineId)
+                            putExtra(REPORT_DATE_KEY, reportDate)
+                            start()
+                        }
+                    }
+                    false -> { // 운동 시작 화면
+                        ActivityNavigator.with(this).workoutStart().apply {
+                            putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
+                            isModifiedRoutine = true
+                            start()
+                        }
+                    }
                 }
+
             }
             4 -> { // 루틴 만들기 화면
                 ActivityNavigator.with(context!!).routine().start()

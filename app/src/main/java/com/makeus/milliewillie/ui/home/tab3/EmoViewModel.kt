@@ -20,6 +20,8 @@ class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: Repo
     val livePickEmo= MutableLiveData<EmotionImg>()
     val liveEmoMemo = MutableLiveData<String>()
 
+
+    //POST EMO
     fun postEmotionsRecord()=
         apiRepository.postEmotionsRecord(
             EmotionsRecordRequest(
@@ -33,6 +35,7 @@ class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: Repo
             }
         }.disposeOnDestroy(this)
 
+    //PATCH EMO
     fun patchEmotionsRecord()=
         apiRepository.patchEmotionsRecord(
             EmotionsRecordRequest(

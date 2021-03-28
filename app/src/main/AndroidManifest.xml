@@ -60,6 +60,11 @@
         </activity>
         <activity android:name=".ui.intro.WelcomeActivity" />
         <activity android:name=".ui.login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.plan.MakePlanActivity">
 
@@ -71,11 +76,6 @@
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.mypage.InfoMiliActivity" />
         <activity android:name=".ui.dDay.DdayActivity" />

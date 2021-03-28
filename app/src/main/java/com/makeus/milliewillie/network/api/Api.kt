@@ -89,9 +89,11 @@ interface Api {
         @Body body : UsersPatch
     ) : Observable<UsersResponse>
 
+    //로그인
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>
-
+    @POST("users/login-google")
+    fun googleLogin(): Observable<KakaoLogin>
 
     @GET("users/jwt")
     fun jwt(): Observable<BaseResponse>

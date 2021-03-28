@@ -9,6 +9,7 @@ import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ApiRepository(
@@ -29,6 +30,16 @@ class ApiRepository(
         //jwt API 호출
         apiTest.jwt()
     }
+    fun googleLogin() = apiTest.googleLogin().doOnNext {
+        if (!it.result.isMember) {
+            repositoryCached.setValue(LocalKey.ISMEMBER, false)
+        } else {
+            repositoryCached.setValue(LocalKey.ISMEMBER, true)
+        }
+    }.switchMap {
+        //jwt API 호출
+        apiTest.jwt()
+    }
 
     fun jwt() = apiTest.jwt().doOnNext {}
     fun getUsers() = apiTest.getUsers()
@@ -42,6 +53,7 @@ class ApiRepository(
     fun postEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest) = apiTest.postEmotionsRecord(emotionsRecordRequest)
     fun patchEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest, path : Long) = apiTest.patchEmotionsRecord(body = emotionsRecordRequest, emotionsRecordId = path)
     fun patchDiary(path : Long) = apiTest.patchDiary(workId= path)
+
 
     //fun users(name : String) = apiTest.users(name)
     fun schedule(body: ScheduleRequest) = apiTest.schedule(body)

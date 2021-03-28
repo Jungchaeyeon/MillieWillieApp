@@ -13,5 +13,5 @@ data class UsersRequest(
     var strSergeant : String?="",
     var proDate : String?="",
     var goal : String="",
-    val socialType : String="",
+    var socialType : String="",
 ) : Serializable

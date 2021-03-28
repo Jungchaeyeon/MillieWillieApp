@@ -75,6 +75,9 @@ class LoginViewModel(
                                 Log.e(googleSignInAccount.idToken, "AccessToken")
                                 Log.e(googleSignInAccount.isExpired.toString(), "AccessToken")
 
+                                repositoryCached.setValue(LocalKey.TOKEN, googleSignInAccount.idToken)
+
+                                requestGoogleLogin()
                                 response.invoke(true)
                             }
                         } else {
@@ -88,6 +91,26 @@ class LoginViewModel(
             }
         }
     }
+//    private fun requestGoogleLogin(response: (Boolean) -> Unit) {
+//        apiRepository.googleLogin().observeOn(AndroidSchedulers.mainThread()).subscribe({
+//            Log.e("google true로 들어옴")
+//            apiRepository.jwt()
+//            response.invoke(true)
+//        }, {
+//            it.printStackTrace()
+//            response.invoke(false)
+//            Log.e("google false로 들어옴")
+//        }).disposeOnDestroy(this)
+//    }
+    fun requestGoogleLogin()=
+        apiRepository.googleLogin().subscribe({
+            Log.e("requestKakaoLogin true로 들어옴")
+        }, {
+            it.printStackTrace()
+            Log.e("requestKakaoLogin false로 들어옴")
+            Log.e(repositoryCached.getToken(),"토큰")
+        }).disposeOnDestroy(this)
+
 
     fun onClickKakaoLogin(context: Context, response: (Boolean) -> Unit) {
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
@@ -120,6 +143,7 @@ class LoginViewModel(
             it.printStackTrace()
             response.invoke(false)
             Log.e("requestKakaoLogin false로 들어옴")
+            Log.e(repositoryCached.getToken(),"토큰")
         }).disposeOnDestroy(this)
     }
 

@@ -6,6 +6,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.info.AccountActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.info.AccountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

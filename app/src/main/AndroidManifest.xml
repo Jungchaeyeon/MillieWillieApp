@@ -97,6 +97,7 @@
         <activity android:name=".ui.report.ReportActivity"/>
         <activity android:name=".ui.profile.ProfileActivity"/>
         <activity android:name=".ui.info.AccountActivity"/>
+        <activity android:name=".ui.info.RuleWebViewActivity"/>
     </application>
 
 </manifest>

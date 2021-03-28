@@ -56,6 +56,7 @@ class ApiRepository(
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
 
     fun deleteRoutine(exerciseId: Long, routineId: Long) = apiTest.deleteRoutine(exerciseId = exerciseId, routineId = routineId)
+    fun deleteUsers() = apiTest.deleteUsers()
     //회원가입
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
         //header에 token을 jwt로 변경

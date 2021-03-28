@@ -11,6 +11,7 @@ import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.holiday.HolidayActivity
 import com.makeus.milliewillie.ui.info.AccountActivity
+import com.makeus.milliewillie.ui.info.RuleWebViewActivity
 import com.makeus.milliewillie.ui.profile.EditProfileFragment
 import com.makeus.milliewillie.ui.profile.ProfileActivity
 import com.makeus.milliewillie.ui.map.MapActivity
@@ -78,6 +79,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun reports() = MyIntent(ReportActivity::class.java)
     fun profile() = MyIntent(ProfileActivity::class.java)
     fun account() = MyIntent(AccountActivity::class.java)
+    fun rulesInAccount() = MyIntent(RuleWebViewActivity::class.java)
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }

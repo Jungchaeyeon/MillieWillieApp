@@ -102,6 +102,9 @@ interface Api {
     fun deleteRoutine(@Path("exerciseId") exerciseId: Long,
                       @Path("routineId") routineId: Long): Observable<ResultResponse>
 
+    @DELETE("users")
+    fun deleteUsers(): Observable<BaseResponse>
+
 
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>

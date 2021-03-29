@@ -151,12 +151,12 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     }
 
-    fun onClickItem() {
-        val nextFrag = HomeFragment()
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.container, nextFrag, "findThisFragment")
-            ?.addToBackStack(null)?.commit()
-    }
+//    fun onClickItem() {
+//        val nextFrag = HomeFragment()
+//        activity?.supportFragmentManager?.beginTransaction()
+//            ?.replace(R.id.container, nextFrag, "findThisFragment")
+//            ?.addToBackStack(null)?.commit()
+//    }
 
     //x
     fun onClickMyPage() {

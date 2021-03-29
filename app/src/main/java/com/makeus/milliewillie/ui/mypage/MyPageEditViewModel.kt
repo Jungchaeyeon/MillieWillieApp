@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.mypage
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
@@ -51,7 +52,7 @@ class MyPageEditViewModel(
         var count1 = dischargePercent
         var count2 = nextPromPercent
         var count3 = monthPromPercent
-        Observable.interval(0, 1, TimeUnit.MILLISECONDS).timeInterval().map {
+        Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {
             count1++.toInt()
         }.subscribe {
             //퍼센트 계산
@@ -65,7 +66,7 @@ class MyPageEditViewModel(
             toNextPromPercent.postValue(nextPromPercent.toString()+it.toString()+"%")
 
         }.disposeOnDestroy(this)
-        Observable.interval(0, 1, TimeUnit.MILLISECONDS).timeInterval().map {
+        Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {
             count3++.toInt()
         }.subscribe {
             //퍼센트 계산
@@ -129,6 +130,7 @@ class MyPageEditViewModel(
             usersResponse.serveType +" "+ hobongClassInfo.value+" " + usersResponse.hobong.toString() + "호봉"
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun percentInit() {
 
         val dfParse = SimpleDateFormat("yyyy-MM-dd")

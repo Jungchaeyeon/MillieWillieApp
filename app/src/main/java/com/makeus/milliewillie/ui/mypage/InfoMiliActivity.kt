@@ -1,17 +1,13 @@
 package com.makeus.milliewillie.ui.mypage
 
-import android.os.Bundle
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoMiliBinding
-import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.MainViewModel
 import com.makeus.milliewillie.util.Log
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class InfoMiliActivity :
@@ -27,6 +23,7 @@ class InfoMiliActivity :
         fun getInstance() = InfoMiliActivity()
     }
 
+
     override fun ActivityInfoMiliBinding.onBind() {
         vi = this@InfoMiliActivity
         vm = viewModel
@@ -41,7 +38,7 @@ class InfoMiliActivity :
 
     override fun onResume() {
         super.onResume()
-        viewModel.getUsers()
+        //viewModel.getUsers()
         Log.e(allDdayPercent.toString(),"nextDayPercent")
         Log.e(nextDdayPercent.toString(),"nextDayPercent")
         Log.e(mothPromDday.toString(),"nextDayPercent")

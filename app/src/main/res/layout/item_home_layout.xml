@@ -97,6 +97,7 @@
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
                 android:textAlignment="viewStart"
+                android:stateListAnimator="@null"
                 android:text="@{vm.liveGoal}"
                 tools:text="토익만 따서 나가자!" />
 
@@ -205,7 +206,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_begin="24dp" />
+                        app:layout_constraintGuide_begin="16dp" />
 
 
                     <ProgressBar

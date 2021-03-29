@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.makeus.milliewillie.util.Log
 
 class CircleIndicator : LinearLayout{
 
@@ -70,6 +71,7 @@ class CircleIndicator : LinearLayout{
         }
         selectDots(0)
     }
+
     /**
      * 선택된 점 표시
      * @param position
@@ -78,7 +80,8 @@ class CircleIndicator : LinearLayout{
         imageDot.forEachIndexed { index, imageView ->
             imageView.setImageResource(if (index == position) mSelectCircle else mDefaultCircle)
         }
-    } fun selectDots(nums: Int) {
+    }
+    fun selectDots(nums: Int) {
         imageDot.forEachIndexed { index, imageView ->
             imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
         }

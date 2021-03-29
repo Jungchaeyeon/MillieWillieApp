@@ -204,7 +204,8 @@
                 <RelativeLayout
                     android:id="@+id/d_day_anni_layout_date"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
                     android:layout_marginHorizontal="24dp"
                     android:onClick="@{()-> vi.onClickDdayDate()}"
                     >
@@ -221,7 +222,7 @@
                     <TextView
                         android:id="@+id/d_day_anni_text_date_selector"
                         android:layout_width="wrap_content"
-                        android:layout_height="17dp"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="40dp"
                         android:layout_toEndOf="@+id/d_day_anni_text_date"
@@ -246,7 +247,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/icon_left" />
+                        android:src="@drawable/icon_left2" />
 
                 </RelativeLayout>
             </LinearLayout>

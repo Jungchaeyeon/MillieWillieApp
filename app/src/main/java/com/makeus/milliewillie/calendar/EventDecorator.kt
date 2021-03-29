@@ -21,7 +21,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 
 @SuppressLint("UseCompatLoadingForDrawables")
-class EventDecorator(private val color: Int, dates: Collection<CalendarDay>, context: Context) :
+class EventDecorator(dates: Collection<CalendarDay>, context: Context) :
     DayViewDecorator {
 
     private val drawable: Drawable = context.resources.getDrawable(R.drawable.calendar_item_background)
@@ -35,7 +35,7 @@ class EventDecorator(private val color: Int, dates: Collection<CalendarDay>, con
     override fun decorate(view: DayViewFacade) {
         view.setBackgroundDrawable(drawable)
 
-        view.addSpan(DotSpan(5f, color)); // 날자밑에 점
+//        view.addSpan(DotSpan(5f, R.color.maincolor_blue)); // 날자밑에 점
     }
 
 }

@@ -43,6 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/layout_underline"
+            android:onClick="@{()-> vi.onClickProfile()}"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout5">
 
             <ImageView
@@ -51,7 +53,7 @@
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="24dp"
-                android:src="@color/black" />
+                android:src="@drawable/graphic_profile_big" />
 
             <TextView
                 android:id="@+id/info_text_user_name"
@@ -62,7 +64,7 @@
                 android:layout_toEndOf="@+id/info_img_profile"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
-                android:text="name"
+                android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />
 
@@ -72,7 +74,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="2dp"
                 android:layout_toEndOf="@+id/info_text_user_name"
-                android:src="@drawable/icon_left" />
+                android:src="@drawable/icon_left2" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -81,6 +83,7 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="24dp"
             android:background="@drawable/layout_underline"
+            android:onClick="@{()-> vi.onClickAccount()}"
             app:layout_constraintTop_toBottomOf="@+id/info_user_profile_layout"
             tools:layout_editor_absoluteX="24dp">
 
@@ -137,53 +140,11 @@
             app:layout_constraintTop_toBottomOf="@+id/info_push_alarm_layout" />
 
         <RelativeLayout
-            android:id="@+id/info_MW_layout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/layout_underline"
-            app:layout_constraintTop_toBottomOf="@+id/info_push_alarm_layout"
-            tools:layout_editor_absoluteX="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/MW"
-                android:textColor="@color/black_all" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/info_card_merit_layout"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/info_MW_layout"
-            tools:layout_editor_absoluteX="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/card_merit"
-                android:textColor="@color/black_all" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout13"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/e_white"
-            app:layout_constraintTop_toBottomOf="@+id/info_card_merit_layout" />
-
-        <RelativeLayout
             android:id="@+id/info_log_out_layout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/info_card_merit_layout"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout12"
             tools:layout_editor_absoluteX="24dp">
 
             <TextView

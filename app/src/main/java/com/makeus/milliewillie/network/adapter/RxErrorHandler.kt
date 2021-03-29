@@ -49,7 +49,10 @@ class RxErrorHandler {
                 }
             }
             is UnknownHostException -> "인터넷 연결을 확인하세요.".showLongToastSafe()
-            else                    -> it.cause?.message?.showLongToastSafe()
+            else                    -> {
+                Log.e(it.cause?.message)
+                it.cause?.message?.showLongToastSafe()
+            }
         }
     }
 

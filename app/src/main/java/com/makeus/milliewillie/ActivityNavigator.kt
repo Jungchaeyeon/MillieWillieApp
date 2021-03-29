@@ -12,6 +12,10 @@ import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
 import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.holiday.HolidayActivity
+import com.makeus.milliewillie.ui.info.AccountActivity
+import com.makeus.milliewillie.ui.info.RuleWebViewActivity
+import com.makeus.milliewillie.ui.profile.EditProfileFragment
+import com.makeus.milliewillie.ui.profile.ProfileActivity
 import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.intro.*
@@ -26,6 +30,7 @@ import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
 import com.makeus.milliewillie.ui.plan.PlanVacationActivity
+import com.makeus.milliewillie.ui.report.ReportActivity
 import java.util.*
 
 /**
@@ -72,6 +77,11 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun holiday() = MyIntent(HolidayActivity::class.java)
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
+    fun planvacation() = MyIntent(PlanVacationActivity::class.java)
+    fun reports() = MyIntent(ReportActivity::class.java)
+    fun profile() = MyIntent(ProfileActivity::class.java)
+    fun account() = MyIntent(AccountActivity::class.java)
+    fun rulesInAccount() = MyIntent(RuleWebViewActivity::class.java)
     fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)

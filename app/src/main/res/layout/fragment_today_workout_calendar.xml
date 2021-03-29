@@ -58,11 +58,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="398dp"
                 android:background="@drawable/calendar_background"
+                app:mcv_selectionMode="single"
                 app:mcv_dateTextAppearance="@style/CalendarDateText"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
                 app:mcv_selectionColor="@color/blue_green_zero"
                 app:mcv_leftArrowMask="@drawable/icon_left_reverse"
-                app:mcv_rightArrowMask="@drawable/icon_left"
+                app:mcv_rightArrowMask="@drawable/icon_left2"
                 app:mcv_arrowColor="@color/blue_green"
                 app:mcv_headerTextAppearance="@style/CalendarHeaderText"
                 app:mcv_showOtherDates="defaults"
@@ -107,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                replaceAll="@{vm.liveRoutineItemList}"
+                replaceAll="@{vm._calRoutineArrayList}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
 

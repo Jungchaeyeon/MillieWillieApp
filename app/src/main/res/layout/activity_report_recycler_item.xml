@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.report.ReportActivity" />
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.ReportRecyclerItem" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_underline"
+        android:layout_marginHorizontal="24dp"
+        android:paddingVertical="16dp">
+
+        <TextView
+            android:id="@+id/report_item_text_ex_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
+            android:textColor="@color/black_all"
+            android:text="@{item.exerciseName}"/>
+
+        <TextView
+            android:id="@+id/report_text_ex_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/report_item_text_ex_name"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            android:text="@{item.exerciseStatus}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/report_item_recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/report_item_text_ex_name"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:id="@+id/report_text_ex_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/report_item_recycler"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            android:text="@{item.exerciseOption}"/>
+
+
+
+    </RelativeLayout>
+</layout>

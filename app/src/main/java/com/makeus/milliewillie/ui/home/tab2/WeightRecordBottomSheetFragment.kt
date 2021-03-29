@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.util.Log
 import java.util.*
 
@@ -40,8 +41,13 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
     fun onClickOk() {
         goal = binding.wRecordEditGoal.text.toString()
         current = binding.wRecordEditCurrent.text.toString()
-        clickOk?.invoke(goal, current)
-        dismiss()
+        if (current.isBlank() || goal.isBlank()) {
+            getString(R.string.toast_weight_record).showShortToastSafe()
+        } else {
+            getString(R.string.toast_weight_record_per_today).showShortToastSafe()
+            clickOk?.invoke(goal, current)
+            dismiss()
+        }
     }
 
     fun onClickCancel(){

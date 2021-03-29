@@ -5,9 +5,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Handler
 import android.view.MotionEvent
-import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -16,12 +14,11 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
-import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.*
-import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
@@ -31,7 +28,6 @@ import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
@@ -109,46 +105,62 @@ class WeightRecordActivity :
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun todayWeightInput() {
-        WeightAddRecordBottomSheetFragment.getInstance()
-            .setOnClickOk {
-                val dayWeight = it
-                val date = viewModel.liveDataWeightPerDay.value?.get(position)?.dayOfMonth
-                val year = Calendar.getInstance().get(Calendar.YEAR)
-                var month = ""
-                var day = ""
-                var idx = 0
-                for (i in date!!.indices) {
-                    if (date[i] == '월') {
-                        for (j in 0 until i) month += date[j].toString()
-                        if (month.length < 2) month = "0$month"
-                        idx = i + 1
-                    }
-                    else if (date[i] == '일') {
-                        for (j in idx until i) day += date[j].toString()
-                        if (day.length < 2) day = "0$day"
-                    }
+        val date = viewModel.liveDataWeightPerDay.value?.get(position)?.dayOfMonth
+        var dayText = ""
+        var index = 0
+        for (i in date!!.indices) {
+            if (date[i] == '월') index = i+1
+            if (date[index] == '일') break
+            if (index > 0) {
+                dayText += date[index]
+                index++
+            }
+        }
 
-                }
-                val dateForm = "$year-$month-$day"
-                Log.e(dateForm)
-
-                viewModel.apiRepository.patchTodayWeight(
-                    path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
-                    body = PatchTodayWeightRequest(dayWeight = it.toDouble(), dayDate = dateForm))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { it2 ->
-                        Log.e(it2.isSuccess.toString())
-                        if (it2.isSuccess) {
-                            Log.e("호출 성공")
-
-                            viewModel.replaceItem(position, dayWeight)
-                            executeGetWeightRecord(month = todayMonth, year = todayYear)
-                        } else {
-                            Log.e("호출 실패")
-                            Log.e(it2.message)
+        if (dayText.toInt() > Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+            getString(R.string.over_value_date).showShortToastSafe()
+        } else {
+            WeightAddRecordBottomSheetFragment.getInstance()
+                .setOnClickOk {
+                    val dayWeight = it
+                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    var month = ""
+                    var day = ""
+                    var idx = 0
+                    for (i in date!!.indices) {
+                        if (date[i] == '월') {
+                            for (j in 0 until i) month += date[j].toString()
+                            if (month.length < 2) month = "0$month"
+                            idx = i + 1
                         }
-                    }.disposeOnDestroy(this)
-            }.show(supportFragmentManager)
+                        else if (date[i] == '일') {
+                            for (j in idx until i) day += date[j].toString()
+                            if (day.length < 2) day = "0$day"
+                        }
+
+                    }
+                    val dateForm = "$year-$month-$day"
+                    Log.e(dateForm)
+
+                    viewModel.apiRepository.patchTodayWeight(
+                        path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+                        body = PatchTodayWeightRequest(dayWeight = it.toDouble(), dayDate = dateForm))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { it2 ->
+                            Log.e(it2.isSuccess.toString())
+                            if (it2.isSuccess) {
+                                Log.e("호출 성공")
+
+                                viewModel.replaceItem(position, dayWeight)
+                                executeGetWeightRecord(month = todayMonth, year = todayYear)
+                            } else {
+                                Log.e("호출 실패")
+                                Log.e(it2.message)
+                            }
+                        }.disposeOnDestroy(this)
+                }.show(supportFragmentManager)
+        }
+
     }
 
     fun executeGetWeightRecord(month: Int, year: Int) {
@@ -224,11 +236,15 @@ class WeightRecordActivity :
 
     // 일자 없앤 데이트피커로 새로 만들어서 변경 예정
     fun onClickSetDate() {
-        DatePickerDdayBottomSheetDialogFragment.getInstance()
-            .setOnClickOk {date, dotDate, gapDay, year, month ->
-                viewModel.yearAndMonth.postValue("${year}년 ${month}월")
-                executeGetWeightRecord(month = month.toInt(), year = year.toInt())
+        DatePickekWeightRecortBottomSheetDialogFragment.getInstance()
+            .setOnClickOk {year, month ->
+                if (year.toInt() <= Calendar.getInstance().get(Calendar.YEAR)) {
+                    if (month.toInt() <= Calendar.getInstance().get(Calendar.MONTH) + 1) {
+                        viewModel.yearAndMonth.postValue("${year}년 ${month}월")
+                        executeGetWeightRecord(month = month.toInt(), year = year.toInt())
 //                viewModel.liveDataWeightPerDay.observe(this, androidx.lifecycle.Observer { viewModel.defaultWeightPerDay() })
+                    } else getString(R.string.over_value_month).showShortToastSafe()
+                } else getString(R.string.over_value_month).showShortToastSafe()
             }.show(supportFragmentManager)
     }
 

@@ -421,7 +421,6 @@ class WorkoutFragment :
                     false -> { // 운동 시작 화면
                         ActivityNavigator.with(this).workoutStart().apply {
                             putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
-                            isModifiedRoutine = true
                             start()
                         }
                     }
@@ -429,6 +428,7 @@ class WorkoutFragment :
 
             }
             4 -> { // 루틴 만들기 화면
+                isModifiedRoutine = false
                 ActivityNavigator.with(context!!).routine().start()
             }
         }

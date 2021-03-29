@@ -6,10 +6,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.StartRecyclerCircleItem
 import com.makeus.milliewillie.model.StartRecyclerItem
 import com.makeus.milliewillie.repository.ApiRepository
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
-import com.makeus.milliewillie.ui.view.CircleIndicator
 import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
 
 class WorkoutStartViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 

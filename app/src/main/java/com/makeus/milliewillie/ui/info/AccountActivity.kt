@@ -3,10 +3,14 @@ package com.makeus.milliewillie.ui.info
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoAccountBinding
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,7 +34,12 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                     Log.e("deleteUsers 호출 실패")
                     Log.e(it.message)
                 }
-                // 처음 화면으로 이동 추가해야함
+                isInputGoal = false
+                SharedPreference.putSettingBooleanItem(
+                    IS_GOAL,
+                    isInputGoal
+                )
+                ActivityNavigator.with(this).welcome().start()
             }.disposeOnDestroy(this)
     }
 

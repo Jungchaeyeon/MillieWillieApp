@@ -8,6 +8,7 @@ import com.makeus.milliewillie.di.networkModule
 import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.di.viewModelModule
 import com.makeus.milliewillie.network.adapter.RxErrorHandler
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
@@ -30,16 +31,24 @@ class MyApplication : Application() {
             String.format(globalApplicationContext.getString(stringId, arg))
         }
 
-//        lateinit var loginType: LOGINTYPE
+        lateinit var loginType: LOGINTYPE
         var isEnabledPush: Boolean = true
 
         var isFirstExListSet by Delegates.notNull<Boolean>()
 
         lateinit var sSharedPreferences: SharedPreferences
-        const val MILLI_WILLI = "MILLI_WILLI"
 
         var userProfileImgUrl: String? = ""
         var userName: String = ""
+
+        var isInputGoal: Boolean = false
+        var exerciseId by Delegates.notNull<Long>()
+
+        //const key
+        const val MILLI_WILLI = "MILLI_WILLI"
+        const val IS_GOAL = "IS_GOAL"
+        const val EXERCISE_ID = "EXERCISE_ID"
+        const val ROUTINE_ID_KEY_FROM_WORKOUT = "ROUTINE_ID_KEY_FROM_WORKOUT"
 
     }
 

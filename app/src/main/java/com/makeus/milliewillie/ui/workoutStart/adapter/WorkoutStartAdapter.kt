@@ -52,38 +52,11 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
 //        statusList = ArrayList()
 
         holder.itemView.setOnClickListener {
-            items.stack++
+            onItemClickAddCircle(items, holder)
+        }
 
-            val tempList = ArrayList<StartRecyclerCircleItem>()
-
-            for (i in 0 until items.circleList.size) {
-                tempList.add(StartRecyclerCircleItem(circle = R.drawable.one_currnet_gray))
-            }
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                for (i in 0 until items.stack) {
-                    items.circleList[i].circle = R.drawable.one_currnet_blue
-                }
-
-                if (items.stack == items.circleList.size) {
-                    holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-//                    statusList.add(position, items.stack)
-                }
-                notifyDataSetChanged()
-            }, 200)
-
-//            try {
-//                statusList[position] = items.stack
-//                Log.e("statusList1 = $statusList")
-//            } catch (e: Exception) {
-//                try {
-//                    statusList.add(position, items.stack)
-//                    Log.e("statusList2 = $statusList")
-//                } catch (e: Exception) {
-//                    statusList.add(items.stack)
-//                    Log.e("statusList3 = $statusList")
-//                }
-//            }
+        holder.innerRecyclerView.setOnClickListener {
+            onItemClickAddCircle(items, holder)
         }
 
 
@@ -101,6 +74,28 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
             layoutManager = GridLayoutManager(context, 10, GridLayoutManager.VERTICAL, false)
             recyclerView.adapter = itemsAdapter
         }
+    }
+
+    // on click circle count up
+    fun onItemClickAddCircle(items: StartRecyclerItem, holder: WorkoutStartAdapter.StartViewHolder) {
+        items.stack++
+
+        val tempList = ArrayList<StartRecyclerCircleItem>()
+
+        for (i in 0 until items.circleList.size) {
+            tempList.add(StartRecyclerCircleItem(circle = R.drawable.one_currnet_gray))
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in 0 until items.stack) {
+                items.circleList[i].circle = R.drawable.one_currnet_blue
+            }
+
+            if (items.stack == items.circleList.size) {
+                holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            notifyDataSetChanged()
+        }, 200)
     }
 
     override fun getItemCount(): Int = itemList.size

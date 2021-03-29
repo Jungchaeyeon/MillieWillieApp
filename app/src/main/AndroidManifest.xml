@@ -57,14 +57,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.intro.WelcomeActivity" />
-        <activity android:name=".ui.login.LoginActivity"/>
-        <activity android:name=".ui.plan.MakePlanActivity"/>
-        <activity
-            android:name=".ui.intro.IntroSettingNameActivity"
-            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.intro.WelcomeActivity">
 
-        <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
+        </activity>
 
         <activity
             android:name=".ui.MainActivity"
@@ -75,6 +70,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.login.LoginActivity"/>
+        <activity android:name=".ui.plan.MakePlanActivity"/>
+        <activity
+            android:name=".ui.intro.IntroSettingNameActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity android:name=".ui.intro.IntroServiceTypeActivity"/>
+
+
 
         <activity android:name=".ui.mypage.InfoMiliActivity"/>
         <activity android:name=".ui.dDay.DdayActivity" />

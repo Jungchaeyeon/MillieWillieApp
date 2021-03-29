@@ -16,6 +16,11 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
+import com.makeus.milliewillie.MyApplication.Companion.exerciseId
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
@@ -60,19 +65,13 @@ class WorkoutFragment :
 
     companion object {
         fun getInstance() = WorkoutFragment()
-        const val IS_GOAL = "IS_GOAL"
-        const val EXERCISE_ID = "EXERCISE_ID"
-        const val ROUTINE_ID_KEY_FROM_WORKOUT = "ROUTINE_ID_KEY_FROM_WORKOUT"
-
-        var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1.toLong()
         var isModifiedRoutine: Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0.toLong()
+        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong()!!
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -96,9 +95,6 @@ class WorkoutFragment :
             (calendar.get(Calendar.MONTH)+1).toString(),
             calendar.get(Calendar.DAY_OF_MONTH).toString()
         )
-
-        isInputGoal = true
-        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
         onClickWeightDateItemAdd() // 체중 입력
 
@@ -294,6 +290,7 @@ class WorkoutFragment :
                                     isInputGoal = true
                                     SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
                                     SharedPreference.putSettingItem(EXERCISE_ID, it.result.exerciseId.toString())
+                                    exerciseId = it.result.exerciseId
 
                                     Handler().postDelayed({
                                         setLineChart()
@@ -379,6 +376,8 @@ class WorkoutFragment :
             axisRight.isEnabled = false // x충 오른쪽 데이터 설정
             axisLeft.isEnabled = false // x축 왼쪽 데이터 설정
 
+            setNoDataText(getString(R.string.chart_no_data_text))
+            setNoDataTextColor(R.color.white)
             description.text = "" // 차트 설명 설정
             setPinchZoom(false) // 차트 확대 설정
             isDoubleTapToZoomEnabled = false // 더블탭으로 확대 설정

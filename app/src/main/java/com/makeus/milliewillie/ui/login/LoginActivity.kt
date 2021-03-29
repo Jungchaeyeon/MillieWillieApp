@@ -9,11 +9,16 @@ import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
+import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -31,6 +36,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         if (repositoryCached.getToken().isNotEmpty()) {
                 //1단계 -> jwt 가지고 있니?
             viewModel.firstCheckJmt() {
+                isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
                 //2단계. 유효한 토큰?
                 if (it) {
                     Log.e(it.toString(), "메인으로")
@@ -65,10 +71,9 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
-//            loginType = MyApplication.LOGINTYPE.GOOGLE
+            loginType = MyApplication.LOGINTYPE.GOOGLE
             viewModel.getFcmToken {
                 deviceToken = it
-                Log.e("deviceToken : ${deviceToken}")
             }
             viewModel.onRequestLoginWithGoogle(this, data) {
                 nextStep(it)
@@ -90,6 +95,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         viewModel.getFcmToken {
         }
         viewModel.onClickKakaoLogin(this) {
+            loginType = MyApplication.LOGINTYPE.KAKAO
             nextStep(it)
         }
 

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityReportBinding
 import com.makeus.milliewillie.databinding.ActivityReportRecyclerItemBinding
@@ -13,7 +14,6 @@ import com.makeus.milliewillie.model.PatchReportsRequest
 import com.makeus.milliewillie.model.ReportInnerRecyclerItem
 import com.makeus.milliewillie.model.ReportRecyclerItem
 import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.report.adapter.ReportsAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY

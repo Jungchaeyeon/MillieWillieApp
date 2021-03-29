@@ -7,17 +7,16 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
-import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
+import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.calendar.DotDecorator
 import com.makeus.milliewillie.calendar.SelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
-import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
 import com.makeus.milliewillie.util.BasicTextFormat
@@ -291,7 +290,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
             }
             false -> { // 운동 시작 화면
                 ActivityNavigator.with(this).workoutStart().apply {
-                    putExtra(WorkoutFragment.ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
+                    putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
                     WorkoutFragment.isModifiedRoutine = true
                     start()
                 }

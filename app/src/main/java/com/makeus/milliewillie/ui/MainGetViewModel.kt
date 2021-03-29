@@ -65,7 +65,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
             vacTotalDays.value = mainResponse.vacationTotalDays.toString()
             nowPercentInt = dischargeDdayPercent(mainResponse.startDate,mainResponse.endDate).toInt()
             nowPercentStr =dischargeDdayPercent(mainResponse.startDate,mainResponse.endDate).toInt().toString()+"%"
-            nowPercentFlt = (nowPercentInt.toFloat()/100.0).plus(0.01).toFloat()
+            nowPercentFlt = (nowPercentInt.toFloat()/100.0).toFloat()
             addAllItem(mainResponse.plan)
             Log.e("$nowPercentFlt","nowPercentFlt")
             Log.e((nowPercentInt.toFloat()/10.0).toString(),"nowPercentt")

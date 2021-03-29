@@ -35,7 +35,9 @@ class InfoMiliActivity :
     fun onClickEdit(){
         ActivityNavigator.with(this).infoenlist().start()
     }
-
+    fun onClickBack(){
+        ActivityNavigator.with(this).main().start()
+    }
     override fun onResume() {
         super.onResume()
         //viewModel.getUsers()

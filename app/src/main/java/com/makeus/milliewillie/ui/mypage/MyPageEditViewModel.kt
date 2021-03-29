@@ -62,8 +62,9 @@ class MyPageEditViewModel(
         Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {
             count2++.toInt()
         }.subscribe {
+            if(usersResponse.normalPromotionStateIdx !=3){
             //퍼센트 계산
-            toNextPromPercent.postValue(nextPromPercent.toString()+it.toString()+"%")
+            toNextPromPercent.postValue("$nextPromPercent$it%")}
 
         }.disposeOnDestroy(this)
         Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {

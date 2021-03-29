@@ -60,7 +60,8 @@ class InfoEnlistActivity : BaseDataBindingActivity<ActivityInfoEnlistBinding>(R.
             Snackbar.make(this.layout_info,"날짜 정보를 확인해주세요.",Snackbar.LENGTH_SHORT).show()
         }
         else{
-        patchUsers()}
+        patchUsers()
+        }
     }
     fun patchUsers(){
         viewModel.patchUsers()
@@ -68,7 +69,7 @@ class InfoEnlistActivity : BaseDataBindingActivity<ActivityInfoEnlistBinding>(R.
             .subscribe({
                 if(it.isSuccess){
                     SampleToast.createToast(this,"일정 수정이 완료되었습니다.")?.show()
-                    finish()
+                    ActivityNavigator.with(this).infomili().start()
                 }
                 else{
                     "일정 수정실패".showShortToastSafe()

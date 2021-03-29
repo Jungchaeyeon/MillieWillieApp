@@ -63,12 +63,13 @@
             style="@style/spoqa_medium_14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
             android:gravity="start"
             android:paddingTop="22dp"
             android:background="@color/trans"
             android:hint="@string/write_plan"
             android:maxLines="20"
-            android:minHeight="200dp"
+            android:minHeight="220dp"
             android:paddingHorizontal="24dp"
             android:text="@={item.content}" />
 

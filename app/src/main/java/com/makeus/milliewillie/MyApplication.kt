@@ -41,6 +41,8 @@ class MyApplication : Application() {
         var userProfileImgUrl: String? = ""
         var userName: String = ""
 
+        var isLogout = false
+
     }
 
     enum class LOGINTYPE {

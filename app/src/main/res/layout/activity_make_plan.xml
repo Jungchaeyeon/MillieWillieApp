@@ -104,35 +104,45 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="62dp"
-                        android:layout_height="match_parent"
-                        android:onClick="@{()->vi.onClickColor()}"
-                        android:orientation="vertical"
-                        android:paddingVertical="23dp"
-                        android:paddingStart="26dp"
-                        android:paddingEnd="16dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="62dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:onClick="@{()->vi.onClickColor()}"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:paddingVertical="23dp"-->
+<!--                        android:paddingStart="26dp"-->
+<!--                        android:paddingEnd="16dp">-->
 
-                        <ImageView
-                            android:id="@+id/btn_color"
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
-                            android:background="@drawable/oval_30"
-                            android:backgroundTint="@color/periwinkle"
-                            android:padding="23dp" />
-                    </LinearLayout>
+<!--                        <ImageView-->
+<!--                            android:id="@+id/btn_color"-->
+<!--                            android:layout_width="14dp"-->
+<!--                            android:layout_height="14dp"-->
+<!--                            android:background="@drawable/oval_30"-->
+<!--                            android:backgroundTint="@color/periwinkle"-->
+<!--                            android:padding="23dp" />-->
+<!--                    </LinearLayout>-->
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="@string/title"
+                        android:textColor="@color/black_all"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/plan_title"
                         style="@style/spoqa_medium_14"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
                         android:layout_marginEnd="24dp"
                         android:background="@color/trans"
                         android:gravity="center_vertical"
                         android:ems="20"
                         android:hint="@string/plan_title"
                         android:paddingStart="10dp"
+                        android:textColor="@color/black_all"
                         android:singleLine="true" />
                 </LinearLayout>
 
@@ -427,6 +437,7 @@
                         android:backgroundTint="@color/non"
                         android:focusableInTouchMode="true"
                         android:hint="@string/todo_add"
+                        android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"

@@ -10,6 +10,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -31,18 +32,24 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
         Log.e(repositoryCached.getToken().toString(),"토큰유무")
 
-        if (repositoryCached.getToken().isNotEmpty()) {
+        if(!isLogout) {
+                //로그인 상태
+            if (repositoryCached.getToken().isNotEmpty()) {
                 //1단계 -> jwt 가지고 있니?
-            viewModel.firstCheckJmt() {
-                //2단계. 유효한 토큰?
-                if (it) {
-                    Log.e(it.toString(), "유효한 토큰-> 메인으로")
-                    ActivityNavigator.with(this).main().start()
-                } else {
-                    Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
+                viewModel.firstCheckJmt() {
+                    //2단계. 유효한 토큰?
+                    if (it) {
+                        Log.e(it.toString(), "유효한 토큰-> 메인으로")
+                        ActivityNavigator.with(this).main().start()
+                    } else {
+                        Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
+                    }
                 }
+            } else {
+
             }
-        } else {
+        }else{
+            //로그아웃 상태 -> isMember이고 회원으로 이동
 
         }
 
@@ -126,7 +133,6 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
 
     fun nextStep(isSuccess: Boolean) {
-        Log.e("두번거침")
         if (isSuccess) {
             Log.e("onRequestLoginWithGoogle2")
             Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")

@@ -45,15 +45,15 @@
 
 
 
-            <TextView
-                style="@style/spoqa_regular_12"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="@string/reset"
-                android:textColor="@color/black_all"
-                android:gravity="center"
-                android:layout_marginEnd="15dp"
-                android:onClick="@{()->vi.onClickToday()}"/>
+<!--            <TextView-->
+<!--                style="@style/spoqa_regular_12"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:text="@string/reset"-->
+<!--                android:textColor="@color/black_all"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginEnd="15dp"-->
+<!--                android:onClick="@{()->vi.onClickToday()}"/>-->
 
         </LinearLayout>
 
@@ -76,6 +76,7 @@
             android:background="@color/aqua_blue"
             android:gravity="center"
             android:orientation="horizontal"
+            android:onClick="@{()->vi.onClickBack()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

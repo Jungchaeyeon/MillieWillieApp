@@ -80,7 +80,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
     private fun initNavigation() {
         //bottom navi 기본 tint 설정 막음
-        navigation_view.itemIconTintList = null
+        binding.navigationView.itemIconTintList = null
 
     }
 

@@ -113,7 +113,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                     putExtra(REPORT_DATE_KEY, today)
                     start()
                 }
-
+                finish()
             }.disposeOnDestroy(this)
     }
 
@@ -202,6 +202,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
         isStart = !isStart
         when (isStart) {
             true -> {
+                binding.startBtnStart.text = getString(R.string.stop)
                 viewModel.liveDataTimeSec.postValue(sec)
                 viewModel.liveDataTimeMin.postValue(min)
                 viewModel.liveDataTimeHour.postValue(hour)
@@ -224,6 +225,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                 }
             }
             false -> {
+                binding.startBtnStart.text = getString(R.string.start)
                 hour = viewModel.liveDataTimeHour.value!!
                 min = viewModel.liveDataTimeMin.value!!
                 sec = viewModel.liveDataTimeSec.value!!
@@ -250,6 +252,10 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
             }, "start")
             .show(supportFragmentManager)
+    }
+
+    fun onClickBack() {
+        onBackPressed()
     }
 
 }

@@ -42,11 +42,15 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     private var routineId by Delegates.notNull<Long>()
     private var exerciseName = ""
     private var position by Delegates.notNull<Int>()
+    private var selectedListPosition by Delegates.notNull<Int>()
 
     private var detailType = ArrayList<Int>()
     private var detailTypeContext = ArrayList<String>()
+    private var detailTypePatchContext = ArrayList<String>()
     private var detailSetEqual = ArrayList<Boolean>()
     private var detailSet = ArrayList<Int>()
+
+    private var isPartOfEx: Boolean = false
 
     var repeatDays = ""
 
@@ -56,7 +60,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             routineId = intent.getLongExtra(ROUTINE_ID_KEY, 0)
         }
 
-        if (isModifiedRoutine) executeGetDetailsExercises()
+        if (isModifiedRoutine) {
+            Log.e("isModifiedRoutine = $isModifiedRoutine")
+            executeGetDetailsExercises()
+        }
 
     }
 
@@ -77,6 +84,28 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         everyDay.isSelected = true
 
         routineSelectedRecycler.run {
+            // 아이템 클릭 리스너
+            addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    val child = rv.findChildViewUnder(e.x, e.y)
+                    val position = child?.let { rv.getChildAdapterPosition(it) }
+                    if (e.action == MotionEvent.ACTION_MOVE) return false
+                    else if (e.action == MotionEvent.ACTION_UP) {
+                        Log.e("$position")
+                        if (position != null) {
+                            this@MakeRoutineActivity.selectedListPosition = position
+                            return false
+                        }
+                        return true
+                    }
+                    return false
+                }
+
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+            })
             adapter = BaseDataBindingRecyclerViewAdapter<RoutineSelectedRecyclerItem>()
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<RoutineSelectedRecyclerItem, RoutineWorkoutSelectedRecyclerItemBinding>(
@@ -170,7 +199,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 repeatDay = repeatDays,
                 detailName = detailNameList,
                 detailType = detailType,
-                detailTypeContext = detailTypeContext,
+                detailTypeContext = detailTypePatchContext,
                 detailSetEqual = detailSetEqual,
                 detailSet = detailSet
             ))
@@ -184,6 +213,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     Log.e("patchRoutine 호출 실패")
                     Log.e(it.message)
                 }
+                isModifiedRoutine = false
                 onBackPressed()
             }.disposeOnDestroy(this)
     }
@@ -201,7 +231,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     var resSetCount = 0
     var resIsSetSame = false
 
-    fun executeGetDetailsExercises() {
+    private fun executeGetDetailsExercises() {
         viewModel.apiRepository.getDetailsExercises(
             exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
             routineId = routineId
@@ -214,6 +244,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
                     routineName = it.result.get("routineName").asString
                     bodyPart = it.result.get("bodyPart").asString
+                    isPartOfEx = true
 
                     val repeatList = it.result.get("repeatDay").asJsonArray
                     for (i in 0 until repeatList.size()) repeatDay.add(repeatList[i].asInt)
@@ -268,31 +299,31 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
     }
 
-    fun initResult(idx: Int) {
+    private fun initResult(idx: Int) {
         when (detailType[idx]) {
             1 -> {
                 detailSet.add(detailResList[idx].setCount)
                 when (detailSetEqual[idx]) {
                     true -> {
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 1) detailTypeContext.add("${inner.weight}#${inner.count}")
-                            }
+                        detailResList[idx].setDetailList.forEach { inner ->
+                                if (detailResList[idx].exerciseType == 1) {
+                                    detailTypePatchContext.add("${inner.weight}#${inner.count}")
+                                    detailTypeContext.add("${inner.weight}#${inner.count}")
+                                }
                         }
                         Log.e(detailTypeContext.toString())
                     }
                     false -> {
                         var index = 0
                         var optionsText = ""
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 1) {
+                        detailResList[idx].setDetailList.forEach { inner ->
+                                if (detailResList[idx].exerciseType == 1) {
                                     optionsText += if (index == 0) "${inner.weight}#${inner.count}"
                                     else "/${inner.weight}#${inner.count}"
                                     index++
                                 }
-                            }
                         }
+                        detailTypePatchContext.add(optionsText)
                         detailTypeContext.add(optionsText)
                         Log.e(detailTypeContext.toString())
                     }
@@ -302,9 +333,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 detailSet.add(detailResList[idx].setCount)
                 when (detailSetEqual[idx]) {
                     true -> {
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 2) detailTypeContext.add("${inner.count}")
+                        detailResList[idx].setDetailList.forEach { inner ->
+                            if (detailResList[idx].exerciseType == 2) {
+                                detailTypePatchContext.add("${inner.count}")
+                                detailTypeContext.add("${inner.count}")
                             }
                         }
                         Log.e(detailTypeContext.toString())
@@ -312,15 +344,14 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     false -> {
                         var index = 0
                         var optionsText = ""
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 2) {
-                                    optionsText += if (index == 0) "${inner.count}"
-                                    else "/${inner.count}"
-                                    index++
-                                }
+                        detailResList[idx].setDetailList.forEach { inner ->
+                            if (detailResList[idx].exerciseType == 2) {
+                                optionsText += if (index == 0) "${inner.count}"
+                                else "/${inner.count}"
+                                index++
                             }
                         }
+                        detailTypePatchContext.add(optionsText)
                         detailTypeContext.add(optionsText)
                         Log.e(detailTypeContext.toString())
                     }
@@ -328,31 +359,42 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             }
             3 -> {
                 detailSet.add(detailResList[idx].setCount)
+                Log.e("detailSetEqual[idx] = ${detailSetEqual[idx]}")
                 when (detailSetEqual[idx]) {
                     true -> {
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 2) {
-                                    val timeText = decodeTime(inner.time)
-                                    detailTypeContext.add(timeText)
-                                }
+                        detailResList[idx].setDetailList.forEach { inner ->
+                            if (detailResList[idx].exerciseType == 3) {
+                                val timeText = decodeTime(inner.time)
+                                detailTypeContext.add(timeText)
+                                detailTypePatchContext.add((inner.time).toString())
+                                Log.e("time = ${inner.time}")
                             }
                         }
+                        Log.e("detailTypePatchContext = $detailTypePatchContext")
                         Log.e(detailTypeContext.toString())
                     }
                     false -> {
                         var index = 0
                         var optionsText = ""
-                        detailResList.forEach {
-                            it.setDetailList.forEach { inner ->
-                                if (it.exerciseType == 3) {
-                                    val timeText = decodeTime(inner.time)
-                                    optionsText += if (index == 0) timeText
-                                    else "/$timeText"
-                                    index++
+                        var timeSum = ""
+                        detailResList[idx].setDetailList.forEach { inner ->
+                            Log.e("$index time = ${inner.time}")
+                            if (detailResList[idx].exerciseType == 3) {
+                                val timeText = decodeTime(inner.time)
+                                if (index == 0) {
+                                    optionsText += timeText
+                                    timeSum += "${inner.time}"
+                                } else {
+                                    optionsText += "/$timeText"
+                                    timeSum += "/${inner.time}"
                                 }
+                                index++
                             }
+
                         }
+                        detailTypePatchContext.add(timeSum)
+                        Log.e("optionsText = $optionsText")
+                        Log.e("detailTypePatchContext = $detailTypePatchContext")
                         detailTypeContext.add(optionsText)
                         Log.e(detailTypeContext.toString())
                     }
@@ -362,9 +404,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         }
     }
 
-    private var m = 0
-    private var h = 0
-    private var s = 0
+
     fun modifiedViewDataBinding() {
         everyDay.isSelected = false
         binding.routineEditRoutineName.setText(routineName)
@@ -418,7 +458,9 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
     }
 
-
+    private var m = 0
+    private var h = 0
+    private var s = 0
     private fun decodeTime(sec: Int): String {
         var timeText = ""
 
@@ -433,6 +475,21 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         if (s != 0) timeText += "${s}초 "
 
         return timeText
+    }
+
+    private fun incodeTime(detailTypeContext: ArrayList<String>): Int {
+        var timeSum = 0
+        for (i in 0 until detailTypeContext.size) {
+            if (detailTypeContext[i] == "시") {
+                timeSum += (detailTypeContext[i-1] + detailTypeContext[i-2]).toInt() * 3600
+            } else if (detailTypeContext[i] == "분") {
+                timeSum += (detailTypeContext[i-1] + detailTypeContext[i-2]).toInt() * 60
+            } else if (detailTypeContext[i] == "초") {
+                timeSum += (detailTypeContext[i-1] + detailTypeContext[i-2]).toInt()
+            }
+        }
+        Log.e("timeSum = $timeSum")
+        return timeSum
     }
 
     fun onClickExItem() {
@@ -458,6 +515,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 }
                 for (i in 0 until detailTypeList.size) {
                     detailType.add(detailTypeList[i])
+                    detailTypePatchContext.add(detailTypeContextList[i])
                     detailTypeContext.add(detailTypeContextList[i])
                     detailSetEqual.add(detailSetEqualList[i])
                     detailSet.add(detailSetList[i])
@@ -470,13 +528,17 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
 
     fun onClickSetPartOfEx() {
-        ExPartSelectBottomSheetFragment.getInstance()
-            .setOnClickOk {
-                viewModel.liveDatePartOfEx.postValue(it)
-                val textSet = String.format(getString(R.string.part_of_ex_title, it))
-                viewModel.liveDataPartOfExTitle.postValue(textSet)
-                viewModel.createExItem(it)
-            }.show(supportFragmentManager)
+        if (!isPartOfEx) {
+            ExPartSelectBottomSheetFragment.getInstance()
+                .setOnClickOk {
+                    viewModel.liveDatePartOfEx.postValue(it)
+                    val textSet = String.format(getString(R.string.part_of_ex_title, it))
+                    viewModel.liveDataPartOfExTitle.postValue(textSet)
+                    viewModel.createExItem(it)
+                    isPartOfEx = true
+                }.show(supportFragmentManager)
+        }
+
 
     }
 
@@ -559,6 +621,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
 
     fun getRepeatDays() {
+        repeatDays = ""
         val textList = arrayListOf<View>(everyDay, monday, tuesday, wendesday, thursday, friday, saturday, sunday)
         var idx = 0
         for (i in 0 until textList.size) {
@@ -609,12 +672,17 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
         }
     }
 
+    fun onClickRemoveItem() {
+        viewModel.removeSelectedItem(selectedListPosition)
+    }
+
     fun onClickOk() {
         getRepeatDays()
+        Log.e("isModifiedRoutine in onClick = $isModifiedRoutine")
         when (isModifiedRoutine) {
             true -> {
                 executePatchRoutine()
-                isModifiedRoutine = false
+
             }
             false -> {
                 executePostRoutine()

@@ -8,6 +8,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.profile.ProfileActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
-                android:text="name"
+                android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />
 
@@ -98,7 +101,7 @@
                 android:visibility="visible"
                 android:textSize="12sp"
                 android:textColor="@color/black_all"
-                android:text="0000. 00. 00"/>
+                android:text="@{vm.liveDataUserBirth}"/>
 
 
         </LinearLayout>

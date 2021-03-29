@@ -8,6 +8,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.profile.EditProfileFragment" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,21 +78,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_img_user_image">
 
-                <TextView
-                    android:id="@+id/user_text_user_name"
+                <EditText
+                    android:id="@+id/user_edit_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/spoqa_han_sans_neo_medium"
                     android:includeFontPadding="false"
-                    android:text="name"
+                    android:backgroundTint="@color/non"
+                    android:textCursorDrawable="@color/maincolor_blue"
+                    android:paddingVertical="0dp"
+                    android:text="@{vm.liveDataUserName}"
                     android:textColor="@color/black_all"
                     android:textSize="18sp" />
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="2dp"
-                    android:layout_toEndOf="@+id/user_text_user_name"
+                    android:layout_toEndOf="@+id/user_edit_user_name"
                     android:src="@drawable/icon_edit" />
 
             </RelativeLayout>
@@ -100,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
+                android:onClick="@{()-> vi.onClickBirthday()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_layout_user_name">
@@ -110,7 +118,7 @@
                     android:layout_gravity="center_vertical"
                     android:textSize="12sp"
                     android:textColor="@color/black_all"
-                    android:text="0000. 00. 00"/>
+                    android:text="@{vm.liveDataUserBirth}"/>
 
                 <ImageView
                     android:layout_width="20dp"

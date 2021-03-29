@@ -14,6 +14,7 @@ import com.makeus.milliewillie.model.ReportInnerRecyclerItem
 import com.makeus.milliewillie.model.ReportRecyclerItem
 import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.report.adapter.ReportsAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
@@ -103,7 +104,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
                         Log.e("doneSet = $doneSet")
 
                         for (i in 0 until lastSetIndex) {
-                            if (doneSet >= i) innerList.add(ReportInnerRecyclerItem(circle = R.drawable.one_small_blu))
+                            if (doneSet > i) innerList.add(ReportInnerRecyclerItem(circle = R.drawable.one_small_blu))
                             else innerList.add(ReportInnerRecyclerItem(circle = R.drawable.one_small_grey))
                         }
                         Log.e("innerList = $innerList")
@@ -218,7 +219,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
     }
 
     fun onClickBack() {
-        onBackPressed()
+        isModifiedRoutine = false
         onBackPressed()
     }
 

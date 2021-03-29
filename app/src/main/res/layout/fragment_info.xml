@@ -64,7 +64,7 @@
                 android:layout_toEndOf="@+id/info_img_profile"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
-                android:text="name"
+                android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />
 

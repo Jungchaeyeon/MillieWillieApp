@@ -83,7 +83,7 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             }
             else -> {
                 DatePickerDdayBottomSheetDialogFragment.getInstance()
-                    .setOnClickOk {date, gapDay, year, month ->
+                    .setOnClickOk {date, dotDate, gapDay, year, month ->
                         viewModel.liveDataDayGap.postValue(gapDay)
                         viewModel.liveDataDdayDate.postValue(date)
                     }.show(supportFragmentManager)

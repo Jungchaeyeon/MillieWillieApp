@@ -35,20 +35,29 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:layout_marginTop="15dp"
             android:text="@{item.routineName}"
             android:textColor="@color/text_gray"
-            app:layout_constraintEnd_toStartOf="@+id/imageView8"
             app:layout_constraintStart_toEndOf="@+id/selected_index"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="2dp"
+            android:onClick="@{()-> vi.onClickRemoveItem()}"
+            android:src="@drawable/icon_small_delete"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:visibility="invisible"
             android:src="@drawable/icon_edit_posi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

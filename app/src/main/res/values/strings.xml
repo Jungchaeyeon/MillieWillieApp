@@ -154,6 +154,7 @@
     <string name="reports_delete">리포트 삭제하기</string>
     <string name="toast_delete">삭제되었습니다.</string>
     <string name="toast_patch">수정되었습니다.</string>
+    <string name="toast_must_input_name">이름은 필수로 입력해야 합니다.</string>
 
     <string name="no_data_info">정보없음</string>
     <string name="middle_dot">·</string>
@@ -161,6 +162,7 @@
     <string name="workout_non_item2">추가하기 버튼을 눌러 추가해 보세요!</string>
     <string name="startMW">밀리윌리 시작하기</string>
     <string name="start">시작</string>
+    <string name="stop">정지</string>
     <string name="workout_done">운동 끝내기</string>
     <string name="workout_start">운동 시작하기</string>
     <string name="workout_start_question">운동을 시작하시겠습니까?</string>

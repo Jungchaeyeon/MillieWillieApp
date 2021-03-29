@@ -225,7 +225,7 @@ class WeightRecordActivity :
     // 일자 없앤 데이트피커로 새로 만들어서 변경 예정
     fun onClickSetDate() {
         DatePickerDdayBottomSheetDialogFragment.getInstance()
-            .setOnClickOk {date, gapDay, year, month ->
+            .setOnClickOk {date, dotDate, gapDay, year, month ->
                 viewModel.yearAndMonth.postValue("${year}년 ${month}월")
                 executeGetWeightRecord(month = month.toInt(), year = year.toInt())
 //                viewModel.liveDataWeightPerDay.observe(this, androidx.lifecycle.Observer { viewModel.defaultWeightPerDay() })

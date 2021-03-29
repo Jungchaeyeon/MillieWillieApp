@@ -45,6 +45,7 @@ class ApiRepository(
     fun getDetailsExercises(exerciseId: Long, routineId: Long) = apiTest.getDetailsExercises(exerciseId = exerciseId, routineId = routineId)
     fun getStartExercises(exerciseId: Long, routineId: Long) = apiTest.getStartExercises(exerciseId = exerciseId, routineId = routineId)
     fun getReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.getReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
+    fun getUsers() = apiTest.getUsers()
 
     fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
@@ -55,6 +56,7 @@ class ApiRepository(
     fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
     fun patchReports(exerciseId: Long, routineId: Long, body: PatchReportsRequest) = apiTest.patchReports(exerciseId = exerciseId, routineId = routineId, body = body)
+    fun patchUsers(body: PatchUsersRequest) = apiTest.patchUsers(body = body)
 
     fun deleteRoutine(exerciseId: Long, routineId: Long) = apiTest.deleteRoutine(exerciseId = exerciseId, routineId = routineId)
     fun deleteUsers() = apiTest.deleteUsers()

@@ -86,6 +86,9 @@ interface Api {
                    @Path("routineId") routineId: Long,
                    @Query("reportDate") reportDate: String): Observable<GetReportsResponse>
 
+    @GET("users")
+    fun getUsers(): Observable<GetUsersResponse>
+
     @PATCH("exercises/{exerciseId}/routines/{routineId}")
     fun patchRoutine(@Path("exerciseId") exerciseId: Long,
                      @Path("routineId") routineId: Long,
@@ -103,6 +106,9 @@ interface Api {
     fun patchReports(@Path("exerciseId") exerciseId: Long,
                      @Path("routineId") routineId: Long,
                      @Body body: PatchReportsRequest): Observable<PatchRoutine>
+
+    @PATCH("users")
+    fun patchUsers(@Body body: PatchUsersRequest): Observable<PatchUsersResponse>
 
     @DELETE("exercises/{exerciseId}/routines/{routineId}")
     fun deleteRoutine(@Path("exerciseId") exerciseId: Long,

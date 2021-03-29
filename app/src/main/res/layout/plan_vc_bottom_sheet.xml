@@ -266,7 +266,7 @@ p
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/background_google_login"
-            android:backgroundTint="@color/main_col_blu"
+            android:backgroundTint="@color/maincolor_blue"
             android:onClick="@{()->vi.onClickOk()}"
             android:text="@string/ok"
             android:textColor="@color/white"

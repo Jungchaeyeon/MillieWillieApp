@@ -17,6 +17,7 @@
     <color name="text_gray">#9d9d9d</color>
     <color name="e_white">#eeeeee</color>
     <color name="white_two">#fafafa</color>
+    <color name="white_background">#f5f5f5  </color>
     <color name="bright_yellow">#fff900</color>
     <color name="pink">#ff91bc</color>
     <color name="light_greenish_blue">#5df2ad</color>
@@ -32,7 +33,7 @@
     <color name="icon_gray">#bbbbbb</color>
     <color name="blue_green">#10747d</color>
     <color name="blue_green2">#148c96</color>
-    <color name="blue_green_less">#50148c96</color>
+    <color name="blue_green_less">#30148c96</color>
     <color name="blue_green_zero">#00148c96</color>
     <color name="red">#F06161</color>
 

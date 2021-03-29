@@ -9,6 +9,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
@@ -27,7 +28,7 @@ import kotlin.math.abs
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    val viewModel by viewModel<MainGetViewModel>()
+   // val viewModel by viewModel<MainGetViewModel>()
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation
@@ -39,7 +40,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
 
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-        viewModel.bindLifecycle(this@MainActivity)
+       // viewModel.bindLifecycle(this@MainActivity)
 
        // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
@@ -116,8 +117,9 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 anim()
             }
             R.id.fab_dday -> {
-                anim()
-                ActivityNavigator.with(this).dDay().start()
+                getString(R.string.toast_update_later).showShortToastSafe()
+//                anim()
+//                ActivityNavigator.with(this).dDay().start()
             }
             R.id.fab_plan -> {
                 fab_dday.run {

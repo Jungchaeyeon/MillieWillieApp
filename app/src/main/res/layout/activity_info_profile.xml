@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
 
     <data>
-
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.profile.ProfileActivity" />
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <RelativeLayout
             android:id="@+id/relativeLayout14"
             android:layout_width="match_parent"
@@ -21,6 +27,7 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
+                android:onClick="@{()-> vi.onClickBack()}"
                 android:src="@drawable/vic_icon_delete" />
 
             <TextView
@@ -39,7 +46,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="7dp"
                 android:gravity="center"
-                android:text="@string/complete"
+                android:onClick="@{()-> vi.onClickEdit()}"
+                android:text="@string/edit"
                 android:textColor="@color/black_all"
                 android:textSize="12sp" />
 
@@ -50,7 +58,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/graphic_profile_big_with_camera"
+            android:src="@drawable/graphic_profile_big"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout14" />
@@ -70,16 +78,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
-                android:text="name"
+                android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="2dp"
-                android:layout_toEndOf="@+id/user_text_user_name"
-                android:src="@drawable/icon_edit" />
 
         </RelativeLayout>
 
@@ -97,17 +98,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:visibility="visible"
                 android:textSize="12sp"
                 android:textColor="@color/black_all"
-                android:text="0000. 00. 00"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_semo_small" />
+                android:text="@{vm.liveDataUserBirth}"/>
 
 
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/profile_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

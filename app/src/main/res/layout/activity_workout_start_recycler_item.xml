@@ -45,13 +45,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/start_item_recycler"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:layout_below="@+id/start_item_text_ex_info"
-            android:orientation="horizontal"
-            replaceAll="@{vm.liveDataCircleItemList}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            replaceAll="@{item.circleList}"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
     </RelativeLayout>
 </layout>

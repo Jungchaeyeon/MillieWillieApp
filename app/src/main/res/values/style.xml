@@ -103,6 +103,9 @@
         <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
     </style>
 
+    <style name="NumberPickerDividerCustom" parent="AppTheme">
+        <item name="colorControlNormal">@color/icon_gray</item>
+    </style>
 
     <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
@@ -135,6 +138,14 @@
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:paddingTop">16dp</item>
+    </style>
+    <style name="BottomLayout2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/rect_radius_top</item>
+        <item name="android:backgroundTint">#ffffff</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
     </style>
     <style name="MapBottomLayout">
         <item name="android:layout_width">match_parent</item>

@@ -1,7 +1,6 @@
 package com.makeus.milliewillie.ui.login
 
 import android.content.Intent
-import com.bumptech.glide.util.Util
 import com.kakao.sdk.common.util.Utility
 import android.os.Build
 import android.os.Bundle
@@ -11,14 +10,10 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
-import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
-import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.common.BasicBottomSheetDialogFragment
-import com.makeus.milliewillie.ui.common.BasicDialogFragment
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
@@ -72,7 +67,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
-            loginType = MyApplication.LOGINTYPE.GOOGLE
+//            loginType = MyApplication.LOGINTYPE.GOOGLE
             viewModel.getFcmToken {
                 deviceToken = it
                 Log.e("deviceToken : ${deviceToken}")

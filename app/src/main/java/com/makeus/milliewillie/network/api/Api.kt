@@ -82,10 +82,11 @@ interface Api {
     @PATCH("users/vacations/{vacationId}")
     fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
 
-
+    @GET("users")
+    fun getUsers(): Observable<GetUsersResponse>
     //회원정보
     @GET("users")
-    fun getUsers(): Observable<UsersResponse>
+    fun getUsersRes(): Observable<UsersResponse>
 
     @PATCH("users")
     fun patchUsers(
@@ -119,8 +120,6 @@ interface Api {
     ): Observable<Schedule>
 
 
-
-
     @POST("exercises/first-weights")
     fun postFirstWeight(@Body body: FirstWeightRequest): Observable<FirstWeight>
 
@@ -131,6 +130,11 @@ interface Api {
     @POST("exercises/{exerciseId}/routines")
     fun postRoutine(@Body body: PostRoutineRequest,
                     @Path("exerciseId") exerciseId: Long): Observable<PostRoutine>
+
+    @POST("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun postReports(@Path("exerciseId") exerciseId: Long,
+                    @Path("routineId") routineId: Long,
+                    @Body body: PostReportsRequest): Observable<PostReportsResponse>
 
     @GET("exercises/{exerciseId}/daily-weights")
     fun getDailyWeight(@Path("exerciseId") exerciseId: Long): Observable<GetDailyWeight>
@@ -147,6 +151,29 @@ interface Api {
     fun getRoutines(@Path("exerciseId") exerciseId: Long,
                     @Query("targetDate") targetDate: String): Observable<Routines>
 
+    @GET("exercises/{exerciseId}/reports")
+    fun getCalendarReports(@Path("exerciseId") exerciseId: Long,
+                           @Query("viewYear") viewYear: Int,
+                           @Query("viewMonth") viewMonth: Int):Observable<ReportsResponse>
+
+    @GET("exercises/{exerciseId}/routines/{routineId}/detail-exercises")
+    fun getDetailsExercises(@Path("exerciseId") exerciseId: Long,
+                            @Path("routineId") routineId: Long): Observable<DetailsExercisesResponse>
+
+    @GET("exercises/{exerciseId}/routines/{routineId}/start-exercises")
+    fun getStartExercises(@Path("exerciseId") exerciseId: Long,
+                          @Path("routineId") routineId: Long): Observable<StartExercisesResponse>
+    @GET("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun getReports(@Path("exerciseId") exerciseId: Long,
+                   @Path("routineId") routineId: Long,
+                   @Query("reportDate") reportDate: String): Observable<GetReportsResponse>
+
+
+    @PATCH("exercises/{exerciseId}/routines/{routineId}")
+    fun patchRoutine(@Path("exerciseId") exerciseId: Long,
+                     @Path("routineId") routineId: Long,
+                     @Body body: PostRoutineRequest): Observable<PatchRoutine>
+
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,
                         @Body body: PatchGoalWeightRequest): Observable<ResultResponse>
@@ -155,8 +182,24 @@ interface Api {
     fun patchTodayWeight(@Path("exerciseId") exerciseId: Long,
                         @Body body: PatchTodayWeightRequest): Observable<ResultResponse>
 
-    @DELETE("exercises/{exerciseId}/routines/{routineId}")
-    fun deleteRoutine(@Path("exerciseId") exerciseId: Long): Observable<ResultResponse>
+    @PATCH("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun patchReports(@Path("exerciseId") exerciseId: Long,
+                     @Path("routineId") routineId: Long,
+                     @Body body: PatchReportsRequest): Observable<PatchRoutine>
 
+    @PATCH("users")
+    fun patchUsers(@Body body: PatchUsersRequest): Observable<PatchUsersResponse>
+
+    @DELETE("exercises/{exerciseId}/routines/{routineId}")
+    fun deleteRoutine(@Path("exerciseId") exerciseId: Long,
+                      @Path("routineId") routineId: Long): Observable<ResultResponse>
+
+    @DELETE("users")
+    fun deleteUsers(): Observable<BaseResponse>
+
+    @DELETE("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun deleteReports(@Path("exerciseId") exerciseId: Long,
+                      @Path("routineId") routineId: Long,
+                      @Query("reportDate") reportDate: String): Observable<PatchRoutine>
 
 }

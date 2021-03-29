@@ -10,6 +10,7 @@ import com.makeus.milliewillie.ui.holiday.HoliViewModel
 import com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel
 import com.makeus.milliewillie.ui.home.tab3.EmoViewModel
 import com.makeus.milliewillie.ui.home.tab4.InfoViewModel
+import com.makeus.milliewillie.ui.info.AccountViewModel
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import com.makeus.milliewillie.ui.intro.WelcomeViewModel
 import com.makeus.milliewillie.ui.login.LoginViewModel
@@ -19,6 +20,8 @@ import com.makeus.milliewillie.ui.plan.MakePlanViewModel
 import com.makeus.milliewillie.ui.plan.PlanOutputViewModel
 import com.makeus.milliewillie.ui.routine.ExerciseSetViewModel
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel
+import com.makeus.milliewillie.ui.profile.ProfileViewModel
+import com.makeus.milliewillie.ui.report.ReportViewModel
 import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordViewModel
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel
@@ -41,11 +44,14 @@ val viewModelModule = module {
     viewModel { MainGetViewModel(get(),get()) }
     viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel(get()) }
-    viewModel { WorkoutStartViewModel() }
-    viewModel { InfoViewModel() }
+    viewModel { WorkoutStartViewModel(get()) }
+    viewModel { InfoViewModel(get()) }
     viewModel { WeightRecordViewModel(get()) }
     viewModel { EmoViewModel(get(),get()) }
     viewModel { HoliViewModel(get(),get()) }
     viewModel {MyPageEditViewModel(get(),get())}
     viewModel { PlanOutputViewModel(get(),get()) }
+    viewModel { ReportViewModel(get()) }
+    viewModel { AccountViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
 }

@@ -177,6 +177,17 @@ class MakeRoutineViewModel(val apiRepository: ApiRepository): BaseViewModel() {
         defaultSelectedItemList()
     }
 
+    fun removeSelectedItem(position: Int) {
+        var index = 1
+
+        _selectedItemList.removeAt(position)
+        for (i in 0 until _selectedItemList.size) {
+            _selectedItemList[i].index = "${index++}"
+            Log.e("item = $_selectedItemList")
+        }
+        defaultSelectedItemList()
+    }
+
 
 
 

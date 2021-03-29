@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <queries>
         <package android:name="com.kakao.talk" />
@@ -13,9 +14,9 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_mw"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_mw_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
@@ -66,18 +67,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.plan.MakePlanActivity">
-
-        </activity>
-        <activity
-            android:name=".ui.intro.IntroSettingNameActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.intro.IntroServiceTypeActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ui.mypage.InfoMiliActivity" />
+
+        <activity android:name=".ui.plan.MakePlanActivity"/>
+        <activity
+            android:name=".ui.intro.IntroSettingNameActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+
         <activity android:name=".ui.dDay.DdayActivity" />
         <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.routine.MakeRoutineActivity" />
@@ -88,6 +90,12 @@
         <activity android:name=".ui.workoutStart.WorkoutStartActivity" />
         <activity android:name=".ui.todayWorkout.TodayWorkoutActivity" />
         <activity android:name=".ui.weightRecord.WeightRecordActivity" />
+
+        <activity android:name=".ui.report.ReportActivity"/>
+        <activity android:name=".ui.profile.ProfileActivity"/>
+        <activity android:name=".ui.info.AccountActivity"/>
+        <activity android:name=".ui.info.RuleWebViewActivity"/>
+
     </application>
 
 </manifest>

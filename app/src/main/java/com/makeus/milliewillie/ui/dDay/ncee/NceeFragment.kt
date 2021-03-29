@@ -47,7 +47,7 @@ class NceeFragment: BaseDataBindingFragment<FragmentDDayNceeBinding>(R.layout.fr
     fun onClickDdayDate() {
         fragmentManager?.let {
             DatePickerDdayBottomSheetDialogFragment.getInstance()
-                .setOnClickOk {date, gapDay, year, month ->
+                .setOnClickOk {date, dotDate, gapDay, year, month ->
                     viewModel.liveDataToday.postValue(date)
                     viewModel.liveDataTodayInfo.postValue(gapDay)
                 }.show(it)

@@ -13,7 +13,7 @@ class AddExerciseBottomSheetFragment :
     private var clickOk: ((String) -> Unit)? = null
 
     companion object {
-        fun getInstance() = WeightAddRecordBottomSheetFragment()
+        fun getInstance() = AddExerciseBottomSheetFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

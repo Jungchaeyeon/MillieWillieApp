@@ -203,7 +203,7 @@ class MyPageEditViewModel(
 
     }
 
-    fun getUsers() = apiRepository.getUsers()
+    fun getUsers() = apiRepository.getUsersRes()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
             Log.e("User정보 호출 성공")

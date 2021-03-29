@@ -8,20 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutFeedBinding
+import com.makeus.milliewillie.databinding.WorkoutFeedRoutineRecyclerItemBinding
 import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import okhttp3.internal.notify
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeedBinding>(R.layout.fragment_today_workout_feed) {
+
+    companion object {
+        const val ROUTINE_ID_KEY = "ROUTINE_ID_KEY"
+    }
 
     private val viewModel by viewModel<TodayWorkoutViewModel>()
 
@@ -32,11 +40,16 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
     var liveDataItemImg = R.drawable.icon_arrow_gotodeep
     val allRoutineArray = ArrayList<MyRoutineInfo>()
 
+    override fun onResume() {
+        super.onResume()
+        // 모든 routine 호출
+        executeGetAllRoutines()
+    }
+
     override fun FragmentTodayWorkoutFeedBinding.onBind() {
         vi = this@TodayWorkoutFeedFragment
         vm = viewModel
 
-        executeGetAllRoutines()
 
         binding.todayFeedImgGotoBack.setOnClickListener {
             (activity as TodayWorkoutActivity).onClickViewChange(1)
@@ -72,7 +85,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
             })
             adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(R.layout.workout_routine_recycler_item){
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutFeedRoutineRecyclerItemBinding>(R.layout.workout_feed_routine_recycler_item){
                         viFeed = this@TodayWorkoutFeedFragment
                         item = it
                     }
@@ -82,7 +95,8 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
 
     }
 
-    fun executeGetAllRoutines() {
+    private fun executeGetAllRoutines() {
+        allRoutineArray.clear()
         viewModel.apiRepository.getAllRoutines(
             SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong()
         )
@@ -102,6 +116,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
                             )
                         )
                     }
+                    Log.e(allRoutineArray.toString())
                     viewModel.createRoutineItem(allRoutineArray)
                 } else {
                     Log.e("getAllRoutines 호출 실패")
@@ -132,21 +147,30 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
     fun onClickImage(status: Int) {
         when (status) {
             1 -> { // 루틴 수정 페이지
+                if (!isEdit) {
+                    ActivityNavigator.with(this).routine().apply {
+                        putExtra(ROUTINE_ID_KEY, allRoutineArray[position].routineId)
+                        isModifiedRoutine = true
+                        start()
+                    }
 
+                }
             }
             2 -> { // 루틴 삭제 API
-                viewModel.apiRepository.deleteRoutine(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
-                        if (it.isSuccess) {
-                            Log.e("deleteRoutine 호출 성공")
+                if (isEdit) {
+                    viewModel.apiRepository.deleteRoutine(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), allRoutineArray[position].routineId  )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            if (it.isSuccess) {
+                                Log.e("deleteRoutine 호출 성공")
 
-                            viewModel.removeRoutineItem(position)
-                        } else {
-                            Log.e("deleteRoutine 호출 실패")
-                            Log.e(it.message)
-                        }
-                    }.disposeOnDestroy(this)
+                                viewModel.removeRoutineItem(position)
+                            } else {
+                                Log.e("deleteRoutine 호출 실패")
+                                Log.e(it.message)
+                            }
+                        }.disposeOnDestroy(this)
+                }
             }
         }
     }

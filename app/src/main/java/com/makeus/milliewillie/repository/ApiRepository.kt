@@ -43,7 +43,7 @@ class ApiRepository(
     }
 
     fun jwt() = apiTest.jwt().doOnNext {}
-    fun getUsers() = apiTest.getUsers()
+    fun getUsersRes() = apiTest.getUsersRes()
     fun patchUsers(usersPatch : UsersPatch) = apiTest.patchUsers(usersPatch)
     fun users(usersRequest : UsersRequest) = apiTest.users(usersRequest).observeOn(AndroidSchedulers.mainThread())
     fun patchVacationId(vacationIdRequest: VacationIdPatch, path: Long) = apiTest.patchVacationId(vacationIdRequest,path).observeOn(AndroidSchedulers.mainThread())
@@ -57,17 +57,33 @@ class ApiRepository(
 
 
     //fun users(name : String) = apiTest.users(name)
-    fun schedule(body: ScheduleRequest) = apiTest.schedule(body)
+
+
     fun getDailyWeight(path: Long) = apiTest.getDailyWeight(path)
     fun getWeightRecord(path: Long, viewMonth:Int, viewYear: Int) = apiTest.getWeightRecord(exerciseId =  path, viewMonth = viewMonth, viewYear = viewYear)
     fun getAllRoutines(path: Long) = apiTest.getAllRoutines(exerciseId = path)
     fun getRoutines(path: Long, targetDate: String) = apiTest.getRoutines(exerciseId = path, targetDate = targetDate)
+    fun getCalendarReports(path: Long, viewYear: Int, viewMonth: Int) = apiTest.getCalendarReports(exerciseId = path, viewYear = viewYear, viewMonth = viewMonth)
+    fun getDetailsExercises(exerciseId: Long, routineId: Long) = apiTest.getDetailsExercises(exerciseId = exerciseId, routineId = routineId)
+    fun getStartExercises(exerciseId: Long, routineId: Long) = apiTest.getStartExercises(exerciseId = exerciseId, routineId = routineId)
+    fun getReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.getReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
+    fun getUsers() = apiTest.getUsers()
+
+    fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
     fun postRoutine(body: PostRoutineRequest, path: Long) = apiTest.postRoutine(body = body, exerciseId = path)
+
+    fun patchRoutine(exerciseId: Long, routineId: Long, body: PostRoutineRequest) = apiTest.patchRoutine(exerciseId = exerciseId, routineId = routineId, body = body)
     fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
-    fun deleteRoutine(path: Long) = apiTest.deleteRoutine(exerciseId = path)
+    fun patchReports(exerciseId: Long, routineId: Long, body: PatchReportsRequest) = apiTest.patchReports(exerciseId = exerciseId, routineId = routineId, body = body)
+    fun patchUsers(body: PatchUsersRequest) = apiTest.patchUsers(body = body)
+
+    fun deleteRoutine(exerciseId: Long, routineId: Long) = apiTest.deleteRoutine(exerciseId = exerciseId, routineId = routineId)
+    fun deleteUsers() = apiTest.deleteUsers()
+    fun deleteReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.deleteReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
+
     fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
     }.observeOn(AndroidSchedulers.mainThread())
     //회원가입

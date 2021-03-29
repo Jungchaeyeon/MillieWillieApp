@@ -101,7 +101,7 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         repositoryCached.setValue(LocalKey.ALLDDAY,nowPercentInt)
     }
 
-    fun getUsers() = apiRepository.getUsers()
+    fun getUsers() = apiRepository.getUsersRes()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe ({
             Log.e("User정보 호출 성공")

@@ -187,7 +187,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/rebs_btn_minus"
                     android:background="@drawable/icon_plus"
-                    android:onClick="@{()-> vm.increaseSetCount()}" />
+                    android:onClick="@{(view)-> vi.onClickAddItem(view)}"  />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/rebs_btn_minus"
@@ -196,7 +196,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/icon_minus"
-                    android:onClick="@{()-> vm.decreaseSetCount()}" />
+                    android:onClick="@{(view)-> vi.onClickAddItem(view)}"  />
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,13 +22,15 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 
 class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    val viewModel by sharedViewModel<MainGetViewModel>()
+    val viewModel by viewModel<MainGetViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val classImg: Int = 0
     var dDay = ""

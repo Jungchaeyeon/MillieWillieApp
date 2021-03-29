@@ -4,13 +4,13 @@ import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutAddWeightInputBottomSheetBinding
-import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import java.util.*
 
 class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<FragmentWorkoutAddWeightInputBottomSheetBinding>(
     R.layout.fragment_workout_add_weight_input_bottom_sheet) {
 
-    var currnet = ""
+    private var current = ""
 
     private var clickOk: ((String) -> Unit)? = null
 
@@ -36,13 +36,23 @@ class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fra
     }
 
     fun onClickOk() {
-        if (currnet.isEmpty()){
-            currnet = "0"
+
+//        if (currnet.isEmpty()){
+//            currnet = "0"
+//        }
+//
+//        currnet = binding.recordEditCurrent.text.toString()
+//        clickOk?.invoke(currnet)
+
+        current = binding.recordEditCurrent.text.toString()
+        if (current.isBlank()) {
+            getString(R.string.toast_weight_record).showShortToastSafe()
+        } else {
+            getString(R.string.toast_weight_record_per_today).showShortToastSafe()
+            clickOk?.invoke(current)
+            dismiss()
         }
 
-        currnet = binding.recordEditCurrent.text.toString()
-        clickOk?.invoke(currnet)
-        dismiss()
     }
 
     fun onClickCancel(){

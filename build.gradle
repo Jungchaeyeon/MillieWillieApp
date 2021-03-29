@@ -6,7 +6,7 @@ buildscript {
         versionName = "0.0.1"
 
         kotlinVersion = '1.4.21'
-        gradleVersion = '4.1.1'
+        gradleVersion = '4.1.2'
         googleServicesVersion = '4.0.0'
 
         compileSdkVersion = 30
@@ -29,11 +29,11 @@ buildscript {
 
         glideVersion = '4.11.0'
 
-        firebaseBom = '25.12.0'
+        firebaseBom = '26.6.0'
         firebaseMessageVersion = '21.0.1'
         firebaseCoreVersion = '18.0.0'
         firebaseAnalyticsVersion = '17.5.0'
-        firebaseAuthVersion = '20.0.1'
+        firebaseAuthVersion = '20.0.3'
         firebasePlayServiceAuthVersion = '19.0.0'
         firebaseCrashlytics = '17.1.1'
 
@@ -82,7 +82,7 @@ buildscript {
 
         //Stage
         appNameStage = "MakeUs-Stage"
-        apiUrlStage = "\"https://shine94.kr/app/\""
+        apiUrlStage = "\"https://www.miliwili.shop/app/\""
         kakaoAppKeyStage = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyStage = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersStage = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]
@@ -103,7 +103,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "com.google.gms:google-services:4.3.5"
         classpath "com.google.firebase:firebase-crashlytics-gradle:$crashlyticsVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

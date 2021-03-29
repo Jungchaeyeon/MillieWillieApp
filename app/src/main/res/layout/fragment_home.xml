@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainViewModel" />
+            type="com.makeus.milliewillie.ui.MainGetViewModel" />
     </data>
 
     <RelativeLayout

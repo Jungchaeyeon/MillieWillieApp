@@ -11,7 +11,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainViewModel" />
+            type="com.makeus.milliewillie.ui.MainGetViewModel" />
 
         <variable
             name="item"
@@ -53,6 +53,7 @@
 <!--                    android:text="@{vm.usersResponse.name.toString()}"-->
 
                 <TextView
+                    android:text="@{vm.liveName}"
                     style="@style/spoqa_medium_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,8 +61,7 @@
                     android:layout_marginStart="5dp"
                     android:includeFontPadding="false"
                     android:textColor="@color/black_all"
-                    android:textSize="18sp"
-                    tools:text="@{vm.usersResponse.name}" />
+                    android:textSize="18sp"/>
 
                 <View
                     android:layout_width="0dp"
@@ -77,10 +77,16 @@
                     style="@style/spoqa_regular_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.hobongClassInfo}"
+                    android:text="@{vm.liveClass}"
                     android:layout_gravity="center_vertical"
-                    tools:text="일병2호봉"/>
-
+                    tools:text="일병"/>
+                <TextView
+                    style="@style/spoqa_regular_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.liveHobongStr}"
+                    android:layout_gravity="center_vertical"
+                    tools:text="2호봉"/>
 
             </LinearLayout>
 
@@ -91,7 +97,7 @@
                 android:background="@drawable/background_google_login"
                 android:drawableLeft="@drawable/ic_icon_goal"
                 android:textAlignment="viewStart"
-                android:text="@{vm.usersResponse.goal}"
+                android:text="@{vm.liveGoal}"
                 tools:text="토익만 따서 나가자!" />
 
             <LinearLayout
@@ -148,10 +154,14 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:text="@{vm.nextProm}"
-                        tools:text="상병 진급" />
-
+                        tools:text="상병" />
+                    <TextView
+                        style="@style/spoqa_regular_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text=" 진급" />
                     <TextView
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
@@ -173,6 +183,7 @@
                         android:layout_height="24dp"
                         android:background="@drawable/icon_percent_bubble"
                         android:gravity="center_horizontal|center_vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/progressbar"
                         app:layout_constraintEnd_toEndOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="@id/guideline"
                         app:layout_constraintTop_toTopOf="parent">
@@ -230,7 +241,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:text="@{vm.usersResponse.endDate}"
+                        android:text="@{vm.enlistDayFormat}"
                         android:textColor="@color/black_all" />
                 </LinearLayout>
             </LinearLayout>
@@ -305,7 +316,14 @@
                         android:letterSpacing="0.1"
                         android:text="24"
                         android:textSize="20sp" />
-
+                    <TextView
+                        style="@style/spoqa_bold_22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="0.1"
+                        android:text=" / "
+                        android:textSize="20sp" />
                     <TextView
                         style="@style/spoqa_bold_22"
                         android:layout_width="wrap_content"
@@ -313,7 +331,7 @@
                         android:layout_marginEnd="16dp"
                         android:includeFontPadding="false"
                         android:letterSpacing="0.1"
-                        android:text="/30"
+                        android:text="24"
                         android:textColor="@color/text_gray"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -331,7 +349,6 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="24dp"
                 android:gravity="center_vertical"
-                android:onClick="@{()->vi.onClickCalendar()}"
                 android:orientation="horizontal">
 
                 <TextView

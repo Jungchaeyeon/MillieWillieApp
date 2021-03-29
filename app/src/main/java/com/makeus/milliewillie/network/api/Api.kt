@@ -50,6 +50,9 @@ interface Api {
 
 
 
+    // Main
+    @GET("main")
+    fun getMain(): Observable<Main>
 
     //일정 API
     @POST("calendars/plans")

@@ -19,6 +19,7 @@ class ApiRepository(
     // observeOn() , subscribeOn() 차이
     // fun gallerySearchList(keyword : String) = apiTest.gallerySearchList(keyword = keyword).observeOn(AndroidSchedulers.mainThread())
 
+    fun getMain() =apiTest.getMain().observeOn(AndroidSchedulers.mainThread())
 
     fun kakaoLogin() = apiTest.kakaoLogin().doOnNext {
             if (!it.result.isMember) {

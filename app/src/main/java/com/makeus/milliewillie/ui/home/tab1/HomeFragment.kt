@@ -10,6 +10,7 @@ import com.makeus.milliewillie.databinding.ItemHomeLayoutBinding
 import com.makeus.milliewillie.databinding.ItemMainScheduleBinding
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.MainGetViewModel
 import com.makeus.milliewillie.ui.MainViewModel
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.view.*
@@ -17,13 +18,15 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 
 class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    val viewModel: MainViewModel by sharedViewModel()
+    val viewModel by sharedViewModel<MainGetViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val classImg: Int = 0
     var dDay = ""
@@ -100,16 +103,6 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     fun onClickHoli() {
         ActivityNavigator.with(this).holiday().start()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        responseUser()
-    }
-
-    fun responseUser() {
-        viewModel.getUsers()
-        //Log.e(viewModel.usersResponse.toString(),"스타트 홈에서 ")
     }
 
 }

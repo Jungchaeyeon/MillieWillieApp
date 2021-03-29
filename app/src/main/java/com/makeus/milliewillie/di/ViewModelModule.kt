@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.di
 
+import com.makeus.milliewillie.ui.MainGetViewModel
 import com.makeus.milliewillie.ui.MainViewModel
 import com.makeus.milliewillie.ui.dDay.DdayViewModel
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel
@@ -37,6 +38,7 @@ val viewModelModule = module {
     viewModel { UserViewModel(get(),get()) }
     viewModel {  MakePlanViewModel(get()) }//추후 수정
     viewModel { MainViewModel(get(),get()) }
+    viewModel { MainGetViewModel(get(),get()) }
     viewModel { WorkoutViewModel(get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel() }

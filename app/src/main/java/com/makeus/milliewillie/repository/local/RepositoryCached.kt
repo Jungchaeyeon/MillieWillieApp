@@ -68,7 +68,7 @@ abstract class RepositoryCached {
     fun getPlanTotalDay() = getValue(LocalKey.MONTHPROMDDAY, "")//percent
     fun getVacaId() = getValue(LocalKey.PATCHVACID, "")
     fun getDiaryId() = getValue(LocalKey.DIARYID, "")
-    fun getPlanId() = getGeneralValue(LocalKey.PLANID, "")
+    fun getPlanId() = getGeneralValue(LocalKey.PLANID, "0")
     fun getEmotionId() = getGeneralValue(LocalKey.EMOTIONID, 0L)
     fun getWorkId() = getGeneralValue(LocalKey.WORKID, "")
 

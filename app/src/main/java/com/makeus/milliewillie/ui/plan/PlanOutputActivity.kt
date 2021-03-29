@@ -91,7 +91,7 @@ class PlanOutputActivity :
 
     override fun onResume() {
         super.onResume()
-        Log.e(repositoryCached.getPlanId(), "id")
+        Log.e(repositoryCached.getPlanId().toString(), "id")
     }
 
     fun onClickEdit(view: View) {

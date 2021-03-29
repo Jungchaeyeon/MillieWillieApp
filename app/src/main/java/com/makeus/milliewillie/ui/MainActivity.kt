@@ -27,7 +27,7 @@ import kotlin.math.abs
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    val viewModel by viewModel<MainViewModel>()
+    val viewModel by viewModel<MainGetViewModel>()
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation

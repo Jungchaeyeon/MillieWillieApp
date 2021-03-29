@@ -1,6 +1,12 @@
 package com.makeus.milliewillie.repository
 
+
 import com.makeus.milliewillie.model.*
+
+import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.model.KakaoRequest
+import com.makeus.milliewillie.model.PlansRequest
+
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.network.api.Api
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -25,14 +31,12 @@ class ApiRepository(
                 repositoryCached.setValue(LocalKey.ISMEMBER, true)
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
             }
-
     }.switchMap {
         //jwt API 호출
         apiTest.jwt()
     }
 
     fun jwt() = apiTest.jwt().doOnNext {}
-
 
     //fun users(name : String) = apiTest.users(name)
 
@@ -62,11 +66,12 @@ class ApiRepository(
     fun deleteUsers() = apiTest.deleteUsers()
     fun deleteReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.deleteReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
 
+    fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
+        Log.e(it.result.color.toString(),"왜 안돼?")
+    }
     //회원가입
     fun users(usersRequest: UsersRequest) = apiTest.users(usersRequest).doOnNext {
         //header에 token을 jwt로 변경
-        Log.e(repositoryCached.getToken(),"현재 토큰 값아직 바뀌면 안됨")
         repositoryCached.setValue(LocalKey.TOKEN, it.jwt)
-        Log.e(repositoryCached.getToken(),"여기서 jwt로 바껴야해")
     }
 }

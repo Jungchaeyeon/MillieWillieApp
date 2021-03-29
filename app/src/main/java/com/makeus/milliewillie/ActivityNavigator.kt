@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
@@ -65,7 +67,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun map() = MyIntent(MapActivity::class.java)
     fun routine() = MyIntent(MakeRoutineActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
-    fun plancalendar() = MyIntent(PlanCalendarActivity::class.java)
+    fun plancalendar(plansRequest: PlansRequest) = MyIntent(PlanCalendarActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
@@ -80,6 +82,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun profile() = MyIntent(ProfileActivity::class.java)
     fun account() = MyIntent(AccountActivity::class.java)
     fun rulesInAccount() = MyIntent(RuleWebViewActivity::class.java)
+    fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }

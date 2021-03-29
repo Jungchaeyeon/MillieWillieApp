@@ -23,19 +23,19 @@ class IntroGoalActivity :
     BaseDataBindingActivity<ActivityIntroGoalBinding>(R.layout.activity_intro_goal) {
 
     val viewModel by viewModel<UserViewModel>()
-
+    val context = this
     override fun setupProperties(bundle: Bundle?) {
         super.setupProperties(bundle)
         viewModel.usersRequest =bundle?.getSerializable(ActivityNavigator.KEY_DATA) as UsersRequest
     }
     override fun ActivityIntroGoalBinding.onBind() {
         vi = this@IntroGoalActivity
-        Log.e(viewModel.usersRequest.startDate.toString(),"startDate")
-        Log.e(viewModel.usersRequest.endDate.toString(),"endDate")
-        Log.e(viewModel.usersRequest.proDate.toString(),"proDate")
-        Log.e(viewModel.usersRequest.strCorporal.toString(),"strCorporal")
-        Log.e(viewModel.usersRequest.strPrivate.toString(),"strPrivate")
-        Log.e(viewModel.usersRequest.strSergeant.toString(),"strSergeant")
+//        Log.e(viewModel.usersRequest.startDate.toString(),"startDate")
+//        Log.e(viewModel.usersRequest.endDate.toString(),"endDate")
+//        Log.e(viewModel.usersRequest.proDate.toString(),"proDate")
+//        Log.e(viewModel.usersRequest.strCorporal.toString(),"strCorporal")
+//        Log.e(viewModel.usersRequest.strPrivate.toString(),"strPrivate")
+//        Log.e(viewModel.usersRequest.strSergeant.toString(),"strSergeant")
     }
 
     fun onClickBack() {
@@ -53,12 +53,16 @@ class IntroGoalActivity :
     fun requestUser() {
         viewModel.requestUser().subscribe {
             if (it.isSuccess) {
-                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
+              //  SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)",).show()
                 ActivityNavigator.with(this).main().start()
+                showSuccessToast()
             } else {
                 "가입 실패".showShortToastSafe()
             }
         }.disposeOnDestroy(this)
+    }
+    fun showSuccessToast(){
+     //   SampleToast.createToast(context, "밀리윌리 가입을 환영합니다 :)")?.show()
     }
 
 

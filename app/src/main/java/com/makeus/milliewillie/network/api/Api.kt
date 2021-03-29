@@ -88,7 +88,8 @@ interface Api {
 
     @PATCH("exercises/{exerciseId}/routines/{routineId}")
     fun patchRoutine(@Path("exerciseId") exerciseId: Long,
-                     @Path("routineId") routineId: Long): Observable<PostRoutine>
+                     @Path("routineId") routineId: Long,
+                     @Body body: PostRoutineRequest): Observable<PatchRoutine>
 
     @PATCH("exercises/{exerciseId}/goal-weights")
     fun patchGoalWeight(@Path("exerciseId") exerciseId: Long,
@@ -98,6 +99,11 @@ interface Api {
     fun patchTodayWeight(@Path("exerciseId") exerciseId: Long,
                         @Body body: PatchTodayWeightRequest): Observable<ResultResponse>
 
+    @PATCH("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun patchReports(@Path("exerciseId") exerciseId: Long,
+                     @Path("routineId") routineId: Long,
+                     @Body body: PatchReportsRequest): Observable<PatchRoutine>
+
     @DELETE("exercises/{exerciseId}/routines/{routineId}")
     fun deleteRoutine(@Path("exerciseId") exerciseId: Long,
                       @Path("routineId") routineId: Long): Observable<ResultResponse>
@@ -105,6 +111,10 @@ interface Api {
     @DELETE("users")
     fun deleteUsers(): Observable<BaseResponse>
 
+    @DELETE("exercises/{exerciseId}/routines/{routineId}/reports")
+    fun deleteReports(@Path("exerciseId") exerciseId: Long,
+                      @Path("routineId") routineId: Long,
+                      @Query("reportDate") reportDate: String): Observable<PatchRoutine>
 
     @POST("users/login-kakao")
     fun kakaoLogin(): Observable<KakaoLogin>

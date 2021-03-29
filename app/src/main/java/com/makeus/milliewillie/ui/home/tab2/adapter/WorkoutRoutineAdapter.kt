@@ -2,26 +2,16 @@ package com.makeus.milliewillie.ui.home.tab2.adapter
 
 import android.content.Context
 import android.graphics.Paint
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.MyRoutineInfo
-import com.makeus.milliewillie.model.StartRecyclerCircleItem
-import com.makeus.milliewillie.model.StartRecyclerItem
-import com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel
-import com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel
-import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartAdapter
-import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartInnerAdapter
-import com.makeus.milliewillie.util.Log
 
-class WorkoutRoutineAdapter(val context: Context?, val itemList: ArrayList<MyRoutineInfo>, val viewModel: WorkoutViewModel): RecyclerView.Adapter<WorkoutRoutineAdapter.RoutineViewHolder>() {
+class WorkoutRoutineAdapter(val context: Context?, val itemList: ArrayList<MyRoutineInfo>): RecyclerView.Adapter<WorkoutRoutineAdapter.RoutineViewHolder>() {
     interface RoutineItemClickListener {
         fun onItemClick(position: Int)
     }

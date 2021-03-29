@@ -8,8 +8,11 @@ import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityReportBinding
 import com.makeus.milliewillie.databinding.ActivityReportRecyclerItemBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.PatchReportsRequest
 import com.makeus.milliewillie.model.ReportInnerRecyclerItem
 import com.makeus.milliewillie.model.ReportRecyclerItem
+import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.report.adapter.ReportsAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
@@ -31,6 +34,11 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
     private lateinit var reportsAdapter: ReportsAdapter
     val outterList = ArrayList<ReportRecyclerItem>()
 
+    override fun onResume() {
+        super.onResume()
+        executeGetReports()
+    }
+
     override fun ActivityReportBinding.onBind() {
         vi = this@ReportActivity
         vm = viewModel
@@ -42,7 +50,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
             reportDate = intent.getStringExtra(REPORT_DATE_KEY).toString()
         }
 
-        executeGetReports()
+
 
         binding.reportRecycler.run {
             adapter = BaseDataBindingRecyclerViewAdapter<ReportRecyclerItem>()
@@ -53,10 +61,6 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
                     }
                 )
         }
-
-
-
-
 
     }
 
@@ -141,6 +145,68 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
 
     }
 
+    var isClickMenu = false
+    fun onClickMenu() {
+        isClickMenu = !isClickMenu
+        when (isClickMenu) {
+            true -> binding.reportLayoutPopUpMenu.visibility = View.VISIBLE
+            false -> binding.reportLayoutPopUpMenu.visibility = View.GONE
+        }
+    }
+
+    fun onClickModifyMenu() {
+        // 리포트 수정 api
+        viewModel.apiRepository.patchReports(
+            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            routineId = routineId,
+            body = PatchReportsRequest(reportDate = reportDate, reportText = binding.reportEditContent.text.toString())
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess){
+                    Log.e("patchReports 호출 성공")
+                    getString(R.string.toast_patch).showShortToastSafe()
+                    onBackPressed()
+                } else {
+                    Log.e("patchReports 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+
+        binding.reportLayoutPopUpMenu.visibility = View.GONE
+        isClickMenu = false
+    }
+
+    fun onClickDeleteMenu() {
+        val title1 = getString(R.string.reports_delete_title)
+        val title2 = getString(R.string.reports_delete_title2)
+        val title = "$title1\n$title2"
+        DialogWorkoutDoneFragment.getInstance()
+            .setTitle(title)
+            .setOnClickOk ({
+                viewModel.apiRepository.deleteReports(
+                    exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+                    routineId = routineId,
+                    reportDate = reportDate
+                )
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        if (it.isSuccess){
+                            Log.e("deleteReports 호출 성공")
+                            getString(R.string.toast_delete).showShortToastSafe()
+                            onBackPressed()
+                        } else {
+                            Log.e("deleteReports 호출 실패")
+                            Log.e(it.message)
+                        }
+                    }.disposeOnDestroy(this)
+            },"reports")
+            .show(supportFragmentManager)
+        binding.reportLayoutPopUpMenu.visibility = View.GONE
+        isClickMenu = false
+    }
+
+
     var isFold = false
     fun onClickToFold() {
         isFold = !isFold
@@ -152,6 +218,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
     }
 
     fun onClickBack() {
+        onBackPressed()
         onBackPressed()
     }
 

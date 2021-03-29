@@ -1,11 +1,13 @@
 package com.makeus.milliewillie.util
 
 object BasicTextFormat {
-    fun BasicDashFormat(year: String, month: String, day: String): String{
+    fun BasicDateFormat(year: String, month: String, day: String): String{
         var monthText = ""
+        var dayText = ""
         monthText = if (month.length < 2) "0$month" else month
+        dayText = if (day.length < 2) "0$day" else day
 
-        return "$year-$monthText-$day"
+        return "$year-$monthText-$dayText"
     }
 
     fun BasicRoutineOptionTextForm(setCount: String, weight: String, count:String, time: String, index: Int): String {

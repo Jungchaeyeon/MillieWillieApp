@@ -46,10 +46,10 @@
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:onClick="@{()-> vi.onClickMenu()}"
                 android:src="@drawable/icon_small_moreinfo_vertical"
                 app:tint="@color/black_all" />
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/relativeLayout10"
@@ -161,6 +161,7 @@
                         android:paddingTop="22dp"
                         android:backgroundTint="@color/non"
                         android:textSize="14sp"
+                        android:maxLength="300"
                         android:fontFamily="@font/spoqa_han_sans_neo_medium"
                         android:includeFontPadding="false"
                         android:hint="@string/content_hint"/>
@@ -173,6 +174,40 @@
         </androidx.core.widget.NestedScrollView>
 
 
+        <LinearLayout
+            android:id="@+id/report_layout_pop_up_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:elevation="5dp"
+            android:background="@drawable/pop_up_menu_background"
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout9">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:includeFontPadding="false"
+                android:text="@string/modify"
+                android:textColor="@color/black_all"
+                android:onClick="@{()-> vi.onClickModifyMenu()}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:includeFontPadding="false"
+                android:text="@string/delete"
+                android:textColor="@color/red"
+                android:onClick="@{()-> vi.onClickDeleteMenu()}"/>
+
+        </LinearLayout>
 
 
 

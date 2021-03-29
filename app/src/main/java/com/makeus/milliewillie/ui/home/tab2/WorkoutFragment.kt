@@ -55,6 +55,9 @@ class WorkoutFragment :
     var routineId by Delegates.notNull<Long>()
     private var position by Delegates.notNull<Int>()
 
+    lateinit var routineRecyclerAdapter: WorkoutRoutineAdapter
+    private var routineItemList = ArrayList<MyRoutineInfo>()
+
     companion object {
         fun getInstance() = WorkoutFragment()
         const val IS_GOAL = "IS_GOAL"
@@ -79,7 +82,6 @@ class WorkoutFragment :
         executeGetRoutines()
         // 체중 기록 GET 호출
         executeGetWeightRecord()
-        "onResume".showShortToastSafe()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -89,7 +91,7 @@ class WorkoutFragment :
         vm = viewModel
 
         todayDate() //오늘 날짜 설정
-        reportDate = BasicTextFormat.BasicDashFormat(
+        reportDate = BasicTextFormat.BasicDateFormat(
             calendar.get(Calendar.YEAR).toString(),
             (calendar.get(Calendar.MONTH)+1).toString(),
             calendar.get(Calendar.DAY_OF_MONTH).toString()
@@ -99,9 +101,6 @@ class WorkoutFragment :
         SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
         onClickWeightDateItemAdd() // 체중 입력
-
-//        //라인차트 함수 호출
-//        setLineChart()
 
         binding.workoutRecyclerDay.run {
             adapter = BaseDataBindingRecyclerViewAdapter<WorkoutWeightRecordDate>()
@@ -114,41 +113,6 @@ class WorkoutFragment :
                     }
                 )
         }
-
-//        binding.workoutRecyclerTodayRoutine.run {
-//            // 아이템 클릭 리스너
-//            addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
-//                @RequiresApi(Build.VERSION_CODES.O)
-//                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-//                    val child = rv.findChildViewUnder(e.x, e.y)
-//                    val position = child?.let { rv.getChildAdapterPosition(it) }
-//                    if (e.action == MotionEvent.ACTION_MOVE) return false
-//                    else if (e.action == MotionEvent.ACTION_UP) {
-//                        Log.e("$position")
-//                        if (position != null) {
-//                            this@WorkoutFragment.position = position
-//                            return false
-//                        }
-//                        return true
-//                    }
-//                    return false
-//                }
-//
-//                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
-//
-//                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
-//            })
-//            adapter = BaseDataBindingRecyclerViewAdapter<MyRoutineInfo>()
-//                .addViewType(
-//                    BaseDataBindingRecyclerViewAdapter.MultiViewType<MyRoutineInfo, WorkoutRoutineRecyclerItemBinding>(
-//                        R.layout.workout_routine_recycler_item
-//                    ) {
-//                        vi = this@WorkoutFragment
-//                        item = it
-//                    }
-//                )
-//        }
-
 
     }
 
@@ -191,12 +155,11 @@ class WorkoutFragment :
             }.disposeOnDestroy(this)
     }
 
-    lateinit var routineRecyclerAdapter: WorkoutRoutineAdapter
-    private var routineItemList = ArrayList<MyRoutineInfo>()
+
 
     fun setRecyclerAdapter() {
         Log.e("routineItemList = $routineItemList")
-        routineRecyclerAdapter = WorkoutRoutineAdapter(context, routineItemList, viewModel)
+        routineRecyclerAdapter = WorkoutRoutineAdapter(context, routineItemList)
         binding.workoutRecyclerTodayRoutine.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)

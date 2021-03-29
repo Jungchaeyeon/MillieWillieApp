@@ -151,15 +151,32 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     Log.e("postRoutine 호출 실패")
                     Log.e(it.message)
                 }
+                onBackPressed()
             }.disposeOnDestroy(this)
     }
 
     fun executePatchRoutine() {
+        val detailNameList = ArrayList<String>()
+
+        viewModel.liveDataSelectedItemList.value!!.forEach {
+            detailNameList.add(it.routineName)
+        }
         viewModel.apiRepository.patchRoutine(
             exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
-            routineId = routineId)
+            routineId = routineId,
+            body = PostRoutineRequest(
+                routineName = binding.routineEditRoutineName.text.toString(),
+                bodyPart = viewModel.liveDatePartOfEx.value.toString(),
+                repeatDay = repeatDays,
+                detailName = detailNameList,
+                detailType = detailType,
+                detailTypeContext = detailTypeContext,
+                detailSetEqual = detailSetEqual,
+                detailSet = detailSet
+            ))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                Log
                 if (it.isSuccess) {
                     Log.e("patchRoutine 호출 성공")
 
@@ -167,6 +184,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     Log.e("patchRoutine 호출 실패")
                     Log.e(it.message)
                 }
+                onBackPressed()
             }.disposeOnDestroy(this)
     }
 
@@ -602,7 +620,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 executePostRoutine()
             }
         }
-        onBackPressed()
+
     }
 
     fun onClickCancel() {

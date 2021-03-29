@@ -23,21 +23,26 @@ class ExerciseSetViewModel: BaseViewModel() {
     var timeSetItemListSize = timeSetItemList.size
 
     var liveDataSetCount = MutableLiveData<String>().apply { value = "0" }
-    var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0 세트" }
+    var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0세트" }
 
     var liveDataExerciseName = MutableLiveData<String>().apply { value = "" }
     
     init {
         defaultAddSet()
+//        addItem()
     }
 
     fun increaseSetCount(value: String) {
         liveDataSetCount.postValue(value)
-        liveDataUnderSetCount.postValue("$value 세트")
+        liveDataUnderSetCount.postValue("${value}세트")
+
+        addItem()
+
     }
     fun decreaseSetCount(value: String) {
         liveDataSetCount.postValue(value)
-        liveDataUnderSetCount.postValue("$value 세트")
+        liveDataUnderSetCount.postValue("${value}세트")
+        removeItem()
     }
 
     fun defaultAddSet() {
@@ -50,16 +55,18 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addItem() {
-        wncSetItemList.add(WorkoutWncSet("${liveDataSetCount.value!!.toInt()+1}세트"))
-        wncSetItemListSize = wncSetItemList.size
-        countSetItemList.add(WorkoutCountSet("${liveDataSetCount.value!!.toInt()+1}세트"))
-        countSetItemListSize = countSetItemList.size
-        timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
-        timeSetItemListSize = timeSetItemList.size
-
-        Log.e("addPositionItem2 : $wncSetItemList")
-        Log.e("addPositionItem2 : $countSetItemList")
-        Log.e("addPositionItem2 : $timeSetItemList")
+        //매개변수로 데이터 받아서 +1 하고 if로 조절하면 될 것 같음 1세트 부터 시작하는 거
+//        if (liveDataSetCount.value!!.toInt() == 1) {
+//            Log.e("liveDataSetCount.value = ${liveDataSetCount.value}")
+//            wncSetItemList.add(WorkoutWncSet("${liveDataSetCount.value!!.toInt()}세트"))
+//            countSetItemList.add(WorkoutCountSet("${liveDataSetCount.value!!.toInt()}세트"))
+//            timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()}세트"))
+//        } else {
+            Log.e("liveDataSetCount = ${liveDataSetCount.value}")
+            wncSetItemList.add(WorkoutWncSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+            countSetItemList.add(WorkoutCountSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+            timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
+//        }
 
         defaultAddSet()
     }
@@ -76,9 +83,6 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addPositionItem(setOption: ExerciseSetBottomSheetFragment.SetOptions, position: Int, value: String, kind: Int) {
-        Log.e("addPositionItem : $wncSetItemList")
-        Log.e("addPositionItem : $countSetItemList")
-        Log.e("addPositionItem : $timeSetItemList")
         when (setOption) {
             ExerciseSetBottomSheetFragment.SetOptions.WNC-> {
                 when (kind) {

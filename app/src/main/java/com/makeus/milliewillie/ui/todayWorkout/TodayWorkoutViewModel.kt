@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.MyRoutineInfo
-import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.repository.ApiRepository
 
 class TodayWorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
@@ -14,7 +13,7 @@ class TodayWorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
     var liveDataToday = MutableLiveData<String>().apply { value = "" }
 
     val liveRoutineItemList = MutableLiveData<ArrayList<MyRoutineInfo>>()
-    val _routineArrayList = ArrayList<MyRoutineInfo>()
+    val _calRoutineArrayList = ArrayList<MyRoutineInfo>()
 
     init {
         defaultRoutineItemList()
@@ -22,23 +21,24 @@ class TodayWorkoutViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 
 
     fun defaultRoutineItemList() {
-        liveRoutineItemList.postValue(_routineArrayList)
+        liveRoutineItemList.postValue(_calRoutineArrayList)
+        android.util.Log.e("makeUs", "liveRoutineItemList: ${liveRoutineItemList.value}")
     }
 
-    fun createRoutineItem(item: ArrayList<MyRoutineInfo>) {
-        _routineArrayList.clear()
+    fun createRoutineItem(item: ArrayList<MyRoutineInfo>): ArrayList<MyRoutineInfo> {
+        _calRoutineArrayList.clear()
 
-        for (i in item) _routineArrayList.add(MyRoutineInfo(routineName = i.routineName, routineRepeatDay = i.routineRepeatDay, routineId = i.routineId))
+        for (i in item) _calRoutineArrayList.add(MyRoutineInfo(routineName = i.routineName, routineRepeatDay = i.routineRepeatDay, routineId = i.routineId, isDoneRoutine = i.isDoneRoutine))
 
         defaultRoutineItemList()
-        android.util.Log.e("makeUs", "_routineArrayList: $_routineArrayList")
 
+        return _calRoutineArrayList
     }
 
     fun removeRoutineItem(position: Int) {
-        _routineArrayList.removeAt(position)
+        _calRoutineArrayList.removeAt(position)
         defaultRoutineItemList()
-        android.util.Log.e("makeUs", "_routineArrayList: $_routineArrayList")
+        android.util.Log.e("makeUs", "_routineArrayList: $_calRoutineArrayList")
     }
 
 }

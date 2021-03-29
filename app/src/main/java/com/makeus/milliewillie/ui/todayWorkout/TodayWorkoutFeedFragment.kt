@@ -21,6 +21,7 @@ import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModified
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import okhttp3.internal.notify
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -39,11 +40,16 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
     var liveDataItemImg = R.drawable.icon_arrow_gotodeep
     val allRoutineArray = ArrayList<MyRoutineInfo>()
 
+    override fun onResume() {
+        super.onResume()
+        // 모든 routine 호출
+        executeGetAllRoutines()
+    }
+
     override fun FragmentTodayWorkoutFeedBinding.onBind() {
         vi = this@TodayWorkoutFeedFragment
         vm = viewModel
 
-        executeGetAllRoutines()
 
         binding.todayFeedImgGotoBack.setOnClickListener {
             (activity as TodayWorkoutActivity).onClickViewChange(1)
@@ -89,7 +95,8 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
 
     }
 
-    fun executeGetAllRoutines() {
+    private fun executeGetAllRoutines() {
+        allRoutineArray.clear()
         viewModel.apiRepository.getAllRoutines(
             SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong()
         )
@@ -109,6 +116,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
                             )
                         )
                     }
+                    Log.e(allRoutineArray.toString())
                     viewModel.createRoutineItem(allRoutineArray)
                 } else {
                     Log.e("getAllRoutines 호출 실패")

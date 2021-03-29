@@ -68,7 +68,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
         val calendar = Calendar.getInstance()
 
-        today = BasicTextFormat.BasicDashFormat(
+        today = BasicTextFormat.BasicDateFormat(
             calendar.get(Calendar.YEAR).toString(),
             (calendar.get(Calendar.MONTH)+1).toString(),
             calendar.get(Calendar.DAY_OF_MONTH).toString()
@@ -237,7 +237,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
     fun onClickDone() {
         DialogWorkoutDoneFragment.getInstance()
             .setTitle(getString(R.string.is_done_ex))
-            .setOnClickOk {
+            .setOnClickOk ({
                 startItemList.forEach {
                     var count = 0
                     for (i in 0 until it.circleList.size) {
@@ -248,7 +248,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
                 executePostReports()
 
-            }
+            }, "start")
             .show(supportFragmentManager)
     }
 

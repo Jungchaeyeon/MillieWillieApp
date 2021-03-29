@@ -3,6 +3,8 @@
     <string name="complete">완료</string>
     <string name="edit">편집</string>
     <string name="cancel">취소</string>
+    <string name="modify">수정하기</string>
+    <string name="delete">삭제하기</string>
     <string name="title">제목</string>
     <string name="d_day_title">D - day 제목</string>
     <string name="sub_title">소제목</string>
@@ -147,6 +149,11 @@
     <string name="date_weight_record_format">%s/%d</string>
     <string name="current_weight">현재체중</string>
     <string name="todayDateForm">%d월 %d일(%s)</string>
+    <string name="reports_delete_title">운동리포트를 삭제하시겠습니까?</string>
+    <string name="reports_delete_title2">삭제시 운동하지 않은 상태로 처리됩니다.</string>
+    <string name="reports_delete">리포트 삭제하기</string>
+    <string name="toast_delete">삭제되었습니다.</string>
+    <string name="toast_patch">수정되었습니다.</string>
 
     <string name="no_data_info">정보없음</string>
     <string name="middle_dot">·</string>

@@ -25,6 +25,7 @@ import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_plan_output.*
 import kotlinx.android.synthetic.main.item_output_plan_todo.*
+import kotlinx.android.synthetic.main.item_output_plan_todo.view.*
 import kotlinx.android.synthetic.main.item_plan_memo.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
@@ -62,7 +63,6 @@ class PlanOutputActivity :
                     ) {
                         vi = this@PlanOutputActivity
                         item = it
-
                     })
         }
 
@@ -75,17 +75,16 @@ class PlanOutputActivity :
         repositoryCached.setValue(LocalKey.DIARYID, item.diaryId)
         viewModel.liveContent.value = edit_plan.text.toString()
         viewModel.patchPlanDiary()
-        SampleToast.createToast(this, "")?.show()
+        SampleToast.createToast(this, "일정 저장 완료")?.show()
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun onClickChkBox(item : PlansGet.Result.Work){
+    fun onClickChkBox(view: View,item : PlansGet.Result.Work){
         Log.e(item.processingStatus,"preocesstiongStatus")
-
-        text_todo.isActivated =! text_todo.isActivated
-        if(text_todo.isActivated) text_todo.setTextColor(Color.parseColor("#9d9d9d"))
-        else text_todo.setTextColor(Color.parseColor("#3e3e3e"))
-
+        repositoryCached.setValue(LocalKey.WORKID,item.workId)
+        view.isActivated =! view.isActivated
+        if(view.isActivated) view.text_todo.setTextColor(Color.parseColor("#9d9d9d"))
+        else view.text_todo.setTextColor(Color.parseColor("#3e3e3e"))
         viewModel.patchDiary()
     }
 
@@ -106,8 +105,10 @@ class PlanOutputActivity :
 
         override fun onMenuItemClick(item: MenuItem?): Boolean {
             when (item?.itemId) {
-                R.id.menu1 -> viewModel.deletePlans()
+                R.id.menu1 -> {viewModel.deletePlans()
+                }
             }
+            ActivityNavigator.with(this@PlanOutputActivity).main().start()
             return false
         }
     }

@@ -70,7 +70,7 @@ abstract class RepositoryCached {
     fun getDiaryId() = getValue(LocalKey.DIARYID, "")
     fun getPlanId() = getGeneralValue(LocalKey.PLANID, "0")
     fun getEmotionId() = getGeneralValue(LocalKey.EMOTIONID, 0L)
-    fun getWorkId() = getGeneralValue(LocalKey.WORKID, "")
+    fun getWorkId() = getGeneralValue(LocalKey.WORKID, "0")
 
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)

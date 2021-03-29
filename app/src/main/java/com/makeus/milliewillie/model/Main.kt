@@ -20,6 +20,17 @@ data class Main(
       val goal : String,
       val vacationTotalDays : Int,
       val vacationUseDays : Int,
-      val dday : List<String>?
-    )
+      val dday : List<Dday>,
+      val plan : List<PlanMain>
+    ){
+      data class Dday(
+        val ddayId : Long,
+        val date : String,
+        val title : String
+      )
+      data class PlanMain(
+        val planId : Long,
+        val title : String
+      )
+    }
 }

@@ -36,7 +36,7 @@ val viewModelModule = module {
     viewModel { MakeRoutineViewModel(get()) }
     viewModel { ExerciseSetViewModel() }
     viewModel { UserViewModel(get(),get()) }
-    viewModel {  MakePlanViewModel(get()) }//추후 수정
+    viewModel {  MakePlanViewModel(get(),get()) }//추후 수정
     viewModel { MainViewModel(get(),get()) }
     viewModel { MainGetViewModel(get(),get()) }
     viewModel { WorkoutViewModel(get()) }

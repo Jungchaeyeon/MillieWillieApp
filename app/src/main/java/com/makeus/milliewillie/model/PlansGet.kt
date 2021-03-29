@@ -5,6 +5,7 @@ data class PlansGet(
 ) : BaseResponse() {
     data class Result(
         val planId: Long=0L,
+        val title : String ="",
         val startDate: String="",
         val endDate: String="",
         val dateInfo: String="",

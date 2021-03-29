@@ -25,7 +25,7 @@ class PlanOutputViewModel(
 
     var dayInfo = MutableLiveData<String>()
     var planType =MutableLiveData<String>()
-    var title =""
+    var title =MutableLiveData<String>()
     var plansGet = PlansGet.Result()
     val liveDayNNight =MutableLiveData<String>()
     val liveContent = MutableLiveData<String>().apply { value = "" }
@@ -98,7 +98,7 @@ class PlanOutputViewModel(
                 Log.e(plansGet.toString(),"plansGet")
                 dayInfo.value = plansGet.dateInfo
                 planType.value = plansGet.planType
-                title = "제목 보류"
+                title.value = plansGet.title
                 calDayNNight(plansGet.startDate, plansGet.endDate)
                 addTodoAll(it.result.work)
                 addMemoAll(it.result.diary)
@@ -114,7 +114,7 @@ class PlanOutputViewModel(
             if(it.isSuccess){
                 Log.e("일정삭제 성공")
                 // set plan Key
-                repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
+               // repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
             }
             else{
                 Log.e("일정삭제 실패")
@@ -129,7 +129,7 @@ class PlanOutputViewModel(
             if(it.isSuccess){
                 Log.e("할일 T/F 성공")
                 // set work Key
-                repositoryCached.setValue(LocalKey.WORKID, it.result.workId.toString())
+                repositoryCached.setValue(LocalKey.WORKID, it.result.workId)
             }
             else{
                 Log.e("할일 T/F 실패")

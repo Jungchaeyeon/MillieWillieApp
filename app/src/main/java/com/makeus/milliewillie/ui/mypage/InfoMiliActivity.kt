@@ -41,7 +41,7 @@ class InfoMiliActivity :
 
     override fun onResume() {
         super.onResume()
-       // viewModel.getUsers()
+        viewModel.getUsers()
         Log.e(allDdayPercent.toString(),"nextDayPercent")
         Log.e(nextDdayPercent.toString(),"nextDayPercent")
         Log.e(mothPromDday.toString(),"nextDayPercent")

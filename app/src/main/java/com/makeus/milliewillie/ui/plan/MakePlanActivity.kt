@@ -117,6 +117,29 @@ class MakePlanActivity :
             this@MakePlanActivity,
             androidx.lifecycle.Observer { txt_daynight.text = it })
     }
+    fun onClickDone() {
+        if (plan_title.text.isEmpty()) {
+            Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
+        } else {
+            viewModel.plansRequest.title = plan_title.text.toString()
+            viewModel.plansRequest.startDate = repositoryCached.getPlanStartDate()
+            viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
+
+            //viewModel.plansRequest.planVacation = array
+
+            if (viewModel.planTodos.size != 0) {
+                viewModel.plansRequest.work = viewModel.planTodos.toList()
+            }
+            viewModel.plansRequest.planVacation = array
+
+            e(array.toString(), "Make에서 planVac")
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                viewModel.plansRequest.pushDeviceToken = task.result
+                requestUser()
+            }
+        }
+    }
 
     fun onClickPlanType() {
         //viewModel.liveDate.postValue("")
@@ -219,30 +242,6 @@ class MakePlanActivity :
         }
     }
 
-    fun onClickDone() {
-        if (plan_title.text.isEmpty()) {
-            Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
-        } else {
-            viewModel.plansRequest.title = plan_title.text.toString()
-            viewModel.plansRequest.startDate = repositoryCached.getPlanStartDate()
-            viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
-
-            //viewModel.plansRequest.planVacation = array
-            viewModel.addTodo(PlansRequest.Work(plan_title.text.toString()))
-
-            if (viewModel.planTodos.size != 0) {
-                viewModel.plansRequest.work = viewModel.planTodos.toList()
-            }
-            viewModel.plansRequest.planVacation = array
-
-            e(array.toString(), "Make에서 planVac")
-
-            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                viewModel.plansRequest.pushDeviceToken = task.result
-                requestUser()
-            }
-        }
-    }
 
     fun requestUser() {
         viewModel.requestPlan().subscribe {

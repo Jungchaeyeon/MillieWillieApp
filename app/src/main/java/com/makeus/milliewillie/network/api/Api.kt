@@ -51,7 +51,7 @@ interface Api {
 
 
     // Main
-    @GET("main")
+    @GET("main/users-calendars")
     fun getMain(): Observable<Main>
 
     //일정 API

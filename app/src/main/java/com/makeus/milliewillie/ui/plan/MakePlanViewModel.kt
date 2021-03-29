@@ -3,6 +3,7 @@ package com.makeus.milliewillie.ui.plan
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
 import io.reactivex.Observable
@@ -11,7 +12,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-class MakePlanViewModel(val apiRepository: ApiRepository) :
+class MakePlanViewModel(val apiRepository: ApiRepository, val repository: ApiRepository) :
     BaseViewModel() {
 
     val livePlanType = MutableLiveData<String>().apply { value = "일정" }
@@ -23,6 +24,7 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
     var liveOnlyDay = MutableLiveData<String>()
 
     var plansRequest = PlansRequest()
+    lateinit var plans : Plans.Result
 
     // TodoItem list
     val livePlanTodoList = MutableLiveData<ArrayList<PlansRequest.Work>>()
@@ -38,10 +40,11 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
     }
 
 
+//                "일정", "휴가",
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(
             listOf(
-                "일정", "휴가",
+                "일정",
                 "외박", "훈련", "면회",
                 "외출", "전투휴무", "당직"
             )

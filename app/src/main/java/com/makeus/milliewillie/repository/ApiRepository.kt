@@ -50,7 +50,7 @@ class ApiRepository(
     fun getVacation() = apiTest.getVacation()
     fun patchPlanDiary(planDiaryRequest: PlanDiaryRequest, path: Long) = apiTest.patchPlanDiary(body = planDiaryRequest, diaryId = path)
     fun getPlans(path: Long) = apiTest.getPlans(planId = path)
-    fun deletePlans(path: Long) = apiTest.getPlans(planId = path)
+    fun deletePlans(path: Long) = apiTest.deletePlans(planId = path)
     fun postEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest) = apiTest.postEmotionsRecord(emotionsRecordRequest)
     fun patchEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest, path : Long) = apiTest.patchEmotionsRecord(body = emotionsRecordRequest, emotionsRecordId = path)
     fun patchDiary(path : Long) = apiTest.patchDiary(workId= path)

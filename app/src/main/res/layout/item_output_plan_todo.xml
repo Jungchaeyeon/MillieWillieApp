@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="itemPlanWork"
+            type="com.makeus.milliewillie.model.PlansWork.Result" />
+
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.PlansGet.Result.Work" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout_item_todo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_todo"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:includeFontPadding="false"
+            android:onClick="@{(view)->vi.onClickChkBox(view,item)}"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/chk_box_on_off"
+            android:text="@{item.content}"/>
+
+    </LinearLayout>
+</layout>

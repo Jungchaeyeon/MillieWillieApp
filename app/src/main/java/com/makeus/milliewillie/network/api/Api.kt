@@ -36,6 +36,88 @@ interface Api {
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
 
+    //감정일기기
+   @POST("emotions-record")
+    fun postEmotionsRecord(
+        @Body body : EmotionsRecordRequest
+    ): Observable<EmotionsRecordResponse>
+
+    @PATCH("emotions-record/{emotionsRecordId}")
+    fun patchEmotionsRecord(
+        @Body body : EmotionsRecordRequest,
+        @Path("emotionsRecordId") emotionsRecordId: Long
+    ): Observable<EmotionsRecordResponse>
+
+
+
+    // Main
+    @GET("main/users-calendars")
+    fun getMain(): Observable<Main>
+
+    //일정 API
+    @POST("calendars/plans")
+    fun plans(
+        @Body body : PlansRequest
+    ): Observable<Plans>
+
+    @GET(" calendars/plans/{planId}")
+    fun getPlans(@Path("planId") planId: Long): Observable<PlansGet>
+
+    @DELETE("calendars/plans/{planId}")
+    fun deletePlans(@Path("planId") planId: Long): Observable<BaseResponse>
+
+    @PATCH("calendars/plans/plans-diary/{diaryId}")
+    fun patchPlanDiary(
+        @Body body: PlanDiaryRequest, @Path("diaryId") diaryId: Long): Observable<PlanDiary>
+
+    @PATCH("calendars/plans/plans-work/{workId}")
+    fun patchDiary(
+        @Path("workId") workId: Long): Observable<PlansWork>
+
+
+    // 휴가 API
+    @GET("users/vacations")
+    fun getVacation(): Observable<VacationIdResponse>
+
+    @PATCH("users/vacations/{vacationId}")
+    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
+
+    @GET("users")
+    fun getUsers(): Observable<GetUsersResponse>
+    //회원정보
+    @GET("users")
+    fun getUsersRes(): Observable<UsersResponse>
+
+    @PATCH("users")
+    fun patchUsers(
+        @Body body : UsersPatch
+    ) : Observable<UsersResponse>
+
+    //로그인
+    @POST("users/login-kakao")
+    fun kakaoLogin(): Observable<KakaoLogin>
+    @POST("users/login-google")
+    fun googleLogin(): Observable<KakaoLogin>
+
+    @GET("users/jwt")
+    fun jwt(): Observable<BaseResponse>
+
+//    @POST("users")
+//    fun users(
+//        @Field("name") name : String
+//    ): Observable<Users>
+
+
+
+    @POST("users")
+    fun users(
+        @Body body : UsersRequest
+    ): Observable<Users>
+
+    @POST("calendars/schedule")
+    fun schedule(
+        @Body body: ScheduleRequest
+    ): Observable<Schedule>
 
 
     @POST("exercises/first-weights")
@@ -86,8 +168,6 @@ interface Api {
                    @Path("routineId") routineId: Long,
                    @Query("reportDate") reportDate: String): Observable<GetReportsResponse>
 
-    @GET("users")
-    fun getUsers(): Observable<GetUsersResponse>
 
     @PATCH("exercises/{exerciseId}/routines/{routineId}")
     fun patchRoutine(@Path("exerciseId") exerciseId: Long,
@@ -121,26 +201,5 @@ interface Api {
     fun deleteReports(@Path("exerciseId") exerciseId: Long,
                       @Path("routineId") routineId: Long,
                       @Query("reportDate") reportDate: String): Observable<PatchRoutine>
-
-    @POST("users/login-kakao")
-    fun kakaoLogin(): Observable<KakaoLogin>
-
-    @GET("users/jwt")
-    fun jwt(): Observable<BaseResponse>
-
-//    @POST("users")
-//    fun users(
-//        @Field("name") name : String
-//    ): Observable<Users>
-
-    @POST("calendars/plans")
-    fun plans(
-        @Body body : PlansRequest
-    ): Observable<Plans>
-
-    @POST("users")
-    fun users(
-        @Body body : UsersRequest
-    ): Observable<Users>
 
 }

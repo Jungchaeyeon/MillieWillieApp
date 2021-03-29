@@ -1,17 +1,18 @@
 package com.makeus.milliewillie.ui.plan
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
-import com.makeus.milliewillie.repository.local.RepositoryCached
-import java.text.SimpleDateFormat
+import io.reactivex.Observable
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-class MakePlanViewModel(val apiRepository: ApiRepository) :
+class MakePlanViewModel(val apiRepository: ApiRepository, val repository: ApiRepository) :
     BaseViewModel() {
 
     val livePlanType = MutableLiveData<String>().apply { value = "일정" }
@@ -22,68 +23,28 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
     val livePlanTypeList = MutableLiveData<List<String>>()
     var liveOnlyDay = MutableLiveData<String>()
 
-    var plansRequest =PlansRequest()
-
-
+    var plansRequest = PlansRequest()
+    lateinit var plans : Plans.Result
 
     // TodoItem list
-    val livePlanTodoList = MutableLiveData<MutableList<PlansRequest.Work>>()
+    val livePlanTodoList = MutableLiveData<ArrayList<PlansRequest.Work>>()
     var planTodos = ArrayList<PlansRequest.Work>()
-
     //TodoMethod
     fun addTodo(item: PlansRequest.Work) {
         planTodos.add(item)
         livePlanTodoList.value = planTodos
     }
-
     fun replaceTodo() {
         planTodos.clear()
         livePlanTodoList.value = planTodos
     }
 
-    fun removeTodo(item: MainSchedule) {
-        planTodos.remove(item)
-        livePlanTodoList.value = planTodos
-    }
 
-
-    //Main 일정 recyclerview itemlist
-    val liveMainPlan = MutableLiveData<ArrayList<MainSchedule>>().apply {
-        this.postValue(
-            arrayListOf(
-                MainSchedule()
-            )
-        )
-    }
-    var planItems = ArrayList<MainSchedule>()
-
-    //Main 일정 itemMethod
-    fun addItem(item: MainSchedule) {
-
-        if (planItems.size == 0) {
-            planItems.add(0, MainSchedule())
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        } else {
-            planItems.add(item)
-            liveMainPlan.value = planItems
-        }
-    }
-
-    fun removeItem(item: MainSchedule) {
-        planItems.remove(item)
-        liveMainPlan.value = planItems
-    }
-
-    fun notifyChange() {
-        val items: ArrayList<MainSchedule>? = liveMainPlan.value
-        liveMainPlan.value = items
-    }
-
+//                "일정", "휴가",
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(
             listOf(
-                "일정", "휴가",
+                "일정",
                 "외박", "훈련", "면회",
                 "외출", "전투휴무", "당직"
             )
@@ -109,6 +70,18 @@ class MakePlanViewModel(val apiRepository: ApiRepository) :
 //        plansRequest.startDate=planDateChange(today.toString())
 //        plansRequest.endDate=planDateChange(today.toString())
 //    }
+
+    val liveDDayPercent = MutableLiveData<String>()
+    var count = 0
+    init {
+        Observable.interval(0, 1, TimeUnit.SECONDS).timeInterval().map {
+            count++
+        }.subscribe {
+            //퍼센트 계산
+            liveDDayPercent.postValue(it.toString())
+
+        }.disposeOnDestroy(this)
+    }
 }
 
 

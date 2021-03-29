@@ -22,328 +22,328 @@
         android:orientation="vertical"
         tools:context=".ui.plan.MakePlanActivity">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#f5f5f5"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/icon_left"
-                android:backgroundTint="@color/black_all"
-                android:layout_marginVertical="5dp"
-                android:layout_marginStart="15dp"/>
-            <TextView
-                style="@style/spoqa_medium_14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/check_leave_date"
-                android:layout_centerInParent="true"
-                android:textColor="@color/black_all"/>
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="#f5f5f5"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:background="@drawable/icon_left"-->
+<!--                android:backgroundTint="@color/black_all"-->
+<!--                android:layout_marginVertical="5dp"-->
+<!--                android:layout_marginStart="15dp"/>-->
+<!--            <TextView-->
+<!--                style="@style/spoqa_medium_14"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/check_leave_date"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:textColor="@color/black_all"/>-->
 
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#f5f5f5"
-            android:orientation="vertical">
+<!--        </RelativeLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#f5f5f5"-->
+<!--            android:orientation="vertical">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f5f5f5"
-                android:orientation="vertical">
-
-
-            <TextView
-                style="@style/spoqa_regular_10"
-                android:layout_width="62dp"
-                android:layout_height="25dp"
-                android:background="@drawable/cal_btn_background_unselected"
-                android:backgroundTint="@color/icon_gray"
-                android:textColor="@color/white_two"
-                android:text="@string/manage_vaca"
-                android:gravity="center"
-                android:layout_gravity="right"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="16dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/rect_radius_8"
-                    android:backgroundTint="#eeeeee"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/leftDays"
-                        android:textColor="@color/black_all" />
-
-                    <TextView
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/leftall"
-                        android:textColor="@color/text_gray" />
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="0.48sp"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:lineSpacingExtra="0.48sp"
-                        android:text=" /"
-                        android:textColor="@color/text_gray"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:background="#f5f5f5">
-
-                    <TextView
-                        android:id="@+id/txt_type_regul"
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="32dp"
-                        android:layout_height="17dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/cal_btn_background_selected"
-                        android:backgroundTint="#eeeeee"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/regular"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="20dp"
-                        android:includeFontPadding="false"
-                        android:text="정기휴가"
-                        app:layout_constraintStart_toEndOf="@+id/txt_type_regul"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="정기휴가" />
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="#f5f5f5"-->
+<!--                android:orientation="vertical">-->
 
 
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_regul_Indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+<!--            <TextView-->
+<!--                style="@style/spoqa_regular_10"-->
+<!--                android:layout_width="62dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:background="@drawable/cal_btn_background_unselected"-->
+<!--                android:backgroundTint="@color/icon_gray"-->
+<!--                android:textColor="@color/white_two"-->
+<!--                android:text="@string/manage_vaca"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="right"-->
+<!--                android:layout_marginTop="3dp"-->
+<!--                android:layout_marginEnd="16dp"/>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="36dp"-->
+<!--                    android:layout_marginHorizontal="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/rect_radius_8"-->
+<!--                    android:backgroundTint="#eeeeee"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/textView18"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="0일" />
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:text="@string/leftDays"-->
+<!--                        android:textColor="@color/black_all" />-->
 
-                    <TextView
-                        android:id="@+id/textView18"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:textColor="@color/text_gray"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView4"
-                        tools:text=" /8일" />
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/leftall"-->
+<!--                        android:textColor="@color/text_gray" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <View-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="1" />-->
 
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:lineSpacingExtra="0.48sp"-->
+<!--                        android:textSize="16sp" />-->
 
-            </LinearLayout>
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:lineSpacingExtra="0.48sp"-->
+<!--                        android:text=" /"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="16sp" />-->
+<!--                </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="83dp"-->
+<!--                    android:background="#f5f5f5">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:background="#f5f5f5">
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_type_regul"-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="32dp"-->
+<!--                        android:layout_height="17dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:background="@drawable/cal_btn_background_selected"-->
+<!--                        android:backgroundTint="#eeeeee"-->
+<!--                        android:gravity="center"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/regular"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="10sp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:id="@+id/textView13"
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="32dp"
-                        android:layout_height="17dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/cal_btn_background_selected"
-                        android:backgroundTint="#eeeeee"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/prize"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="20dp"
-                        android:includeFontPadding="false"
-                        android:text="@string/prize_holi"
-                        app:layout_constraintStart_toEndOf="@+id/textView13"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="포상휴가" />
-
-
-
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_prize_indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_holi_prize"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-                    <TextView
-                        android:id="@+id/txt_holi_prize"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/textView17"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="0일" />
-
-                    <TextView
-                        android:id="@+id/textView17"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:textColor="@color/text_gray"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_holi_prize"
-                        tools:text=" /15일" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView2"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="정기휴가"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/txt_type_regul"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="정기휴가" />-->
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <com.makeus.milliewillie.ui.view.CircleIndicator-->
+<!--                        android:id="@+id/holi_regul_Indicator"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView2" />-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:background="#f5f5f5">
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView4"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/textView18"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="0일" />-->
 
-                    <TextView
-                        android:id="@+id/txt_type_other"
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="32dp"
-                        android:layout_height="17dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/cal_btn_background_selected"
-                        android:backgroundTint="#eeeeee"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/other"
-                        android:textColor="@color/text_gray"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView18"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/textView4"-->
+<!--                        tools:text=" /8일" />-->
 
-                    <TextView
-                        android:id="@+id/textView16"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="20dp"
-                        android:includeFontPadding="false"
-                        android:text="@string/other_holi"
-                        app:layout_constraintStart_toEndOf="@+id/txt_type_other"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="기타휴가" />
-
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_other_Indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-                    <TextView
-                        android:id="@+id/txt_holi_other"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/textView15"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="0일" />
-
-                    <TextView
-                        android:id="@+id/textView15"
-                        style="@style/spoqa_medium_16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:textColor="@color/text_gray"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_holi_other"
-                        tools:text=" /15일" />
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            </LinearLayout>-->
 
-            </LinearLayout>
-        </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/white"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="83dp"-->
+<!--                    android:background="#f5f5f5">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView13"-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="32dp"-->
+<!--                        android:layout_height="17dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:background="@drawable/cal_btn_background_selected"-->
+<!--                        android:backgroundTint="#eeeeee"-->
+<!--                        android:gravity="center"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/prize"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="10sp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView14"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/prize_holi"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/textView13"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="포상휴가" />-->
+
+
+
+<!--                    <com.makeus.milliewillie.ui.view.CircleIndicator-->
+<!--                        android:id="@+id/holi_prize_indicator"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        app:layout_constraintBottom_toTopOf="@+id/txt_holi_prize"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView14" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_holi_prize"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/textView17"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="0일" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView17"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/txt_holi_prize"-->
+<!--                        tools:text=" /15일" />-->
+
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="83dp"-->
+<!--                    android:background="#f5f5f5">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_type_other"-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="32dp"-->
+<!--                        android:layout_height="17dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:background="@drawable/cal_btn_background_selected"-->
+<!--                        android:backgroundTint="#eeeeee"-->
+<!--                        android:gravity="center"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/other"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="10sp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView16"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/other_holi"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/txt_type_other"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="기타휴가" />-->
+
+<!--                    <com.makeus.milliewillie.ui.view.CircleIndicator-->
+<!--                        android:id="@+id/holi_other_Indicator"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/textView16" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_holi_other"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/textView15"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        tools:text="0일" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textView15"-->
+<!--                        style="@style/spoqa_medium_16"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="18sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/txt_holi_other"-->
+<!--                        tools:text=" /15일" />-->
+
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 </layout>

@@ -5,32 +5,32 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.model.UsersRequest
+import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.dDay.DdayActivity
-import com.makeus.milliewillie.ui.*
 import com.makeus.milliewillie.ui.holiday.HolidayActivity
+import com.makeus.milliewillie.ui.holiday.HolidayEditActivity
 import com.makeus.milliewillie.ui.info.AccountActivity
 import com.makeus.milliewillie.ui.info.RuleWebViewActivity
-import com.makeus.milliewillie.ui.profile.EditProfileFragment
-import com.makeus.milliewillie.ui.profile.ProfileActivity
-import com.makeus.milliewillie.ui.map.MapActivity
-import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.intro.*
 import com.makeus.milliewillie.ui.login.LoginActivity
+import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.mypage.InfoEnlistActivity
 import com.makeus.milliewillie.ui.mypage.InfoMiliActivity
 import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
+import com.makeus.milliewillie.ui.plan.PlanOutputActivity
+import com.makeus.milliewillie.ui.plan.PlanVacationActivity
+import com.makeus.milliewillie.ui.profile.ProfileActivity
+import com.makeus.milliewillie.ui.report.ReportActivity
+import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
 import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity
 import com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
-import com.makeus.milliewillie.ui.plan.PlanVacationActivity
-import com.makeus.milliewillie.ui.report.ReportActivity
 import java.util.*
 
 /**
@@ -75,8 +75,10 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun todayWorkout() = MyIntent(TodayWorkoutActivity::class.java)
     fun weightRecord() = MyIntent(WeightRecordActivity::class.java)
     fun holiday() = MyIntent(HolidayActivity::class.java)
+    fun holiedit(liveHoliType: String) = MyIntent(HolidayEditActivity::class.java).apply { putExtra(KEY_DATA,liveHoliType) }
     fun infoenlist() = MyIntent(InfoEnlistActivity::class.java)
     fun infomili() = MyIntent(InfoMiliActivity::class.java)
+    fun planoutput() = MyIntent(PlanOutputActivity::class.java)
     fun planvacation() = MyIntent(PlanVacationActivity::class.java)
     fun reports() = MyIntent(ReportActivity::class.java)
     fun profile() = MyIntent(ProfileActivity::class.java)

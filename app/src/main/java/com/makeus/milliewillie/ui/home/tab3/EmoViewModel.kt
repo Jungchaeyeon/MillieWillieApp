@@ -1,15 +1,55 @@
 package com.makeus.milliewillie.ui.home.tab3
 
 import androidx.lifecycle.MutableLiveData
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.EmotionImg
+import com.makeus.milliewillie.model.EmotionsRecordRequest
+import com.makeus.milliewillie.model.EmotionsRecordResponse
+import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 
-class EmoViewModel: BaseViewModel() {
+class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: RepositoryCached): BaseViewModel() {
+
+    var emotionsRecordRequest = EmotionsRecordRequest()
+    lateinit var emotionsRecordResponse : EmotionsRecordResponse
     val liveEmoList = MutableLiveData<List<EmotionImg>>()
     val liveTodayData = MutableLiveData<String>()
     val livePickEmo= MutableLiveData<EmotionImg>()
     val liveEmoMemo = MutableLiveData<String>()
+
+
+    //POST EMO
+    fun postEmotionsRecord()=
+        apiRepository.postEmotionsRecord(
+            EmotionsRecordRequest(
+                content = emotionsRecordRequest.content,
+                emotion= emotionsRecordRequest.emotion
+            )
+        ).subscribe {
+            if(it.isSuccess){
+                emotionsRecordResponse = it
+                repositoryCached.setValue(LocalKey.EMOTIONID, it.result.emotionRecordId)
+            }
+        }.disposeOnDestroy(this)
+
+    //PATCH EMO
+    fun patchEmotionsRecord()=
+        apiRepository.patchEmotionsRecord(
+            EmotionsRecordRequest(
+                content = emotionsRecordRequest.content,
+                emotion= emotionsRecordRequest.emotion
+            ),
+            path = repositoryCached.getEmotionId()
+        ).subscribe {
+            if(it.isSuccess){
+                emotionsRecordResponse = it
+                repositoryCached.setValue(LocalKey.EMOTIONID, it.result.emotionRecordId)
+            }
+        }.disposeOnDestroy(this)
+
 
     fun requestEmo(){
         liveEmoList.postValue(listOf(

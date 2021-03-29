@@ -36,6 +36,14 @@ class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fra
     }
 
     fun onClickOk() {
+
+//        if (currnet.isEmpty()){
+//            currnet = "0"
+//        }
+//
+//        currnet = binding.recordEditCurrent.text.toString()
+//        clickOk?.invoke(currnet)
+
         current = binding.recordEditCurrent.text.toString()
         if (current.isBlank()) {
             getString(R.string.toast_weight_record).showShortToastSafe()

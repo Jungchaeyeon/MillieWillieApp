@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,7 +9,7 @@
             type="com.makeus.milliewillie.ui.mypage.InfoMiliActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.mypage.MyPageEditViewModel" />
     </data>
 
     <LinearLayout
@@ -26,11 +27,12 @@
 
             <ImageButton
                 android:id="@+id/btn_x"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginVertical="5dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/ic_x" />
+                android:onClick="@{()->vi.finish()}"
+                android:background="@drawable/vic_icon_delete" />
 
             <View
                 android:layout_width="wrap_content"
@@ -83,11 +85,12 @@
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="176dp"
-                android:text="20.11.17"
                 android:textColor="@color/black_all"
+                android:text="@{vm.userEnlist}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2020.11.01"/>
 
             <TextView
                 android:id="@+id/textView9"
@@ -108,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginBottom="16dp"
-                android:text="육군"
                 android:textColor="@color/black_all"
+                android:text="@{vm.usersResponse.serveType}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView9" />
 
@@ -120,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="16dp"
-                android:text="일병2호봉"
+                android:text="@{vm.hobongClassInfo}"
                 android:textColor="@color/black_all"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView8" />
@@ -149,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="9dp"
                 android:layout_marginTop="6dp"
-                android:text="D - 152"
+                android:text="@{vm.allDday}"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -163,7 +166,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="19.122532453" />
+                android:text="@{vm.toDischargePercent}"
+                tools:text="15.45353453453"/>
 
             <View
                 android:layout_width="wrap_content"
@@ -174,18 +178,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="2020년 5월 18일" />
+                android:text="@{vm.formatDischargeDate}"
+                tools:text="2020년 3월 18일"/>
         </LinearLayout>
 
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.allDdayPercent}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
-            android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="19"/>
+            android:progressDrawable="@drawable/progressbar_custom"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -200,21 +205,23 @@
                 android:layout_marginVertical="9dp"
                 android:layout_marginStart="24dp"
                 android:letterSpacing="0.1"
-                android:text="@string/army_corporal"
+                android:text="@{vm.nextProm}"
                 android:textColor="@color/black_all"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="상병"/>
 
             <TextView
                 style="@style/spoqa_bold_22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="9dp"
-                android:text="D - 152"
+                android:text="@{vm.nextPromDday}"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginHorizontal="24dp"
             android:orientation="horizontal">
 
@@ -222,7 +229,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="19.122532453" />
+                android:text="@{vm.toNextPromPercent}"
+                tools:text="15.45353453453" />
 
             <View
                 android:layout_width="wrap_content"
@@ -233,17 +241,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="2020년 5월 18일" />
+                android:text="@{vm.formatNextPromDate}"
+                tools:text="2020년 3월 18일" />
         </LinearLayout>
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.nextDdayPercent}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
-            android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="19"/>
+            android:progressDrawable="@drawable/progressbar_custom" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,7 +267,7 @@
                 android:layout_marginVertical="9dp"
                 android:layout_marginStart="24dp"
                 android:letterSpacing="0.1"
-                android:text="일병 3호봉"
+                android:text="@{vm.monthProm}"
                 android:textColor="@color/black_all"
                 android:textSize="16sp" />
 
@@ -267,8 +276,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="9dp"
-                android:text="D - 22"
-                android:textSize="16sp" />
+                android:text="@{vm.monthPromDday}"
+                android:textSize="16sp"
+                tools:text="3호봉"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -278,9 +288,10 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:includeFontPadding="false"
-                android:text="19.122532453" />
+                android:text="@{vm.toMonthPromPercent}"
+                tools:text="15.45353453453"/>
 
             <View
                 android:layout_width="wrap_content"
@@ -291,17 +302,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
-                android:text="2020년 5월 18일" />
+                tools:text="2020년 3월 18일"
+                android:text="@{vm.formatNextMonthPromDate}" />
         </LinearLayout>
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:progress="@{vi.mothPromDday}"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:max="100"
             android:progressDrawable="@drawable/progressbar_custom"
-            android:progress="4"/>
+            />
     </LinearLayout>
 
 </layout>

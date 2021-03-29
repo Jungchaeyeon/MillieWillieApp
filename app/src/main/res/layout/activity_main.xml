@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<!--        <variable-->
+<!--            name="vm"-->
+<!--            type="com.makeus.milliewillie.ui.MainActivity" />-->
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.MainActivity" />

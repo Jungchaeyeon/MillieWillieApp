@@ -40,7 +40,7 @@ abstract class RepositoryCached {
         return value
     }
 
-    fun getToken() = getGeneralValue(LocalKey.TOKEN , "")
+    fun getToken() = getGeneralValue(LocalKey.TOKEN , "없음")
     fun getPickDate() = getGeneralValue(LocalKey.PICKDATE , "날짜선택")
     fun getType() = getValue(LocalKey.TYPE, "")
     fun getTypeDetail() = getValue(LocalKey.DETAILTYPE, "")
@@ -49,8 +49,10 @@ abstract class RepositoryCached {
     fun getColor() = getValue(LocalKey.COLOR, "#ffbe65")
     fun getOnlyDay() = getValue(LocalKey.ONLYDAY, "")
     fun getDayNight() = getValue(LocalKey.DAYNIGHT, "")
-    fun getStartDate() = getValue(LocalKey.STARTDATE, "")
-    fun getEnd() = getValue(LocalKey.ENDDATE, "")
+    fun getStartDate() = getGeneralValue(LocalKey.STARTDATE, "")
+    fun getEnd() = getGeneralValue(LocalKey.ENDDATE, "")
+    fun getPlanStartDate() = getGeneralValue(LocalKey.PLANSTART,"")
+    fun getPlanEndDate() = getGeneralValue(LocalKey.PLANEND,"")
     fun getGoal() = getValue(LocalKey.GOAL, "파이팅")
     fun getMiliDday() = getValue(LocalKey.MILIDDAY, "")
     fun getDDay() = getValue(LocalKey.ENDDDAY, "")
@@ -60,6 +62,16 @@ abstract class RepositoryCached {
     fun getSocialType() = getValue(LocalKey.SOCIALTYPE, "")
     fun getholiExist() = getValue(LocalKey.HOLIEXIST, false)
     fun getAvailHoli() = getValue(LocalKey.AVAILHOLI, 0)
+    fun getDday() = getValue(LocalKey.ALLDDAY, 0)//percent
+    fun getNextPromDday() = getValue(LocalKey.NEXTPROMDDAY, 0)//percent
+    fun getMonthPromDday() = getValue(LocalKey.MONTHPROMDDAY, 0)//percent
+    fun getPlanTotalDay() = getValue(LocalKey.MONTHPROMDDAY, "")//percent
+    fun getVacaId() = getValue(LocalKey.PATCHVACID, "")
+    fun getDiaryId() = getValue(LocalKey.DIARYID, "")
+    fun getPlanId() = getGeneralValue(LocalKey.PLANID, "0")
+    fun getEmotionId() = getGeneralValue(LocalKey.EMOTIONID, 0L)
+    fun getWorkId() = getGeneralValue(LocalKey.WORKID, "0")
+
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)
     protected abstract fun getRawValue(key: LocalKey): String?

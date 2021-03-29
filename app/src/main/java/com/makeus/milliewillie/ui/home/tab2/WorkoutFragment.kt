@@ -123,7 +123,7 @@ class WorkoutFragment :
         routineArray.clear()
 
         viewModel.apiRepository.getRoutines(
-            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), targetDate = date
+            path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0, targetDate = date
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -248,7 +248,7 @@ class WorkoutFragment :
                     .setOnClickOk { weight ->
                         viewModel.apiRepository.postDailyWeight(
                             body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
-                            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
+                            path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
                         )
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe {

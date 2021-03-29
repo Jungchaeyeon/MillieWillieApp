@@ -5,7 +5,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
-import com.makeus.milliewillie.util.Log
+
+import com.makeus.milliewillie.R
+
 
 class CircleIndicator : LinearLayout{
 
@@ -13,6 +15,7 @@ class CircleIndicator : LinearLayout{
 
     private var mDefaultCircle: Int = 0
     private var mSelectCircle: Int = 0
+    private var mUseCircle: Int = 0
 
     private var imageDot: MutableList<ImageView> = mutableListOf()
 
@@ -41,6 +44,7 @@ class CircleIndicator : LinearLayout{
 
         mDefaultCircle = defaultCircle
         mSelectCircle = selectCircle
+        mUseCircle = R.drawable.indicator_dot_use
 
         for (i in 0 until count) {
             imageDot.add(ImageView(mContext).apply {
@@ -60,6 +64,7 @@ class CircleIndicator : LinearLayout{
 
         mDefaultCircle = defaultCircle
         mSelectCircle = selectCircle
+        mUseCircle = R.drawable.indicator_dot_use
 
         for (i in 0 until count) {
             imageDot.add(ImageView(mContext).apply {
@@ -85,5 +90,18 @@ class CircleIndicator : LinearLayout{
         imageDot.forEachIndexed { index, imageView ->
             imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
         }
+    }
+    fun selectDotsTwice(nums: Int, uNums:Int) {
+//        imageDot.forEachIndexed { index, imageView ->
+//            imageView.setImageResource(if (index < rNums) mSelectCircle else mDefaultCircle)
+//            imageView.setImageResource(if (index < uNums) mUseCircle else mSelectCircle)
+//            imageView.setImageResource(if(index<uNums))
+//        }
+        imageDot.forEachIndexed {index, imageView->
+                if(index<uNums) imageView.setImageResource(mUseCircle)
+                else if(index<nums) imageView.setImageResource(mSelectCircle)
+                else imageView.setImageResource(mDefaultCircle)
+        }
+
     }
 }

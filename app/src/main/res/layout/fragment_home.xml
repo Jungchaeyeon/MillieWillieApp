@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeus.milliewillie.ui.MainGetViewModel" />
     </data>
 
     <RelativeLayout
@@ -22,10 +22,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMemoList"
-            addAll="@{vm.liveMainPlan}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            replaceAll="@{vm.liveMainPlan}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="60dp"
             android:isScrollContainer="true"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

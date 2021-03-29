@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.holiday.HolidayEditActivity" />
+
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.holiday.HoliViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/layout_holi_edit_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        android:orientation="vertical"
+        tools:context=".ui.holiday.HolidayActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/vic_icon_delete"
+                android:onClick="@{()->vi.finish()}" />
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/edit_holi"
+                android:textColor="@color/black_all" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="7dp"
+                android:gravity="center_vertical"
+                android:text="@string/done"
+                android:onClick="@{()->vi.onClickDone()}"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/devide"
+                android:textColor="@color/black_all"
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/spoqa_medium_12"
+                android:layout_width="64dp"
+                android:layout_height="26dp"
+                android:layout_marginVertical="17dp"
+                android:layout_marginStart="35dp"
+                android:background="@drawable/d_day_btn_background_selected"
+                android:gravity="center"
+                android:text="@{vm.liveHoliType}"
+                android:textColor="@color/main_col_blu" />
+        </LinearLayout>
+
+        <View
+            style="@style/MatchWrap_24"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@{vm.liveHoliType}"
+                android:textColor="@color/black_all"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/MatchWrap_24"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/all_holiday"
+                android:textColor="@color/black_all"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/allHoliDays"
+                android:layout_width="170dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="80dp"
+                android:background="@drawable/background_google_login"
+                android:backgroundTint="#eeeeee"
+                android:inputType="number"
+                android:paddingStart="145dp"/>
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/day"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black_all"/>
+        </LinearLayout>
+
+        <View
+            style="@style/MatchWrap_24"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:background="@color/light_gray" />
+        <LinearLayout
+            android:id="@+id/layout_army_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/regular_holi_day_num"/>
+        <TextView
+            style="@style/spoqa_medium_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/army"
+            android:textColor="@color/text_gray"/>
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/army_info"/>
+        <TextView
+            style="@style/spoqa_medium_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/navy"
+            android:textColor="@color/text_gray"/>
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/navy_info"/>
+        <TextView
+            style="@style/spoqa_medium_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/air_force"
+            android:textColor="@color/text_gray"/>
+        <TextView
+            style="@style/spoqa_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/air_force_info"/>
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_holi_add"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/add_holi_num"
+                android:textColor="@color/black_all"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="170dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="96dp"
+                android:background="@drawable/background_google_login"
+                android:backgroundTint="#eeeeee"
+                android:inputType="number"
+                android:paddingStart="145dp"/>
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/day"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black_all"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

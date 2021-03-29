@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.plan.PlanOutputViewModel" />
+        <variable
+            name="item"
+            type="com.makeus.milliewillie.model.PlansGet.Result.Diary" />
+
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/item_todo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/spoqa_medium_14"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:gravity="center_vertical"
+                android:text="@={item.title}"
+                android:textColor="@color/black_all"
+                tools:text="3월 2일" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="6dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/icon_check"
+                android:backgroundTint="#9d9d9d"
+                android:onClick="@{()->vi.onClickDone(item)}" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#e3e3e3" />
+
+        <EditText
+            android:id="@+id/edit_plan"
+            style="@style/spoqa_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingTop="22dp"
+            android:background="@color/trans"
+            android:hint="@string/write_plan"
+            android:maxLines="20"
+            android:minHeight="200dp"
+            android:paddingHorizontal="24dp"
+            android:text="@={item.content}" />
+
+    </LinearLayout>
+</layout>

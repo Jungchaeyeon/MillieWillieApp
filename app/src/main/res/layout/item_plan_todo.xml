@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.Plan.Todos" />
+            type="com.makeus.milliewillie.model.PlansRequest.Work" />
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.plan.MakePlanActivity" />
@@ -35,7 +35,7 @@
             android:background="@color/trans"
             android:fontFamily="@font/spoqa_han_sans_neo_medium"
             android:singleLine="true"
-            android:text="@{item.todo}"
+            android:text="@{item.content}"
             android:textColor="@color/icon_gray"
             android:textSize="14dp" />
 

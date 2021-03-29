@@ -14,7 +14,7 @@ class AuthInterceptor(val repositoryCached: RepositoryCached) : Interceptor {
         return chain.proceed(
             originalRequest.newBuilder().apply {
                 if (repositoryCached.getToken().isNotEmpty()) {
-                    Log.e(repositoryCached.getToken())
+                    Log.e(repositoryCached.getToken(),"jwt")
                     header("X-ACCESS-TOKEN", repositoryCached.getToken())
                 }
                 url(url)

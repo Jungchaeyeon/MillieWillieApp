@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
@@ -33,17 +34,18 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Log.e(repositoryCached.getToken().toString(),"토큰유무")
+
         if (repositoryCached.getToken().isNotEmpty()) {
                 //1단계 -> jwt 가지고 있니?
             viewModel.firstCheckJmt() {
                 isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
                 //2단계. 유효한 토큰?
                 if (it) {
-                    Log.e(it.toString(), "메인으로")
+                    Log.e(it.toString(), "유효한 토큰-> 메인으로")
                     ActivityNavigator.with(this).main().start()
                 } else {
-                    Log.e(it.toString(), "로그인으로")
-                  //  ActivityNavigator.with(this).login().start()
+                    Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
                 }
             }
         } else {
@@ -76,10 +78,12 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                 deviceToken = it
             }
             viewModel.onRequestLoginWithGoogle(this, data) {
-                nextStep(it)
+                Log.e("onRequestLoginWithGoogle")
+               nextStep(it)
             }
         }
     }
+
 
     fun onClickGoogleLogin() {
         repositoryCached.setValue(LocalKey.SOCIALTYPE, "G")
@@ -87,6 +91,23 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
             viewModel.getGoogleLoginClient(this)?.signInIntent,
             requestGoogleAuth
         )
+    }
+    fun nextStepGoogle(isSuccess: Boolean){
+        if(isSuccess){
+            Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
+            if(!repositoryCached.getIsMember()){
+                ActivityNavigator.with(this).welcome().start()
+            }
+            else{
+                ActivityNavigator.with(this).main().start()
+                Log.e(repositoryCached.getToken(),"jwt")
+            }
+        }else {
+            if(!repositoryCached.getIsMember()){
+            }else{
+                Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 
 
@@ -111,11 +132,20 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
 
     fun nextStep(isSuccess: Boolean) {
+        Log.e("두번거침")
         if (isSuccess) {
-            ActivityNavigator.with(this).main().start()
-        } else {
+            Log.e("onRequestLoginWithGoogle2")
+            Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
             if(!repositoryCached.getIsMember()){
                 ActivityNavigator.with(this).welcome().start()
+            }
+            else{
+                ActivityNavigator.with(this).main().start()
+                Log.e(repositoryCached.getToken(),"jwt")
+            }
+        } else {
+            Log.e("onRequestLoginWithGoogle2")
+            if(!repositoryCached.getIsMember()){
             }else{
                 Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
             }

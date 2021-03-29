@@ -62,28 +62,31 @@ class PlanCalendarActivity :
             startStrDate = dateFormat.format(startDate)
             endStrDate = dateFormat.format(endDate)
 
-            Log.e(startDate.toString(),"startDate")
-            Log.e(endDate.toString(),"endDate")
 
-            viewModel.plansRequest.startDate = planDateChange(startDate)
-            viewModel.plansRequest.endDate = planDateChange(endDate)
 
             val calcuDate = (endDate.time - startDate.time) / (60 * 60 * 24 * 1000)
 
+            //몇박 몇일
             dayNightStr = "$calcuDate" + "박${calcuDate + 1}일"
-            dayAvail= calcuDate.toInt().plus(1).toString()
             viewModel.liveDate.postValue("$startStrDate - $endStrDate")
-           // viewModel.liveOnlyDay.postValue(dayNightStr)
+
+            //휴가 사용 가능일 수
+            dayAvail= calcuDate.toInt().plus(1).toString()
+
+
+            repositoryCached.setValue(LocalKey.PLANSTART, planDateChange(startDate))
+            repositoryCached.setValue(LocalKey.PLANEND,planDateChange(endDate))
             repositoryCached.setValue(LocalKey.ONLYDAY,dayNightStr)
             repositoryCached.setValue(LocalKey.DAYNIGHT,dayNightStr)
         }
 
         calendar_view.setOnStartSelectedListener { startDate, label ->
             startStrDate = dateFormat.format(startDate)
-            viewModel.plansRequest.startDate = planDateChange(startDate)
-            viewModel.plansRequest.endDate = planDateChange(startDate)
+
             viewModel.liveDate.postValue("$startStrDate")
-            //viewModel.liveOnlyDay.postValue("1일")
+
+            repositoryCached.setValue(LocalKey.PLANSTART, planDateChange(startDate))
+            repositoryCached.setValue(LocalKey.PLANEND, planDateChange(startDate))
             repositoryCached.setValue(LocalKey.ONLYDAY,"1일")
             repositoryCached.setValue(LocalKey.DAYNIGHT,"1일")
         }
@@ -100,16 +103,18 @@ class PlanCalendarActivity :
         viewModel.liveDayAndNight.postValue(dayNightStr)
         repositoryCached.setValue(LocalKey.AVAILHOLI,dayAvail)
         repositoryCached.setValue(LocalKey.PICKDATE,viewModel.liveDate.value.toString())
-        Log.e(repositoryCached.getPickDate().toString(),"pickDate")
+       //Log.e(repositoryCached.getPickDate().toString(),"pickDate")
 
         onBackPressed()
     }
+
     fun onClickToday(){
         calendar_view.setSelectionDate(firstCalendarDate.time, thirdCalendarDate.time)
     }
+
     fun planDateChange(date: Date): String {
         val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        Log.e(planDateFormat.format(date).toString(),"날짜로그출력")
+        //Log.e(planDateFormat.format(date).toString(),"날짜로그출력")
         return planDateFormat.format(date).toString()
     }
 

@@ -22,8 +22,16 @@ class ExerciseSetViewModel: BaseViewModel() {
     var countSetItemListSize = countSetItemList.size
     var timeSetItemListSize = timeSetItemList.size
 
+
+//    val liveSwitchStatus = MutableLiveData<Boolean>()
+//    var liveDataSetCount = MutableLiveData<String>().apply { value = setCount.toString() }
+//    var setCount = 0
+//
+//    var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0 세트" }
+
     var liveDataSetCount = MutableLiveData<String>().apply { value = "0" }
     var liveDataUnderSetCount = MutableLiveData<String>().apply { value = "0세트" }
+
 
     var liveDataExerciseName = MutableLiveData<String>().apply { value = "" }
     
@@ -31,6 +39,18 @@ class ExerciseSetViewModel: BaseViewModel() {
         defaultAddSet()
 //        addItem()
     }
+
+
+//    fun increaseSetCount() {
+//        setCount += 1
+//        liveDataSetCount.postValue(setCount.toString())
+//        liveDataUnderSetCount.postValue("$setCount 세트")
+//        addItem()
+//    }
+//    fun decreaseSetCount() {
+//        setCount -= 1
+//        liveDataSetCount.postValue(setCount.toString())
+//        liveDataUnderSetCount.postValue("$setCount 세트")
 
     fun increaseSetCount(value: String) {
         liveDataSetCount.postValue(value)
@@ -42,6 +62,7 @@ class ExerciseSetViewModel: BaseViewModel() {
     fun decreaseSetCount(value: String) {
         liveDataSetCount.postValue(value)
         liveDataUnderSetCount.postValue("${value}세트")
+
         removeItem()
     }
 
@@ -55,6 +76,14 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun addItem() {
+
+//        wncSetItemList.add(WorkoutWncSet("$setCount 세트"))
+//        wncSetItemListSize = wncSetItemList.size
+//        countSetItemList.add(WorkoutCountSet("$setCount 세트"))
+//        countSetItemListSize = countSetItemList.size
+//        timeSetItemList.add(WorkoutTimeSet("$setCount 세트"))
+//        timeSetItemListSize = timeSetItemList.size
+
         //매개변수로 데이터 받아서 +1 하고 if로 조절하면 될 것 같음 1세트 부터 시작하는 거
 //        if (liveDataSetCount.value!!.toInt() == 1) {
 //            Log.e("liveDataSetCount.value = ${liveDataSetCount.value}")
@@ -68,10 +97,13 @@ class ExerciseSetViewModel: BaseViewModel() {
             timeSetItemList.add(WorkoutTimeSet("${liveDataSetCount.value!!.toInt()+1}세트"))
 //        }
 
+
+        liveDataWncAddSetList.postValue(wncSetItemList)
         defaultAddSet()
     }
 
     fun removeItem() {
+        //wncSetItemList.removeLast()
         wncSetItemList.removeAt(wncSetItemListSize-1)
         wncSetItemListSize = wncSetItemList.size
         countSetItemList.removeAt(countSetItemListSize-1)

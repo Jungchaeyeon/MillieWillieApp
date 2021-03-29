@@ -10,7 +10,7 @@
             type="com.makeus.milliewillie.ui.mypage.InfoEnlistActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+            type="com.makeus.milliewillie.ui.mypage.MyPageEditViewModel" />
     </data>
 
     <LinearLayout
@@ -36,6 +36,7 @@
                 android:layout_marginStart="15dp"
                 android:gravity="center"
                 android:text="@string/cancel"
+                android:onClick="@{()->vi.finish()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

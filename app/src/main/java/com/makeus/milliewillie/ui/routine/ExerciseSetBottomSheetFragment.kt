@@ -88,6 +88,30 @@ class ExerciseSetBottomSheetFragment:
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<WorkoutWncSet, RoutineExWncRecyclerItemBinding>(R.layout.routine_ex_wnc_recycler_item) {
                         vi = this@ExerciseSetBottomSheetFragment
                         item = it
+
+                        //var weightValue = ""
+                        //var countValue = ""
+//                        this.rebsWncRecyclerEditWeight.addTextChangedListener(object : TextWatcher{
+//                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                                weightValue = s.toString()
+//                            }
+//                            override fun afterTextChanged(s: Editable?) {
+//                                viewModel.addPositionItem(SetOptions.WNC, position, weightValue, 1)
+//                                Log.e(viewModel.wncSetItemList.toString())
+//                            }
+//                        })
+//                        this.rebsWncRecyclerEditCount.addTextChangedListener(object : TextWatcher{
+//                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                                countValue = s.toString()
+//                            }
+//                            override fun afterTextChanged(s: Editable?) {
+//                                viewModel.addPositionItem(SetOptions.WNC, position, countValue, 2)
+//                                Log.e(viewModel.wncSetItemList.toString())
+//                            }
+//                        })
+
                         var weightValue = ""
                         var countValue = ""
                         this.rebsWncRecyclerEditWeight.addTextChangedListener(object : TextWatcher{
@@ -120,6 +144,7 @@ class ExerciseSetBottomSheetFragment:
 //                                }
                             }
                         })
+
                     }
                 )
         }
@@ -291,6 +316,7 @@ class ExerciseSetBottomSheetFragment:
 
     }
 
+
     fun onClickAddItem(view: View) {
         when (view.id) {
             R.id.rebs_btn_plus -> {
@@ -383,6 +409,7 @@ class ExerciseSetBottomSheetFragment:
                     }
 //                }
             }
+
             SetOptions.COUNT -> {
 //                if (TextUtils.isEmpty(binding.rebsCountEditCount.text.toString()) && !binding.rebsSwitch.isChecked) {
 //                    "값을 입력해야합니다.".showShortToastSafe()
@@ -496,6 +523,12 @@ class ExerciseSetBottomSheetFragment:
     }
 
     fun onClickOk() {
+
+//        Log.e(viewModel.liveDataWncAddSetList.value.toString())
+//        initResult()
+//        clickOk?.invoke(exerciseName, resultArrayList)
+//        dismiss()
+
         if (binding.rebsEditSetCount.text.toString() == "0") {
             "세트 수는 '1'이상으로 설정해야 합니다.".showShortToastSafe()
         } else {

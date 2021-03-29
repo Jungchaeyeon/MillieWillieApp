@@ -118,6 +118,8 @@
     <string name="notice">알림</string>
     <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
 
+    <string name="string_id"><![CDATA[<font color="#9ee91d">텍스트 1 %1$s %s %d</font> <font color="#878787">텍스트 2 %2$s</font>]]></string>
+
     <string name="reset">초기화</string>
     <string name="makeplan">일정 만들기</string>
     <string name="makedday">D-day 만들기</string>
@@ -196,6 +198,7 @@
     <string name="regular">정기</string>
     <string name="add_holi">휴가 추가하기</string>
     <string name="regular_holi">정기휴가</string>
+    <string name="regular_holi_day_num">정기휴가 일수</string>
     <string name="other_holi">기타휴가</string>
     <string name="day">일</string>
     <string name="all_holiday">총 휴가일수</string>
@@ -210,6 +213,14 @@
     <string name="other">기타</string>
     <string name="manage_vaca">휴가 관리</string>
     <string name="avail_pick_date_vc">선택 가능 일수</string>
+    <string name="edit_holi">휴가 수정하기</string>
+    <string name="edit_holi_short">휴가 수정</string>
+    <string name="holi_bubble_text_info1">복무정보에 따라 휴가 일수가 다를 수 있습니다.</string>
+    <string name="holi_bubble_text_info2"> 더보기(      ) 버튼으로 휴가 정보를 수정 후 사용해주세요!</string>
+    <string name="write_plan">글 남기기...</string>
+    <string name="caution">주의</string>
+    <string name="caution_context1">사용하기를 누르면 사용된 휴가는 되돌릴 수 없습니다.</string>
+    <string name="caution_context2">휴가 사용이후 조정하심을 권장드립니다 :)</string>
     <string name="over_value_month">조회하고자 하는 날짜는 이번달 이전만 가능합니다</string>
     <string name="over_value_date">기록하고자 하는 날짜는 오늘까지만 가능합니다</string>
 

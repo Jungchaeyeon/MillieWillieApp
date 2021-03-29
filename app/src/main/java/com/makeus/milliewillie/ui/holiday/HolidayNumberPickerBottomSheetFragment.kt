@@ -38,7 +38,7 @@ class HolidayNumberPickerBottomSheetFragment :
         liveButton.postValue(context?.getString(R.string.ok))
 
         npSpinner.minValue=0
-        npSpinner.maxValue=viewModel.pickableMax
+        npSpinner.maxValue = viewModel.pickableMax
         npSpinner.value=0
     }
 
@@ -55,6 +55,10 @@ class HolidayNumberPickerBottomSheetFragment :
 
     fun onClickCancel() {
         dismiss()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 }

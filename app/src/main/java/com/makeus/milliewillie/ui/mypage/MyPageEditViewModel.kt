@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.mypage
 
 import android.annotation.SuppressLint
+import android.icu.util.Calendar.DAY_OF_MONTH
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
@@ -14,7 +15,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
+import java.util.Calendar.DAY_OF_MONTH
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
@@ -261,12 +264,14 @@ class MyPageEditViewModel(
     }
 
     fun calHobongDday(): Int {
-        val cal = Calendar.getInstance()
+        val cal = Calendar.getInstance(TimeZone.getDefault())
         val allMonthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
-        //  Log.e(allMonthDay.toString(),"이번달 최대일")
-        val today = allMonthDay - Calendar.DATE
-        // Log.e(today.toString(),"오늘")
-        return allMonthDay - today
+        Log.e(allMonthDay.toString(),"이번달 최대일")
+        val today = cal.get(Calendar.DATE)
+
+        Log.e(today.toString(),"오늘")
+        Log.e((allMonthDay - today).toString(),"계산")
+        return allMonthDay - (today-1)
     }
 
 
@@ -287,14 +292,15 @@ class MyPageEditViewModel(
     }
 
     fun HobongPercent(): Float {
-        val cal = Calendar.getInstance()
+        val cal = Calendar.getInstance(TimeZone.getDefault())
         val df = SimpleDateFormat("yyyy-MM-dd")
         val allMonthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
-        val today = allMonthDay - Calendar.DATE
+        val today = cal.get(Calendar.DATE)
 
         val allDays = allMonthDay // 전체 날
-        val nowDays = allMonthDay - today// 첫날 ~ 오늘
-
+        val nowDays = allMonthDay - (allMonthDay - today)// 첫날 ~ 오늘
+//        Log.e(today.toString(),"계산2")
+//        Log.e(nowDays.toString(),"계산")
         return (nowDays * 100.toFloat() / allDays.toFloat())
     }
 

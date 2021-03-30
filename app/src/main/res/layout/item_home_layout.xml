@@ -43,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="18dp">
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -70,7 +71,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@{vi.classImg}" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="2dp"
+                    setImage="@{vm.classImg}" />
 
                 <TextView
                     style="@style/spoqa_regular_12"
@@ -205,7 +208,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_begin="16dp" />
+                        app:layout_constraintGuide_begin="24dp" />
 
 
                     <ProgressBar

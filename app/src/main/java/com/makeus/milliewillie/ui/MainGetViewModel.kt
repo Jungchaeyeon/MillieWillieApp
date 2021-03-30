@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.UsersResponse
@@ -23,7 +24,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     BaseViewModel() {
 
 
-    lateinit var mainResponse : Main.Result
+    lateinit var mainResponse: Main.Result
 
     val liveName = MutableLiveData<String>()
     val liveGoal = MutableLiveData<String>()
@@ -38,9 +39,10 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     val vacUseDays = MutableLiveData<String>()
     val vacTotalDays = MutableLiveData<String>()
     var nowPercentInt = 0
-    var nowPercentStr ="%"
+    var nowPercentStr = "%"
     var nowPercentFlt = 0.0f
     var stateIdx = 0
+    var classImg = 0
 
     init {
         getMain()
@@ -48,8 +50,8 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
 
 
     fun getMain() = apiRepository.getMain()
-        .subscribe ({
-            if(it.isSuccess) {
+        .subscribe({
+            if (it.isSuccess) {
                 Log.e("User정보 호출 성공")
                 mainResponse = it.result
                 Log.e(mainResponse.toString())
@@ -61,12 +63,13 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 allDday.value = "D - " + calDday(mainResponse.endDate).toString()
                 monthProm.value = mainResponse.hobong.plus(1).toString() + "호봉 진급"
                 monthPromDday.value = "D - " + calHobongDday().toString()
+                classImg = initImg(it.result.normalPromotionStateIdx)
                 nextProm.value = this.initNextProm(mainResponse.normalPromotionStateIdx)
                 nextPromDday.value = "D - " + initNextPromDay(mainResponse.normalPromotionStateIdx)
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
                 vacUseDays.value = mainResponse.vacationUseDays.toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
-                if(mainResponse.stateIdx != 1){
+                if (mainResponse.stateIdx != 1) {
 
                 }
                 nowPercentInt =
@@ -78,58 +81,71 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 addAllItem(mainResponse.plan)
                 Log.e("$nowPercentFlt", "nowPercentFlt")
                 Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")
-            }else{
+            } else {
 
             }
-                    } , {
+        }, {
             it.printStackTrace()
         }).disposeOnDestroy(this)
 
+    fun initImg(classArmy: Int): Int {
+        return when(classArmy){
+            0->  R.drawable.icon_class_1
+            1-> R.drawable.icon_class_2
+            2->   R.drawable.icon_class_3
+            3->   R.drawable.icon_class_4
+            else-> R.drawable.icon_class_1
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
-    fun dateFormat(inputDate: String) : String{
+    fun dateFormat(inputDate: String): String {
         val dfParse = SimpleDateFormat("yyyy-MM-dd")
         val dfFormat = SimpleDateFormat("yyyy.MM.dd")
 
         return dfFormat.format(dfParse.parse(inputDate))
     }
 
-    fun initNextPromDay(nowClass: Int) : Int{
-        return when(nowClass){
-            0-> calDday(mainResponse.strPrivate)
-            1-> calDday(mainResponse.strCorporal)
-            2-> calDday(mainResponse.strSergeant)
-            3-> calDday(mainResponse.endDate)
+    fun initNextPromDay(nowClass: Int): Int {
+        return when (nowClass) {
+            0 -> calDday(mainResponse.strPrivate)
+            1 -> calDday(mainResponse.strCorporal)
+            2 -> calDday(mainResponse.strSergeant)
+            3 -> calDday(mainResponse.endDate)
             else -> 0
         }
     }
-    fun initClass(serviceId: Int, nowClass : Int) : String{
-       // if(serviceId == 0){
-        return when(nowClass){
-            0-> "일병"
-            1-> "이병"
-            2-> "상병"
-            3-> "병장"
+
+    fun initClass(serviceId: Int, nowClass: Int): String {
+        // if(serviceId == 0){
+        return when (nowClass) {
+            0 -> "일병"
+            1 -> "이병"
+            2 -> "상병"
+            3 -> "병장"
             else -> ""
         }
-    //}
+        //}
 //        else{
 //            return ""
 //        }
     }
-    fun initNextProm(nowClass: Int) : String{
-        return when(nowClass){
-            0-> "이병"
-            1-> "상병"
-            2-> "병장"
-            3-> "전역"
+
+    fun initNextProm(nowClass: Int): String {
+        return when (nowClass) {
+            0 -> "이병"
+            1 -> "상병"
+            2 -> "병장"
+            3 -> "전역"
             else -> ""
         }
     }
+
     //Main 일정 recyclerview itemlist
     val liveMainPlan = MutableLiveData<ArrayList<Main.Result.PlanMain>>().apply {
         this.postValue(
             arrayListOf(
-                Main.Result.PlanMain(0,"")
+                Main.Result.PlanMain(0, "")
             )
         )
     }
@@ -139,19 +155,20 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     fun addItem(item: Main.Result.PlanMain) {
 
         if (planItems.size == 0) {
-            planItems.add(0, Main.Result.PlanMain(0,""))
-          //  planItems.add(item)
+            planItems.add(0, Main.Result.PlanMain(0, ""))
+            //  planItems.add(item)
             liveMainPlan.value = planItems
         } else {
             planItems.add(item)
             liveMainPlan.value = planItems
         }
     }
+
     fun addAllItem(item: List<Main.Result.PlanMain>) {
 
         if (planItems.size == 0) {
-            planItems.add(0, Main.Result.PlanMain(0,""))
-         //   planItems.add(item[0])
+            planItems.add(0, Main.Result.PlanMain(0, ""))
+            //   planItems.add(item[0])
             liveMainPlan.value = planItems
         } else {
             planItems.addAll(item)
@@ -159,7 +176,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
         }
     }
 
-    fun removeItem(item: List<Main.Result.PlanMain>,i : Int) {
+    fun removeItem(item: List<Main.Result.PlanMain>, i: Int) {
         planItems.remove(item[i])
         liveMainPlan.value = planItems
     }
@@ -196,16 +213,16 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
         val allDays = calDateBetweenAnB(date1, date2) //입대 ~ 전역
         val nowDays = calDateBetweenAnB(date1, nowFormat) // 입대 ~ 오늘
 
-        return (nowDays*100).div(allDays.toFloat())
+        return (nowDays * 100).div(allDays.toFloat())
     }
 
     fun calHobongDday(): Int {
-        val cal =Calendar.getInstance()
-        val allMonthDay =Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
-      //  Log.e(allMonthDay.toString(),"이번달 최대일")
-        val today = allMonthDay-Calendar.DATE
-       // Log.e(today.toString(),"오늘")
-        return allMonthDay-today
+        val cal = Calendar.getInstance()
+        val allMonthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
+        //  Log.e(allMonthDay.toString(),"이번달 최대일")
+        val today = allMonthDay - Calendar.DATE
+        // Log.e(today.toString(),"오늘")
+        return allMonthDay - today
     }
 
 

@@ -20,6 +20,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
@@ -229,12 +230,9 @@ class WeightRecordActivity :
                             Handler().postDelayed({
                                 setLineChart()
                             }, 200)
-
-                            "호출 성공".showShortToastSafe()
                         } else {
                             Log.e("호출 실패")
                             Log.e(it.message)
-                            "호출 실패".showShortToastSafe()
                         }
                     }.disposeOnDestroy(this)
             }.show(supportFragmentManager)
@@ -248,9 +246,8 @@ class WeightRecordActivity :
                     if (month.toInt() <= Calendar.getInstance().get(Calendar.MONTH) + 1) {
                         viewModel.yearAndMonth.postValue("${year}년 ${month}월")
                         executeGetWeightRecord(month = month.toInt(), year = year.toInt())
-//                viewModel.liveDataWeightPerDay.observe(this, androidx.lifecycle.Observer { viewModel.defaultWeightPerDay() })
-                    } else getString(R.string.over_value_month).showShortToastSafe()
-                } else getString(R.string.over_value_month).showShortToastSafe()
+                    } else SampleToast.createToast(this, getString(R.string.over_value_month))?.show()
+                } else SampleToast.createToast(this, getString(R.string.over_value_month))?.show()
             }.show(supportFragmentManager)
     }
 

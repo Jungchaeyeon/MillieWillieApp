@@ -163,16 +163,12 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
 
     fun calculateDay(enlist: String) {
 
-        //enlist.showShortToastSafe()
         //입대일 받아옴
         val getDateFormat = SimpleDateFormat("yyyy.MM.dd")
         val setDateFormat = SimpleDateFormat("yyyy.MM.dd (EE)")
         val date = getDateFormat.parse(enlist)
         val cal = Calendar.getInstance()
         cal.time = date
-
-        // cal.time.toString().showShortToastSafe()
-        // df.format(cal.time).toString().showShortToastSafe()
 
         //진급일
         var promPrivate = ""

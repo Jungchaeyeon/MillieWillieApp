@@ -77,14 +77,4 @@ class MyPageEditActivity :
             ?.replace(R.id.mypage_edit_container, MyPageEditFragment.getInstance())
             ?.addToBackStack(null)?.commit()
     }
-
-//    fun requestUserUpdate() {
-//        viewModel.requestUserUpdate().subscribe {
-//            if (it.isSuccess) {
-//                "변경 완료".showShortToastSafe()
-//            } else {
-//                "변경 실패".showShortToastSafe()
-//            }
-//        }.disposeOnDestroy(this)
-//    }
 }

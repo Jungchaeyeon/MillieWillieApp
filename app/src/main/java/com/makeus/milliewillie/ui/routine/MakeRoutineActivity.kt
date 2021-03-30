@@ -689,12 +689,12 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             true -> {
                 val isDoNotExecute = setDoNotExecute()
                 if (!isDoNotExecute) executePatchRoutine()
-                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))
+                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))?.show()
             }
             false -> {
                 val isDoNotExecute = setDoNotExecute()
                 if (!isDoNotExecute) executePostRoutine()
-                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))
+                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))?.show()
             }
         }
 

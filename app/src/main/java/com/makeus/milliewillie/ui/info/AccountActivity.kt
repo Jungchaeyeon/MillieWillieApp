@@ -46,7 +46,7 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                 )
                 repositoryCached.setValue(LocalKey.TOKEN, "")
                 repositoryCached.setValue(LocalKey.ISMEMBER, false)
-                SampleToast.createToast(this, getString(R.string.toast_withdraw))
+                SampleToast.createToast(this, getString(R.string.toast_withdraw))?.show()
                 ActivityNavigator.with(this).login().start()
             }.disposeOnDestroy(this)
     }

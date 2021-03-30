@@ -7,6 +7,7 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroSettingNameBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.ui.SampleToast
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -25,7 +26,7 @@ class IntroSettingNameActivity :
             viewModel.usersRequest.name = edt_name.text.toString()
             ActivityNavigator.with(this).typedetail(viewModel.usersRequest).start()
         } else {
-            "이름을 입력해 주세요.".showShortToastSafe()
+            SampleToast.createToast(this,"이름을 입력해 주세요.")?.show()
         }
     }
     fun onClickBack(){

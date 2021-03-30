@@ -257,7 +257,7 @@ class MakePlanActivity :
 //                    )
 //                )
             } else {
-                "일정 생성 실패".showShortToastSafe()
+                SampleToast.createToast(this, "일정 생성 실패")?.show()
             }
         }.disposeOnDestroy(this)
     }

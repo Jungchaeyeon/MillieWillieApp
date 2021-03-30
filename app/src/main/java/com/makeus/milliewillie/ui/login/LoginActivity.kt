@@ -39,6 +39,9 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
         Log.e(repositoryCached.getToken().toString(),"토큰유무")
 
+        Log.e("isLogout = $isLogout")
+        Log.e("repositoryCached.getInApp() = ${repositoryCached.getInApp()}")
+
         if(!isLogout) {
             //logout상태면 true
                 //isLogout == false -> 로그인 상태

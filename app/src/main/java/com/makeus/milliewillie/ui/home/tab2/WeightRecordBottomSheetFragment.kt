@@ -24,12 +24,11 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-        dialog?.setCanceledOnTouchOutside(false)
     }
 
     override fun FragmentWorkoutWeightInputBottomSheetBinding.onBind() {
         vi = this@WeightRecordBottomSheetFragment
-
+        dialog?.setCanceledOnTouchOutside(false)
     }
 
     fun setOnClickOk(clickOk: ((String, String) -> Unit)): WeightRecordBottomSheetFragment {

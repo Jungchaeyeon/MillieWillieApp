@@ -22,8 +22,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.makeus.base.fragment.BaseDataBindingFragment
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentPhotoSelectBinding
+import com.makeus.milliewillie.model.PhotoSelectedItems
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.profile.adapter.PhotoSelectAdapter
 import com.makeus.milliewillie.util.Log
 import java.text.SimpleDateFormat
@@ -38,15 +41,15 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
     private var  fbStorage: FirebaseStorage? = null
     private var  viewProfile: View? = null
 
-    private var image = ""
+    private var image: String? = null
 
     lateinit var uploadRecyclerAdapter: PhotoSelectAdapter
     lateinit var gridLayoutManager: GridLayoutManager
 
     private val IMAGE_LOADER_ID = 1
-    private val listOfAllImages = ArrayList<String>()
+    private val listOfAllImages = ArrayList<PhotoSelectedItems>()
 
-    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
+    private val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
 
     @SuppressLint("WrongConstant")
     override fun FragmentPhotoSelectBinding.onBind() {
@@ -54,11 +57,11 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
         if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (shouldShowRequestPermissionRationale(
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                // Explain to the user why we need to read the contacts
-            }
+//            // Should we show an explanation?
+//            if (shouldShowRequestPermissionRationale(
+//                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//                // Explain to the user why we need to read the contacts
+//            }
 
             requestPermissions(
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -67,7 +70,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
             // MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE is an
             // app-defined int constant that should be quite unique
 
-            return
+            (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
         }
 
 
@@ -85,7 +88,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
             val columnIndexData = it.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
 
             while (it.moveToNext()) {
-                listOfAllImages.add(it.getString(columnIndexData));
+                listOfAllImages.add(PhotoSelectedItems(it.getString(columnIndexData)));
             }
             Log.e("onLoadFinished: $listOfAllImages")
             Log.d("onLoadFinished: ${listOfAllImages.size}")
@@ -93,6 +96,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
         }
     }
 
+    private var isSelected: Boolean = false
     fun setRecyclerAdapter() {
         uploadRecyclerAdapter = PhotoSelectAdapter(context, listOfAllImages)
         binding.photoRecycler.apply {
@@ -104,7 +108,25 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
                 it.setMyUploadItemClickListener(object :
                     PhotoSelectAdapter.MyUploadItemClickListener {
                     override fun onItemClick(position: Int) {
-                        image = listOfAllImages[position]
+                        when (!this@PhotoSelectFragment.isSelected) {
+                            true -> {
+                                listOfAllImages[position].isCheck = true
+                                uploadRecyclerAdapter.notifyDataSetChanged()
+                                listOfAllImages[position].isThisItem = 1
+                                isSelected = true
+                            }
+                            false -> {
+                                if (listOfAllImages[position].isThisItem == 1) {
+                                    listOfAllImages[position].isCheck = false
+                                    uploadRecyclerAdapter.notifyDataSetChanged()
+                                    isSelected = false
+                                    listOfAllImages[position].isThisItem = 0
+                                } else SampleToast.createToast(MyApplication.globalApplicationContext, "사진을 취소하고 선택해야 합니다")
+
+                            }
+                        }
+
+                        image = listOfAllImages[position].uri
                         Log.e("onItemClick: $image")
 
                     }

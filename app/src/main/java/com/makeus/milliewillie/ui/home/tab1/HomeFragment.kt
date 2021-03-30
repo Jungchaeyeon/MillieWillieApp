@@ -161,9 +161,9 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 //    }
 
     //x
-    fun onClickMyPage() {
-        ActivityNavigator.with(this).mypage().start()
-    }
+//    fun onClickMyPage() {
+//        ActivityNavigator.with(this).mypage().start()
+//    }
 
     fun onClickEdit() {
         ActivityNavigator.with(this).infomili().start()

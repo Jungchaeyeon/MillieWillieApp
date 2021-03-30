@@ -52,6 +52,33 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
 //        statusList = ArrayList()
 
         holder.itemView.setOnClickListener {
+            onItemClickAddCircle(items, holder)
+        }
+
+        holder.innerRecyclerView.setOnClickListener {
+            onItemClickAddCircle(items, holder)
+        }
+
+
+        holder.exerciseName.text = items.exName
+        holder.exerciseInfo.text = items.exInfo
+
+        setItemsRecycler(holder.innerRecyclerView, items.circleList, viewModel)
+    }
+
+    //inner 리사이클러뷰 어답터 장착
+    private fun setItemsRecycler(recyclerView: RecyclerView, item: ArrayList<StartRecyclerCircleItem>, viewModel: WorkoutStartViewModel){
+        val itemsAdapter = WorkoutStartInnerAdapter(context, item, viewModel)
+
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 10, GridLayoutManager.VERTICAL, false)
+            recyclerView.adapter = itemsAdapter
+        }
+    }
+
+    // on click circle count up
+    private fun onItemClickAddCircle(items: StartRecyclerItem, holder: WorkoutStartAdapter.StartViewHolder) {
+        if (items.stack <= itemList.size) {
             items.stack++
 
             val tempList = ArrayList<StartRecyclerCircleItem>()
@@ -67,39 +94,9 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
 
                 if (items.stack == items.circleList.size) {
                     holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-//                    statusList.add(position, items.stack)
                 }
                 notifyDataSetChanged()
             }, 200)
-
-//            try {
-//                statusList[position] = items.stack
-//                Log.e("statusList1 = $statusList")
-//            } catch (e: Exception) {
-//                try {
-//                    statusList.add(position, items.stack)
-//                    Log.e("statusList2 = $statusList")
-//                } catch (e: Exception) {
-//                    statusList.add(items.stack)
-//                    Log.e("statusList3 = $statusList")
-//                }
-//            }
-        }
-
-
-        holder.exerciseName.text = items.exName
-        holder.exerciseInfo.text = items.exInfo
-
-        setItemsRecycler(holder.innerRecyclerView, items.circleList, viewModel)
-    }
-
-    //inner 리사이클러뷰 어답터 장착
-    fun setItemsRecycler(recyclerView: RecyclerView, item: ArrayList<StartRecyclerCircleItem>, viewModel: WorkoutStartViewModel){
-        val itemsAdapter = WorkoutStartInnerAdapter(context, item, viewModel)
-
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 10, GridLayoutManager.VERTICAL, false)
-            recyclerView.adapter = itemsAdapter
         }
     }
 

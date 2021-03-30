@@ -14,11 +14,8 @@ object SharedPreference {
     }
 
     fun getSettingItem(key: String): String? {
-        Log.e("Return ${sSharedPreferences.getString(key, "")}")
-
-      //  return sSharedPreferences.getString(key, null)
-
-        return sSharedPreferences.getString(key, "")
+        Log.e("Return ${sSharedPreferences.getString(key, "0")}")
+        return sSharedPreferences.getString(key, "0")
     }
 
     fun putSettingBooleanItem(key: String, value: Boolean) {

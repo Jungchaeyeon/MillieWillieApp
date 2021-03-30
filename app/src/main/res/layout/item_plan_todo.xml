@@ -28,6 +28,7 @@
             android:backgroundTint="#e3e3e3"/>
 
         <EditText
+            style="@style/EditCursorStyle"
             android:id="@+id/edt_todo"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

@@ -10,12 +10,17 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
+import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,8 +35,12 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+
         Log.e(repositoryCached.getToken().toString(),"토큰유무")
 
+        Log.e("isLogout = $isLogout")
+        Log.e("repositoryCached.getInApp() = ${repositoryCached.getInApp()}")
 
         if(!isLogout) {
             //logout상태면 true
@@ -78,10 +87,10 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
-//            loginType = MyApplication.LOGINTYPE.GOOGLE
+            loginType = MyApplication.LOGINTYPE.GOOGLE
+            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
             viewModel.getFcmToken {
                 deviceToken = it
-                Log.e("deviceToken : ${deviceToken}")
             }
             viewModel.onRequestLoginWithGoogle(this, data) {
                 Log.e("onRequestLoginWithGoogle")
@@ -122,6 +131,8 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         viewModel.getFcmToken {
         }
         viewModel.onClickKakaoLogin(this) {
+            loginType = MyApplication.LOGINTYPE.KAKAO
+            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
             nextStep(it)
         }
 

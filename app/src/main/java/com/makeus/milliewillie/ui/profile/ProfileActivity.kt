@@ -10,6 +10,8 @@ import com.makeus.milliewillie.MyApplication.Companion.userName
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoProfileBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.ui.profile.PhotoSelectFragment.Companion.PROFILE_URL_KEY
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -17,17 +19,18 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.layout.activity_info_profile) {
     var backStack = true
     var fragmentBack: Fragment? = null
-    private var userBirthday: String = ""
 
     private val viewModel by viewModel<ProfileViewModel>()
 
     companion object {
         const val USER_BIRTHDAY_KEY = "USER_BIRTHDAY_KEY"
+        var userBirthday: String? = null
     }
 
     override fun onResume() {
         super.onResume()
         executeGetUsers()
+        onBackPressed()
     }
 
     private fun executeGetUsers() {
@@ -40,7 +43,7 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
 
                     userName = it.result.name.toString()
                     userProfileImgUrl = if (it.result.profileImg == null) "" else it.result.profileImg.toString()
-                    userBirthday = it.result.birthday.toString()
+                    userBirthday = if (it.result.birthday.isNullOrBlank()) "" else it.result.birthday.toString()
 
                     viewModel.liveDataUserBirth.value = userBirthday
                     viewModel.liveDataUserName.postValue(userName)
@@ -72,7 +75,7 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
                         Log.e("userBirthday In Profile = $userBirthday")
                     }
                 })
-                    .addToBackStack("profile").commitAllowingStateLoss()
+                    .commitAllowingStateLoss()
             }
             "replace" -> {
                 supportFragmentManager.beginTransaction().replace(R.id.profile_frame, fragment)
@@ -84,7 +87,7 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
 
     fun onClickEdit() {
         Log.e("onClickEdit")
-        transitionFragment(EditProfileFragment(), "add")
+        transitionFragment(EditProfileFragment(), "replace")
     }
 
     fun onClickBack() {

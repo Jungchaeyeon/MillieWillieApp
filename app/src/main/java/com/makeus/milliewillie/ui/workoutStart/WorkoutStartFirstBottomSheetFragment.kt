@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.workoutStart
 
+import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.AddExerciseBottomSheetBinding
@@ -16,9 +17,13 @@ class WorkoutStartFirstBottomSheetFragment  :
         fun getInstance() = WorkoutStartFirstBottomSheetFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
+    }
+
     override fun WorkoutStartFirstPopUpBinding.onBind() {
         vi = this@WorkoutStartFirstBottomSheetFragment
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
         dialog?.setCanceledOnTouchOutside(false)
     }
 

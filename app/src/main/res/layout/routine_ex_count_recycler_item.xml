@@ -23,6 +23,7 @@
             android:text="@{item.setCount}"/>
 
         <EditText
+            style="@style/EditCursorStyle"
             android:id="@+id/rebs_count_recycler_edit_count"
             android:layout_width="60dp"
             android:layout_height="wrap_content"

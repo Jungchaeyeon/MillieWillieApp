@@ -16,10 +16,14 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
+import com.makeus.milliewillie.MyApplication.Companion.exerciseId
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
@@ -60,19 +64,13 @@ class WorkoutFragment :
 
     companion object {
         fun getInstance() = WorkoutFragment()
-        const val IS_GOAL = "IS_GOAL"
-        const val EXERCISE_ID = "EXERCISE_ID"
-        const val ROUTINE_ID_KEY_FROM_WORKOUT = "ROUTINE_ID_KEY_FROM_WORKOUT"
-
-        var isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        var exerciseId: Long = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 1.toLong()
         var isModifiedRoutine: Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0.toLong()
+        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong()!!
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -81,7 +79,9 @@ class WorkoutFragment :
         // 루틴 GET 호출
         executeGetRoutines()
         // 체중 기록 GET 호출
-        executeGetWeightRecord()
+        executeGetDailyWeight()
+
+        setLineChart()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -96,9 +96,6 @@ class WorkoutFragment :
             (calendar.get(Calendar.MONTH)+1).toString(),
             calendar.get(Calendar.DAY_OF_MONTH).toString()
         )
-
-        isInputGoal = true
-        SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
 
         onClickWeightDateItemAdd() // 체중 입력
 
@@ -155,9 +152,7 @@ class WorkoutFragment :
             }.disposeOnDestroy(this)
     }
 
-
-
-    fun setRecyclerAdapter() {
+    private fun setRecyclerAdapter() {
         Log.e("routineItemList = $routineItemList")
         routineRecyclerAdapter = WorkoutRoutineAdapter(context, routineItemList)
         binding.workoutRecyclerTodayRoutine.apply {
@@ -180,7 +175,7 @@ class WorkoutFragment :
 
     }
 
-    fun executeGetWeightRecord() {
+    private fun executeGetDailyWeight() {
         dailyWeightArray.clear()
         weightDayArray.clear()
         viewModel.getDailyWeight()
@@ -221,7 +216,7 @@ class WorkoutFragment :
             }.disposeOnDestroy(this@WorkoutFragment)
     }
 
-    fun todayDate(){
+    private fun todayDate(){
         val dateInstance = Calendar.getInstance()
 
         val month = dateInstance.get(Calendar.MONTH) + 1
@@ -239,95 +234,91 @@ class WorkoutFragment :
             7 -> dayOfWeekText = "토"
         }
 
-        val today = String.format(getString(R.string.todayDateForm, month, day, dayOfWeekText))
+        val today = String.format(getString(R.string.todayDateFormWithDayOfWeek, month, day, dayOfWeekText))
 
         viewModel.liveDataToday.postValue(today)
+    }
+
+    private fun executePostDailyWeight() {
+        WeightAddRecordBottomSheetFragment.getInstance()
+            .setOnClickOk { weight ->
+                viewModel.apiRepository.postDailyWeight(
+                    body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
+                    path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
+                )
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        Log.e(it.isSuccess.toString())
+                        if (it.isSuccess) {
+                            Log.e("호출 성공")
+
+                            drawDailyWeight(goalValue.toString(), weight)
+                        } else {
+                            Log.e("호출 실패")
+                            Log.e(it.message)
+                        }
+                    }.disposeOnDestroy(this)
+            }.show(fragmentManager!!)
+    }
+
+    private fun executePostFirstWeight() {
+        WeightRecordBottomSheetFragment.getInstance()
+            .setOnClickOk { goal, current ->
+                viewModel.apiRepository.postFirstWeight(FirstWeightRequest(goalWeight = goal.toDouble(),
+                    firstWeight = current.toDouble()))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        Log.e(it.isSuccess.toString())
+                        if (it.isSuccess) {
+                            Log.e("postFirstWeight 성공")
+
+                            if (goal != "-1.0") goalValue = goal.toFloat()
+                            isInputGoal = true
+                            SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
+                            SharedPreference.putSettingItem(EXERCISE_ID, it.result.toString())
+                            exerciseId = it.result
+
+                            drawDailyWeight(goal, current)
+                        } else {
+                            Log.e("postFirstWeight 실패")
+                            Log.e(it.message)
+                        }
+                    }.disposeOnDestroy(this)
+            }.show(fragmentManager!!)
     }
 
     fun onClickWeightDateItemAdd() {
         // 목표체중 유무에 따라 다른 창을 띄움
         when (isInputGoal) {
-            true -> {
-                WeightAddRecordBottomSheetFragment.getInstance()
-                    .setOnClickOk { weight ->
-                        viewModel.apiRepository.postDailyWeight(
-                            body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
-                            path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
-                        )
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe {
-                                Log.e(it.isSuccess.toString())
-                                if (it.isSuccess) {
-                                    Log.e("호출 성공")
-
-                                    drawDailyWeight(goalValue.toString(), weight)
-
-                                    Handler().postDelayed({
-                                        setLineChart()
-                                    }, 200)
-
-                                    "호출 성공".showShortToastSafe()
-                                } else {
-                                    Log.e("호출 실패")
-                                    Log.e(it.message)
-                                    "호출 실패".showShortToastSafe()
-                                }
-                            }.disposeOnDestroy(this)
-                    }.show(fragmentManager!!)
-            }
-            false -> {
-                WeightRecordBottomSheetFragment.getInstance()
-                    .setOnClickOk { goal, current ->
-                        viewModel.apiRepository.postFirstWeight(FirstWeightRequest(goalWeight = goal.toInt(), firstWeight = current.toInt()))
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe {
-                                Log.e(it.isSuccess.toString())
-                                if (it.isSuccess) {
-                                    Log.e("postFirstWeight 성공")
-                                    Log.e(it.isSuccess.toString())
-                                    Log.e(it.code.toString())
-                                    Log.e(it.message)
-
-                                    drawDailyWeight(goal, current)
-
-                                    goalValue = goal.toFloat()
-                                    isInputGoal = true
-                                    SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
-                                    SharedPreference.putSettingItem(EXERCISE_ID, it.result.exerciseId.toString())
-
-                                    Handler().postDelayed({
-                                        setLineChart()
-                                    }, 200)
-                                    "호출 성공".showShortToastSafe()
-                                } else {
-                                    Log.e("postFirstWeight 실패")
-                                    Log.e(it.message)
-                                    "호출 실패".showShortToastSafe()
-                                }
-                            }.disposeOnDestroy(this)
-                    }.show(fragmentManager!!)
-            }
+            true -> executePostDailyWeight()
+            false -> executePostFirstWeight()
         }
 
     }
 
-    fun drawDailyWeight(goal: String, current: String) {
+    private fun drawDailyWeight(goal: String, current: String) {
         Log.e("called drawDailyWeight")
-        val goalText = String.format(getString(R.string.goal_weight_var, goal))
-        viewModel.goalWeightText.postValue(goalText)
-        binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+        var goalText = ""
+        if (goal != "-1.0") goalText = String.format(getString(R.string.goal_weight_var, goal))
 
-        if (todayMonth < 10) {
-            val dateform = String.format(getString(R.string.date_weight_record_format, "0$todayMonth", today))
-            viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
-        } else {
-            val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth.toString(), today))
-            viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+        if (current != "-1.0"){
+            viewModel.goalWeightText.postValue(goalText)
+            binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+            if (todayMonth < 10) {
+                val dateform = String.format(getString(R.string.date_weight_record_format, "0$todayMonth", today))
+                viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+            } else {
+                val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth.toString(), today))
+                viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
+            }
+
+            Handler().postDelayed({
+                setLineChart()
+            }, 200)
         }
     }
 
-    fun setLineChart() {
-        Log.e("line chart called")
+    private fun setLineChart() {
         val values = ArrayList<Entry>()
         val goalWeight = ArrayList<Entry>()
 
@@ -379,6 +370,8 @@ class WorkoutFragment :
             axisRight.isEnabled = false // x충 오른쪽 데이터 설정
             axisLeft.isEnabled = false // x축 왼쪽 데이터 설정
 
+            setNoDataText(getString(R.string.chart_no_data_text))
+            setNoDataTextColor(R.color.white)
             description.text = "" // 차트 설명 설정
             setPinchZoom(false) // 차트 확대 설정
             isDoubleTapToZoomEnabled = false // 더블탭으로 확대 설정
@@ -406,8 +399,6 @@ class WorkoutFragment :
             }
             2 -> { // 오늘의 운동 화면
                 ActivityNavigator.with(this).todayWorkout().start()
-
-//                ActivityNavigator.with(this).workoutStart().start()
             }
             3 -> {
                 when (routineArray[position].isDoneRoutine.toBoolean()) {

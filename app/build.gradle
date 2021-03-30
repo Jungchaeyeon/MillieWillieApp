@@ -38,23 +38,25 @@ android {
         }
     }
 
+
     dexOptions {
         jumboMode true
         javaMaxHeapSize "4g"
     }
 
+//    lintOptions{
+//        checkRealeaseBuilds false
+//    }
+
     buildTypes {
         debug{
             minifyEnabled false
             shrinkResources false
-
             signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
             signingConfig signingConfigs.debug
         }
     }

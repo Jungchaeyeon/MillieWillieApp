@@ -11,6 +11,7 @@
         <package android:name="com.kakao.talk" />
     </queries>
 
+<!--        android:debuggable="false"-->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -19,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_mw_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:ignore="HardcodedDebugMode">
         <activity android:name=".ui.plan.PlanOutputActivity">
         </activity>
 

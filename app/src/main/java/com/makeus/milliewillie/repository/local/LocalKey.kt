@@ -33,5 +33,7 @@ enum class LocalKey {
     ENDDATE,
     ENDDDAY,
     NEXTDDAY,
-    MONTHDDAY
+    MONTHDDAY,
+    LOGINTYPE,
+    LOGOUT
 }

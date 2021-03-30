@@ -69,6 +69,8 @@
             android:hint="@string/write_plan"
             android:maxLines="20"
             android:minHeight="200dp"
+            android:textCursorDrawable="@color/maincolor_blue"
+            android:pointerIcon="none"
             android:paddingHorizontal="24dp"
             android:text="@={item.content}" />
 

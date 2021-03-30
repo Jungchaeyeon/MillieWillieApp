@@ -53,6 +53,12 @@ class WeightRecordActivity :
     private val monthWeightArray = ArrayList<WorkoutWeightRecordDate>()
     private val dayWeightArray = ArrayList<WeightPerDay>()
 
+    override fun onResume() {
+        super.onResume()
+
+        setLineChart()
+    }
+
     @SuppressLint("ResourceAsColor", "StringFormatMatches")
     override fun ActivityWeightRecordBinding.onBind() {
         vi = this@WeightRecordActivity
@@ -249,7 +255,7 @@ class WeightRecordActivity :
     }
 
     // 라인차트 세팅
-    fun setLineChart() {
+    private fun setLineChart() {
         val values = ArrayList<Entry>()
         val goalWeight = ArrayList<Entry>()
 
@@ -299,8 +305,8 @@ class WeightRecordActivity :
         }
 
         set1.apply {
-            color = R.color.maincolor_blue
-            setCircleColor(R.color.maincolor_blue)
+            color = Color.parseColor("#00D8FF")
+            setCircleColor(Color.parseColor("#00D8FF"))
             valueTextSize = 0.0f
             setDrawHighlightIndicators(false)
         }

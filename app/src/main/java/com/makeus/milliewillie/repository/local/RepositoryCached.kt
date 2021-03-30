@@ -40,6 +40,8 @@ abstract class RepositoryCached {
         return value
     }
 
+    fun getLogout() = getGeneralValue(LocalKey.LOGOUT , false)
+    fun getLoginType() = getGeneralValue(LocalKey.LOGINTYPE , "")
     fun getToken() = getGeneralValue(LocalKey.TOKEN , "없음")
     fun getPickDate() = getGeneralValue(LocalKey.PICKDATE , "날짜선택")
     fun getType() = getValue(LocalKey.TYPE, "")

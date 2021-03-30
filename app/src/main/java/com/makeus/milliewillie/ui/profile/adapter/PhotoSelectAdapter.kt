@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.model.PhotoSelectedItems
+import com.makeus.milliewillie.ui.SampleToast
 
-class PhotoSelectAdapter(val context: Context?, var itemList: ArrayList<String>): RecyclerView.Adapter<PhotoSelectAdapter.ItemViewHolder>() {
+class PhotoSelectAdapter(val context: Context?, var itemList: ArrayList<PhotoSelectedItems>): RecyclerView.Adapter<PhotoSelectAdapter.ItemViewHolder>() {
 
     interface MyUploadItemClickListener {
         fun onItemClick(position: Int)
@@ -28,6 +32,7 @@ class PhotoSelectAdapter(val context: Context?, var itemList: ArrayList<String>)
         }
 
         val image: ImageView = itemView.findViewById(R.id.photo_item_img)
+        val layout: LinearLayout = itemView.findViewById(R.id.photo_item_image_layout)
     }
 
 
@@ -39,8 +44,16 @@ class PhotoSelectAdapter(val context: Context?, var itemList: ArrayList<String>)
 
     override fun onBindViewHolder(holder: PhotoSelectAdapter.ItemViewHolder, position: Int) {
         val items = itemList[position]
-        Glide.with(holder.image).load(items).into(holder.image)
+
+        when (items.isCheck) {
+            true -> holder.layout.setBackgroundResource(R.drawable.photo_selected_background)
+            false -> holder.layout.setBackgroundResource(R.drawable.photo_unselected_background)
+        }
+
+        Glide.with(holder.image).load(items.uri).into(holder.image)
     }
+
+
 
     override fun getItemCount(): Int = itemList.size
 }

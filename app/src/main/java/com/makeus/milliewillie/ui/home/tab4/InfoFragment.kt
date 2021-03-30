@@ -12,14 +12,18 @@ import com.makeus.milliewillie.MyApplication.Companion.userName
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.databinding.FragmentInfoBinding
 import com.makeus.milliewillie.R
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragment_info) {
 
     private val viewModel by viewModel<InfoViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     companion object {
         fun getInstance() = InfoFragment()
@@ -73,14 +77,14 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
             MyApplication.LOGINTYPE.KAKAO -> {
                 UserApiClient.instance.me { user, error ->
                     user?.let { UserApiClient.instance.logout {
-                        ActivityNavigator.with(this).welcome().start()
+                        ActivityNavigator.with(this).login().start()
                         activity?.finish()
                     } }
                 }
             }
             MyApplication.LOGINTYPE.GOOGLE -> {
                 FirebaseAuth.getInstance().signOut()
-                ActivityNavigator.with(this).welcome().start()
+                ActivityNavigator.with(this).login().start()
                 activity?.finish()
 
             }

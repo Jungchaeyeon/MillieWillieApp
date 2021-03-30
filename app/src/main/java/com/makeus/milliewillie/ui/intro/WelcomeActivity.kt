@@ -29,7 +29,7 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
         viewModel.bindLifecycle(this@WelcomeActivity)
         vIndicator.createDotPanel(2, R.drawable.indicator_dot_off, R.drawable.indicator_dot_on, 0)
 
-        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+
 
         //viewpager
         vp_intro.run {

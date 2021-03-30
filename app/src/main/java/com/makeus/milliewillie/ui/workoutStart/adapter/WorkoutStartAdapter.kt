@@ -67,7 +67,7 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
     }
 
     //inner 리사이클러뷰 어답터 장착
-    fun setItemsRecycler(recyclerView: RecyclerView, item: ArrayList<StartRecyclerCircleItem>, viewModel: WorkoutStartViewModel){
+    private fun setItemsRecycler(recyclerView: RecyclerView, item: ArrayList<StartRecyclerCircleItem>, viewModel: WorkoutStartViewModel){
         val itemsAdapter = WorkoutStartInnerAdapter(context, item, viewModel)
 
         recyclerView.apply {
@@ -77,25 +77,27 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
     }
 
     // on click circle count up
-    fun onItemClickAddCircle(items: StartRecyclerItem, holder: WorkoutStartAdapter.StartViewHolder) {
-        items.stack++
+    private fun onItemClickAddCircle(items: StartRecyclerItem, holder: WorkoutStartAdapter.StartViewHolder) {
+        if (items.stack <= itemList.size) {
+            items.stack++
 
-        val tempList = ArrayList<StartRecyclerCircleItem>()
+            val tempList = ArrayList<StartRecyclerCircleItem>()
 
-        for (i in 0 until items.circleList.size) {
-            tempList.add(StartRecyclerCircleItem(circle = R.drawable.one_currnet_gray))
+            for (i in 0 until items.circleList.size) {
+                tempList.add(StartRecyclerCircleItem(circle = R.drawable.one_currnet_gray))
+            }
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                for (i in 0 until items.stack) {
+                    items.circleList[i].circle = R.drawable.one_currnet_blue
+                }
+
+                if (items.stack == items.circleList.size) {
+                    holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                notifyDataSetChanged()
+            }, 200)
         }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            for (i in 0 until items.stack) {
-                items.circleList[i].circle = R.drawable.one_currnet_blue
-            }
-
-            if (items.stack == items.circleList.size) {
-                holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            }
-            notifyDataSetChanged()
-        }, 200)
     }
 
     override fun getItemCount(): Int = itemList.size

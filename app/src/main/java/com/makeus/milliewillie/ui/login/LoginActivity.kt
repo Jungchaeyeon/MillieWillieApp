@@ -34,12 +34,16 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        loginType = MyApplication.LOGINTYPE.GOOGLE
+        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+
         Log.e(repositoryCached.getToken().toString(),"토큰유무")
 
         if (repositoryCached.getToken().isNotEmpty()) {
                 //1단계 -> jwt 가지고 있니?
             viewModel.firstCheckJmt() {
                 isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
+                repositoryCached.getLoginType()
                 //2단계. 유효한 토큰?
                 if (it) {
                     Log.e(it.toString(), "유효한 토큰-> 메인으로")
@@ -74,6 +78,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == requestGoogleAuth) {
             loginType = MyApplication.LOGINTYPE.GOOGLE
+            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
             viewModel.getFcmToken {
                 deviceToken = it
             }
@@ -117,6 +122,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         }
         viewModel.onClickKakaoLogin(this) {
             loginType = MyApplication.LOGINTYPE.KAKAO
+            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
             nextStep(it)
         }
 

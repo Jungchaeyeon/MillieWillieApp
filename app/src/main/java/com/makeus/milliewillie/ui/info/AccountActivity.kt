@@ -9,14 +9,19 @@ import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoAccountBinding
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.layout.activity_info_account) {
 
     private val viewModel by viewModel<AccountViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     override fun ActivityInfoAccountBinding.onBind() {
         vi = this@AccountActivity
@@ -39,7 +44,10 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                     IS_GOAL,
                     isInputGoal
                 )
-                ActivityNavigator.with(this).welcome().start()
+                repositoryCached.setValue(LocalKey.TOKEN, "")
+                repositoryCached.setValue(LocalKey.ISMEMBER, false)
+                SampleToast.createToast(this, getString(R.string.toast_withdraw))
+                ActivityNavigator.with(this).login().start()
             }.disposeOnDestroy(this)
     }
 

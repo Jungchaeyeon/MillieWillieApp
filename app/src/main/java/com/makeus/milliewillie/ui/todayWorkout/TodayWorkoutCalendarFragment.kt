@@ -74,7 +74,9 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
         val calendarDayList: ArrayList<CalendarDay> = ArrayList()
 
+
         binding.calendar.apply {
+            addDecorator(SundayDecorator())
             state().edit()
                 .isCacheCalendarPositionEnabled(false)
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
@@ -242,8 +244,8 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
         if (month == todayMonth && day == todayDay) binding.todayCalendarTextTodayDateOfWeek.visibility = View.VISIBLE
         else binding.todayCalendarTextTodayDateOfWeek.visibility = View.GONE
 
-        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        var dayOfWeekText = ""
+//        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+//        var dayOfWeekText = ""
 
 //        val difDayOfWeek = if (todayDay > day) (todayDay - day) % 7 else (day - todayDay) % 7
 //        var difIntDayOfWeek = 0
@@ -259,17 +261,17 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 //            }
 //        }
 
-        when (dayOfWeek) {
-            1 -> dayOfWeekText = "일"
-            2 -> dayOfWeekText = "월"
-            3 -> dayOfWeekText = "화"
-            4 -> dayOfWeekText = "수"
-            5 -> dayOfWeekText = "목"
-            6 -> dayOfWeekText = "금"
-            7 -> dayOfWeekText = "토"
-        }
+//        when (dayOfWeek) {
+//            1 -> dayOfWeekText = "일"
+//            2 -> dayOfWeekText = "월"
+//            3 -> dayOfWeekText = "화"
+//            4 -> dayOfWeekText = "수"
+//            5 -> dayOfWeekText = "목"
+//            6 -> dayOfWeekText = "금"
+//            7 -> dayOfWeekText = "토"
+//        }
 
-        val today = String.format(getString(R.string.todayDateForm, month + 1, day, dayOfWeekText))
+        val today = String.format(getString(R.string.todayDateForm, month + 1, day))
 
         viewModel.liveDataToday.postValue(today)
         Log.e(today)

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.DatepickerBottomSheetDDayBinding
+import com.makeus.milliewillie.util.BasicTextFormat
 import java.util.*
 
 class DatePickerDdayBottomSheetDialogFragment:
@@ -42,7 +43,7 @@ class DatePickerDdayBottomSheetDialogFragment:
                     else -> "오늘" // 오늘 일 때
                 }
 
-            dotDate = "${year}. ${month + 1}. $day"
+            dotDate = BasicTextFormat.BasicDateFormat(year.toString(), (month + 1).toString(), day.toString())
             date = "${year}년 ${month + 1}월 ${day}일"
             dateYear = year.toString()
             dateMonth = (month + 1).toString()
@@ -86,7 +87,7 @@ class DatePickerDdayBottomSheetDialogFragment:
     fun onClickOk() {
         if (date.isBlank()) {
             date = "${Calendar.getInstance().get(Calendar.YEAR)}년 ${Calendar.getInstance().get(Calendar.MONTH)+1}월 ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}일"
-            dotDate = "${Calendar.getInstance().get(Calendar.YEAR)}. ${Calendar.getInstance().get(Calendar.MONTH) + 1}. ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}"
+            dotDate = BasicTextFormat.BasicDateFormat(Calendar.getInstance().get(Calendar.YEAR).toString(),(Calendar.getInstance().get(Calendar.MONTH) + 1).toString(), Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString())
             gapDays = "오늘"
             dateYear = "${Calendar.getInstance().get(Calendar.YEAR)}"
             dateMonth = "${Calendar.getInstance().get(Calendar.MONTH)+1}"

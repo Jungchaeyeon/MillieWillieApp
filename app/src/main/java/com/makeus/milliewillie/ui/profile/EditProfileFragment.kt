@@ -24,6 +24,8 @@ import com.makeus.milliewillie.model.PatchUsersRequest
 import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.profile.PhotoSelectFragment.Companion.PROFILE_URL_KEY
 import com.makeus.milliewillie.ui.profile.ProfileActivity.Companion.USER_BIRTHDAY_KEY
+import com.makeus.milliewillie.ui.profile.ProfileActivity.Companion.userBirthday
+import com.makeus.milliewillie.util.Loading
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,33 +40,37 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
     var uriPhoto: Uri? = null
     var downloadUri: Uri? = null
     var viewProfile: View? = null
-    private var userBirthday: String? = null
 
 
     private val viewModel by viewModel<ProfileViewModel>()
+
+    override fun onResume() {
+        super.onResume()
+        onBackPressed()
+    }
 
     override fun FragmentInfoEditProfileBinding.onBind() {
         vi = this@EditProfileFragment
         vm = viewModel
 
-        arguments?.let {
-            Log.e("userBirthday = $it")
-            userBirthday = it.getString(USER_BIRTHDAY_KEY).toString()
-            viewModel.liveDataUserBirth.value = userBirthday
-            Log.e("liveDataUserBirth = ${viewModel.liveDataUserBirth.value}")
-        }
 
-//        if (viewModel.liveDataUserBirth.value.isNullOrBlank()) viewModel.liveDataUserBirth.postValue("0000. 00. 00")
+        if (userBirthday == null) userBirthday = "0000-00-00"
+        viewModel.liveDataUserBirth.value = userBirthday
+        Log.e("userBirthday = $userBirthday")
+        Log.e("liveDataUserBirth = ${viewModel.liveDataUserBirth.value}")
 
-        arguments?.let {
-            if (it.getString(PROFILE_URL_KEY)?.isNotBlank() == true) {
-                uriPhoto = it.getString(PROFILE_URL_KEY)!!.toUri()
-            }
+
+        if (arguments?.getString(PROFILE_URL_KEY) != null) {
+            uriPhoto = arguments?.getString(PROFILE_URL_KEY)!!.toUri()
             Log.e("uriPhoto1: $uriPhoto")
         }
+
         if (uriPhoto != null) {
             Log.e("uriPhoto2: $uriPhoto")
             Glide.with(binding.userImgUserImage).load(uriPhoto.toString())
+                .placeholder(R.drawable.graphic_profile_big_with_camera).circleCrop().into(binding.userImgUserImage)
+        } else {
+            Glide.with(binding.userImgUserImage).load(userProfileImgUrl)
                 .placeholder(R.drawable.graphic_profile_big_with_camera).circleCrop().into(binding.userImgUserImage)
         }
 
@@ -74,22 +80,22 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        Log.e("requestCode: $requestCode, pickImageFromAlbum: $pickImageFromAlbum")
-        Log.e("resultCode: $resultCode, resultCode: ${Activity.RESULT_OK}")
-        if (requestCode == pickImageFromAlbum) {
-            if (resultCode == Activity.RESULT_OK) {
-                uriPhoto = data?.data
-                Log.e("uriPhoto: $uriPhoto")
-                if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    funImageUpload(viewProfile!!)
-                }
-            }
-        }
-
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        Log.e("requestCode: $requestCode, pickImageFromAlbum: $pickImageFromAlbum")
+//        Log.e("resultCode: $resultCode, resultCode: ${Activity.RESULT_OK}")
+//        if (requestCode == pickImageFromAlbum) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                uriPhoto = data?.data
+//                Log.e("uriPhoto: $uriPhoto")
+//                if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+//                    funImageUpload(viewProfile!!)
+//                }
+//            }
+//        }
+//
+//    }
 
     private fun funImageUpload(view: View) {
         val timeStamp = SimpleDateFormat("yyyyMMDD_HHmmss").format(Date())
@@ -101,7 +107,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
         val stream: FileInputStream
         val uploadTask: UploadTask?
 
-        if (uriPhoto != null) {
+        if (uriPhoto != null || uriPhoto == "".toUri()) {
             stream = FileInputStream(File("$uriPhoto"))
             Log.e("stream: $stream")
 
@@ -116,6 +122,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
             }
         } else {
             executePatchUsers()
+            onBackPressed()
         }
 
     }
@@ -143,11 +150,8 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
                 if (task.isSuccessful) {
                     val downloadUri = task.result
                     this.downloadUri = downloadUri
-                    Log.e("downloadUri = ${this.downloadUri}")
                     executePatchUsers()
                 } else {
-                    // Handle failures
-                    // ...
                     Log.e("Handler Failure")
                 }
             }
@@ -156,7 +160,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
 
     private fun executePatchUsers() {
         if (userBirthday.isNullOrBlank()
-            || userBirthday == "0000. 00. 00") userBirthday = null
+            || userBirthday == "0000-00-00") userBirthday = null
 
         val profileImg = if (downloadUri == null) null
         else downloadUri.toString()
@@ -176,15 +180,12 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
                     userName = it.result.name
                     userProfileImgUrl = it.result.profileImg
                     userBirthday = it.result.birthday
-                    viewModel.liveDataUserBirth.value = userBirthday
-
-                    Log.e("userName = $userName")
-                    Log.e("userProfileImgUrl = $userProfileImgUrl")
-                    Log.e("userBirthday = ${viewModel.liveDataUserBirth.value.toString()}")
+                    viewModel.liveDataUserBirth.postValue(userBirthday)
                 } else {
                     Log.e("patchUsers 호출 실패")
                     Log.e(it.message)
                 }
+                Loading.dissmiss()
                 activity?.supportFragmentManager?.popBackStack()
                 (activity as ProfileActivity).onBackPressed()
             }.disposeOnDestroy(this)
@@ -199,7 +200,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
     }
 
     fun onClickPhoto() {
-        (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "add")
+        (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
     }
 
     fun onClickComplete() {
@@ -207,13 +208,14 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
             getString(R.string.toast_must_input_name).showShortToastSafe()
         } else {
             if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Loading.show(context)
                 funImageUpload(viewProfile!!)
             }
         }
     }
 
     fun onClickCancel() {
-        (activity as ProfileActivity).onBackPressed()
+        activity?.supportFragmentManager?.popBackStack()
     }
 
 }

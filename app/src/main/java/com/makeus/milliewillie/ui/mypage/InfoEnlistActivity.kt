@@ -71,7 +71,7 @@ class InfoEnlistActivity : BaseDataBindingActivity<ActivityInfoEnlistBinding>(R.
                     finish()
                 }
                 else{
-                    "일정 수정실패".showShortToastSafe()
+                    SampleToast.createToast(this, "일정 수정실패")
                 }
             },{})
     }

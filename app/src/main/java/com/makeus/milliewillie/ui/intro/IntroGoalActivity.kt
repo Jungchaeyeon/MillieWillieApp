@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
+import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroGoalBinding
 import com.makeus.milliewillie.ext.showLongToastSafe
@@ -14,7 +16,9 @@ import com.makeus.milliewillie.model.UsersRequest
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_intro_goal.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
@@ -55,6 +59,12 @@ class IntroGoalActivity :
     fun requestUser() {
         viewModel.requestUser().subscribe {
             if (it.isSuccess) {
+                isInputGoal = false
+                SharedPreference.putSettingBooleanItem(
+                    IS_GOAL,
+                    isInputGoal
+                )
+
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
                 SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
                 ActivityNavigator.with(this).main().start()

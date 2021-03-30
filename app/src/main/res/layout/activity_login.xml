@@ -15,49 +15,66 @@
             type="com.makeus.milliewillie.ui.login.LoginViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.login.LoginActivity">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.48" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.90" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_animation"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="189dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/ani_mw_logintitle" />
 
+
         <Button
+            android:id="@+id/button3"
             style="@style/spoqa_medium_14"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="172dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/background_kakao_login"
             android:drawableLeft="@drawable/icon_login_kakao"
             android:foreground="@drawable/ripple_default"
             android:gravity="center"
-            android:textAlignment="viewStart"
             android:onClick="@{()->vi.onClickKakaoLogin()}"
             android:paddingStart="16dp"
             android:text="카카오 로그인"
-            android:textColor="#85000000"/>
-
-
+            android:textAlignment="viewStart"
+            android:textColor="#85000000"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
+            android:id="@+id/button2"
             style="@style/spoqa_medium_14"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="61dp"
-            android:textAlignment="viewStart"
             android:background="@drawable/background_google_login"
             android:drawableLeft="@drawable/icon_login_google"
             android:foreground="@drawable/ripple_default"
@@ -65,10 +82,13 @@
             android:onClick="@{()->vi.onClickGoogleLogin()}"
             android:paddingStart="16dp"
             android:text="구글 로그인"
-            tools:ignore="RtlCompat" />
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            tools:ignore="RtlCompat"
+            tools:layout_editor_absoluteX="32dp" />
             android:textColor="#54000000" />
 
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

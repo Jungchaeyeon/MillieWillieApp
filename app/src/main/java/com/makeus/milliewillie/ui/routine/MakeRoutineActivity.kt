@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.model.*
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.absItemListKey
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.armItemListKey
@@ -153,7 +154,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
     }
 
-    fun executePostRoutine() {
+    private fun executePostRoutine() {
         val detailNameList = ArrayList<String>()
 
         viewModel.liveDataSelectedItemList.value!!.forEach {
@@ -184,7 +185,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             }.disposeOnDestroy(this)
     }
 
-    fun executePatchRoutine() {
+    private fun executePatchRoutine() {
         val detailNameList = ArrayList<String>()
 
         viewModel.liveDataSelectedItemList.value!!.forEach {
@@ -673,22 +674,57 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
     }
 
     fun onClickRemoveItem() {
+        detailSet.removeAt(selectedListPosition)
+        detailSetEqual.removeAt(selectedListPosition)
+        detailType.removeAt(selectedListPosition)
+        detailTypeContext.removeAt(selectedListPosition)
+        detailTypePatchContext.removeAt(selectedListPosition)
+
         viewModel.removeSelectedItem(selectedListPosition)
     }
 
     fun onClickOk() {
         getRepeatDays()
-        Log.e("isModifiedRoutine in onClick = $isModifiedRoutine")
         when (isModifiedRoutine) {
             true -> {
-                executePatchRoutine()
-
+                val isDoNotExecute = setDoNotExecute()
+                if (!isDoNotExecute) executePatchRoutine()
+                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))
             }
             false -> {
-                executePostRoutine()
+                val isDoNotExecute = setDoNotExecute()
+                if (!isDoNotExecute) executePostRoutine()
+                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))
             }
         }
 
+    }
+
+    private fun setDoNotExecute(): Boolean {
+        var setIsDoNotExecute = false
+        for (i in 0 until detailType.size) {
+            when (detailType[i]) {
+                1 -> {
+                    if (detailTypeContext[i] == "#") {
+                        setIsDoNotExecute = true
+                        break
+                    }
+                }
+                2 -> {
+                    if (detailTypeContext[i] == "") {
+                        setIsDoNotExecute = true
+                        break
+                    }
+                }
+                3 -> {
+                    if (detailTypeContext[i] == "0") {
+                        setIsDoNotExecute = true
+                        break
+                    }
+                }
+            }
+        }
+        return setIsDoNotExecute
     }
 
     fun onClickCancel() {

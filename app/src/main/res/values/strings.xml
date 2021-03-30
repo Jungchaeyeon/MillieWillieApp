@@ -144,22 +144,28 @@
     <string name="service_type">복무 타입</string>
     <string name="goal">목표</string>
     <string name="name">이름</string>
+
+    <string name="chart_no_data_text">체중정보가 없습니다.</string>
     <string name="today_workout">오늘의 운동</string>
     <string name="weight_record">체중기록</string>
     <string name="goal_weight">목표체중</string>
     <string name="goal_weight_var">목표체중 : %skg</string>
     <string name="date_weight_record_format">%s/%d</string>
     <string name="current_weight">현재체중</string>
-    <string name="todayDateForm">%d월 %d일(%s)</string>
+    <string name="todayDateFormWithDayOfWeek">%d월 %d일(%s)</string>
+    <string name="todayDateForm">%d월 %d일</string>
     <string name="reports_delete_title">운동리포트를 삭제하시겠습니까?</string>
     <string name="reports_delete_title2">삭제시 운동하지 않은 상태로 처리됩니다.</string>
     <string name="reports_delete">리포트 삭제하기</string>
-    <string name="toast_delete">삭제되었습니다.</string>
-    <string name="toast_patch">수정되었습니다.</string>
-    <string name="toast_must_input_name">이름은 필수로 입력해야 합니다.</string>
+
+    <string name="toast_withdraw">탈퇴되었습니다</string>
+    <string name="toast_delete">삭제되었습니다</string>
+    <string name="toast_patch">수정되었습니다</string>
+    <string name="toast_must_input_name">이름은 필수로 입력해야 합니다</string>
     <string name="toast_weight_record">체중을 입력해야 합니다</string>
     <string name="toast_weight_record_per_today">체중은 하루에 한 번만 입력할 수 있습니다</string>
     <string name="toast_update_later">업데이트 예정입니다</string>
+    <string name="toast_input_routine_data">운동정보를 입력해야합니다</string>
 
     <string name="no_data_info">정보없음</string>
     <string name="middle_dot">·</string>

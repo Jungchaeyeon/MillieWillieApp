@@ -242,6 +242,7 @@
                     android:text="@{vm.liveDataUnderSetCount}" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_wnc_edit_weight"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -266,6 +267,7 @@
                     android:text="kg" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_wnc_edit_count"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -336,6 +338,7 @@
                     android:textColor="@color/black_all" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_count_edit_count"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -405,6 +408,7 @@
                     android:textColor="@color/black_all" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_time_edit_hour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -432,6 +436,7 @@
                     android:textColor="@color/black_all" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_time_edit_min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -459,6 +464,7 @@
                     android:textColor="@color/black_all" />
 
                 <EditText
+                    style="@style/EditCursorStyle"
                     android:id="@+id/rebs_time_edit_sec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

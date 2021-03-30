@@ -5,16 +5,22 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/photo_item_img"
+    <LinearLayout
+        android:id="@+id/photo_item_image_layout"
         android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:layout_margin="1dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/graphic_profile_big"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/photo_unselected_background"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/photo_item_img"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:layout_margin="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/graphic_profile_big" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

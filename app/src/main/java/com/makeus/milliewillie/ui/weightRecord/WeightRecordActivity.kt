@@ -14,6 +14,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
+import com.makeus.milliewillie.MyApplication.Companion.exerciseId
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.showShortToastSafe
@@ -21,8 +23,6 @@ import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.exerciseId
 import com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
@@ -52,6 +52,12 @@ class WeightRecordActivity :
 
     private val monthWeightArray = ArrayList<WorkoutWeightRecordDate>()
     private val dayWeightArray = ArrayList<WeightPerDay>()
+
+    override fun onResume() {
+        super.onResume()
+
+        setLineChart()
+    }
 
     @SuppressLint("ResourceAsColor", "StringFormatMatches")
     override fun ActivityWeightRecordBinding.onBind() {
@@ -209,7 +215,7 @@ class WeightRecordActivity :
         WeightAddRecordBottomSheetFragment.getInstance()
             .setOnClickOk { weight ->
                 viewModel.apiRepository.patchGoalWeight(body = PatchGoalWeightRequest(goalWeight = weight.toDouble()),
-                    path = SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong())
+                    path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         Log.e(it.isSuccess.toString())
@@ -249,7 +255,7 @@ class WeightRecordActivity :
     }
 
     // 라인차트 세팅
-    fun setLineChart() {
+    private fun setLineChart() {
         val values = ArrayList<Entry>()
         val goalWeight = ArrayList<Entry>()
 
@@ -283,6 +289,8 @@ class WeightRecordActivity :
             axisRight.isEnabled = false // x충 오른쪽 데이터 설정
             axisLeft.isEnabled = false // x축 왼쪽 데이터 설정
 
+            setNoDataText(getString(R.string.chart_no_data_text))
+            setNoDataTextColor(R.color.white)
             description.text = "" // 차트 설명 설정
             setPinchZoom(false) // 차트 확대 설정
             isDoubleTapToZoomEnabled = false // 더블탭으로 확대 설정
@@ -297,8 +305,8 @@ class WeightRecordActivity :
         }
 
         set1.apply {
-            color = R.color.maincolor_blue
-            setCircleColor(R.color.maincolor_blue)
+            color = Color.parseColor("#00D8FF")
+            setCircleColor(Color.parseColor("#00D8FF"))
             valueTextSize = 0.0f
             setDrawHighlightIndicators(false)
         }

@@ -7,17 +7,16 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
-import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
+import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.calendar.DotDecorator
 import com.makeus.milliewillie.calendar.SelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
-import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
 import com.makeus.milliewillie.util.BasicTextFormat
@@ -75,7 +74,9 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 
         val calendarDayList: ArrayList<CalendarDay> = ArrayList()
 
+
         binding.calendar.apply {
+            addDecorator(SundayDecorator())
             state().edit()
                 .isCacheCalendarPositionEnabled(false)
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
@@ -243,8 +244,8 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
         if (month == todayMonth && day == todayDay) binding.todayCalendarTextTodayDateOfWeek.visibility = View.VISIBLE
         else binding.todayCalendarTextTodayDateOfWeek.visibility = View.GONE
 
-        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        var dayOfWeekText = ""
+//        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+//        var dayOfWeekText = ""
 
 //        val difDayOfWeek = if (todayDay > day) (todayDay - day) % 7 else (day - todayDay) % 7
 //        var difIntDayOfWeek = 0
@@ -260,17 +261,17 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
 //            }
 //        }
 
-        when (dayOfWeek) {
-            1 -> dayOfWeekText = "일"
-            2 -> dayOfWeekText = "월"
-            3 -> dayOfWeekText = "화"
-            4 -> dayOfWeekText = "수"
-            5 -> dayOfWeekText = "목"
-            6 -> dayOfWeekText = "금"
-            7 -> dayOfWeekText = "토"
-        }
+//        when (dayOfWeek) {
+//            1 -> dayOfWeekText = "일"
+//            2 -> dayOfWeekText = "월"
+//            3 -> dayOfWeekText = "화"
+//            4 -> dayOfWeekText = "수"
+//            5 -> dayOfWeekText = "목"
+//            6 -> dayOfWeekText = "금"
+//            7 -> dayOfWeekText = "토"
+//        }
 
-        val today = String.format(getString(R.string.todayDateForm, month + 1, day, dayOfWeekText))
+        val today = String.format(getString(R.string.todayDateForm, month + 1, day))
 
         viewModel.liveDataToday.postValue(today)
         Log.e(today)
@@ -291,7 +292,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
             }
             false -> { // 운동 시작 화면
                 ActivityNavigator.with(this).workoutStart().apply {
-                    putExtra(WorkoutFragment.ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
+                    putExtra(ROUTINE_ID_KEY_FROM_WORKOUT, routineArray[position].routineId)
                     WorkoutFragment.isModifiedRoutine = true
                     start()
                 }

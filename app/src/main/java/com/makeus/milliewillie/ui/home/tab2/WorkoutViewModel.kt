@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.exerciseId
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.exerciseId
 import com.makeus.milliewillie.util.Log
 import java.util.*
 import kotlin.collections.ArrayList

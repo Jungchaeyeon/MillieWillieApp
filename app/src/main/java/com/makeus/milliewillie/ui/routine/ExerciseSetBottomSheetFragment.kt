@@ -135,13 +135,9 @@ class ExerciseSetBottomSheetFragment:
                                 countValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank()) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
                                     if (s.isNullOrBlank()) countValue = "0"
                                     Log.e(countValue)
                                     viewModel.addPositionItem(SetOptions.WNC, position, countValue, 2)
-//                                }
                             }
                         })
 
@@ -163,13 +159,9 @@ class ExerciseSetBottomSheetFragment:
                                 countValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank()) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
                                     if (s.isNullOrBlank()) countValue = "0"
                                     Log.e(countValue)
                                     viewModel.addPositionItem(SetOptions.COUNT, position, countValue, 1)
-//                                }
                             }
                         })
 
@@ -193,13 +185,9 @@ class ExerciseSetBottomSheetFragment:
                                 hourValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank() && binding.rebsSwitch.isChecked) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
                                     if (s.isNullOrBlank()) hourValue = "0"
                                     Log.e(hourValue)
                                     viewModel.addPositionItem(SetOptions.TIME, position, hourValue, 1)
-//                                }
                             }
                         })
                         this.rebsTimeRecyclerEditMin.addTextChangedListener(object : TextWatcher{
@@ -208,13 +196,9 @@ class ExerciseSetBottomSheetFragment:
                                 minValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank() && binding.rebsSwitch.isChecked) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
                                     if (s.isNullOrBlank()) minValue = "0"
                                     Log.e(minValue)
                                     viewModel.addPositionItem(SetOptions.TIME, position, minValue, 2)
-//                                }
                             }
                         })
                         this.rebsTimeRecyclerEditSec.addTextChangedListener(object : TextWatcher{
@@ -223,13 +207,9 @@ class ExerciseSetBottomSheetFragment:
                                 secValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank() && binding.rebsSwitch.isChecked) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
                                     if (s.isNullOrBlank()) secValue = "0"
                                     Log.e(secValue)
                                     viewModel.addPositionItem(SetOptions.TIME, position, secValue, 3)
-//                                }
                             }
                         })
 
@@ -367,65 +347,64 @@ class ExerciseSetBottomSheetFragment:
     fun initResult() {
         when (setOptionKind) {
             SetOptions.WNC -> {
-//                if ((TextUtils.isEmpty(binding.rebsWncEditWeight.text.toString())
-//                    || TextUtils.isEmpty(binding.rebsWncEditCount.text.toString())) && !binding.rebsSwitch.isChecked) {
-//                    "값을 입력해야합니다.".showShortToastSafe()
-//                } else {
-                    detailType.add(1)
-                    when (binding.rebsSwitch.isChecked) {
-                        true -> {
-                            detailSetEqual.add(true)
-                            val setCount = viewModel.liveDataSetCount.value.toString()
-                            var wncWeight = binding.rebsWncEditWeight.text.toString()
-                            var wncExCount = binding.rebsWncEditCount.text.toString()
+                detailType.add(1)
+                when (binding.rebsSwitch.isChecked) {
+                    true -> {
+                        detailSetEqual.add(true)
+                        val setCount = viewModel.liveDataSetCount.value.toString()
+                        val wncWeight = binding.rebsWncEditWeight.text.toString()
+                        val wncExCount = binding.rebsWncEditCount.text.toString()
 
-                            if (wncWeight.isBlank()) wncWeight = "0"
-                            if (wncExCount.isBlank()) wncExCount = "0"
+                        val setText = if (wncWeight.isBlank() && wncExCount.isBlank()) "${setCount}세트" else "${setCount}세트,"
+                        val weightText = if (wncWeight.isBlank()) "" else "${wncWeight}kg, "
+                        val countText = if (wncExCount.isBlank()) "" else "${wncExCount}개"
 
-                            detailSet.add(setCount.toInt())
-                            detailTypeContext.add("$wncWeight#$wncExCount")
-                            resultArrayList.add("${setCount}세트, ${wncWeight}kg, ${wncExCount}개")
-                        }
-                        false -> {
-                            var idx = 0
-                            var optionsText = ""
-                            detailSetEqual.add(false)
-                            viewModel.defaultAddSet()
-                            val optionArrayList = viewModel.liveDataWncAddSetList.value!!
-                            Log.e(optionArrayList.toString())
-                            optionArrayList.forEach {
-                                if (it.weight.isBlank()) it.weight = "0"
-                                if (it.count.isBlank()) it.count = "0"
-                                optionsText += if (idx == 0) "${it.weight}#${it.count}"
-                                else "/${it.weight}#${it.count}"
-                                idx++
-
-                                resultArrayList.add("${it.setCount}, ${it.weight}kg, ${it.count}개")
-                            }
-                            detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
-                            detailTypeContext.add(optionsText)
-
-                        }
+                        detailSet.add(setCount.toInt())
+                        detailTypeContext.add("$wncWeight#$wncExCount")
+                        resultArrayList.add("$setText $weightText $countText")
                     }
-//                }
+                    false -> {
+                        var idx = 0
+                        var optionsText = ""
+                        var setText = ""
+                        var weightText = ""
+                        var countText = ""
+                        detailSetEqual.add(false)
+                        viewModel.defaultAddSet()
+                        val optionArrayList = viewModel.liveDataWncAddSetList.value!!
+                        Log.e(optionArrayList.toString())
+                        optionArrayList.forEach {
+                            setText = if (it.weight.isBlank() && it.count.isBlank()) it.setCount else "${it.setCount},"
+                            weightText = if (it.weight.isBlank()) "" else "${it.weight}kg, "
+                            countText = if (it.count.isBlank()) "" else "${it.count}개"
+
+                            optionsText += if (idx == 0) "${it.weight}#${it.count}"
+                            else "/${it.weight}#${it.count}"
+                            idx++
+
+                            resultArrayList.add("$setText $weightText $countText")
+                        }
+                        detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
+                        detailTypeContext.add(optionsText)
+
+                    }
+                }
             }
 
             SetOptions.COUNT -> {
-//                if (TextUtils.isEmpty(binding.rebsCountEditCount.text.toString()) && !binding.rebsSwitch.isChecked) {
-//                    "값을 입력해야합니다.".showShortToastSafe()
-//                } else {
                     detailType.add(2)
                     when (binding.rebsSwitch.isChecked) {
                         true -> {
                             detailSetEqual.add(true)
                             val setCount = viewModel.liveDataSetCount.value.toString()
-                            var countCount = binding.rebsCountEditCount.text.toString()
+                            val countCount = binding.rebsCountEditCount.text.toString()
 
-                            if (countCount.isBlank()) countCount = "0"
+                            val setText = if (countCount.isBlank()) "${setCount}세트" else "${setCount}세트,"
+                            val countText = if (countCount.isBlank()) "" else "${countCount}개"
 
                             detailSet.add(setCount.toInt())
                             detailTypeContext.add(countCount)
-                            resultArrayList.add("${setCount}세트, ${countCount}개")
+                            resultArrayList.add("$setText $countText")
                         }
                         false -> {
                             var idx = 0
@@ -435,13 +414,14 @@ class ExerciseSetBottomSheetFragment:
                             val optionArrayList = viewModel.liveDataCountAddSetList.value!!
                             Log.e(optionArrayList.toString())
                             optionArrayList.forEach {
-                                if (it.count.isBlank()) it.count = "0"
+                                val setText = if (it.count.isBlank()) it.setCount else "${it.setCount},"
+                                val countText = if (it.count.isBlank()) "" else "${it.count}개"
 
-                                optionsText += if (idx == 0) "${it.count}"
+                                optionsText += if (idx == 0) it.count
                                 else "/${it.count}"
                                 idx++
 
-                                resultArrayList.add("${it.setCount}, ${it.count}개")
+                                resultArrayList.add("$setText $countText")
                             }
                             detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
                             detailTypeContext.add(optionsText)
@@ -450,11 +430,6 @@ class ExerciseSetBottomSheetFragment:
 //                }
             }
             SetOptions.TIME -> {
-//                if ((TextUtils.isEmpty(binding.rebsTimeEditHour.text.toString())
-//                    || TextUtils.isEmpty(binding.rebsTimeEditMin.text.toString())
-//                    || TextUtils.isEmpty(binding.rebsTimeEditSec.text.toString())) && !binding.rebsSwitch.isChecked) {
-//                    "값을 입력해야합니다.".showShortToastSafe()
-//                } else {
                     detailType.add(3)
                     when (binding.rebsSwitch.isChecked) {
                         true -> {
@@ -466,12 +441,14 @@ class ExerciseSetBottomSheetFragment:
                             val timeSec = binding.rebsTimeEditSec.text.toString()
                             var timeText = ""
 
-                            timeText += if (timeHour.isNotBlank()) "${timeHour}시간 " else "0시간 "
-                            timeText += if (timeMin.isNotBlank()) "${timeMin}분 " else "0분 "
-                            timeText += if (timeSec.isNotBlank()) "${timeSec}초 " else "0초 "
+                            val setText = if (timeHour.isBlank() && timeMin.isBlank() && timeSec.isBlank()) "${setCount}세트" else "${setCount}세트,"
+
+                            timeText += if (timeHour.isNotBlank()) "${timeHour}시간 " else ""
+                            timeText += if (timeMin.isNotBlank()) "${timeMin}분 " else ""
+                            timeText += if (timeSec.isNotBlank()) "${timeSec}초 " else ""
                             detailSet.add(setCount.toInt())
-                            resultArrayList.add("${setCount}세트, $timeText")
-                            optionsText = "${exchangeToSec(timeHour, timeMin, timeSec)}"
+                            resultArrayList.add("$setText $timeText")
+                            optionsText = "${exchangeToSec(timeHour, timeMin, timeSec)}"  // post, patch 를 위해 초단위로 합산
                             detailTypeContext.add(optionsText)
                         }
                         false -> {
@@ -484,15 +461,17 @@ class ExerciseSetBottomSheetFragment:
                             var timeText = ""
 
                             optionArrayList.forEach {
-                                timeText += if (it.hour.isNotBlank()) "${it.hour}시간 " else "0시간 "
-                                timeText += if (it.min.isNotBlank()) "${it.min}분 " else "0분 "
-                                timeText += if (it.sec.isNotBlank()) "${it.sec}초 " else "0초 "
+                                val setText = if (it.hour.isBlank() && it.min.isBlank() && it.sec.isBlank()) it.setCount else "${it.setCount},"
 
-                                optionsText += if (idx == 0) "${exchangeToSec(it.hour, it.min, it.sec)}"
+                                timeText += if (it.hour.isNotBlank()) "${it.hour}시간 " else ""
+                                timeText += if (it.min.isNotBlank()) "${it.min}분 " else ""
+                                timeText += if (it.sec.isNotBlank()) "${it.sec}초 " else ""
+
+                                optionsText += if (idx == 0) "${exchangeToSec(it.hour, it.min, it.sec)}" // post, patch 를 위해 초단위로 합산
                                 else "/${exchangeToSec(it.hour, it.min, it.sec)}"
                                 idx++
 
-                                resultArrayList.add("${it.setCount}, $timeText")
+                                resultArrayList.add("$setText $timeText")
                                 timeText = ""
                             }
                             detailSet.add(viewModel.liveDataSetCount.value!!.toInt())
@@ -505,7 +484,7 @@ class ExerciseSetBottomSheetFragment:
         }
     }
 
-    fun exchangeToSec(hour: String, min: String, sec: String): Int {
+    private fun exchangeToSec(hour: String, min: String, sec: String): Int {
         var exHour = 0
         var exMin = 0
         var exSec = 0

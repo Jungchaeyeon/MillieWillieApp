@@ -9,6 +9,7 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutFeedBinding
 import com.makeus.milliewillie.databinding.WorkoutFeedRoutineRecyclerItemBinding
@@ -16,7 +17,6 @@ import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
 import com.makeus.milliewillie.model.TodayRoutines
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.EXERCISE_ID
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
@@ -98,7 +98,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
     private fun executeGetAllRoutines() {
         allRoutineArray.clear()
         viewModel.apiRepository.getAllRoutines(
-            SharedPreference.getSettingItem(WorkoutFragment.EXERCISE_ID)!!.toLong()
+            SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

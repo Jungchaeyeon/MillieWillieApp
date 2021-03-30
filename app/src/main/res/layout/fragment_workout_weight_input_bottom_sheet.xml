@@ -58,6 +58,7 @@
                 android:text="@string/goal_weight" />
 
             <EditText
+                style="@style/EditCursorStyle"
                 android:id="@+id/w_record_edit_goal"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
@@ -104,6 +105,7 @@
                 />
 
             <EditText
+                style="@style/EditCursorStyle"
                 android:id="@+id/w_record_edit_current"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"

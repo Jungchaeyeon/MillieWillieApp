@@ -5,6 +5,7 @@ import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import java.util.*
 
@@ -27,30 +28,30 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
 
     override fun FragmentWorkoutWeightInputBottomSheetBinding.onBind() {
         vi = this@WeightRecordBottomSheetFragment
-
+        dialog?.setCanceledOnTouchOutside(false)
     }
-
 
     fun setOnClickOk(clickOk: ((String, String) -> Unit)): WeightRecordBottomSheetFragment {
         this.clickOk = clickOk
         return this
     }
 
-
-
     fun onClickOk() {
         goal = binding.wRecordEditGoal.text.toString()
         current = binding.wRecordEditCurrent.text.toString()
-        if (current.isBlank() || goal.isBlank()) {
-            getString(R.string.toast_weight_record).showShortToastSafe()
-        } else {
-            getString(R.string.toast_weight_record_per_today).showShortToastSafe()
-            clickOk?.invoke(goal, current)
-            dismiss()
-        }
+        if (current.isBlank()) current = "-1.0"
+        if (goal.isBlank()) goal = "-1.0"
+
+        SampleToast.createToast(context!!,getString(R.string.toast_weight_record_per_today))
+        clickOk?.invoke(goal, current)
+        dismiss()
+
     }
 
     fun onClickCancel(){
+        current = "-1.0"
+        goal = "-1.0"
+        clickOk?.invoke(goal, current)
         dismiss()
     }
 

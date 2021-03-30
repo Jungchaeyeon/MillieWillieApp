@@ -1,9 +1,7 @@
 package com.makeus.milliewillie.model
 
+import com.google.gson.annotations.SerializedName
+
 data class FirstWeight(
-    val result: Result
-): BaseResponse() {
-    data class Result(
-        val exerciseId: Long
-    )
-}
+    @SerializedName("result") val result: Long
+): BaseResponse()

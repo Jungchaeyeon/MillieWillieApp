@@ -162,7 +162,7 @@ class MakeRoutineViewModel(val apiRepository: ApiRepository): BaseViewModel() {
 
         defaultExItemList()
     }
-    fun defaultSelectedItemList() {
+    private fun defaultSelectedItemList() {
         liveDataSelectedItemList.postValue(_selectedItemList)
     }
 
@@ -185,6 +185,7 @@ class MakeRoutineViewModel(val apiRepository: ApiRepository): BaseViewModel() {
             _selectedItemList[i].index = "${index++}"
             Log.e("item = $_selectedItemList")
         }
+        Log.e("_selectedItemList = $_selectedItemList")
         defaultSelectedItemList()
     }
 

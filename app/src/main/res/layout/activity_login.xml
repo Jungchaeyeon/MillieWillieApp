@@ -55,11 +55,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/background_kakao_login"
-            android:drawableLeft="@drawable/icon_login_kakao"
+            android:drawableStart="@drawable/icon_login_kakao"
             android:foreground="@drawable/ripple_default"
-            android:gravity="center"
+            android:gravity="start|center_vertical"
             android:onClick="@{()->vi.onClickKakaoLogin()}"
             android:paddingStart="16dp"
             android:text="카카오 로그인"
@@ -84,7 +84,7 @@
 <!--            android:textAlignment="viewStart"-->
 <!--            app:layout_constraintBottom_toTopOf="@+id/guideline5"-->
 <!--            tools:ignore="RtlCompat"-->
-<!--            android:textColor="#54000000" -->
+<!--            android:textColor="#54000000"-->
 <!--            tools:layout_editor_absoluteX="32dp" />-->
 
 

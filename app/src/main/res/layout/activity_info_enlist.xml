@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:text="@string/set_goal"
             android:textColor="@color/black_all" />
 
@@ -83,21 +83,22 @@
             android:id="@+id/btn_goal"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/background_google_login"
-            android:drawableLeft="@drawable/ic_icon_goal"
             android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
             android:textAlignment="viewStart"
-            android:stateListAnimator="@color/non"
+            android:drawableStart="@drawable/icon_goal"
+            android:stateListAnimator="@null"
             android:text="@{vm.liveGoal}"
             tools:text="토익만 따서 나가자!" />
+
         <TextView
             style="@style/spoqa_medium_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:text="복무형태"
             android:textColor="@color/black_all" />
 
@@ -110,7 +111,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
-            android:stateListAnimator="@color/non"
+            android:stateListAnimator="@null"
             android:paddingHorizontal="10dp"
             android:textAlignment="viewStart"
             tools:text="@{vm.liveServicetype}"
@@ -135,8 +136,8 @@
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:onClick="@{()-> vi.onClickDate(0)}"
-            android:stateListAnimator="@color/non"
             android:paddingHorizontal="10dp"
+            android:stateListAnimator="@null"
             android:text="@{vm.liveDateButtonList[0]}"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
@@ -162,7 +163,7 @@
             android:onClick="@{()-> vi.onClickDate(1)}"
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[1]}"
-            android:stateListAnimator="@color/non"
+            android:stateListAnimator="@null"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
 
@@ -195,7 +196,7 @@
                 android:onClick="@{()-> vi.onClickDate(2)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[2]}"
-                android:stateListAnimator="@color/non"
+                android:stateListAnimator="@null"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -229,7 +230,7 @@
                 android:onClick="@{()-> vi.onClickDate(3)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[3]}"
-                android:stateListAnimator="@color/non"
+                android:stateListAnimator="@null"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -261,7 +262,7 @@
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
                 android:onClick="@{()-> vi.onClickDate(4)}"
-                android:stateListAnimator="@color/non"
+                android:stateListAnimator="@null"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[4]}"
                 tools:text="2021.3.3 (토)" />

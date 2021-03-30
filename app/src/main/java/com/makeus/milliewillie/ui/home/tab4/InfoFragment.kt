@@ -7,6 +7,7 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.MyApplication.Companion.userName
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
@@ -77,6 +78,8 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
             MyApplication.LOGINTYPE.KAKAO -> {
                 UserApiClient.instance.me { user, error ->
                     user?.let { UserApiClient.instance.logout {
+                        isLogout = true
+                        repositoryCached.setValue(LocalKey.INAPP, "T")
                         ActivityNavigator.with(this).login().start()
                         activity?.finish()
                     } }
@@ -84,6 +87,8 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
             }
             MyApplication.LOGINTYPE.GOOGLE -> {
                 FirebaseAuth.getInstance().signOut()
+                isLogout = true
+                repositoryCached.setValue(LocalKey.INAPP, "T")
                 ActivityNavigator.with(this).login().start()
                 activity?.finish()
 

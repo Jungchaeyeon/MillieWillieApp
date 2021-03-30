@@ -66,13 +66,15 @@ class IntroGoalActivity :
                 )
 
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
-                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)",)?.show()
+                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
                 ActivityNavigator.with(this).main().start()
                 Log.e(repositoryCached.getToken(), "환영users")
 //                Log.e( it.result.jwt, "환영 Test")
 //                Log.e( it.result.userId.toString(),"id 값")
             } else {
-                "가입 실패".showShortToastSafe()
+                repositoryCached.setValue(LocalKey.TOKEN,"")
+                ActivityNavigator.with(this).name().start()
+                SampleToast.createToast(this,"밀리윌리 가입에 실패했습니다")?.show()
             }
         }.disposeOnDestroy(this)
     }

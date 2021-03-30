@@ -38,6 +38,7 @@ class MyPageEditViewModel(
     var toDischargePercent = MutableLiveData<String>()
     var toNextPromPercent = MutableLiveData<String>()
     var toMonthPromPercent = MutableLiveData<String>()
+    var liveGoal = MutableLiveData<String>()
     var dischargePercent = 0.0f
     var nextPromPercent = 0.0f
     var monthPromPercent = 0.0f
@@ -62,8 +63,9 @@ class MyPageEditViewModel(
         Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {
             count2++.toInt()
         }.subscribe {
+            if(usersResponse.normalPromotionStateIdx !=3){
             //퍼센트 계산
-            toNextPromPercent.postValue(nextPromPercent.toString()+it.toString()+"%")
+            toNextPromPercent.postValue("$nextPromPercent$it%")}
 
         }.disposeOnDestroy(this)
         Observable.interval(0, 100, TimeUnit.MILLISECONDS).timeInterval().map {
@@ -85,10 +87,22 @@ class MyPageEditViewModel(
                 strPrivate = usersResponse.strPrivate,
                 strCorporal = usersResponse.strCorporal,
                 strSergeant = usersResponse.strSergeant,
-                proDate = null
+                proDate = null,
             )
         )
-
+    fun patchGoal()=
+        apiRepository.patchUsers(
+            UsersPatch(
+                serveType = null,
+                startDate = null,
+                endDate =null,
+                strPrivate = null,
+                strCorporal = null,
+                strSergeant = null,
+                proDate = null,
+                goal =  liveGoal.value.toString()
+            )
+        )
 
     fun dateChangeTest(string: String): String {
 
@@ -188,6 +202,7 @@ class MyPageEditViewModel(
         toNextPromPercent.value = nextPromPercent.toString()
         toMonthPromPercent.value = monthPromPercent.toString()
 
+
         Log.e(dischargePercent.toString(), "DischargePercnet")
         Log.e(nextPromPercent.toString(), "NextPromPercent")
         Log.e(monthPromPercent.toString(), "NextMonthPromPercent")
@@ -210,6 +225,7 @@ class MyPageEditViewModel(
             usersResponse = it.result
             initMain()
             percentInit()
+            liveGoal.value =usersResponse.goal
             Log.e(usersResponse.toString(), "스타트")
         }, {
             it.printStackTrace()

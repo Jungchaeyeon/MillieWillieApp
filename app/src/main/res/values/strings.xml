@@ -226,5 +226,6 @@
     <string name="caution_context2">휴가 사용이후 조정하심을 권장드립니다 :)</string>
     <string name="over_value_month">조회하고자 하는 날짜는 이번달 이전만 가능합니다</string>
     <string name="over_value_date">기록하고자 하는 날짜는 오늘까지만 가능합니다</string>
+    <string name="set_goal">목표 설정</string>
 
 </resources>

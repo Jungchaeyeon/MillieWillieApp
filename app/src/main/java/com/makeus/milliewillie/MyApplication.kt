@@ -43,6 +43,7 @@ class MyApplication : Application() {
 
         var isInputGoal: Boolean = false
         var exerciseId by Delegates.notNull<Long>()
+        var isLogout = false
 
         //const key
         const val MILLI_WILLI = "MILLI_WILLI"

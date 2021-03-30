@@ -41,9 +41,9 @@ class PlanOutputActivity :
         vi = this@PlanOutputActivity
         vm = viewModel
         viewModel.bindLifecycle(this@PlanOutputActivity)
-        setSupportActionBar(toolbar)
-        toolbar.title = " "
-
+        //setSupportActionBar(toolbar)
+        //toolbar.title = " "
+        binding
         binding.rvTodo.run {
             adapter = BaseDataBindingRecyclerViewAdapter<PlansGet.Result.Work>()
                 .addViewType(

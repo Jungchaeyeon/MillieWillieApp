@@ -207,14 +207,14 @@ class MakePlanActivity :
 
     }
 
-    fun onClickColor() {
-        ColorPickerBottomSheetFragment.getInstance()
-            .setOnClickColor {
-                btn_color.bgTint(it)
-                viewModel.livePlanColor.postValue(it)
-            }
-            .show(supportFragmentManager)
-    }
+//    fun onClickColor() {
+//        ColorPickerBottomSheetFragment.getInstance()
+//            .setOnClickColor {
+//                btn_color.bgTint(it)
+//                viewModel.livePlanColor.postValue(it)
+//            }
+//            .show(supportFragmentManager)
+//    }
 
     fun onClickCalendar() {
         ActivityNavigator.with(this).plancalendar(viewModel.plansRequest).start()

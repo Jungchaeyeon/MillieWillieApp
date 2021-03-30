@@ -186,7 +186,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/progressbar"
                         app:layout_constraintEnd_toEndOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="@id/guideline"
-                        app:layout_constraintTop_toTopOf="parent">
+                       >
 
                         <TextView
                             android:id="@+id/txt_now_percent"
@@ -215,7 +215,7 @@
                         android:layout_height="2dp"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="28dp"
-                        android:max="100"
+                        android:max="105"
                         android:progress="@{vm.nowPercentInt}"
                         android:progressDrawable="@drawable/progressbar_custom"
                         app:layout_constraintEnd_toEndOf="parent"

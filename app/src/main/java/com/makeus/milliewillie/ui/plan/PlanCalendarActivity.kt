@@ -108,10 +108,6 @@ class PlanCalendarActivity :
         onBackPressed()
     }
 
-    fun onClickToday(){
-        calendar_view.setSelectionDate(firstCalendarDate.time, thirdCalendarDate.time)
-    }
-
     fun planDateChange(date: Date): String {
         val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
         //Log.e(planDateFormat.format(date).toString(),"날짜로그출력")
@@ -120,6 +116,5 @@ class PlanCalendarActivity :
 
     override fun onResume() {
         super.onResume()
-        onClickToday()
     }
 }

@@ -59,7 +59,7 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                 nextProm.value = "병장진급"
                 nextPromDday.value= "D -"+calDday(usersResponse.strSergeant).toString()  }
             3-> { hobongClassInfo.value= "병장"
-                nextProm.value = "다음 진급 없음"}
+                nextProm.value = "다음 진급 없음" }
         }
         hobongClassInfo.value += usersResponse.hobong.toString()+"호봉"
         nowPercentInt= dischargeDdayPercent(usersResponse.startDate,usersResponse.endDate).toInt()
@@ -84,7 +84,7 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
             2 ->{ toNextPromPercent = dischargeDdayPercent(usersResponse.strCorporal,usersResponse.strSergeant).toString()
                 dfFormat.format(dfParse.parse(usersResponse.strSergeant))}
 
-            3 -> toNextPromPercent = dischargeDdayPercent(usersResponse.strSergeant,usersResponse.endDate).toString()
+            3 -> toNextPromPercent = ""
         }
         val cal = Calendar.getInstance()
         cal.set(Calendar.DAY_OF_MONTH+1,1); //다음 월의 1일로 변경

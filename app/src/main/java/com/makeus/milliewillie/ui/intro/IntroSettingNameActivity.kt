@@ -23,7 +23,7 @@ class IntroSettingNameActivity :
     fun onClickNext() {
         if (edt_name.text.isNotEmpty()) {
             viewModel.usersRequest.name = edt_name.text.toString()
-            ActivityNavigator.with(this).type(viewModel.usersRequest).start()
+            ActivityNavigator.with(this).typedetail(viewModel.usersRequest).start()
         } else {
             "이름을 입력해 주세요.".showShortToastSafe()
         }

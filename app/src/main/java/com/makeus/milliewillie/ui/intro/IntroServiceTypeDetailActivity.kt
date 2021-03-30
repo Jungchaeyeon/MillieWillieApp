@@ -48,12 +48,12 @@ class IntroServiceTypeDetailActivity :
 
     override fun onResume() {
         super.onResume()
-
-        if (repositoryCached.getType() == "일반병사") {
-            viewModel.requestDetailSoldier()
-        } else if (repositoryCached.getType() == "부사관") {
-            viewModel.requestDetailSergeant()
-        } else viewModel.requestDetailCaptain()
+        viewModel.requestDetailSoldier()
+//        if (repositoryCached.getType() == "일반병사") {
+//            viewModel.requestDetailSoldier()
+//        } else if (repositoryCached.getType() == "부사관") {
+//            viewModel.requestDetailSergeant()
+//        } else viewModel.requestDetailCaptain()
     }
 
     fun onClickItemD(detailType: String) {
@@ -61,11 +61,12 @@ class IntroServiceTypeDetailActivity :
         //복무 세부 타입 캐시 저장
         viewModel.usersRequest.serveType = detailType
         Log.e(viewModel.usersRequest.stateIdx.toString(),"stateIdxDetail")
-        if (repositoryCached.getType() == "일반병사") {
-            ActivityNavigator.with(this).enlist1(viewModel.usersRequest).start()
-        } else {
-            ActivityNavigator.with(this).enlist2(viewModel.usersRequest).start()
-        }
+        ActivityNavigator.with(this).enlist1(viewModel.usersRequest).start()
+//        if (repositoryCached.getType() == "일반병사") {
+//            ActivityNavigator.with(this).enlist1(viewModel.usersRequest).start()
+//        } else {
+//            ActivityNavigator.with(this).enlist2(viewModel.usersRequest).start()
+//        }
     }
 
     fun onClickBack() {

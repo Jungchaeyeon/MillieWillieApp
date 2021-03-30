@@ -40,7 +40,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     var nowPercentInt = 0
     var nowPercentStr ="%"
     var nowPercentFlt = 0.0f
-    var stateIdx: Int = 0
+    var stateIdx = 0
 
     init {
         getMain()
@@ -49,15 +49,12 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
 
     fun getMain() = apiRepository.getMain()
         .subscribe ({
-            if (it.isSuccess){
+            if(it.isSuccess) {
                 Log.e("User정보 호출 성공")
-                Log.e("it.result = ${it.result}")
                 mainResponse = it.result
                 Log.e(mainResponse.toString())
                 liveName.value = mainResponse.name
                 liveGoal.value = mainResponse.goal
-                allDday.value =  "D - "+calDday(mainResponse.endDate).toString()
-                monthPromDday.value = "D - "+ calHobongDday().toString()
                 if (it.result.stateIdx == 1){
                     nextProm.value = this.initNextProm(mainResponse.normalPromotionStateIdx)
                     nextPromDday.value = "D - "+ initNextPromDay(mainResponse.normalPromotionStateIdx)
@@ -65,18 +62,21 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                     liveHobongStr.value = mainResponse.hobong.toString() +"호봉"
                     monthProm.value = mainResponse.hobong.plus(1).toString() +"호봉 진급"
                 }
+                allDday.value = "D - " + calDday(mainResponse.endDate).toString()
+                monthPromDday.value = "D - " + calHobongDday().toString()
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
                 vacUseDays.value = mainResponse.vacationUseDays.toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
-                nowPercentInt = dischargeDdayPercent(mainResponse.startDate,mainResponse.endDate).toInt()
-                nowPercentStr =dischargeDdayPercent(mainResponse.startDate,mainResponse.endDate).toInt().toString()+"%"
-                nowPercentFlt = (nowPercentInt.toFloat()/100.0).toFloat()
-                stateIdx = it.result.stateIdx
+                if(mainResponse.stateIdx != 1){
+
+                }
+                nowPercentInt = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
+                nowPercentStr = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt().toString() + "%"
+                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat()
                 addAllItem(mainResponse.plan)
-                Log.e("$nowPercentFlt","nowPercentFlt")
-                Log.e((nowPercentInt.toFloat()/10.0).toString(),"nowPercentt")
-            } else {
-                apiRepository.getMain()
+                Log.e("$nowPercentFlt", "nowPercentFlt")
+                Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")
+                stateIdx = it.result.stateIdx
             }
                     } , {
             it.printStackTrace()

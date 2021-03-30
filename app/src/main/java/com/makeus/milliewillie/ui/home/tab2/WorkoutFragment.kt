@@ -25,6 +25,8 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
@@ -32,8 +34,11 @@ import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
@@ -43,14 +48,15 @@ class WorkoutFragment :
     BaseDataBindingFragment<FragmentWorkoutBinding>(R.layout.fragment_workout) {
 
     private val viewModel by viewModel<WorkoutViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     private var goalValue: Float = 0f
     private var currentValue: Float = 0f
 
-    val calendar = Calendar.getInstance()
+    private val calendar = Calendar.getInstance()
 
-    val todayMonth = calendar.get(Calendar.MONTH) + 1
-    val today = calendar.get(Calendar.DAY_OF_MONTH)
+    private val todayMonth = calendar.get(Calendar.MONTH) + 1
+    private val today = calendar.get(Calendar.DAY_OF_MONTH)
     private lateinit var reportDate: String
 
     val dailyWeightArray = ArrayList<DailyWeight>()
@@ -84,7 +90,6 @@ class WorkoutFragment :
         setLineChart()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceAsColor", "StringFormatMatches", "CheckResult")
     override fun FragmentWorkoutBinding.onBind() {
         vi= this@WorkoutFragment
@@ -425,6 +430,9 @@ class WorkoutFragment :
         }
     }
 
-
+    override fun onBackPressed(): Boolean {
+        if (!isInputGoal) executePostFirstWeight()
+        return super.onBackPressed()
+    }
 
 }

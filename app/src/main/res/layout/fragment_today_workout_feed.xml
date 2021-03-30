@@ -31,6 +31,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
                 android:src="@drawable/icon_gotobac"
+                android:onClick="@{()-> vi.onClickBack()}"
                 app:tint="@color/white" />
 
             <TextView

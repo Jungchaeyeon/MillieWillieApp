@@ -4,11 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.VacationIdPatch
 import com.makeus.milliewillie.model.VacationIdResponse
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -89,7 +91,7 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                 Log.e("휴가 수정 성공")
                 response.invoke(true)
             } else {
-                "휴가 수정실패".showShortToastSafe()
+                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
                 response.invoke(false)
             }
         }, {
@@ -107,7 +109,7 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                 Log.e("휴가 수정 성공")
                 response.invoke(true)
             } else {
-                "휴가 수정실패".showShortToastSafe()
+                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
                 response.invoke(false)
             }
         }, {

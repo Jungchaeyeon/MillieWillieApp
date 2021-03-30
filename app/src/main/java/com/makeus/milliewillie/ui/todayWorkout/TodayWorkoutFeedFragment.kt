@@ -175,5 +175,9 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
         }
     }
 
+    fun onClickBack() {
+        activity?.onBackPressed()
+    }
+
 
 }

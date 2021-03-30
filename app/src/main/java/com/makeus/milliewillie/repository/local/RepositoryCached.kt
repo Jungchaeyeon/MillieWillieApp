@@ -40,6 +40,7 @@ abstract class RepositoryCached {
         return value
     }
 
+    fun getWeightTime() = getGeneralValue(LocalKey.WEIGHTTIME , "")
     fun getLogout() = getGeneralValue(LocalKey.LOGOUT , false)
     fun getLoginType() = getGeneralValue(LocalKey.LOGINTYPE , "")
     fun getToken() = getGeneralValue(LocalKey.TOKEN , "없음")

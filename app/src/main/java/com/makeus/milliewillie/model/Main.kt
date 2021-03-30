@@ -1,7 +1,9 @@
 package com.makeus.milliewillie.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Main(
-    val result: Result
+    @SerializedName("result") val result: Result
 ): BaseResponse(){
     data class Result(
       val name : String,

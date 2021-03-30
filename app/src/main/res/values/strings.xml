@@ -224,8 +224,8 @@
     <string name="caution">주의</string>
     <string name="caution_context1">사용하기를 누르면 사용된 휴가는 되돌릴 수 없습니다.</string>
     <string name="caution_context2">휴가 사용이후 조정하심을 권장드립니다 :)</string>
-    <string name="over_value_month">조회하고자 하는 날짜는 이번달 이전만 가능합니다</string>
-    <string name="over_value_date">기록하고자 하는 날짜는 오늘까지만 가능합니다</string>
+    <string name="over_value_month">이번달 이전만 조회 가능합니다</string>
+    <string name="over_value_date">오늘 이전으로만 기록 가능합니다</string>
     <string name="set_goal">목표 설정</string>
 
 </resources>

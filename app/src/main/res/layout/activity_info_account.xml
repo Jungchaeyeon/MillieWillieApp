@@ -26,6 +26,7 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="15dp"
+                android:onClick="@{()-> vi.onClickBack()}"
                 android:src="@drawable/icon_gotobac" />
 
             <TextView

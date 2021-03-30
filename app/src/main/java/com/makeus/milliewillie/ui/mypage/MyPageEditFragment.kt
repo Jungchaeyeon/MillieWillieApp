@@ -11,6 +11,7 @@ import com.makeus.milliewillie.databinding.FragmentMypageEditBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.intro.UserViewModel
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
 import kotlinx.android.synthetic.main.fragment_mypage_edit.*
@@ -53,7 +54,7 @@ class MyPageEditFragment :
                     btn_ok.isEnabled = it
                     btn_ok.setTextColor(Color.parseColor("#b2babf"))
                 }
-                if(edit_txt.length() > maxLenth) "$maxLenth 자 내로 설정해주세요.".showShortToastSafe()
+                if(edit_txt.length() > maxLenth) SampleToast.createToast(context!!, "$maxLenth 자 내로 설정해주세요.")?.show()
 
 
             }
@@ -76,7 +77,6 @@ class MyPageEditFragment :
         when (viewModel.liveModifyTitle.value.toString()) {
             "이름" -> {
                 viewModel.liveUserName.postValue(viewModel.liveEditData.value.toString())
-                // viewModel.liveUserName.value.toString().showShortToastSafe()
             }
             "목표" -> {
                 viewModel.liveUserGoal.postValue(viewModel.liveEditData.value.toString())

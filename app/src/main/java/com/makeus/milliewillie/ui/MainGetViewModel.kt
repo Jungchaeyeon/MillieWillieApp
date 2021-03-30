@@ -2,18 +2,13 @@ package com.makeus.milliewillie.ui
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
-import com.airbnb.lottie.parser.moshi.JsonReader
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Main
-import com.makeus.milliewillie.model.MainSchedule
-import com.makeus.milliewillie.model.UsersResponse
 import com.makeus.milliewillie.repository.ApiRepository
-import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
-import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,30 +52,29 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 Log.e(mainResponse.toString())
                 liveName.value = mainResponse.name
                 liveGoal.value = mainResponse.goal
-                liveClass.value =
-                    this.initClass(mainResponse.stateIdx, mainResponse.normalPromotionStateIdx)
-                liveHobongStr.value = mainResponse.hobong.plus(2).toString() + "호봉"
+                if (it.result.stateIdx == 1){
+                    nextProm.value = this.initNextProm(mainResponse.normalPromotionStateIdx)
+                    nextPromDday.value = "D - "+ initNextPromDay(mainResponse.normalPromotionStateIdx)
+                    liveClass.value = this.initClass(mainResponse.stateIdx,mainResponse.normalPromotionStateIdx)
+                    liveHobongStr.value = mainResponse.hobong.toString() +"호봉"
+                    monthProm.value = mainResponse.hobong.plus(1).toString() +"호봉 진급"
+                }
                 allDday.value = "D - " + calDday(mainResponse.endDate).toString()
-                monthProm.value = mainResponse.hobong.plus(1).toString() + "호봉 진급"
                 monthPromDday.value = "D - " + calHobongDday().toString()
                 classImg = initImg(it.result.normalPromotionStateIdx)
-                nextProm.value = this.initNextProm(mainResponse.normalPromotionStateIdx)
-                nextPromDday.value = "D - " + initNextPromDay(mainResponse.normalPromotionStateIdx)
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
                 vacUseDays.value = mainResponse.vacationUseDays.toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
                 if (mainResponse.stateIdx != 1) {
 
                 }
-                nowPercentInt =
-                    dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
-                nowPercentStr =
-                    dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
-                        .toString() + "%"
-                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat()
+                nowPercentInt = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
+                nowPercentStr = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt().toString() + "%"
+                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat() + 0.05f
                 addAllItem(mainResponse.plan)
                 Log.e("$nowPercentFlt", "nowPercentFlt")
                 Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")
+                stateIdx = it.result.stateIdx
             } else {
 
             }

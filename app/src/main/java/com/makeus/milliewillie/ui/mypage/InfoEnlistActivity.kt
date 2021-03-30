@@ -83,7 +83,7 @@ class InfoEnlistActivity :
             SampleToast.createToast(this, "일정 수정이 완료되었습니다.")?.show()
             ActivityNavigator.with(this).infomili().start()
         } else {
-            "일정 수정실패".showShortToastSafe()
+            SampleToast.createToast(this,"일정 수정실패")?.show()
         }
     }
 

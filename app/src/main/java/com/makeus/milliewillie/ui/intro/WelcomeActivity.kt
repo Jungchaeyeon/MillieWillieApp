@@ -66,7 +66,6 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
     fun onClickNext() {
         val layouts = 2
         val current: Int = getItem(1)
-        //current.toString().showShortToastSafe()
         if (current < layouts) {
             // 다음 화면이동
             vp_intro.currentItem = current

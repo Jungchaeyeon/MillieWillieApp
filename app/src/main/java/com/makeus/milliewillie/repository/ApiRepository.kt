@@ -25,6 +25,7 @@ class ApiRepository(
             if (!it.result.isMember) {
                  repositoryCached.setValue(LocalKey.ISMEMBER, false)
             } else {
+                repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
                 repositoryCached.setValue(LocalKey.ISMEMBER, true)
             }
     }.switchMap {
@@ -35,6 +36,7 @@ class ApiRepository(
         if (!it.result.isMember) {
             repositoryCached.setValue(LocalKey.ISMEMBER, false)
         } else {
+            repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
             repositoryCached.setValue(LocalKey.ISMEMBER, true)
         }
     }.switchMap {

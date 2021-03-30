@@ -20,6 +20,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.WorkoutCountSet
 import com.makeus.milliewillie.model.WorkoutTimeSet
 import com.makeus.milliewillie.model.WorkoutWncSet
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.routine_ex_bottom_sheet.*
 import kotlinx.android.synthetic.main.routine_ex_wnc_recycler_item.*
@@ -120,13 +121,6 @@ class ExerciseSetBottomSheetFragment:
                                 weightValue = s.toString()
                             }
                             override fun afterTextChanged(s: Editable?) {
-//                                if (s.isNullOrBlank()) {
-//                                    "값을 입력해야합니다.".showShortToastSafe()
-//                                } else {
-//                                    if (s.isNullOrBlank()) weightValue = "0"
-//                                    Log.e(weightValue)
-//                                    viewModel.addPositionItem(SetOptions.WNC, position, weightValue, 1)
-//                                }
                             }
                         })
                         this.rebsWncRecyclerEditCount.addTextChangedListener(object : TextWatcher{
@@ -509,7 +503,7 @@ class ExerciseSetBottomSheetFragment:
 //        dismiss()
 
         if (binding.rebsEditSetCount.text.toString() == "0") {
-            "세트 수는 '1'이상으로 설정해야 합니다.".showShortToastSafe()
+            SampleToast.createToast(context!!, "세트 수는 '1'이상으로 설정해야 합니다.")?.show()
         } else {
             initResult()
             clickOk?.invoke(exerciseName, resultArrayList, detailType, detailTypeContext, detailSetEqual, detailSet)

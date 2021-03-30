@@ -5,6 +5,7 @@ import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutAddWeightInputBottomSheetBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.ui.SampleToast
 import java.util.*
 
 class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<FragmentWorkoutAddWeightInputBottomSheetBinding>(
@@ -46,9 +47,9 @@ class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fra
 
         current = binding.recordEditCurrent.text.toString()
         if (current.isBlank()) {
-            getString(R.string.toast_weight_record).showShortToastSafe()
+            SampleToast.createToast(context!!, getString(R.string.toast_weight_record))?.show()
         } else {
-            getString(R.string.toast_weight_record_per_today).showShortToastSafe()
+            SampleToast.createToast(context!!, getString(R.string.toast_weight_record_per_today))?.show()
             clickOk?.invoke(current)
             dismiss()
         }

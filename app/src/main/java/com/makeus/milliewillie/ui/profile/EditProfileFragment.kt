@@ -54,7 +54,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
         vm = viewModel
 
 
-        if (userBirthday == null) userBirthday = "0000-00-00"
+        if (userBirthday == null || userBirthday == "") userBirthday = "생년월일 입력"
         viewModel.liveDataUserBirth.value = userBirthday
         Log.e("userBirthday = $userBirthday")
         Log.e("liveDataUserBirth = ${viewModel.liveDataUserBirth.value}")
@@ -160,7 +160,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
 
     private fun executePatchUsers() {
         if (userBirthday.isNullOrBlank()
-            || userBirthday == "0000-00-00") userBirthday = null
+            || userBirthday == "생년월일 입력") userBirthday = null
 
         val profileImg = if (downloadUri == null) null
         else downloadUri.toString()
@@ -186,7 +186,7 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
                     Log.e(it.message)
                 }
                 Loading.dissmiss()
-                activity?.supportFragmentManager?.popBackStack()
+                activity?.onBackPressed()
                 (activity as ProfileActivity).onBackPressed()
             }.disposeOnDestroy(this)
     }

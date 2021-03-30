@@ -55,4 +55,8 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
         ActivityNavigator.with(this).rulesInAccount().start()
     }
 
+    fun onClickBack() {
+        onBackPressed()
+    }
+
 }

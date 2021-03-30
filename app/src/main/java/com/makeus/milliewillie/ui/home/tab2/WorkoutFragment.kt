@@ -425,6 +425,9 @@ class WorkoutFragment :
         }
     }
 
-
+    override fun onBackPressed(): Boolean {
+        if (!isInputGoal) executePostFirstWeight()
+        return super.onBackPressed()
+    }
 
 }

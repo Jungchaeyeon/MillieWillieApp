@@ -16,11 +16,13 @@ import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityLoginBinding
+import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -31,6 +33,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
     private val viewModel by viewModel<LoginViewModel>()
     private val requestGoogleAuth = 9001
     private val repositoryCached by inject<RepositoryCached>()
+    private val apiRepository by  inject<ApiRepository>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +48,33 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         if(!isLogout) {
             //logout상태면 true
                 //isLogout == false -> 로그인 상태
-            if(repositoryCached.getInApp() =="F") {
-
+            if(repositoryCached.getInApp() =="KF") {
                 if (repositoryCached.getToken().isNotEmpty()) {
                     //1단계 -> jwt 가지고 있니?
                     viewModel.firstCheckJmt() {
                         //2단계. 유효한 토큰?
                         if (it) {
+                            apiRepository.kakaoLogin()
+                            loginType = MyApplication.LOGINTYPE.KAKAO
+                            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
+                            Log.e(it.toString(), "유효한 토큰-> 메인으로")
+                            ActivityNavigator.with(this).main().start()
+                        } else {
+                            Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
+                        }
+                    }
+                } else {
+
+                }
+            } else if (repositoryCached.getInApp() =="GF") {
+                if (repositoryCached.getToken().isNotEmpty()) {
+                    //1단계 -> jwt 가지고 있니?
+                    viewModel.firstCheckJmt() {
+                        //2단계. 유효한 토큰?
+                        if (it) {
+                            apiRepository.googleLogin()
+                            loginType = MyApplication.LOGINTYPE.GOOGLE
+                            repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
                             Log.e(it.toString(), "유효한 토큰-> 메인으로")
                             ActivityNavigator.with(this).main().start()
                         } else {
@@ -93,6 +116,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                 deviceToken = it
             }
             viewModel.onRequestLoginWithGoogle(this, data) {
+                repositoryCached.setValue(LocalKey.INAPP, "GF")
                 Log.e("onRequestLoginWithGoogle")
                nextStep(it)
             }
@@ -133,23 +157,14 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         viewModel.onClickKakaoLogin(this) {
             loginType = MyApplication.LOGINTYPE.KAKAO
             repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
+            repositoryCached.setValue(LocalKey.INAPP, "KF")
             nextStep(it)
         }
 
     }
 
-//    fun nextStep(isSuccess : Boolean) {
-//        if (isSuccess){
-//            ActivityNavigator.with(this).main().start()
-//        } else {
-//            "로그인에 실패했습니다.".showLongToastSafe()
-//        }
-//    }
-
-
     fun nextStep(isSuccess: Boolean) {
         if (isSuccess) {
-            repositoryCached.setValue(LocalKey.INAPP,"F")
             Log.e("onRequestLoginWithGoogle2")
             Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
             if(!repositoryCached.getIsMember()){

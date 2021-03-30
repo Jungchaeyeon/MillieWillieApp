@@ -58,6 +58,7 @@
             android:drawableEnd="@drawable/ic_icon_semo"
             android:gravity="center_vertical"
             android:onClick="@{()-> vi.onClickDate(0)}"
+            android:stateListAnimator="@null"
             android:paddingHorizontal="8dp"
             android:text="@{vm.liveDateButtonList[0]}"
             android:textColor="@color/black_all"
@@ -83,6 +84,7 @@
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
             android:onClick="@{()-> vi.onClickDate(1)}"
+            android:stateListAnimator="@null"
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[1]}"
             android:textAlignment="viewStart" />
@@ -104,6 +106,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
+            android:stateListAnimator="@null"
             android:drawableEnd="@drawable/ic_icon_semo"
             android:hint="날짜를 선택해주세요."
             android:onClick="@{()-> vi.onClickDate(2)}"

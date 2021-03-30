@@ -220,6 +220,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
 
     fun onClickBack() {
         isModifiedRoutine = false
+        onClickModifyMenu()
         onBackPressed()
     }
 

@@ -36,5 +36,6 @@ enum class LocalKey {
     NEXTDDAY,
     MONTHDDAY,
     LOGINTYPE,
-    LOGOUT
+    LOGOUT,
+    WEIGHTTIME
 }

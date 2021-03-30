@@ -91,17 +91,7 @@ class LoginViewModel(
             }
         }
     }
-//    private fun requestGoogleLogin(response: (Boolean) -> Unit) {
-//        apiRepository.googleLogin().observeOn(AndroidSchedulers.mainThread()).subscribe({
-//            Log.e("google true로 들어옴")
-//            apiRepository.jwt()
-//            response.invoke(true)
-//        }, {
-//            it.printStackTrace()
-//            response.invoke(false)
-//            Log.e("google false로 들어옴")
-//        }).disposeOnDestroy(this)
-//    }
+
     fun requestGoogleLogin()=
         apiRepository.googleLogin().subscribe({
             Log.e("requestKakaoLogin true로 들어옴")

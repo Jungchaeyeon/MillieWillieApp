@@ -125,7 +125,6 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
 
     fun onClickGoogleLogin() {
-        repositoryCached.setValue(LocalKey.SOCIALTYPE, "G")
         startActivityForResult(
             viewModel.getGoogleLoginClient(this)?.signInIntent,
             requestGoogleAuth

@@ -1,16 +1,44 @@
 package com.makeus.milliewillie.ui.home.tab2
 
+import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import androidx.annotation.RequiresApi
+import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.model.FirstWeightRequest
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.MainActivity
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
+import com.makeus.milliewillie.util.SharedPreference
+import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
+import java.time.LocalDate
 import java.util.*
+import kotlin.properties.Delegates
 
+@RequiresApi(Build.VERSION_CODES.O)
 class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<FragmentWorkoutWeightInputBottomSheetBinding>(
     R.layout.fragment_workout_weight_input_bottom_sheet) {
+
+    private val viewModel by viewModel<WorkoutViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
+
+    private var now = LocalDate.now()
+    private var postYear = repositoryCached.getPostYear()
+    private var postMonth = repositoryCached.getPostMonth()
+    private var postDay = repositoryCached.getPostDay()
+    private var currentYear = now.year
+    private var currentMonth = now.monthValue
+    private var currentDay = now.dayOfMonth
 
     private var goal: String = ""
     private var current: String = ""
@@ -28,6 +56,7 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
 
     override fun FragmentWorkoutWeightInputBottomSheetBinding.onBind() {
         vi = this@WeightRecordBottomSheetFragment
+        vm = viewModel
         dialog?.setCanceledOnTouchOutside(false)
     }
 
@@ -44,15 +73,17 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
 
         SampleToast.createToast(context!!,getString(R.string.toast_weight_record_per_today))?.show()
         clickOk?.invoke(goal, current)
-        dismiss()
 
+        dismiss()
     }
 
     fun onClickCancel(){
         current = "-1.0"
         goal = "-1.0"
+
         clickOk?.invoke(goal, current)
         dismiss()
     }
+
 
 }

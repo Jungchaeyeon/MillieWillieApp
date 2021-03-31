@@ -120,6 +120,9 @@ interface Api {
     ): Observable<Schedule>
 
 
+    @POST("exercises/first-entrances")
+    fun postFirstEntrances(): Observable<FirstEntrances>
+
     @POST("exercises/first-weights")
     fun postFirstWeight(@Body body: FirstWeightRequest): Observable<FirstWeight>
 

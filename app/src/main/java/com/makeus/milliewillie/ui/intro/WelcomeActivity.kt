@@ -2,19 +2,14 @@ package com.makeus.milliewillie.ui.intro
 
 import android.view.View
 import android.view.animation.TranslateAnimation
-import androidx.core.view.marginTop
 import androidx.viewpager2.widget.ViewPager2
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
-import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityWelcomeBinding
 import com.makeus.milliewillie.databinding.ItemWelcomeBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.Intro
-import com.makeus.milliewillie.util.SharedPreference
 import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.item_welcome.*
 import org.koin.android.viewmodel.ext.android.viewModel

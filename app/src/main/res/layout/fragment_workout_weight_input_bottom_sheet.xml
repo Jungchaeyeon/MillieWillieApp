@@ -7,7 +7,9 @@
         <variable
             name="vi"
             type="com.makeus.milliewillie.ui.home.tab2.WeightRecordBottomSheetFragment" />
-
+        <variable
+            name="vm"
+            type="com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel" />
 
     </data>
 

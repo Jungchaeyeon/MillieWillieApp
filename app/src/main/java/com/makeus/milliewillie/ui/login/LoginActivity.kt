@@ -7,11 +7,8 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
-import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
-import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
-import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.R
@@ -19,10 +16,7 @@ import com.makeus.milliewillie.databinding.ActivityLoginBinding
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -37,8 +31,6 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
 
         Log.e(repositoryCached.getToken().toString(),"토큰유무")
 

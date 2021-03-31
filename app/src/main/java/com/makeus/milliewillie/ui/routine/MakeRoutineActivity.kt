@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.routine.MakeRoutineViewModel.Companion.absItemListKey
@@ -24,12 +24,14 @@ import com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment.Companio
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R.layout.activity_make_routine) {
 
     private val viewModel by viewModel<MakeRoutineViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     lateinit var everyDay: View
     lateinit var monday: View
@@ -171,7 +173,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 detailTypeContext = detailTypeContext,
                 detailSetEqual = detailSetEqual,
                 detailSet = detailSet
-            ), path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
+            ), path = repositoryCached.getExerciseId()
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -192,7 +194,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             detailNameList.add(it.routineName)
         }
         viewModel.apiRepository.patchRoutine(
-            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            exerciseId = repositoryCached.getExerciseId(),
             routineId = routineId,
             body = PostRoutineRequest(
                 routineName = binding.routineEditRoutineName.text.toString(),
@@ -234,7 +236,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
 
     private fun executeGetDetailsExercises() {
         viewModel.apiRepository.getDetailsExercises(
-            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            exerciseId = repositoryCached.getExerciseId(),
             routineId = routineId
         )
             .observeOn(AndroidSchedulers.mainThread())

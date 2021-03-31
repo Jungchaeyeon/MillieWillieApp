@@ -162,8 +162,10 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
         if (userBirthday.isNullOrBlank()
             || userBirthday == "생년월일 입력") userBirthday = null
 
-        val profileImg = if (downloadUri == null) null
-        else downloadUri.toString()
+//        val profileImg = if (downloadUri == null) null
+//        else downloadUri.toString()
+        val profileImg = if (uriPhoto == null) null
+        else uriPhoto.toString()
 
         Log.e("profileImg = $profileImg")
         viewModel.apiRepository.patchUsers(
@@ -209,13 +211,14 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
         } else {
             if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Loading.show(context)
-                funImageUpload(viewProfile!!)
+//                funImageUpload(viewProfile!!)
+                executePatchUsers()
             }
         }
     }
 
     fun onClickCancel() {
-        activity?.supportFragmentManager?.popBackStack()
+        onBackPressed()
     }
 
 }

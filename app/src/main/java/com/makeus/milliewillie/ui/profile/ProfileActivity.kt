@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.profile
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.makeus.base.activity.BaseDataBindingActivity
@@ -30,7 +31,6 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
     override fun onResume() {
         super.onResume()
         executeGetUsers()
-        onBackPressed()
     }
 
     private fun executeGetUsers() {
@@ -75,6 +75,7 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
                         Log.e("userBirthday In Profile = $userBirthday")
                     }
                 })
+                    .addToBackStack(null)
                     .commitAllowingStateLoss()
             }
             "replace" -> {
@@ -85,9 +86,35 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
 
     }
 
+    fun onClickPhoto() {
+        transitionFragment(PhotoSelectFragment(), "add")
+    }
+
+    private var isEdit = false
+
     fun onClickEdit() {
-        Log.e("onClickEdit")
-        transitionFragment(EditProfileFragment(), "replace")
+        isEdit = !isEdit
+        when (isEdit) {
+            true -> {
+                if (userBirthday == null || userBirthday == "") userBirthday = "생년월일 입력"
+                viewModel.liveDataUserBirth.value = userBirthday
+                binding.userTextEdit.setText(R.string.complete)
+                binding.userImgBirthday.visibility = View.VISIBLE
+                binding.userImgUserName.visibility = View.VISIBLE
+                binding.userEditUserName.isEnabled = true
+
+                binding.userImgUserImage.setOnClickListener {
+                    onClickPhoto()
+                }
+            }
+            false -> {
+                binding.userTextEdit.setText(R.string.edit)
+                binding.userImgBirthday.visibility = View.GONE
+                binding.userImgUserName.visibility = View.GONE
+                binding.userEditUserName.isEnabled = false
+            }
+        }
+
     }
 
     fun onClickBack() {

@@ -40,6 +40,7 @@
                 android:textColor="@color/black_all" />
 
             <TextView
+                android:id="@+id/user_text_edit"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
@@ -72,15 +73,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_img_user_image">
 
-            <TextView
-                android:id="@+id/user_text_user_name"
+            <EditText
+                android:id="@+id/user_edit_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
+                android:backgroundTint="@color/non"
+                android:textCursorDrawable="@color/maincolor_blue"
+                android:paddingVertical="0dp"
+                android:enabled="false"
                 android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/user_img_user_name"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="2dp"
+                android:layout_toEndOf="@+id/user_edit_user_name"
+                android:visibility="gone"
+                android:src="@drawable/icon_edit" />
 
         </RelativeLayout>
 
@@ -98,10 +113,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:visibility="visible"
                 android:textSize="12sp"
                 android:textColor="@color/black_all"
                 android:text="@{vm.liveDataUserBirth}"/>
+
+            <ImageView
+                android:id="@+id/user_img_birthday"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:src="@drawable/icon_semo_small" />
 
 
         </LinearLayout>

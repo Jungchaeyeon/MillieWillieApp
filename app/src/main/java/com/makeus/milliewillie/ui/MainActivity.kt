@@ -152,7 +152,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
+//            .addToBackStack(null)
             .commit()
     }
 

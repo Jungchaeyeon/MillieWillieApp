@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
@@ -40,6 +41,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
 
     private var  fbStorage: FirebaseStorage? = null
     private var  viewProfile: View? = null
+    private var isSelected: Boolean = false
 
     private var image: String? = null
 
@@ -54,30 +56,25 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
     @SuppressLint("WrongConstant")
     override fun FragmentPhotoSelectBinding.onBind() {
         vi = this@PhotoSelectFragment
+
         if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-
 //            // Should we show an explanation?
 //            if (shouldShowRequestPermissionRationale(
 //                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
 //                // Explain to the user why we need to read the contacts
 //            }
-
             requestPermissions(
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
 
-            // MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE is an
-            // app-defined int constant that should be quite unique
-
             (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
         }
-
 
         val loaderManager: LoaderManager = LoaderManager.getInstance(this@PhotoSelectFragment)
         loaderManager.initLoader(IMAGE_LOADER_ID, null, this@PhotoSelectFragment)
 
-        viewProfile = view
+        viewProfile = binding.root
 
         android.util.Log.d("TAG", "fbStorage: $fbStorage")
     }
@@ -96,7 +93,6 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
         }
     }
 
-    private var isSelected: Boolean = false
     fun setRecyclerAdapter() {
         uploadRecyclerAdapter = PhotoSelectAdapter(context, listOfAllImages)
         binding.photoRecycler.apply {
@@ -125,15 +121,11 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
 
                             }
                         }
-
                         image = listOfAllImages[position].uri
-                        Log.e("onItemClick: $image")
-
                     }
                 })
 
             }
-
             setHasFixedSize(true)
             adapter = uploadRecyclerAdapter
         }
@@ -160,12 +152,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
 
 
     fun onClickComplete() {
-        (activity as ProfileActivity).transitionFragment(
-            EditProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(PROFILE_URL_KEY, image)
-                }
-        }, "replace")
+        Log.e("onComplete")
         (activity as ProfileActivity).onBackPressed()
     }
 

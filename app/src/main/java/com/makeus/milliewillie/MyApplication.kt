@@ -41,7 +41,6 @@ class MyApplication : Application() {
         var userProfileImgUrl: String? = ""
         var userName: String = ""
 
-        var isInputGoal: Boolean = false
         var exerciseId by Delegates.notNull<Long>()
         var isLogout = false
 

@@ -40,6 +40,13 @@ abstract class RepositoryCached {
         return value
     }
 
+    fun getExerciseId() = getValue(LocalKey.EXERCISEID , 0).toLong()
+    fun getIsExerciseId() = getValue(LocalKey.ISEXERCISEID , false)
+    fun getIsInputWeight() = getValue(LocalKey.ISINPUTWEIGHT , false)
+    fun getIsInputGoal() = getValue(LocalKey.ISINPUTGOAL , false)
+    fun getPostYear() = getValue(LocalKey.POSTYEAR , 10000)
+    fun getPostMonth() = getValue(LocalKey.POSTMONTH , 100)
+    fun getPostDay() = getValue(LocalKey.POSTDAY , 100)
     fun getWeightTime() = getGeneralValue(LocalKey.WEIGHTTIME , "")
     fun getLogout() = getGeneralValue(LocalKey.LOGOUT , false)
     fun getLoginType() = getGeneralValue(LocalKey.LOGINTYPE , "")

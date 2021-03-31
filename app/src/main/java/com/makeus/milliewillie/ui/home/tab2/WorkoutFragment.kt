@@ -16,11 +16,8 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
-import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.MyApplication.Companion.exerciseId
-import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
@@ -38,12 +35,12 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.properties.Delegates
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 class WorkoutFragment :
     BaseDataBindingFragment<FragmentWorkoutBinding>(R.layout.fragment_workout) {
 
@@ -53,6 +50,16 @@ class WorkoutFragment :
     private var goalValue: Float = 0f
     private var currentValue: Float = 0f
 
+    private var isInputWeight by Delegates.notNull<Boolean>()
+    private var isInputGoal by Delegates.notNull<Boolean>()
+
+    private var now = LocalDate.now()
+    private var postYear = repositoryCached.getPostYear()
+    private var postMonth = repositoryCached.getPostMonth()
+    private var postDay = repositoryCached.getPostDay()
+    private var currentYear = now.year
+    private var currentMonth = now.monthValue
+    private var currentDay = now.dayOfMonth
     private val calendar = Calendar.getInstance()
 
     private val todayMonth = calendar.get(Calendar.MONTH) + 1
@@ -75,11 +82,42 @@ class WorkoutFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        isInputGoal = SharedPreference.getSettingBooleanItem(IS_GOAL)
-        exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong()!!
+//        if (!repositoryCached.getIsExerciseId()) {
+//            viewModel.apiRepository.postFirstEntrances()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe {
+//                    if (it.isSuccess) {
+//                        Log.e("postFirstEntrances 호출 성공")
+//
+//                        repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
+//                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
+//                    } else {
+//                        Log.e("postFirstEntrances 호출 실패")
+//                        Log.e(it.message)
+//                    }
+//                }.disposeOnDestroy(this)
+//        }
+
+        isInputWeight = repositoryCached.getIsInputWeight()
+        isInputGoal = repositoryCached.getIsInputGoal()
+//        exerciseId = repositoryCached.getExerciseId()
+        exerciseId = 1
+        Log.e("postYear currentYear = $postYear $currentYear")
+        Log.e("postMonth currentMonth = $postMonth $currentMonth")
+        Log.e("postDay currentDay = $postDay $currentDay")
+
+        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) {
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) {
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        } else if (isInputWeight && postYear < currentYear) {
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         // 루틴 GET 호출
@@ -119,7 +157,6 @@ class WorkoutFragment :
     }
 
     @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.O)
     fun executeGetRoutines() {
         val now = Date()
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -129,7 +166,7 @@ class WorkoutFragment :
         routineArray.clear()
 
         viewModel.apiRepository.getRoutines(
-            path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0, targetDate = date
+            path = repositoryCached.getExerciseId(), targetDate = date
         )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -200,9 +237,7 @@ class WorkoutFragment :
                     binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
 
                     goalValue = it.result.goalWeight.toFloat()
-                    Log.e("goalValue: $goalValue")
-                    Log.e("dailyWeightList: ${it.result.dailyWeightList}")
-                    Log.e("weightDayList: ${it.result.weightDayList}")
+
                     it.result.dailyWeightList.forEach { element ->
                         dailyWeightArray.add(0, DailyWeight(element.asString))
                     }
@@ -249,7 +284,7 @@ class WorkoutFragment :
             .setOnClickOk { weight ->
                 viewModel.apiRepository.postDailyWeight(
                     body = PostDailyWeightRequest(dayWeight = weight.toDouble()),
-                    path = SharedPreference.getSettingItem(EXERCISE_ID)?.toLong() ?: 0
+                    path = repositoryCached.getExerciseId()
                 )
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
@@ -257,6 +292,8 @@ class WorkoutFragment :
                         if (it.isSuccess) {
                             Log.e("호출 성공")
 
+                            isInputWeight = true
+                            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
                             drawDailyWeight(goalValue.toString(), weight)
                         } else {
                             Log.e("호출 실패")
@@ -278,10 +315,16 @@ class WorkoutFragment :
                             Log.e("postFirstWeight 성공")
 
                             if (goal != "-1.0") goalValue = goal.toFloat()
-                            isInputGoal = true
-                            SharedPreference.putSettingBooleanItem(IS_GOAL, isInputGoal)
-                            SharedPreference.putSettingItem(EXERCISE_ID, it.result.toString())
-                            exerciseId = it.result
+                            isInputWeight = true
+                            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+                            repositoryCached.setValue(LocalKey.ISINPUTGOAL, true)
+
+                            postYear = currentYear
+                            postMonth = currentMonth
+                            postDay = currentDay
+                            repositoryCached.setValue(LocalKey.POSTYEAR, postYear)
+                            repositoryCached.setValue(LocalKey.POSTMONTH, postMonth)
+                            repositoryCached.setValue(LocalKey.POSTDAY, postDay)
 
                             drawDailyWeight(goal, current)
                         } else {
@@ -295,7 +338,7 @@ class WorkoutFragment :
     fun onClickWeightDateItemAdd() {
         // 목표체중 유무에 따라 다른 창을 띄움
         when (isInputGoal) {
-            true -> executePostDailyWeight()
+            true -> if (!isInputWeight) executePostDailyWeight()
             false -> executePostFirstWeight()
         }
 
@@ -430,9 +473,10 @@ class WorkoutFragment :
         }
     }
 
-    override fun onBackPressed(): Boolean {
-        if (!isInputGoal) executePostFirstWeight()
-        return super.onBackPressed()
-    }
+//    override fun onBackPressed(): Boolean {
+//        Log.e("onBackPressed in workout")
+//        if (!isInputGoal) executePostFirstWeight()
+//        return super.onBackPressed()
+//    }
 
 }

@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityWorkoutStartBinding
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.workoutStart.adapter.WorkoutStartAdapter
 import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -27,6 +28,8 @@ import kotlin.properties.Delegates
 class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>(R.layout.activity_workout_start) {
 
     private val viewModel by viewModel<WorkoutStartViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
+
     lateinit var timer: Timer
 
     private var position by Delegates.notNull<Int>()
@@ -55,12 +58,6 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                 stopWatch()
             }.show(supportFragmentManager)
     }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
 
     override fun ActivityWorkoutStartBinding.onBind() {
         vi = this@WorkoutStartActivity
@@ -93,7 +90,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
         Log.e("exerciseStatus = $exerciseStatus")
 
         viewModel.apiRepository.postReports(
-            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            exerciseId = repositoryCached.getExerciseId(),
             routineId = routineId, body = PostReportsRequest(routineId = routineId, totalTime = totalTime, exerciseStatus = exerciseStatus)
         )
             .observeOn(AndroidSchedulers.mainThread())
@@ -128,7 +125,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
     fun executeGetStartExercises() {
         viewModel.apiRepository.getStartExercises(
-            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            exerciseId = repositoryCached.getExerciseId(),
             routineId = routineId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

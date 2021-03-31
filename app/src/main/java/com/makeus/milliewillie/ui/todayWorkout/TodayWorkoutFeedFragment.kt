@@ -2,26 +2,22 @@ package com.makeus.milliewillie.ui.todayWorkout
 
 import android.os.Build
 import android.view.MotionEvent
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutFeedBinding
 import com.makeus.milliewillie.databinding.WorkoutFeedRoutineRecyclerItemBinding
-import com.makeus.milliewillie.databinding.WorkoutRoutineRecyclerItemBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
-import com.makeus.milliewillie.model.TodayRoutines
-import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
-import okhttp3.internal.notify
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -32,6 +28,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
     }
 
     private val viewModel by viewModel<TodayWorkoutViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     private var isEdit = false
 
@@ -97,9 +94,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
 
     private fun executeGetAllRoutines() {
         allRoutineArray.clear()
-        viewModel.apiRepository.getAllRoutines(
-            SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong()
-        )
+        viewModel.apiRepository.getAllRoutines(repositoryCached.getExerciseId())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isSuccess){
@@ -158,7 +153,7 @@ class TodayWorkoutFeedFragment: BaseDataBindingFragment<FragmentTodayWorkoutFeed
             }
             2 -> { // 루틴 삭제 API
                 if (isEdit) {
-                    viewModel.apiRepository.deleteRoutine(SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(), allRoutineArray[position].routineId  )
+                    viewModel.apiRepository.deleteRoutine(exerciseId = repositoryCached.getExerciseId(), routineId = allRoutineArray[position].routineId  )
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             if (it.isSuccess) {

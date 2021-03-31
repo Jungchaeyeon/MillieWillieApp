@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityReportBinding
 import com.makeus.milliewillie.databinding.ActivityReportRecyclerItemBinding
@@ -13,6 +12,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.PatchReportsRequest
 import com.makeus.milliewillie.model.ReportInnerRecyclerItem
 import com.makeus.milliewillie.model.ReportRecyclerItem
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.report.adapter.ReportsAdapter
@@ -22,12 +22,14 @@ import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
 class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.activity_report) {
 
     private val viewModel by viewModel<ReportViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     private var routineId by Delegates.notNull<Long>()
     private lateinit var reportDate: String
@@ -67,7 +69,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
 
 
     private fun executeGetReports() {
-        viewModel.apiRepository.getReports(exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+        viewModel.apiRepository.getReports(exerciseId = repositoryCached.getExerciseId(),
         routineId = routineId, reportDate = reportDate)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -158,7 +160,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
     fun onClickModifyMenu() {
         // 리포트 수정 api
         viewModel.apiRepository.patchReports(
-            exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            exerciseId = repositoryCached.getExerciseId(),
             routineId = routineId,
             body = PatchReportsRequest(reportDate = reportDate, reportText = binding.reportEditContent.text.toString())
         )
@@ -186,7 +188,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
             .setTitle(title)
             .setOnClickOk ({
                 viewModel.apiRepository.deleteReports(
-                    exerciseId = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+                    exerciseId = repositoryCached.getExerciseId(),
                     routineId = routineId,
                     reportDate = reportDate
                 )

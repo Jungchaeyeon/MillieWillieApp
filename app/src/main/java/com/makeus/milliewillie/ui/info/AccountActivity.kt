@@ -3,17 +3,12 @@ package com.makeus.milliewillie.ui.info
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication
-import com.makeus.milliewillie.MyApplication.Companion.IS_GOAL
-import com.makeus.milliewillie.MyApplication.Companion.isInputGoal
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoAccountBinding
-import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -39,11 +34,7 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                     Log.e("deleteUsers 호출 실패")
                     Log.e(it.message)
                 }
-                isInputGoal = false
-                SharedPreference.putSettingBooleanItem(
-                    IS_GOAL,
-                    isInputGoal
-                )
+                repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
                 repositoryCached.setValue(LocalKey.TOKEN, "")
                 repositoryCached.setValue(LocalKey.ISMEMBER, false)
                 SampleToast.createToast(this, getString(R.string.toast_withdraw))?.show()

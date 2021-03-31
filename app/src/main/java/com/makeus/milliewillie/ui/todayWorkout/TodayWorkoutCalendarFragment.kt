@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.ActivityNavigator
-import com.makeus.milliewillie.MyApplication.Companion.EXERCISE_ID
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.calendar.DotDecorator
@@ -16,6 +15,7 @@ import com.makeus.milliewillie.calendar.SelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.FragmentTodayWorkoutCalendarBinding
 import com.makeus.milliewillie.model.MyRoutineInfo
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity
@@ -25,6 +25,7 @@ import com.makeus.milliewillie.util.SharedPreference
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,6 +36,7 @@ import kotlin.properties.Delegates
 class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkoutCalendarBinding>(R.layout.fragment_today_workout_calendar) {
 
     private val viewModel by viewModel<TodayWorkoutViewModel>()
+    private val repositoryCached by inject<RepositoryCached>()
 
     private val now = Date()
     val format = SimpleDateFormat("yyyy-MM-dd")
@@ -170,7 +172,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
     private fun executeGetRoutines() {
         routineArray.clear()
         viewModel.apiRepository.getRoutines(
-            path = SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            path = repositoryCached.getExerciseId(),
             targetDate = date
         )
             .observeOn(AndroidSchedulers.mainThread())
@@ -204,7 +206,7 @@ class TodayWorkoutCalendarFragment: BaseDataBindingFragment<FragmentTodayWorkout
     private fun executeGetCalendarReports() {
         reportsDatesList.clear()
         viewModel.apiRepository.getCalendarReports(
-            SharedPreference.getSettingItem(EXERCISE_ID)!!.toLong(),
+            path = repositoryCached.getExerciseId(),
             viewYear = year, viewMonth = month)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

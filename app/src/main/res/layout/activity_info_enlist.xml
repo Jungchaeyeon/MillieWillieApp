@@ -111,7 +111,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
-            android:stateListAnimator="@color/non"
+            android:stateListAnimator="@null"
             android:paddingHorizontal="10dp"
             android:textAlignment="viewStart"
             tools:text="@{vm.liveServicetype}"
@@ -163,7 +163,7 @@
             android:onClick="@{()-> vi.onClickDate(1)}"
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[1]}"
-            android:stateListAnimator="@color/non"
+            android:stateListAnimator="@null"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
 

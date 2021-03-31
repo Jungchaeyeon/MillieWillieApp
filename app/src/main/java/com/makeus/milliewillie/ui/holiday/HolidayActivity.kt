@@ -29,7 +29,9 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
     var otherUse = 0
     var regulAvail = 0
     var prizeAvail = 0
+    var prizeAllNum =0
     var otherAvail = 0
+    var otherAllNum =0
 
     var maxValue = 24
     val context = this
@@ -86,6 +88,9 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
         popup.setOnMenuItemClickListener(PopupListener())
         popup.show()
     }
+    fun onClickDone(){
+
+    }
 
     //사용하기 버튼 눌렀을 때
     fun onClickUse(num: Int) {
@@ -100,10 +105,10 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                 when (num) {
                     0 -> {
                         regulUse += it.toInt()
-                        viewModel.liveRegularHoliday.postValue(regulUse.toString() + "일 /")
-                        calRegulIndicator(regulUse)
                         viewModel.vacationIdPatch.useDays = regulUse
                         viewModel.patchVacationUseDays()
+                        viewModel.liveRegularHoliday.postValue(regulUse.toString() + "일 /")
+                        calRegulIndicator(regulUse)
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
                     }
@@ -116,11 +121,12 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             //사용자가 선택한 날 +"일"
 
                         prizeUse += it.toInt()
+                        viewModel.vacationIdPatch.useDays = prizeUse
+                        viewModel.patchVacationUseDays()
                         viewModel.livePrizeHoliday.postValue(prizeUse.toString() + "일/")
                         calPrizeIndicator(prizeUse)
+                        //vacationIdPatch
                         //viewModel 에 전체/ 사용일 수 기록
-                        viewModel.vacationIdPatch.useDays =prizeUse
-                        viewModel.patchVacationUseDays()
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
                     }
@@ -132,11 +138,11 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             }
                             //regularholi3.text = it + "일"
                             otherUse += it.toInt()
+                        viewModel.vacationIdPatch.useDays = otherUse
+                        viewModel.patchVacationUseDays()
                             viewModel.liveOtherHoliday.postValue(otherUse.toString() + "일/")
                             calOtherIndicator(otherUse)
-                         viewModel.patchVacationUseDays()
-                        viewModel.vacationIdPatch.useDays = it.toInt()
-                        viewModel.vacationIdPatch.totalDays = viewModel.otherHoliNum
+                        //vacationIdPatch
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
                     }
@@ -160,39 +166,59 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
             in 1..11 -> {
                 holi_regul_Indicator1.selectDotsTwice(countRest, regulAvail )
                 holi_regul_Indicator2.selectDotsTwice(0, regulAvail - 12)
-                holi_regul_Indicator3.selectDotsTwice(0, availRest)
+                if(regulAvail>24){
+                    holi_regul_Indicator3.selectDotsTwice(0, availRest)}
+                else{
+                    holi_regul_Indicator3.selectDotsTwice(0, 0)}
             }
             in 12..23 -> {
                 holi_regul_Indicator1.selectDotsTwice(12, 0)
-                holi_regul_Indicator2.selectDotsTwice(countRest, regulAvail +1)
-                holi_regul_Indicator3.selectDotsTwice(0, availRest)
+                holi_regul_Indicator2.selectDotsTwice(countRest, availRest)
+                if(regulAvail>24){
+                    holi_regul_Indicator3.selectDotsTwice(countRest, availRest)}
+                else{
+                    holi_regul_Indicator3.selectDotsTwice(0, 0)}
             }
             in 24..35-> {
                 holi_regul_Indicator1.selectDotsTwice(12, 0)
                 holi_regul_Indicator2.selectDotsTwice(12, 0)
-                holi_regul_Indicator3.selectDotsTwice(countRest, regulAvail-num)
+                holi_regul_Indicator3.selectDotsTwice(countRest, regulAvail-24)
             }
         }
     }
 
     fun calPrizeIndicator(num: Int) {
         val countRest: Int = num.rem(12)
-        val availRest : Int = prizeAvail.rem(12)
+        val availRest : Int = prizeAllNum.rem(12)
+
+        Log.e(num.toString(),"num값값값")
+        Log.e(availRest.toString(),"avial테스트")
+        Log.e(countRest.toString(),"avial")
+        Log.e(prizeAllNum.toString(),"avial스트")
+
+
+
         when (num) {
             in 1..11 -> {
-                holi_prize_indicator1.selectDotsTwice(countRest, prizeAvail )
-                holi_prize_Indicator2.selectDotsTwice(0, prizeAvail - 12)
-                holi_prize_Indicator3.selectDotsTwice(0, availRest)
+                holi_prize_indicator1.selectDotsTwice(countRest, prizeAllNum )
+                holi_prize_Indicator2.selectDotsTwice(0, prizeAllNum - 12)
+                if(prizeAllNum>24){
+                    holi_prize_Indicator3.selectDotsTwice(0, availRest)}
+                else{
+                    holi_prize_Indicator3.selectDotsTwice(0, 0)}
             }
             in 12..23 -> {
                 holi_prize_indicator1.selectDotsTwice(12, 0)
-                holi_prize_Indicator2.selectDotsTwice(countRest, prizeAvail+1)
-                holi_prize_Indicator3.selectDotsTwice(0, availRest)
+                holi_prize_Indicator2.selectDotsTwice(countRest, availRest)
+                if(prizeAllNum>24){
+                    holi_prize_Indicator3.selectDotsTwice(0, availRest)}
+                else{
+                    holi_prize_Indicator3.selectDotsTwice(0, 0)}
             }
             in 24..36 -> {
                 holi_prize_indicator1.selectDotsTwice(12, 0)
                 holi_prize_Indicator2.selectDotsTwice(12, 0)
-                holi_prize_Indicator3.selectDotsTwice(countRest, prizeAvail - num)
+                holi_prize_Indicator3.selectDotsTwice(countRest, prizeAllNum - 24)
 
             }
             }
@@ -200,24 +226,35 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
 
 
     fun calOtherIndicator(num: Int) {
-
         val countRest: Int = num.toInt().rem(12)
-        val availRest : Int = otherAvail.rem(12)
+        val availRest : Int = otherAllNum.rem(12)
+        Log.e(num.toString(),"num값값값")
+        Log.e(availRest.toString(),"otherAvail")
+        Log.e(countRest.toString(),"COuntTEst")
+
+        Log.e(otherAllNum.toString(),"OTHER")
         when (num) {
             in 1..11 -> {
-                holi_other_Indicator1.selectDotsTwice(countRest, otherAvail)
-                holi_other_Indicator2.selectDotsTwice(0, otherAvail - 12)
-                holi_other_Indicator3.selectDotsTwice(0, availRest)
+                holi_other_Indicator1.selectDotsTwice(countRest, otherAllNum)
+                holi_other_Indicator2.selectDotsTwice(0, otherAllNum - 12)
+                if(otherAllNum>24){
+                holi_other_Indicator3.selectDotsTwice(countRest, availRest)}
+                else{
+                    holi_other_Indicator3.selectDotsTwice(0, 0)}
             }
             in 12..23 -> {
                 holi_other_Indicator1.selectDotsTwice(12, 0)
-                holi_other_Indicator2.selectDotsTwice(countRest, otherAvail + 1)
-                holi_other_Indicator3.selectDotsTwice(0, availRest)
+                holi_other_Indicator2.selectDotsTwice(countRest, availRest)
+                if(otherAllNum>24){
+                holi_other_Indicator3.selectDotsTwice(0, availRest)}
+                else{
+                    holi_other_Indicator3.selectDotsTwice(0, 0)}
+
             }
             in 24..35 -> {
                 holi_other_Indicator1.selectDotsTwice(12, 0)
                 holi_other_Indicator2.selectDotsTwice(12, 0)
-                holi_other_Indicator3.selectDotsTwice(countRest, otherAvail - num)
+                holi_other_Indicator3.selectDotsTwice(countRest, otherAllNum - 24)
             }
         }
     }
@@ -370,6 +407,8 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
 
                 Log.e(prizeUse.toString(), "prizeUse")
                 Log.e(prizeAvail.toString(), "prizeAvail")
+                prizeAllNum = prizeAvail
+                otherAllNum = otherAvail
                 holi_regul_Indicator1.customCreateDotPanel(R.drawable.indicator_dot_off,
                     R.drawable.indicator_dot_on,
                     0)

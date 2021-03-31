@@ -39,7 +39,6 @@
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.mypage.MyPageActivity" />
         <activity android:name=".ui.plan.PlanCalendarActivity" />
         <activity android:name=".ui.plan.PlanVacationActivity" />
 
@@ -69,7 +68,6 @@
         <activity android:name=".ui.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -19,7 +19,6 @@ import com.makeus.milliewillie.ui.login.LoginActivity
 import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.mypage.InfoEnlistActivity
 import com.makeus.milliewillie.ui.mypage.InfoMiliActivity
-import com.makeus.milliewillie.ui.mypage.MyPageActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
 import com.makeus.milliewillie.ui.plan.MakePlanActivity
 import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
@@ -68,7 +67,6 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun routine() = MyIntent(MakeRoutineActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
     fun plancalendar(plansRequest: PlansRequest) = MyIntent(PlanCalendarActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
-    fun mypage() = MyIntent(MyPageActivity::class.java)
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)
     fun workoutStart() = MyIntent(WorkoutStartActivity::class.java)

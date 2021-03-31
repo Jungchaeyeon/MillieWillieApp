@@ -5,21 +5,26 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.EmotionImg
+import com.makeus.milliewillie.model.EmotionsRecordDayResponse
 import com.makeus.milliewillie.model.EmotionsRecordRequest
 import com.makeus.milliewillie.model.EmotionsRecordResponse
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: RepositoryCached): BaseViewModel() {
 
     var emotionsRecordRequest = EmotionsRecordRequest()
+    lateinit var emotionsRecordDayResponse : EmotionsRecordDayResponse
     lateinit var emotionsRecordResponse : EmotionsRecordResponse
     val liveEmoList = MutableLiveData<List<EmotionImg>>()
     val liveTodayData = MutableLiveData<String>()
     val livePickEmo= MutableLiveData<EmotionImg>()
     val liveEmoMemo = MutableLiveData<String>()
-
+   // var emoDayKey = ArrayList<EmotionsRecordDayResponse.Result>()
 
     //POST EMO
     fun postEmotionsRecord()=
@@ -28,8 +33,10 @@ class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: Repo
                 content = emotionsRecordRequest.content,
                 emotion= emotionsRecordRequest.emotion
             )
-        ).subscribe {
+        )
+            .subscribe {
             if(it.isSuccess){
+                Log.e("감정 기록 생성 완료")
                 emotionsRecordResponse = it
                 repositoryCached.setValue(LocalKey.EMOTIONID, it.result.emotionRecordId)
             }
@@ -50,7 +57,46 @@ class EmoViewModel(val apiRepository: ApiRepository, val  repositoryCached: Repo
             }
         }.disposeOnDestroy(this)
 
+    //DELETE EMO
+    fun deleteEmotionsRecord(response: (Boolean) -> Unit)=
+        apiRepository.deleteEmotionsRecord(
+            path = 0L
+        ).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                response.invoke(true)
+        },{
+                response.invoke(false)
+            }).disposeOnDestroy(this)
+    //
+    //GET EMO DAY
+    fun getEmotionsRecordDay( response: (Boolean) -> Unit)=
+        apiRepository.getEmotionsRecordDay(
+            path ="2020-03-25"
+        ).subscribe {
+            if(it.isSuccess){
+                Log.e("이모지 일별 조회 성공")
+                emotionsRecordDayResponse = it
+                response.invoke(true)
+            }
+            else{
+                response.invoke(false)
+            }
+        }.disposeOnDestroy(this)
 
+    //GET EMO MONTH
+    fun getEmotionsRecordMonth( response: (Boolean) -> Unit)=
+        apiRepository.getEmotionsRecordMonth(
+            path ="2020-03-25"
+        ).subscribe {
+            if(it.isSuccess){
+                Log.e("이모지 월별 조회 성공")
+                emotionsRecordDayResponse = it
+                response.invoke(true)
+            }
+            else{
+                response.invoke(false)
+            }
+        }.disposeOnDestroy(this)
     fun requestEmo(){
         liveEmoList.postValue(listOf(
             EmotionImg(R.drawable.emo_1_happy,"행복해",1),

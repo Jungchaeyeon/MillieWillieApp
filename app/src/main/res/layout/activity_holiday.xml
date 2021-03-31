@@ -221,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/holi_regul_Indicator1"/>
                 <com.makeus.milliewillie.ui.view.CircleIndicator
@@ -230,7 +230,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/holi_regul_Indicator2"
                     app:layout_constraintBottom_toTopOf="@id/textView4"
@@ -250,6 +251,7 @@
                     tools:text="0일" />
 
                 <TextView
+                    android:id="@+id/textView15"
                     style="@style/spoqa_medium_16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,14 +270,13 @@
                     style="@style/spoqa_regular_12"
                     android:layout_width="68dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/rect_radius_4"
                     android:onClick="@{()->vi.onClickUse(0)}"
                     android:text="@string/use"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/regular_edit" />
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -349,7 +350,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_prize_indicator1"
                         app:layout_constraintBottom_toTopOf="@id/holi_prize_Indicator3"/>
@@ -359,7 +360,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_prize_Indicator2"
                         app:layout_constraintBottom_toTopOf="@id/txt_holi_prize"
@@ -379,6 +381,7 @@
                         tools:text="0일" />
 
                     <TextView
+                        android:id="@+id/textView17"
                         style="@style/spoqa_medium_16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -412,7 +415,6 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
@@ -420,7 +422,7 @@
                         android:text="@string/register"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/prize_edit" />
+                        app:layout_constraintTop_toTopOf="@+id/textView17" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -487,7 +489,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="4dp"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_other_Indicator1"/>
@@ -497,7 +499,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_other_Indicator2"
                         app:layout_constraintBottom_toTopOf="@id/txt_holi_other"
@@ -516,6 +519,7 @@
                         tools:text="0일" />
 
                     <TextView
+                        android:id="@+id/textView18"
                         style="@style/spoqa_medium_16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -549,7 +553,6 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="23dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
@@ -557,7 +560,7 @@
                         android:text="@string/register"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/other_edit" />
+                        app:layout_constraintTop_toTopOf="@+id/textView18" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

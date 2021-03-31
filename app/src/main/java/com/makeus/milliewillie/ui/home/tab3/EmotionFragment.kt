@@ -12,7 +12,9 @@ import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentEmotionBinding
 import com.makeus.milliewillie.databinding.ItemEmoListBinding
+import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.EmotionImg
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
@@ -34,7 +36,7 @@ class EmotionFragment :
     var day = df.format(Calendar.getInstance().time)
     var today = df.format(cal.time)
     var emoId = 0
-
+   // val context = requireActivity()
 
     companion object {
         fun getInstance() = EmotionFragment()
@@ -141,6 +143,17 @@ class EmotionFragment :
 
 
     }
+    fun onClickDelete(){
+        viewModel.deleteEmotionsRecord(){
+            if(it){
+             //   SampleToast.createToast(context,"삭제 완료")?.show()
+                "삭제 완료".showShortToastSafe()
+            }
+            else{
+                "삭제 실패".showShortToastSafe()
+            }
+        }
+    }
 
     fun onClickCheck(v: View) {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -150,6 +163,7 @@ class EmotionFragment :
         viewModel.emotionsRecordRequest.emotion = emoId
         //서버에 쏘기
         viewModel.postEmotionsRecord()
+       // viewModel.patchEmotionsRecord()
     }
 
     fun onClickItem(img: Int, text: String, id : Int) {
@@ -175,6 +189,13 @@ class EmotionFragment :
         super.onResume()
         viewModel.liveTodayData.postValue(df.format(cal.time))
         viewModel.requestEmo()
+        viewModel.getEmotionsRecordDay(){
+            if(it){
+                "조회 성공".showShortToastSafe()
+            }else{
+                "조회 실패".showShortToastSafe()
+            }
+        }
         btn_check.visibility = View.GONE
     }
 

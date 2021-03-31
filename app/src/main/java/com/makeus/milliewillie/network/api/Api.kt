@@ -47,9 +47,20 @@ interface Api {
         @Body body : EmotionsRecordRequest,
         @Path("emotionsRecordId") emotionsRecordId: Long
     ): Observable<EmotionsRecordResponse>
+    @DELETE("emotions-record/{emotionsRecordId}")
+    fun deleteEmotionsRecord(
+        @Path("emotionsRecordId") emotionsRecordId: Long
+    ): Observable<BaseResponse>
 
+    @GET("emotions-record/day?date={date}")
+    fun getEmotionsRecordDay(
+        @Path("date") date: String
+    ): Observable<EmotionsRecordDayResponse>
 
-
+    @GET("emotions-record/month?month=")
+    fun getEmotionsRecordMonth(
+        @Path("month") month: String
+    ): Observable<EmotionsRecordDayResponse>
     // Main
     @GET("main/users-calendars")
     fun getMain(): Observable<Main>

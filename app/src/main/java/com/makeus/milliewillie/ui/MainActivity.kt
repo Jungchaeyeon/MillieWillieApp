@@ -13,6 +13,7 @@ import com.makeus.milliewillie.databinding.ActivityMainBinding
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
+import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
 import com.makeus.milliewillie.ui.home.tab4.InfoFragment
 import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,11 +57,11 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                     changeFragment(WorkoutFragment.getInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
-//                R.id.page_emotion -> {
-//                    fab.visibility = View.GONE
-//                    changeFragment(EmotionFragment.getInstance())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
+                R.id.page_emotion -> {
+                    fab.visibility = View.GONE
+                    changeFragment(EmotionFragment.getInstance())
+                    return@setOnNavigationItemSelectedListener true
+                }
                 R.id.page_info -> {
                     fab.visibility = View.VISIBLE
                     changeFragment(InfoFragment.getInstance())

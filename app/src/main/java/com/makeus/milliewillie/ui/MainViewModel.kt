@@ -43,7 +43,6 @@ class MainViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         getUsers()
     }
     fun initMain(){
-        usersResponse.hobong+=2
 
         allDday.value =  "D - "+calDday(usersResponse.endDate).toString()
         monthProm.value = usersResponse.hobong.plus(1).toString()+"호봉 진급"

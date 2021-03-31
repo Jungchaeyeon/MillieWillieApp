@@ -2,7 +2,6 @@ package com.makeus.milliewillie.ui.dDay
 
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.databinding.ActivityDDayAbContentBinding
 import com.makeus.milliewillie.databinding.ActivityDDayCertiNceeContentBinding
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import org.koin.android.ext.android.inject

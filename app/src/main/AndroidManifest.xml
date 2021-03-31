@@ -106,6 +106,8 @@
         <activity android:name=".ui.profile.PhotoSelectActivity"/>
         <activity android:name=".ui.info.AccountActivity"/>
         <activity android:name=".ui.info.RuleWebViewActivity"/>
+        <activity android:name=".ui.dDay.DdayOutputCNActivity"/>
+        <activity android:name=".ui.dDay.anniversary.DdayOutputAnniversaryActivity"/>
 
     </application>
 

@@ -9,6 +9,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.VacationIdPatch
 import com.makeus.milliewillie.model.VacationIdResponse
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
@@ -52,6 +53,10 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
             .subscribe({
                 if (it.isSuccess) {
                     vacationIdResponse = it
+
+                    repositoryCached.setValue(LocalKey.VAC1ID,it.result[0].vacationId)
+                    repositoryCached.setValue(LocalKey.VAC2ID,it.result[1].vacationId)
+                    repositoryCached.setValue(LocalKey.VAC3ID,it.result[2].vacationId)
                     liveRegularHoliday.value = it.result[0].useDays.toString() + "일 /"
                     liveRegularWholeHoliday.value = it.result[0].totalDays.toString() + "일"
                     livePrizeHoliday.value = it.result[1].useDays.toString() + "일 /"
@@ -89,7 +94,14 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
         apiRepository.patchVacationId(
             VacationIdPatch(totalDays = null,useDays = vacationIdPatch.useDays),
             path = repositoryCached.getVacaId().toLong()
-        )
+        ).subscribe({
+            if(it.isSuccess){
+                Log.e("통신 성공")
+            }
+            else{
+                Log.e("통신실패")
+            }
+        },{Log.e("통신 실패")})
 
 
 }

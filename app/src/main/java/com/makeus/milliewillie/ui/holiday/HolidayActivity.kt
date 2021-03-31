@@ -105,12 +105,13 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                 when (num) {
                     0 -> {
                         regulUse += it.toInt()
-                        viewModel.vacationIdPatch.useDays = regulUse
-                        viewModel.patchVacationUseDays()
                         viewModel.liveRegularHoliday.postValue(regulUse.toString() + "일 /")
                         calRegulIndicator(regulUse)
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.vacationIdPatch.useDays = regulUse
+                        repositoryCached.setValue(LocalKey.PATCHVACID,repositoryCached.getVac1Id())
+                        viewModel.patchVacationUseDays()
                     }
                     1 -> {
                         if (it.toInt() == viewModel.prizeHoliNum) {
@@ -121,14 +122,15 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             //사용자가 선택한 날 +"일"
 
                         prizeUse += it.toInt()
-                        viewModel.vacationIdPatch.useDays = prizeUse
-                        viewModel.patchVacationUseDays()
                         viewModel.livePrizeHoliday.postValue(prizeUse.toString() + "일/")
                         calPrizeIndicator(prizeUse)
                         //vacationIdPatch
                         //viewModel 에 전체/ 사용일 수 기록
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.vacationIdPatch.useDays = prizeUse
+                        repositoryCached.setValue(LocalKey.PATCHVACID,repositoryCached.getVac2Id())
+                        viewModel.patchVacationUseDays()
                     }
                     2 -> {
                         if (it.toInt() == viewModel.otherHoliNum) {
@@ -138,13 +140,14 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
                             }
                             //regularholi3.text = it + "일"
                             otherUse += it.toInt()
-                        viewModel.vacationIdPatch.useDays = otherUse
-                        viewModel.patchVacationUseDays()
                             viewModel.liveOtherHoliday.postValue(otherUse.toString() + "일/")
                             calOtherIndicator(otherUse)
                         //vacationIdPatch
                         Log.e(viewModel.vacationIdPatch.useDays.toString(), "사용일수")
                         Log.e(viewModel.vacationIdPatch.totalDays.toString(), "총 사용일수")
+                        viewModel.vacationIdPatch.useDays = otherUse
+                        repositoryCached.setValue(LocalKey.PATCHVACID,repositoryCached.getVac3Id())
+                        viewModel.patchVacationUseDays()
                     }
                 }
             }.show(supportFragmentManager)

@@ -60,7 +60,7 @@
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[0]}"
             android:textAlignment="viewStart"
-            android:stateListAnimator="@null"
+            android:stateListAnimator="@color/non"
             tools:text="2021.3.3 (토)" />
 
         <TextView
@@ -85,7 +85,7 @@
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[1]}"
             android:textAlignment="viewStart"
-            android:stateListAnimator="@null"
+            android:stateListAnimator="@color/non"
             tools:text="2021.3.3 (토)" />
 
         <LinearLayout
@@ -117,8 +117,7 @@
                 android:onClick="@{()-> vi.onClickDate(2)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[2]}"
-                android:textAlignment="viewStart"
-                android:stateListAnimator="@null"
+                android:stateListAnimator="@color/non"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -152,8 +151,7 @@
                 android:onClick="@{()-> vi.onClickDate(3)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[3]}"
-                android:textAlignment="viewStart"
-                android:stateListAnimator="@null"
+                android:stateListAnimator="@color/non"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -187,8 +185,7 @@
                 android:onClick="@{()-> vi.onClickDate(4)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[4]}"
-                android:textAlignment="viewStart"
-                android:stateListAnimator="@null"
+                android:stateListAnimator="@color/non"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 

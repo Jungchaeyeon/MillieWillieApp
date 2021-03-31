@@ -82,26 +82,26 @@ class WorkoutFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!repositoryCached.getIsExerciseId()) {
-            viewModel.apiRepository.postFirstEntrances()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    if (it.isSuccess) {
-                        Log.e("postFirstEntrances 호출 성공")
-
-                        repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
-                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
-                    } else {
-                        Log.e("postFirstEntrances 호출 실패")
-                        Log.e(it.message)
-                    }
-                }.disposeOnDestroy(this)
-        }
+//        if (!repositoryCached.getIsExerciseId()) {
+//            viewModel.apiRepository.postFirstEntrances()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe {
+//                    if (it.isSuccess) {
+//                        Log.e("postFirstEntrances 호출 성공")
+//
+//                        repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
+//                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
+//                    } else {
+//                        Log.e("postFirstEntrances 호출 실패")
+//                        Log.e(it.message)
+//                    }
+//                }.disposeOnDestroy(this)
+//        }
 
         isInputWeight = repositoryCached.getIsInputWeight()
         isInputGoal = repositoryCached.getIsInputGoal()
-        exerciseId = repositoryCached.getExerciseId()
-
+//        exerciseId = repositoryCached.getExerciseId()
+        exerciseId = 1
         Log.e("postYear currentYear = $postYear $currentYear")
         Log.e("postMonth currentMonth = $postMonth $currentMonth")
         Log.e("postDay currentDay = $postDay $currentDay")

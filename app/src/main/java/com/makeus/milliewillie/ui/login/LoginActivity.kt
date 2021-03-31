@@ -104,6 +104,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
         if (requestCode == requestGoogleAuth) {
             loginType = MyApplication.LOGINTYPE.GOOGLE
             repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
+            repositoryCached.setValue(LocalKey.SOCIALTYPE, "G")
             viewModel.getFcmToken {
                 deviceToken = it
             }

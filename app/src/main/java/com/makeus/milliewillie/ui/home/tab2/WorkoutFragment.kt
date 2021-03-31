@@ -82,26 +82,26 @@ class WorkoutFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        if (!repositoryCached.getIsExerciseId()) {
-//            viewModel.apiRepository.postFirstEntrances()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe {
-//                    if (it.isSuccess) {
-//                        Log.e("postFirstEntrances 호출 성공")
-//
-//                        repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
-//                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
-//                    } else {
-//                        Log.e("postFirstEntrances 호출 실패")
-//                        Log.e(it.message)
-//                    }
-//                }.disposeOnDestroy(this)
-//        }
+        if (!repositoryCached.getIsExerciseId()) {
+            viewModel.apiRepository.postFirstEntrances()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (it.isSuccess) {
+                        Log.e("postFirstEntrances 호출 성공")
+
+                        repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
+                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
+                    } else {
+                        Log.e("postFirstEntrances 호출 실패")
+                        Log.e(it.message)
+                    }
+                }.disposeOnDestroy(this)
+        }
 
         isInputWeight = repositoryCached.getIsInputWeight()
         isInputGoal = repositoryCached.getIsInputGoal()
-//        exerciseId = repositoryCached.getExerciseId()
-        exerciseId = 1
+        exerciseId = repositoryCached.getExerciseId()
+
         Log.e("postYear currentYear = $postYear $currentYear")
         Log.e("postMonth currentMonth = $postMonth $currentMonth")
         Log.e("postDay currentDay = $postDay $currentDay")
@@ -294,6 +294,14 @@ class WorkoutFragment :
 
                             isInputWeight = true
                             repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+
+                            postYear = currentYear
+                            postMonth = currentMonth
+                            postDay = currentDay
+                            repositoryCached.setValue(LocalKey.POSTYEAR, postYear)
+                            repositoryCached.setValue(LocalKey.POSTMONTH, postMonth)
+                            repositoryCached.setValue(LocalKey.POSTDAY, postDay)
+
                             drawDailyWeight(goalValue.toString(), weight)
                         } else {
                             Log.e("호출 실패")
@@ -306,8 +314,9 @@ class WorkoutFragment :
     private fun executePostFirstWeight() {
         WeightRecordBottomSheetFragment.getInstance()
             .setOnClickOk { goal, current ->
-                viewModel.apiRepository.postFirstWeight(FirstWeightRequest(goalWeight = goal.toDouble(),
-                    firstWeight = current.toDouble()))
+                viewModel.apiRepository.postFirstWeight(
+                    exerciseId = repositoryCached.getExerciseId(),
+                    body = FirstWeightRequest(goalWeight = goal.toDouble(), firstWeight = current.toDouble()))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         Log.e(it.isSuccess.toString())

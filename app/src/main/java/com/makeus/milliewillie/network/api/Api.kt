@@ -123,8 +123,9 @@ interface Api {
     @POST("exercises/first-entrances")
     fun postFirstEntrances(): Observable<FirstEntrances>
 
-    @POST("exercises/first-weights")
-    fun postFirstWeight(@Body body: FirstWeightRequest): Observable<FirstWeight>
+    @POST("exercises/{exerciseId}/first-weights")
+    fun postFirstWeight(@Path("exerciseId") exerciseId: Long,
+                        @Body body: FirstWeightRequest): Observable<FirstWeight>
 
     @POST("exercises/{exerciseId}/weights")
     fun postDailyWeight(@Body body: PostDailyWeightRequest,

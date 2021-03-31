@@ -2,39 +2,30 @@ package com.makeus.milliewillie.ui.profile
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.ClipData
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
-import androidx.core.net.toUri
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
-import com.makeus.base.fragment.BaseDataBindingFragment
+import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
-import com.makeus.milliewillie.databinding.FragmentPhotoSelectBinding
+import com.makeus.milliewillie.databinding.ActivityPhotoSelectBinding
 import com.makeus.milliewillie.model.PhotoSelectedItems
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.profile.adapter.PhotoSelectAdapter
 import com.makeus.milliewillie.util.Log
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.layout.fragment_photo_select), LoaderManager.LoaderCallbacks<Cursor> {
+class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.layout.activity_photo_select), LoaderManager.LoaderCallbacks<Cursor> {
     companion object {
         const val PROFILE_URL_KEY = "PROFILE_URL_KEY"
     }
@@ -54,10 +45,10 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
     private val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
 
     @SuppressLint("WrongConstant")
-    override fun FragmentPhotoSelectBinding.onBind() {
-        vi = this@PhotoSelectFragment
+    override fun ActivityPhotoSelectBinding.onBind() {
+        vi = this@PhotoSelectActivity
 
-        if (checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (checkSelfPermission(this@PhotoSelectActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
 //            // Should we show an explanation?
 //            if (shouldShowRequestPermissionRationale(
@@ -68,11 +59,11 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
 
-            (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
+//            (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
         }
 
-        val loaderManager: LoaderManager = LoaderManager.getInstance(this@PhotoSelectFragment)
-        loaderManager.initLoader(IMAGE_LOADER_ID, null, this@PhotoSelectFragment)
+        val loaderManager: LoaderManager = LoaderManager.getInstance(this@PhotoSelectActivity)
+        loaderManager.initLoader(IMAGE_LOADER_ID, null, this@PhotoSelectActivity)
 
         viewProfile = binding.root
 
@@ -94,7 +85,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
     }
 
     fun setRecyclerAdapter() {
-        uploadRecyclerAdapter = PhotoSelectAdapter(context, listOfAllImages)
+        uploadRecyclerAdapter = PhotoSelectAdapter(this, listOfAllImages)
         binding.photoRecycler.apply {
             gridLayoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             layoutManager = gridLayoutManager
@@ -104,7 +95,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
                 it.setMyUploadItemClickListener(object :
                     PhotoSelectAdapter.MyUploadItemClickListener {
                     override fun onItemClick(position: Int) {
-                        when (!this@PhotoSelectFragment.isSelected) {
+                        when (!this@PhotoSelectActivity.isSelected) {
                             true -> {
                                 listOfAllImages[position].isCheck = true
                                 uploadRecyclerAdapter.notifyDataSetChanged()
@@ -122,6 +113,8 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
                             }
                         }
                         image = listOfAllImages[position].uri
+                        userProfileImgUrl = image
+                        Log.e(userProfileImgUrl)
                     }
                 })
 
@@ -140,7 +133,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
         val sortOrder: String? = null
 
         return CursorLoader(
-            activity!!.applicationContext,
+            applicationContext,
             uri,
             projection,
             selection,
@@ -153,7 +146,7 @@ class PhotoSelectFragment:BaseDataBindingFragment<FragmentPhotoSelectBinding>(R.
 
     fun onClickComplete() {
         Log.e("onComplete")
-        (activity as ProfileActivity).onBackPressed()
+        onBackPressed()
     }
 
 }

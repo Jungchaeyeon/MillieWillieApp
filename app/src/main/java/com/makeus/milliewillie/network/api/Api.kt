@@ -80,7 +80,7 @@ interface Api {
     fun getVacation(): Observable<VacationIdResponse>
 
     @PATCH("users/vacations/{vacationId}")
-    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationIdResponse>
+    fun patchVacationId( @Body body : VacationIdPatch, @Path("vacationId") vacationId : Long): Observable<VacationPatchResponse>
 
     @GET("users")
     fun getUsers(): Observable<GetUsersResponse>

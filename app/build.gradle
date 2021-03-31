@@ -50,6 +50,7 @@ android {
 
     buildTypes {
         debug{
+            debuggable true
             minifyEnabled false
             shrinkResources false
             signingConfig signingConfigs.debug

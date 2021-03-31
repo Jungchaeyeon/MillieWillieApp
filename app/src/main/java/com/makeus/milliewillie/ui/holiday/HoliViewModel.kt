@@ -17,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: RepositoryCached) :
     BaseViewModel() {
 
-    var pickableMax = 50
+    var pickableMax = 35
 
     var regularHoliNum = 0
     var prizeHoliNum = 0
@@ -72,49 +72,24 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                     otherNum= it.result[2].useDays
                     response.invoke(true)
                 } else {
-                    Log.e("User정보 호출 실패")
                     response.invoke(false)
+                    Log.e("User정보 호출 실패")
                 }
             }, {
                 it.printStackTrace()
             }).disposeOnDestroy(this)
     }
 
-    fun patchVacationId(response: (Boolean) -> Unit) =
+    fun patchVacationId()=
         apiRepository.patchVacationId(
-            VacationIdPatch(
-                totalDays = vacationIdPatch.totalDays
-            ),
-            path = repositoryCached.getVacaId().toLong()
-        ).subscribe({
-            if (it.isSuccess) {
-                Log.e("휴가 수정 성공")
-                response.invoke(true)
-            } else {
-                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
-                response.invoke(false)
-            }
-        }, {
-            response.invoke(false)
-        })
-    fun patchVacationIdAll(response: (Boolean) -> Unit) =
+            VacationIdPatch(totalDays = vacationIdPatch.totalDays,useDays = vacationIdPatch.useDays),
+            path = repositoryCached.getVacaId().toLong())
+
+    fun patchVacationUseDays() =
         apiRepository.patchVacationId(
-            VacationIdPatch(
-                 useDays = vacationIdPatch.useDays,
-                 totalDays = vacationIdPatch.totalDays
-            ),
+            VacationIdPatch(totalDays = null,useDays = vacationIdPatch.useDays),
             path = repositoryCached.getVacaId().toLong()
-        ).subscribe({
-            if (it.isSuccess) {
-                Log.e("휴가 수정 성공")
-                response.invoke(true)
-            } else {
-                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
-                response.invoke(false)
-            }
-        }, {
-            response.invoke(false)
-        })
+        )
 
 
 }

@@ -47,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:text="@string/info_mili"
-                android:textColor="@color/black_all"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView12"
                 app:layout_constraintStart_toEndOf="@+id/btn_x"
@@ -89,7 +88,6 @@
             android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
             android:textAlignment="viewStart"
             android:drawableStart="@drawable/icon_goal"
-            android:stateListAnimator="@null"
             android:text="@{vm.liveGoal}"
             tools:text="토익만 따서 나가자!" />
 
@@ -111,7 +109,6 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/background_google_login"
             android:drawableEnd="@drawable/ic_icon_semo"
-            android:stateListAnimator="@null"
             android:paddingHorizontal="10dp"
             android:textAlignment="viewStart"
             tools:text="@{vm.liveServicetype}"
@@ -137,7 +134,6 @@
             android:drawableEnd="@drawable/ic_icon_semo"
             android:onClick="@{()-> vi.onClickDate(0)}"
             android:paddingHorizontal="10dp"
-            android:stateListAnimator="@null"
             android:text="@{vm.liveDateButtonList[0]}"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
@@ -163,7 +159,6 @@
             android:onClick="@{()-> vi.onClickDate(1)}"
             android:paddingHorizontal="10dp"
             android:text="@{vm.liveDateButtonList[1]}"
-            android:stateListAnimator="@null"
             android:textAlignment="viewStart"
             tools:text="2021.3.3 (토)" />
 
@@ -196,7 +191,6 @@
                 android:onClick="@{()-> vi.onClickDate(2)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[2]}"
-                android:stateListAnimator="@null"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -230,7 +224,6 @@
                 android:onClick="@{()-> vi.onClickDate(3)}"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[3]}"
-                android:stateListAnimator="@null"
                 tools:text="2021.3.3 (토)" />
         </LinearLayout>
 
@@ -262,7 +255,6 @@
                 android:background="@drawable/background_google_login"
                 android:drawableEnd="@drawable/ic_icon_semo"
                 android:onClick="@{()-> vi.onClickDate(4)}"
-                android:stateListAnimator="@null"
                 android:paddingHorizontal="10dp"
                 android:text="@{vm.liveDateButtonList[4]}"
                 tools:text="2021.3.3 (토)" />

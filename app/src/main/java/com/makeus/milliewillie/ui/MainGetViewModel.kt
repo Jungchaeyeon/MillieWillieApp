@@ -70,7 +70,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 }
                 nowPercentInt = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
                 nowPercentStr = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt().toString() + "%"
-                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat() + 0.05f
+                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat() + 0.01f
                 addAllItem(mainResponse.plan)
                 Log.e("$nowPercentFlt", "nowPercentFlt")
                 Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")

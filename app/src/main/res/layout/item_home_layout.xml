@@ -250,95 +250,95 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rect_radius_8"
-                android:orientation="vertical"
-                android:onClick="@{()->vi.onClickHoli()}">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="24dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:background="@drawable/rect_radius_8"-->
+<!--                android:orientation="vertical"-->
+<!--                android:onClick="@{()->vi.onClickHoli()}">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:gravity="bottom"
-                    android:orientation="horizontal">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="14dp"-->
+<!--                    android:gravity="bottom"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <View
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/icon_star" />
+<!--                    <View-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:background="@drawable/icon_star" />-->
 
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/leave"
-                        android:textSize="16sp" />
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:text="@string/leave"-->
+<!--                        android:textSize="16sp" />-->
 
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+<!--                    <View-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="1" />-->
 
-                    <TextView
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="@string/leftDays" />
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:text="@string/leftDays" />-->
 
-                    <TextView
-                        style="@style/spoqa_medium_12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/leftall"
-                        android:textColor="@color/text_gray" />
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_medium_12"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:text="@string/leftall"-->
+<!--                        android:textColor="@color/text_gray" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="end"
-                    android:orientation="horizontal">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:gravity="end"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
-                        android:text="@{vm.vacUseDays}"
-                        android:textSize="20sp" />
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
-                        android:text=" / "
-                        android:textSize="20sp" />
-                    <TextView
-                        style="@style/spoqa_bold_22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
-                        android:text="@{vm.vacTotalDays}"
-                        android:textColor="@color/text_gray"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </LinearLayout>
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:letterSpacing="0.1"-->
+<!--                        android:text="@{vm.vacUseDays}"-->
+<!--                        android:textSize="20sp" />-->
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:letterSpacing="0.1"-->
+<!--                        android:text=" / "-->
+<!--                        android:textSize="20sp" />-->
+<!--                    <TextView-->
+<!--                        style="@style/spoqa_bold_22"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:letterSpacing="0.1"-->
+<!--                        android:text="@{vm.vacTotalDays}"-->
+<!--                        android:textColor="@color/text_gray"-->
+<!--                        android:textSize="20sp" />-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
 
 
             <View

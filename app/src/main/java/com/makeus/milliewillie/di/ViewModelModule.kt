@@ -2,6 +2,7 @@ package com.makeus.milliewillie.di
 
 import com.makeus.milliewillie.ui.MainGetViewModel
 import com.makeus.milliewillie.ui.MainViewModel
+import com.makeus.milliewillie.ui.dDay.DdayOutputCNViewModel
 import com.makeus.milliewillie.ui.dDay.DdayViewModel
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel
 import com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel
@@ -54,4 +55,5 @@ val viewModelModule = module {
     viewModel { ReportViewModel(get()) }
     viewModel { AccountViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
+    viewModel { DdayOutputCNViewModel(get()) }
 }

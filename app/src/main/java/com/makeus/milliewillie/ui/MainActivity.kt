@@ -111,9 +111,9 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 anim()
             }
             R.id.fab_dday -> {
-//                SampleToast.createToast(this, getString(R.string.toast_update_later))?.show()
-                anim()
-                ActivityNavigator.with(this).dDay().start()
+                SampleToast.createToast(this, getString(R.string.toast_update_later))?.show()
+//                anim()
+//                ActivityNavigator.with(this).dDay().start()
             }
             R.id.fab_plan -> {
                 fab_dday.run {

@@ -83,6 +83,10 @@
                 android:textCursorDrawable="@color/maincolor_blue"
                 android:paddingVertical="0dp"
                 android:enabled="false"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"
                 android:textSize="18sp" />

@@ -4,6 +4,7 @@
     <string name="edit">편집</string>
     <string name="cancel">취소</string>
     <string name="modify">수정하기</string>
+    <string name="do_edit">편집하기</string>
     <string name="delete">삭제하기</string>
     <string name="title">제목</string>
     <string name="d_day_title">D - day 제목</string>

@@ -31,6 +31,7 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
     override fun onResume() {
         super.onResume()
         executeGetUsers()
+        onBackPressed()
     }
 
     private fun executeGetUsers() {

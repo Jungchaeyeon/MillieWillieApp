@@ -73,6 +73,7 @@ class ApiRepository(
 
     fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)
     fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
+    fun postFirstEntrances() = apiTest.postFirstEntrances()
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
     fun postRoutine(body: PostRoutineRequest, path: Long) = apiTest.postRoutine(body = body, exerciseId = path)
 

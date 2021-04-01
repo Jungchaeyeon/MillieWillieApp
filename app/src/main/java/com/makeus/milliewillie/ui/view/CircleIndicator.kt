@@ -15,6 +15,7 @@ class CircleIndicator : LinearLayout{
 
     private var mDefaultCircle: Int = 0
     private var mSelectCircle: Int = 0
+    private var mWhiteCircle: Int = 0
     private var mUseCircle: Int = 0
 
     private var imageDot: MutableList<ImageView> = mutableListOf()
@@ -44,7 +45,7 @@ class CircleIndicator : LinearLayout{
 
         mDefaultCircle = defaultCircle
         mSelectCircle = selectCircle
-        mUseCircle = R.drawable.indicator_dot_use
+        mWhiteCircle = R.drawable.indicator_dot_white
 
         for (i in 0 until count) {
             imageDot.add(ImageView(mContext).apply {
@@ -59,22 +60,23 @@ class CircleIndicator : LinearLayout{
         selectDot(position)
     }
 
-    fun customCreateDotPanel(count: Int, defaultCircle: Int, selectCircle: Int) {
+    fun customCreateDotPanel( defaultCircle: Int, selectCircle: Int, position : Int) {
         this.removeAllViews()
 
         mDefaultCircle = defaultCircle
         mSelectCircle = selectCircle
+        mWhiteCircle = R.drawable.indicator_dot_white
         mUseCircle = R.drawable.indicator_dot_use
 
-        for (i in 0 until count) {
+        for (i in 0 until 12) {
             imageDot.add(ImageView(mContext).apply {
-                if (i < count - 1) {
+                if (i < 12 - 1) {
                     setPadding(0, 0, temp.toInt(), 0)
                 }
             })
             this.addView(imageDot[i])
         }
-        selectDots(0)
+        selectDotsWhite(0)
     }
 
     /**
@@ -91,16 +93,17 @@ class CircleIndicator : LinearLayout{
             imageView.setImageResource(if (index < nums) mSelectCircle else mDefaultCircle)
         }
     }
-    fun selectDotsTwice(nums: Int, uNums:Int) {
-//        imageDot.forEachIndexed { index, imageView ->
-//            imageView.setImageResource(if (index < rNums) mSelectCircle else mDefaultCircle)
-//            imageView.setImageResource(if (index < uNums) mUseCircle else mSelectCircle)
-//            imageView.setImageResource(if(index<uNums))
-//        }
+    fun selectDotsWhite(nums: Int) {
+        imageDot.forEachIndexed { index, imageView ->
+            imageView.setImageResource(if (index < nums) mSelectCircle else mWhiteCircle)
+        }
+    }
+    //nums 가 파랑색 -> 선택가능횟수, uNums가 진회색 -> 이미 사용 (사용횟수, 선택가능 횟수)
+    fun selectDotsTwice(uNums:Int,nums: Int) {
         imageDot.forEachIndexed {index, imageView->
                 if(index<uNums) imageView.setImageResource(mUseCircle)
                 else if(index<nums) imageView.setImageResource(mSelectCircle)
-                else imageView.setImageResource(mDefaultCircle)
+                else imageView.setImageResource(mWhiteCircle)
         }
 
     }

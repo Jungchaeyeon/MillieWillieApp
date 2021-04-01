@@ -59,7 +59,7 @@ class InfoEnlistActivity :
             Log.e(btn_goal.text.toString(),"목표text")
             Log.e(viewModel.usersPatch.goal,"목표text Patch")
             Log.e(viewModel.liveGoal.value.toString(),"목표text LiveData")
-//
+
             patchGoal()
             patchUsers()
         }

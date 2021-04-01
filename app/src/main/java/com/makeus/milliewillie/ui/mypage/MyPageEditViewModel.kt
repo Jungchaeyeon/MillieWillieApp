@@ -117,11 +117,14 @@ class MyPageEditViewModel(
     }
 
     fun initMain() {
-        usersResponse.hobong += 2
+
         userEnlist.value = usersResponse.startDate
         allDday.value = "D - " + calDday(usersResponse.endDate).toString()
         monthProm.value = usersResponse.hobong.plus(1).toString() + "호봉 진급"
-        monthPromDday.value = "D - " + calHobongDday().toString()
+        if(calHobongDday() ==0){
+            monthPromDday.value = "D - DAY"
+        }else{
+            monthPromDday.value = "D - " + calHobongDday().toString()}
         when (usersResponse.normalPromotionStateIdx) {
             0 -> {
                 hobongClassInfo.value = "일병"
@@ -271,7 +274,7 @@ class MyPageEditViewModel(
 
         Log.e(today.toString(),"오늘")
         Log.e((allMonthDay - today).toString(),"계산")
-        return allMonthDay - (today-1)
+        return allMonthDay - (today)
     }
 
 

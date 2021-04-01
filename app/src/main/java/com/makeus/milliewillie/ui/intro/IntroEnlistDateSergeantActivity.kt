@@ -84,7 +84,9 @@ class IntroEnlistDateSergeantActivity :
 
     override fun onResume() {
         super.onResume()
-        viewModel.liveServiceId.postValue(2)
+
+            viewModel.liveServiceId.postValue(2)
     }
+
 
 }

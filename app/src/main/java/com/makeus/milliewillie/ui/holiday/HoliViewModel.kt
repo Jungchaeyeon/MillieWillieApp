@@ -9,6 +9,7 @@ import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.VacationIdPatch
 import com.makeus.milliewillie.model.VacationIdResponse
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
@@ -17,7 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: RepositoryCached) :
     BaseViewModel() {
 
-    var pickableMax = 50
+    var pickableMax = 35
 
     var regularHoliNum = 0
     var prizeHoliNum = 0
@@ -52,6 +53,10 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
             .subscribe({
                 if (it.isSuccess) {
                     vacationIdResponse = it
+
+                    repositoryCached.setValue(LocalKey.VAC1ID,it.result[0].vacationId)
+                    repositoryCached.setValue(LocalKey.VAC2ID,it.result[1].vacationId)
+                    repositoryCached.setValue(LocalKey.VAC3ID,it.result[2].vacationId)
                     liveRegularHoliday.value = it.result[0].useDays.toString() + "일 /"
                     liveRegularWholeHoliday.value = it.result[0].totalDays.toString() + "일"
                     livePrizeHoliday.value = it.result[1].useDays.toString() + "일 /"
@@ -72,49 +77,31 @@ class HoliViewModel(val apiRepository: ApiRepository, val repositoryCached: Repo
                     otherNum= it.result[2].useDays
                     response.invoke(true)
                 } else {
-                    Log.e("User정보 호출 실패")
                     response.invoke(false)
+                    Log.e("User정보 호출 실패")
                 }
             }, {
                 it.printStackTrace()
             }).disposeOnDestroy(this)
     }
 
-    fun patchVacationId(response: (Boolean) -> Unit) =
+    fun patchVacationId()=
         apiRepository.patchVacationId(
-            VacationIdPatch(
-                totalDays = vacationIdPatch.totalDays
-            ),
+            VacationIdPatch(totalDays = vacationIdPatch.totalDays,useDays = vacationIdPatch.useDays),
+            path = repositoryCached.getVacaId().toLong())
+
+    fun patchVacationUseDays() =
+        apiRepository.patchVacationId(
+            VacationIdPatch(totalDays = null,useDays = vacationIdPatch.useDays),
             path = repositoryCached.getVacaId().toLong()
         ).subscribe({
-            if (it.isSuccess) {
-                Log.e("휴가 수정 성공")
-                response.invoke(true)
-            } else {
-                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
-                response.invoke(false)
+            if(it.isSuccess){
+                Log.e("통신 성공")
             }
-        }, {
-            response.invoke(false)
-        })
-    fun patchVacationIdAll(response: (Boolean) -> Unit) =
-        apiRepository.patchVacationId(
-            VacationIdPatch(
-                 useDays = vacationIdPatch.useDays,
-                 totalDays = vacationIdPatch.totalDays
-            ),
-            path = repositoryCached.getVacaId().toLong()
-        ).subscribe({
-            if (it.isSuccess) {
-                Log.e("휴가 수정 성공")
-                response.invoke(true)
-            } else {
-                SampleToast.createToast(MyApplication.globalApplicationContext, "휴가 수정실패")?.show()
-                response.invoke(false)
+            else{
+                Log.e("통신실패")
             }
-        }, {
-            response.invoke(false)
-        })
+        },{Log.e("통신 실패")})
 
 
 }

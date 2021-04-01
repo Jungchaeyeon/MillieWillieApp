@@ -52,11 +52,16 @@ class IntroGoalActivity :
         viewModel.requestUser().subscribe {
             if (it.isSuccess) {
                 repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
-
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
-                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
-                ActivityNavigator.with(this).main().start()
+                repositoryCached.setValue(LocalKey.ISMEMBER, true)
+                Log.e(repositoryCached.getIsMember().toString(),"ISMEMBER")
                 Log.e(repositoryCached.getToken(), "환영users")
+
+                SampleToast.createToast(this,"밀리윌리 가입을 환영합니다 :)")?.show()
+                if(repositoryCached.getIsMember()==true) {ActivityNavigator.with(this).main().start()}
+                else{
+                    ActivityNavigator.with(this).login().start()
+                }
 //                Log.e( it.result.jwt, "환영 Test")
 //                Log.e( it.result.userId.toString(),"id 값")
             } else {
@@ -66,6 +71,8 @@ class IntroGoalActivity :
             }
         }.disposeOnDestroy(this)
     }
+
+
 
 
 

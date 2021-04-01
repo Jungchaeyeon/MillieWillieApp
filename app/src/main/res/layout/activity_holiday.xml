@@ -29,18 +29,18 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/vic_icon_delete"
-            android:onClick="@{()->vi.finish()}"/>
+            android:onClick="@{()->vi.onClickDone()}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="#f5f5f5"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="#f5f5f5"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -158,10 +158,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="116dp"
-                android:background="@color/white">
+                android:layout_height="wrap_content"
+                android:background="#f5f5f5">
 
                 <TextView
                     android:id="@+id/txt_type_regul"
@@ -206,16 +207,35 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.makeus.milliewillie.ui.view.CircleIndicator
-                    android:id="@+id/holi_regul_Indicator"
+                    android:id="@+id/holi_regul_Indicator1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <com.makeus.milliewillie.ui.view.CircleIndicator
+                    android:id="@+id/holi_regul_Indicator2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/holi_regul_Indicator1"/>
+                <com.makeus.milliewillie.ui.view.CircleIndicator
+                    android:id="@+id/holi_regul_Indicator3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/holi_regul_Indicator2"
+                    app:layout_constraintBottom_toTopOf="@id/textView4"
+                    />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -231,6 +251,7 @@
                     tools:text="0일" />
 
                 <TextView
+                    android:id="@+id/textView15"
                     style="@style/spoqa_medium_16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,29 +270,27 @@
                     style="@style/spoqa_regular_12"
                     android:layout_width="68dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/rect_radius_4"
                     android:onClick="@{()->vi.onClickUse(0)}"
                     android:text="@string/use"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/regular_edit" />
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="#f5f5f5"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content"
+                    android:background="#f5f5f5">
 
                     <TextView
                         android:id="@+id/textView13"
@@ -299,7 +318,7 @@
                         android:layout_marginTop="20dp"
                         android:includeFontPadding="false"
                         android:text="@string/prize_holi"
-                        app:layout_constraintStart_toEndOf="@+id/textView13"
+                        app:layout_constraintStart_toEndOf="@id/textView13"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="포상휴가" />
 
@@ -316,16 +335,37 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_prize_indicator"
+                        android:id="@+id/holi_prize_indicator1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="12dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_holi_prize"
+                        app:layout_constraintBottom_toTopOf="@id/holi_prize_Indicator2"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                        app:layout_constraintTop_toBottomOf="@id/textView14" />
+                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                        android:id="@+id/holi_prize_Indicator2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/holi_prize_indicator1"
+                        app:layout_constraintBottom_toTopOf="@id/holi_prize_Indicator3"/>
+                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                        android:id="@+id/holi_prize_Indicator3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/holi_prize_Indicator2"
+                        app:layout_constraintBottom_toTopOf="@id/txt_holi_prize"
+                        />
 
                     <TextView
                         android:id="@+id/txt_holi_prize"
@@ -341,6 +381,7 @@
                         tools:text="0일" />
 
                     <TextView
+                        android:id="@+id/textView17"
                         style="@style/spoqa_medium_16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -350,8 +391,8 @@
                         android:textColor="@color/text_gray"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txt_holi_prize"
-                        app:layout_constraintTop_toTopOf="@+id/txt_holi_prize"
+                        app:layout_constraintStart_toEndOf="@id/txt_holi_prize"
+                        app:layout_constraintTop_toTopOf="@id/txt_holi_prize"
                         tools:text=" /15일" />
 
                     <Button
@@ -364,16 +405,16 @@
                         android:background="@drawable/rect_radius_4"
                         android:onClick="@{()->vi.onClickUse(1)}"
                         android:text="@string/use"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/prize_edit" />
+                        app:layout_constraintTop_toBottomOf="@id/prize_edit" />
 
                     <Button
                         android:id="@+id/btn_register_prize"
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
@@ -381,14 +422,14 @@
                         android:text="@string/register"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/prize_edit" />
+                        app:layout_constraintTop_toTopOf="@+id/textView17" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content"
+                    android:background="#f5f5f5">
 
                     <TextView
                         android:id="@+id/txt_type_other"
@@ -416,7 +457,7 @@
                         android:layout_marginTop="20dp"
                         android:includeFontPadding="false"
                         android:text="@string/other_holi"
-                        app:layout_constraintStart_toEndOf="@+id/txt_type_other"
+                        app:layout_constraintStart_toEndOf="@id/txt_type_other"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="기타휴가" />
 
@@ -433,7 +474,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.makeus.milliewillie.ui.view.CircleIndicator
-                        android:id="@+id/holi_other_Indicator"
+                        android:id="@+id/holi_other_Indicator1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -441,8 +482,29 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
+                        app:layout_constraintTop_toBottomOf="@id/textView16" />
+                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                        android:id="@+id/holi_other_Indicator2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/holi_other_Indicator1"/>
+                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                        android:id="@+id/holi_other_Indicator3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/holi_other_Indicator2"
+                        app:layout_constraintBottom_toTopOf="@id/txt_holi_other"
+                        />
                     <TextView
                         android:id="@+id/txt_holi_other"
                         style="@style/spoqa_medium_16"
@@ -457,6 +519,7 @@
                         tools:text="0일" />
 
                     <TextView
+                        android:id="@+id/textView18"
                         style="@style/spoqa_medium_16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -480,6 +543,7 @@
                         android:background="@drawable/rect_radius_4"
                         android:onClick="@{()->vi.onClickUse(2)}"
                         android:text="@string/use"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/other_edit" />
@@ -489,7 +553,6 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="23dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
@@ -497,14 +560,15 @@
                         android:text="@string/register"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/other_edit" />
+                        app:layout_constraintTop_toTopOf="@+id/textView18" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="#f5f5f5">
 
                     <TextView
                         style="@style/spoqa_regular_10"

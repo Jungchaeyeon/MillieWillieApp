@@ -131,17 +131,8 @@ class WeightRecordActivity :
         val selectDateMillis = ConvertTimeMills.ConvertDateToMillis(recordDatePickerYear, recordDatePickerMonth, dayText.toInt())
         val todayMillis = ConvertTimeMills.ConvertDateToMillis(calendarInstance.get(Calendar.YEAR), calendarInstance.get(Calendar.MONTH) + 1, calendarInstance.get(Calendar.DAY_OF_MONTH))
 
-        Log.e("selYear toYear = $recordDatePickerYear ${calendarInstance.get(Calendar.YEAR)}")
-        Log.e("selMonth toMonth = $recordDatePickerMonth ${calendarInstance.get(Calendar.MONTH) + 1}")
-        Log.e("selDay toDay = ${dayText.toInt()} ${calendarInstance.get(Calendar.DAY_OF_MONTH)}")
-
-        Log.e("selectDateMillis = $selectDateMillis")
-        Log.e("todayMillis = $todayMillis")
-        Log.e("select가 더 큰가? ${todayMillis < selectDateMillis}")
-        // 월 체크도 필요./////////////////////////////////////////////////////
         if (todayMillis < selectDateMillis){
-//        if (dayText.toInt() > calendarInstance.get(Calendar.DAY_OF_MONTH)) {
-            globalApplicationContext.getString(R.string.over_value_date).showShortToastSafe()
+            SampleToast.createToast(this, globalApplicationContext.getString(R.string.over_value_date))?.show()
         } else {
             WeightAddRecordBottomSheetFragment.getInstance()
                 .setOnClickOk {

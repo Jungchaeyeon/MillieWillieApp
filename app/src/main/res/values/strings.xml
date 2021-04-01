@@ -227,5 +227,6 @@
     <string name="over_value_month">이번달 이전만 조회 가능합니다</string>
     <string name="over_value_date">오늘 이전으로만 기록 가능합니다</string>
     <string name="set_goal">목표 설정</string>
+    <string name="max35">최대 35일</string>
 
 </resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
@@ -27,7 +28,7 @@ class HolidayEditActivity :
     val viewModel by viewModel<HoliViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     var holiType =""
-    var minSetDay=0
+    var minSetDay=MutableLiveData<Int>()
 
     override fun setupProperties(bundle: Bundle?) {
         super.setupProperties(bundle)
@@ -46,7 +47,7 @@ class HolidayEditActivity :
     @SuppressLint("CheckResult")
     fun onClickDone(){
     //    "$minSetDay".showShortToastSafe()
-            if (allHoliDays.text.toString().toInt()>=minSetDay) {
+            if (allHoliDays.text.toString().toInt()>= minSetDay.value?.toInt() ?: 0) {
                 if(allHoliDays.text.toString().toInt()<36){
                 repositoryCached.setValue(LocalKey.PLANTOTOALDAYS, allHoliDays.text.toString())
                 viewModel.vacationIdPatch.totalDays = allHoliDays.text.toString().toInt()
@@ -65,7 +66,7 @@ class HolidayEditActivity :
                 }
 
             }else{
-                Snackbar.make(this.layout_holi_edit_2, "${minSetDay} 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(this.layout_holi_edit_2, "${minSetDay} 일 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
             }
 
     }
@@ -76,17 +77,17 @@ class HolidayEditActivity :
             if(it){
                 when(viewModel.liveHoliType.value){
                     "정기휴가" -> {
-                        minSetDay = viewModel.regularHoliNum
+                        minSetDay.value = viewModel.regularHoliNum
                         binding.layoutArmyInfo.visibility = View.VISIBLE
                         allHoliDays.setText(viewModel.regularHoliNum.toString())
                     }
                     "포상휴가" -> {
-                        minSetDay = viewModel.prizeHoliNum
+                        minSetDay.value = viewModel.prizeHoliNum
                         binding.layoutArmyInfo.visibility = View.GONE
                         allHoliDays.setText(viewModel.prizeHoliNum.toString())
                     }
                     "기타휴가" ->{
-                        minSetDay = viewModel.otherHoliNum
+                        minSetDay.value = viewModel.otherHoliNum
                         binding.layoutArmyInfo.visibility = View.GONE
                         allHoliDays.setText(viewModel.otherHoliNum.toString())
                     }

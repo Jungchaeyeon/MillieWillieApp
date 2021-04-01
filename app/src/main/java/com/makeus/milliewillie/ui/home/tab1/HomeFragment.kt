@@ -43,9 +43,14 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
         fun getInstance() = HomeFragment()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getMain()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getMain()
+
     }
     override fun FragmentHomeBinding.onBind() {
         vi = this@HomeFragment

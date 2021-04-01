@@ -7,6 +7,7 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.MyApplication.Companion.isLogout
 import com.makeus.milliewillie.MyApplication.Companion.loginType
 import com.makeus.milliewillie.MyApplication.Companion.userName
@@ -65,10 +66,10 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
     fun getLoginType() {
         when (loginType) {
             MyApplication.LOGINTYPE.KAKAO -> {
-                binding.infoTextLoginType.text = getString(R.string.kakao_login)
+                binding.infoTextLoginType.text = globalApplicationContext.getString(R.string.kakao_login)
             }
             MyApplication.LOGINTYPE.GOOGLE -> {
-                binding.infoTextLoginType.text = getString(R.string.google_login)
+                binding.infoTextLoginType.text = globalApplicationContext.getString(R.string.google_login)
             }
         }
     }

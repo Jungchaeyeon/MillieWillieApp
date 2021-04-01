@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityReportBinding
 import com.makeus.milliewillie.databinding.ActivityReportRecyclerItemBinding
@@ -168,7 +169,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
             .subscribe {
                 if (it.isSuccess){
                     Log.e("patchReports 호출 성공")
-                    getString(R.string.toast_patch).showShortToastSafe()
+                    globalApplicationContext.getString(R.string.toast_patch).showShortToastSafe()
                     onBackPressed()
                 } else {
                     Log.e("patchReports 호출 실패")

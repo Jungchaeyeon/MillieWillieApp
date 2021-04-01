@@ -3,6 +3,7 @@ package com.makeus.milliewillie.ui.info
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoAccountBinding
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -37,7 +38,12 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                 repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
                 repositoryCached.setValue(LocalKey.TOKEN, "")
                 repositoryCached.setValue(LocalKey.ISMEMBER, false)
-                SampleToast.createToast(this, getString(R.string.toast_withdraw))?.show()
+                repositoryCached.setValue(LocalKey.EXERCISEID, 0)
+                repositoryCached.setValue(LocalKey.ISEXERCISEID, false)
+                repositoryCached.setValue(LocalKey.POSTYEAR, 10000)
+                repositoryCached.setValue(LocalKey.POSTMONTH, 100)
+                repositoryCached.setValue(LocalKey.POSTDAY, 100)
+                SampleToast.createToast(this, globalApplicationContext.getString(R.string.toast_withdraw))?.show()
                 ActivityNavigator.with(this).login().start()
             }.disposeOnDestroy(this)
     }

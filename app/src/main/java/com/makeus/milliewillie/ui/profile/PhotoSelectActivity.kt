@@ -50,15 +50,16 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
 
         if (checkSelfPermission(this@PhotoSelectActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-//            // Should we show an explanation?
-//            if (shouldShowRequestPermissionRationale(
-//                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//                // Explain to the user why we need to read the contacts
-//            }
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Explain to the user why we need to read the contacts
+            }
             requestPermissions(
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
 
+//            return
 //            (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
         }
 
@@ -97,10 +98,14 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
                     override fun onItemClick(position: Int) {
                         when (!this@PhotoSelectActivity.isSelected) {
                             true -> {
-                                listOfAllImages[position].isCheck = true
-                                uploadRecyclerAdapter.notifyDataSetChanged()
-                                listOfAllImages[position].isThisItem = 1
-                                isSelected = true
+                                if (listOfAllImages[position].isThisItem == 1) {
+                                    listOfAllImages[position].isCheck = true
+                                    uploadRecyclerAdapter.notifyDataSetChanged()
+                                    listOfAllImages[position].isThisItem = 1
+                                    isSelected = true
+                                } else {
+                                    SampleToast.createToast(MyApplication.globalApplicationContext, "사진을 취소하고 선택해야 합니다")
+                                }
                             }
                             false -> {
                                 if (listOfAllImages[position].isThisItem == 1) {
@@ -108,7 +113,7 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
                                     uploadRecyclerAdapter.notifyDataSetChanged()
                                     isSelected = false
                                     listOfAllImages[position].isThisItem = 0
-                                } else SampleToast.createToast(MyApplication.globalApplicationContext, "사진을 취소하고 선택해야 합니다")
+                                }
 
                             }
                         }

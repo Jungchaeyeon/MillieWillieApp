@@ -18,6 +18,7 @@ import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
 import com.makeus.milliewillie.MyApplication.Companion.exerciseId
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
 import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
@@ -76,6 +77,7 @@ class WorkoutFragment :
     private var routineItemList = ArrayList<MyRoutineInfo>()
 
     companion object {
+        @Synchronized
         fun getInstance() = WorkoutFragment()
         var isModifiedRoutine: Boolean = false
     }
@@ -98,24 +100,26 @@ class WorkoutFragment :
                 }.disposeOnDestroy(this)
         }
 
-        isInputWeight = repositoryCached.getIsInputWeight()
-        isInputGoal = repositoryCached.getIsInputGoal()
+//        isInputWeight = repositoryCached.getIsInputWeight()
+        isInputWeight = true
+//        isInputGoal = repositoryCached.getIsInputGoal()
+        isInputGoal = true
         exerciseId = repositoryCached.getExerciseId()
-
-        Log.e("postYear currentYear = $postYear $currentYear")
-        Log.e("postMonth currentMonth = $postMonth $currentMonth")
-        Log.e("postDay currentDay = $postDay $currentDay")
-
-        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) {
-            isInputWeight = false
-            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) {
-            isInputWeight = false
-            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-        } else if (isInputWeight && postYear < currentYear) {
-            isInputWeight = false
-            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-        }
+        Log.e("exerciseId = $exerciseId")
+//        Log.e("postYear currentYear = $postYear $currentYear")
+//        Log.e("postMonth currentMonth = $postMonth $currentMonth")
+//        Log.e("postDay currentDay = $postDay $currentDay")
+//
+//        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) {
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) {
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        } else if (isInputWeight && postYear < currentYear) {
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        }
     }
 
     override fun onResume() {
@@ -228,7 +232,7 @@ class WorkoutFragment :
                     Log.e("getDailyWeight 호출 성공")
 
                     val goalText = String.format(
-                        getString(
+                        globalApplicationContext.getString(
                             R.string.goal_weight_var,
                             it.result.goalWeight
                         )
@@ -274,7 +278,7 @@ class WorkoutFragment :
             7 -> dayOfWeekText = "토"
         }
 
-        val today = String.format(getString(R.string.todayDateFormWithDayOfWeek, month, day, dayOfWeekText))
+        val today = String.format(globalApplicationContext.getString(R.string.todayDateFormWithDayOfWeek, month, day, dayOfWeekText))
 
         viewModel.liveDataToday.postValue(today)
     }
@@ -345,8 +349,9 @@ class WorkoutFragment :
     }
 
     fun onClickWeightDateItemAdd() {
+        Log.e("repositoryCached.getIsInputGoal() = ${repositoryCached.getIsInputGoal()}")
         // 목표체중 유무에 따라 다른 창을 띄움
-        when (isInputGoal) {
+        when (repositoryCached.getIsInputGoal()) {
             true -> if (!isInputWeight) executePostDailyWeight()
             false -> executePostFirstWeight()
         }
@@ -356,16 +361,16 @@ class WorkoutFragment :
     private fun drawDailyWeight(goal: String, current: String) {
         Log.e("called drawDailyWeight")
         var goalText = ""
-        if (goal != "-1.0") goalText = String.format(getString(R.string.goal_weight_var, goal))
+        if (goal != "-1.0") goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, goal))
 
         if (current != "-1.0"){
             viewModel.goalWeightText.postValue(goalText)
             binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
             if (todayMonth < 10) {
-                val dateform = String.format(getString(R.string.date_weight_record_format, "0$todayMonth", today))
+                val dateform = String.format(globalApplicationContext.getString(R.string.date_weight_record_format, "0$todayMonth", today))
                 viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
             } else {
-                val dateform = String.format(getString(R.string.date_weight_record_format, todayMonth.toString(), today))
+                val dateform = String.format(globalApplicationContext.getString(R.string.date_weight_record_format, todayMonth.toString(), today))
                 viewModel.addWeightItem(WorkoutWeightRecordDate(weight = current, date = dateform))
             }
 
@@ -427,7 +432,7 @@ class WorkoutFragment :
             axisRight.isEnabled = false // x충 오른쪽 데이터 설정
             axisLeft.isEnabled = false // x축 왼쪽 데이터 설정
 
-            setNoDataText(getString(R.string.chart_no_data_text))
+            setNoDataText(globalApplicationContext.getString(R.string.chart_no_data_text))
             setNoDataTextColor(R.color.white)
             description.text = "" // 차트 설명 설정
             setPinchZoom(false) // 차트 확대 설정

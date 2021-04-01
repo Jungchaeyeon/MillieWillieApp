@@ -14,7 +14,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
-import com.makeus.milliewillie.MyApplication.Companion.exerciseId
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.showShortToastSafe
@@ -25,7 +25,6 @@ import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
 import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -110,9 +109,8 @@ class WeightRecordActivity :
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun todayWeightInput() {
-        if (!repositoryCached.getIsInputWeight()) {
+//        if (!repositoryCached.getIsInputWeight()) {
             val date = viewModel.liveDataWeightPerDay.value?.get(position)?.dayOfMonth
             var dayText = ""
             var index = 0
@@ -125,8 +123,10 @@ class WeightRecordActivity :
                 }
             }
 
+
+        // 월 체크도 필요./////////////////////////////////////////////////////
             if (dayText.toInt() > Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
-                getString(R.string.over_value_date).showShortToastSafe()
+                globalApplicationContext.getString(R.string.over_value_date).showShortToastSafe()
             } else {
                 WeightAddRecordBottomSheetFragment.getInstance()
                     .setOnClickOk {
@@ -171,20 +171,20 @@ class WeightRecordActivity :
                             }.disposeOnDestroy(this)
                     }.show(supportFragmentManager)
             }
-        }
+//        }
 
     }
 
     private fun executeGetWeightRecord(month: Int, year: Int) {
         monthWeightArray.clear()
         dayWeightArray.clear()
-        viewModel.getWeightRecord(exerciseId, viewMonth = month, viewYear = year)
+        viewModel.getWeightRecord(repositoryCached.getExerciseId(), viewMonth = month, viewYear = year)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isSuccess) {
                     goalValue = it.result.goalWeight.toFloat()
                     viewModel.recordGoalWeight.postValue(goalValue.toString())
-                    val goalText = String.format(getString(R.string.goal_weight_var, goalValue.toString()))
+                    val goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, goalValue.toString()))
                     viewModel.topRecordGoalWeight.postValue(goalText)
 
                     for (i in 0 until it.result.monthWeight.size()) { // 월별 체중 평균
@@ -229,7 +229,7 @@ class WeightRecordActivity :
                             Log.e("호출 성공")
 
                             viewModel.recordGoalWeight.postValue(weight.toDouble().toString())
-                            val goalText = String.format(getString(R.string.goal_weight_var, weight.toDouble().toString()))
+                            val goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, weight.toDouble().toString()))
                             viewModel.topRecordGoalWeight.postValue(goalText)
 
                             Handler().postDelayed({
@@ -246,12 +246,14 @@ class WeightRecordActivity :
     fun onClickSetDate() {
         DatePickekWeightRecortBottomSheetDialogFragment.getInstance()
             .setOnClickOk {year, month ->
+                Log.e("year Calendar.YEAR = $year ${Calendar.YEAR}")
+                Log.e("month Calendar.MONTH = $month ${Calendar.MONTH + 1}")
                 if (year.toInt() <= Calendar.getInstance().get(Calendar.YEAR)) {
                     if (month.toInt() <= Calendar.getInstance().get(Calendar.MONTH) + 1) {
                         viewModel.yearAndMonth.postValue("${year}년 ${month}월")
                         executeGetWeightRecord(month = month.toInt(), year = year.toInt())
-                    } else SampleToast.createToast(this, getString(R.string.over_value_month))?.show()
-                } else SampleToast.createToast(this, getString(R.string.over_value_month))?.show()
+                    } else SampleToast.createToast(this, globalApplicationContext.getString(R.string.over_value_month))?.show()
+                } else SampleToast.createToast(this, globalApplicationContext.getString(R.string.over_value_month))?.show()
             }.show(supportFragmentManager)
     }
 
@@ -290,7 +292,7 @@ class WeightRecordActivity :
             axisRight.isEnabled = false // x충 오른쪽 데이터 설정
             axisLeft.isEnabled = false // x축 왼쪽 데이터 설정
 
-            setNoDataText(getString(R.string.chart_no_data_text))
+            setNoDataText(globalApplicationContext.getString(R.string.chart_no_data_text))
             setNoDataTextColor(R.color.white)
             description.text = "" // 차트 설명 설정
             setPinchZoom(false) // 차트 확대 설정

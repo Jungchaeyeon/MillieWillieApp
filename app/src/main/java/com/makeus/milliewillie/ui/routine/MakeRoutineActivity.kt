@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.model.*
@@ -455,7 +456,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             typeIndex++
         }
 
-        val textSet = String.format(getString(R.string.part_of_ex_title, bodyPart))
+        val textSet = String.format(globalApplicationContext.getString(R.string.part_of_ex_title, bodyPart))
         viewModel.liveDataPartOfExTitle.postValue(textSet)
         viewModel.createExItem(bodyPart)
 
@@ -535,7 +536,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             ExPartSelectBottomSheetFragment.getInstance()
                 .setOnClickOk {
                     viewModel.liveDatePartOfEx.postValue(it)
-                    val textSet = String.format(getString(R.string.part_of_ex_title, it))
+                    val textSet = String.format(globalApplicationContext.getString(R.string.part_of_ex_title, it))
                     viewModel.liveDataPartOfExTitle.postValue(textSet)
                     viewModel.createExItem(it)
                     isPartOfEx = true
@@ -691,12 +692,12 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             true -> {
                 val isDoNotExecute = setDoNotExecute()
                 if (!isDoNotExecute) executePatchRoutine()
-                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))?.show()
+                else SampleToast.createToast(this, globalApplicationContext.getString(R.string.toast_input_routine_data))?.show()
             }
             false -> {
                 val isDoNotExecute = setDoNotExecute()
                 if (!isDoNotExecute) executePostRoutine()
-                else SampleToast.createToast(this, getString(R.string.toast_input_routine_data))?.show()
+                else SampleToast.createToast(this, globalApplicationContext.getString(R.string.toast_input_routine_data))?.show()
             }
         }
 

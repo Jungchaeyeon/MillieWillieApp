@@ -47,9 +47,9 @@ class WeightAddRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fra
 
         current = binding.recordEditCurrent.text.toString()
         if (current.isBlank()) {
-            SampleToast.createToast(context!!, getString(R.string.toast_weight_record))?.show()
+            SampleToast.createToast(context!!, context!!.getString(R.string.toast_weight_record))?.show()
         } else {
-            SampleToast.createToast(context!!, getString(R.string.toast_weight_record_per_today))?.show()
+//            SampleToast.createToast(context!!, context!!.getString(R.string.toast_weight_record_per_today))?.show()
             clickOk?.invoke(current)
             dismiss()
         }

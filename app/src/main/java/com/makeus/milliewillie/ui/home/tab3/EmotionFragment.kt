@@ -189,13 +189,13 @@ class EmotionFragment :
         super.onResume()
         viewModel.liveTodayData.postValue(df.format(cal.time))
         viewModel.requestEmo()
-        viewModel.getEmotionsRecordDay(){
-            if(it){
-                "조회 성공".showShortToastSafe()
-            }else{
-                "조회 실패".showShortToastSafe()
-            }
-        }
+//        viewModel.getEmotionsRecordDay(){
+//            if(it){
+//                "조회 성공".showShortToastSafe()
+//            }else{
+//                "조회 실패".showShortToastSafe()
+//            }
+//        }
         btn_check.visibility = View.GONE
     }
 

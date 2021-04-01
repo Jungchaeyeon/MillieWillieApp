@@ -36,10 +36,15 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
         Log.e("isLogout = $isLogout")
         Log.e("repositoryCached.getInApp() = ${repositoryCached.getInApp()}")
+        Log.e(repositoryCached.getSettingOut(),"SETTINGOUT")
+        Log.e(repositoryCached.getIsMember().toString(),"GETISMEMBER")
+        Log.e(repositoryCached.getToken().toString(),"GETTOKEN")
+
 
         if(!isLogout) {
             //logout상태면 true
                 //isLogout == false -> 로그인 상태
+            Log.e(repositoryCached.getSettingOut().toString(),"F이면 회원가입 넘어간것")
             if(repositoryCached.getInApp() =="KF") {
                 if (repositoryCached.getToken().isNotEmpty()) {
                     //1단계 -> jwt 가지고 있니?
@@ -50,13 +55,18 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                             loginType = MyApplication.LOGINTYPE.KAKAO
                             repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
                             Log.e(it.toString(), "유효한 토큰-> 메인으로")
-                            ActivityNavigator.with(this).main().start()
+                            if(repositoryCached.getIsMember()==true){
+                                ActivityNavigator.with(this).main().start()}
+                            else{
+                                ActivityNavigator.with(this).welcome().start()
+                            }
                         } else {
                             Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
                         }
                     }
                 } else {
-
+                        Log.e("회원가입 중도 빠졌을 때")
+                        repositoryCached.setValue(LocalKey.TOKEN,"")
                 }
             } else if (repositoryCached.getInApp() =="GF") {
                 if (repositoryCached.getToken().isNotEmpty()) {
@@ -78,6 +88,8 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                 }
             }
         }else{
+            Log.e("$isLogout","isLogout??")
+            Log.e(repositoryCached.getIsMember().toString(),"isMember?")
         //로그아웃 상태 -> isMember이고 회원으로 이동
         }
 
@@ -173,5 +185,8 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
             }
         }
     }
+
+
+
 
 }

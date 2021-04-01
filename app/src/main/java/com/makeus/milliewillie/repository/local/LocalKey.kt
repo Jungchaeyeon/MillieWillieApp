@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    SETTINGOUT,
     VAC1ID,
     VAC2ID,
     VAC3ID,

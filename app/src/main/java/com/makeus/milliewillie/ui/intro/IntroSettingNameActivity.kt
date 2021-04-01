@@ -7,14 +7,19 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityIntroSettingNameBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class IntroSettingNameActivity :
     BaseDataBindingActivity<ActivityIntroSettingNameBinding>(R.layout.activity_intro_setting_name) {
 
     val viewModel by viewModel<UserViewModel>()
+    val repositoryCached by inject<RepositoryCached>()
 
     override fun ActivityIntroSettingNameBinding.onBind() {
         vi = this@IntroSettingNameActivity
@@ -41,5 +46,7 @@ class IntroSettingNameActivity :
     fun onClickClear(){
         edt_name.text.clear()
     }
+
+
 
 }

@@ -24,6 +24,7 @@ class IntroEnlistDateSoldierActivity :
     BaseDataBindingActivity<ActivityIntroEnlistDateSoldierBinding>(R.layout.activity_intro_enlist_date_soldier) {
 
     private val viewModel by viewModel<UserViewModel>()
+    val repositoryCached by inject<RepositoryCached>()
 
     override fun setupProperties(bundle: Bundle?) {
         super.setupProperties(bundle)
@@ -72,4 +73,9 @@ class IntroEnlistDateSoldierActivity :
         viewModel.enlistDataInit()
         viewModel.usersRequest
     }
+
+
+
+
+
 }

@@ -10,14 +10,18 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityWelcomeBinding
 import com.makeus.milliewillie.databinding.ItemWelcomeBinding
 import com.makeus.milliewillie.model.Intro
+import com.makeus.milliewillie.repository.local.LocalKey
+import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.item_welcome.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout.activity_welcome) {
     private val viewModel by viewModel<WelcomeViewModel>()
-
+    val repositoryCached by inject<RepositoryCached>()
     override fun ActivityWelcomeBinding.onBind() {
         vi = this@WelcomeActivity
         vm = viewModel
@@ -75,6 +79,7 @@ class WelcomeActivity : BaseDataBindingActivity<ActivityWelcomeBinding>(R.layout
 
     override fun onResume() {
         super.onResume()
+
         viewModel.requestIntroItemList()
     }
 }

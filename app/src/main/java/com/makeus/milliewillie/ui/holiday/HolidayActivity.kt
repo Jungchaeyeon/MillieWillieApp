@@ -89,7 +89,7 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
         popup.show()
     }
     fun onClickDone(){
-
+        onBackPressed()
     }
 
     //사용하기 버튼 눌렀을 때

@@ -1,28 +1,33 @@
 package com.makeus.milliewillie.ui
 
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityMainBinding
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.home.tab1.HomeFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeus.milliewillie.ui.home.tab3.EmotionFragment
 import com.makeus.milliewillie.ui.home.tab4.InfoFragment
 import com.makeus.milliewillie.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-   // val viewModel by viewModel<MainGetViewModel>()
+    private val viewModel by viewModel<MainGetViewModel>()
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation
@@ -32,12 +37,31 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
         fun getInstance() = MainActivity()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // ExerciseId 앱 실행시 싱글톤으로 1회 실행
+        viewModel.apiRepository.getExerciseId()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess) {
+                    Log.e("getExerciseId 호출 성공")
+                    // 받아온 exId Local 저장
+                    repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
+                    Log.e("getExerciseId = ${repositoryCached.getExerciseId()}")
+                } else {
+                    Log.e("getExerciseId 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this@MainActivity)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun ActivityMainBinding.onBind() {
         vi = this@MainActivity
-       // viewModel.bindLifecycle(this@MainActivity)
 
-       // Log.e("값 넘김",intent.getStringExtra("userViewModel").toString())
+
+
         fabOpen = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close);
         fabFastClose = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fab_close_fast);

@@ -83,7 +83,7 @@ class WorkoutFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // ExerciseId를 최초 1회 POST로 받아옴, 이후 로그아웃, 회원탈퇴 시 초기화 그전까지 변동 없음
-        if (!repositoryCached.getIsExerciseId()) {
+        if (repositoryCached.getExerciseId() == (-1).toLong()) {
             viewModel.apiRepository.postFirstEntrances()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -91,8 +91,6 @@ class WorkoutFragment :
                         Log.e("postFirstEntrances 호출 성공")
                         // ExId 로컬에 저장
                         repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
-                        // ExId를 로컬에 저장했는가?
-                        repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
                     } else {
                         Log.e("postFirstEntrances 호출 실패")
                         Log.e(it.message)

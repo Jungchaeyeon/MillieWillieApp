@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.repository.ApiRepository
@@ -52,6 +53,8 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 Log.e(mainResponse.toString())
                 liveName.value = mainResponse.name
                 liveGoal.value = mainResponse.goal
+                userProfileImgUrl = mainResponse.profileImg
+                Log.e("userProfileUrl = $userProfileImgUrl")
                 if (it.result.stateIdx == 1){
                     nextProm.value = this.initNextProm(mainResponse.normalPromotionStateIdx)
                     nextPromDday.value = "D - "+ initNextPromDay(mainResponse.normalPromotionStateIdx)
@@ -235,5 +238,12 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
         }
         return calDateDays
     }
+
+//    @BindingAdapter("setImageUrl")
+//    fun setUserProfileImage(view: ImageView, url: String?) {
+//        if (!userProfileImgUrl.isNullOrBlank()) {
+//            Glide.with(view).load(url).circleCrop().placeholder(R.drawable.graphic_profile_big).into(view)
+//        }
+//    }
 
 }

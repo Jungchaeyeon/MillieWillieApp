@@ -192,6 +192,8 @@ interface Api {
     @GET("calendars/ddays/{ddayId}")
     fun getDday(@Path("ddayId") ddayId: Long): Observable<GetDdayResponse>
 
+    @GET("exercises")
+    fun getExerciseId(): Observable<FirstEntrances>
 
 
     @PATCH("exercises/{exerciseId}/routines/{routineId}")

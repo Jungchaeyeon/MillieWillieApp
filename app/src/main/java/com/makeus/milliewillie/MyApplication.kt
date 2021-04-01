@@ -38,7 +38,7 @@ class MyApplication : Application() {
 
         lateinit var sSharedPreferences: SharedPreferences
 
-        var userProfileImgUrl: String? = ""
+        var userProfileImgUrl: String = ""
         var userName: String = ""
 
         var isLogout = false

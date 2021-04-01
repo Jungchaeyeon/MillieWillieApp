@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentHomeBinding
 import com.makeus.milliewillie.databinding.ItemHomeLayoutBinding
@@ -58,7 +60,6 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
         setClassImg()
 
-
         rvMemoList.run {
 
             adapter = BaseDataBindingRecyclerViewAdapter<Main.Result.PlanMain>()
@@ -71,6 +72,10 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
                     ) {
                         vi = this@HomeFragment
                         vm = viewModel
+
+                        Glide.with(this.profileImg).load(userProfileImgUrl).circleCrop()
+                            .placeholder(R.drawable.graphic_profile_big).into(this.profileImg)
+
                     })
                 .addViewType(
                     BaseDataBindingRecyclerViewAdapter.MultiViewType<Main.Result.PlanMain, ItemMainScheduleBinding>(

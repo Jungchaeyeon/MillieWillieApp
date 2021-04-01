@@ -73,6 +73,7 @@ class ApiRepository(
     fun getStartExercises(exerciseId: Long, routineId: Long) = apiTest.getStartExercises(exerciseId = exerciseId, routineId = routineId)
     fun getReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.getReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
     fun getUsers() = apiTest.getUsers()
+    fun getExerciseId() = apiTest.getExerciseId()
     fun getDday(ddayId: Long) = apiTest.getDday(ddayId)
 
     fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)

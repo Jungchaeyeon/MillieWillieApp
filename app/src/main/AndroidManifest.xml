@@ -39,7 +39,8 @@
             android:name=".ui.mypage.MyPageEditActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.plan.PlanCalendarActivity" />
-        <activity android:name=".ui.plan.PlanVacationActivity" />
+        <activity android:name=".ui.plan.PlanVacationActivity" >
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

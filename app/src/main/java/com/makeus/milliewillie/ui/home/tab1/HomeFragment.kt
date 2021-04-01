@@ -38,7 +38,8 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     var nowPercentInt = 0
     var nowPercent = ""
     var nowPercentFlt = 0F
-//    lateinit var simpleItemTouchCallback : ItemTouchHelper.SimpleCallback
+    //lateinit var simpleItemTouchCallback : ItemTouchHelper.SimpleCallback
+
     companion object {
         fun getInstance() = HomeFragment()
     }
@@ -79,6 +80,8 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
 
                     })
+
+
 
         }
     }

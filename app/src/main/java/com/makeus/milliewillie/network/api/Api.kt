@@ -36,7 +36,7 @@ interface Api {
 //        @Part file: MultipartBody.Part
 //    ): Observable<Thumbnail>
 
-    //감정일기기
+    //감정일기기--------------------------------------------------------------
    @POST("emotions-record")
     fun postEmotionsRecord(
         @Body body : EmotionsRecordRequest
@@ -52,20 +52,25 @@ interface Api {
         @Path("emotionsRecordId") emotionsRecordId: Long
     ): Observable<BaseResponse>
 
-    @GET("emotions-record/day?date={date}")
+    @GET("emotions-record/day?")
     fun getEmotionsRecordDay(
-        @Path("date") date: String
-    ): Observable<EmotionsRecordDayResponse>
+        @Query("date") date: String
+    ): Observable<EmotionsRecordResponse>
 
-    @GET("emotions-record/month?month=")
+    @GET("emotions-record/month?")
     fun getEmotionsRecordMonth(
-        @Path("month") month: String
-    ): Observable<EmotionsRecordDayResponse>
-    // Main
+        @Query("month") month: String
+    ): Observable<EmotionRecordOnlyMonthResponse>
+
+    @GET("emotions-record/current-month-today")
+    fun getEmotionsFirstMonth(): Observable<EmotionsRecordMonthResponse>
+    //--------------------------------------------------------
+
+    // Main---------------------------------------------------
     @GET("main/users-calendars")
     fun getMain(): Observable<Main>
 
-    //일정 API
+    //일정 API-------------------------------------------------
     @POST("calendars/plans")
     fun plans(
         @Body body : PlansRequest
@@ -84,7 +89,7 @@ interface Api {
     @PATCH("calendars/plans/plans-work/{workId}")
     fun patchDiary(
         @Path("workId") workId: Long): Observable<PlansWork>
-
+    //---------------------------------------------------------------------
 
     // 휴가 API
     @GET("users/vacations")

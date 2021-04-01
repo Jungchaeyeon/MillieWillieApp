@@ -57,8 +57,9 @@ class ApiRepository(
     fun patchEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest, path : Long) = apiTest.patchEmotionsRecord(body = emotionsRecordRequest, emotionsRecordId = path)
     fun patchDiary(path : Long) = apiTest.patchDiary(workId= path)
     fun deleteEmotionsRecord(path : Long) = apiTest.deleteEmotionsRecord(emotionsRecordId= path)
-    fun getEmotionsRecordDay(path : String) = apiTest.getEmotionsRecordDay(date= path)
-    fun getEmotionsRecordMonth(path : String) = apiTest.getEmotionsRecordMonth(month= path)
+    fun getEmotionsRecordDay(date : String) = apiTest.getEmotionsRecordDay(date= date)
+    fun getEmotionsRecordMonth(month : String) = apiTest.getEmotionsRecordMonth(month= month)
+    fun getEmotionsFirstMonth() = apiTest.getEmotionsFirstMonth()
 
 
     //fun users(name : String) = apiTest.users(name)

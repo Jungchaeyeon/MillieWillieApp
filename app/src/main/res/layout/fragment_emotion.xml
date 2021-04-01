@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.home.tab3.EmoViewModel" />
@@ -37,14 +39,15 @@
                 app:headerColor="@color/white"
                 app:headerLabelColor="#3E3E3E"
                 app:todayLabelColor="@color/aqua_blue" />
-<!--            <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
-<!--                android:id="@+id/calendar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="382dp"-->
-<!--                android:background="@drawable/rect_radius_bottom"-->
-<!--                app:mcv_leftArrowMask="@drawable/icon_left"-->
-<!--                app:mcv_rightArrowMask="@drawable/icon_right_cal"-->
-<!--                app:mcv_showOtherDates="defaults" />-->
+
+            <!--            <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
+            <!--                android:id="@+id/calendar"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="382dp"-->
+            <!--                android:background="@drawable/rect_radius_bottom"-->
+            <!--                app:mcv_leftArrowMask="@drawable/icon_left"-->
+            <!--                app:mcv_rightArrowMask="@drawable/icon_right_cal"-->
+            <!--                app:mcv_showOtherDates="defaults" />-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -53,7 +56,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txt_Date"
                     style="@style/spoqa_medium_16"
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
@@ -64,7 +67,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="3월20일" />
-<!--                    android:onFocusChange="@{(_, b) -> vi.onChangeFocus(b)}"-->
+                <!--                    android:onFocusChange="@{(_, b) -> vi.onChangeFocus(b)}"-->
 
                 <TextView
                     android:id="@+id/txt_today"
@@ -76,8 +79,21 @@
                     android:text="@string/today"
                     android:textColor="@color/text_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintStart_toEndOf="@+id/txt_Date"
                     app:layout_constraintTop_toTopOf="parent" />
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/btn_edit"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_marginEnd="46dp"-->
+<!--                    android:background="@drawable/icon_pencil"-->
+<!--                    android:backgroundTint="@color/text_gray"-->
+<!--                    android:onClick="@{()->vi.onClickEdit()}"-->
+<!--                    android:visibility="invisible"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
                 <ImageView
                     android:id="@+id/btn_check"
@@ -97,11 +113,11 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/icon_trashcan"
+                    android:onClick="@{()->vi.onClickDelete()}"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:onClick="@{()->vi.onClickDelete()}"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -119,9 +135,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="143dp"
                 android:isScrollContainer="true"
-                android:visibility="visible"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="5" />
+<!--                android:visibility="@{vm.liveEmotionsRecordMonthData.result.today == null ? View.VISIBLE : View.GONE , default = gone }"-->
 
             <LinearLayout
                 android:id="@+id/layout_make_today_emo"
@@ -129,9 +145,9 @@
                 android:layout_height="368dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
+<!--                android:visibility="@{vm.liveEmotionsRecordMonthData.result.today == null ? View.GONE : View.VISIBLE , default = visible }">-->
                 <LinearLayout
                     android:layout_width="72dp"
                     android:layout_height="86dp"
@@ -139,7 +155,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/img_emo"
                         setImage="@{vm.livePickEmo.emotion}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -151,7 +167,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/txt_emo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gaegu_bold"
@@ -170,21 +186,16 @@
                     style="@style/AppTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@={vm.liveEmoMemo}"
                     android:layout_marginTop="18dp"
                     android:background="@drawable/edit_bubble_default"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:hint="오늘의 감정을 남겨주세요."
                     android:inputType="textMultiLine"
                     android:maxWidth="256dp"
-                    android:onClick="@{(_)->vi.onClickEditTxt(_)}"
-                    android:maxHeight="256dp"
-                    android:paddingVertical="10dp"
                     android:paddingStart="18dp"
-                    android:textSize="14sp" />
-
+                    android:paddingEnd="10dp"
+                    android:text="@={vm.liveEmoMemo}" />
             </LinearLayout>
 
         </LinearLayout>

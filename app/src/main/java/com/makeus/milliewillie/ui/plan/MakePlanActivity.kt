@@ -147,6 +147,7 @@ class MakePlanActivity :
         viewModel.liveDayAndNight.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
+                viewModel.livePlanType.value = it
                 viewModel.replaceTodo()
                 val type = repositoryCached.getPlanType()
                 btn_tp.text = type

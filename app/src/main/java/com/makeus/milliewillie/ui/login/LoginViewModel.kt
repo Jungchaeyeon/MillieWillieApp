@@ -114,7 +114,6 @@ class LoginViewModel(
 
                 Log.e("일단 카카오 쪽 로그인 성공 ${token.accessToken}")
                 repositoryCached.setValue(LocalKey.TOKEN, token.accessToken)
-                repositoryCached.setValue(LocalKey.SETTINGOUT,"F")
 
                 //서버 통신
                 requestKakaoLogin(response)

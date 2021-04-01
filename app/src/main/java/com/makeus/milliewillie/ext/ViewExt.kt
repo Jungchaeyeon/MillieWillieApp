@@ -4,10 +4,12 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.Guideline
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import kotlinx.android.synthetic.main.activity_intro_goal.view.*
 import kotlinx.android.synthetic.main.item_home_layout.view.*
 
 @BindingAdapter("lineTint")
@@ -29,4 +31,8 @@ fun View.setPercent(value: Float) {
 @BindingAdapter("setProgress")
 fun View.setProgress(value:MutableLiveData<String>){
     (progressbar as ProgressBar).progress = value.value?.toInt()!!
+}
+@BindingAdapter("setImageUrl")
+fun View.setImageUrl(value: String){
+    (imageView as ImageView).setImageUrl(value)
 }

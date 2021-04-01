@@ -13,11 +13,6 @@
     <string name="exercisePart">운동 부위</string>
     <string name="start_date">시작일</string>
     <string name="date">날짜</string>
-    <string name="date_info">날짜선택</string>
-    <string name="alarm">알림</string>
-    <string name="alarm_info">하루 전날(18:30) 푸시알림을 받겠습니다.</string>
-    <string name="hundred_divided_date">100일 단위 표시</string>
-    <string name="content">내용</string>
     <string name="content_hint">글 남기기...</string>
     <string name="link">링크</string>
     <string name="link_hint">사이트 링크 붙여넣기</string>
@@ -26,21 +21,16 @@
     <string name="todo">할일</string>
     <string name="check_list">체크리스트</string>
     <string name="something_for_do">준비물</string>
-    <string name="goal_aim">목표량</string>
-    <string name="today_goal_input">오늘의 목표치 입력</string>
     <string name="todo_add">챙길 물품, 확인해야할 사항 기록!</string>
     <string name="anniversary">기념일</string>
     <string name="certification">자격증</string>
     <string name="ncee">수능</string>
     <string name="birthday">생일</string>
-    <string name="user_setting">직접설정</string>
     <string name="search_for_place">장소·주소 검색</string>
 
     <string name="see_more">더보기</string>
     <string name="account_setting">계정관리</string>
     <string name="push_alarm">푸시 알림</string>
-    <string name="MW">밀리윌리</string>
-    <string name="card_merit">카드혜택</string>
     <string name="log_out">로그아웃</string>
     <string name="kakao_login">카카오 로그인</string>
     <string name="google_login">구글 로그인</string>
@@ -67,34 +57,24 @@
     <string name="chest">가슴</string>
     <string name="back">등</string>
     <string name="abs">복근</string>
-    <string name="triceps">삼두</string>
     <string name="biceps">이두</string>
     <string name="forearm">전완</string>
     <string name="arm">팔</string>
-    <string name="hip">엉덩이</string>
-    <string name="thigh">허벅지</string>
-    <string name="calf">종아리</string>
-    <string name="whole_body">전신</string>
-    <string name="core">코어</string>
     <string name="leg">하체</string>
     <string name="part_of_ex_title">%s 운동</string>
 
-    <string name="option_select">옵션 선택</string>
     <string name="option_weight_count">무게 + 개수</string>
     <string name="option_count">개수만</string>
     <string name="option_time">시간</string>
     <string name="minute">분</string>
     <string name="sec">초</string>
     <string name="set_count">세트 수</string>
-    <string name="set_total_count_input">%d 세트</string>
-    <string name="set_add">세트 추가</string>
     <string name="total_set_con">전체 세트 동일</string>
 
     <string name="select">선택</string>
     <string name="ok">확인</string>
 
     <string name="divide">구분</string>
-    <string name="enlist">입대</string>
     <string name="discharge">전역</string>
     <string name="blank_message1">아직 생성한 일정/기록이 없습니다.</string>
     <string name="blank_message2">추가하기 버튼을 눌러 추가해 보세요!</string>
@@ -106,21 +86,9 @@
     <string name="introduce_plan_page2">구분 탭을 눌러보세요 :)</string>
     <string name="plan_title">일정 제목</string>
     <string name="plan_date">날짜</string>
-    <string name="pick_date">날짜 선택</string>
-    <string name="repeat_no">안함</string>
-    <string name="mon">월</string>
-    <string name="tues">화</string>
-    <string name="wedn">수</string>
-    <string name="thurs">목</string>
-    <string name="fri">금</string>
-    <string name="sat">토</string>
-    <string name="sun">일</string>
     <string name="notice">알림</string>
     <string name="notice_msg">하루 전날(19:00) 푸시알림을 받겠습니다.</string>
 
-    <string name="string_id"><![CDATA[<font color="#9ee91d">텍스트 1 %1$s %s %d</font> <font color="#878787">텍스트 2 %2$s</font>]]></string>
-
-    <string name="reset">초기화</string>
     <string name="makeplan">일정 만들기</string>
     <string name="makedday">D-day 만들기</string>
     <string name="plan_color">일정 색상</string>
@@ -134,16 +102,10 @@
     <string name="silver">#dfe5e6</string>
     <string name="cool_grey">#b2babf</string>
     <string name="steel_grey">#7e8b90</string>
-    <string name="military_leave">정기휴가</string>
-    <string name="check_leave_date">휴가일수 확인</string>
     <string name="reward_leave">포상휴가</string>
-    <string name="mypage">마이페이지</string>
-    <string name="army_private">일병</string>
-    <string name="army_corporal">상병</string>
     <string name="done">완료</string>
     <string name="service_type">복무 타입</string>
     <string name="goal">목표</string>
-    <string name="name">이름</string>
 
     <string name="chart_no_data_text">체중정보가 없습니다.</string>
     <string name="today_workout">오늘의 운동</string>
@@ -167,8 +129,6 @@
     <string name="toast_update_later">업데이트 예정입니다</string>
     <string name="toast_input_routine_data">운동정보를 입력해야합니다</string>
 
-    <string name="no_data_info">정보없음</string>
-    <string name="middle_dot">·</string>
     <string name="workout_non_item1">아직 생성한 운동루틴이 없습니다.</string>
     <string name="workout_non_item2">추가하기 버튼을 눌러 추가해 보세요!</string>
     <string name="startMW">밀리윌리 시작하기</string>
@@ -184,7 +144,6 @@
     <string name="d_day_explain">자격증,시험,기념일등의 D - day를 확인하세요</string>
     <string name="today">오늘</string>
     <string name="plz_today_emotion">오늘의 감정을 남겨주세요.</string>
-    <string name="emo_happy">행복해</string>
     <string name="leave">휴가</string>
     <string name="leftDays">남은일수</string>
     <string name="leftall">/총</string>
@@ -193,28 +152,22 @@
     <string name="enlist_day">입대일</string>
     <string name="holiday">휴가</string>
     <string name="use">사용하기</string>
-    <string name="add">추가하기</string>
     <string name="register">등록하기</string>
     <string name="prize">포상</string>
     <string name="prize_holi">포상휴가</string>
-    <string name="max_prizeholi">/15일</string>
     <string name="regular">정기</string>
-    <string name="add_holi">휴가 추가하기</string>
     <string name="regular_holi">정기휴가</string>
     <string name="regular_holi_day_num">정기휴가 일수</string>
     <string name="other_holi">기타휴가</string>
     <string name="day">일</string>
     <string name="all_holiday">총 휴가일수</string>
-    <string name="naming_holi">휴가 명칭</string>
     <string name="air_force">공군</string>
     <string name="air_force_info">28일 (21개월 복무 시)</string>
     <string name="navy">해군</string>
     <string name="navy_info">27일 (20개월 복무 시)</string>
     <string name="army_info">24일 (18개월 복무 시)</string>
     <string name="army">육군/해병대</string>
-    <string name="add_holi_num">추가일수</string>
     <string name="other">기타</string>
-    <string name="manage_vaca">휴가 관리</string>
     <string name="avail_pick_date_vc">선택 가능 일수</string>
     <string name="edit_holi">휴가 수정하기</string>
     <string name="edit_holi_short">휴가 수정</string>
@@ -227,6 +180,7 @@
     <string name="over_value_month">이번달 이전만 조회 가능합니다</string>
     <string name="over_value_date">오늘 이전으로만 기록 가능합니다</string>
     <string name="set_goal">목표 설정</string>
-    <string name="max35">최대 35일</string>
+    <string name="check_leave_data">휴가일수 확인</string>
+    <string name="manage_vaca">휴가 관리</string>
 
 </resources>

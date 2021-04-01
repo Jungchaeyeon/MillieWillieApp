@@ -17,7 +17,6 @@ import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
-import com.makeus.milliewillie.MyApplication.Companion.exerciseId
 import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutBinding
@@ -30,7 +29,6 @@ import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.RE
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
 import com.makeus.milliewillie.util.BasicTextFormat
 import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -84,14 +82,16 @@ class WorkoutFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // ExerciseId를 최초 1회 POST로 받아옴, 이후 로그아웃, 회원탈퇴 시 초기화 그전까지 변동 없음
         if (!repositoryCached.getIsExerciseId()) {
             viewModel.apiRepository.postFirstEntrances()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     if (it.isSuccess) {
                         Log.e("postFirstEntrances 호출 성공")
-
+                        // ExId 로컬에 저장
                         repositoryCached.setValue(LocalKey.EXERCISEID, it.result)
+                        // ExId를 로컬에 저장했는가?
                         repositoryCached.setValue(LocalKey.ISEXERCISEID, true)
                     } else {
                         Log.e("postFirstEntrances 호출 실패")
@@ -100,26 +100,19 @@ class WorkoutFragment :
                 }.disposeOnDestroy(this)
         }
 
-//        isInputWeight = repositoryCached.getIsInputWeight()
-        isInputWeight = true
-//        isInputGoal = repositoryCached.getIsInputGoal()
-        isInputGoal = true
-        exerciseId = repositoryCached.getExerciseId()
-        Log.e("exerciseId = $exerciseId")
-//        Log.e("postYear currentYear = $postYear $currentYear")
-//        Log.e("postMonth currentMonth = $postMonth $currentMonth")
-//        Log.e("postDay currentDay = $postDay $currentDay")
-//
-//        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) {
-//            isInputWeight = false
-//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-//        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) {
-//            isInputWeight = false
-//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-//        } else if (isInputWeight && postYear < currentYear) {
-//            isInputWeight = false
-//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-//        }
+        isInputWeight = repositoryCached.getIsInputWeight()
+        isInputGoal = repositoryCached.getIsInputGoal()
+
+        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) { // 일자만 비교
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) { // 월이 바뀌었을 때, 월만 비교
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        } else if (isInputWeight && postYear < currentYear) { // 년도가 바뀌었을 때, 년도만 비교
+            isInputWeight = false
+            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+        }
     }
 
     override fun onResume() {
@@ -330,6 +323,7 @@ class WorkoutFragment :
                             if (goal != "-1.0") goalValue = goal.toFloat()
                             isInputWeight = true
                             repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+                            isInputGoal = true
                             repositoryCached.setValue(LocalKey.ISINPUTGOAL, true)
 
                             postYear = currentYear
@@ -350,6 +344,7 @@ class WorkoutFragment :
 
     fun onClickWeightDateItemAdd() {
         Log.e("repositoryCached.getIsInputGoal() = ${repositoryCached.getIsInputGoal()}")
+        Log.e("!isInputWeight = ${!isInputWeight}")
         // 목표체중 유무에 따라 다른 창을 띄움
         when (repositoryCached.getIsInputGoal()) {
             true -> if (!isInputWeight) executePostDailyWeight()
@@ -487,10 +482,5 @@ class WorkoutFragment :
         }
     }
 
-//    override fun onBackPressed(): Boolean {
-//        Log.e("onBackPressed in workout")
-//        if (!isInputGoal) executePostFirstWeight()
-//        return super.onBackPressed()
-//    }
 
 }

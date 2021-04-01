@@ -44,7 +44,7 @@ val viewModelModule = module {
     viewModel {  MakePlanViewModel(get(),get()) }//추후 수정
     viewModel { MainViewModel(get(),get()) }
     viewModel { MainGetViewModel(get(),get()) }
-    viewModel { WorkoutViewModel(get()) }
+    viewModel { WorkoutViewModel(get(), get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel(get()) }
     viewModel { InfoViewModel(get()) }

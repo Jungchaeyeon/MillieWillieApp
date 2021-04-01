@@ -14,6 +14,7 @@ import androidx.loader.content.Loader
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.storage.FirebaseStorage
 import com.makeus.base.activity.BaseDataBindingActivity
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
@@ -32,9 +33,6 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
 
     private var  fbStorage: FirebaseStorage? = null
     private var  viewProfile: View? = null
-    private var isSelected: Boolean = false
-
-    private var image: String? = null
 
     lateinit var uploadRecyclerAdapter: PhotoSelectAdapter
     lateinit var gridLayoutManager: GridLayoutManager
@@ -48,6 +46,7 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
     override fun ActivityPhotoSelectBinding.onBind() {
         vi = this@PhotoSelectActivity
 
+        // 최초 1회 퍼미션 허용 팝업
         if (checkSelfPermission(this@PhotoSelectActivity, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
             // Should we show an explanation?
@@ -59,7 +58,10 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE)
 
-//            return
+            ActivityNavigator.with(this@PhotoSelectActivity).photoSelect().start()
+            finish()
+
+            return
 //            (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
         }
 
@@ -85,6 +87,7 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
         }
     }
 
+    var postPosition: Int = -1
     fun setRecyclerAdapter() {
         uploadRecyclerAdapter = PhotoSelectAdapter(this, listOfAllImages)
         binding.photoRecycler.apply {
@@ -96,29 +99,27 @@ class PhotoSelectActivity:BaseDataBindingActivity<ActivityPhotoSelectBinding>(R.
                 it.setMyUploadItemClickListener(object :
                     PhotoSelectAdapter.MyUploadItemClickListener {
                     override fun onItemClick(position: Int) {
-                        when (!this@PhotoSelectActivity.isSelected) {
-                            true -> {
-                                if (listOfAllImages[position].isThisItem == 1) {
-                                    listOfAllImages[position].isCheck = true
+                        val items = listOfAllImages[position]
+                        when (items.isCheck) {
+                            false -> {
+                                if (postPosition == -1) {
+                                    items.isCheck = true
+                                    postPosition = position
                                     uploadRecyclerAdapter.notifyDataSetChanged()
-                                    listOfAllImages[position].isThisItem = 1
-                                    isSelected = true
                                 } else {
-                                    SampleToast.createToast(MyApplication.globalApplicationContext, "사진을 취소하고 선택해야 합니다")
+                                    listOfAllImages[postPosition].isCheck = false
+                                    items.isCheck = true
+                                    postPosition = position
+                                    uploadRecyclerAdapter.notifyDataSetChanged()
                                 }
                             }
-                            false -> {
-                                if (listOfAllImages[position].isThisItem == 1) {
-                                    listOfAllImages[position].isCheck = false
-                                    uploadRecyclerAdapter.notifyDataSetChanged()
-                                    isSelected = false
-                                    listOfAllImages[position].isThisItem = 0
-                                }
-
+                            true -> {
+                                items.isCheck = false
+                                postPosition = -1
+                                uploadRecyclerAdapter.notifyDataSetChanged()
                             }
                         }
-                        image = listOfAllImages[position].uri
-                        userProfileImgUrl = image
+                        userProfileImgUrl = listOfAllImages[position].uri
                         Log.e(userProfileImgUrl)
                     }
                 })

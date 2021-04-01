@@ -35,9 +35,10 @@ class AccountActivity: BaseDataBindingActivity<ActivityInfoAccountBinding>(R.lay
                     Log.e("deleteUsers 호출 실패")
                     Log.e(it.message)
                 }
-                repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
                 repositoryCached.setValue(LocalKey.TOKEN, "")
                 repositoryCached.setValue(LocalKey.ISMEMBER, false)
+                repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, false)
+                repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
                 repositoryCached.setValue(LocalKey.EXERCISEID, 0)
                 repositoryCached.setValue(LocalKey.ISEXERCISEID, false)
                 repositoryCached.setValue(LocalKey.POSTYEAR, 10000)

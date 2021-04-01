@@ -81,6 +81,8 @@ class InfoFragment : BaseDataBindingFragment<FragmentInfoBinding>(R.layout.fragm
                     user?.let { UserApiClient.instance.logout {
                         isLogout = true
                         repositoryCached.setValue(LocalKey.INAPP, "T")
+                        repositoryCached.setValue(LocalKey.ISEXERCISEID, false)
+                        repositoryCached.setValue(LocalKey.EXERCISEID, 0)
                         ActivityNavigator.with(this).login().start()
                         activity?.finish()
                     } }

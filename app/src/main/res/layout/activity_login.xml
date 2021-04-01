@@ -64,28 +64,28 @@
             android:paddingStart="16dp"
             android:text="카카오 로그인"
             android:textColor="#85000000"
-            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-<!--        <Button-->
-<!--            android:id="@+id/button2"-->
-<!--            style="@style/spoqa_medium_14"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_marginHorizontal="32dp"-->
-<!--            android:background="@drawable/background_google_login"-->
-<!--            android:drawableLeft="@drawable/icon_login_google"-->
-<!--            android:foreground="@drawable/ripple_default"-->
-<!--            android:gravity="center"-->
-<!--            android:onClick="@{()->vi.onClickGoogleLogin()}"-->
-<!--            android:paddingStart="16dp"-->
-<!--            android:text="구글 로그인"-->
-<!--            android:textAlignment="viewStart"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/guideline5"-->
-<!--            tools:ignore="RtlCompat"-->
-<!--            android:textColor="#54000000"-->
-<!--            tools:layout_editor_absoluteX="32dp" />-->
+        <Button
+            android:id="@+id/button2"
+            style="@style/spoqa_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/background_google_login"
+            android:drawableLeft="@drawable/icon_login_google"
+            android:foreground="@drawable/ripple_default"
+            android:gravity="center"
+            android:onClick="@{()->vi.onClickGoogleLogin()}"
+            android:paddingStart="16dp"
+            android:text="구글 로그인"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            tools:ignore="RtlCompat"
+            android:textColor="#54000000"
+            tools:layout_editor_absoluteX="32dp" />
 
 
 

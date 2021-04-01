@@ -176,7 +176,7 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
             }
             in 12..23 -> {
                 holi_regul_Indicator1.selectDotsTwice(12, 0)
-                if(regulAvail>24){
+                if(regulAvail>=24){
                     holi_regul_Indicator2.selectDotsTwice(countRest, 12)
                     holi_regul_Indicator3.selectDotsTwice(0, availRest)}
                 else{
@@ -213,7 +213,7 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
             }
             in 12..23 -> {
                 holi_prize_indicator1.selectDotsTwice(12, 0)
-                if(prizeAllNum>24){
+                if(prizeAllNum>=24){
                     holi_prize_Indicator2.selectDotsTwice(countRest, 12)
                     holi_prize_Indicator3.selectDotsTwice(0, availRest)}
                 else{
@@ -242,14 +242,14 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
             in 1..11 -> {
                 holi_other_Indicator1.selectDotsTwice(countRest, otherAllNum)
                 holi_other_Indicator2.selectDotsTwice(0, otherAllNum - 12)
-                if(otherAllNum>24){
-                     holi_other_Indicator3.selectDotsTwice(countRest, availRest)}
+                if(otherAllNum>=24){
+                     holi_other_Indicator3.selectDotsTwice(0, availRest)}
                 else{
                     holi_other_Indicator3.selectDotsTwice(0, 0)}
             }
             in 12..23 -> {
                 holi_other_Indicator1.selectDotsTwice(12, 0)
-                if(otherAllNum>24){
+                if(otherAllNum>=24){
                     holi_other_Indicator2.selectDotsTwice(countRest, 12)
                     holi_other_Indicator3.selectDotsTwice(0, availRest)}
                 else{
@@ -336,46 +336,26 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
     }
 
     fun onClickRegister(num: Int) {
-        viewModel.pickableMax = 35
-        HolidayNumberPickerBottomSheetFragment.getInstance()
-            .setOnClickOk {
-
                 when (num) {
                     0 -> {
                         //포상 등록
-                        if (it.toInt() >= 1) {
-                            btn_register_prize.visibility = View.INVISIBLE
-                            btn_use_prize.visibility = View.VISIBLE
+                            viewModel.liveHoliType.value = "포상휴가"
+                            repositoryCached.setValue(
+                                LocalKey.PATCHVACID,
+                                viewModel.vacationIdResponse.result[1].vacationId)
+
                         }
-                        prizeAvail = it.toInt()
-                        calRegisPrizeRIndicator(it.toInt())
-                        viewModel.prizeHoliNum = it.toInt()
-                        viewModel.vacationIdPatch.totalDays = prizeAvail
-                        viewModel.patchVacationId()
-                        prizeUse =0
-                        viewModel.livePrizeHoliday.postValue("0 일/")
-                        viewModel.livePrizeWholeHoliday.postValue(it + "일")
-                    }
+
                     1 -> {
-                        if (it.toInt() >= 1) {
-                            //viewModel.pickableMax = viewModel.otherHoliNum
-                            btn_register_other.visibility = View.INVISIBLE
-                            btn_use_other.visibility = View.VISIBLE
-                        }
-                        otherAvail = it.toInt()
-                        otherUse =0
-                        calRegisOtherIndicator(it.toInt())
-                        viewModel.otherHoliNum = it.toInt()
-                        viewModel.vacationIdPatch.totalDays = otherAvail
-                        viewModel.patchVacationId()
-                        viewModel.liveOtherHoliday.postValue("0 일/")
-                        viewModel.liveOtherWholeHoliday.postValue(it + "일")
-                        viewModel.patchVacationId()
+                        viewModel.liveHoliType.value = "기타휴가"
+                        repositoryCached.setValue(
+                        LocalKey.PATCHVACID,
+                        viewModel.vacationIdResponse.result[2].vacationId
+                        )
                     }
                 }
+            ActivityNavigator.with(this).holiedit(viewModel.liveHoliType.value.toString()).start()
 
-            }
-            .show(supportFragmentManager)
     }
 
     fun onClickQues() {

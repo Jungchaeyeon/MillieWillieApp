@@ -55,7 +55,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                             loginType = MyApplication.LOGINTYPE.KAKAO
                             repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
                             Log.e(it.toString(), "유효한 토큰-> 메인으로")
-                            if(repositoryCached.getIsMember()==true){
+                            if(repositoryCached.getIsMember()){
                                 ActivityNavigator.with(this).main().start()}
                             else{
                                 ActivityNavigator.with(this).welcome().start()
@@ -78,7 +78,11 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                             loginType = MyApplication.LOGINTYPE.GOOGLE
                             repositoryCached.setValue(LocalKey.LOGINTYPE, loginType)
                             Log.e(it.toString(), "유효한 토큰-> 메인으로")
-                            ActivityNavigator.with(this).main().start()
+                            if(repositoryCached.getIsMember()){
+                                ActivityNavigator.with(this).main().start()}
+                            else{
+                                ActivityNavigator.with(this).welcome().start()
+                            }
                         } else {
                             Log.e(it.toString(), "유효하지 않은 토큰 -> 로그인으로")
                         }
@@ -121,6 +125,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
             }
             viewModel.onRequestLoginWithGoogle(this, data) {
                 repositoryCached.setValue(LocalKey.INAPP, "GF")
+                repositoryCached.setValue(LocalKey.SOCIALTYPE,"G")
                 Log.e("onRequestLoginWithGoogle")
                nextStep(it)
             }
@@ -134,23 +139,23 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
             requestGoogleAuth
         )
     }
-    fun nextStepGoogle(isSuccess: Boolean){
-        if(isSuccess){
-            Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
-            if(!repositoryCached.getIsMember()){
-                ActivityNavigator.with(this).welcome().start()
-            }
-            else{
-                ActivityNavigator.with(this).main().start()
-                Log.e(repositoryCached.getToken(),"jwt")
-            }
-        }else {
-            if(!repositoryCached.getIsMember()){
-            }else{
-                Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
-            }
-        }
-    }
+//    fun nextStepGoogle(isSuccess: Boolean){
+//        if(isSuccess){
+//            Log.e(repositoryCached.getIsMember().toString(),"가입멤버인가")
+//            if(!repositoryCached.getIsMember()){
+//                ActivityNavigator.with(this).welcome().start()
+//            }
+//            else{
+//                ActivityNavigator.with(this).main().start()
+//                Log.e(repositoryCached.getToken(),"jwt")
+//            }
+//        }else {
+//            if(!repositoryCached.getIsMember()){
+//            }else{
+//                Snackbar.make(this.mainLayout,"로그인에 실패했습니다.", Snackbar.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 
 
     fun onClickKakaoLogin() {

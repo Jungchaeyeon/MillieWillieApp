@@ -94,10 +94,10 @@ class LoginViewModel(
 
     fun requestGoogleLogin()=
         apiRepository.googleLogin().subscribe({
-            Log.e("requestKakaoLogin true로 들어옴")
+            Log.e("requestGoogleLogin true로 들어옴")
         }, {
             it.printStackTrace()
-            Log.e("requestKakaoLogin false로 들어옴")
+            Log.e("requestGoogle false로 들어옴")
             Log.e(repositoryCached.getToken(),"토큰")
         }).disposeOnDestroy(this)
 

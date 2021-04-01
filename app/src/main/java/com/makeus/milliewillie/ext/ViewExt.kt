@@ -35,12 +35,3 @@ fun View.setPercent(value: Float) {
 fun View.setProgress(value:MutableLiveData<String>){
     (progressbar as ProgressBar).progress = value.value?.toInt()!!
 }
-
-//@BindingAdapter("setImageGlide")
-//fun View.setImageGlide(value: String) {
-//    Glide.with((imageView as ImageView))
-//        .load(value)
-//        .circleCrop()
-//        .placeholder(R.drawable.graphic_profile_big)
-//        .into((imageView as ImageView))
-//}

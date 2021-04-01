@@ -82,6 +82,7 @@ class WorkoutFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("ererciseId = ${repositoryCached.getExerciseId()}")
         // ExerciseId를 최초 1회 POST로 받아옴, 이후 로그아웃, 회원탈퇴 시 초기화 그전까지 변동 없음
         if (repositoryCached.getExerciseId() == (-1).toLong()) {
             viewModel.apiRepository.postFirstEntrances()

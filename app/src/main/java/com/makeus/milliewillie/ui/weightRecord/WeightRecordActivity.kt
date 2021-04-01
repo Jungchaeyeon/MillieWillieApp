@@ -24,6 +24,7 @@ import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment
 import com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment
+import com.makeus.milliewillie.util.ConvertTimeMills
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
@@ -43,6 +44,9 @@ class WeightRecordActivity :
     private var currentValue: Float = 0f
 
     val calendar = Calendar.getInstance()
+
+    private var recordDatePickerYear: Int = calendar.get(Calendar.YEAR)
+    private var recordDatePickerMonth: Int = calendar.get(Calendar.MONTH) + 1
 
     val todayYear = calendar.get(Calendar.YEAR)
     val todayMonth = calendar.get(Calendar.MONTH) + 1
@@ -110,68 +114,78 @@ class WeightRecordActivity :
     }
 
     fun todayWeightInput() {
-//        if (!repositoryCached.getIsInputWeight()) {
-            val date = viewModel.liveDataWeightPerDay.value?.get(position)?.dayOfMonth
-            var dayText = ""
-            var index = 0
-            for (i in date!!.indices) {
-                if (date[i] == '월') index = i + 1
-                if (date[index] == '일') break
-                if (index > 0) {
-                    dayText += date[index]
-                    index++
-                }
+        val calendarInstance = Calendar.getInstance()
+        val date = viewModel.liveDataWeightPerDay.value?.get(position)?.dayOfMonth
+        var dayText = ""
+        var index = 0
+        for (i in date!!.indices) {
+            if (date[i] == '월') index = i + 1
+            if (date[index] == '일') break
+            if (index > 0) {
+                dayText += date[index]
+                index++
             }
+        }
 
 
+        val selectDateMillis = ConvertTimeMills.ConvertDateToMillis(recordDatePickerYear, recordDatePickerMonth, dayText.toInt())
+        val todayMillis = ConvertTimeMills.ConvertDateToMillis(calendarInstance.get(Calendar.YEAR), calendarInstance.get(Calendar.MONTH) + 1, calendarInstance.get(Calendar.DAY_OF_MONTH))
+
+        Log.e("selYear toYear = $recordDatePickerYear ${calendarInstance.get(Calendar.YEAR)}")
+        Log.e("selMonth toMonth = $recordDatePickerMonth ${calendarInstance.get(Calendar.MONTH) + 1}")
+        Log.e("selDay toDay = ${dayText.toInt()} ${calendarInstance.get(Calendar.DAY_OF_MONTH)}")
+
+        Log.e("selectDateMillis = $selectDateMillis")
+        Log.e("todayMillis = $todayMillis")
+        Log.e("select가 더 큰가? ${todayMillis < selectDateMillis}")
         // 월 체크도 필요./////////////////////////////////////////////////////
-            if (dayText.toInt() > Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
-                globalApplicationContext.getString(R.string.over_value_date).showShortToastSafe()
-            } else {
-                WeightAddRecordBottomSheetFragment.getInstance()
-                    .setOnClickOk {
-                        val dayWeight = it
-                        val year = Calendar.getInstance().get(Calendar.YEAR)
-                        var month = ""
-                        var day = ""
-                        var idx = 0
-                        for (i in date!!.indices) {
-                            if (date[i] == '월') {
-                                for (j in 0 until i) month += date[j].toString()
-                                if (month.length < 2) month = "0$month"
-                                idx = i + 1
-                            } else if (date[i] == '일') {
-                                for (j in idx until i) day += date[j].toString()
-                                if (day.length < 2) day = "0$day"
-                            }
-
+        if (todayMillis < selectDateMillis){
+//        if (dayText.toInt() > calendarInstance.get(Calendar.DAY_OF_MONTH)) {
+            globalApplicationContext.getString(R.string.over_value_date).showShortToastSafe()
+        } else {
+            WeightAddRecordBottomSheetFragment.getInstance()
+                .setOnClickOk {
+                    val dayWeight = it
+                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    var month = ""
+                    var day = ""
+                    var idx = 0
+                    for (i in date!!.indices) {
+                        if (date[i] == '월') {
+                            for (j in 0 until i) month += date[j].toString()
+                            if (month.length < 2) month = "0$month"
+                            idx = i + 1
+                        } else if (date[i] == '일') {
+                            for (j in idx until i) day += date[j].toString()
+                            if (day.length < 2) day = "0$day"
                         }
-                        val dateForm = "$year-$month-$day"
 
-                        viewModel.apiRepository.patchTodayWeight(
-                            path = repositoryCached.getExerciseId(),
-                            body = PatchTodayWeightRequest(
-                                dayWeight = it.toDouble(),
-                                dayDate = dateForm
-                            )
+                    }
+                    val dateForm = "$year-$month-$day"
+
+                    viewModel.apiRepository.patchTodayWeight(
+                        path = repositoryCached.getExerciseId(),
+                        body = PatchTodayWeightRequest(
+                            dayWeight = it.toDouble(),
+                            dayDate = dateForm
                         )
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe { it2 ->
-                                Log.e(it2.isSuccess.toString())
-                                if (it2.isSuccess) {
-                                    Log.e("호출 성공")
-                                    repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, true)
+                    )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { it2 ->
+                            Log.e(it2.isSuccess.toString())
+                            if (it2.isSuccess) {
+                                Log.e("호출 성공")
+                                repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, true)
 
-                                    viewModel.replaceItem(position, dayWeight)
-                                    executeGetWeightRecord(month = todayMonth, year = todayYear)
-                                } else {
-                                    Log.e("호출 실패")
-                                    Log.e(it2.message)
-                                }
-                            }.disposeOnDestroy(this)
-                    }.show(supportFragmentManager)
-            }
-//        }
+                                viewModel.replaceItem(position, dayWeight)
+                                executeGetWeightRecord(month = todayMonth, year = todayYear)
+                            } else {
+                                Log.e("호출 실패")
+                                Log.e(it2.message)
+                            }
+                        }.disposeOnDestroy(this)
+                }.show(supportFragmentManager)
+        }
 
     }
 
@@ -246,6 +260,8 @@ class WeightRecordActivity :
     fun onClickSetDate() {
         DatePickekWeightRecortBottomSheetDialogFragment.getInstance()
             .setOnClickOk {year, month ->
+                recordDatePickerYear = year.toInt()
+                recordDatePickerMonth = month.toInt()
                 Log.e("year Calendar.YEAR = $year ${Calendar.YEAR}")
                 Log.e("month Calendar.MONTH = $month ${Calendar.MONTH + 1}")
                 if (year.toInt() <= Calendar.getInstance().get(Calendar.YEAR)) {

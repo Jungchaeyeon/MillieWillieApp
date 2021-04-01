@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/workout_today_date"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="30dp"
             android:textSize="12sp"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/workout_text_today_workout"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:layout_below="@+id/workout_today_date"
@@ -74,7 +74,7 @@
         <RelativeLayout
             android:id="@+id/workout_layout_goal_weight"
             android:layout_width="wrap_content"
-            android:layout_height="13dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
             android:visibility="gone"

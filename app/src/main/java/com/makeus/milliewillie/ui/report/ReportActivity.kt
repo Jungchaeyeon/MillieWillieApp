@@ -14,6 +14,7 @@ import com.makeus.milliewillie.model.PatchReportsRequest
 import com.makeus.milliewillie.model.ReportInnerRecyclerItem
 import com.makeus.milliewillie.model.ReportRecyclerItem
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.common.DialogWorkoutDoneFragment
 import com.makeus.milliewillie.ui.home.tab2.WorkoutFragment.Companion.isModifiedRoutine
 import com.makeus.milliewillie.ui.report.adapter.ReportsAdapter
@@ -158,29 +159,6 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
         }
     }
 
-    fun onClickModifyMenu() {
-        // 리포트 수정 api
-        viewModel.apiRepository.patchReports(
-            exerciseId = repositoryCached.getExerciseId(),
-            routineId = routineId,
-            body = PatchReportsRequest(reportDate = reportDate, reportText = binding.reportEditContent.text.toString())
-        )
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if (it.isSuccess){
-                    Log.e("patchReports 호출 성공")
-                    globalApplicationContext.getString(R.string.toast_patch).showShortToastSafe()
-                    onBackPressed()
-                } else {
-                    Log.e("patchReports 호출 실패")
-                    Log.e(it.message)
-                }
-            }.disposeOnDestroy(this)
-
-        binding.reportLayoutPopUpMenu.visibility = View.GONE
-        isClickMenu = false
-    }
-
     fun onClickDeleteMenu() {
         val title1 = getString(R.string.reports_delete_title)
         val title2 = getString(R.string.reports_delete_title2)
@@ -197,7 +175,7 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
                     .subscribe {
                         if (it.isSuccess){
                             Log.e("deleteReports 호출 성공")
-                            getString(R.string.toast_delete).showShortToastSafe()
+                            SampleToast.createToast(this, getString(R.string.toast_delete))?.show()
                             onBackPressed()
                         } else {
                             Log.e("deleteReports 호출 실패")
@@ -222,8 +200,24 @@ class ReportActivity: BaseDataBindingActivity<ActivityReportBinding>(R.layout.ac
     }
 
     fun onClickBack() {
+        viewModel.apiRepository.patchReports(
+            exerciseId = repositoryCached.getExerciseId(),
+            routineId = routineId,
+            body = PatchReportsRequest(reportDate = reportDate, reportText = binding.reportEditContent.text.toString())
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess){
+                    Log.e("patchReports 호출 성공")
+                    SampleToast.createToast(this, getString(R.string.toast_patch))?.show()
+                    onBackPressed()
+                } else {
+                    Log.e("patchReports 호출 실패")
+                    Log.e(it.message)
+                }
+            }.disposeOnDestroy(this)
+
         isModifiedRoutine = false
-        onClickModifyMenu()
         onBackPressed()
     }
 

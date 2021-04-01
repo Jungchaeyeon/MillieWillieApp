@@ -41,10 +41,12 @@
             android:textSize ="14sp"
             android:fontFamily ="@font/spoqa_han_sans_neo_medium"
             android:background ="@drawable/cal_btn_selected"
+            android:autoSizeMaxTextSize="14sp"
             android:textColor ="#3e3e3e"
             android:text ="@{item}"
             tools:text ="육군"
-            android:onClick="@{()->vi.onClickType(item)}"/>
+            android:onClick="@{()->vi.onClickType(item)}"
+            tools:targetApi="o" />
 
     </LinearLayout>
 </layout>

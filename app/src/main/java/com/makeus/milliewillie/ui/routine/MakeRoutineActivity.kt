@@ -183,6 +183,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                 } else {
                     Log.e("postRoutine 호출 실패")
                     Log.e(it.message)
+                    SampleToast.createToast(this, "세트 정보를 모두 입력해야 합니다")?.show()
                 }
                 onBackPressed()
             }.disposeOnDestroy(this)
@@ -696,8 +697,10 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
             }
             false -> {
                 val isDoNotExecute = setDoNotExecute()
-                if (!isDoNotExecute) executePostRoutine()
-                else SampleToast.createToast(this, globalApplicationContext.getString(R.string.toast_input_routine_data))?.show()
+                if (!isDoNotExecute) {
+                    if (!viewModel.liveDataSelectedItemList.value.isNullOrEmpty()) executePostRoutine()
+                } else SampleToast.createToast(this,
+                    globalApplicationContext.getString(R.string.toast_input_routine_data))?.show()
             }
         }
 

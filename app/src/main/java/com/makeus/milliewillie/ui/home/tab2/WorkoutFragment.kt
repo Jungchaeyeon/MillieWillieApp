@@ -28,6 +28,7 @@ import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
 import com.makeus.milliewillie.util.BasicTextFormat
+import com.makeus.milliewillie.util.ConvertTimeMills
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
@@ -102,16 +103,27 @@ class WorkoutFragment :
         isInputWeight = repositoryCached.getIsInputWeight()
         isInputGoal = repositoryCached.getIsInputGoal()
 
-        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) { // 일자만 비교
-            isInputWeight = false
-            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) { // 월이 바뀌었을 때, 월만 비교
-            isInputWeight = false
-            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
-        } else if (isInputWeight && postYear < currentYear) { // 년도가 바뀌었을 때, 년도만 비교
+        val postDateMillis = ConvertTimeMills.ConvertDateToMillis(postYear, postMonth, postDay)
+        val currentDateMillis = ConvertTimeMills.ConvertDateToMillis(currentYear, currentMonth, currentDay)
+
+        Log.e("postDateMillis = $postDateMillis")
+        Log.e("currentDateMillis = $currentDateMillis")
+        Log.e("currentDateMillis 더 큰가? ${postDateMillis < currentDateMillis}")
+
+        if (postDateMillis < currentDateMillis) {
             isInputWeight = false
             repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
         }
+//        if (isInputWeight && postYear == currentYear && postMonth == currentMonth && postDay < currentDay) { // 일자만 비교
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        } else if (isInputWeight && postYear == currentYear && postMonth < currentMonth) { // 월이 바뀌었을 때, 월만 비교
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        } else if (isInputWeight && postYear < currentYear) { // 년도가 바뀌었을 때, 년도만 비교
+//            isInputWeight = false
+//            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+//        }
     }
 
     override fun onResume() {
@@ -319,9 +331,11 @@ class WorkoutFragment :
                         if (it.isSuccess) {
                             Log.e("postFirstWeight 성공")
 
-                            if (goal != "-1.0") goalValue = goal.toFloat()
-                            isInputWeight = true
-                            repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+                            if (goal != "-1.0") {
+                                goalValue = goal.toFloat()
+                                isInputWeight = true
+                                repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, isInputWeight)
+                            }
                             isInputGoal = true
                             repositoryCached.setValue(LocalKey.ISINPUTGOAL, true)
 

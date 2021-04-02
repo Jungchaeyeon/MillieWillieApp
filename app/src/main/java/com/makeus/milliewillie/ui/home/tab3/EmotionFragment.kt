@@ -333,7 +333,7 @@ class EmotionFragment :
             Log.e(viewModel.emotionOnlyMonthData.toString(), "MONTHDATA")
             viewModel.emotionOnlyMonthData?.forEach {
 
-                val cal = Calendar.getInstance()
+                val cal = Calendar.getInstance(TimeZone.getDefault())
                 cal.set(Calendar.DAY_OF_MONTH, calBetweenDayInput(it.date))
                 events.add(EventDay(cal, viewModel.nextEmo(it.emotion)))
                 Log.e( calBetweenDayInput(it.date).toString(),"CALBETWEENDAY")

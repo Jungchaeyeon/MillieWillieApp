@@ -152,7 +152,6 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 ActivityNavigator.with(this).makeplan().start()
                 isFabOpen = false
                 alpha90.visibility = View.GONE
-
             }
         }
     }

@@ -306,9 +306,9 @@ class EmotionFragment :
                 viewModel.emotionsRecordRequest.emotion = emoId
                 viewModel.patchEmotionsRecord {
                     if (it) {
-                        SampleToast.createToast(requireActivity(), "감정 기록 생성 완료!")?.show()
+                        SampleToast.createToast(requireActivity(), "감정 기록 수정 완료!")?.show()
                     } else {
-                        Snackbar.make(this.layout_emo, "감정 기록 생성 에 실패하였습니다.", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(this.layout_emo, "감정 기록 수정에 실패하였습니다.", Snackbar.LENGTH_SHORT)
                             .show()
                     }
                 }

@@ -86,18 +86,17 @@
                 android:id="@+id/workout_dash"
                 android:layout_width="10dp"
                 android:layout_height="2dp"
+                android:layout_marginEnd="4dp"
                 android:enabled="false"
                 android:background="@color/blue_green"
-                android:layout_marginEnd="4dp"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_toStartOf="@+id/workout_text_goal_weight"/>
 
             <TextView
                 android:id="@+id/workout_text_goal_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/workout_dash"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_medium"
                 android:includeFontPadding="false"
@@ -235,9 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-1dp"
-            android:layout_marginBottom="1dp" />
+            android:layout_alignParentBottom="true" />
 
 
     </RelativeLayout>

@@ -37,6 +37,8 @@
             android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
             android:imeOptions="actionDone"
+            android:gravity="end|center_vertical"
+            android:inputType="number"
             android:hint="0.0"
             android:text="@={item.weight}"
             android:textColor="@color/black"
@@ -61,10 +63,12 @@
             android:maxLength="5"
             android:maxLines="1"
             android:singleLine="true"
+            android:gravity="end|center_vertical"
+            android:inputType="number"
             android:backgroundTint="@color/text_gray"
             android:textAlignment="textEnd"
             android:imeOptions="actionDone"
-            android:hint="0.0"
+            android:hint="0"
             android:text="@={item.count}"
             android:textColor="@color/black"
             android:textSize="14sp"/>
@@ -80,10 +84,11 @@
 
         <ImageView
             android:id="@+id/rebs_wnc_recycler_img_text_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:onClick="@{(view)-> vi.onClickAddItem(view)}"
             android:src="@drawable/icon_small_delete"/>
     </RelativeLayout>
 </layout>

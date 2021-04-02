@@ -13,8 +13,7 @@
     <RelativeLayout
         android:id="@+id/rebs_time_recycler_layout_input"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginHorizontal="8dp">
+        android:layout_height="38dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,6 +36,8 @@
                 android:maxLength="2"
                 android:maxLines="1"
                 android:ems="2"
+                android:gravity="end|center_vertical"
+                android:inputType="number"
                 android:singleLine="true"
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
@@ -66,6 +67,8 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:ems="2"
+                android:gravity="end|center_vertical"
+                android:inputType="number"
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
                 android:imeOptions="actionDone"
@@ -95,6 +98,8 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:ems="2"
+                android:gravity="end|center_vertical"
+                android:inputType="number"
                 android:backgroundTint="@color/text_gray"
                 android:textAlignment="textEnd"
                 android:imeOptions="actionDone"
@@ -115,11 +120,12 @@
 
         <ImageView
             android:id="@+id/rebs_time_recycler_img_text_delete"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="19dp"
+            android:layout_height="15dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_small_delete"/>
+            android:onClick="@{(view)-> vi.onClickAddItem(view)}"
+            android:src="@drawable/icon_small_delete" />
     </RelativeLayout>
 
 </layout>

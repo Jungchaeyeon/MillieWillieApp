@@ -48,6 +48,8 @@ class WeightRecordActivity :
     private var recordDatePickerYear: Int = calendar.get(Calendar.YEAR)
     private var recordDatePickerMonth: Int = calendar.get(Calendar.MONTH) + 1
 
+    var selectYear = ""
+
     val todayYear = calendar.get(Calendar.YEAR)
     val todayMonth = calendar.get(Calendar.MONTH) + 1
     val today = calendar.get(Calendar.DAY_OF_MONTH)
@@ -137,7 +139,7 @@ class WeightRecordActivity :
             WeightAddRecordBottomSheetFragment.getInstance()
                 .setOnClickOk {
                     val dayWeight = it
-                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    val year = selectYear
                     var month = ""
                     var day = ""
                     var idx = 0
@@ -169,7 +171,7 @@ class WeightRecordActivity :
                                 repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, true)
 
                                 viewModel.replaceItem(position, dayWeight)
-                                executeGetWeightRecord(month = todayMonth, year = todayYear)
+                                executeGetWeightRecord(month = month.toInt(), year = year.toInt())
                             } else {
                                 Log.e("호출 실패")
                                 Log.e(it2.message)
@@ -181,6 +183,8 @@ class WeightRecordActivity :
     }
 
     private fun executeGetWeightRecord(month: Int, year: Int) {
+        Log.e("month = $month")
+        Log.e("year = $year")
         monthWeightArray.clear()
         dayWeightArray.clear()
         viewModel.getWeightRecord(repositoryCached.getExerciseId(), viewMonth = month, viewYear = year)
@@ -188,9 +192,17 @@ class WeightRecordActivity :
             .subscribe {
                 if (it.isSuccess) {
                     goalValue = it.result.goalWeight.toFloat()
-                    viewModel.recordGoalWeight.postValue(goalValue.toString())
-                    val goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, goalValue.toString()))
-                    viewModel.topRecordGoalWeight.postValue(goalText)
+                    if (goalValue == -1.0f) {
+                        viewModel.recordGoalWeight.postValue("0")
+                        val goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, "0"))
+                        viewModel.topRecordGoalWeight.postValue(goalText)
+                    }
+                    else {
+                        viewModel.recordGoalWeight.postValue(goalValue.toString())
+                        val goalText = String.format(globalApplicationContext.getString(R.string.goal_weight_var, goalValue.toString()))
+                        viewModel.topRecordGoalWeight.postValue(goalText)
+                    }
+
 
                     for (i in 0 until it.result.monthWeight.size()) { // 월별 체중 평균
                         monthWeightArray.add(WorkoutWeightRecordDate(
@@ -257,6 +269,7 @@ class WeightRecordActivity :
                 Log.e("month Calendar.MONTH = $month ${Calendar.MONTH + 1}")
                 if (year.toInt() <= Calendar.getInstance().get(Calendar.YEAR)) {
                     if (month.toInt() <= Calendar.getInstance().get(Calendar.MONTH) + 1) {
+                        selectYear = year
                         viewModel.yearAndMonth.postValue("${year}년 ${month}월")
                         executeGetWeightRecord(month = month.toInt(), year = year.toInt())
                     } else SampleToast.createToast(this, globalApplicationContext.getString(R.string.over_value_month))?.show()

@@ -74,8 +74,8 @@ buildscript {
     ext {
         //Dev
         appNameDev = "MiliWili-Dev"
-        apiUrlDev = "\"https://www.miliwili.shop/app/\""
-//        apiUrlDev = "\"https://shine94.kr/app/\""
+//        apiUrlDev = "\"https://www.miliwili.shop/app/\""
+        apiUrlDev = "\"https://shine94.kr/app/\""
         kakaoAppKeyDev = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyDev = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersDev = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]

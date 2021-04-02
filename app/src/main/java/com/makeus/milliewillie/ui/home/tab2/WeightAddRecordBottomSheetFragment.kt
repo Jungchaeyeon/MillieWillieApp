@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutAddWeightInputBottomSheetBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.ui.SampleToast
 import java.util.*
 

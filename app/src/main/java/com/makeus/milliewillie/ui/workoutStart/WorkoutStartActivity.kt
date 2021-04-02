@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
@@ -58,6 +60,9 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
             .setOnClickOk {
                 stopWatch()
             }.show(supportFragmentManager)
+
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.startRecycler)
     }
 
     override fun ActivityWorkoutStartBinding.onBind() {

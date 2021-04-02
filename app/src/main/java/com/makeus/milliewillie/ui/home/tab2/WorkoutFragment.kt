@@ -24,6 +24,7 @@ import com.makeus.milliewillie.databinding.WorkoutWeightRecyclerItemBinding
 import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.home.tab2.adapter.WorkoutRoutineAdapter
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.REPORT_DATE_KEY
 import com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity.Companion.START_ROUTINE_ID
@@ -141,6 +142,8 @@ class WorkoutFragment :
         vi= this@WorkoutFragment
         vm = viewModel
 
+        binding.workoutFab.size
+
         todayDate() //오늘 날짜 설정
         reportDate = BasicTextFormat.BasicDateFormat(
             calendar.get(Calendar.YEAR).toString(),
@@ -228,6 +231,7 @@ class WorkoutFragment :
     private fun executeGetDailyWeight() {
         dailyWeightArray.clear()
         weightDayArray.clear()
+        var goalValueText = ""
         viewModel.getDailyWeight()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -235,14 +239,18 @@ class WorkoutFragment :
                 if (it.isSuccess) {
                     Log.e("getDailyWeight 호출 성공")
 
+                    goalValueText = if (it.result.goalWeight == "-1.0") "" else it.result.goalWeight
+
                     val goalText = String.format(
                         globalApplicationContext.getString(
                             R.string.goal_weight_var,
-                            it.result.goalWeight
+                            goalValueText
                         )
                     )
-                    viewModel.goalWeightText.postValue(goalText)
-                    binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+                    if (goalValueText != "") {
+                        viewModel.goalWeightText.postValue(goalText)
+                        binding.workoutLayoutGoalWeight.visibility = View.VISIBLE
+                    }
 
                     goalValue = it.result.goalWeight.toFloat()
 
@@ -360,7 +368,10 @@ class WorkoutFragment :
         Log.e("!isInputWeight = ${!isInputWeight}")
         // 목표체중 유무에 따라 다른 창을 띄움
         when (repositoryCached.getIsInputGoal()) {
-            true -> if (!isInputWeight) executePostDailyWeight()
+            true -> {
+                if (!isInputWeight) executePostDailyWeight()
+                else SampleToast.createToast(context!!, "체중은 하루에 한 번 입력할 수 있습니다")?.show()
+            }
             false -> executePostFirstWeight()
         }
 

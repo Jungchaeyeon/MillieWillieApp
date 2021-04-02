@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.workoutStart.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Handler
 import android.os.Looper
@@ -52,11 +53,36 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
 //        statusList = ArrayList()
 
         holder.itemView.setOnClickListener {
-            onItemClickAddCircle(items, holder)
+//            onItemClickAddCircle(items, holder)
+            if (items.stack < items.circleList.size) {
+                items.stack++
+                Handler(Looper.getMainLooper()).postDelayed({
+                    for (i in 0 until items.stack) {
+                        items.circleList[i].circle = R.drawable.one_currnet_blue
+                    }
+                    if (items.stack == items.circleList.size) {
+                        holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                        holder.exerciseName.setTextColor(Color.parseColor("#9d9d9d"))
+                    }
+                    notifyDataSetChanged()
+                }, 200)
+            }
         }
 
         holder.innerRecyclerView.setOnClickListener {
-            onItemClickAddCircle(items, holder)
+            if (items.stack < items.circleList.size) {
+                items.stack++
+                Handler(Looper.getMainLooper()).postDelayed({
+                    for (i in 0 until items.stack) {
+                        items.circleList[i].circle = R.drawable.one_currnet_blue
+                    }
+                    if (items.stack == items.circleList.size) {
+                        holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                        holder.exerciseName.setTextColor(Color.parseColor("#9d9d9d"))
+                    }
+                    notifyDataSetChanged()
+                }, 200)
+            }
         }
 
 
@@ -78,7 +104,10 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
 
     // on click circle count up
     private fun onItemClickAddCircle(items: StartRecyclerItem, holder: WorkoutStartAdapter.StartViewHolder) {
-        if (items.stack <= itemList.size) {
+        Log.e("${holder.adapterPosition}")
+        Log.e("stack = ${items.stack}")
+        Log.e("size = ${items.circleList.size}")
+        if (items.stack < items.circleList.size) {
             items.stack++
 
             val tempList = ArrayList<StartRecyclerCircleItem>()
@@ -87,16 +116,19 @@ class WorkoutStartAdapter(val context: Context?, val itemList: ArrayList<StartRe
                 tempList.add(StartRecyclerCircleItem(circle = R.drawable.one_currnet_gray))
             }
 
-            Handler(Looper.getMainLooper()).postDelayed({
-                for (i in 0 until items.stack) {
-                    items.circleList[i].circle = R.drawable.one_currnet_blue
-                }
 
-                if (items.stack == items.circleList.size) {
-                    holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                }
-                notifyDataSetChanged()
-            }, 200)
+
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                for (i in 0 until items.stack) {
+//                    items.circleList[i].circle = R.drawable.one_currnet_blue
+//                }
+//                Log.e("stack == size => ${items.stack == items.circleList.size}")
+//                if (items.stack == items.circleList.size) {
+//                    holder.exerciseName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+//                    holder.exerciseName.setTextColor(Color.parseColor("#9d9d9d"))
+//                }
+//                notifyDataSetChanged()
+//            }, 200)
         }
     }
 

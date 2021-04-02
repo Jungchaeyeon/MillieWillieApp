@@ -541,6 +541,7 @@ class MakeRoutineActivity: BaseDataBindingActivity<ActivityMakeRoutineBinding>(R
                     viewModel.liveDataPartOfExTitle.postValue(textSet)
                     viewModel.createExItem(it)
                     isPartOfEx = true
+                    binding.routineImgPartOfExArrow.visibility = View.GONE
                 }.show(supportFragmentManager)
         }
 

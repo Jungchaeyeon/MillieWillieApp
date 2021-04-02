@@ -63,7 +63,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
                         }
                     }
                 } else {
-                        repositoryCached.setValue(LocalKey.TOKEN,"")
+                    repositoryCached.setValue(LocalKey.TOKEN,"")
                 }
             } else if (repositoryCached.getInApp() =="GF") {
                 if (repositoryCached.getToken().isNotEmpty()) {

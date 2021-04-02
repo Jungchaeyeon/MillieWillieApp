@@ -1,5 +1,7 @@
 package com.makeus.milliewillie.ui.routine
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.model.WorkoutCountSet
@@ -63,16 +65,15 @@ class ExerciseSetViewModel: BaseViewModel() {
         liveDataSetCount.postValue(value)
         liveDataUnderSetCount.postValue("${value}세트")
 
-        removeItem()
     }
 
     fun defaultAddSet() {
         wncSetItemListSize = wncSetItemList.size
-        liveDataWncAddSetList.postValue(wncSetItemList)
+        liveDataWncAddSetList.value = wncSetItemList
         countSetItemListSize = countSetItemList.size
-        liveDataCountAddSetList.postValue(countSetItemList)
+        liveDataCountAddSetList.value = countSetItemList
         timeSetItemListSize = timeSetItemList.size
-        liveDataTimeAddSetList.postValue(timeSetItemList)
+        liveDataTimeAddSetList.value = timeSetItemList
     }
 
     fun addItem() {
@@ -114,6 +115,19 @@ class ExerciseSetViewModel: BaseViewModel() {
         defaultAddSet()
     }
 
+    fun removePositionItem(position: Int) {
+        Log.e("position = $position")
+        wncSetItemList.removeAt(position)
+        wncSetItemListSize = wncSetItemList.size
+        countSetItemList.removeAt(position)
+        countSetItemListSize = countSetItemList.size
+        timeSetItemList.removeAt(position)
+        timeSetItemListSize = timeSetItemList.size
+
+        resetItems()
+        defaultAddSet()
+    }
+
     fun addPositionItem(setOption: ExerciseSetBottomSheetFragment.SetOptions, position: Int, value: String, kind: Int) {
         when (setOption) {
             ExerciseSetBottomSheetFragment.SetOptions.WNC-> {
@@ -137,17 +151,21 @@ class ExerciseSetViewModel: BaseViewModel() {
     }
 
     fun resetItems() {
+        Log.e("reset")
         wncSetItemList.clear()
         countSetItemList.clear()
         timeSetItemList.clear()
 
-        for (i in 0 until liveDataSetCount.value!!.toInt()) {
-            wncSetItemList.add(WorkoutWncSet("${i+1}세트"))
-            countSetItemList.add(WorkoutCountSet("${i+1}세트"))
-            timeSetItemList.add(WorkoutTimeSet("${i+1}세트"))
-        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in 0 until liveDataSetCount.value!!.toInt()) {
+                wncSetItemList.add(WorkoutWncSet("${i+1}세트"))
+                countSetItemList.add(WorkoutCountSet("${i+1}세트"))
+                timeSetItemList.add(WorkoutTimeSet("${i+1}세트"))
+            }
 
-        defaultAddSet()
+            defaultAddSet()
+        }, 30)
+
     }
 
 }

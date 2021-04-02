@@ -1,29 +1,16 @@
 package com.makeus.milliewillie.ui.home.tab2
 
-import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import androidx.annotation.RequiresApi
-import com.makeus.base.disposeOnDestroy
 import com.makeus.base.fragment.BaseDataBindingBottomSheetFragment
-import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentWorkoutWeightInputBottomSheetBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.model.FirstWeightRequest
-import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
-import com.makeus.milliewillie.ui.MainActivity
-import com.makeus.milliewillie.ui.SampleToast
-import com.makeus.milliewillie.util.Log
-import com.makeus.milliewillie.util.SharedPreference
-import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.util.*
-import kotlin.properties.Delegates
 
 @RequiresApi(Build.VERSION_CODES.O)
 class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<FragmentWorkoutWeightInputBottomSheetBinding>(
@@ -73,7 +60,6 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
 
 //        SampleToast.createToast(context!!,context!!.getString(R.string.toast_weight_record_per_today))?.show()
         clickOk?.invoke(goal, current)
-
         dismiss()
     }
 

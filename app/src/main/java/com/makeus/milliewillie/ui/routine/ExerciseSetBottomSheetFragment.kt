@@ -297,7 +297,24 @@ class ExerciseSetBottomSheetFragment:
                 viewModel.increaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() + 1}")
             }
             R.id.rebs_btn_minus -> {
-                if (viewModel.liveDataSetCount.value!!.toInt() > 0) viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                if (viewModel.liveDataSetCount.value!!.toInt() > 0) {
+                    viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                    viewModel.removeItem()
+                }
+            }
+            R.id.rebs_wnc_recycler_img_text_delete -> {
+                if (viewModel.liveDataSetCount.value!!.toInt() > 0) {
+                        viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                        viewModel.removePositionItem(position)
+                }
+            }
+            R.id.rebs_count_recycler_img_text_delete -> {
+                    viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                    viewModel.removePositionItem(position)
+            }
+            R.id.rebs_time_recycler_img_text_delete -> {
+                    viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                    viewModel.removePositionItem(position)
             }
         }
 

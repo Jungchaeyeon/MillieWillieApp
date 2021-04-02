@@ -46,10 +46,10 @@
         <RelativeLayout
             android:id="@+id/workout_layout_goal_weight"
             android:layout_width="wrap_content"
-            android:layout_height="13dp"
+            android:layout_height="15dp"
             android:layout_alignParentEnd="true"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="29dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout7">
 
@@ -192,9 +192,9 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
                 android:src="@drawable/icon_op"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView5"

@@ -50,15 +50,13 @@ class IntroServiceTypeDetailActivity :
     override fun onResume() {
         super.onResume()
         viewModel.requestDetailSoldier()
-        if(repositoryCached.getSettingOut()=="T"){
-            ActivityNavigator.with(this).login().start()
         }
 //        if (repositoryCached.getType() == "일반병사") {
 //            viewModel.requestDetailSoldier()
 //        } else if (repositoryCached.getType() == "부사관") {
 //            viewModel.requestDetailSergeant()
 //        } else viewModel.requestDetailCaptain()
-    }
+
 
     fun onClickItemD(detailType: String) {
 

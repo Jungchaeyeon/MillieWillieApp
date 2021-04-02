@@ -270,11 +270,13 @@
                     style="@style/spoqa_regular_12"
                     android:layout_width="68dp"
                     android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/rect_radius_4"
                     android:onClick="@{()->vi.onClickUse(0)}"
                     android:text="@string/use"
                     android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView15" />
 
@@ -415,12 +417,14 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
                         android:onClick="@{()->vi.onClickRegister(0)}"
                         android:text="@string/register"
                         android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView17"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
@@ -553,12 +557,14 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="68dp"
                         android:layout_height="30dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/rect_radius_4"
                         android:backgroundTint="@color/text_gray"
                         android:onClick="@{()->vi.onClickRegister(1)}"
                         android:text="@string/register"
                         android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView18"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView18" />
 

@@ -2,18 +2,12 @@ package com.makeus.milliewillie.ui.dDay.birthday
 
 import android.annotation.SuppressLint
 import android.view.KeyEvent
-import android.view.MotionEvent
-import android.view.View
-import androidx.lifecycle.Observer
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentDDayBirthRecyclerItemBinding
 import com.makeus.milliewillie.databinding.FragmentDDayBirthdayBinding
-import com.makeus.milliewillie.databinding.FragmentDDayRecyclerItemBinding
 import com.makeus.milliewillie.model.DdayCheckList
-import com.makeus.milliewillie.model.KakaoLogin
-import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class BirthdayFragment: BaseDataBindingFragment<FragmentDDayBirthdayBinding>(R.layout.fragment_d_day_birthday) {

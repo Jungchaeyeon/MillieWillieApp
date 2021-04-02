@@ -10,8 +10,6 @@ import androidx.constraintlayout.widget.Guideline
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
-import com.makeus.milliewillie.R
 import kotlinx.android.synthetic.main.activity_intro_goal.view.*
 import kotlinx.android.synthetic.main.item_home_layout.view.*
 
@@ -34,4 +32,8 @@ fun View.setPercent(value: Float) {
 @BindingAdapter("setProgress")
 fun View.setProgress(value:MutableLiveData<String>){
     (progressbar as ProgressBar).progress = value.value?.toInt()!!
+}
+@BindingAdapter("setImageUrl")
+fun View.setImageUrl(value: String){
+    (imageView as ImageView).setImageUrl(value)
 }

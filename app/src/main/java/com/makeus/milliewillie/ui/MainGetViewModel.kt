@@ -214,12 +214,14 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     }
 
     fun calHobongDday(): Int {
-        val cal = Calendar.getInstance()
+        val cal = Calendar.getInstance(TimeZone.getDefault())
         val allMonthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
-        //  Log.e(allMonthDay.toString(),"이번달 최대일")
-        val today = allMonthDay - Calendar.DATE
-        // Log.e(today.toString(),"오늘")
-        return allMonthDay - today
+        Log.e(allMonthDay.toString(),"이번달 최대일")
+        val today = cal.get(Calendar.DATE)
+
+        Log.e(today.toString(),"오늘")
+        Log.e((allMonthDay - today).toString(),"계산")
+        return allMonthDay - (today)
     }
 
 

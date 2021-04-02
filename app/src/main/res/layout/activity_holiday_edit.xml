@@ -126,21 +126,25 @@
 
             <EditText
                 android:id="@+id/allHoliDays"
-                android:layout_width="170dp"
+                android:layout_width="140dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="80dp"
                 android:background="@drawable/background_google_login"
+                android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="80dp"
                 android:backgroundTint="#eeeeee"
                 android:inputType="number"
-                android:paddingStart="145dp"/>
+                android:paddingStart="105dp"/>
+
             <TextView
                 style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/day"
-                android:layout_gravity="end|center_vertical"
+                android:layout_gravity="center_vertical|end"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/black_all"/>
+                android:layout_marginEnd="24dp"
+                android:text="@string/day"
+                android:textColor="@color/black_all" />
         </LinearLayout>
 
         <View

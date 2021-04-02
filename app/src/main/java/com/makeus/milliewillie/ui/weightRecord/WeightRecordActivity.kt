@@ -48,7 +48,7 @@ class WeightRecordActivity :
     private var recordDatePickerYear: Int = calendar.get(Calendar.YEAR)
     private var recordDatePickerMonth: Int = calendar.get(Calendar.MONTH) + 1
 
-    var selectYear = ""
+    var selectYear = calendar.get(Calendar.YEAR)
 
     val todayYear = calendar.get(Calendar.YEAR)
     val todayMonth = calendar.get(Calendar.MONTH) + 1
@@ -269,7 +269,7 @@ class WeightRecordActivity :
                 Log.e("month Calendar.MONTH = $month ${Calendar.MONTH + 1}")
                 if (year.toInt() <= Calendar.getInstance().get(Calendar.YEAR)) {
                     if (month.toInt() <= Calendar.getInstance().get(Calendar.MONTH) + 1) {
-                        selectYear = year
+                        selectYear = year.toInt()
                         viewModel.yearAndMonth.postValue("${year}년 ${month}월")
                         executeGetWeightRecord(month = month.toInt(), year = year.toInt())
                     } else SampleToast.createToast(this, globalApplicationContext.getString(R.string.over_value_month))?.show()

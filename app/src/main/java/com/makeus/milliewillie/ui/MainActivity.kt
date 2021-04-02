@@ -81,11 +81,11 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                     changeFragment(WorkoutFragment.getInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
-//                R.id.page_emotion -> {
-//                    fab.visibility = View.GONE
-//                    changeFragment(EmotionFragment.getInstance())
-//                    return@setOnNavigationItemSelectedListener true
-//                }
+                R.id.page_emotion -> {
+                    fab.visibility = View.GONE
+                    changeFragment(EmotionFragment.getInstance())
+                    return@setOnNavigationItemSelectedListener true
+                }
                 R.id.page_info -> {
                     fab.visibility = View.VISIBLE
                     changeFragment(InfoFragment.getInstance())

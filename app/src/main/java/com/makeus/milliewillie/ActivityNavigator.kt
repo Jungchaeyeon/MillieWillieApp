@@ -25,6 +25,7 @@ import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
 import com.makeus.milliewillie.ui.plan.PlanOutputActivity
 import com.makeus.milliewillie.ui.plan.PlanVacationActivity
 import com.makeus.milliewillie.ui.profile.PhotoSelectActivity
+import com.makeus.milliewillie.ui.plan.*
 import com.makeus.milliewillie.ui.profile.ProfileActivity
 import com.makeus.milliewillie.ui.report.ReportActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity

@@ -139,8 +139,9 @@ interface Api {
     @POST("exercises/first-entrances")
     fun postFirstEntrances(): Observable<FirstEntrances>
 
-    @POST("exercises/first-weights")
-    fun postFirstWeight(@Body body: FirstWeightRequest): Observable<FirstWeight>
+    @POST("exercises/{exerciseId}/first-weights")
+    fun postFirstWeight(@Path("exerciseId") exerciseId: Long,
+                        @Body body: FirstWeightRequest): Observable<FirstWeight>
 
     @POST("exercises/{exerciseId}/weights")
     fun postDailyWeight(@Body body: PostDailyWeightRequest,
@@ -154,6 +155,13 @@ interface Api {
     fun postReports(@Path("exerciseId") exerciseId: Long,
                     @Path("routineId") routineId: Long,
                     @Body body: PostReportsRequest): Observable<PostReportsResponse>
+
+    @POST("calendars/ddays")
+    fun postDday(@Body body: PostDdayRequest): Observable<PostDdayResponse>
+
+    @POST("calendars/ddays/{ddayId}/ddays-diary")
+    fun postDdayOutput(@Path("ddayid") ddayId: Long): Observable<PostDdayResponse>
+
 
     @GET("exercises/{exerciseId}/daily-weights")
     fun getDailyWeight(@Path("exerciseId") exerciseId: Long): Observable<GetDailyWeight>
@@ -186,6 +194,11 @@ interface Api {
     fun getReports(@Path("exerciseId") exerciseId: Long,
                    @Path("routineId") routineId: Long,
                    @Query("reportDate") reportDate: String): Observable<GetReportsResponse>
+    @GET("calendars/ddays/{ddayId}")
+    fun getDday(@Path("ddayId") ddayId: Long): Observable<GetDdayResponse>
+
+    @GET("exercises")
+    fun getExerciseId(): Observable<FirstEntrances>
 
 
     @PATCH("exercises/{exerciseId}/routines/{routineId}")
@@ -206,6 +219,14 @@ interface Api {
                      @Path("routineId") routineId: Long,
                      @Body body: PatchReportsRequest): Observable<PatchRoutine>
 
+    @PATCH("calendars/ddays/{ddayId}")
+    fun patchDday(@Body body: PatchDdayRequest,
+                  @Path("ddayId") ddayId: Long): Observable<PatchDdayResponse>
+
+    @PATCH("calendars/ddays/ddays-diary/{diaryId}")
+    fun patchDdayOutput(@Body body: PatchDdayOutputRequest,
+                        @Path("ddayId") ddayId: Long): Observable<PatchDdayOutputResponse>
+
     @PATCH("users")
     fun patchUsers(@Body body: PatchUsersRequest): Observable<PatchUsersResponse>
 
@@ -220,5 +241,9 @@ interface Api {
     fun deleteReports(@Path("exerciseId") exerciseId: Long,
                       @Path("routineId") routineId: Long,
                       @Query("reportDate") reportDate: String): Observable<PatchRoutine>
+
+    @DELETE("calendars/ddays/{ddayId}")
+    fun deleteDday(@Path ("ddayId") ddayId: Long): Observable<BaseResponse>
+
 
 }

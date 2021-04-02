@@ -1,29 +1,17 @@
 package com.makeus.milliewillie.ui.dDay
 
-import android.annotation.SuppressLint
-import android.icu.util.ChineseCalendar
 import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.makeus.base.activity.BaseDataBindingActivity
-import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityDDayBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.model.ScheduleRequest
-import com.makeus.milliewillie.repository.local.LocalKey
-import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayFragment
 import com.makeus.milliewillie.ui.dDay.certification.CertificationFragment
 import com.makeus.milliewillie.ui.dDay.ncee.NceeFragment
-import com.makeus.milliewillie.ui.fragment.DatePickerBirthBottomSheetDialogFragment
-import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
-import com.makeus.milliewillie.ui.login.LoginActivity.Companion.deviceToken
-import com.makeus.milliewillie.util.Log
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 enum class Classification {
@@ -59,13 +47,6 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
         btnCertification = binding.dDayBtnCertification
         btnNcee = binding.dDayBtnNcee
 
-        binding.dDayAnniTextComplete.setOnClickListener{
-            Toast.makeText(this@DdayActivity, "Complete", Toast.LENGTH_SHORT).show()
-        }
-
-
-
-
 
     }
 
@@ -83,7 +64,7 @@ class DdayActivity: BaseDataBindingActivity<ActivityDDayBinding>(R.layout.activi
             }
             else -> {
                 DatePickerDdayBottomSheetDialogFragment.getInstance()
-                    .setOnClickOk {date, dotDate, gapDay, year, month ->
+                    .setOnClickOk {date, gapDay ->
                         viewModel.liveDataDayGap.postValue(gapDay)
                         viewModel.liveDataDdayDate.postValue(date)
                     }.show(supportFragmentManager)

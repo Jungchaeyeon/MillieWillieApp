@@ -74,22 +74,29 @@ class ApiRepository(
     fun getStartExercises(exerciseId: Long, routineId: Long) = apiTest.getStartExercises(exerciseId = exerciseId, routineId = routineId)
     fun getReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.getReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
     fun getUsers() = apiTest.getUsers()
+    fun getExerciseId() = apiTest.getExerciseId()
+    fun getDday(ddayId: Long) = apiTest.getDday(ddayId)
 
     fun postReports(exerciseId: Long, routineId: Long, body: PostReportsRequest) = apiTest.postReports(exerciseId = exerciseId, routineId = routineId, body = body)
-    fun postFirstWeight(body: FirstWeightRequest) = apiTest.postFirstWeight(body)
+    fun postFirstWeight(body: FirstWeightRequest, exerciseId: Long) = apiTest.postFirstWeight(exerciseId = exerciseId, body = body)
     fun postFirstEntrances() = apiTest.postFirstEntrances()
     fun postDailyWeight(body: PostDailyWeightRequest, path: Long) = apiTest.postDailyWeight(body, path)
     fun postRoutine(body: PostRoutineRequest, path: Long) = apiTest.postRoutine(body = body, exerciseId = path)
+    fun postDday(body: PostDdayRequest) = apiTest.postDday(body)
+    fun postDdayOutput(ddayId: Long) = apiTest.postDdayOutput(ddayId)
 
     fun patchRoutine(exerciseId: Long, routineId: Long, body: PostRoutineRequest) = apiTest.patchRoutine(exerciseId = exerciseId, routineId = routineId, body = body)
     fun patchGoalWeight(body: PatchGoalWeightRequest, path: Long) = apiTest.patchGoalWeight(body = body, exerciseId = path)
     fun patchTodayWeight(path: Long, body: PatchTodayWeightRequest) = apiTest.patchTodayWeight(exerciseId = path, body = body)
     fun patchReports(exerciseId: Long, routineId: Long, body: PatchReportsRequest) = apiTest.patchReports(exerciseId = exerciseId, routineId = routineId, body = body)
     fun patchUsers(body: PatchUsersRequest) = apiTest.patchUsers(body = body)
+    fun patchDday(body: PatchDdayRequest, ddayId: Long) = apiTest.patchDday(body = body, ddayId = ddayId)
+    fun patchDdayOutput(body: PatchDdayOutputRequest, ddayId: Long) = apiTest.patchDdayOutput(body = body, ddayId = ddayId)
 
     fun deleteRoutine(exerciseId: Long, routineId: Long) = apiTest.deleteRoutine(exerciseId = exerciseId, routineId = routineId)
     fun deleteUsers() = apiTest.deleteUsers()
     fun deleteReports(exerciseId: Long, routineId: Long, reportDate: String) = apiTest.deleteReports(exerciseId = exerciseId, routineId = routineId, reportDate = reportDate)
+    fun deleteDday(ddayId: Long) = apiTest.deleteDday(ddayId)
 
     fun plans(plansRequest: PlansRequest) = apiTest.plans(plansRequest).doOnNext {
     }.observeOn(AndroidSchedulers.mainThread())

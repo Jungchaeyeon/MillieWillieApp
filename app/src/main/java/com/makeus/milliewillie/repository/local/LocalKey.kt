@@ -48,6 +48,5 @@ enum class LocalKey {
     POSTDAY,
     ISINPUTGOAL,
     ISINPUTWEIGHT,
-    EXERCISEID,
-    ISEXERCISEID
+    EXERCISEID
 }

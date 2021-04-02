@@ -71,7 +71,7 @@ class WeightRecordBottomSheetFragment: BaseDataBindingBottomSheetFragment<Fragme
         if (current.isBlank()) current = "-1.0"
         if (goal.isBlank()) goal = "-1.0"
 
-        SampleToast.createToast(context!!,getString(R.string.toast_weight_record_per_today))?.show()
+//        SampleToast.createToast(context!!,context!!.getString(R.string.toast_weight_record_per_today))?.show()
         clickOk?.invoke(goal, current)
 
         dismiss()

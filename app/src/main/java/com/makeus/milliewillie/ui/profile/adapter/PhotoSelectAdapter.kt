@@ -12,6 +12,7 @@ import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.PhotoSelectedItems
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.util.Log
 
 class PhotoSelectAdapter(val context: Context?, var itemList: ArrayList<PhotoSelectedItems>): RecyclerView.Adapter<PhotoSelectAdapter.ItemViewHolder>() {
 

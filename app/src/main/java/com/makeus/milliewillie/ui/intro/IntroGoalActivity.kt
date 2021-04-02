@@ -54,6 +54,11 @@ class IntroGoalActivity :
                 repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
                 repositoryCached.setValue(LocalKey.TOKEN, it.result.jwt)
                 repositoryCached.setValue(LocalKey.ISMEMBER, true)
+                repositoryCached.setValue(LocalKey.POSTYEAR, 10000)
+                repositoryCached.setValue(LocalKey.POSTMONTH, 100)
+                repositoryCached.setValue(LocalKey.POSTDAY, 100)
+
+
                 Log.e(repositoryCached.getIsMember().toString(),"ISMEMBER")
                 Log.e(repositoryCached.getToken(), "환영users")
 

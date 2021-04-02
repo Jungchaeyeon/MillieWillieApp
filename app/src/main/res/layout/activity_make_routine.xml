@@ -89,7 +89,7 @@
                     <TextView
                         android:id="@+id/routine_text_part_of_ex"
                         android:layout_width="wrap_content"
-                        android:layout_height="17dp"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/part_of_ex"
                         android:textSize="14sp"
@@ -98,7 +98,7 @@
                     <TextView
                         android:id="@+id/routine_text_select_part_of_ex"
                         android:layout_width="wrap_content"
-                        android:layout_height="17dp"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="14dp"
                         android:layout_toEndOf="@+id/routine_text_part_of_ex"
@@ -111,7 +111,7 @@
                         android:layout_height="20dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/icon_left" />
+                        android:src="@drawable/icon_left2" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -123,9 +123,10 @@
                         <TextView
                             android:id="@+id/routine_text_repeat"
                             android:layout_width="wrap_content"
-                            android:layout_height="17dp"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:text="@string/repeat"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             />
                     <LinearLayout
@@ -133,7 +134,6 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:layout_marginStart="39dp"
-                        android:layout_marginEnd="34dp"
                         android:layout_toEndOf="@+id/routine_text_repeat">
                         <TextView
                             android:id="@+id/routine_text_everyday"
@@ -143,6 +143,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(1)}"
                             android:text="@string/everyday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -153,6 +154,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(2)}"
                             android:text="@string/monday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -163,6 +165,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(3)}"
                             android:text="@string/tuesday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -173,6 +176,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(4)}"
                             android:text="@string/wednesday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -183,6 +187,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(5)}"
                             android:text="@string/thursday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -193,6 +198,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(6)}"
                             android:text="@string/friday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
                         <TextView
@@ -203,6 +209,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(7)}"
                             android:text="@string/saturday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"
                             />
 
@@ -214,6 +221,7 @@
                             android:layout_weight="1"
                             android:onClick="@{()-> vi.setTextStatus(8)}"
                             android:text="@string/sunday"
+                            android:textSize="14sp"
                             android:textColor="@color/d_day_btn_text_selected"/>
                     </LinearLayout>
 

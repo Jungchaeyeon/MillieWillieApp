@@ -297,7 +297,7 @@ class ExerciseSetBottomSheetFragment:
                 viewModel.increaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() + 1}")
             }
             R.id.rebs_btn_minus -> {
-                viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
+                if (viewModel.liveDataSetCount.value!!.toInt() > 0) viewModel.decreaseSetCount("${viewModel.liveDataSetCount.value!!.toInt() - 1}")
             }
         }
 

@@ -34,7 +34,7 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
     var prizeNum = 0
     var otherNum = 0
 
-    val liveAlreadyUseDays = MutableLiveData<Int>().apply { value = 0 }
+    val liveAvailUseDays = MutableLiveData<Int>().apply { value = 0 }
     val liveNotUseDays = MutableLiveData<Int>().apply { value = 0 }
     val liveRegularHoliday = MutableLiveData<String>()
     val liveRegularWholeHoliday = MutableLiveData<String>()
@@ -42,6 +42,8 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
     val livePrizeWholeHoliday = MutableLiveData<String>()
     val liveOtherHoliday = MutableLiveData<String>()
     val liveOtherWholeHoliday = MutableLiveData<String>()
+
+    var arrayPlanVac= ArrayList<PlansRequest.PlanVacation>(3)
 
     var plansRequest = PlansRequest()
     lateinit var plans: Plans.Result
@@ -66,7 +68,7 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(
             listOf(
-                "일정",
+                "일정", "휴가",
                 "외박", "훈련", "면회",
                 "외출", "전투휴무", "당직"
             )
@@ -82,8 +84,8 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
                 startDate = plansRequest.startDate,
                 endDate = plansRequest.endDate,
                 push = plansRequest.push,
-                pushDeviceToken = null,
-                planVacation = plansRequest.planVacation,
+                pushDeviceToken = plansRequest.pushDeviceToken,
+                planVacation = arrayPlanVac,
                 work = plansRequest.work
             )
         )
@@ -109,30 +111,32 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
     fun getVacation(response: (Boolean) -> Unit) {
         apiRepository.getVacation().observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+
                 if (it.isSuccess) {
-
-
-                    repositoryCached.setValue(LocalKey.VAC1ID, it.result[0].vacationId)
-                    repositoryCached.setValue(LocalKey.VAC2ID, it.result[1].vacationId)
-                    repositoryCached.setValue(LocalKey.VAC3ID, it.result[2].vacationId)
-                    liveRegularHoliday.value = it.result[0].useDays.toString() + "일 /"
-                    liveRegularWholeHoliday.value = it.result[0].totalDays.toString() + "일"
-                    livePrizeHoliday.value = it.result[1].useDays.toString() + "일 /"
-                    livePrizeWholeHoliday.value = it.result[1].totalDays.toString() + "일"
-                    liveOtherHoliday.value = it.result[2].useDays.toString() + "일 /"
-                    liveOtherWholeHoliday.value = it.result[2].totalDays.toString() + "일"
-
-                    liveAlreadyUseDays.value =
-                        it.result[0].useDays + it.result[1].useDays + it.result[2].useDays
-                    liveNotUseDays.value =
-                        it.result[0].totalDays + it.result[1].totalDays + it.result[2].totalDays
-
                     regularHoliNum = it.result[0].totalDays
                     prizeHoliNum = it.result[1].totalDays
                     otherHoliNum = it.result[2].totalDays
                     regularNum = it.result[0].useDays
                     prizeNum = it.result[1].useDays
                     otherNum = it.result[2].useDays
+
+
+                    liveRegularHoliday.value =(regularHoliNum-regularNum).toString() + "일 /"
+                    liveRegularWholeHoliday.value = it.result[0].totalDays.toString() + "일"
+                    livePrizeHoliday.value = (prizeHoliNum-prizeNum).toString() + "일 /"
+                    livePrizeWholeHoliday.value = it.result[1].totalDays.toString() + "일"
+                    liveOtherHoliday.value = (otherHoliNum-otherNum).toString() + "일 /"
+                    liveOtherWholeHoliday.value = it.result[2].totalDays.toString() + "일"
+
+                    repositoryCached.setValue(LocalKey.VAC1ID,it.result[0].vacationId.toString())
+                    repositoryCached.setValue(LocalKey.VAC2ID,it.result[1].vacationId.toString())
+                    repositoryCached.setValue(LocalKey.VAC3ID,it.result[2].vacationId.toString())
+
+                    liveNotUseDays.value =
+                        it.result[0].totalDays + it.result[1].totalDays + it.result[2].totalDays
+                    liveAvailUseDays.value =
+                        (it.result[0].totalDays + it.result[1].totalDays + it.result[2].totalDays)-(it.result[0].useDays + it.result[1].useDays + it.result[2].useDays)
+
                     response.invoke(true)
                 } else {
                     response.invoke(false)

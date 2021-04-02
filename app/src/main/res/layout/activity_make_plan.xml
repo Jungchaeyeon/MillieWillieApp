@@ -58,10 +58,12 @@
                 android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/txt_makeplan_done"
                 style="@style/spoqa_regular_12"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
+                android:enabled="true"
                 android:onClick="@{()->vi.onClickDone()}"
                 android:text="@string/finish"
                 android:textColor="@color/black_all" />

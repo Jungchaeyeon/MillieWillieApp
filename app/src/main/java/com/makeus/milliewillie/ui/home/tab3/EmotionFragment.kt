@@ -172,22 +172,22 @@ class EmotionFragment :
                 if (eventDay.calendar.time > calToday.time) {
                     //  "미래 기록은 남길 수 없습니다,".showShortToastSafe()
 //                    binding.txtDate.visibility = View.INVISIBLE
-                    binding.rvEmo.visibility = View.GONE
-                    binding.btnCheck.visibility = View.GONE
-                    binding.layoutMakeTodayEmo.visibility = View.GONE // 메모 GONE
-                    binding.txtPlzTodayEmo.visibility = View.GONE
-                    txt_today.visibility = View.INVISIBLE //오늘 GONE
-                    Snackbar.make(this@EmotionFragment.layout_emo,
+                         binding.rvEmo.visibility = View.GONE
+                         binding.btnCheck.visibility = View.GONE
+                         binding.layoutMakeTodayEmo.visibility = View.GONE // 메모 GONE
+                         binding.txtPlzTodayEmo.visibility = View.GONE
+                         txt_today.visibility = View.INVISIBLE //오늘 GONE
+                         Snackbar.make(this@EmotionFragment.layout_emo,
                         "미래 기록은 남길 수 없습니다.",
                         Snackbar.LENGTH_SHORT).show()
                 } else {
 
-                    day = df.format(eventDay.calendar.time)
-                    pickDay = dayFormat.format(eventDay.calendar.time)
-                    pickSDay = daySFormat.format(eventDay.calendar.time)
-                    //일별 기록 조회
-                    repositoryCached.setValue(LocalKey.PICKDAY, pickDay)
-                    Log.e(pickDay.toString(), "Pick Day")
+                          day = df.format(eventDay.calendar.time)
+                          pickDay = dayFormat.format(eventDay.calendar.time)
+                          pickSDay = daySFormat.format(eventDay.calendar.time)
+                          //일별 기록 조회
+                          repositoryCached.setValue(LocalKey.PICKDAY, pickDay)
+                          Log.e(pickDay.toString(), "Pick Day")
 
                     viewModel.getEmotionsRecordDay {
                         if (it) {
@@ -199,14 +199,12 @@ class EmotionFragment :
                             if (today != day) { //오늘이 아니고 && 해당 날짜에 내용이 있으면
 
                                 binding.imgEmo.setImage(viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion))
-                                binding.txtEmo.text =
-                                    viewModel.emotionsRecordResponse.result.emotionText
+                                binding.txtEmo.text = viewModel.emotionsRecordResponse.result.emotionText
                                 viewModel.liveTodayData.postValue(day.toString())
                                 txt_plz_today_emo.visibility = View.GONE // 오늘 감정을 남겨주세요 GONE
                                 txt_today.visibility = View.GONE //오늘 GONE
                                 //date response -> date request에 저장
-                                viewModel.emotionsRecordRequest.date =
-                                    viewModel.emotionsRecordResponse.result.date
+                                viewModel.emotionsRecordRequest.date = viewModel.emotionsRecordResponse.result.date
 
                             } else { //오늘이고 && 해당 날짜에 내용이 있으면
                                 txt_plz_today_emo.visibility = View.VISIBLE
@@ -216,15 +214,17 @@ class EmotionFragment :
                                 binding.imgEmo.setImage(viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion))
 
                             }
-                            binding.rvEmo.visibility = View.GONE  // 리사이클러 GONE
-                            binding.layoutMakeTodayEmo.visibility = View.VISIBLE //메모 VISIBLE
+                                binding.rvEmo.visibility = View.GONE  // 리사이클러 GONE
+                                binding.layoutMakeTodayEmo.visibility = View.VISIBLE //메모 VISIBLE
                         } else {
                             // 해당 날짜에 내용이 없으면
-                            Log.e("해당날짜에 내용이 없음")
-                            binding.btnCheck.visibility = View.INVISIBLE
-                            binding.trash.visibility = View.GONE
-                            binding.rvEmo.visibility = View.VISIBLE  // 리사이클러 VISIBLE
-                            binding.layoutMakeTodayEmo.visibility = View.GONE //메모 VISIBLE
+                                 Log.e("해당날짜에 내용이 없음")
+                                 txt_plz_today_emo.visibility = View.GONE // 오늘 감정을 남겨주세요 GONE
+                                 txt_today.visibility = View.GONE //오늘   GONE
+                                 binding.btnCheck.visibility = View.INVISIBLE
+                                 binding.trash.visibility = View.GONE
+                                 binding.rvEmo.visibility = View.VISIBLE  // 리사이클러 VISIBLE
+                                 binding.layoutMakeTodayEmo.visibility = View.GONE //메모 VISIBLE
 
                             viewModel.emotionsRecordRequest.date = pickSDay
 
@@ -358,8 +358,7 @@ class EmotionFragment :
                     binding.rvEmo.visibility = View.VISIBLE
                 } else {
                     viewModel.liveEmoMemo.value = it.result.today!!.content.toString()
-                    Log.e(it.result.month.toString(), "이거돼야대")
-                    Log.e(it.result.today.toString(), "이거돼야대2")
+
                     binding.layoutMakeTodayEmo.visibility = View.VISIBLE
                     binding.rvEmo.visibility = View.GONE
                     binding.imgEmo.setImage(viewModel.nextEmo(it.result.today!!.emotion))

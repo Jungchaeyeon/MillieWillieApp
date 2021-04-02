@@ -68,7 +68,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 monthPromDday.value = "D - " + calHobongDday().toString()
                 classImg = initImg(it.result.normalPromotionStateIdx)
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
-                vacUseDays.value = mainResponse.vacationUseDays.toString()
+                vacUseDays.value = (mainResponse.vacationTotalDays-mainResponse.vacationUseDays).toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
                 if (mainResponse.stateIdx != 1) {
 

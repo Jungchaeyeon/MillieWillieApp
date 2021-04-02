@@ -1,11 +1,13 @@
 package com.makeus.milliewillie.ui.mypage
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoEnlistBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.ui.plan.DatePickerBasicBottomSheetDialogFragment
 import com.makeus.milliewillie.util.Log
@@ -20,10 +22,19 @@ class InfoEnlistActivity :
 
     val viewModel by viewModel<MyPageEditViewModel>()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun ActivityInfoEnlistBinding.onBind() {
         vi = this@InfoEnlistActivity
         vm = viewModel
         viewModel.bindLifecycle(this@InfoEnlistActivity)
+
+        binding.layoutInfo.setOnTouchListener { p0, p1 ->
+            binding.layoutInfo.requestFocus()
+            hideKeyboard()
+            binding.btnGoal.clearFocus()
+            true
+        }
+
     }
 
 
@@ -90,5 +101,6 @@ class InfoEnlistActivity :
 
     override fun onResume() {
         super.onResume()
+        binding.btnGoal.isFocusableInTouchMode
     }
 }

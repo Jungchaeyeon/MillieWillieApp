@@ -1,6 +1,10 @@
 package com.makeus.milliewillie.repository.local
 
 enum class LocalKey {
+    VAC1COUNT,
+    VAC2COUNT,
+    VAC3COUNT,
+    ARRAYPLANVAC,
     PICKDAY,
     VAC1ID,
     VAC2ID,

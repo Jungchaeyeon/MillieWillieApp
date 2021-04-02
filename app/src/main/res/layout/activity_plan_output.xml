@@ -209,6 +209,45 @@
                                 android:textColor="@color/text_gray"
                                 tools:text="할일" />
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/caution_train_output"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:background="#f5f5f5">
+
+                                <TextView
+                                    style="@style/spoqa_regular_10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="24dp"
+                                    android:text="@string/caution"
+                                    android:textColor="#f8944b" />
+
+                                <TextView
+                                    style="@style/spoqa_regular_10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="@string/caution_train1"
+                                    android:textColor="@color/black_all"/>
+                            </LinearLayout>
+
+                            <TextView
+                                style="@style/spoqa_regular_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:textColor="@color/black_all"
+                                android:text="@string/caution_train2" />
+                        </LinearLayout>
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_todo"

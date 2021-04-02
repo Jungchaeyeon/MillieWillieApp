@@ -24,6 +24,7 @@ import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
 import com.makeus.milliewillie.util.Log.e
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.activity_my_page_edit.*
@@ -31,6 +32,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.view.*
 import kotlinx.android.synthetic.main.item_plan_todo.*
 import kotlinx.android.synthetic.main.item_plan_todo.view.*
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -117,22 +119,39 @@ class MakePlanActivity :
             this@MakePlanActivity,
             androidx.lifecycle.Observer { txt_daynight.text = it })
     }
+//    else if(viewModel.liveOnlyDay.value.isNullOrEmpty()){
+//        Snackbar.make(this.layout_mk_plan, "휴가 정보를 입력해주세요.", Snackbar.LENGTH_SHORT).show();
+//    }
     fun onClickDone() {
-        if (plan_title.text.isEmpty()) {
-            Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_LONG).show();
-        } else {
+        if (plan_title.text.isEmpty() ) {
+            Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_SHORT).show();
+        }
+        else if(viewModel.liveDate.value=="날짜선택" || viewModel.liveDate.value =="") {
+            Snackbar.make(this.layout_mk_plan, "날짜를 선택해 주세요.", Snackbar.LENGTH_SHORT).show();
+        }
+        else if(viewModel.liveDayAndNight.value ==""){
+            Snackbar.make(this.layout_mk_plan, "선택 가능한 휴가일이 남아있습니다.", Snackbar.LENGTH_SHORT).show()
+        }
+        else {
             viewModel.plansRequest.title = plan_title.text.toString()
             viewModel.plansRequest.startDate = repositoryCached.getPlanStartDate()
             viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
 
-            //viewModel.plansRequest.planVacation = array
+
 
             if (viewModel.planTodos.size != 0) {
                 viewModel.plansRequest.work = viewModel.planTodos.toList()
             }
-            viewModel.plansRequest.planVacation = array
 
-            e(array.toString(), "Make에서 planVac")
+            if(viewModel.livePlanType.value.toString() == "휴가") {
+
+                viewModel.arrayPlanVac.add(PlansRequest.PlanVacation(repositoryCached.getVac1Id()
+                    .toLong(), repositoryCached.getVac1count().toInt()))
+                viewModel.arrayPlanVac.add(PlansRequest.PlanVacation(repositoryCached.getVac2Id()
+                    .toLong(), repositoryCached.getVac2count().toInt()))
+                viewModel.arrayPlanVac.add(PlansRequest.PlanVacation(repositoryCached.getVac3Id()
+                    .toLong(), repositoryCached.getVac3count().toInt()))
+            }
 
             FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
                 viewModel.plansRequest.pushDeviceToken = task.result
@@ -145,6 +164,7 @@ class MakePlanActivity :
         //viewModel.liveDate.postValue("")
         repositoryCached.setValue(LocalKey.PICKDATE, "")
         viewModel.liveDayAndNight.postValue("")
+        viewModel.liveOnlyDay.postValue("")
         PlanTypeBottomSheetDialogFragment.getInstance()
             .setOnClickDate {
                 viewModel.livePlanType.value = it
@@ -157,7 +177,6 @@ class MakePlanActivity :
                     "휴가", "일정" -> {
                         layout_other_plan.visibility = View.GONE
                         layout_mk_plan.visibility = View.VISIBLE
-                        // item_todo.visibility = View.VISIBLE
                         when (type) {
                             "휴가" -> {
                                 //  layout_notice_week.visibility = View.GONE
@@ -171,7 +190,6 @@ class MakePlanActivity :
                     }
                     "외박", "훈련", "면회", "외출", "전투휴무", "당직" -> {
                         layout_other_plan.visibility = View.VISIBLE
-                        //layout_notice_week.visibility = View.GONE
                         layout_leave.visibility = View.GONE
 
                         when (type) {
@@ -225,6 +243,7 @@ class MakePlanActivity :
             "면회","전투휴무","외출","당직" -> ActivityNavigator.with(this).plancalendaronlyone(viewModel.plansRequest).start()
             else -> ActivityNavigator.with(this).plancalendar(viewModel.plansRequest).start()
         }
+
         txt_daynight.setTextColor(Color.parseColor("#3e3e3e"))
     }
 
@@ -233,9 +252,10 @@ class MakePlanActivity :
             Snackbar.make(this.layout_mk_plan, "휴가일수는 날짜를 선택하신 뒤에 확인 가능합니다.", Snackbar.LENGTH_LONG)
                 .show()
         } else {
-            ActivityNavigator.with(context).planvacation(viewModel.plansRequest).startForResult(
-                requestCode
-            )
+            ActivityNavigator.with(context).planvacation().start()
+//            ActivityNavigator.with(context).planvacation(viewModel.plansRequest).startForResult(
+//                requestCode
+//            )
         }
     }
 
@@ -251,20 +271,20 @@ class MakePlanActivity :
 
 
     fun requestUser() {
-        viewModel.requestPlan().subscribe {
+        viewModel.requestPlan()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+            viewModel.arrayPlanVac.clear()
             if (it.isSuccess) {
+                //binding.txtMakeplanDone.isEnabled=false
                 SampleToast.createToast(context, "일정 생성 완료!")?.show()
                 ActivityNavigator.with(this).main().start()
                 repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
                 Log.e(it.result.planId.toString(),"plan ID")
-//                viewModel.addItem(
-//                    MainSchedule(
-//                        plan_title.text.toString(),
-//                        viewModel.livePlanColor.value.toString()
-//                    )
-//                )
+
             } else {
-                SampleToast.createToast(this, "일정 생성 실패")?.show()
+                Snackbar.make(this.layout_mk_plan, "휴가 날짜 정보가 올바르지 않습니다.", Snackbar.LENGTH_LONG)
+
             }
         }.disposeOnDestroy(this)
     }
@@ -283,6 +303,10 @@ class MakePlanActivity :
         val planDateFormat = SimpleDateFormat("yyyy-MM-dd")
         //  Log.e(planDateFormat.format(date).toString(), "날짜로그출력")
         return planDateFormat.format(date).toString()
+    }
+
+    override fun onBackPressed() {
+        ActivityNavigator.with(this).main().start()
     }
 }
 

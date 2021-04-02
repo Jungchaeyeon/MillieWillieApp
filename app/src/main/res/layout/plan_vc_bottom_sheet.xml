@@ -17,13 +17,14 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/layout_plan_vaca"
         style="@style/BottomLayout"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginBottom="18dp"
+
                 android:text="@string/regular_holi"
                 android:textColor="@color/black_all"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,14 +105,17 @@
                 app:layout_constraintStart_toEndOf="@+id/txt_day1"
                 app:layout_constraintTop_toTopOf="parent" />
 p
+
             <ImageView
                 android:id="@+id/btn_minus_regul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/icon_minus_circle"
                 android:onClick="@{()->vi.onClickMinus(0)}"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_plus_regul"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_plus_regul"
                 app:layout_constraintTop_toTopOf="@+id/btn_plus_regul" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -180,9 +185,11 @@ p
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/icon_minus_circle"
                 android:onClick="@{()->vi.onClickMinus(1)}"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_plus_prize"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_plus_prize"
                 app:layout_constraintTop_toTopOf="@+id/btn_plus_prize" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -252,9 +259,11 @@ p
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/icon_minus_circle"
                 android:onClick="@{()->vi.onClickMinus(2)}"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_plus_other"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_plus_other"
                 app:layout_constraintTop_toTopOf="@+id/btn_plus_other" />
         </androidx.constraintlayout.widget.ConstraintLayout>

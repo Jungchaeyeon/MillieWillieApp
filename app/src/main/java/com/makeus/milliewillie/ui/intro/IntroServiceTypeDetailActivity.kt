@@ -41,7 +41,6 @@ class IntroServiceTypeDetailActivity :
                     ) {
                         vi = this@IntroServiceTypeDetailActivity
                         item = it
-                        repositoryCached.setValue(LocalKey.DETAILTYPE, it.detailType.toString())
                     })
         }
 
@@ -63,6 +62,7 @@ class IntroServiceTypeDetailActivity :
         //복무 세부 타입 캐시 저장
         viewModel.usersRequest.serveType = detailType
         Log.e(viewModel.usersRequest.stateIdx.toString(),"stateIdxDetail")
+        repositoryCached.setValue(LocalKey.DETAILTYPE, detailType)
         ActivityNavigator.with(this).enlist1(viewModel.usersRequest).start()
 //        if (repositoryCached.getType() == "일반병사") {
 //            ActivityNavigator.with(this).enlist1(viewModel.usersRequest).start()

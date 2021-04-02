@@ -65,25 +65,23 @@ class PlanOutputActivity :
                         item = it
                     })
         }
-
-
     }
 
     fun onClickDone(item: PlansGet.Result.Diary) {
 //        viewModel.liveContent.value = edit_plan.text.toString()
 //        Log.e(edit_plan.text.toString(),"edit 데이터 값 확인")
         repositoryCached.setValue(LocalKey.DIARYID, item.diaryId)
-        viewModel.liveContent.value = edit_plan.text.toString()
+        viewModel.liveContent.value = item.content
         viewModel.patchPlanDiary()
         SampleToast.createToast(this, "일정 저장 완료")?.show()
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun onClickChkBox(view: View,item : PlansGet.Result.Work){
-        Log.e(item.processingStatus,"preocesstiongStatus")
-        repositoryCached.setValue(LocalKey.WORKID,item.workId)
-        view.isActivated =! view.isActivated
-        if(view.isActivated) view.text_todo.setTextColor(Color.parseColor("#9d9d9d"))
+    fun onClickChkBox(view: View, item: PlansGet.Result.Work) {
+        Log.e(item.processingStatus, "preocesstiongStatus")
+        repositoryCached.setValue(LocalKey.WORKID, item.workId)
+        view.isActivated = !view.isActivated
+        if (view.isActivated) view.text_todo.setTextColor(Color.parseColor("#9d9d9d"))
         else view.text_todo.setTextColor(Color.parseColor("#3e3e3e"))
         viewModel.patchDiary()
     }
@@ -91,6 +89,14 @@ class PlanOutputActivity :
     override fun onResume() {
         super.onResume()
         Log.e(repositoryCached.getPlanId().toString(), "id")
+        viewModel.getPlans() {
+            if (it) {
+                Log.e(viewModel.planType.value.toString(), "훈련인지")
+                if (viewModel.planType.value.toString() == "훈련") {
+                    binding.cautionTrainOutput.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     fun onClickEdit(view: View) {
@@ -100,18 +106,21 @@ class PlanOutputActivity :
         popup.setOnMenuItemClickListener(PopupListener())
         popup.show()
     }
-    fun onClickBack(){
+
+    fun onClickBack() {
         onBackPressed()
     }
 
     override fun onBackPressed() {
         ActivityNavigator.with(this).main().start()
     }
+
     inner class PopupListener : PopupMenu.OnMenuItemClickListener {
 
         override fun onMenuItemClick(item: MenuItem?): Boolean {
             when (item?.itemId) {
-                R.id.menu1 -> {viewModel.deletePlans()
+                R.id.menu1 -> {
+                    viewModel.deletePlans()
                 }
             }
             ActivityNavigator.with(this@PlanOutputActivity).main().start()

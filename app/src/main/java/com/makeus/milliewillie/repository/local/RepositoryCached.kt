@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.repository.local
 
+import com.makeus.milliewillie.model.PlansRequest
 import com.makeus.milliewillie.util.GsonFactory
 import java.lang.reflect.Type
 
@@ -82,10 +83,15 @@ abstract class RepositoryCached {
     fun getVac1Id() = getGeneralValue(LocalKey.VAC1ID, "0")
     fun getVac2Id() = getGeneralValue(LocalKey.VAC2ID, "0")
     fun getVac3Id() = getGeneralValue(LocalKey.VAC3ID, "0")
+    fun getVac1count() =getGeneralValue(LocalKey.VAC1COUNT, "")
+    fun getVac2count() =getGeneralValue(LocalKey.VAC2COUNT, "")
+    fun getVac3count() =getGeneralValue(LocalKey.VAC3COUNT, "")
     fun getEmotionId() = getGeneralValue(LocalKey.EMOTIONID, 0L)
     fun getWorkId() = getGeneralValue(LocalKey.WORKID, "0")
     fun getFirstAccess() = getGeneralValue(LocalKey.FIRSTACCESS, "T")
     fun getPickDay() = getGeneralValue(LocalKey.PICKDAY, "")
+
+
 
 
     protected abstract fun setRawValue(key: LocalKey, value: Any?)

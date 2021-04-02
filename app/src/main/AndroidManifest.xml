@@ -34,7 +34,8 @@
 
         <activity android:name=".ui.MainCalendarActivity" />
         <activity android:name=".ui.holiday.HolidayActivity"/>
-        <activity android:name=".ui.mypage.InfoEnlistActivity" />
+        <activity android:name=".ui.mypage.InfoEnlistActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.mypage.MyPageEditActivity"
             android:windowSoftInputMode="adjustResize" />

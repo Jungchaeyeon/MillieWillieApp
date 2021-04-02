@@ -116,7 +116,6 @@ class ActivityNavigator private constructor(private val context: Context) {
             if (context !is Activity) {
                 throw IllegalArgumentException("startActivityForResult 는 context 가 activity 일 경우에만 사용할 수 있습니다.")
             }
-
             context.startActivityForResult(this, requestCode)
         }
 

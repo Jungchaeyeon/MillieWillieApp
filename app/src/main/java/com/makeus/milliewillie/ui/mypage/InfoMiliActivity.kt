@@ -36,6 +36,10 @@ class InfoMiliActivity :
         ActivityNavigator.with(this).infoenlist().start()
     }
     fun onClickBack(){
+        onBackPressed()
+    }
+
+    override fun onBackPressed() {
         ActivityNavigator.with(this).main().start()
     }
     override fun onResume() {

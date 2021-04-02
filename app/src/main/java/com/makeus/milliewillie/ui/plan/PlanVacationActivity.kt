@@ -40,15 +40,14 @@ class PlanVacationActivity :
     private var otherAvail = 0
     private var otherAllNum = 0
 
-
     companion object {
         fun getInstance() = PlanVacationActivity()
     }
 
-    override fun setupProperties(bundle: Bundle?) {
-        super.setupProperties(bundle)
-        viewModel.plansRequest = bundle?.getSerializable(ActivityNavigator.KEY_DATA) as PlansRequest
-    }
+//    override fun setupProperties(bundle: Bundle?) {
+//        super.setupProperties(bundle)
+//        viewModel.plansRequest = bundle?.getSerializable(ActivityNavigator.KEY_DATA) as PlansRequest
+//    }
 
     override fun ActivityPlanVacationBinding.onBind() {
         vi = this@PlanVacationActivity
@@ -243,24 +242,24 @@ class PlanVacationActivity :
         viewModel.otherHoliNum = num
         prizeAvail = num
     }
+    fun onClickBack(){
+        Log.e("확인")
+        ActivityNavigator.with(this).makeplan().start()
+    }
+    fun onClickManage(){
+        ActivityNavigator.with(this).holiday().start()
+    }
+    override fun onBackPressed() {
+        ActivityNavigator.with(this).makeplan().start()
+    }
 
     override fun onResume() {
         super.onResume()
         PlanVacationBottomSheetFragment.getInstance()
             .setOnClickOk {
-                val intent = Intent()
-                intent.putExtra("vacationId0",
-                    viewModel.plansRequest.planVacation[0].vacationId.toString())
-                intent.putExtra("vacationId1",
-                    viewModel.plansRequest.planVacation[1].vacationId.toString())
-                intent.putExtra("vacationId2",
-                    viewModel.plansRequest.planVacation[2].vacationId.toString())
-                intent.putExtra("count0", viewModel.plansRequest.planVacation[0].count.toString())
-                intent.putExtra("count1", viewModel.plansRequest.planVacation[1].count.toString())
-                intent.putExtra("count2", viewModel.plansRequest.planVacation[2].count.toString())
 
                 Log.e(viewModel.plansRequest.planVacation.toString())
-                this.setResult(Activity.RESULT_OK, intent)
+
                 this.finish()
                 // ActivityNavigator.with(this@PlanVacationActivity).makeplan().start()
             }

@@ -21,16 +21,16 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
     val emotionsRecordMonthData = MutableLiveData<EmotionsRecordMonthResponse>()
     var emotionOnlyMonthData = ArrayList<EmotionRecordOnlyMonthResponse.Result>()
     var emotionMonthData = EmotionsRecordMonthResponse().result.month
-    var emotionMonthToday =EmotionsRecordMonthResponse().result.today
+    var emotionMonthToday = EmotionsRecordMonthResponse().result.today
     var emotionsRecordRequest = EmotionsRecordRequest()
     var emotionsRecordResponse = EmotionsRecordResponse()
     val liveEmoList = MutableLiveData<List<EmotionImg>>()
     val liveTodayData = MutableLiveData<String>()
     val livePickEmo = MutableLiveData<EmotionImg>()
     val liveEmoMemo = MutableLiveData<String>()
-    val calList = List<Calendar>(31){ Calendar.getInstance()}
+    val calList = List<Calendar>(31) { Calendar.getInstance() }
     var monthEmoSize = 0
-    val cal = Calendar.getInstance()
+    val cal = Calendar.getInstance(TimeZone.getDefault())
     val df = SimpleDateFormat("yyyyMM")
     var month = df.format(cal.time)
     // var emoDayKey = ArrayList<EmotionsRecordDayResponse.Result>()
@@ -98,10 +98,11 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
                 if (it.isSuccess) {
                     Log.e("이모지 일별 기록 있음")
                     emotionsRecordResponse = it
-
+                    liveTodayData.value = (Calendar.MONTH).plus(1).toString()+"월"+(Calendar.DATE)+"일"
+                    Log.e(liveTodayData.value.toString(),"날짜")
                     liveEmoMemo.value = it.result.content
-                    Log.e(it.result.emotion.toString(),"이모션 id")
-                    Log.e(it.result.emotionText.toString(),"이모션 text")
+                    Log.e(it.result.emotion.toString(), "이모션 id")
+                    Log.e(it.result.emotionText.toString(), "이모션 text")
 
                     response.invoke(true)
                 } else {
@@ -112,34 +113,56 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
             }.disposeOnDestroy(this)
 
     //GET EMO MONTH
-    fun getEmotionsRecordMonth(response: (Boolean) -> Unit)=
+    fun getEmotionsRecordMonth(response: (Boolean) -> Unit) =
         apiRepository.getEmotionsRecordMonth(
             month = month
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 emotionOnlyMonthData = it.result as ArrayList<EmotionRecordOnlyMonthResponse.Result>
 
-                Log.e(emotionOnlyMonthData.toString(),"EMOTIONMONTHDATA")
+                Log.e(emotionOnlyMonthData.toString(), "EMOTIONMONTHDATA")
 
                 monthEmoSize = emotionOnlyMonthData.size
                 Log.e(monthEmoSize.toString())
                 response.invoke(true)
             }.disposeOnDestroy(this)
 
-    fun getEmotionsFirstMonth(response: (Boolean) -> Unit)=
-        apiRepository.getEmotionsFirstMonth()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                emotionMonthData = it.result.month
-                emotionMonthToday = it.result.today
+//    fun getEmotionsFirstMonth(response: (Boolean) -> Unit) =
+//        apiRepository.getEmotionsFirstMonth()
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                emotionMonthData = it.result.month
+//                emotionMonthToday = it.result.today
+//                monthEmoSize = emotionMonthData?.size!!
+//
+//                if (emotionMonthToday == null) {
+//                    response.invoke(false)
+//                } else {
+//                    liveEmoMemo.value = emotionMonthToday?.content
+//                    Log.e(emotionMonthData.toString(), "EMOTIONMONTHDATA")
+//                    Log.e(emotionMonthToday.toString(), "EMOTIONMONTHTODAY")
+//
+//                    response.invoke(true)
+//                }
+//            }, {
+//                response.invoke(false)
+//            }).disposeOnDestroy(this)
+fun getEmotionsFirstMonth()=
+    apiRepository.getEmotionsFirstMonth()
+//        .doOnNext{
+//            Log.e("???")
+//            emotionMonthData = it.result.month
+//            emotionMonthToday = it.result.today
+//            monthEmoSize = emotionMonthData?.size!!
+//
+//            if (emotionMonthToday == null) {
+//            } else {
+//                liveEmoMemo.value = emotionMonthToday?.content
+//                Log.e(emotionMonthData.toString(), "EMOTIONMONTHDATA")
+//                Log.e(emotionMonthToday.toString(), "EMOTIONMONTHTODAY")
+//            }
+    //    }
 
-                Log.e(emotionMonthData.toString(),"EMOTIONMONTHDATA")
-                Log.e(emotionMonthToday.toString(),"EMOTIONMONTHTODAY")
-
-                monthEmoSize = emotionMonthData?.size!!
-                Log.e(monthEmoSize.toString())
-                response.invoke(true)
-            }.disposeOnDestroy(this)
 
 //            : Observable<EmotionsRecordMonthResponse>
 //            .doOnNext {

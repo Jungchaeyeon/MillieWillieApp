@@ -123,12 +123,12 @@
                     android:lineSpacingExtra="0.6sp"
                     android:text="@{vm.allDday}"
                     android:textSize="20sp"
-                    tools:text="D-442"/>
+                    tools:text="D - 442"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="60dp"
+                    android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="12dp"
 
                     android:orientation="horizontal">
@@ -153,7 +153,6 @@
                     <View
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:minWidth="24dp"
                         android:layout_weight="1" />
 
                     <TextView
@@ -179,8 +178,9 @@
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_width="match_parent"
+                    android:paddingHorizontal="8dp"
                     android:layout_height="31dp"
                     android:layout_marginTop="8dp">
 
@@ -188,6 +188,7 @@
                         android:id="@+id/relativeLayout7"
                         android:layout_width="29dp"
                         android:layout_height="24dp"
+                        android:layout_marginBottom="4dp"
                         android:background="@drawable/icon_percent_bubble"
                         android:gravity="center_horizontal|center_vertical"
                         app:layout_constraintBottom_toTopOf="@+id/progressbar"
@@ -233,14 +234,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/spoqa_regular_12"
+                        style="@style/spoqa_regular_10"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="9dp"
                         android:text="@string/discharge" />
 
                     <TextView
-                        style="@style/spoqa_regular_12"
+                        style="@style/spoqa_regular_10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
@@ -263,7 +264,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:gravity="bottom"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <View
@@ -289,6 +290,7 @@
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
                         android:layout_marginEnd="4dp"
                         android:text="@string/leftDays" />
 
@@ -297,6 +299,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginTop="2dp"
                         android:text="@string/leftall"
                         android:textColor="@color/text_gray" />
 
@@ -316,7 +319,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="0.6sp"
                         android:text="@{vm.vacUseDays}"
                         android:textSize="20sp" />
                     <TextView
@@ -324,8 +327,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
                         android:text=" / "
+                        android:textColor="@color/text_gray"
                         android:textSize="20sp" />
                     <TextView
                         style="@style/spoqa_bold_22"
@@ -333,10 +336,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:includeFontPadding="false"
-                        android:letterSpacing="0.1"
                         android:text="@{vm.vacTotalDays}"
+                        android:lineSpacingExtra="0.6sp"
                         android:textColor="@color/text_gray"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        tools:text="24"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -350,7 +354,7 @@
             <LinearLayout
                 style="@style/MatchWrap_24"
                 android:layout_height="30dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -361,7 +365,8 @@
                     android:text="@{vm.todayDate}"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black_all"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    tools:text="4월 3일"/>
 
                 <View
                     android:layout_width="wrap_content"

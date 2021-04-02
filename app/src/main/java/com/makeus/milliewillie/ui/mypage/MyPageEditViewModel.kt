@@ -46,6 +46,7 @@ class MyPageEditViewModel(
     var nextPromPercent = 0.0f
     var monthPromPercent = 0.0f
     var userEnlist = MutableLiveData<String>()
+    val dfParse = SimpleDateFormat("yyyy-MM-dd")
 
     val liveServicetype = MutableLiveData<String>()
     val liveDateButtonList = List(5) { MutableLiveData<String>() }
@@ -117,35 +118,36 @@ class MyPageEditViewModel(
     }
 
     fun initMain() {
-
-        userEnlist.value = usersResponse.startDate
-        allDday.value = "D - " + calDday(usersResponse.endDate).toString()
-        monthProm.value = usersResponse.hobong.plus(1).toString() + "호봉 진급"
+        val millidf = SimpleDateFormat("yyyy.MM.dd")
+        userEnlist.value = millidf.format(dfParse.parse(usersResponse.startDate))
+        allDday.value = " D - " + calDday(usersResponse.endDate).toString()
         if(calHobongDday() ==0){
-            monthPromDday.value = "D - DAY"
+            monthPromDday.value = " D - DAY"
         }else{
-            monthPromDday.value = "D - " + calHobongDday().toString()}
+            monthPromDday.value = " D - " + calHobongDday().toString()}
         when (usersResponse.normalPromotionStateIdx) {
             0 -> {
-                hobongClassInfo.value = "일병"
-                nextProm.value = "일병진급"
-                nextPromDday.value = "D -" + calDday(usersResponse.strPrivate).toString()
+                hobongClassInfo.value = "일병 "
+                nextProm.value = "일병 "
+                nextPromDday.value = "D - " + calDday(usersResponse.strPrivate).toString()
             }
             1 -> {
-                hobongClassInfo.value = "일병"
-                nextProm.value = "상병진급"
-                nextPromDday.value = "D -" + calDday(usersResponse.strCorporal).toString()
+                hobongClassInfo.value = "일병 "
+                nextProm.value = "상병 "
+                nextPromDday.value = "D - " + calDday(usersResponse.strCorporal).toString()
             }
             2 -> {
-                hobongClassInfo.value = "상병"
-                nextProm.value = "병장진급"
-                nextPromDday.value = "D -" + calDday(usersResponse.strSergeant).toString()
+                hobongClassInfo.value = "상병 "
+                nextProm.value = "병장 "
+                nextPromDday.value = "D - " + calDday(usersResponse.strSergeant).toString()
             }
             3 -> {
-                hobongClassInfo.value = "병장"
+                hobongClassInfo.value = "병장 "
                 nextProm.value = "다음 진급 없음"
+                nextPromPercent=0.0f
             }
         }
+        monthProm.value = hobongClassInfo.value+" "+usersResponse.hobong.plus(1).toString() + "호봉"
         hobongClassInfo.value =
             usersResponse.serveType +" "+ hobongClassInfo.value+" " + usersResponse.hobong.toString() + "호봉"
     }
@@ -153,7 +155,6 @@ class MyPageEditViewModel(
     @SuppressLint("SimpleDateFormat")
     fun percentInit() {
 
-        val dfParse = SimpleDateFormat("yyyy-MM-dd")
         val dfFormat = SimpleDateFormat("yyyy년 MM월 dd일")
 
         // Next percent계산하는 부분
@@ -270,7 +271,7 @@ class MyPageEditViewModel(
         val cal = Calendar.getInstance(TimeZone.getDefault())
         val allMonthDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
         Log.e(allMonthDay.toString(),"이번달 최대일")
-        val today = cal.get(Calendar.DATE)
+        val today = cal.get(Calendar.DATE).minus(1)
 
         Log.e(today.toString(),"오늘")
         Log.e((allMonthDay - today).toString(),"계산")

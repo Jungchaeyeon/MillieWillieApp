@@ -185,7 +185,7 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
         //전역일
         var enlistDate = 0
 
-        when (liveServicetype.value.toString()) {
+        when (repositoryCached.getTypeDetail()) {
             "육군" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
@@ -211,6 +211,9 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
         //전역일
         cal.add(Calendar.MONTH, durAll)
         dischargeDate = setDateFormat.format(cal.time).toString()
+        Log.e(repositoryCached.getTypeDetail().toString(),"type")
+        Log.e(dischargeDate.toString(),"dischargeDate")
+        Log.e(cal.time.toString(),"dischargeCal")
         cal.time = date
 
         //일병진급일

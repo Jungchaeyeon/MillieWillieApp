@@ -68,14 +68,14 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 monthPromDday.value = "D - " + calHobongDday().toString()
                 classImg = initImg(it.result.normalPromotionStateIdx)
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
-                vacUseDays.value = mainResponse.vacationUseDays.toString()
+                vacUseDays.value = (mainResponse.vacationTotalDays-mainResponse.vacationUseDays).toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
                 if (mainResponse.stateIdx != 1) {
 
                 }
                 nowPercentInt = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
                 nowPercentStr = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt().toString() + "%"
-                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat() + 0.01f
+                nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat()
                 addAllItem(mainResponse.plan)
                 Log.e("$nowPercentFlt", "nowPercentFlt")
                 Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")

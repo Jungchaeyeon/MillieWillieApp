@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.ui.plan
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
@@ -63,7 +64,7 @@ class PlanOutputViewModel(
     }
 
     init {
-        getPlans()
+
         initToday()
     }
 
@@ -86,11 +87,12 @@ class PlanOutputViewModel(
         },{})
 
     //일정 조회
-    fun getPlans() = apiRepository.getPlans(
+    fun getPlans(response: (Boolean) -> Unit) = apiRepository.getPlans(
         path = repositoryCached.getPlanId().toLong()
     ) .observeOn(AndroidSchedulers.mainThread())
         .subscribe(
         {
+            memoLists.clear()
             if(it.isSuccess){
                 Log.e("일정조회 성공")
                 // set plan Key
@@ -103,9 +105,12 @@ class PlanOutputViewModel(
                 addTodoAll(it.result.work)
                 addMemoAll(it.result.diary)
                 repositoryCached.setValue(LocalKey.PLANID, it.result.planId.toString())
+                response.invoke(true)
+
             }
             else{
                 Log.e("일정조회 실패")
+                response.invoke(false)
             }
         },{}).disposeOnDestroy(this)
 

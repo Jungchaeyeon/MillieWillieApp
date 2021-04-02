@@ -10,11 +10,11 @@
         android:enabled="true"
         android:icon="@drawable/ic_fab2_selector"
         android:title="" />
-<!--    <item-->
-<!--        android:id="@+id/page_emotion"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_fab3_selector"-->
-<!--        android:title="" />-->
+    <item
+        android:id="@+id/page_emotion"
+        android:enabled="true"
+        android:icon="@drawable/ic_fab3_selector"
+        android:title="" />
     <item
         android:id="@+id/page_info"
         android:enabled="true"

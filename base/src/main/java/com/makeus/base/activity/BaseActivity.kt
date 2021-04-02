@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.makeus.base.Disposer
 import com.makeus.base.fragment.BaseDialogFragment
 import com.makeus.base.fragment.BaseFragment
@@ -113,7 +114,6 @@ abstract class BaseActivity(private val layoutId: Int) : AppCompatActivity(),
 
     override fun onBackPressed() {
         if (!backToastBlock && ActivityBackToast.showToast(isTaskRoot)) {
-            Toast.makeText(this, getString(R.string.backCloseToast), Toast.LENGTH_SHORT).show()
         } else {
             super.onBackPressed()
         }

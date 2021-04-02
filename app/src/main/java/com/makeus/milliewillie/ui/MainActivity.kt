@@ -181,8 +181,7 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        Log.e("onBackPressed in main")
+        SampleToast.createToast(this,"한번 더 클릭하면 앱이 종료됩니다.")?.show()
     }
 
 }

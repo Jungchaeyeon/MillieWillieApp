@@ -20,6 +20,7 @@ import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.mypage.InfoEnlistActivity
 import com.makeus.milliewillie.ui.mypage.InfoMiliActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
+import com.makeus.milliewillie.ui.profile.PhotoSelectActivity
 import com.makeus.milliewillie.ui.plan.*
 import com.makeus.milliewillie.ui.profile.ProfileActivity
 import com.makeus.milliewillie.ui.report.ReportActivity
@@ -77,6 +78,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun planvacation() = MyIntent(PlanVacationActivity::class.java)
     fun reports() = MyIntent(ReportActivity::class.java)
     fun profile() = MyIntent(ProfileActivity::class.java)
+    fun photoSelect() = MyIntent(PhotoSelectActivity::class.java)
     fun account() = MyIntent(AccountActivity::class.java)
     fun rulesInAccount() = MyIntent(RuleWebViewActivity::class.java)
     fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }

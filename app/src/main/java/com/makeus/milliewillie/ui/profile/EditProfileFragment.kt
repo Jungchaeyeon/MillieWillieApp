@@ -1,8 +1,6 @@
 package com.makeus.milliewillie.ui.profile
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.text.TextUtils
@@ -21,9 +19,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentInfoEditProfileBinding
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.PatchUsersRequest
-import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
-import com.makeus.milliewillie.ui.profile.PhotoSelectFragment.Companion.PROFILE_URL_KEY
-import com.makeus.milliewillie.ui.profile.ProfileActivity.Companion.USER_BIRTHDAY_KEY
+import com.makeus.milliewillie.ui.profile.PhotoSelectActivity.Companion.PROFILE_URL_KEY
 import com.makeus.milliewillie.ui.profile.ProfileActivity.Companion.userBirthday
 import com.makeus.milliewillie.util.Loading
 import com.makeus.milliewillie.util.Log
@@ -194,15 +190,11 @@ class EditProfileFragment:BaseDataBindingFragment<FragmentInfoEditProfileBinding
     }
 
     fun onClickBirthday() {
-        DatePickerDdayBottomSheetDialogFragment.getInstance()
-            .setOnClickOk{date, dotDate, gapDays, dateYear, dateMonth ->
-                userBirthday = dotDate
-                viewModel.liveDataUserBirth.value = dotDate
-            }.show(fragmentManager!!)
+
     }
 
     fun onClickPhoto() {
-        (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
+//        (activity as ProfileActivity).transitionFragment(PhotoSelectFragment(), "replace")
     }
 
     fun onClickComplete() {

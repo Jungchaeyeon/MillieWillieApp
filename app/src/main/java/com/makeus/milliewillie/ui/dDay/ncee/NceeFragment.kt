@@ -8,7 +8,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentDDayNceeBinding
 import com.makeus.milliewillie.databinding.FragmentDDayNceeRecyclerItemBinding
 import com.makeus.milliewillie.model.DdayCheckList
-import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.dDay.DatePickerDdayBottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NceeFragment: BaseDataBindingFragment<FragmentDDayNceeBinding>(R.layout.fragment_d_day_ncee) {
@@ -47,7 +47,7 @@ class NceeFragment: BaseDataBindingFragment<FragmentDDayNceeBinding>(R.layout.fr
     fun onClickDdayDate() {
         fragmentManager?.let {
             DatePickerDdayBottomSheetDialogFragment.getInstance()
-                .setOnClickOk {date, dotDate, gapDay, year, month ->
+                .setOnClickOk {date, gapDay ->
                     viewModel.liveDataToday.postValue(date)
                     viewModel.liveDataTodayInfo.postValue(gapDay)
                 }.show(it)

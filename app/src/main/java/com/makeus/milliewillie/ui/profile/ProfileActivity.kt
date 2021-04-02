@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
-import com.makeus.milliewillie.MyApplication
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication.Companion.userName
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityInfoProfileBinding
-import com.makeus.milliewillie.ext.showShortToastSafe
-import com.makeus.milliewillie.ui.profile.PhotoSelectFragment.Companion.PROFILE_URL_KEY
+import com.makeus.milliewillie.model.PatchUsersRequest
+import com.makeus.milliewillie.ui.fragment.DatePickekProfileBirthDayBottomSheetDialogFragment
+import com.makeus.milliewillie.util.BasicTextFormat
+import com.makeus.milliewillie.util.Loading
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,8 +32,16 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
 
     override fun onResume() {
         super.onResume()
-        executeGetUsers()
+        Glide.with(binding.userImgUserImage).load(userProfileImgUrl).circleCrop()
+            .placeholder(R.drawable.graphic_profile_big).into(binding.userImgUserImage)
+    }
+
+    override fun ActivityInfoProfileBinding.onBind() {
+        vi = this@ProfileActivity
+        vm = viewModel
         onBackPressed()
+        executeGetUsers()
+
     }
 
     private fun executeGetUsers() {
@@ -40,7 +50,6 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
             .subscribe {
                 if (it.isSuccess) {
                     Log.e("getUsers 호출 성공")
-                    Log.e("userName = $userName")
 
                     userName = it.result.name.toString()
                     userProfileImgUrl = if (it.result.profileImg == null) "" else it.result.profileImg.toString()
@@ -60,17 +69,44 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
             }.disposeOnDestroy(this)
     }
 
-    override fun ActivityInfoProfileBinding.onBind() {
-        vi = this@ProfileActivity
-        vm = viewModel
+    private fun executePatchUsers() {
+        if (userBirthday.isNullOrBlank()
+            || userBirthday == "생년월일 입력") userBirthday = null
+
+//        val profileImg = if (downloadUri == null) null
+//        else downloadUri.toString()
+
+        viewModel.apiRepository.patchUsers(
+            body = PatchUsersRequest(
+                name = binding.userEditUserName.text.toString(),
+                profileImg = userProfileImgUrl, birthday = userBirthday
+            )
+        )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isSuccess){
+                    Log.e("patchUsers 호출 성공")
+
+                    userName = it.result.name
+                    userProfileImgUrl = it.result.profileImg
+                    userBirthday = it.result.birthday
+                    viewModel.liveDataUserBirth.postValue(userBirthday)
+                } else {
+                    Log.e("patchUsers 호출 실패")
+                    Log.e(it.message)
+                }
+                Loading.dissmiss()
+            }.disposeOnDestroy(this)
     }
+
 
     fun transitionFragment(fragment: Fragment, kind: String) {
         backStack = true
         fragmentBack = fragment
         when (kind) {
             "add" -> {
-                supportFragmentManager.beginTransaction().add(R.id.profile_frame, fragment.apply {
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.profile_frame, fragment.apply {
                     arguments = Bundle().apply {
                         putString(USER_BIRTHDAY_KEY, userBirthday)
                         Log.e("userBirthday In Profile = $userBirthday")
@@ -88,7 +124,8 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
     }
 
     fun onClickPhoto() {
-        transitionFragment(PhotoSelectFragment(), "add")
+//        transitionFragment(PhotoSelectFragment(), "add")
+        ActivityNavigator.with(this).photoSelect().start()
     }
 
     private var isEdit = false
@@ -113,9 +150,19 @@ class ProfileActivity: BaseDataBindingActivity<ActivityInfoProfileBinding>(R.lay
                 binding.userImgBirthday.visibility = View.GONE
                 binding.userImgUserName.visibility = View.GONE
                 binding.userEditUserName.isEnabled = false
+
+                executePatchUsers()
             }
         }
 
+    }
+
+    fun onClickBirthday() {
+        DatePickekProfileBirthDayBottomSheetDialogFragment.getInstance()
+            .setOnClickOk{dateYear, dateMonth, dateDay ->
+                userBirthday = BasicTextFormat.BasicDateFormat(dateYear, dateMonth, dateDay)
+                viewModel.liveDataUserBirth.value = userBirthday
+            }.show(supportFragmentManager)
     }
 
     fun onClickBack() {

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.Guideline
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import kotlinx.android.synthetic.main.activity_intro_goal.view.*

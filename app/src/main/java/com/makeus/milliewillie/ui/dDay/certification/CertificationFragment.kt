@@ -8,7 +8,7 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentDDayCertiRecyclerItemBinding
 import com.makeus.milliewillie.databinding.FragmentDDayCertificationBinding
 import com.makeus.milliewillie.model.DdayCheckList
-import com.makeus.milliewillie.ui.fragment.DatePickerDdayBottomSheetDialogFragment
+import com.makeus.milliewillie.ui.dDay.DatePickerDdayBottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CertificationFragment: BaseDataBindingFragment<FragmentDDayCertificationBinding>(R.layout.fragment_d_day_certification) {
@@ -47,7 +47,7 @@ class CertificationFragment: BaseDataBindingFragment<FragmentDDayCertificationBi
     fun onClickDdayDate() {
         fragmentManager?.let {
             DatePickerDdayBottomSheetDialogFragment.getInstance()
-                .setOnClickOk {date, dotDate, gapDay, year, month ->
+                .setOnClickOk {date, gapDay ->
                     viewModel.liveDataToday.postValue(date)
                     viewModel.liveDataTodayInfo.postValue(gapDay)
                 }.show(it)

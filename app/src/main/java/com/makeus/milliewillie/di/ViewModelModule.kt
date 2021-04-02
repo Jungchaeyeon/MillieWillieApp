@@ -2,7 +2,9 @@ package com.makeus.milliewillie.di
 
 import com.makeus.milliewillie.ui.MainGetViewModel
 import com.makeus.milliewillie.ui.MainViewModel
+import com.makeus.milliewillie.ui.dDay.DdayOutputCNViewModel
 import com.makeus.milliewillie.ui.dDay.DdayViewModel
+import com.makeus.milliewillie.ui.dDay.anniversary.DdayOutputAnniversaryViewModel
 import com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel
 import com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel
 import com.makeus.milliewillie.ui.dDay.ncee.NceeViewModel
@@ -42,7 +44,7 @@ val viewModelModule = module {
     viewModel {  MakePlanViewModel(get(),get()) }//추후 수정
     viewModel { MainViewModel(get(),get()) }
     viewModel { MainGetViewModel(get(),get()) }
-    viewModel { WorkoutViewModel(get()) }
+    viewModel { WorkoutViewModel(get(), get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel(get()) }
     viewModel { InfoViewModel(get()) }
@@ -54,4 +56,6 @@ val viewModelModule = module {
     viewModel { ReportViewModel(get()) }
     viewModel { AccountViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
+    viewModel { DdayOutputCNViewModel(get()) }
+    viewModel { DdayOutputAnniversaryViewModel(get()) }
 }

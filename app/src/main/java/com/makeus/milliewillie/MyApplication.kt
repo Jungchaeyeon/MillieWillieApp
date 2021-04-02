@@ -38,10 +38,9 @@ class MyApplication : Application() {
 
         lateinit var sSharedPreferences: SharedPreferences
 
-        var userProfileImgUrl: String? = ""
+        var userProfileImgUrl: String = ""
         var userName: String = ""
 
-        var exerciseId by Delegates.notNull<Long>()
         var isLogout = false
 
         //const key

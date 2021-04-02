@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/workout_today_date"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="30dp"
             android:textSize="12sp"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/workout_text_today_workout"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="4dp"
             android:layout_below="@+id/workout_today_date"
@@ -74,7 +74,7 @@
         <RelativeLayout
             android:id="@+id/workout_layout_goal_weight"
             android:layout_width="wrap_content"
-            android:layout_height="13dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="40dp"
             android:visibility="gone"
@@ -218,13 +218,15 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/workout_fab"
             style="@style/FloatingBtn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="72dp"
+            android:layout_marginEnd="25dp"
             android:backgroundTint="@color/white"
             android:onClick="@{()->vi.onClickItem(4)}"
             android:src="@drawable/ic_add"
             app:elevation="6dp"
+            app:borderWidth="0dp"
+            app:fabCustomSize="60dp"
+            app:fabSize="auto"
             app:pressedTranslationZ="12dp"
             app:tint="@color/aqua_blue" />
 

@@ -1,4 +1,4 @@
-package com.makeus.milliewillie.ui.fragment
+package com.makeus.milliewillie.ui.dDay
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
@@ -16,10 +16,8 @@ class DatePickerDdayBottomSheetDialogFragment:
     private var date : String = ""
     private var dotDate : String = ""
     private var gapDays : String = ""
-    private var dateYear: String = ""
-    private var dateMonth: String = ""
 
-    private var clickOk: ((String, String, String, String, String) -> Unit)? = null
+    private var clickOk: ((String, String) -> Unit)? = null
 
     companion object {
         fun getInstance() = DatePickerDdayBottomSheetDialogFragment()
@@ -45,8 +43,6 @@ class DatePickerDdayBottomSheetDialogFragment:
 
             dotDate = BasicTextFormat.BasicDateFormat(year.toString(), (month + 1).toString(), day.toString())
             date = "${year}년 ${month + 1}월 ${day}일"
-            dateYear = year.toString()
-            dateMonth = (month + 1).toString()
         }
     }
 
@@ -79,7 +75,7 @@ class DatePickerDdayBottomSheetDialogFragment:
         }.timeInMillis
     }
 
-    fun setOnClickOk(clickOk: ((String, String, String, String, String) -> Unit)): DatePickerDdayBottomSheetDialogFragment {
+    fun setOnClickOk(clickOk: ((String, String) -> Unit)): DatePickerDdayBottomSheetDialogFragment {
         this.clickOk = clickOk
         return this
     }
@@ -87,13 +83,10 @@ class DatePickerDdayBottomSheetDialogFragment:
     fun onClickOk() {
         if (date.isBlank()) {
             date = "${Calendar.getInstance().get(Calendar.YEAR)}년 ${Calendar.getInstance().get(Calendar.MONTH)+1}월 ${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}일"
-            dotDate = BasicTextFormat.BasicDateFormat(Calendar.getInstance().get(Calendar.YEAR).toString(),(Calendar.getInstance().get(Calendar.MONTH) + 1).toString(), Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString())
             gapDays = "오늘"
-            dateYear = "${Calendar.getInstance().get(Calendar.YEAR)}"
-            dateMonth = "${Calendar.getInstance().get(Calendar.MONTH)+1}"
         }
 
-        clickOk?.invoke(date, dotDate, gapDays, dateYear, dateMonth)
+        clickOk?.invoke(date, gapDays)
         dismiss()
     }
     fun onClickCancel(){

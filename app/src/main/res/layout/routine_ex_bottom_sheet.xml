@@ -107,14 +107,14 @@
         <RelativeLayout
             android:id="@+id/rebs_layout_switch"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/rebs_layout_option_select"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="17dp"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/total_set_con"
                 android:textColor="@color/black_all" />
@@ -140,14 +140,14 @@
             <RelativeLayout
                 android:id="@+id/relativeLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp">
 
                 <TextView
                     android:id="@+id/rebs_text_total_set_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/set_count"
                     android:textColor="@color/black_all" />
@@ -229,7 +229,7 @@
             <RelativeLayout
                 android:id="@+id/rebs_wnc_layout_input"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="24dp">
@@ -237,7 +237,7 @@
                 <TextView
                     android:id="@+id/rebs_wnc_text_total_set_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@{vm.liveDataUnderSetCount}" />
 
@@ -323,7 +323,7 @@
             <RelativeLayout
                 android:id="@+id/rebs_count_layout_input"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_scrollFlags="exitUntilCollapsed|scroll"
@@ -332,7 +332,7 @@
                 <TextView
                     android:id="@+id/rebs_count_text_total_set_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@{vm.liveDataUnderSetCount}"
                     android:textColor="@color/black_all" />
@@ -395,14 +395,14 @@
             <RelativeLayout
                 android:id="@+id/rebs_time_layout_input"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/rebs_time_text_total_set_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="17dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@{vm.liveDataUnderSetCount}"
                     android:textColor="@color/black_all" />

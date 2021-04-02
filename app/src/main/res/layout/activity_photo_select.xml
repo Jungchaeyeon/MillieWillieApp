@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.profile.PhotoSelectFragment" />
+            type="com.makeus.milliewillie.ui.profile.PhotoSelectActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

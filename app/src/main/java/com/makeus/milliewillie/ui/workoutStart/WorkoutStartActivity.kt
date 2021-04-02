@@ -8,6 +8,7 @@ import com.makeus.base.activity.BaseDataBindingActivity
 import com.makeus.base.disposeOnDestroy
 import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication.Companion.ROUTINE_ID_KEY_FROM_WORKOUT
+import com.makeus.milliewillie.MyApplication.Companion.globalApplicationContext
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.ActivityWorkoutStartBinding
 import com.makeus.milliewillie.model.*
@@ -222,7 +223,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                 }
             }
             false -> {
-                binding.startBtnStart.text = getString(R.string.start)
+                binding.startBtnStart.text = globalApplicationContext.getString(R.string.start)
                 hour = viewModel.liveDataTimeHour.value!!
                 min = viewModel.liveDataTimeMin.value!!
                 sec = viewModel.liveDataTimeSec.value!!
@@ -235,7 +236,7 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
 
     fun onClickDone() {
         DialogWorkoutDoneFragment.getInstance()
-            .setTitle(getString(R.string.is_done_ex))
+            .setTitle(globalApplicationContext.getString(R.string.is_done_ex))
             .setOnClickOk ({
                 startItemList.forEach {
                     var count = 0

@@ -137,7 +137,9 @@
     <string name="stop">정지</string>
     <string name="workout_done">운동 끝내기</string>
     <string name="workout_start">운동 시작하기</string>
+    <string name="workout_done_message">운동 완료! 수고많으셨어요:)</string>
     <string name="workout_start_question">운동을 시작하시겠습니까?</string>
+    <string name="workout_report_check">운동리포트 확인</string>
     <string name="ex_report">운동 리포트</string>
     <string name="total_ex_time">총운동시간</string>
     <string name="is_done_ex">운동을 종료하시겠습니까?</string>

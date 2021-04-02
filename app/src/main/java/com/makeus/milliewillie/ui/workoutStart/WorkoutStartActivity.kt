@@ -251,7 +251,11 @@ class WorkoutStartActivity: BaseDataBindingActivity<ActivityWorkoutStartBinding>
                     statusList.add(count)
                 }
 
-                executePostReports()
+                WorkoutStartDoneBottomSheetFragment.getInstance()
+                    .setOnClickOk {
+                        executePostReports()
+                    }.show(supportFragmentManager)
+
 
             }, "start")
             .show(supportFragmentManager)

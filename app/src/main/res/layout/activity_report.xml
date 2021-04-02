@@ -165,6 +165,7 @@
                             android:fontFamily="@font/spoqa_han_sans_neo_medium"
                             android:hint="@string/content_hint"
                             android:includeFontPadding="false"
+                            android:textCursorDrawable="@color/maincolor_blue"
                             android:maxLength="300"
                             android:paddingHorizontal="24dp"
                             android:paddingTop="22dp"

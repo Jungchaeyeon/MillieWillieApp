@@ -31,7 +31,7 @@
                 android:layout_marginVertical="5dp"
                 android:background="@drawable/icon_left"
                 android:backgroundTint="@color/black_all"
-                android:onClick="@{()->vi.finish()}" />
+                android:onClick="@{()->vi.onClickBack()}" />
 
             <TextView
                 style="@style/spoqa_bold_22"

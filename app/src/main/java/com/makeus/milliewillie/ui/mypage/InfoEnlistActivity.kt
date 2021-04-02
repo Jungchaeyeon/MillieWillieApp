@@ -63,6 +63,7 @@ class InfoEnlistActivity :
             patchGoal()
             patchUsers()
         }
+        ActivityNavigator.with(this).infomili().start()
     }
     fun patchGoal() =
         viewModel.patchGoal()

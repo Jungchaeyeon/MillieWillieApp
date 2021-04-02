@@ -92,6 +92,9 @@ class HolidayActivity : BaseDataBindingActivity<ActivityHolidayBinding>(R.layout
         onBackPressed()
     }
 
+    override fun onBackPressed() {
+        ActivityNavigator.with(this).main().start()
+    }
     //사용하기 버튼 눌렀을 때
     fun onClickUse(num: Int) {
         //선택 버튼 종류

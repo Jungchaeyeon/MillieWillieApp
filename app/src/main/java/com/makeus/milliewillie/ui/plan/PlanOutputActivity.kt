@@ -100,7 +100,13 @@ class PlanOutputActivity :
         popup.setOnMenuItemClickListener(PopupListener())
         popup.show()
     }
+    fun onClickBack(){
+        onBackPressed()
+    }
 
+    override fun onBackPressed() {
+        ActivityNavigator.with(this).main().start()
+    }
     inner class PopupListener : PopupMenu.OnMenuItemClickListener {
 
         override fun onMenuItemClick(item: MenuItem?): Boolean {

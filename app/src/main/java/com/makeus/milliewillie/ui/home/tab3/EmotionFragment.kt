@@ -17,13 +17,12 @@ import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentEmotionBinding
 import com.makeus.milliewillie.databinding.ItemEmoListBinding
 import com.makeus.milliewillie.ext.setImage
-import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.EmotionImg
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
+import io.reactivex.Observable
 import com.makeus.milliewillie.ui.SampleToast
 import com.makeus.milliewillie.util.Log
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import kotlinx.android.synthetic.main.activity_make_plan.*

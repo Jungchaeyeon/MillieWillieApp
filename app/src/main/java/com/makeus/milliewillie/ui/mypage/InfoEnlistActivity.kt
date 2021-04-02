@@ -92,10 +92,10 @@ class InfoEnlistActivity :
 
     fun nextStep(it : Boolean){
         if (it) {
-            SampleToast.createToast(this, "일정 수정이 완료되었습니다.")?.show()
+            SampleToast.createToast(this, "수정이 완료되었습니다.")?.show()
             ActivityNavigator.with(this).infomili().start()
         } else {
-            SampleToast.createToast(this,"일정 수정실패")?.show()
+            SampleToast.createToast(this,"수정실패")?.show()
         }
     }
 

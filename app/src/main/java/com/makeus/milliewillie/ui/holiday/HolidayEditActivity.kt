@@ -66,7 +66,7 @@ class HolidayEditActivity :
                 }
 
             }else{
-                Snackbar.make(this.layout_holi_edit_2, "${minSetDay} 일 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(this.layout_holi_edit_2, minSetDay.value.toString()+" 일 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
             }
 
     }

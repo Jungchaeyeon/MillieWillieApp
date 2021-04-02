@@ -98,7 +98,8 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
                 if (it.isSuccess) {
                     Log.e("이모지 일별 기록 있음")
                     emotionsRecordResponse = it
-                    liveTodayData.value = (Calendar.MONTH).plus(1).toString()+"월"+(Calendar.DATE)+"일"
+                    val calToday = Calendar.getInstance(TimeZone.getDefault())
+                    liveTodayData.value= calToday.get(Calendar.MONTH).plus(1).toString()+"월 "+calToday.get(Calendar.DATE)+"일"
                     Log.e(liveTodayData.value.toString(),"날짜")
                     liveEmoMemo.value = it.result.content
                     Log.e(it.result.emotion.toString(), "이모션 id")

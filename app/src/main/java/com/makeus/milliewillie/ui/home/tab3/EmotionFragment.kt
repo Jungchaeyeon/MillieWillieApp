@@ -158,7 +158,6 @@ class EmotionFragment :
         calendarView.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
 
-
                 txt_Date.setText(df.format(eventDay.calendar.time))
                 Observable.timer(300, java.util.concurrent.TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -264,22 +263,23 @@ class EmotionFragment :
                     viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion)))
                 binding.calendarView.setEvents(events)
 
-                SampleToast.createToast(requireActivity(), "일정 삭제 완료!")?.show()
+                SampleToast.createToast(requireActivity(), "감정 기록 삭제 완료!")?.show()
                 binding.rvEmo.visibility = View.VISIBLE
                 binding.layoutMakeTodayEmo.visibility = View.GONE
             } else {
-                Snackbar.make(this.layout_emo, "일정 삭제에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(this.layout_emo, "감정 기록 삭제에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
+
 
     fun onClickCheck(v: View) {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(v.windowToken, 0)
 
-        cal.add(Calendar.DATE, calBetweenDay())
-        events.add(EventDay(cal, viewModel.nextEmo(emoId)))
-        binding.calendarView.setEvents(events)
+//        cal.add(Calendar.DATE, calBetweenDay())
+//        events.add(EventDay(cal, viewModel.nextEmo(emoId)))
+//        binding.calendarView.setEvents(events)
         Log.e(Calendar.DAY_OF_MONTH.toString(),"DAM")
         Log.e(calBetweenDay().toString(),"between")
 
@@ -292,11 +292,13 @@ class EmotionFragment :
                 viewModel.emotionsRecordRequest.emotion = emoId
                 viewModel.postEmotionsRecord {
                     if (it) {
-                        SampleToast.createToast(requireActivity(), "일정 생성 완료!")?.show()
-
+                        SampleToast.createToast(requireActivity(), "감정 기록 생성 완료!")?.show()
+                        viewModel.getEmotionsRecordMonth {
+                            getEmo(it)
+                        }
 
                     } else {
-                        Snackbar.make(this.layout_emo, "일정 생성에 실패하였습니다.", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(this.layout_emo, "감정 기록  생성에 실패하였습니다.", Snackbar.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -304,9 +306,9 @@ class EmotionFragment :
                 viewModel.emotionsRecordRequest.emotion = emoId
                 viewModel.patchEmotionsRecord {
                     if (it) {
-                        SampleToast.createToast(requireActivity(), "일정 수정 완료!")?.show()
+                        SampleToast.createToast(requireActivity(), "감정 기록 생성 완료!")?.show()
                     } else {
-                        Snackbar.make(this.layout_emo, "일정 수정에 실패하였습니다.", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(this.layout_emo, "감정 기록 생성 에 실패하였습니다.", Snackbar.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -376,7 +378,7 @@ class EmotionFragment :
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getEmo(data: Boolean) {
+     fun getEmo(data: Boolean) {
 
         if (data) {
             events.clear()

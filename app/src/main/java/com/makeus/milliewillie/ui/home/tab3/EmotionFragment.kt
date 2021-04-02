@@ -334,7 +334,7 @@ class EmotionFragment :
             viewModel.emotionOnlyMonthData?.forEach {
 
                 val cal = Calendar.getInstance()
-                cal.set(Calendar.DAY_OF_MONTH, calBetweenDayInput(it.date)+1)
+                cal.set(Calendar.DAY_OF_MONTH, calBetweenDayInput(it.date))
                 events.add(EventDay(cal, viewModel.nextEmo(it.emotion)))
                 Log.e( calBetweenDayInput(it.date).toString(),"CALBETWEENDAY")
                 Log.e(it.date.toString(),"It Date")
@@ -384,7 +384,7 @@ class EmotionFragment :
         val pickDay = df.parse(day)
         var calDate = pickDay.time - today.time
         val calDateDays = calDate / (24 * 60 * 60 * 1000)
-
+        Log.e(calDateDays.toString(),"오늘 선택인데")
         return calDateDays.toInt()
     }
     fun calBetweenDayInput(dayInput: String): Int {

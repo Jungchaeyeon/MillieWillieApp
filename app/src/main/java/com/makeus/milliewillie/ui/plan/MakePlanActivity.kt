@@ -149,6 +149,8 @@ class MakePlanActivity :
             .setOnClickDate {
                 viewModel.livePlanType.value = it
                 viewModel.replaceTodo()
+                Log.e(it,"구분")
+                repositoryCached.setValue(LocalKey.PLANTYPE,it.toString())
                 val type = repositoryCached.getPlanType()
                 btn_tp.text = type
                 when (type) {
@@ -218,7 +220,11 @@ class MakePlanActivity :
 //    }
 
     fun onClickCalendar() {
-        ActivityNavigator.with(this).plancalendar(viewModel.plansRequest).start()
+
+        when(viewModel.livePlanType.value.toString()){
+            "면회","전투휴무","외출","당직" -> ActivityNavigator.with(this).plancalendaronlyone(viewModel.plansRequest).start()
+            else -> ActivityNavigator.with(this).plancalendar(viewModel.plansRequest).start()
+        }
         txt_daynight.setTextColor(Color.parseColor("#3e3e3e"))
     }
 

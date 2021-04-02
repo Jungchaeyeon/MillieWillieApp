@@ -20,10 +20,7 @@ import com.makeus.milliewillie.ui.map.MapActivity
 import com.makeus.milliewillie.ui.mypage.InfoEnlistActivity
 import com.makeus.milliewillie.ui.mypage.InfoMiliActivity
 import com.makeus.milliewillie.ui.mypage.MyPageEditActivity
-import com.makeus.milliewillie.ui.plan.MakePlanActivity
-import com.makeus.milliewillie.ui.plan.PlanCalendarActivity
-import com.makeus.milliewillie.ui.plan.PlanOutputActivity
-import com.makeus.milliewillie.ui.plan.PlanVacationActivity
+import com.makeus.milliewillie.ui.plan.*
 import com.makeus.milliewillie.ui.profile.ProfileActivity
 import com.makeus.milliewillie.ui.report.ReportActivity
 import com.makeus.milliewillie.ui.routine.MakeRoutineActivity
@@ -83,6 +80,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun account() = MyIntent(AccountActivity::class.java)
     fun rulesInAccount() = MyIntent(RuleWebViewActivity::class.java)
     fun planvacation(plansRequest: PlansRequest) = MyIntent(PlanVacationActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
+    fun plancalendaronlyone(plansRequest: PlansRequest) = MyIntent(PlanCalendarOnlyOneActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun goal(usersRequest: UsersRequest) = MyIntent(IntroGoalActivity::class.java).apply{
         putExtra(KEY_DATA, usersRequest)
     }
@@ -105,6 +103,7 @@ class ActivityNavigator private constructor(private val context: Context) {
             stack.add(this)
             return this@ActivityNavigator
         }
+
 
         fun start() {
             stack.add(this)

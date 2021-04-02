@@ -33,6 +33,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     val enlistDayFormat = MutableLiveData<String>()
     val vacUseDays = MutableLiveData<String>()
     val vacTotalDays = MutableLiveData<String>()
+    var todayDate = MutableLiveData<String>()
     var nowPercentInt = 0
     var nowPercentStr = "%"
     var nowPercentFlt = 0.0f
@@ -41,6 +42,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
 
     init {
         getMain()
+        initTodayDate()
     }
 
 
@@ -90,6 +92,11 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
             3->   R.drawable.icon_class_4
             else-> R.drawable.icon_class_1
         }
+    }
+    fun initTodayDate(){
+        val df = SimpleDateFormat("MM월 dd일")
+        val calToday = Calendar.getInstance(TimeZone.getDefault())
+        todayDate.value= calToday.get(Calendar.MONTH).plus(1).toString()+"월 "+calToday.get(Calendar.DATE)+"일"
     }
 
     @SuppressLint("SimpleDateFormat")

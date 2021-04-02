@@ -178,9 +178,9 @@
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginHorizontal="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="31dp"
-                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp">
 
                     <RelativeLayout
@@ -357,7 +357,7 @@
                     style="@style/spoqa_bold_22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3월10일"
+                    android:text="@{vm.todayDate}"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black_all"
                     android:textSize="16dp" />

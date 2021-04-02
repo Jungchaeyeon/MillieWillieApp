@@ -66,7 +66,7 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
     fun requestPlanTypeList() {
         livePlanTypeList.postValue(
             listOf(
-                "일정", "휴가",
+                "일정",
                 "외박", "훈련", "면회",
                 "외출", "전투휴무", "당직"
             )

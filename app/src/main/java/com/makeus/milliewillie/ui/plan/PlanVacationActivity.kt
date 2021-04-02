@@ -61,11 +61,11 @@ class PlanVacationActivity :
 
         val countRest: Int = num.rem(12)
         val availRest: Int = regulAvail.rem(12)
-        Log.e("$countRest", "countRest")
-        Log.e((regulAvail - regulUse).toString(), "count차")
-        Log.e(regulAvail.toString(), "Avail")
-        Log.e(regulUse.toString(), "use")
-        Log.e("$countRest", "countRest")
+//        Log.e("$countRest", "countRest")
+//        Log.e((regulAvail - regulUse).toString(), "count차")
+//        Log.e(regulAvail.toString(), "Avail")
+//        Log.e(regulUse.toString(), "use")
+//        Log.e("$countRest", "countRest")
 
 
         when (num) {
@@ -100,10 +100,10 @@ class PlanVacationActivity :
         val countRest: Int = num.rem(12)
         val availRest: Int = prizeAllNum.rem(12)
 
-        Log.e(num.toString(), "num값값값")
-        Log.e(availRest.toString(), "avial테스트")
-        Log.e(countRest.toString(), "avial")
-        Log.e(prizeAllNum.toString(), "avial스트")
+//        Log.e(num.toString(), "num값값값")
+//        Log.e(availRest.toString(), "avial테스트")
+//        Log.e(countRest.toString(), "avial")
+//        Log.e(prizeAllNum.toString(), "avial스트")
 
 
 
@@ -140,11 +140,11 @@ class PlanVacationActivity :
     fun calOtherIndicator(num: Int) {
         val countRest: Int = num.toInt().rem(12)
         val availRest: Int = otherAllNum.rem(12)
-        Log.e(num.toString(), "num값값값")
-        Log.e(availRest.toString(), "otherAvail")
-        Log.e(countRest.toString(), "COuntTEst")
-
-        Log.e(otherAllNum.toString(), "OTHER")
+//        Log.e(num.toString(), "num값값값")
+//        Log.e(availRest.toString(), "otherAvail")
+//        Log.e(countRest.toString(), "COuntTEst")
+//
+//        Log.e(otherAllNum.toString(), "OTHER")
         when (num) {
             in 1..11 -> {
                 holi_other_Indicator1.selectDotsTwice(countRest, otherAllNum)

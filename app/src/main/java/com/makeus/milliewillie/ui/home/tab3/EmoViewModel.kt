@@ -30,7 +30,7 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
     val liveEmoMemo = MutableLiveData<String>()
     val calList = List<Calendar>(31) { Calendar.getInstance() }
     var monthEmoSize = 0
-    val cal = Calendar.getInstance()
+    val cal = Calendar.getInstance(TimeZone.getDefault())
     val df = SimpleDateFormat("yyyyMM")
     var month = df.format(cal.time)
     // var emoDayKey = ArrayList<EmotionsRecordDayResponse.Result>()
@@ -98,7 +98,8 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
                 if (it.isSuccess) {
                     Log.e("이모지 일별 기록 있음")
                     emotionsRecordResponse = it
-
+                    liveTodayData.value = (Calendar.MONTH).plus(1).toString()+"월"+(Calendar.DATE)+"일"
+                    Log.e(liveTodayData.value.toString(),"날짜")
                     liveEmoMemo.value = it.result.content
                     Log.e(it.result.emotion.toString(), "이모션 id")
                     Log.e(it.result.emotionText.toString(), "이모션 text")

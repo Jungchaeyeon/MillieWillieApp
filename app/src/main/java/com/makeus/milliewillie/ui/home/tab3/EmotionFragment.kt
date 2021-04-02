@@ -97,7 +97,7 @@ class EmotionFragment :
         calendarView.setCalendarDayLayout(R.layout.item_emo_calendar_day)
         context?.resources?.let {
             calendarView.setForwardButtonImage(it.getDrawable(R.drawable.icon_right, null))
-            calendarView.setPreviousButtonImage(it.getDrawable(R.drawable.icon_left, null))
+            calendarView.setPreviousButtonImage(it.getDrawable(R.drawable.icon_left_reverse, null))
 
         }
         //캘린더 이전 월 리스너
@@ -178,7 +178,7 @@ class EmotionFragment :
                          binding.txtPlzTodayEmo.visibility = View.GONE
                          txt_today.visibility = View.INVISIBLE //오늘 GONE
                          Snackbar.make(this@EmotionFragment.layout_emo,
-                        "미래 기록은 남길 수 없습니다.",
+                        "이전 날짜만 기록 가능합니다.",
                         Snackbar.LENGTH_SHORT).show()
                 } else {
 
@@ -277,9 +277,11 @@ class EmotionFragment :
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(v.windowToken, 0)
 
-        cal.set(Calendar.DAY_OF_MONTH, calBetweenDay())
+        cal.add(Calendar.DATE, calBetweenDay())
         events.add(EventDay(cal, viewModel.nextEmo(emoId)))
         binding.calendarView.setEvents(events)
+        Log.e(Calendar.DAY_OF_MONTH.toString(),"DAM")
+        Log.e(calBetweenDay().toString(),"between")
 
         if (binding.editEmo.text.isNullOrEmpty()) {
             Snackbar.make(this.layout_emo, "오늘의 감정을 기록해 주세요.", Snackbar.LENGTH_SHORT).show()
@@ -439,7 +441,7 @@ class EmotionFragment :
         var calDate = pickDay.time - today.time
         val calDateDays = calDate / (24 * 60 * 60 * 1000)
         Log.e(calDateDays.toString(), "오늘 선택인데")
-        return calDateDays.toInt().plus(2)
+        return calDateDays.toInt()
     }
 
     fun calBetweenDayInput(dayInput: String): Int {
@@ -449,7 +451,7 @@ class EmotionFragment :
         var calDate = pickDay.time - cal.time
         val calDateDays = calDate / (24 * 60 * 60 * 1000)
         Log.e(calDateDays.toString(), "calDates")
-        return calDateDays.toInt().plus(2)
+        return calDateDays.toInt().plus(3)
     }
 
     fun calDay(): Int {

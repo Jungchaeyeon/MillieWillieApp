@@ -58,27 +58,7 @@
                 android:textColor="@color/black_all" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#f5f5f5"
-            android:gravity="center_vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginVertical="5dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/icon_date" />
-
-            <TextView
-                style="@style/spoqa_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="@{vm.dayInfo}"
-                android:textColor="@color/black_all" />
-        </LinearLayout>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -110,6 +90,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="#f5f5f5"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginVertical="5dp"
+                                android:layout_marginStart="16dp"
+                                android:src="@drawable/icon_date" />
+
+                            <TextView
+                                style="@style/spoqa_medium_12"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="@{vm.dayInfo}"
+                                android:textColor="@color/black_all" />
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

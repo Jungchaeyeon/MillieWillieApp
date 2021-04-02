@@ -41,6 +41,15 @@ class IntroGoalActivity :
     }
 
     fun onClickDone() {
+//        repositoryCached.setValue(LocalKey.TOKEN,"")
+//        repositoryCached.setValue(LocalKey.ISMEMBER, false)
+//        repositoryCached.setValue(LocalKey.ISINPUTWEIGHT, false)
+//        repositoryCached.setValue(LocalKey.ISINPUTGOAL, false)
+//        repositoryCached.setValue(LocalKey.EXERCISEID, (-1))
+//        repositoryCached.setValue(LocalKey.POSTYEAR, 10000)
+//        repositoryCached.setValue(LocalKey.POSTMONTH, 100)
+//        repositoryCached.setValue(LocalKey.POSTDAY, 100)
+
         if (edt_goal.text.isNotEmpty()) {
             viewModel.usersRequest.goal=edt_goal.text.toString()
             requestUser()

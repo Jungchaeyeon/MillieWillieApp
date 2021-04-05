@@ -391,7 +391,7 @@ class EmotionFragment :
                 Log.e(calBetweenDayInput(it.date).toString(), "CALBETWEENDAY")
                 Log.e(it.date.toString(), "It Date")
                 Log.e(it.emotion.toString(), "It Date")
-                Log.e(Calendar.DAY_OF_MONTH.toString(), "It Date")
+                Log.e(Calendar.DATE.toString(), "It Date")
 
             }
             binding.calendarView.setEvents(events)
@@ -452,8 +452,12 @@ class EmotionFragment :
         val pickDay = dff.parse(dayInput)
         var calDate = pickDay.time - cal.time
         val calDateDays = calDate / (24 * 60 * 60 * 1000)
+        val date = Calendar.DATE.toInt()
+        Log.e(date.toString(),"doM")
         Log.e(calDateDays.toString(), "calDates")
-        return calDateDays.toInt().plus(3)
+        Log.e(pickDay.toString(), "pickDay")
+
+        return calDateDays.toInt().plus(date)
     }
 
     fun calDay(): Int {

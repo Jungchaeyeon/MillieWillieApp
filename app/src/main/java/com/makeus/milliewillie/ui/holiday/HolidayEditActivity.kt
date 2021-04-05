@@ -47,7 +47,7 @@ class HolidayEditActivity :
     @SuppressLint("CheckResult")
     fun onClickDone(){
     //    "$minSetDay".showShortToastSafe()
-            if (allHoliDays.text.toString().toInt()>= minSetDay.value?.toInt() ?: 0) {
+//            if (allHoliDays.text.toString().toInt()>= minSetDay.value?.toInt() ?: 0) {
                 if(allHoliDays.text.toString().toInt()<36){
                 repositoryCached.setValue(LocalKey.PLANTOTOALDAYS, allHoliDays.text.toString())
                 viewModel.vacationIdPatch.totalDays = allHoliDays.text.toString().toInt()
@@ -58,16 +58,16 @@ class HolidayEditActivity :
                         if(it.isSuccess){
                         ActivityNavigator.with(this).holiday().start()}
                         else{
-                            Snackbar.make(this.layout_holi_edit_2, "휴가 정보 수정에 실패했습니다..", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(this.layout_holi_edit_2, "최대 35일까지 가능합니다.", Snackbar.LENGTH_SHORT).show()
                         }
                     }}
                 else{
                     Snackbar.make(this.layout_holi_edit_2, "최대 35일까지 가능합니다.", Snackbar.LENGTH_SHORT).show()
                 }
 
-            }else{
-                Snackbar.make(this.layout_holi_edit_2, "선택일 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
-            }
+//            }else{
+//                Snackbar.make(this.layout_holi_edit_2, "선택일 이상의 총 휴가일수를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
+//            }
 
     }
 

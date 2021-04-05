@@ -201,7 +201,7 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
             "해병대" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
-            "카투사" -> {
+            "카투사","특전사" -> {
                 durPrivate = 0;durCorporal = 0;durSergeant = 0;durAll = 18
             }
             "해양의무경찰", "의무소방" -> {

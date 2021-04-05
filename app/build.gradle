@@ -46,7 +46,7 @@ android {
 
 //    lintOptions{
 //        checkRealeaseBuilds false
-//    }
+//    }h
 
     buildTypes {
         debug{

@@ -78,6 +78,8 @@ class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activ
                 }
                 R.id.page_workout -> {
                     fab.visibility = View.GONE
+                    fab_dday.visibility = View.GONE
+                    fab_plan.visibility = View.GONE
                     changeFragment(WorkoutFragment.getInstance())
                     return@setOnNavigationItemSelectedListener true
                 }

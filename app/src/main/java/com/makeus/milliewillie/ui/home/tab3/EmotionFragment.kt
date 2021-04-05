@@ -273,6 +273,7 @@ class EmotionFragment :
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onClickCheck(v: View) {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(v.windowToken, 0)

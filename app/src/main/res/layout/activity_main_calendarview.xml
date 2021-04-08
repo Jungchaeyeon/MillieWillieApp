@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainViewModel" />
+            type="com.makeus.milliewillie.ui.MainCalendarViewModel" />
     </data>
 
     <LinearLayout
@@ -118,9 +118,9 @@
                 android:text="@string/blank_message2" />
         </LinearLayout>
 
+<!--            addAll="@{vm.liveMainPlan}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cal_list"
-            addAll="@{vm.liveMainPlan}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"

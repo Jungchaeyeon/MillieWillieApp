@@ -60,6 +60,7 @@ class ApiRepository(
     fun getEmotionsRecordDay(date : String) = apiTest.getEmotionsRecordDay(date= date)
     fun getEmotionsRecordMonth(month : String) = apiTest.getEmotionsRecordMonth(month= month)
     fun getEmotionsFirstMonth() = apiTest.getEmotionsFirstMonth()
+    fun getMainCalendar(month : String) =apiTest.getMainCalendar(month= month)
 
 
     //fun users(name : String) = apiTest.users(name)

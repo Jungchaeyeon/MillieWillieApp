@@ -125,6 +125,9 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
     fun onClickHoli() {
         ActivityNavigator.with(this).holiday().start()
     }
+    fun onClickCalendar(){
+        ActivityNavigator.with(this).maincalendar().start()
+    }
 
 
 

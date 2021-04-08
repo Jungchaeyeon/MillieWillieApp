@@ -195,18 +195,18 @@ class UserViewModel(val repositoryCached: RepositoryCached, val apiRepository: A
             "공군" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 22
             }
-            "의경" -> {
+            "의경", "해양의무경찰", "의무소방", "카투사","특전사"-> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
-            "해병대" -> {
+            "해병대","전문연구요원","산업기능요원","사회복무요원" -> {
                 durPrivate = 2;durCorporal = 6;durSergeant = 6;durAll = 18
             }
-            "카투사","특전사" -> {
-                durPrivate = 0;durCorporal = 0;durSergeant = 0;durAll = 18
-            }
-            "해양의무경찰", "의무소방" -> {
-                durPrivate = 0;durCorporal = 0;durSergeant = 0;durAll = 20
-            }
+//            "카투사","특전사" -> {
+//                durPrivate = 0;durCorporal = 0;durSergeant = 0;durAll = 18
+//            }
+//            "해양의무경찰", "의무소방" -> {
+//                durPrivate = 0;durCorporal = 0;durSergeant = 0;durAll = 20
+//            }
         }
         //전역일
         cal.add(Calendar.MONTH, durAll)

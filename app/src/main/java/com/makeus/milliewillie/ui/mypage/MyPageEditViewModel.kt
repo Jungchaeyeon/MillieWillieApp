@@ -192,9 +192,11 @@ class MyPageEditViewModel(
             }
         }
         //다음달 1일 설정
-        val cal = Calendar.getInstance()
+        val cal = Calendar.getInstance(Locale.KOREA)
         cal.set(Calendar.DAY_OF_MONTH, 1); //다음 월의 1일로 변경
-        cal.set(Calendar.MONTH, Calendar.MONTH + 1)
+        cal.set(Calendar.MONTH, Calendar.MONTH + 2)
+        Log.e(cal.get(Calendar.MONTH).toString(),"MONTH")
+        Log.e(cal.get(Calendar.MONTH).plus(2).toString(),"MONTH+1")
         formatNextMonthPromDate.value = dfFormat.format(cal.time)
 
         //전역 yyyy년 MM월 dd일

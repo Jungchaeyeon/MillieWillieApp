@@ -185,10 +185,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
         liveMainPlan.value = planItems
     }
 
-//    fun notifyChange() {
-//        val items: ArrayList<MainSchedule>? = liveMainPlan.value
-//        liveMainPlan.value = items
-//    }
+
 
 
     fun calDateBetweenAnB(date1: String, date2: String): Int {

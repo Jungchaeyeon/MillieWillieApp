@@ -412,10 +412,8 @@ class EmotionFragment :
                 cal.set(Calendar.DAY_OF_MONTH, calBetweenDayInput(it.date))
                 events.add(EventDay(cal, viewModel.nextEmo(it.emotion)))
                 Log.e(calBetweenDayInput(it.date).toString(), "CALBETWEENDAY")
+                Log.e(Calendar.DAY_OF_MONTH.toString(), "DOFMONTH")
 
-                Log.e(it.date.toString(), "It Date")
-                Log.e(it.emotion.toString(), "It Date")
-                Log.e(Calendar.DAY_OF_MONTH.toString(), "It Date")
 
             }
             binding.calendarView.setEvents(events)
@@ -450,15 +448,16 @@ class EmotionFragment :
     fun calBetweenDayInput(dayInput: String): Int {
         val dff = SimpleDateFormat("yyyy-MM-dd")
         val cal = Calendar.getInstance(TimeZone.getDefault()).time
+
+        val calPlus = Calendar.getInstance(TimeZone.getDefault())
+        val today = calPlus.get(Calendar.DATE)
+
         val pickDay = dff.parse(dayInput)
         var calDate = pickDay.time - cal.time
         val calDateDays = calDate / (24 * 60 * 60 * 1000)
-        val date = Calendar.DATE.toInt()
-        Log.e(date.toString(),"doM")
-        Log.e(calDateDays.toString(), "calDates")
-        Log.e(pickDay.toString(), "pickDay")
+        Log.e(today.toString(),"doM")
 
-        return calDateDays.toInt().plus(date)
+        return calDateDays.toInt().plus(today)
     }
 
     fun calDay(): Int {

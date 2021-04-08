@@ -1,5 +1,6 @@
 package com.makeus.milliewillie.di
 
+import com.makeus.milliewillie.ui.MainCalendarViewModel
 import com.makeus.milliewillie.ui.MainGetViewModel
 import com.makeus.milliewillie.ui.MainViewModel
 import com.makeus.milliewillie.ui.dDay.DdayOutputCNViewModel
@@ -48,6 +49,7 @@ val viewModelModule = module {
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel(get()) }
     viewModel { InfoViewModel(get()) }
+    viewModel { MainCalendarViewModel(get(),get()) }
     viewModel { WeightRecordViewModel(get()) }
     viewModel { EmoViewModel(get(),get()) }
     viewModel { HoliViewModel(get(),get()) }

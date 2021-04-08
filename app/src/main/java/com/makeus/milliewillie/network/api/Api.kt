@@ -117,6 +117,11 @@ interface Api {
 
     @GET("users/jwt")
     fun jwt(): Observable<BaseResponse>
+    //main 캘린더-----------------------------------------------
+    @GET("main/calendars/month?")
+    fun getMainCalendar(
+        @Query("month") month: String
+    ): Observable<MainCalendarResponse>
 
 //    @POST("users")
 //    fun users(

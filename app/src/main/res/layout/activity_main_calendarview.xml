@@ -40,22 +40,23 @@
                 android:layout_width="30dp"
                 android:layout_height="17dp"
                 android:layout_marginStart="35dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/cal_btn_selected"
                 android:gravity="center"
                 android:text="@string/today"
                 android:textColor="@color/d_day_btn_text_selected" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/d_day_btn_birthday"
-                style="@style/spoqa_regular_10"
-                android:layout_width="37dp"
-                android:layout_height="17dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/cal_btn_selected"
-                android:gravity="center"
-                android:text="@string/discharge_day"
-                android:textColor="@color/d_day_btn_text_selected" />
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/d_day_btn_birthday"-->
+<!--                style="@style/spoqa_regular_10"-->
+<!--                android:layout_width="37dp"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:background="@drawable/cal_btn_selected"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/discharge_day"-->
+<!--                android:textColor="@color/d_day_btn_text_selected" />-->
         </LinearLayout>
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="382dp"
             android:background="@drawable/rect_radius_bottom"
+            app:mcv_selectionColor="@color/white_two"
             app:mcv_leftArrowMask="@drawable/icon_left"
             app:mcv_rightArrowMask="@drawable/icon_right_cal"
             app:mcv_showOtherDates="defaults" />
@@ -78,12 +80,13 @@
                 style="@style/spoqa_medium_16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3월10일"
+                android:text="@{vm.pickDay}"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black_all"
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/txt_today"
                 style="@style/spoqa_medium_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,9 +121,9 @@
                 android:text="@string/blank_message2" />
         </LinearLayout>
 
-<!--            addAll="@{vm.liveMainPlan}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cal_list"
+            replaceAll="@{vm.liveMainPlan}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"

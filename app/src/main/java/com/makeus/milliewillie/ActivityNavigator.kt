@@ -64,6 +64,7 @@ class ActivityNavigator private constructor(private val context: Context) {
     fun map() = MyIntent(MapActivity::class.java)
     fun routine() = MyIntent(MakeRoutineActivity::class.java)
     fun makeplan() = MyIntent(MakePlanActivity::class.java)
+    fun makeplanwith(isPatchPlan: String) = MyIntent(MakePlanActivity::class.java).apply { putExtra(KEY_DATA,isPatchPlan) }
     fun plancalendar(plansRequest: PlansRequest) = MyIntent(PlanCalendarActivity::class.java).apply { putExtra(KEY_DATA,plansRequest) }
     fun mypageedit() = MyIntent(MyPageEditActivity::class.java)
     fun maincalendar() = MyIntent(MainCalendarActivity::class.java)

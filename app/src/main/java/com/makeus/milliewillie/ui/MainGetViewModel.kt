@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.repository.ApiRepository
+import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.util.Log
 import java.text.ParseException
@@ -42,12 +44,12 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     var classImg = 0
 
     init {
-        getMain()
+        getMain(){}
         initTodayDate()
     }
 
 
-    fun getMain() = apiRepository.getMain()
+    fun getMain(response: (Boolean) -> Unit) = apiRepository.getMain()
         .subscribe({
             if (it.isSuccess) {
                 Log.e("User정보 호출 성공")
@@ -70,9 +72,9 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 enlistDayFormat.value = dateFormat(mainResponse.endDate)
                 vacUseDays.value = (mainResponse.vacationTotalDays-mainResponse.vacationUseDays).toString()
                 vacTotalDays.value = mainResponse.vacationTotalDays.toString()
-                if (mainResponse.stateIdx != 1) {
-
-                }
+//                if (mainResponse.stateIdx != 1) {
+//
+//                }
                 nowPercentInt = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt()
                 nowPercentStr = dischargeDdayPercent(mainResponse.startDate, mainResponse.endDate).toInt().toString() + "%"
                 nowPercentFlt = (nowPercentInt.toFloat() / 100.0).toFloat()
@@ -80,8 +82,13 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
                 Log.e("$nowPercentFlt", "nowPercentFlt")
                 Log.e((nowPercentInt.toFloat() / 10.0).toString(), "nowPercentt")
                 stateIdx = it.result.stateIdx
+                response.invoke(true)
             } else {
-
+                if(it.code == 3100){
+                    Log.e("해당 회원과 일치하는 메인 정보가 없습니다!")
+                    repositoryCached.setValue(LocalKey.TOKEN,"")
+                    response.invoke(false)
+                }
             }
         }, {
             it.printStackTrace()
@@ -121,7 +128,7 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
     }
 
     fun initClass(serviceId: Int, nowClass: Int): String {
-        // if(serviceId == 0){
+
         return when (nowClass) {
             0 -> "일병"
             1 -> "이병"
@@ -129,10 +136,6 @@ class MainGetViewModel(val apiRepository: ApiRepository, val repositoryCached: R
             3 -> "병장"
             else -> ""
         }
-        //}
-//        else{
-//            return ""
-//        }
     }
 
     fun initNextProm(nowClass: Int): String {

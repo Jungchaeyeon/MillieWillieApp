@@ -4,10 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
-import com.makeus.milliewillie.model.PlanDiary
-import com.makeus.milliewillie.model.PlanDiaryRequest
-import com.makeus.milliewillie.model.PlansGet
-import com.makeus.milliewillie.model.PlansRequest
+import com.makeus.milliewillie.model.*
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -68,7 +65,8 @@ class PlanOutputViewModel(
         initToday()
     }
 
-    //일정 Patch
+
+    //일정 다이어리Patch
     fun patchPlanDiary() = apiRepository.patchPlanDiary(
         PlanDiaryRequest(
             content = liveContent.value.toString()
@@ -77,14 +75,14 @@ class PlanOutputViewModel(
     ).subscribe(
         {
             if(it.isSuccess){
-                Log.e("일정등록 성공")
+                Log.e("다이어리 수정 성공")
                 // set plan Key
                 repositoryCached.setValue(LocalKey.DIARYID, it.result.diaryId)
             }
             else{
-                Log.e("일정등록 실패")
+                Log.e("다이어리 수정 실패")
             }
-        },{})
+        },{}).disposeOnDestroy(this)
 
     //일정 조회
     fun getPlans(response: (Boolean) -> Unit) = apiRepository.getPlans(
@@ -114,6 +112,7 @@ class PlanOutputViewModel(
             }
         },{}).disposeOnDestroy(this)
 
+
     fun deletePlans() = apiRepository.deletePlans(path = repositoryCached.getPlanId().toLong()).subscribe(
         {
             if(it.isSuccess){
@@ -139,7 +138,7 @@ class PlanOutputViewModel(
             else{
                 Log.e("할일 T/F 실패")
             }
-        },{})
+        },{}).disposeOnDestroy(this)
 
 
     //몇박 몇일

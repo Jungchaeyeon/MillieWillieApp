@@ -1,6 +1,7 @@
 package com.makeus.milliewillie.ui.plan
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -37,6 +38,7 @@ class PlanOutputActivity :
     val viewModel by viewModel<PlanOutputViewModel>()
     val repositoryCached by inject<RepositoryCached>()
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun ActivityPlanOutputBinding.onBind() {
         vi = this@PlanOutputActivity
         vm = viewModel
@@ -52,6 +54,11 @@ class PlanOutputActivity :
                     ) {
                         vi = this@PlanOutputActivity
                         item = it
+                        if(it.processingStatus=="T"){
+                            this.textTodo.isActivated= !isActivated
+                            this.textTodo.setTextColor(Color.parseColor("#9d9d9d"))
+                            this.textTodo.background=getDrawable(R.drawable.layout_middleline)
+                        }
 
                     })
         }
@@ -63,6 +70,7 @@ class PlanOutputActivity :
                     ) {
                         vi = this@PlanOutputActivity
                         item = it
+
                     })
         }
     }
@@ -81,20 +89,26 @@ class PlanOutputActivity :
         Log.e(item.processingStatus, "preocesstiongStatus")
         repositoryCached.setValue(LocalKey.WORKID, item.workId)
         view.isActivated = !view.isActivated
-        if (view.isActivated) view.text_todo.setTextColor(Color.parseColor("#9d9d9d"))
-        else view.text_todo.setTextColor(Color.parseColor("#3e3e3e"))
+        if (view.isActivated){
+            view.text_todo.setTextColor(Color.parseColor("#9d9d9d"))
+            view.text_todo.background= getDrawable(R.drawable.layout_middleline)
+        }
+        else {view.text_todo.setTextColor(Color.parseColor("#3e3e3e"))
+            view.text_todo.background= getDrawable(R.drawable.background_transparent)
+        }
         viewModel.patchDiary()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e(repositoryCached.getPlanId().toString(), "id")
+        Log.e(repositoryCached.getPlanId(), "id")
         viewModel.getPlans() {
             if (it) {
                 Log.e(viewModel.planType.value.toString(), "훈련인지")
                 if (viewModel.planType.value.toString() == "훈련") {
                     binding.cautionTrainOutput.visibility = View.VISIBLE
                 }
+
             }
         }
     }
@@ -120,6 +134,10 @@ class PlanOutputActivity :
         override fun onMenuItemClick(item: MenuItem?): Boolean {
             when (item?.itemId) {
                 R.id.menu1 -> {
+                    ActivityNavigator.with(this@PlanOutputActivity).makeplanwith("T").start()
+                    return true
+                }
+                R.id.menu2 -> {
                     viewModel.deletePlans()
                 }
             }

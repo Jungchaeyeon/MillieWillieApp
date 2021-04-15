@@ -44,11 +44,13 @@
                 android:textColor="@color/black_all" />
 
             <TextView
+                style="@style/spoqa_regular_12"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="7dp"
                 android:gravity="center_vertical"
+                android:textColor="@color/black_all"
                 android:text="@string/done"
                 android:onClick="@{()->vi.onClickDone()}"/>
         </RelativeLayout>

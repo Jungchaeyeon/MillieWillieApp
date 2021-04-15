@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
+import com.makeus.milliewillie.model.CalendarDayResponse
 import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.model.MainCalendarResponse
 import com.makeus.milliewillie.model.UsersResponse
@@ -22,26 +23,29 @@ class MainCalendarViewModel(val apiRepository: ApiRepository, val repositoryCach
 
     val cal = Calendar.getInstance(TimeZone.getDefault())
     val df = SimpleDateFormat("yyyyMM")
+    val dfDay =SimpleDateFormat("yyyyMMdd")
     var month = df.format(cal.time)
+    var date = df.format(cal.time)
+    var pickDay = MutableLiveData<String>()
 
     //CalendarView rv
-    val liveMainPlan = MutableLiveData<ArrayList<MainCalendarResponse.Result.PlanCalendar>>()
-    var planItems = ArrayList<MainCalendarResponse.Result.PlanCalendar>()
+    val liveMainPlan = MutableLiveData<ArrayList<CalendarDayResponse.Result.Plan>>()
+    var planItems = ArrayList<CalendarDayResponse.Result.Plan>()
 
-    fun addItem(item: MainCalendarResponse.Result.PlanCalendar) {
+    fun addItem(item: CalendarDayResponse.Result.Plan) {
 
         planItems.add(item)
         liveMainPlan.value = planItems
 
     }
 
-    fun addAllItem(item: List<MainCalendarResponse.Result.PlanCalendar>) {
+    fun addAllItem(item: List<CalendarDayResponse.Result.Plan>) {
         planItems.addAll(item)
         liveMainPlan.value = planItems
 
     }
 
-    fun removeItem(item: List<MainCalendarResponse.Result.PlanCalendar>, i: Int) {
+    fun removeItem(item: List<CalendarDayResponse.Result.Plan>, i: Int) {
         planItems.remove(item[i])
         liveMainPlan.value = planItems
     }
@@ -60,5 +64,19 @@ class MainCalendarViewModel(val apiRepository: ApiRepository, val repositoryCach
             }
         }
         .disposeOnDestroy(this)
+    fun getMainCalendarDay(response: (Boolean) -> Unit)= apiRepository.getMainCalendarDay(date = date)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+            if (it.isSuccess) {
+               Log.e(it.result.toString(),"Main 날별")
+                addAllItem(it.result.plan)
+                Log.e(liveMainPlan.value.toString(),"list 목록")
+                response.invoke(true)
 
+            } else {
+                Log.e("false")
+                response.invoke(false)
+            }
+        }
+        .disposeOnDestroy(this)
 }

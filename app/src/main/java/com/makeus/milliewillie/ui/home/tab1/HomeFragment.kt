@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.makeus.base.fragment.BaseDataBindingFragment
 import com.makeus.base.recycler.BaseDataBindingRecyclerViewAdapter
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.MyApplication.Companion.userProfileImgUrl
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.FragmentHomeBinding
@@ -19,6 +20,7 @@ import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import com.makeus.milliewillie.ui.MainGetViewModel
+import com.makeus.milliewillie.util.Log
 import kotlinx.android.synthetic.main.activity_make_plan.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_home_layout.*
@@ -48,7 +50,12 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     override fun onResume() {
         super.onResume()
-        viewModel.getMain()
+        viewModel.getMain(){
+            if(!it){
+
+                ActivityNavigator.with(this).login().start()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

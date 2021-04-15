@@ -76,11 +76,16 @@ interface Api {
         @Body body : PlansRequest
     ): Observable<Plans>
 
-    @GET(" calendars/plans/{planId}")
+    @PATCH("calendars/plans/{planId}")
+    fun patchPlan(
+        @Body body: PatchPlanRequest, @Path("planId") planId: Long): Observable<Plans>
+
+    @GET("calendars/plans/{planId}")
     fun getPlans(@Path("planId") planId: Long): Observable<PlansGet>
 
     @DELETE("calendars/plans/{planId}")
     fun deletePlans(@Path("planId") planId: Long): Observable<BaseResponse>
+
 
     @PATCH("calendars/plans/plans-diary/{diaryId}")
     fun patchPlanDiary(
@@ -122,6 +127,11 @@ interface Api {
     fun getMainCalendar(
         @Query("month") month: String
     ): Observable<MainCalendarResponse>
+
+    @GET("main/calendars/day?")
+    fun getMainCalendarDay(
+        @Query("date") date: String
+    ): Observable<CalendarDayResponse>
 
 //    @POST("users")
 //    fun users(

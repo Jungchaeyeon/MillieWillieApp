@@ -15,6 +15,7 @@ import com.makeus.milliewillie.ActivityNavigator
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.databinding.*
 import com.makeus.milliewillie.ext.bgTint
+import com.makeus.milliewillie.ext.showLongToastSafe
 import com.makeus.milliewillie.ext.showShortToastSafe
 import com.makeus.milliewillie.model.MainSchedule
 import com.makeus.milliewillie.model.Plans
@@ -46,11 +47,18 @@ class MakePlanActivity :
     val viewModel by viewModel<MakePlanViewModel>()
     val repositoryCached by inject<RepositoryCached>()
     val context = this
-    var array= ArrayList<PlansRequest.PlanVacation>()
+    var array = ArrayList<PlansRequest.PlanVacation>()
+    var isPatchPlan = "F"
 
     companion object {
         fun getInstance() = MakePlanActivity()
     }
+
+    override fun setupProperties(bundle: Bundle?) {
+        super.setupProperties(bundle)
+        isPatchPlan = bundle?.getSerializable(ActivityNavigator.KEY_DATA).toString()
+    }
+
 
     val requestCode = 1004
 
@@ -60,11 +68,14 @@ class MakePlanActivity :
             if (resultCode == Activity.RESULT_OK) {
                 when (requestCode) {
                     1004 -> {
-                       array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId0")?.toLong(),
-                           data.getStringExtra("count0")?.toInt()))
-                        array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId1")?.toLong(),
+                        array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId0")
+                            ?.toLong(),
+                            data.getStringExtra("count0")?.toInt()))
+                        array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId1")
+                            ?.toLong(),
                             data.getStringExtra("count1")?.toInt()))
-                        array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId2")?.toLong(),
+                        array.add(PlansRequest.PlanVacation(data.getStringExtra("vacationId2")
+                            ?.toLong(),
                             data.getStringExtra("count2")?.toInt()))
                     }
                 }
@@ -119,31 +130,29 @@ class MakePlanActivity :
             this@MakePlanActivity,
             androidx.lifecycle.Observer { txt_daynight.text = it })
     }
-//    else if(viewModel.liveOnlyDay.value.isNullOrEmpty()){
+
+    //    else if(viewModel.liveOnlyDay.value.isNullOrEmpty()){
 //        Snackbar.make(this.layout_mk_plan, "휴가 정보를 입력해주세요.", Snackbar.LENGTH_SHORT).show();
 //    }
     fun onClickDone() {
-        if (plan_title.text.isEmpty() ) {
+        if (plan_title.text.isEmpty()) {
             Snackbar.make(this.layout_mk_plan, "제목을 입력해주세요", Snackbar.LENGTH_SHORT).show();
-        }
-        else if(viewModel.liveDate.value=="날짜선택" || viewModel.liveDate.value =="") {
+        } else if (viewModel.liveDate.value == "날짜선택" || viewModel.liveDate.value == "") {
             Snackbar.make(this.layout_mk_plan, "날짜를 선택해 주세요.", Snackbar.LENGTH_SHORT).show();
-        }
-        else if(viewModel.liveDayAndNight.value ==""){
+        } else if (viewModel.liveDayAndNight.value == "") {
             Snackbar.make(this.layout_mk_plan, "선택 가능한 휴가일이 남아있습니다.", Snackbar.LENGTH_SHORT).show()
-        }
-        else {
+        } else {
             viewModel.plansRequest.title = plan_title.text.toString()
             viewModel.plansRequest.startDate = repositoryCached.getPlanStartDate()
             viewModel.plansRequest.endDate = repositoryCached.getPlanEndDate()
 
 
 
-            if (viewModel.planTodos.size != 0) {
+            if (!viewModel.planTodos.isNullOrEmpty()) {
                 viewModel.plansRequest.work = viewModel.planTodos.toList()
             }
 
-            if(viewModel.livePlanType.value.toString() == "휴가") {
+            if (viewModel.livePlanType.value.toString() == "휴가") {
 
                 viewModel.arrayPlanVac.add(PlansRequest.PlanVacation(repositoryCached.getVac1Id()
                     .toLong(), repositoryCached.getVac1count().toInt()))
@@ -155,7 +164,13 @@ class MakePlanActivity :
 
             FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
                 viewModel.plansRequest.pushDeviceToken = task.result
-                requestUser()
+
+                if(isPatchPlan=="T"){
+                    patchPlan()
+                }
+                else{
+                    requestUser()
+                }
             }
         }
     }
@@ -169,8 +184,8 @@ class MakePlanActivity :
             .setOnClickDate {
                 viewModel.livePlanType.value = it
                 viewModel.replaceTodo()
-                Log.e(it,"구분")
-                repositoryCached.setValue(LocalKey.PLANTYPE,it.toString())
+                Log.e(it, "구분")
+                repositoryCached.setValue(LocalKey.PLANTYPE, it.toString())
                 val type = repositoryCached.getPlanType()
                 btn_tp.text = type
                 when (type) {
@@ -239,8 +254,9 @@ class MakePlanActivity :
 
     fun onClickCalendar() {
 
-        when(viewModel.livePlanType.value.toString()){
-            "면회","전투휴무","외출","당직" -> ActivityNavigator.with(this).plancalendaronlyone(viewModel.plansRequest).start()
+        when (viewModel.livePlanType.value.toString()) {
+            "면회", "전투휴무", "외출", "당직" -> ActivityNavigator.with(this)
+                .plancalendaronlyone(viewModel.plansRequest).start()
             else -> ActivityNavigator.with(this).plancalendar(viewModel.plansRequest).start()
         }
 
@@ -274,19 +290,36 @@ class MakePlanActivity :
         viewModel.requestPlan()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-            viewModel.arrayPlanVac.clear()
-            if (it.isSuccess) {
-                //binding.txtMakeplanDone.isEnabled=false
-                SampleToast.createToast(context, "일정 생성 완료!")?.show()
-                ActivityNavigator.with(this).main().start()
-                repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
-                Log.e(it.result.planId.toString(),"plan ID")
+                viewModel.arrayPlanVac.clear()
+                if (it.isSuccess) {
+                    //binding.txtMakeplanDone.isEnabled=false
+                    SampleToast.createToast(context, "일정 생성 완료!")?.show()
+                    ActivityNavigator.with(this).main().start()
+                    repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
+                    Log.e(it.result.planId.toString(), "plan ID")
 
-            } else {
-                Snackbar.make(this.layout_mk_plan, "휴가 날짜 정보가 올바르지 않습니다.", Snackbar.LENGTH_LONG)
+                } else {
+                    Snackbar.make(this.layout_mk_plan, "휴가 날짜 정보가 올바르지 않습니다.", Snackbar.LENGTH_LONG)
 
-            }
-        }.disposeOnDestroy(this)
+                }
+            }.disposeOnDestroy(this)
+    }
+    fun patchPlan() {
+        viewModel.patchPlan()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                viewModel.arrayPlanVac.clear()
+                if (it.isSuccess) {
+                    SampleToast.createToast(context, "일정 수정 완료!")?.show()
+                    ActivityNavigator.with(this).planoutput().start()
+                    repositoryCached.setValue(LocalKey.PLANID, it.result.planId)
+                    Log.e(it.result.planId.toString(), "plan ID")
+
+                } else {
+                    Snackbar.make(this.layout_mk_plan, "휴가 날짜 정보가 올바르지 않습니다.", Snackbar.LENGTH_LONG)
+
+                }
+            }.disposeOnDestroy(this)
     }
 
     override fun onResume() {
@@ -296,7 +329,10 @@ class MakePlanActivity :
         viewModel.liveOnlyDay.value = repositoryCached.getOnlyDay()
         viewModel.liveDayAndNight.value = repositoryCached.getDayNight()
 
-
+        if (isPatchPlan.equals("T")) {
+            layout_plan_type.visibility = View.GONE
+            line_plan_type.visibility = View.GONE
+        }
     }
 
     fun planDateChange(date: Date): String {

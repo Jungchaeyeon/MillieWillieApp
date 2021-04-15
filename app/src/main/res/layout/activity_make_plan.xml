@@ -147,6 +147,7 @@
                     android:background="@color/light_gray" />
 
                 <LinearLayout
+                    android:id="@+id/layout_plan_type"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:gravity="center_vertical"
@@ -184,6 +185,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/line_plan_type"
                     style="@style/MatchWrap_24"
                     android:layout_height="1dp"
                     android:layout_centerInParent="true"

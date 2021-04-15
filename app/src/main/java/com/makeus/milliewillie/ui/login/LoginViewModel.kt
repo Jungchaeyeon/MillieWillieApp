@@ -17,6 +17,7 @@ import com.kakao.sdk.user.rx
 import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.ActivityNavigator
+import com.makeus.milliewillie.MyApplication
 import com.makeus.milliewillie.R
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -127,13 +128,28 @@ class LoginViewModel(
 
     private fun requestKakaoLogin(response: (Boolean) -> Unit) {
         apiRepository.kakaoLogin().subscribe({
-            response.invoke(true)
-            Log.e("requestKakaoLogin true로 들어옴")
+            Log.e("requestKakaoLogin true")
+            UserApiClient.rx.me()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { user ->
+//                    if(user.kakaoAccount?.profile?.thumbnailImageUrl.isNullOrEmpty()){
+//                        MyApplication.userProfileImgUrl= "https://ibb.co/ctvZwnT"
+//                        Log.e(MyApplication.userProfileImgUrl.toString(),"url 이미지")
+//                    }
+                    Log.e(
+                        "사용자 정보 요청 성공" +
+                                "\n회원번호: ${user.id}" +
+                                "\n이메일: ${user.kakaoAccount?.email}" +
+                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                    )
+                    response.invoke(true)
+                }
         }, {
+            Log.e("requestKakaoLogin false")
             it.printStackTrace()
             response.invoke(false)
-            Log.e("requestKakaoLogin false로 들어옴")
-            Log.e(repositoryCached.getToken(),"토큰")
         }).disposeOnDestroy(this)
     }
 

@@ -305,8 +305,6 @@ class MyPageEditViewModel(
 
         val allDays = allMonthDay // 전체 날
         val nowDays = allMonthDay - (allMonthDay - today)// 첫날 ~ 오늘
-//        Log.e(today.toString(),"계산2")
-//        Log.e(nowDays.toString(),"계산")
         return (nowDays * 100.toFloat() / allDays.toFloat())
     }
 

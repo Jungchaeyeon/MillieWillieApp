@@ -41,7 +41,7 @@ class LoginActivity : BaseDataBindingActivity<ActivityLoginBinding>(R.layout.act
 
 
         if(!isLogout) {
-            //logout상태면 true
+            //-> true, logout상태면 true
                 //isLogout == false -> 로그인 상태
             if(repositoryCached.getInApp() =="KF") {
                 if (repositoryCached.getToken().isNotEmpty()) {

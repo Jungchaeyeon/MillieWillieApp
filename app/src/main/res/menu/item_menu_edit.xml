@@ -5,5 +5,10 @@
         android:id="@+id/menu1"
         android:actionLayout="@layout/item_menu_diary"
         app:showAsAction="never"
+        android:title="편집하기" />
+    <item
+        android:id="@+id/menu2"
+        android:actionLayout="@layout/item_menu_diary"
+        app:showAsAction="never"
         android:title="삭제하기" />
 </menu>

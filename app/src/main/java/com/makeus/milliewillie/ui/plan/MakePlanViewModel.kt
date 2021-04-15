@@ -5,6 +5,7 @@ import com.makeus.base.disposeOnDestroy
 import com.makeus.base.viewmodel.BaseViewModel
 import com.makeus.milliewillie.di.repositoryModule
 import com.makeus.milliewillie.model.*
+import com.makeus.milliewillie.model.PatchPlanRequest.PlanVacation
 import com.makeus.milliewillie.repository.ApiRepository
 import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
+@Suppress("UNCHECKED_CAST")
 class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepository: ApiRepository) :
     BaseViewModel() {
 
@@ -89,6 +91,22 @@ class MakePlanViewModel(val repositoryCached: RepositoryCached, val apiRepositor
                 work = plansRequest.work
             )
         )
+    //일정 Patch
+    fun patchPlan() =
+        apiRepository.patchPlan(
+        PatchPlanRequest(
+                color = livePlanColor.value.toString(),
+                title = plansRequest.title,
+                startDate = plansRequest.startDate,
+                endDate = plansRequest.endDate,
+                push = plansRequest.push,
+                pushDeviceToken = plansRequest.pushDeviceToken,
+                planVacation = arrayPlanVac as ArrayList<PlanVacation>,
+                work = plansRequest.work as List<PatchPlanRequest.Work>?
+        ),
+        path = repositoryCached.getPlanId().toLong()
+    )
+
 //    fun initDate(){
 //        val today = Calendar.getInstance().time
 //        plansRequest.startDate=planDateChange(today.toString())

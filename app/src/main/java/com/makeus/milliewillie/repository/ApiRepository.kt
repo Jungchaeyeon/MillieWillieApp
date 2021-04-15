@@ -51,6 +51,7 @@ class ApiRepository(
     fun patchVacationId(vacationIdRequest: VacationIdPatch, path: Long) = apiTest.patchVacationId(vacationIdRequest,path)
     fun getVacation() = apiTest.getVacation()
     fun patchPlanDiary(planDiaryRequest: PlanDiaryRequest, path: Long) = apiTest.patchPlanDiary(body = planDiaryRequest, diaryId = path)
+    fun patchPlan(patchPlanRequest: PatchPlanRequest, path: Long) = apiTest.patchPlan(body = patchPlanRequest, planId = path)
     fun getPlans(path: Long) = apiTest.getPlans(planId = path)
     fun deletePlans(path: Long) = apiTest.deletePlans(planId = path)
     fun postEmotionsRecord(emotionsRecordRequest: EmotionsRecordRequest) = apiTest.postEmotionsRecord(emotionsRecordRequest)
@@ -61,6 +62,7 @@ class ApiRepository(
     fun getEmotionsRecordMonth(month : String) = apiTest.getEmotionsRecordMonth(month= month)
     fun getEmotionsFirstMonth() = apiTest.getEmotionsFirstMonth()
     fun getMainCalendar(month : String) =apiTest.getMainCalendar(month= month)
+    fun getMainCalendarDay(date : String) =apiTest.getMainCalendarDay(date= date)
 
 
     //fun users(name : String) = apiTest.users(name)

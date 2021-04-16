@@ -34,17 +34,15 @@ class CustomLineSpan : LineBackgroundSpan {
         }
         //canvas.drawCircle(((left + right) / 2).toFloat(), bottom + (radius*(index*4)), radius, paint)
         paint.strokeWidth= 5F
-        if(index >2.0){
-//            val imageBitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_calendar_more)
-//            canvas.drawBitmap(imageBitmap,0F,bottom.toFloat(),paint)
-            paint.color = resources.getColor(R.color.text_gray)
-            canvas.drawCircle((left + right)*0.4.toFloat(), 2.1F*(bottom+top).toFloat(), radius, paint)
-            canvas.drawCircle(((left + right) / 2).toFloat(), 2.1F*(bottom+top).toFloat(), radius, paint)
-            canvas.drawCircle(((left + right)*0.6).toFloat(), 2.1F*(bottom+top).toFloat(), radius, paint)
+        if(index >1.8){
+            paint.color = resources.getColor(R.color.icon_gray)
+            canvas.drawCircle((left + right)*0.4.toFloat(), 1.75F*(bottom+top).toFloat(), 2.5f, paint)
+            canvas.drawCircle(((left + right) / 2).toFloat(), 1.75F*(bottom+top).toFloat(), 2.5f, paint)
+            canvas.drawCircle(((left + right)*0.6).toFloat(), 1.75F*(bottom+top).toFloat(), 2.5f, paint)
         }
         else{
-        canvas.drawLine(0F, (bottom*index), right.toFloat(), (bottom*index), paint)
-        paint.color = oldColor
+            canvas.drawLine(0F, (bottom*index.minus(0.2F)), right.toFloat(), (bottom*index.minus(0.2F)), paint)
+            paint.color = oldColor
         }
     }
 

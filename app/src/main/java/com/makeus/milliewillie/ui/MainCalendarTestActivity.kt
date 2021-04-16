@@ -10,6 +10,7 @@ import com.makeus.milliewillie.calendar.MainSelectionDecorator
 import com.makeus.milliewillie.calendar.SundayDecorator
 import com.makeus.milliewillie.databinding.ActivityMainCalendarviewBinding
 import com.makeus.milliewillie.databinding.ItemMainCalScheduleBinding
+import com.makeus.milliewillie.databinding.ItemMainCalTestScheduleBinding
 import com.makeus.milliewillie.model.CalendarDayResponse
 import com.makeus.milliewillie.model.Main
 import com.makeus.milliewillie.repository.local.LocalKey
@@ -29,7 +30,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainCalendarActivity :
+class MainCalendarTestActivity :
     BaseDataBindingActivity<ActivityMainCalendarviewBinding>(R.layout.activity_main_calendarview) {
 
     val viewModel by viewModel<MainCalendarViewModel>()
@@ -39,7 +40,7 @@ class MainCalendarActivity :
     lateinit var mWidget : MaterialCalendarView
 
     companion object {
-        fun getInstance() = MainCalendarActivity()
+        fun getInstance() = MainCalendarTestActivity()
     }
     fun onClickItem(item: CalendarDayResponse.Result.Plan){
         Log.e("클릭확인")
@@ -56,10 +57,10 @@ class MainCalendarActivity :
         rv_cal_list.run {
             adapter = BaseDataBindingRecyclerViewAdapter<CalendarDayResponse.Result.Plan>()
                 .addViewType(
-                    BaseDataBindingRecyclerViewAdapter.MultiViewType<CalendarDayResponse.Result.Plan, ItemMainCalScheduleBinding>(
-                        R.layout.item_main_cal_schedule
+                    BaseDataBindingRecyclerViewAdapter.MultiViewType<CalendarDayResponse.Result.Plan, ItemMainCalTestScheduleBinding>(
+                        R.layout.item_main_cal_test_schedule
                     ) {
-                        vi = this@MainCalendarActivity
+                        vi = this@MainCalendarTestActivity
                         item = it
                     })
 
@@ -70,7 +71,7 @@ class MainCalendarActivity :
                 .isCacheCalendarPositionEnabled(false)
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit()
-            isDynamicHeightEnabled = true
+            isDynamicHeightEnabled = false
             setPadding(0, -10, 0, 0)
         }
 
@@ -84,10 +85,8 @@ class MainCalendarActivity :
                 addDecorators(SundayDecorator())
                 invalidateDecorators()
             }
-            Log.e(viewModel.month.toString(), "month")
             getMainCalendar(widget)
         }
-
         binding.calendar.setOnDateChangedListener { widget, date, selected ->
             Log.e("$date", "dateChangeListener")
             viewModel.pickDay.value = date.month.plus(1).toString()+"월 "+date.day.toString()+"일"
@@ -99,7 +98,10 @@ class MainCalendarActivity :
             }
             widget.setDateTextAppearance(R.style.spoqa_medium_12)
             widget.removeDecorators()
-            val oneDayDecorator = MainSelectionDecorator(date,this@MainCalendarActivity)
+            val oneDayDecorator = MainSelectionDecorator(
+                date,
+                this@MainCalendarTestActivity
+            )
 
 
             if(date.day <10){
@@ -119,7 +121,7 @@ class MainCalendarActivity :
     }
     fun getMainCalendarDay(widget: MaterialCalendarView, date : CalendarDay){
         viewModel.planItems.clear()
-        var index =1.2F
+        var index =1.0F
         viewModel.getMainCalendarDay {
             if(it && viewModel.planItems.size>0){
                 binding.txtBlank.visibility=View.GONE
@@ -146,7 +148,7 @@ class MainCalendarActivity :
                     CustomEventDecorator(Color.parseColor(plan.color), isDateList, this, index, false)
                 }
 
-                if(index>2.0F){
+                if(index>1.8F){
                     eventDecorator.addFirstAndLast(CalendarDay.from(date.year, date.month,date.day),
                         CalendarDay.from(date.year, date.month, date.day))
                 }
@@ -204,7 +206,7 @@ class MainCalendarActivity :
         viewModel.pickDay.value = today.get(Calendar.MONTH).plus(1).toString()+"월 "+today.get(Calendar.DATE).toString()+"일"
         viewModel.date = viewModel.month+today.get(Calendar.DATE).toString()
       //  getMainCalendarDay(mWidget)
-        val oneDayDecorator = MainSelectionDecorator(CalendarDay.from(today),this@MainCalendarActivity)
+        val oneDayDecorator = MainSelectionDecorator(CalendarDay.from(today),this@MainCalendarTestActivity)
         mWidget.apply {
             addDecorators(SundayDecorator(),oneDayDecorator)
             invalidateDecorators()

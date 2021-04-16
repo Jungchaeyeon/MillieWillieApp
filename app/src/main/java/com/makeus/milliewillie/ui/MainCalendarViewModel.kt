@@ -20,6 +20,7 @@ class MainCalendarViewModel(val apiRepository: ApiRepository, val repositoryCach
 
     lateinit var mainCalendar : MainCalendarResponse.Result
     lateinit var planCalendar : List<MainCalendarResponse.Result.PlanCalendar>
+    lateinit var planDayCalendar : List<CalendarDayResponse.Result.PlanCalendar>
 
     val cal = Calendar.getInstance(TimeZone.getDefault())
     val df = SimpleDateFormat("yyyyMM")
@@ -68,7 +69,8 @@ class MainCalendarViewModel(val apiRepository: ApiRepository, val repositoryCach
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe {
             if (it.isSuccess) {
-               Log.e(it.result.toString(),"Main 날별")
+                planDayCalendar = it.result.planCalendar
+               Log.e(it.result.toString(),"planDayCalendar 날별")
                 addAllItem(it.result.plan)
                 Log.e(liveMainPlan.value.toString(),"list 목록")
                 response.invoke(true)

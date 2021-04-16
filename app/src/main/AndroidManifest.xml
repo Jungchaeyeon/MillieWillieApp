@@ -33,6 +33,7 @@
         </service>
 
         <activity android:name=".ui.MainCalendarActivity" />
+        <activity android:name=".ui.MainCalendarTestActivity" />
         <activity android:name=".ui.holiday.HolidayActivity"/>
         <activity android:name=".ui.mypage.InfoEnlistActivity"
             android:windowSoftInputMode="adjustPan"/>

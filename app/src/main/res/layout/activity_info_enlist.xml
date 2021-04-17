@@ -91,6 +91,7 @@
             android:background="@drawable/background_google_login"
             android:textCursorDrawable="@drawable/edittext_cursor_main_blue"
             android:textAlignment="viewStart"
+            android:paddingStart="8dp"
             android:drawableStart="@drawable/icon_goal"
             android:text="@{vm.liveGoal}"
             tools:text="토익만 따서 나가자!" />

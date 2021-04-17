@@ -22,12 +22,13 @@
             android:paddingEnd="8dp">
 
             <TextView
+                style="@style/spoqa_medium_16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="17dp"
                 android:text="@{vi.liveTitle}"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="타이틀" />
 
@@ -36,18 +37,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@{vi.liveSubTitle}"
-                android:textColor="#000000"
+                android:textColor="@color/black_all"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:visibility="@{vi.liveSubTitle.empty ? View.GONE : View.VISIBLE , default = gone}"
                 tools:text="서브 타이틀" />
 
             <TextView
+                style="@style/spoqa_medium_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:text="@{vi.liveContent}"
-                android:textColor="#000000"
+                android:textColor="@color/black_all"
                 android:textSize="15sp"
                 tools:text="내용" />
         </LinearLayout>
@@ -58,7 +60,7 @@
             style="@style/ButtonLine2398e3"
             android:onClick="@{() -> vi.onClickOk()}"
             android:text="@{vi.liveButton}"
-            app:lineTint='@{"#2398e3"}' />
+            app:lineTint='@{"#00D8FF"}' />
 
     </LinearLayout>
 

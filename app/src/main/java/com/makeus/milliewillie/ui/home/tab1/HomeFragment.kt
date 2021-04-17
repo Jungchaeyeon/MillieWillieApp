@@ -50,9 +50,9 @@ class HomeFragment : BaseDataBindingFragment<FragmentHomeBinding>(R.layout.fragm
 
     override fun onResume() {
         super.onResume()
+
         viewModel.getMain(){
             if(!it){
-
                 ActivityNavigator.with(this).login().start()
             }
         }

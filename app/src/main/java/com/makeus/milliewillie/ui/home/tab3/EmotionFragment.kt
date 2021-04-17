@@ -6,6 +6,7 @@ import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import androidx.core.widget.doAfterTextChanged
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
@@ -22,12 +23,14 @@ import com.makeus.milliewillie.repository.local.LocalKey
 import com.makeus.milliewillie.repository.local.RepositoryCached
 import io.reactivex.Observable
 import com.makeus.milliewillie.ui.SampleToast
+import com.makeus.milliewillie.ui.common.BasicDialogFragment
 import com.makeus.milliewillie.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_intro_setting_name.*
 import kotlinx.android.synthetic.main.activity_make_plan.*
 import kotlinx.android.synthetic.main.fragment_emotion.*
 import kotlinx.android.synthetic.main.item_emo_calendar_day.*
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -55,6 +58,7 @@ class EmotionFragment :
     var emoId = 0
     var year = cal.get(Calendar.YEAR).toInt()
     var month = cal.get(Calendar.MONTH).plus(1)
+    var firstCheck= false
 
     companion object {
         fun getInstance() = EmotionFragment()
@@ -70,6 +74,8 @@ class EmotionFragment :
 
         rv_emo.isNestedScrollingEnabled = false
 
+        binding.editEmo.doAfterTextChanged { binding.btnCheck.visibility=View.VISIBLE }
+
         rv_emo.run {
             adapter = BaseDataBindingRecyclerViewAdapter<EmotionImg>()
                 .addViewType(
@@ -79,13 +85,13 @@ class EmotionFragment :
                         vi = this@EmotionFragment
                         item = it
                     })
-            viewModel.liveEmoMemo.observe(this@EmotionFragment, androidx.lifecycle.Observer {
-                if (it.equals("")) {
-                    btn_check.visibility = View.GONE
-                } else {
-                    btn_check.visibility = View.VISIBLE
-                }
-            })
+//            viewModel.liveEmoMemo.observe(this@EmotionFragment, androidx.lifecycle.Observer {
+//                if (it.equals("")) {
+//                    btn_check.visibility = View.GONE
+//                } else {
+//                  //  btn_check.visibility = View.VISIBLE
+//                }
+//            })
         }
         binding.editEmo.setOnTouchListener { v, p1 ->
             onClickEdit()
@@ -96,8 +102,10 @@ class EmotionFragment :
         //화살표
         calendarView.setCalendarDayLayout(R.layout.item_emo_calendar_day)
         context?.resources?.let {
-            calendarView.setForwardButtonImage(it.getDrawable(R.drawable.icon_right, null))
-            calendarView.setPreviousButtonImage(it.getDrawable(R.drawable.icon_left_reverse, null))
+            calendarView.apply {
+                setForwardButtonImage(it.getDrawable(R.drawable.icon_arrow_cal_right, null))
+                setPreviousButtonImage(it.getDrawable(R.drawable.icon_arrow_cal_left, null))
+            }
 
         }
         //캘린더 이전 월 리스너
@@ -147,15 +155,11 @@ class EmotionFragment :
             }
         })
 
-        //오늘 네모
-        // val calendar = Calendar.getInstance()
-        // events.add(EventDay(calendar, DrawableUtils.todayRect(context)))
-
-        val calendar3 = Calendar.getInstance()
         calendarView.setEvents(events)
 
 
         calendarView.setOnDayClickListener(object : OnDayClickListener {
+            @SuppressLint("SetTextI18n")
             override fun onDayClick(eventDay: EventDay) {
 
                 txt_Date.setText(df.format(eventDay.calendar.time))
@@ -170,11 +174,12 @@ class EmotionFragment :
 
                 if (eventDay.calendar.time > calToday.time) {
                     //  "미래 기록은 남길 수 없습니다,".showShortToastSafe()
-//                    binding.txtDate.visibility = View.INVISIBLE
-                         binding.rvEmo.visibility = View.GONE
-                         binding.btnCheck.visibility = View.GONE
-                         binding.layoutMakeTodayEmo.visibility = View.GONE // 메모 GONE
-                         binding.txtPlzTodayEmo.visibility = View.GONE
+                        binding.apply {
+                            rvEmo.visibility = View.GONE
+                            btnCheck.visibility = View.GONE
+                            layoutMakeTodayEmo.visibility = View.GONE // 메모 GONE
+                            txtPlzTodayEmo.visibility = View.GONE
+                        }
                          txt_today.visibility = View.INVISIBLE //오늘 GONE
                          Snackbar.make(this@EmotionFragment.layout_emo,
                         "이전 날짜만 기록 가능합니다.",
@@ -190,8 +195,12 @@ class EmotionFragment :
 
                     viewModel.getEmotionsRecordDay {
                         if (it) {
-                            binding.calendarView.hideKeyboard()
-                            binding.trash.visibility = View.VISIBLE
+                            binding.apply {
+                              editEmo.setText("${viewModel.emotionsRecordResponse.result.content} ")
+                              btnCheck.visibility = View.GONE
+                              calendarView.hideKeyboard()
+                              trash.visibility = View.VISIBLE
+                            }
                             Log.e("해당날짜에 내용이 있음")
                             emoId = viewModel.emotionsRecordResponse.result.emotion
 
@@ -208,8 +217,8 @@ class EmotionFragment :
                             } else { //오늘이고 && 해당 날짜에 내용이 있으면
                                 txt_plz_today_emo.visibility = View.VISIBLE
                                 txt_today.visibility = View.VISIBLE
-                                binding.txtEmo.text =
-                                    viewModel.emotionsRecordResponse.result.emotionText
+                                binding.trash.visibility = View.VISIBLE
+                                binding.txtEmo.text = viewModel.emotionsRecordResponse.result.emotionText
                                 binding.imgEmo.setImage(viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion))
 
                             }
@@ -220,7 +229,6 @@ class EmotionFragment :
                                  Log.e("해당날짜에 내용이 없음")
                                  txt_plz_today_emo.visibility = View.GONE // 오늘 감정을 남겨주세요 GONE
                                  txt_today.visibility = View.GONE //오늘   GONE
-                                 binding.btnCheck.visibility = View.INVISIBLE
                                  binding.trash.visibility = View.GONE
                                  binding.rvEmo.visibility = View.VISIBLE  // 리사이클러 VISIBLE
                                  binding.layoutMakeTodayEmo.visibility = View.GONE //메모 VISIBLE
@@ -253,23 +261,37 @@ class EmotionFragment :
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onClickDelete() {
-        viewModel.deleteEmotionsRecord {
-            if (it) {
-                // getEmo(it)
-                val cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
-                cal.set(Calendar.DAY_OF_MONTH,
-                    calBetweenDayInput(viewModel.emotionsRecordResponse.result.date))
-                events.remove(EventDay(cal,
-                    viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion)))
-                binding.calendarView.setEvents(events)
+        BasicDialogFragment.getInstance()
+                .setTitle("감정일기 삭제")
+                .setContent("삭제하시겠습니까?")
+                .setOnClickOk {
+                    if(firstCheck) {
+                        viewModel.emotionsRecordRequest.emotion = emoId
+                        viewModel.emotionsRecordResponse.result.emotionRecordId =
+                            viewModel.emotionMonthToday?.emotionRecordId!!
+                        firstCheck = false}
+                   else {
+                        viewModel.deleteEmotionsRecord {
+                            if (it) {
+                                // getEmo(it)
+                                val cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
+                                cal.set(Calendar.DAY_OF_MONTH,
+                                    calBetweenDayInput(viewModel.emotionsRecordResponse.result.date))
+                                events.remove(EventDay(cal,
+                                    viewModel.nextEmo(viewModel.emotionsRecordResponse.result.emotion)))
+                                binding.calendarView.setEvents(events)
 
-                SampleToast.createToast(requireActivity(), "감정 기록 삭제 완료!")?.show()
-                binding.rvEmo.visibility = View.VISIBLE
-                binding.layoutMakeTodayEmo.visibility = View.GONE
-            } else {
-                Snackbar.make(this.layout_emo, "감정 기록 삭제에 실패하였습니다.", Snackbar.LENGTH_SHORT).show()
-            }
-        }
+                                SampleToast.createToast(requireActivity(), "감정 기록 삭제 완료!")?.show()
+                                binding.rvEmo.visibility = View.VISIBLE
+                                binding.layoutMakeTodayEmo.visibility = View.GONE
+                            } else {
+                                Snackbar.make(this.layout_emo,
+                                    "감정 기록 삭제에 실패하였습니다.",
+                                    Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }.show(requireActivity().supportFragmentManager)
     }
 
 
@@ -278,39 +300,54 @@ class EmotionFragment :
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(v.windowToken, 0)
 
-//        cal.add(Calendar.DATE, calBetweenDay())
-//        events.add(EventDay(cal, viewModel.nextEmo(emoId)))
-//        binding.calendarView.setEvents(events)
-        Log.e(Calendar.DAY_OF_MONTH.toString(),"DAM")
-        Log.e(calBetweenDay().toString(),"between")
-
         if (binding.editEmo.text.isNullOrEmpty()) {
             Snackbar.make(this.layout_emo, "오늘의 감정을 기록해 주세요.", Snackbar.LENGTH_SHORT).show()
         } else {
-
             viewModel.emotionsRecordRequest.content = binding.editEmo.text.toString()
-            if (!viewModel.emotionsRecordResponse.isSuccess) {
+            if(firstCheck){
                 viewModel.emotionsRecordRequest.emotion = emoId
-                viewModel.postEmotionsRecord {
-                    if (it) {
-                        SampleToast.createToast(requireActivity(), "감정 기록 생성 완료!")?.show()
-                        viewModel.getEmotionsRecordMonth {
-                            getEmo(it)
-                        }
+                viewModel.emotionsRecordResponse.result.emotionRecordId = viewModel.emotionMonthToday?.emotionRecordId!!
+                Log.e(viewModel.emotionsRecordResponse.result.emotionRecordId.toString(),"id값 확인")
 
-                    } else {
-                        Snackbar.make(this.layout_emo, "감정 기록  생성에 실패하였습니다.", Snackbar.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            } else {
-                viewModel.emotionsRecordRequest.emotion = emoId
+
                 viewModel.patchEmotionsRecord {
                     if (it) {
                         SampleToast.createToast(requireActivity(), "감정 기록 수정 완료!")?.show()
                     } else {
                         Snackbar.make(this.layout_emo, "감정 기록 수정에 실패하였습니다.", Snackbar.LENGTH_SHORT)
                             .show()
+                    }
+                }
+                firstCheck=false
+            }else {
+                if (!viewModel.emotionsRecordResponse.isSuccess) {
+                    viewModel.emotionsRecordRequest.emotion = emoId
+                    viewModel.postEmotionsRecord {
+                        if (it) {
+                            SampleToast.createToast(requireActivity(), "감정 기록 생성 완료!")?.show()
+                            viewModel.getEmotionsRecordMonth {
+                                getEmo(it)
+                            }
+
+                        } else {
+                            Snackbar.make(this.layout_emo,
+                                "감정 기록 생성에 실패하였습니다.",
+                                Snackbar.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                } else {
+                    viewModel.emotionsRecordRequest.emotion = emoId
+
+                    viewModel.patchEmotionsRecord {
+                        if (it) {
+                            SampleToast.createToast(requireActivity(), "감정 기록 수정 완료!")?.show()
+                        } else {
+                            Snackbar.make(this.layout_emo,
+                                "감정 기록 수정에 실패하였습니다.",
+                                Snackbar.LENGTH_SHORT)
+                                .show()
+                        }
                     }
                 }
             }
@@ -326,16 +363,8 @@ class EmotionFragment :
         rv_emo.visibility = View.GONE
         layout_make_today_emo.visibility = View.VISIBLE
         txt_plz_today_emo.visibility = View.INVISIBLE
-        trash.visibility = View.VISIBLE
+        trash.visibility = View.GONE
         btn_check.visibility = View.VISIBLE
-
-//
-//        calendar1.add(Calendar.DAY_OF_MONTH, calBetweenDay())
-//        events.remove(EventDay(calendar1, img))
-//        events.add(EventDay(calendar1, img))
-//        calendarView.setEvents(events)
-        Log.e(calBetweenDay().toString(), "이거 값 뭐들어갔어")
-        Log.e(Calendar.DAY_OF_MONTH.toString(), "이거 값 뭐들어갔어")
 
         emoId = id
 
@@ -357,25 +386,27 @@ class EmotionFragment :
 
                 viewModel.emotionMonthData = it.result.month
 
+
                 if (it.result.today == null) {
                     getFirstEmo(it.isSuccess)
                     binding.layoutMakeTodayEmo.visibility = View.GONE
-                    binding.rvEmo.visibility = View.VISIBLE
                 } else {
-                    viewModel.liveEmoMemo.value = it.result.today!!.content.toString()
-
-                    binding.layoutMakeTodayEmo.visibility = View.VISIBLE
-                    binding.rvEmo.visibility = View.GONE
-                    binding.imgEmo.setImage(viewModel.nextEmo(it.result.today!!.emotion))
-                    binding.txtEmo.text =it.result.today!!.emotionText
-                    getFirstEmo(it.isSuccess)
+                    firstCheck=true
+                    viewModel.emotionMonthToday = it.result.today
+                    emoId = it.result.today!!.emotion
+                    viewModel.liveEmoMemo.value = it.result.today!!.content
+                    binding.apply {
+                       layoutMakeTodayEmo.visibility = View.VISIBLE
+                       rvEmo.visibility = View.GONE
+                       trash.visibility = View.VISIBLE
+                       imgEmo.setImage(viewModel.nextEmo(it.result.today!!.emotion))
+                       txtEmo.text =it.result.today!!.emotionText
+                    }
+                    getFirstEmo(it.isSuccess,it.result.today!!.content)
                 }
-
-
             }, {}).disposeOnDestroy(this)
-
         binding.calendarView.setEvents(events)
-        btn_check.visibility = View.GONE
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -391,16 +422,18 @@ class EmotionFragment :
                 events.add(EventDay(cal, viewModel.nextEmo(it.emotion)))
                 Log.e(calBetweenDayInput(it.date).toString(), "CALBETWEENDAY")
                 Log.e(it.date.toString(), "It Date")
-                Log.e(it.emotion.toString(), "It Date")
+                Log.e(it.emotion.toString(), "Emotion")
                 Log.e(Calendar.DATE.toString(), "It Date")
 
             }
             binding.calendarView.setEvents(events)
+            binding.trash.visibility=View.VISIBLE
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getFirstEmo(data: Boolean) {
+    private fun getFirstEmo(data: Boolean, content: String ="") {
 
         if (data) {
             events.clear()
@@ -414,26 +447,15 @@ class EmotionFragment :
                 Log.e(calBetweenDayInput(it.date).toString(), "CALBETWEENDAY")
                 Log.e(Calendar.DAY_OF_MONTH.toString(), "DOFMONTH")
 
-
             }
             binding.calendarView.setEvents(events)
         } else {
             binding.layoutMakeTodayEmo.visibility = View.GONE
-            binding.rvEmo.visibility = View.VISIBLE
         }
+        binding.editEmo.setText("$content ")
+        binding.btnCheck.visibility = View.INVISIBLE
+
     }
-//    private fun getEmo(data: EmotionsRecordMonthResponse) {
-//        data.result.month?.forEach {
-//           // events.add(EventDay(calendar1, viewModel.nextEmo(it.emotion)))
-//        }
-//
-//   //     calendarView.setEvents(events)
-////            for (i in 0..viewModel.monthEmoSize) {
-////                events.add(EventDay(calendar1,
-////                    viewModel.nextEmo(data.result.month!![i].emotion)))
-////            }
-//
-//    }
 
     fun calBetweenDay(): Int {
 

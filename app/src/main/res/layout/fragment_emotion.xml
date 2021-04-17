@@ -99,12 +99,13 @@
                     android:id="@+id/btn_check"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="56dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/icon_check"
                     android:backgroundTint="@color/text_gray"
                     android:onClick="@{(view)->vi.onClickCheck(view)}"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/trash"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
@@ -114,7 +115,7 @@
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/icon_trashcan"
                     android:onClick="@{()->vi.onClickDelete()}"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -117,6 +117,7 @@ class MainCalendarActivity :
         }
 
     }
+
     fun getMainCalendarDay(widget: MaterialCalendarView, date : CalendarDay){
         viewModel.planItems.clear()
         var index =1.2F

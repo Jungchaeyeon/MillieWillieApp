@@ -278,7 +278,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                style="@style/spoqa_regular_10"
+                style="@style/spoqa_bold_22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="9dp"

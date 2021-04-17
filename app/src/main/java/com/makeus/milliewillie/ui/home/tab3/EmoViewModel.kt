@@ -63,7 +63,7 @@ class EmoViewModel(val apiRepository: ApiRepository, val repositoryCached: Repos
         apiRepository.patchEmotionsRecord(
             EmotionsRecordRequest(
                 content = emotionsRecordRequest.content,
-                emotion = emotionsRecordResponse.result.emotion
+                emotion = emotionsRecordRequest.emotion
             ),
             path = emotionsRecordResponse.result.emotionRecordId
         ).observeOn(AndroidSchedulers.mainThread())

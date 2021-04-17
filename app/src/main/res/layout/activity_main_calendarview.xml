@@ -7,6 +7,9 @@
         <variable
             name="vm"
             type="com.makeus.milliewillie.ui.MainCalendarViewModel" />
+        <variable
+            name="vi"
+            type="com.makeus.milliewillie.ui.MainCalendarTestActivity" />
     </data>
 
     <LinearLayout
@@ -23,6 +26,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/btn_back_main"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginVertical="5dp"
@@ -34,8 +38,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/d_day_btn_anni"
+            <Button
+                android:id="@+id/btn_today"
                 style="@style/spoqa_regular_10"
                 android:layout_width="30dp"
                 android:layout_height="17dp"
@@ -58,15 +62,22 @@
 <!--                android:text="@string/discharge_day"-->
 <!--                android:textColor="@color/d_day_btn_text_selected" />-->
         </LinearLayout>
-
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_nest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="382dp"
             android:background="@drawable/rect_radius_bottom"
-            app:mcv_selectionColor="@color/white_two"
-            app:mcv_leftArrowMask="@drawable/icon_left"
-            app:mcv_rightArrowMask="@drawable/icon_right_cal"
+            app:mcv_selectionColor="@color/trans"
+            app:mcv_leftArrowMask="@drawable/icon_arrow_cal_left"
+            app:mcv_rightArrowMask="@drawable/icon_arrow_cal_right"
             app:mcv_showOtherDates="defaults" />
 
         <LinearLayout
@@ -131,5 +142,6 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
-
+</androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 </layout>

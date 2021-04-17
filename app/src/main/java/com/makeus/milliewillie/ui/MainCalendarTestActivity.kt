@@ -54,6 +54,7 @@ class MainCalendarTestActivity :
         calendar.setTitleFormatter(DateFormatTitleFormatter(SimpleDateFormat("yyyy년 MM월",
             Locale.KOREA)))
 
+        rv_cal_list.isNestedScrollingEnabled = false
         rv_cal_list.run {
             adapter = BaseDataBindingRecyclerViewAdapter<CalendarDayResponse.Result.Plan>()
                 .addViewType(
@@ -64,6 +65,20 @@ class MainCalendarTestActivity :
                         item = it
                     })
 
+        }
+        binding.btnToday.setOnClickListener {
+
+            mWidget.removeDecorators()
+            mWidget.clearSelection()
+            val oneDayDecorator = MainSelectionDecorator(CalendarDay.today(),this@MainCalendarTestActivity)
+            mWidget.apply {
+                addDecorators(SundayDecorator(),oneDayDecorator)
+                invalidateDecorators()
+            }
+            getMainCalendar()
+        }
+        binding.btnBackMain.setOnClickListener {
+            ActivityNavigator.with(this@MainCalendarTestActivity).main().start()
         }
         binding.calendar.apply {
             addDecorators(SundayDecorator())
@@ -85,7 +100,7 @@ class MainCalendarTestActivity :
                 addDecorators(SundayDecorator())
                 invalidateDecorators()
             }
-            getMainCalendar(widget)
+            getMainCalendar()
         }
         binding.calendar.setOnDateChangedListener { widget, date, selected ->
             Log.e("$date", "dateChangeListener")
@@ -119,6 +134,8 @@ class MainCalendarTestActivity :
         }
 
     }
+
+
     fun getMainCalendarDay(widget: MaterialCalendarView, date : CalendarDay){
         viewModel.planItems.clear()
         var index =1.0F
@@ -169,7 +186,7 @@ class MainCalendarTestActivity :
     }
 
 
-    fun getMainCalendar(widget: MaterialCalendarView){
+    fun getMainCalendar(){
         viewModel.getMainCalendar { success->
             if(success) {
                 val planCalendar = viewModel.planCalendar
@@ -202,7 +219,7 @@ class MainCalendarTestActivity :
     override fun onResume() {
         super.onResume()
         mWidget = binding.calendar
-        getMainCalendar(mWidget)
+        getMainCalendar()
         viewModel.pickDay.value = today.get(Calendar.MONTH).plus(1).toString()+"월 "+today.get(Calendar.DATE).toString()+"일"
         viewModel.date = viewModel.month+today.get(Calendar.DATE).toString()
       //  getMainCalendarDay(mWidget)

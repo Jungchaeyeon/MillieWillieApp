@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab2.WorkoutFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.home.tab2.WorkoutViewModel" />
+            type="com.makeusteam.milliewillie.ui.home.tab2.WorkoutViewModel" />
     </data>
 
     <RelativeLayout
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="2dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@{vm.goalWeightText}"
                 android:textSize="10sp"

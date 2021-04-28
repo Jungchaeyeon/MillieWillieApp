@@ -6,10 +6,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.MakeRoutineActivity" />
+            type="com.makeusteam.milliewillie.ui.routine.MakeRoutineActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.routine.MakeRoutineViewModel" />
+            type="com.makeusteam.milliewillie.ui.routine.MakeRoutineViewModel" />
 
     </data>
 
@@ -244,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black_all"
                         android:text="@{vm.liveDataPartOfExTitle}"
-                        android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                        android:fontFamily="@font/spoqa_han_sans_medium"
                         android:includeFontPadding="false"/>
 
                     <ImageView

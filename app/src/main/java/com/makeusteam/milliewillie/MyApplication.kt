@@ -1,0 +1,90 @@
+package com.makeusteam.milliewillie
+
+import android.app.Application
+import android.content.SharedPreferences
+import com.facebook.stetho.Stetho
+import com.kakao.sdk.common.KakaoSdk
+import com.makeusteam.milliewillie.di.networkModule
+import com.makeusteam.milliewillie.di.repositoryModule
+import com.makeusteam.milliewillie.di.viewModelModule
+import com.makeusteam.milliewillie.network.adapter.RxErrorHandler
+import com.makeusteam.milliewillie.util.SharedPreference
+import io.reactivex.plugins.RxJavaPlugins
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import kotlin.properties.Delegates
+
+class MyApplication : Application() {
+
+    companion object {
+        private var instance: MyApplication? = null
+        val globalApplicationContext: MyApplication
+            get() {
+                checkNotNull(instance) { "this application does not inherit CoinoneApplication" }
+                return instance as MyApplication
+            }
+
+        fun getString(stringId: Int): String = globalApplicationContext.getString(stringId)
+
+        fun getStringArg(stringId: Int, arg: String) {
+            String.format(globalApplicationContext.getString(stringId, arg))
+        }
+
+        lateinit var loginType: LOGINTYPE
+        var isEnabledPush: Boolean = true
+
+        var isFirstExListSet by Delegates.notNull<Boolean>()
+
+        lateinit var sSharedPreferences: SharedPreferences
+
+        var userProfileImgUrl: String? = ""
+        var userName: String = ""
+
+        var isLogout = false
+
+        //const key
+        const val MILLI_WILLI = "MILLI_WILLI"
+        const val IS_GOAL = "IS_GOAL"
+        const val EXERCISE_ID = "EXERCISE_ID"
+        const val ROUTINE_ID_KEY_FROM_WORKOUT = "ROUTINE_ID_KEY_FROM_WORKOUT"
+
+    }
+
+    enum class LOGINTYPE {
+        KAKAO,
+        GOOGLE
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
+
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(
+                listOf(
+                    networkModule, repositoryModule, viewModelModule
+                )
+            )
+        }
+
+        RxJavaPlugins.setErrorHandler { RxErrorHandler().processErrorHandler(it) }
+        RxJavaPlugins.lockdown()
+
+        // Kakao SDK 초기화
+        KakaoSdk.init(this, BuildConfig.KAKAO_APP_KEY)
+
+        sSharedPreferences = applicationContext.getSharedPreferences(MILLI_WILLI, MODE_PRIVATE)
+        isFirstExListSet = SharedPreference.getSettingBooleanItem("firstSet")
+
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        instance = null
+    }
+}

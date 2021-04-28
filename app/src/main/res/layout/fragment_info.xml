@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab4.InfoFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab4.InfoFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.home.tab4.InfoViewModel" />
+            type="com.makeusteam.milliewillie.ui.home.tab4.InfoViewModel" />
     </data>
 
 
@@ -62,7 +62,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="9dp"
                 android:layout_toEndOf="@+id/info_img_profile"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@{vm.liveDataUserName}"
                 android:textColor="@color/black_all"

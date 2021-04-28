@@ -8,11 +8,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.login.LoginActivity" />
+            type="com.makeusteam.milliewillie.ui.login.LoginActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.login.LoginViewModel" />
+            type="com.makeusteam.milliewillie.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

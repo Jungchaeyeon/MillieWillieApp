@@ -5,14 +5,14 @@
     <data>
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.PlanOutputViewModel" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanOutputViewModel" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.PlansGet.Result.Diary" />
+            type="com.makeusteam.milliewillie.model.PlansGet.Result.Diary" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanOutputActivity" />
     </data>
 
     <LinearLayout

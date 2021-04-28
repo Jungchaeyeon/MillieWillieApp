@@ -6,13 +6,13 @@
         <import type="android.text.Html" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeusteam.milliewillie.ui.plan.MakePlanViewModel" />
         <variable
             name="item"
             type="Integer" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.plan.ColorPickerBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.plan.ColorPickerBottomSheetFragment" />
     </data>
 
     <LinearLayout

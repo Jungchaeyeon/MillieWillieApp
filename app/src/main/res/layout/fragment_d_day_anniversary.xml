@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.anniversary.AnniversaryFragment" />
+            type="com.makeusteam.milliewillie.ui.dDay.anniversary.AnniversaryFragment" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

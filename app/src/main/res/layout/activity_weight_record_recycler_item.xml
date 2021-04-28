@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity" />
+            type="com.makeusteam.milliewillie.ui.weightRecord.WeightRecordActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WeightPerDay" />
+            type="com.makeusteam.milliewillie.model.WeightPerDay" />
 
     </data>
 

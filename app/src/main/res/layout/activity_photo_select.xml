@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.profile.PhotoSelectActivity" />
+            type="com.makeusteam.milliewillie.ui.profile.PhotoSelectActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@string/edit"
                 android:textColor="@color/black_all" />

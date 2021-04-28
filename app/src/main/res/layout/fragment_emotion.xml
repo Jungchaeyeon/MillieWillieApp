@@ -9,11 +9,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.home.tab3.EmoViewModel" />
+            type="com.makeusteam.milliewillie.ui.home.tab3.EmoViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab3.EmotionFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab3.EmotionFragment" />
     </data>
 
     <androidx.core.widget.NestedScrollView

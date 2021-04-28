@@ -9,7 +9,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.common.BasicDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.common.BasicDialogFragment" />
     </data>
 
     <LinearLayout style="@style/DialogLayout">

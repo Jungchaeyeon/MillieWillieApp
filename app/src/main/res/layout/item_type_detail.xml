@@ -7,11 +7,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.intro.IntroServiceTypeDetailActivity" />
+            type="com.makeusteam.milliewillie.ui.intro.IntroServiceTypeDetailActivity" />
 
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.ServiceDetailType" />
+            type="com.makeusteam.milliewillie.model.ServiceDetailType" />
     </data>
 
     <LinearLayout

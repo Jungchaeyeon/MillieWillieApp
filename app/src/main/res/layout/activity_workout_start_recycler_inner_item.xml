@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.StartRecyclerCircleItem" />
+            type="com.makeusteam.milliewillie.model.StartRecyclerCircleItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

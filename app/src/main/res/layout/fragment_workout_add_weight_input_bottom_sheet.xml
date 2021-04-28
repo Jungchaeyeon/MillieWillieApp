@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab2.WeightAddRecordBottomSheetFragment" />
 
 
     </data>

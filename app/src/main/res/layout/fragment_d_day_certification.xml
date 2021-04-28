@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.certification.CertificationFragment" />
+            type="com.makeusteam.milliewillie.ui.dDay.certification.CertificationFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.certification.CertificationViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.certification.CertificationViewModel" />
     </data>
 
     <LinearLayout

@@ -6,11 +6,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.intro.IntroServiceTypeActivity" />
+            type="com.makeusteam.milliewillie.ui.intro.IntroServiceTypeActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+            type="com.makeusteam.milliewillie.ui.intro.UserViewModel" />
     </data>
 
     <LinearLayout

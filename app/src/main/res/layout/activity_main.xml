@@ -10,7 +10,7 @@
 <!--            type="com.makeus.milliewillie.ui.MainActivity" />-->
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.MainActivity" />
+            type="com.makeusteam.milliewillie.ui.MainActivity" />
 
     </data>
 

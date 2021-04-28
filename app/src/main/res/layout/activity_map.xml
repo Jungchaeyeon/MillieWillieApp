@@ -7,11 +7,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.map.MapActivity" />
+            type="com.makeusteam.milliewillie.ui.map.MapActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.map.MapViewModel" />
+            type="com.makeusteam.milliewillie.ui.map.MapViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.LauncherActivity" />
+            type="com.makeusteam.milliewillie.ui.LauncherActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

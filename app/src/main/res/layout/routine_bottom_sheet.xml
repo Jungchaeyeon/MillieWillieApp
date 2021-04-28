@@ -8,7 +8,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.ExPartSelectBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.routine.ExPartSelectBottomSheetFragment" />
     </data>
 
     <RelativeLayout

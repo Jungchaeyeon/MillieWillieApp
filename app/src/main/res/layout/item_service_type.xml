@@ -8,7 +8,7 @@
             type="String" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.mypage.ServiceTypeBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.mypage.ServiceTypeBottomSheetDialogFragment" />
 
     </data>
 
@@ -38,7 +38,7 @@
             android:layout_height ="wrap_content"
             android:layout_width ="match_parent"
             android:textSize ="14sp"
-            android:fontFamily ="@font/spoqa_han_sans_neo_medium"
+            android:fontFamily ="@font/spoqa_han_sans_medium"
             android:background ="@drawable/cal_btn_selected"
             android:autoSizeMaxTextSize="14sp"
             android:textColor ="#3e3e3e"

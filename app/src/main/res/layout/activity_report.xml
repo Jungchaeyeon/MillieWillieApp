@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.report.ReportActivity" />
+            type="com.makeusteam.milliewillie.ui.report.ReportActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.report.ReportViewModel" />
+            type="com.makeusteam.milliewillie.ui.report.ReportViewModel" />
     </data>
 
 
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="@string/ex_report"
                     android:textColor="@color/black_all" />
@@ -129,7 +129,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                            android:fontFamily="@font/spoqa_han_sans_medium"
                             android:includeFontPadding="false"
                             android:text="@string/today_workout"
                             android:textColor="@color/text_gray"
@@ -162,7 +162,7 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/non"
                             android:paddingBottom="200dp"
-                            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                            android:fontFamily="@font/spoqa_han_sans_medium"
                             android:hint="@string/content_hint"
                             android:includeFontPadding="false"
                             android:textCursorDrawable="@color/maincolor_blue"
@@ -192,7 +192,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                        android:fontFamily="@font/spoqa_han_sans_medium"
                         android:includeFontPadding="false"
                         android:onClick="@{()-> vi.onClickDeleteMenu()}"
                         android:text="@string/delete"

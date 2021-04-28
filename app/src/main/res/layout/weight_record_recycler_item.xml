@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity" />
+            type="com.makeusteam.milliewillie.ui.weightRecord.WeightRecordActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WorkoutWeightRecordDate" />
+            type="com.makeusteam.milliewillie.model.WorkoutWeightRecordDate" />
 
     </data>
 
@@ -32,7 +32,7 @@
             android:text="@{item.weight}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:fontFamily="@font/spoqa_han_sans_medium"
             android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

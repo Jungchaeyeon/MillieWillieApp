@@ -9,7 +9,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.fragment.DatePickekProfileBirthDayBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.fragment.DatePickekProfileBirthDayBottomSheetDialogFragment" />
     </data>
 
     <RelativeLayout
@@ -28,7 +28,7 @@
                 android:layout_marginStart="16dp"
                 android:padding="5dp"
                 android:onClick="@{()->vi.onClickCancel()}"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:textColor="@color/text_gray"
                 android:textSize="12sp"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:padding="5dp"
                 android:onClick="@{()->vi.onClickOk()}"

@@ -6,11 +6,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.holiday.HolidayEditActivity" />
+            type="com.makeusteam.milliewillie.ui.holiday.HolidayEditActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.holiday.HoliViewModel" />
+            type="com.makeusteam.milliewillie.ui.holiday.HoliViewModel" />
     </data>
 
 

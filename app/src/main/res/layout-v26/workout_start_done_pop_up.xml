@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartDoneBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartDoneBottomSheetFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

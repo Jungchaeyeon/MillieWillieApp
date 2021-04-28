@@ -8,10 +8,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.anniversary.DdayOutputAnniversaryActivity" />
+            type="com.makeusteam.milliewillie.ui.dDay.anniversary.DdayOutputAnniversaryActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.anniversary.DdayOutputAnniversaryViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.anniversary.DdayOutputAnniversaryViewModel" />
     </data>
 
 
@@ -118,7 +118,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/content_ab_text_tilt"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="end_date"
                     android:textColor="@color/text_gray"
@@ -146,7 +146,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                        android:fontFamily="@font/spoqa_han_sans_medium"
                         android:includeFontPadding="false"
                         android:textColor="@color/black_all"
                         android:text="D-day Title"
@@ -165,7 +165,7 @@
                     android:layout_marginBottom="50dp"
                     android:backgroundTint="@color/non"
                     android:textCursorDrawable="@color/maincolor_blue"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:maxLength="300"
                     android:hint="@string/content_hint"
@@ -190,7 +190,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:onClick="@{()-> vi.onClickModifyMenu()}"
                     android:text="@string/do_edit"
@@ -200,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:onClick="@{()-> vi.onClickDeleteMenu()}"
                     android:text="@string/delete"

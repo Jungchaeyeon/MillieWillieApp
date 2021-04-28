@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab2.WorkoutFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WorkoutWeightRecordDate" />
+            type="com.makeusteam.milliewillie.model.WorkoutWeightRecordDate" />
 
     </data>
 

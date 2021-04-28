@@ -5,10 +5,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.WorkoutWncSet" />
+            type="com.makeusteam.milliewillie.model.WorkoutWncSet" />
 
     </data>
 

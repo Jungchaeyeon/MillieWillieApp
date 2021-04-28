@@ -6,11 +6,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.intro.WelcomeViewModel" />
+            type="com.makeusteam.milliewillie.ui.intro.WelcomeViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.intro.WelcomeActivity" />
+            type="com.makeusteam.milliewillie.ui.intro.WelcomeActivity" />
     </data>
 
     <LinearLayout
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.makeus.milliewillie.ui.view.CircleIndicator
+        <com.makeusteam.milliewillie.ui.view.CircleIndicator
             android:id="@+id/vIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

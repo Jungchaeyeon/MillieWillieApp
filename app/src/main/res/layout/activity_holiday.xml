@@ -7,11 +7,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.holiday.HolidayActivity" />
+            type="com.makeusteam.milliewillie.ui.holiday.HolidayActivity" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.holiday.HoliViewModel" />
+            type="com.makeusteam.milliewillie.ui.holiday.HoliViewModel" />
     </data>
 
 
@@ -206,7 +206,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.makeus.milliewillie.ui.view.CircleIndicator
+                <com.makeusteam.milliewillie.ui.view.CircleIndicator
                     android:id="@+id/holi_regul_Indicator1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
-                <com.makeus.milliewillie.ui.view.CircleIndicator
+                <com.makeusteam.milliewillie.ui.view.CircleIndicator
                     android:id="@+id/holi_regul_Indicator2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/holi_regul_Indicator1"/>
-                <com.makeus.milliewillie.ui.view.CircleIndicator
+                <com.makeusteam.milliewillie.ui.view.CircleIndicator
                     android:id="@+id/holi_regul_Indicator3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -336,7 +336,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_prize_indicator1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -346,7 +346,7 @@
                         app:layout_constraintBottom_toTopOf="@id/holi_prize_Indicator2"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textView14" />
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_prize_Indicator2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_prize_indicator1"
                         app:layout_constraintBottom_toTopOf="@id/holi_prize_Indicator3"/>
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_prize_Indicator3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -477,7 +477,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_other_Indicator1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -487,7 +487,7 @@
                         android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textView16" />
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_other_Indicator2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -497,7 +497,7 @@
                         android:layout_marginBottom="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/holi_other_Indicator1"/>
-                    <com.makeus.milliewillie.ui.view.CircleIndicator
+                    <com.makeusteam.milliewillie.ui.view.CircleIndicator
                         android:id="@+id/holi_other_Indicator3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

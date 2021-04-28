@@ -6,10 +6,10 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainCalendarViewModel" />
+            type="com.makeusteam.milliewillie.ui.MainCalendarViewModel" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.MainCalendarTestActivity" />
+            type="com.makeusteam.milliewillie.ui.MainCalendarTestActivity" />
     </data>
 
     <LinearLayout
@@ -81,6 +81,7 @@
             app:mcv_showOtherDates="defaults" />
 
         <LinearLayout
+            android:id="@+id/layout_day"
             style="@style/MatchWrap_24"
             android:layout_height="30dp"
             android:layout_marginTop="24dp"

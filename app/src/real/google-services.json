@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:391367836015:android:dcd0a7a2f730d32c6aa89a",
         "android_client_info": {
-          "package_name": "com.makeus.milliewillie"
+          "package_name": "com.makeusteam.milliewillie"
         }
       },
       "oauth_client": [
@@ -17,7 +17,81 @@
           "client_id": "391367836015-6c51h10sje40h7mghfm1gd4lk28o8nd4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.makeus.milliewillie",
+            "package_name": "com.makeusteam.milliewillie",
+            "certificate_hash": "eb204cd3b74c6bb110c94ac15dd469b032fec748"
+          }
+        },
+        {
+          "client_id": "391367836015-lkruesrs9geoqe09bp9kv36lum3d0p9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makeusteam.milliewillie",
+            "certificate_hash": "4012ce31d3620e8d4a9c5f7950a5b8c61ca99665"
+          }
+        },
+        {
+          "client_id": "391367836015-vho7rf2gu1g3o1n51mg4bpu4cmdtc1aa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuWrvm9SSBYgAPpDSicZi6poJDmU0rnhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391367836015-vho7rf2gu1g3o1n51mg4bpu4cmdtc1aa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391367836015:android:fea8a6e8e009d4d06aa89a",
+        "android_client_info": {
+          "package_name": "com.makeusteam.milliewillie.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391367836015-vho7rf2gu1g3o1n51mg4bpu4cmdtc1aa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuWrvm9SSBYgAPpDSicZi6poJDmU0rnhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391367836015-vho7rf2gu1g3o1n51mg4bpu4cmdtc1aa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391367836015:android:728c2c8128d1e5e66aa89a",
+        "android_client_info": {
+          "package_name": "com.makeusteam.milliewillie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391367836015-btst51rdpq75jh264tedsgocopl1v7hi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makeusteam.milliewillie",
             "certificate_hash": "eb204cd3b74c6bb110c94ac15dd469b032fec748"
           }
         },

@@ -36,6 +36,7 @@
     <!--Background color-->
     <color name="calendar_day_selected_bg">#00d8ff</color>
     <color name="calendar_day_range_selected_bg">#1000d8ff</color>
+    <color name="calendar_day_disabled_font">#9d9d9d</color>
     <!--Font color-->
 
 </resources>

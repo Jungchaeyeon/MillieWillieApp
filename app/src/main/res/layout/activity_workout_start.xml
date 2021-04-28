@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:fontFamily="@font/spoqa_han_sans_medium"
             android:includeFontPadding="false"
             android:text="routine_date"
             android:textColor="@color/white"
@@ -82,7 +82,7 @@
                 android:id="@+id/start_text_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="00"
                 android:textColor="@color/white"
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text=":"
                 android:textColor="@color/white"
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="00"
                 android:textColor="@color/white"
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text=":"
                 android:textColor="@color/white"
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@{vm.liveDataTimeSec}"
                 android:textColor="@color/white"
@@ -152,7 +152,7 @@
                 android:layout_width="39dp"
                 android:layout_height="39dp"
                 android:background="@drawable/start_btn_background"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@string/start"
                 android:textColor="@color/white"
@@ -191,7 +191,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="70dp"
                     android:background="@drawable/workout_done_btn_background"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="@string/workout_done"
                     android:textColor="@color/white"

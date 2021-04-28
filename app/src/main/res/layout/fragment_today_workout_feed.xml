@@ -6,10 +6,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutFeedFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

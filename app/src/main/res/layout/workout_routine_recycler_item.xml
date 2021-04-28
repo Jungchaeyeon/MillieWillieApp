@@ -6,13 +6,13 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab2.WorkoutFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab2.WorkoutFragment" />
         <variable
             name="vi_calendar"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.MyRoutineInfo" />
+            type="com.makeusteam.milliewillie.model.MyRoutineInfo" />
 
     </data>
 

@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.ncee.NceeFragment" />
+            type="com.makeusteam.milliewillie.ui.dDay.ncee.NceeFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.ncee.NceeViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.ncee.NceeViewModel" />
     </data>
 
     <LinearLayout

@@ -2,8 +2,8 @@
 buildscript {
 
     ext {
-        versionCode = 11
-        versionName = "0.1.1"
+        versionCode = 2
+        versionName = "0.0.1"
 
         kotlinVersion = '1.4.21'
         gradleVersion = '4.1.2'
@@ -75,8 +75,8 @@ buildscript {
         //Dev
         appNameDev = "MiliWili-Dev"
 
+      //  apiUrlDev = "\"https://www.miliwili.shop/app/\""
         apiUrlDev = "\"https://shine94.kr/app/\""
-//        apiUrlDev = "\"https://shine94.kr/app/\""
         kakaoAppKeyDev = "\"2d201bd6dccfb28dcd39158f1557383b\""
         kakaoOauthAppKeyDev = "\"kakao2d201bd6dccfb28dcd39158f1557383b\""
         manifestPlaceholdersDev = [KAKAO_APP_KEY : "2d201bd6dccfb28dcd39158f1557383b" , KAKAO_OAUTH_APP_KEY : "kakao2d201bd6dccfb28dcd39158f1557383b"]

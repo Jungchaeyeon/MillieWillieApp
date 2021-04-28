@@ -8,11 +8,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.intro.UserViewModel" />
+            type="com.makeusteam.milliewillie.ui.intro.UserViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.mypage.ServiceTypeBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.mypage.ServiceTypeBottomSheetDialogFragment" />
     </data>
 
     <LinearLayout

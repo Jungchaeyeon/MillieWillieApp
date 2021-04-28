@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.report.ReportActivity" />
+            type="com.makeusteam.milliewillie.ui.report.ReportActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.ReportRecyclerItem" />
+            type="com.makeusteam.milliewillie.model.ReportRecyclerItem" />
     </data>
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
-            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:fontFamily="@font/spoqa_han_sans_medium"
             android:includeFontPadding="false"
             android:textSize="16sp"
             android:textColor="@color/black_all"

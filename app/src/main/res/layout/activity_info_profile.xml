@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.profile.ProfileActivity" />
+            type="com.makeusteam.milliewillie.ui.profile.ProfileActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.profile.ProfileViewModel" />
+            type="com.makeusteam.milliewillie.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@string/my_info"
                 android:textColor="@color/black_all" />
@@ -77,7 +77,7 @@
                 android:id="@+id/user_edit_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:backgroundTint="@color/non"
                 android:textCursorDrawable="@color/maincolor_blue"

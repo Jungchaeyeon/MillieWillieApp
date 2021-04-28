@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.PlanOutputViewModel" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanOutputViewModel" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanOutputActivity" />
     </data>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -47,15 +47,13 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <TextView
-                style="@style/spoqa_regular_12"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:onClick="@{(view)->vi.onClickEdit(view)}"
-                android:text="@string/edit"
-                android:textColor="@color/black_all" />
+                android:background="@drawable/icon_small_moreinfo_vertical"/>
 
         </LinearLayout>
 

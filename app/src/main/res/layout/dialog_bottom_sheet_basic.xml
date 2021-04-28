@@ -8,7 +8,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.common.BasicBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.common.BasicBottomSheetDialogFragment" />
     </data>
 
     <LinearLayout

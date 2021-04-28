@@ -5,13 +5,13 @@
     <data>
         <variable
             name="vi_parent"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutActivity" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutActivity" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutCalendarFragment" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.todayWorkout.TodayWorkoutViewModel" />
+            type="com.makeusteam.milliewillie.ui.todayWorkout.TodayWorkoutViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -84,7 +84,7 @@
                     android:textColor="@color/blue_green"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="@{vm.liveDataToday}" />
 
@@ -97,7 +97,7 @@
                     android:layout_alignBottom="@+id/today_calendar_text_today_date"
                     android:textColor="@color/blue_green"
                     android:textSize="12sp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="@string/today"/>
             </RelativeLayout>

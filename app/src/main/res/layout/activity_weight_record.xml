@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordActivity" />
+            type="com.makeusteam.milliewillie.ui.weightRecord.WeightRecordActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.weightRecord.WeightRecordViewModel" />
+            type="com.makeusteam.milliewillie.ui.weightRecord.WeightRecordViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@string/weight_record"
                 android:textColor="@color/black_all"
@@ -70,7 +70,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="2dp"
                 android:layout_toEndOf="@+id/workout_dash"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@{vm.topRecordGoalWeight}"
                 android:textColor="@color/black_all"
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@string/goal_weight"
                 android:textColor="@color/black_all"
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@{vm.recordGoalWeight}"
@@ -180,7 +180,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                android:fontFamily="@font/spoqa_han_sans_medium"
                 android:includeFontPadding="false"
                 android:text="@{vm.yearAndMonth}"
                 android:textColor="@color/black_all"

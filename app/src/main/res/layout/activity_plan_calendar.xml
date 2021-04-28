@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.plan.PlanCalendarActivity" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanCalendarActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.plan.MakePlanViewModel" />
+            type="com.makeusteam.milliewillie.ui.plan.MakePlanViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

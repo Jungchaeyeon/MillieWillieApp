@@ -6,11 +6,11 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab1.HomeFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab1.HomeFragment" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainGetViewModel" />
+            type="com.makeusteam.milliewillie.ui.MainGetViewModel" />
     </data>
 
     <RelativeLayout

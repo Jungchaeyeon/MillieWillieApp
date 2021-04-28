@@ -7,7 +7,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.holiday.HolidayNumberPickerBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.holiday.HolidayNumberPickerBottomSheetFragment" />
     </data>
     <LinearLayout
         style="@style/BottomLayout"

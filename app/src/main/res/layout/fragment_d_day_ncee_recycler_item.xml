@@ -6,10 +6,10 @@
 
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.DdayCheckList" />
+            type="com.makeusteam.milliewillie.model.DdayCheckList" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.ncee.NceeFragment" />
+            type="com.makeusteam.milliewillie.ui.dDay.ncee.NceeFragment" />
 
     </data>
 

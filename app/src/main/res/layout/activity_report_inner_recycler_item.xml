@@ -4,10 +4,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.report.ReportActivity" />
+            type="com.makeusteam.milliewillie.ui.report.ReportActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.ReportInnerRecyclerItem" />
+            type="com.makeusteam.milliewillie.model.ReportInnerRecyclerItem" />
     </data>
 
     <RelativeLayout

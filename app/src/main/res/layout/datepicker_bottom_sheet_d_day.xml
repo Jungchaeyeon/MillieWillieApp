@@ -8,7 +8,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.DatePickerDdayBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.dDay.DatePickerDdayBottomSheetDialogFragment" />
     </data>
 
     <RelativeLayout

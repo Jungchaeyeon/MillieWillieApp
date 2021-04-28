@@ -8,10 +8,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.DdayOutputCNActivity" />
+            type="com.makeusteam.milliewillie.ui.dDay.DdayOutputCNActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.DdayOutputCNViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.DdayOutputCNViewModel" />
     </data>
 
 

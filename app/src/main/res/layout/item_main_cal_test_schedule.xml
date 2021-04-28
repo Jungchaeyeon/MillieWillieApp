@@ -6,13 +6,13 @@
     <data>
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.MainCalendarViewModel" />
+            type="com.makeusteam.milliewillie.ui.MainCalendarViewModel" />
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.MainCalendarTestActivity" />
+            type="com.makeusteam.milliewillie.ui.MainCalendarTestActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.CalendarDayResponse.Result.Plan" />
+            type="com.makeusteam.milliewillie.model.CalendarDayResponse.Result.Plan" />
     </data>
 
 

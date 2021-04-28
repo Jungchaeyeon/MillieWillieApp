@@ -4,7 +4,7 @@
     <data>
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.birthday.BirthdayViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.birthday.BirthdayViewModel" />
 
     </data>
 

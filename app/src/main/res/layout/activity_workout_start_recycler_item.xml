@@ -5,13 +5,13 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartActivity" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.workoutStart.WorkoutStartViewModel" />
+            type="com.makeusteam.milliewillie.ui.workoutStart.WorkoutStartViewModel" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.StartRecyclerItem" />
+            type="com.makeusteam.milliewillie.model.StartRecyclerItem" />
     </data>
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:id="@+id/start_item_text_ex_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/spoqa_han_sans_neo_medium"
+            android:fontFamily="@font/spoqa_han_sans_medium"
             android:includeFontPadding="false"
             android:textSize="16sp"
             android:textColor="@color/black_all"

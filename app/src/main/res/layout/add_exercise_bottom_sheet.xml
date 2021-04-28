@@ -9,7 +9,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.AddExerciseBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.routine.AddExerciseBottomSheetFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

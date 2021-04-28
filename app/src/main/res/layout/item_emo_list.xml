@@ -5,10 +5,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.home.tab3.EmotionFragment" />
+            type="com.makeusteam.milliewillie.ui.home.tab3.EmotionFragment" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.EmotionImg" />
+            type="com.makeusteam.milliewillie.model.EmotionImg" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

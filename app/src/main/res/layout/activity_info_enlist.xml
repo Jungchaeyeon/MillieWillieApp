@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.mypage.InfoEnlistActivity" />
+            type="com.makeusteam.milliewillie.ui.mypage.InfoEnlistActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.mypage.MyPageEditViewModel" />
+            type="com.makeusteam.milliewillie.ui.mypage.MyPageEditViewModel" />
     </data>
 
     <LinearLayout

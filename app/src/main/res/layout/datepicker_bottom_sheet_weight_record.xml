@@ -8,7 +8,7 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment" />
+            type="com.makeusteam.milliewillie.ui.fragment.DatePickekWeightRecortBottomSheetDialogFragment" />
     </data>
 
     <RelativeLayout

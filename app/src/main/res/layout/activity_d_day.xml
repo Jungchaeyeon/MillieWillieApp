@@ -7,10 +7,10 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.dDay.DdayActivity" />
+            type="com.makeusteam.milliewillie.ui.dDay.DdayActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.dDay.DdayViewModel" />
+            type="com.makeusteam.milliewillie.ui.dDay.DdayViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

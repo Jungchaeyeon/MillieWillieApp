@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.mypage.InfoMiliActivity" />
+            type="com.makeusteam.milliewillie.ui.mypage.InfoMiliActivity" />
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.mypage.MyPageEditViewModel" />
+            type="com.makeusteam.milliewillie.ui.mypage.MyPageEditViewModel" />
     </data>
 
     <LinearLayout

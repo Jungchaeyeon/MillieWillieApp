@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.MakeRoutineActivity" />
+            type="com.makeusteam.milliewillie.ui.routine.MakeRoutineActivity" />
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.RoutineSelectedRecyclerItem" />
+            type="com.makeusteam.milliewillie.model.RoutineSelectedRecyclerItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

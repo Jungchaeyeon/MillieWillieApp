@@ -11,11 +11,11 @@
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
+            type="com.makeusteam.milliewillie.ui.routine.ExerciseSetBottomSheetFragment" />
 
         <variable
             name="vm"
-            type="com.makeus.milliewillie.ui.routine.ExerciseSetViewModel" />
+            type="com.makeusteam.milliewillie.ui.routine.ExerciseSetViewModel" />
 
     </data>
 
@@ -176,7 +176,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="12dp"
                     android:layout_toStartOf="@+id/rebs_btn_plus"
-                    android:fontFamily="@font/spoqa_han_sans_neo_medium"
+                    android:fontFamily="@font/spoqa_han_sans_medium"
                     android:includeFontPadding="false"
                     android:text="세트"
                     android:textColor="@color/black_all" />

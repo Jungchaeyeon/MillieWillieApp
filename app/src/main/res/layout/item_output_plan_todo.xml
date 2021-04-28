@@ -5,15 +5,15 @@
 
         <variable
             name="itemPlanWork"
-            type="com.makeus.milliewillie.model.PlansWork.Result" />
+            type="com.makeusteam.milliewillie.model.PlansWork.Result" />
 
         <variable
             name="item"
-            type="com.makeus.milliewillie.model.PlansGet.Result.Work" />
+            type="com.makeusteam.milliewillie.model.PlansGet.Result.Work" />
 
         <variable
             name="vi"
-            type="com.makeus.milliewillie.ui.plan.PlanOutputActivity" />
+            type="com.makeusteam.milliewillie.ui.plan.PlanOutputActivity" />
     </data>
 
     <LinearLayout

@@ -68,7 +68,7 @@ android {
     productFlavors {
         dev {
             dimension "makeUs"
-            applicationIdSuffix ".dev"
+            applicationId "com.makeus.milliewillie.dev"
             versionNameSuffix "-dev"
             resValue "string", "app_name", rootProject.appNameDev
             buildConfigField "String", "API_URL", rootProject.apiUrlDev

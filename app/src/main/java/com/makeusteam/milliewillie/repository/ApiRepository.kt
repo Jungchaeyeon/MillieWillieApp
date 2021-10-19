@@ -6,19 +6,22 @@ import com.makeusteam.milliewillie.model.*
 import com.makeusteam.milliewillie.model.PlansRequest
 
 import com.makeusteam.milliewillie.model.UsersRequest
+import com.makeusteam.milliewillie.model.main.MainPageResponse
 import com.makeusteam.milliewillie.network.api.Api
 import com.makeusteam.milliewillie.repository.local.LocalKey
 import com.makeusteam.milliewillie.repository.local.RepositoryCached
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class ApiRepository(
     private val repositoryCached: RepositoryCached,
     private val apiTest: Api
 ) {
-    // observeOn() , subscribeOn() 차이
-    // fun gallerySearchList(keyword : String) = apiTest.gallerySearchList(keyword = keyword).observeOn(AndroidSchedulers.mainThread())
 
-    fun getMain() =apiTest.getMain().observeOn(AndroidSchedulers.mainThread())
+    fun getHomeInfo(): Observable<MainPageResponse> = apiTest.getHomeInfo()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
     fun kakaoLogin() = apiTest.kakaoLogin().doOnNext {
             if (!it.result.isMember) {

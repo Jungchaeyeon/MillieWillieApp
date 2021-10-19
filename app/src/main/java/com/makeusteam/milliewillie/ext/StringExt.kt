@@ -1,6 +1,7 @@
 package com.makeusteam.milliewillie.ext
 
 import android.widget.Toast
+import androidx.databinding.BindingAdapter
 import com.makeusteam.milliewillie.MyApplication
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

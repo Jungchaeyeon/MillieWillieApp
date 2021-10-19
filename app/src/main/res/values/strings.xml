@@ -187,5 +187,6 @@
     <string name="manage_vaca">휴가 관리</string>
     <string name="caution_train1">훈련 정보를 외부에 노출하는 것은 보안 문제로 연결됩니다.</string>
     <string name="caution_train2">밀리윌리는 보안과 관련한 어떠한 책임도 지지 않습니다.</string>
+    <string name="slash"> / </string>
 
 </resources>

@@ -1,7 +1,7 @@
 package com.makeusteam.milliewillie.di
 
 import com.makeusteam.milliewillie.ui.MainCalendarViewModel
-import com.makeusteam.milliewillie.ui.MainGetViewModel
+import com.makeusteam.milliewillie.ui.home.tab1.HomeViewModel
 import com.makeusteam.milliewillie.ui.MainViewModel
 import com.makeusteam.milliewillie.ui.dDay.DdayOutputCNViewModel
 import com.makeusteam.milliewillie.ui.dDay.DdayViewModel
@@ -44,7 +44,7 @@ val viewModelModule = module {
     viewModel { UserViewModel(get(),get()) }
     viewModel {  MakePlanViewModel(get(),get()) }//추후 수정
     viewModel { MainViewModel(get(),get()) }
-    viewModel { MainGetViewModel(get(),get()) }
+    viewModel { HomeViewModel(get(),get()) }
     viewModel { WorkoutViewModel(get(), get()) }
     viewModel { TodayWorkoutViewModel(get()) }
     viewModel { WorkoutStartViewModel(get()) }

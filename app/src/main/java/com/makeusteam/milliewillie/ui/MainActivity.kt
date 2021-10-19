@@ -15,6 +15,7 @@ import com.makeusteam.milliewillie.databinding.ActivityMainBinding
 import com.makeusteam.milliewillie.repository.local.LocalKey
 import com.makeusteam.milliewillie.repository.local.RepositoryCached
 import com.makeusteam.milliewillie.ui.home.tab1.HomeFragment
+import com.makeusteam.milliewillie.ui.home.tab1.HomeViewModel
 import com.makeusteam.milliewillie.ui.home.tab2.WorkoutFragment
 import com.makeusteam.milliewillie.ui.home.tab3.EmotionFragment
 import com.makeusteam.milliewillie.ui.home.tab4.InfoFragment
@@ -27,7 +28,7 @@ import java.util.*
 
 class MainActivity : BaseDataBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val viewModel by viewModel<MainGetViewModel>()
+    private val viewModel by viewModel<HomeViewModel>()
     lateinit var fabOpen: Animation
     lateinit var fabClose: Animation
     lateinit var fabFastClose: Animation

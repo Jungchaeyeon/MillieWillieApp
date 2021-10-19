@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vi"
             type="com.makeusteam.milliewillie.ui.home.tab1.HomeFragment" />
 
         <variable
             name="vm"
-            type="com.makeusteam.milliewillie.ui.MainGetViewModel" />
+            type="com.makeusteam.milliewillie.ui.home.tab1.HomeViewModel" />
     </data>
 
     <RelativeLayout
@@ -22,13 +23,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMemoList"
-            android:layout_width="match_parent"
             replaceAll="@{vm.liveMainPlan}"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingBottom="60dp"
             android:isScrollContainer="true"
             android:orientation="vertical"
+            android:paddingBottom="60dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </RelativeLayout>

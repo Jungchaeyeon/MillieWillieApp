@@ -11,11 +11,8 @@
 
         <variable
             name="vm"
-            type="com.makeusteam.milliewillie.ui.MainGetViewModel" />
+            type="com.makeusteam.milliewillie.ui.home.tab1.HomeViewModel" />
 
-        <variable
-            name="item"
-            type="com.makeusteam.milliewillie.model.MainSchedule" />
     </data>
 
     <LinearLayout
@@ -51,10 +48,9 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_profile" />
-<!--                    android:text="@{vm.usersResponse.name.toString()}"-->
 
                 <TextView
-                    android:text="@{vm.liveName}"
+                    android:text="@{vm.mainPageInfoMutableLiveData.name}"
                     style="@style/spoqa_medium_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,6 +58,7 @@
                     android:layout_marginStart="5dp"
                     android:includeFontPadding="false"
                     android:textColor="@color/black_all"
+                    tools:text="정채연"
                     android:textSize="18sp"/>
 
                 <View
@@ -74,36 +71,39 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="2dp"
-                    setImage="@{vm.classImg}" />
+                    tools:src="@drawable/icon_class_1"
+                    setPromotionStateImage="@{vm.mainPageInfoMutableLiveData.normalPromotionStateIdx}" />
 
                 <TextView
                     style="@style/spoqa_regular_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.liveClass}"
+                    android:text="@{vm.mainPageInfoMutableLiveData.normalPromotionStateIdx.label}"
                     android:layout_gravity="center_vertical"
                     tools:text="일병"/>
                 <TextView
                     style="@style/spoqa_regular_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.liveHobongStr}"
+                    android:text="@{vm.mainPageInfoMutableLiveData.hobong}"
                     android:layout_gravity="center_vertical"
                     tools:text="2호봉"/>
 
             </LinearLayout>
-<!--                android:text="@{vm.usersResponse.goal.toString()}"-->
+
+                <!-- stateListAnimator="@null" - 음영제거-->
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
+                app:paddingStart="8dp"
                 android:gravity="start|center_vertical"
                 android:drawableStart="@drawable/icon_goal"
                 android:background="@drawable/background_google_login"
                 android:stateListAnimator="@null"
-                android:text="@{vm.liveGoal}"/>
+                tools:text="토익 850 목표"
+                android:text="@{vm.mainPageInfoMutableLiveData.goal}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,7 +122,7 @@
                     android:layout_marginTop="24dp"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0.6sp"
-                    android:text="@{vm.allDday}"
+                    setdday="@{vm.mainPageInfoMutableLiveData.allDday}"
                     android:textSize="20sp"
                     tools:text="D - 442"/>
 
@@ -139,20 +139,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="@{vm.monthProm}"
+                        setHobongTitle="@{vm.mainPageInfoMutableLiveData.hobong}"
                         tools:text="3호봉 진급" />
 
                     <TextView
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.monthPromDday}"
+                        setdday="@{vm.mainPageInfoMutableLiveData.hobongDday}"
                         android:layout_marginEnd="8dp"
                         android:textColor="@color/black_all"
                         tools:text="D - 23" />
 
                     <View
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
@@ -160,19 +160,15 @@
                         style="@style/spoqa_regular_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.nextProm}"
-                        tools:text="상병" />
-                    <TextView
-                        style="@style/spoqa_regular_12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text=" 진급" />
+                        setPromotionTitle="@{vm.mainPageInfoMutableLiveData.nextClass.label}"
+                        tools:text="상병 진급" />
+
                     <TextView
                         style="@style/spoqa_medium_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{vm.nextPromDday}"
+                        setdday="@{vm.mainPageInfoMutableLiveData.promotionDday}"
                         android:textColor="@color/black_all"
                         tools:text="D - 123" />
 
@@ -202,14 +198,14 @@
                             android:layout_height="12dp"
                             android:layout_marginBottom="8dp"
                             android:gravity="center_horizontal"
-                            android:text="@{vm.nowPercentStr}"
+                            floatToString="@{vm.mainPageInfoMutableLiveData.serviceTimePercent}"
                             android:textColor="@color/white"
-                            android:textSize="10sp" />
+                            android:textSize="11sp" />
                     </RelativeLayout>
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline"
-                        setPercent="@{vm.nowPercentFlt}"
+                        setPercent="@{vm.mainPageInfoMutableLiveData.serviceTimePercent}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:orientation="vertical" />
@@ -221,7 +217,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_marginTop="28dp"
-                        android:progress="@{vm.nowPercentInt}"
+                        setProgressFromFloat="@{vm.mainPageInfoMutableLiveData.serviceTimePercent}"
                         android:progressDrawable="@drawable/progressbar_custom"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -246,7 +242,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:text="@{vm.enlistDayFormat}"
+                        setDateFormat="@{vm.mainPageInfoMutableLiveData.endDate}"
+                        tools:text="2021-10-19"
                         android:textColor="@color/black_all" />
                 </LinearLayout>
             </LinearLayout>
@@ -321,14 +318,16 @@
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
                         android:lineSpacingExtra="0.6sp"
-                        android:text="@{vm.vacUseDays}"
-                        android:textSize="20sp" />
+                        android:text="@{vm.mainPageInfoMutableLiveData.vacationUseDays}"
+                        android:textSize="20sp"
+                        android:layout_marginEnd="8dp"
+                        tools:text="3"/>
                     <TextView
                         style="@style/spoqa_bold_22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text=" / "
+                        android:text="@string/slash"
                         android:textColor="@color/text_gray"
                         android:textSize="20sp" />
                     <TextView
@@ -337,7 +336,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:includeFontPadding="false"
-                        android:text="@{vm.vacTotalDays}"
+                        android:text="@{vm.mainPageInfoMutableLiveData.vacationTotalDays}"
                         android:lineSpacingExtra="0.6sp"
                         android:textColor="@color/text_gray"
                         android:textSize="20sp"
@@ -366,11 +365,11 @@
                     android:text="@{vm.todayDate}"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black_all"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     tools:text="4월 3일"/>
 
                 <View
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
             </LinearLayout>

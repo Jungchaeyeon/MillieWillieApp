@@ -11,6 +11,11 @@ android {
     buildToolsVersion rootProject.buildToolVersion
 
     defaultConfig {
+
+        configurations.all {
+            resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+        }
+
         applicationId "com.makeusteam.milliewillie"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
@@ -46,7 +51,7 @@ android {
 
 //    lintOptions{
 //        checkRealeaseBuilds false
-//    }h
+//    }
 
     buildTypes {
         debug{
@@ -148,7 +153,6 @@ android {
 
 dependencies {
 
-
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':base')
     implementation files('libs/libDaumMapAndroid.jar')
@@ -177,7 +181,7 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorVersion"
 
     //recycler view
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // RxJava2
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
@@ -187,9 +191,9 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:$firebaseMessageVersion"
     implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-crashlytics:17.4.0'
+    implementation "com.google.firebase:firebase-crashlytics:$firebaseCrashlytics"
     implementation "com.google.firebase:firebase-auth:$firebaseAuthVersion"
-    implementation "com.google.firebase:firebase-storage:19.2.2"
+    implementation "com.google.firebase:firebase-storage:$firebaseStorage"
     implementation "com.google.android.gms:play-services-auth:$firebasePlayServiceAuthVersion"
 
     // OKHttp3 + Retrofit2
@@ -203,8 +207,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     // Koin - Kotlin Injection
-    implementation "org.koin:koin-android:$koinAndroidVersion"
-    implementation "org.koin:koin-android-viewmodel:$koinAndroidVersion"
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
     // Gson
     implementation "com.google.code.gson:gson:$gsonVersion"
@@ -229,7 +233,7 @@ dependencies {
 
     testImplementation "junit:junit:$junitVersion"
 
-    testImplementation "org.koin:koin-test:$koinAndroidVersion"
+    testImplementation "org.koin:koin-test:$koinVersion"
 
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
     testImplementation "androidx.test:core:$testCoreVersion"

@@ -1,6 +1,8 @@
 # MillieWillie
 
+MAKE US PROJECT
 국군 장병들을 위한 자기관리 앱 
+앱디자이너1분, 서버개발자2분, 안드로이드 개발자2분과 함께 협업한 프로젝트 입니다.
 
 ## play store 등록 이미지
 <p align="center">

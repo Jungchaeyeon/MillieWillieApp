@@ -14,6 +14,8 @@
 <img src="https://user-images.githubusercontent.com/63052973/125058573-5f8ada00-e0e5-11eb-9caf-b5872c9fb056.jpg" width="200" height="400">
 </P>
 
+<br/>
+
 ## 앱 소개
 
 "20대 청춘을 나라에 바치는 국군 장병들의 소중한 시간을 더 유의미하게 만들 수 없을까?"라는 고민에서부터
